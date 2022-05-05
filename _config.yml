@@ -105,3 +105,16 @@ deploy:
   type: git
   repo: https://github.com/Wldcmzy/Wldcmzy.github.io.git
   branch: master
+
+
+# math
+markdown_it_plus:
+  highlight: true
+  html: true
+  xhtmlOut: true
+  breaks: true
+  langPrefix:
+  linkify: true
+  typographer:
+  quotes: “”‘’
+  pre_class: highlight
