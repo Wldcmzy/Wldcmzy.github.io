@@ -1,10 +1,7 @@
 ---
 title: 【屑】【学习记录】【Python】自己能看明白的关于学习bs4.BeautifulSoup基本知识的总结.md
 date: 1111-11-11 11:11:11
-categories:
-  - OldBlog(Before20220505)
-tags:
-  - OldBlog(Before20220505)
+
 ---
 
 ## 说明 - 2022-05-05

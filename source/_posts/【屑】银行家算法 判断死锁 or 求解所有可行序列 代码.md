@@ -2,7 +2,7 @@
 title: 【屑】银行家算法 判断死锁 or 求解所有可行序列 代码.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [教练我想学挂边躲牛, 杂乱]
 tags:
   - OldBlog(Before20220505)
 ---
@@ -68,7 +68,7 @@ tags:
         solve(True)
     if __name__ == '__main__':
         main()
-    
+
 
 样例为：《计算机操作系统》——翟一鸣等老师 课后题2.13
 

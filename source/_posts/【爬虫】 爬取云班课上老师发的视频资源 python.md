@@ -2,9 +2,10 @@
 title: 【爬虫】 爬取云班课上老师发的视频资源 python.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [教练我想学挂边躲牛, 爬虫]
 tags:
   - OldBlog(Before20220505)
+  -	爬虫
 ---
 
 ## 说明 - 2022-05-05
@@ -35,8 +36,8 @@ os.system(‘copy /b ‘+os.path.abspath(tempworkpath)+’\ _.ts
 ‘+os.path.abspath(pathOUTPUT)+’\’+nameOUTPUT+’.mp4’)  
 合并所有ts文件为一个新的mp4文件  
 4.  
-把这一次下载的ts文件删掉，以备下一次操作  
-os.system('del ‘+os.path.abspath(tempworkpath)+’\_.ts’)
+    把这一次下载的ts文件删掉，以备下一次操作  
+    os.system('del ‘+os.path.abspath(tempworkpath)+’\_.ts’)
 
     
     
@@ -56,22 +57,22 @@ os.system('del ‘+os.path.abspath(tempworkpath)+’\_.ts’)
         headM3U8 = sch.group(1)
         nameM3U8 =sch.group(2)
         tempworkpath = 'aaabbbcccdddeeefffggghhhiii'
-    
+        
         resM3U8 = requests.get(urlM3U8)
-    
+        
         lstTS = re.findall('.+?ts',resM3U8.text)
-    
+        
         if not os.path.exists(tempworkpath):
             os.mkdir(tempworkpath)
         if not os.path.exists(pathOUTPUT):
             os.mkdir(pathOUTPUT)
-    
+        
         for i,each in enumerate(lstTS):
             print(i,'of',len(lstTS))
             res = requests.get(headM3U8+each)
             with open(tempworkpath+'/'+nameM3U8+toIdxStr(i)+'.ts', 'wb') as f:
                 f.write(res.content)
-    
+        
         print('合并')
         print('copy /b '+os.path.abspath(tempworkpath)+'\\*.ts '+os.path.abspath(pathOUTPUT)+'\\'+nameOUTPUT+'.mp4')
         os.system('copy /b '+os.path.abspath(tempworkpath)+'\\*.ts '+os.path.abspath(pathOUTPUT)+'\\'+nameOUTPUT+'.mp4')
@@ -99,32 +100,32 @@ os.system('del ‘+os.path.abspath(tempworkpath)+’\_.ts’)
 
 这是云班课储存资源的思路
 
-    
-    
-    <div1 这是包含所有视频的一块>
-    	<div2 第一单元的所有视频>  所有的div2的集合对应程序里的d2
-    		<div 视频></div>	 一个div2中所有div的集合对应程序里的d3
-    		<div 视频></div>
-    		<div 视频></div>
-    		<div 视频></div>
-    		<div 视频></div>
-    	</div>
-    	<div2 第二单元的所有视频>
-    		<div 视频></div>
-    		<div 视频></div>
-    		<div 视频></div>
-    		<div 视频></div>
-    		<div 视频></div>
-    	</div>
-    	<div2 第三单元的所有视频>
-    		<div 视频></div>
-    		<div 视频></div>
-    		<div 视频></div>
-    		<div 视频></div>
-    		<div 视频></div>
-    	</div>
-    </div>
-    
+
+​    
+​    <div1 这是包含所有视频的一块>
+​    	<div2 第一单元的所有视频>  所有的div2的集合对应程序里的d2
+​    		<div 视频></div>	 一个div2中所有div的集合对应程序里的d3
+​    		<div 视频></div>
+​    		<div 视频></div>
+​    		<div 视频></div>
+​    		<div 视频></div>
+​    	</div>
+​    	<div2 第二单元的所有视频>
+​    		<div 视频></div>
+​    		<div 视频></div>
+​    		<div 视频></div>
+​    		<div 视频></div>
+​    		<div 视频></div>
+​    	</div>
+​    	<div2 第三单元的所有视频>
+​    		<div 视频></div>
+​    		<div 视频></div>
+​    		<div 视频></div>
+​    		<div 视频></div>
+​    		<div 视频></div>
+​    	</div>
+​    </div>
+
 
 。
 
@@ -132,12 +133,12 @@ os.system('del ‘+os.path.abspath(tempworkpath)+’\_.ts’)
 其中图片的链接中有形如： **'年份/月份/字符串’ **的格式，而m3u8的链接中有形如：** ‘年份/月份/日期/字符串’**
 的格式，并且这两段格式中除了图片链接没有日期外，其他完全相同
 
-    
-    
-    #云班课视频资源获取 开始于2021/03/12
-    '''
-    目前没有任何try,纯莽
-    
+
+​    
+​    #云班课视频资源获取 开始于2021/03/12
+​    '''
+​    目前没有任何try,纯莽
+​    
     part1 登录 (成功)
     part2 找到所有视频块div(成功)
     part3 获取所有视频对应的m3u8链接(遇到问题)
@@ -181,16 +182,18 @@ os.system('del ‘+os.path.abspath(tempworkpath)+’\_.ts’)
             if year%400 == 0 or (year%4 == 0 and year%100 != 0):
                 monthMap[2] += 1
         return range(1,monthMap[month]+1)
-    
-    
-    def toLinkStr(ss):
-        ss = str(ss)
-        return '0'+ss if len(ss) == 1 else ss
-    
-    
-    m3u8Head = 'https://video-cdn-2.mosoteach.cn/mssvc/file'
-    m3u8Tail = 'm3u8'
-    
+
+
+​    
+​    def toLinkStr(ss):
+​        ss = str(ss)
+​        return '0'+ss if len(ss) == 1 else ss
+
+
+​    
+​    m3u8Head = 'https://video-cdn-2.mosoteach.cn/mssvc/file'
+​    m3u8Tail = 'm3u8'
+​    
     logURL = r'https://www.mosoteach.cn/web/index.php?c=passport&m=account_login'
     
     session = requests.session()
@@ -274,12 +277,13 @@ os.system('del ‘+os.path.abspath(tempworkpath)+’\_.ts’)
     for i in range(len(lst)):
         print(namelst[i])
         DOWN.DownOne(lst[i],namelst[i])
-    
-    
-    print('共跳过个数:', len(jumplst), '\n分别为:')
-    for each in jumplst:
-        print(each)
-    
+
+
+​    
+​    print('共跳过个数:', len(jumplst), '\n分别为:')
+​    for each in jumplst:
+​        print(each)
+
 
 ## 不足 与 可以预期的改进（已经不会去改了，所以是可以预期的改进）
 

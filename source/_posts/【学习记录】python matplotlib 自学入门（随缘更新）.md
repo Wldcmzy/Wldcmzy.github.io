@@ -2,9 +2,11 @@
 title: 【学习记录】python matplotlib 自学入门（随缘更新）.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [基础知识, python, matplotlib]
 tags:
   - OldBlog(Before20220505)
+  - python库
+  - 画图
 ---
 
 ## 说明 - 2022-05-05

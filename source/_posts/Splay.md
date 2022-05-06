@@ -2,9 +2,10 @@
 title: Splay.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [算法, 思想or数据结构]
 tags:
   - OldBlog(Before20220505)
+  - Splay树
 ---
 
 ## 说明 - 2022-05-05

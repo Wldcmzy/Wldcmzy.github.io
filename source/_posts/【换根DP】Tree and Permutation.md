@@ -2,9 +2,10 @@
 title: 【换根DP】Tree and Permutation.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [算法, DP]
 tags:
   - OldBlog(Before20220505)
+  - DP
 ---
 
 ## 说明 - 2022-05-05
@@ -27,8 +28,8 @@ tags:
 
 ## 代码
 
-    
-    
+
+​    
     #include <bits/stdc++.h>
     const int N = 1e5 + 4, MOD = 1e9 + 7;
     int n, u, v, ipart = 1, idx;
@@ -77,7 +78,7 @@ tags:
     	}
     	return 0;
     }
-    
+
 
 ## 描述
 

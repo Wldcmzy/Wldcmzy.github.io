@@ -2,9 +2,10 @@
 title: 【数位DP】 洛谷 P2602 [ZJOI2010]数字计数 P2657 [SCOI2009] windy 数.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [算法, DP]
 tags:
-  - OldBlog(Before20220505)
+  - OldBlog(Before20220505)	
+  - DP
 ---
 
 ## 说明 - 2022-05-05
@@ -12,8 +13,8 @@ tags:
 
 ## 洛谷 P2602 [ZJOI2010]数字计数
 
-    
-    
+
+​    
     #include <iostream>
     #include <cstdio>
     #include <cstdlib>
@@ -86,7 +87,7 @@ tags:
         for(int i=0; i<T; i++) printf("%lld ",fun(b+1,i)-fun(a,i));
         return 0;
     }
-    
+
 
 ## 洛谷 P2657 [SCOI2009] windy 数
 
@@ -96,8 +97,8 @@ break;，因为函数的参数可能就是一个非windy数，你需要找出这
 <= 1) break;这个条件满足时，之后找到的就必然时非windy数了，自然不需要继续找。  
 ~~之前我自己的类似的判断思路错了，写题解的人yyds~~
 
-    
-    
+
+​    
     #include <iostream>
     #include <cstdio>
     #include <cstdlib>
@@ -169,5 +170,4 @@ break;，因为函数的参数可能就是一个非windy数，你需要找出这
         printf("%lld",fun(b+1)-fun(a));
         return 0;
     }
-    
 

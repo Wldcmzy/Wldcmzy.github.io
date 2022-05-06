@@ -2,9 +2,10 @@
 title: git github 初用.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [基础知识, git]
 tags:
   - OldBlog(Before20220505)
+  - git
 ---
 
 ## 说明 - 2022-05-05
@@ -43,6 +44,14 @@ tags:
 > git remote add origin https://github.com/Wldcmzy/test.git 关联仓库
 
 > git push origin master 推送到仓库
+
+
+
+git checkout -b xxx
+
+git checkout xxx
+
+
 
 参考资料  
 <https://www.cnblogs.com/imyalost/p/8777684.html>  

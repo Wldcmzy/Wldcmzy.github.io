@@ -2,7 +2,7 @@
 title: 【算法】【C++】初学算法，在此记录.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - 算法
 tags:
   - OldBlog(Before20220505)
 ---
@@ -55,37 +55,37 @@ p[i]=p[j]，而且p[i]不可能再增加。
 从str[1]开始遍历到末尾  
 先通过
 
-    
-    
+
+​    
     if(i<mx)    p[i]=std::min(p[2*id-i],mx-i);
     else        p[i]=1;
-    
+
 
 确定好id-mx范围内的以i为中心的最长子串半径，然后再通过
 
-    
-    
+
+​    
     while(str[i+p[i]]==str[i-p[i]])     p[i]+=1;
-    
+
 
 确定最长半径
 
 若得到以i为中心的子串最右位置超过mx，则更新范围
 
-    
-    
+
+​    
     if(p[i]+i>mx)           //超出最右边就更新范围
             {
                 id=i;
                 mx=p[i]+i;
                 mxsub=std::max(mxsub,p[i]);     //更新最长子串长度
             }
-    
+
 
 ###### 代码：输入一个字符串，用Manacher算法求其中最长回文子串的长度
 
-    
-    
+
+​    
     #include<iostream>
     #include<cstring>
     #include<cstdio>
@@ -139,8 +139,9 @@ p[i]=p[j]，而且p[i]不可能再增加。
         std::cout << manacher() << std::endl;
         return 0;
     }
-    
-    
+
+
+​    
 
 ## 2.用树结构支持并查集
 
@@ -261,8 +262,8 @@ yet.”，否则输出 “In different gangs.”
 
 ###### 代码：
 
-    
-    
+
+​    
     #include<iostream>
     #include<cstring>
     #include<cstdio>
@@ -307,7 +308,7 @@ yet.”，否则输出 “In different gangs.”
         }
         return 0;
     }
-    
+
 
 ## 3.应用Trie树查询字符串
 
@@ -355,8 +356,8 @@ Trie树的根节点root对应空字符串。一般情况下，不是所有的节
 
 ###### 代码（可能有问题）：
 
-    
-    
+
+​    
     #include <iostream>
     #include <cstdio>
     #include <cstring>
@@ -435,7 +436,7 @@ Trie树的根节点root对应空字符串。一般情况下，不是所有的节
     
         return 0;
     }
-    
+
 
 这个解法必须建立在所有输入没有重复的前提上，有的话要另外加对应的处理。
 
@@ -459,8 +460,8 @@ next[]记录一个字符串从第0位到第i位相同的前缀和后缀长度（
 
 ###### 代码：（匹配一个字符串在另一个字符串中的出现次数）
 
-    
-    
+
+​    
     #include <iostream>
     #include <cstdio>
     #include <cstring>
@@ -516,6 +517,7 @@ next[]记录一个字符串从第0位到第i位相同的前缀和后缀长度（
         }
         return 0;
     }
-    
-    
+
+
+​    
 

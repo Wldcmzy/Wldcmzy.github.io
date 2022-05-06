@@ -2,9 +2,10 @@
 title: 数据预处理  sklearn 或者别的库.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [教练我想学挂边躲牛, 瞎学机器学习]
 tags:
   - OldBlog(Before20220505)
+  - 机器学习
 ---
 
 ## 说明 - 2022-05-05

@@ -2,9 +2,11 @@
 title: 【学习记录】【python】【tkinter】自学tkinter的简要记录.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  -  [基础知识, python, tkinter]
 tags:
   - OldBlog(Before20220505)
+  - python库
+  - GUI
 ---
 
 ## 说明 - 2022-05-05
@@ -543,8 +545,8 @@ Spinbox是Entry的变体， 从一些固定值中选择一个，可以通过 1.�
 ​    
 ​    import tkinter as tk
 ​    
-    root=tk.Tk()
-    
+​    root=tk.Tk()
+​    
     frame1=tk.LabelFrame(root,text='message',labelanchor=tk.NW)
     frame1.pack(side=tk.LEFT)
     frame2=tk.LabelFrame(root,text='spinbox',labelanchor=tk.NW)
@@ -579,10 +581,10 @@ Spinbox是Entry的变体， 从一些固定值中选择一个，可以通过 1.�
 ​    
 ​    import tkinter as tk
 ​    
-    root=tk.Tk()
-    root.title('root里面放按钮')
-    num=0
-    
+​    root=tk.Tk()
+​    root.title('root里面放按钮')
+​    num=0
+​    
     def create():
         global num
         num+=1
@@ -598,7 +600,7 @@ Spinbox是Entry的变体， 从一些固定值中选择一个，可以通过 1.�
 ​    
 ​    tk.Button(root,text='创建一个Toplevel窗口',width=70,command=create,relief=tk.RAISED,bd=10).pack()
 ​    
-    tk.mainloop()
+​    tk.mainloop()
 
 
 效果图  
@@ -626,21 +628,21 @@ Event对象的属性及含义：<https://blog.csdn.net/nkd50000/article/details/
 ​    
 ​    import tkinter as tk
 ​    
-    lst=[
-        '<Button-1>',
-        '<Control-Button-1>',
-        '<Control-Shift-Button-3>',
-        '<Control-Shift-KeyPress-Q>',
-        '<Alt-KeyPress-N>',
-        '<Alt_L>',
-        '<Double-Button-1>',
-        '<Shift_L>',
-        '<Double-KeyPress-A>',
-        '<Triple-KeyPress>',
-        '<Shift-KeyPress-H>',
-        #'<Any-KeyPress>'
-        ]
-    
+​    lst=[
+​        '<Button-1>',
+​        '<Control-Button-1>',
+​        '<Control-Shift-Button-3>',
+​        '<Control-Shift-KeyPress-Q>',
+​        '<Alt-KeyPress-N>',
+​        '<Alt_L>',
+​        '<Double-Button-1>',
+​        '<Shift_L>',
+​        '<Double-KeyPress-A>',
+​        '<Triple-KeyPress>',
+​        '<Shift-KeyPress-H>',
+​        #'<Any-KeyPress>'
+​        ]
+​    
     root=tk.Tk()
     
     frame=tk.Frame(root,width=250,height=50,bg='blue')
@@ -675,10 +677,10 @@ massage简单实现
 ​    
 ​    root=tk.Tk()
 ​    
-    v=tk.StringVar()
-    lb=tk.Message(root,textvariable=v)
-    lb.pack()
-    
+​    v=tk.StringVar()
+​    lb=tk.Message(root,textvariable=v)
+​    lb.pack()
+​    
     #返回 字符串 yes no
     res=tkmsg.askquestion(
                     'askquestion',
@@ -735,8 +737,8 @@ filedialog模块
 ​    
 ​    import tkinter as tk
 ​    
-    root=tk.Tk()
-    
+​    root=tk.Tk()
+​    
     frame1=tk.Frame(root,width=200,height=150,bg='lightgrey')
     frame1.pack(side=tk.LEFT,fill=tk.Y)
     frame2=tk.Frame(root,width=200,height=150,bg='yellow')
@@ -757,7 +759,7 @@ filedialog模块
 ​    bt2=tk.Button(frame3,text='iuv')
 ​    bt2.grid(row=1,column=1)
 ​    
-    tk.mainloop()
+​    tk.mainloop()
 
 
 ## 少量拾遗

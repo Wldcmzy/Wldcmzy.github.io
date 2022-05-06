@@ -2,9 +2,10 @@
 title: 【DP】石子合并.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [算法, DP]
 tags:
   - OldBlog(Before20220505)
+  - DP
 ---
 
 ## 说明 - 2022-05-05
@@ -33,8 +34,8 @@ n-1.求相邻的n堆石头合并的代价，之前求出的【2，n-1】堆石�
 使用二维数组dp记录这些代价，首先令所有的dp[i][i]=0  
 使用一维数组sum记录从第一堆石头到第i堆石头的石头总数  
 假设要求解dp[4][7] 只需要求  
-sum[7]-sum[4-1] + min(dp[4][4]+dp[5][7],dp[4][5]+dp[6][7],dp[4][6]+dp[7][7])  
-![看图便于理解](https://img-blog.csdnimg.cn/20201008111934601.png)
+sum[7]-sum[4-1] + min(dp[4] [4]+dp[5] [7],dp[4] [5]+dp[6] [7],dp[4] [6]+dp[7] [7])  
+![看图便于理解](【DP】石子合并/20201008111934601.png)
 
 代码:
 
@@ -49,35 +50,35 @@ sum[7]-sum[4-1] + min(dp[4][4]+dp[5][7],dp[4][5]+dp[6][7],dp[4][6]+dp[7][7])
 ​    #include <cmath>
 ​    #include <map>
 ​    
-    const int N=303;
-    int sum[N],dp[N][N],v[N];
-    
-    int main()
-    {
-        int n;
-        std::cin >> n;
-        std::cin >> v[1];
-        sum[0]=0;
-        sum[1]=v[1];
-        for(int i=2; i<=n; i++)
-        {
-            std::cin >> v[i];
-            sum[i]=sum[i-1]+v[i];
-        }
-        memset(dp,1,sizeof(dp));
-        for(int i=1; i<=n; i++) dp[i][i]=0;
-        for(int span=1; span<n ;span++) 
-        {// span表示区间长度，如span=1表示这次循环求相邻的两堆石头，span=2表示这次循环求相邻的三堆石头，span=n-1表示求所有n堆石头合并的代价
-            for(int st=1; st+span<=n; st++)
-            {//st表示所求区间的起点，ed表示所求区间的终点，st和ed同步增加，直到求完所有合并相邻span+1堆石头的代价
-                int ed=st+span;
-                for(int tmp=st; tmp<ed; tmp++)//tmp为[st,ed)之间的所有整数，这一步循环用来求从st到ed的最小代价
-                    dp[st][ed]=std::min(dp[st][ed],dp[st][tmp]+dp[tmp+1][ed]-sum[st-1]+sum[ed]);
-            }
-        }
-        std::cout << dp[1][n] << std::endl;
-        return 0;
-    }
+​    const int N=303;
+​    int sum[N],dp[N][N],v[N];
+​    
+​    int main()
+​    {
+​        int n;
+​        std::cin >> n;
+​        std::cin >> v[1];
+​        sum[0]=0;
+​        sum[1]=v[1];
+​        for(int i=2; i<=n; i++)
+​        {
+​            std::cin >> v[i];
+​            sum[i]=sum[i-1]+v[i];
+​        }
+​        memset(dp,1,sizeof(dp));
+​        for(int i=1; i<=n; i++) dp[i][i]=0;
+​        for(int span=1; span<n ;span++) 
+​        {// span表示区间长度，如span=1表示这次循环求相邻的两堆石头，span=2表示这次循环求相邻的三堆石头，span=n-1表示求所有n堆石头合并的代价
+​            for(int st=1; st+span<=n; st++)
+​            {//st表示所求区间的起点，ed表示所求区间的终点，st和ed同步增加，直到求完所有合并相邻span+1堆石头的代价
+​                int ed=st+span;
+​                for(int tmp=st; tmp<ed; tmp++)//tmp为[st,ed)之间的所有整数，这一步循环用来求从st到ed的最小代价
+​                    dp[st][ed]=std::min(dp[st][ed],dp[st][tmp]+dp[tmp+1][ed]-sum[st-1]+sum[ed]);
+​            }
+​        }
+​        std::cout << dp[1][n] << std::endl;
+​        return 0;
+​    }
 
 
 ​    
@@ -97,7 +98,7 @@ sum[7]-sum[4-1] + min(dp[4][4]+dp[5][7],dp[4][5]+dp[6][7],dp[4][6]+dp[7][7])
 需要注意dp数组的行数没有变成两倍,for(int tmp=st; tmp<ed; tmp++)中如果出现tmp+1>n
 若要获取dp[tmp+1][ed]的值,则获取tmp[tmp+1-n][ed-n]的值
 
-![看图便于理解](https://img-blog.csdnimg.cn/20201008111347129.png)  
+![看图便于理解](【DP】石子合并/20201008111347129.png)  
 代码:
 
 
@@ -111,61 +112,61 @@ sum[7]-sum[4-1] + min(dp[4][4]+dp[5][7],dp[4][5]+dp[6][7],dp[4][6]+dp[7][7])
 ​    #include <cmath>
 ​    #include <map>
 ​    
-    const int N=103;
-    int sum[N<<1],dp[N][N<<1],v[N],pd[N][N<<1];
-    
-    int main()
-    {
-        int n;
-        std::cin >> n;
-        std::cin >> v[1];
-        sum[0]=0;
-        sum[1]=v[1];
-        for(int i=2; i<=n; i++)
-        {
-            std::cin >> v[i];
-            sum[i]=sum[i-1]+v[i];
-        }
-        for(int i=1; i<=n; i++)
-        {
-            sum[i+n]=sum[i+n-1]+v[i];
-        }
-        memset(dp,1,sizeof(dp));
-        memset(pd,0,sizeof(pd));
-        for(int i=1; i<=n; i++)
-        {
-            dp[i][i]=0;
-            pd[i][i]=0;
-        }
-        for(int span=1; span<n ;span++)
-        {
-            for(int st=1; st<=n; st++)
-            {
-                int ed=st+span;
-                for(int tmp=st; tmp<ed; tmp++)
-                {
-                    if(tmp+1>n)
-                    {
-                        dp[st][ed]=std::min(dp[st][ed],dp[st][tmp]+dp[tmp+1-n][ed-n]-sum[st-1]+sum[ed]);
-                        pd[st][ed]=std::max(pd[st][ed],pd[st][tmp]+pd[tmp+1-n][ed-n]-sum[st-1]+sum[ed]);
-                    }
-                    else
-                    {
-                        dp[st][ed]=std::min(dp[st][ed],dp[st][tmp]+dp[tmp+1][ed]-sum[st-1]+sum[ed]);
-                        pd[st][ed]=std::max(pd[st][ed],pd[st][tmp]+pd[tmp+1][ed]-sum[st-1]+sum[ed]);
-                    }
-                }
-            }
-        }
-        int mn=1e9,mx=0;
-        for(int i=1; i<=n; i++)
-        {
-            mn=std::min(dp[i][n+i-1],mn);
-            mx=std::max(pd[i][n+i-1],mx);
-        }
-        std::cout << mn << std::endl << mx;
-        return 0;
-    }
+​    const int N=103;
+​    int sum[N<<1],dp[N][N<<1],v[N],pd[N][N<<1];
+​    
+​    int main()
+​    {
+​        int n;
+​        std::cin >> n;
+​        std::cin >> v[1];
+​        sum[0]=0;
+​        sum[1]=v[1];
+​        for(int i=2; i<=n; i++)
+​        {
+​            std::cin >> v[i];
+​            sum[i]=sum[i-1]+v[i];
+​        }
+​        for(int i=1; i<=n; i++)
+​        {
+​            sum[i+n]=sum[i+n-1]+v[i];
+​        }
+​        memset(dp,1,sizeof(dp));
+​        memset(pd,0,sizeof(pd));
+​        for(int i=1; i<=n; i++)
+​        {
+​            dp[i][i]=0;
+​            pd[i][i]=0;
+​        }
+​        for(int span=1; span<n ;span++)
+​        {
+​            for(int st=1; st<=n; st++)
+​            {
+​                int ed=st+span;
+​                for(int tmp=st; tmp<ed; tmp++)
+​                {
+​                    if(tmp+1>n)
+​                    {
+​                        dp[st][ed]=std::min(dp[st][ed],dp[st][tmp]+dp[tmp+1-n][ed-n]-sum[st-1]+sum[ed]);
+​                        pd[st][ed]=std::max(pd[st][ed],pd[st][tmp]+pd[tmp+1-n][ed-n]-sum[st-1]+sum[ed]);
+​                    }
+​                    else
+​                    {
+​                        dp[st][ed]=std::min(dp[st][ed],dp[st][tmp]+dp[tmp+1][ed]-sum[st-1]+sum[ed]);
+​                        pd[st][ed]=std::max(pd[st][ed],pd[st][tmp]+pd[tmp+1][ed]-sum[st-1]+sum[ed]);
+​                    }
+​                }
+​            }
+​        }
+​        int mn=1e9,mx=0;
+​        for(int i=1; i<=n; i++)
+​        {
+​            mn=std::min(dp[i][n+i-1],mn);
+​            mx=std::max(pd[i][n+i-1],mx);
+​        }
+​        std::cout << mn << std::endl << mx;
+​        return 0;
+​    }
 
 
 ​    

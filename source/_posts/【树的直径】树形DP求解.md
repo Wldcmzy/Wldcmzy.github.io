@@ -2,9 +2,10 @@
 title: 【树的直径】树形DP求解.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [算法, 图论]
 tags:
   - OldBlog(Before20220505)
+  - DP
 ---
 
 ## 说明 - 2022-05-05
@@ -15,8 +16,8 @@ tags:
 每次记录每个子树从根到叶的最长的链， 然后把最长前2长的拼起来  
 先更新D再更新dp， 否则会求出一条最长链*2
 
-    
-    
+
+​    
     void dfs(int x, int efr){
         for(int e = head[x]; e; e = edg[e].nxt){
             if((e ^ 1) == efr) continue;
@@ -26,12 +27,12 @@ tags:
             dp[x] = std::max(dp[x], dp[y] + 1);
         }
     }
-    
+
 
 ## HDU 6201 transaction transaction transaction（非模题）
 
-    
-    
+
+​    
     #include <bits/stdc++.h>
     const int N = 1e5 + 4;
     int val[N], dp[N][2], head[N];
@@ -72,5 +73,4 @@ tags:
         }
         return 0;
     }
-    
 

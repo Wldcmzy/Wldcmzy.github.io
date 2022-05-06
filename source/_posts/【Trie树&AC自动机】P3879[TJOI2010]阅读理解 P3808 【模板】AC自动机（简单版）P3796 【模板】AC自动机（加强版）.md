@@ -2,9 +2,12 @@
 title: 【Trie树&AC自动机】P3879[TJOI2010]阅读理解 P3808 【模板】AC自动机（简单版）P3796 【模板】AC自动机（加强版）.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [算法, 字符串]
 tags:
   - OldBlog(Before20220505)
+  - AC自动机
+  - Trie树
+  - 字符串
 ---
 
 ## 说明 - 2022-05-05
@@ -14,81 +17,81 @@ tags:
 
 
 ​    
-    #include <iostream>
-    #include <cstdio>
-    #include <cstdlib>
-    #include <cstring>
-    #include <cmath>
-    #include <algorithm>
-    #include <string>
-    #include <queue>
-    #include <vector>
-    #include <stack>
-    #include <map>
-    #include <set>
-    typedef long long int LL;
-    const int INF = 0x7fffffff, SCF = 0x3fffffff;
-    const int N = 5e6+4, M = 1e3+4;
-    int n,m,k;
-    int idx,len,ans;
-    int has[M];
-    char ss[22];
-    struct TT
-    {
-        int nxt[26],id;
-    }tree[N];
-    void jointree(int rt)
-    {
-        len = strlen(ss);
-        for(int i=0; i<len; i++){
-            int pp = ss[i]-'a';
-            if(!tree[rt].nxt[pp]){
-                tree[rt].nxt[pp] = idx++;
-            }
-            rt = tree[rt].nxt[pp];
-        }
-        tree[rt].id = 1;
-    }
-    void qry(int rt)
-    {
-        int root = rt;
-        for(int i=0; i<len; i++){
-            int pp = ss[i]-'a';
-            if(!tree[rt].nxt[pp]) return ;
-            rt = tree[rt].nxt[pp];
-        }
-        has[root] = tree[rt].id;
-    }
-    void solve()
-    {
-        memset(has,0,sizeof(has));
-        len = strlen(ss);
-        for(int i=1; i<=n; i++){
-            qry(i);
-        }
-        for(int i=1; i<=n; i++){
-            if(has[i]) printf("%d ",i);
-        }
-        printf("\n");
-    }
-    int main()
-    {
-        scanf("%d",&n);
-        idx = n+1;
-        for(int i=1; i<=n; i++){
-            scanf("%d",&k);
-            for(int j=1; j<=k; j++){
-                scanf("%s",ss);
-                jointree(i);
-            }
-        }
-        scanf("%d",&m);
-        for(int i=0; i<m; i++){
-            scanf("%s",ss);
-            solve();
-        }
-        return 0;
-    }
+​    #include <iostream>
+​    #include <cstdio>
+​    #include <cstdlib>
+​    #include <cstring>
+​    #include <cmath>
+​    #include <algorithm>
+​    #include <string>
+​    #include <queue>
+​    #include <vector>
+​    #include <stack>
+​    #include <map>
+​    #include <set>
+​    typedef long long int LL;
+​    const int INF = 0x7fffffff, SCF = 0x3fffffff;
+​    const int N = 5e6+4, M = 1e3+4;
+​    int n,m,k;
+​    int idx,len,ans;
+​    int has[M];
+​    char ss[22];
+​    struct TT
+​    {
+​        int nxt[26],id;
+​    }tree[N];
+​    void jointree(int rt)
+​    {
+​        len = strlen(ss);
+​        for(int i=0; i<len; i++){
+​            int pp = ss[i]-'a';
+​            if(!tree[rt].nxt[pp]){
+​                tree[rt].nxt[pp] = idx++;
+​            }
+​            rt = tree[rt].nxt[pp];
+​        }
+​        tree[rt].id = 1;
+​    }
+​    void qry(int rt)
+​    {
+​        int root = rt;
+​        for(int i=0; i<len; i++){
+​            int pp = ss[i]-'a';
+​            if(!tree[rt].nxt[pp]) return ;
+​            rt = tree[rt].nxt[pp];
+​        }
+​        has[root] = tree[rt].id;
+​    }
+​    void solve()
+​    {
+​        memset(has,0,sizeof(has));
+​        len = strlen(ss);
+​        for(int i=1; i<=n; i++){
+​            qry(i);
+​        }
+​        for(int i=1; i<=n; i++){
+​            if(has[i]) printf("%d ",i);
+​        }
+​        printf("\n");
+​    }
+​    int main()
+​    {
+​        scanf("%d",&n);
+​        idx = n+1;
+​        for(int i=1; i<=n; i++){
+​            scanf("%d",&k);
+​            for(int j=1; j<=k; j++){
+​                scanf("%s",ss);
+​                jointree(i);
+​            }
+​        }
+​        scanf("%d",&m);
+​        for(int i=0; i<m; i++){
+​            scanf("%s",ss);
+​            solve();
+​        }
+​        return 0;
+​    }
 
 
 ​    
@@ -97,89 +100,89 @@ tags:
 
 
 ​    
-    #include <iostream>
-    #include <cstdio>
-    #include <cstdlib>
-    #include <cstring>
-    #include <cmath>
-    #include <algorithm>
-    #include <string>
-    #include <queue>
-    #include <vector>
-    #include <stack>
-    #include <map>
-    #include <set>
-    typedef long long int LL;
-    const int INF = 0x7fffffff, SCF = 0x3fffffff;
-    const int N = 1e7+4, M = 1e3+4;
-    int n,idx;
-    char ss[N];
-    struct TT
-    {
-        int fail,id,nxt[26];
-    }tree[N];
-    void joinTree()
-    {
-        int len = strlen(ss), rt = 0;
-        for(int i=0; i<len; i++){
-            int pp = ss[i]-'a';
-            if(!tree[rt].nxt[pp]){
-                tree[rt].nxt[pp] = idx++;
-            }
-            rt = tree[rt].nxt[pp];
-        }
-        tree[rt].id += 1;
-    }
-    void getFail()
-    {
-        std::queue<int> q;
-        int x,y,fail;
-        for(int i=0; i<26; i++){
-            y = tree[0].nxt[i];
-            if(y>0){
-                tree[y].fail = 0;
-                q.push(y);
-            }
-        }
-        while(!q.empty()){
-            x = q.front(); q.pop();
-            fail = tree[x].fail;
-            for(int i=0; i<26; i++){
-                y = tree[x].nxt[i];
-                if(y>0){
-                    tree[y].fail = tree[fail].nxt[i];
-                    q.push(y);
-                }
-                else tree[x].nxt[i] = tree[fail].nxt[i];
-            }
-        }
-    }
-    int ACgo()
-    {
-        int rt = 0,len = strlen(ss),ans = 0;
-        for(int i=0; i<len; i++){
-            rt = tree[rt].nxt[ss[i]-'a'];
-            for(int j=rt; j && tree[j].id != -1; j=tree[j].fail){
-                ans += tree[j].id;
-                tree[j].id = -1;
-            }
-        }
-        return ans;
-    }
-    int main()
-    {
-        //freopen("D:\\EdgeDownloadPlace\\P3808_2.in","r",stdin);
-        idx = 1;
-        scanf("%d",&n);
-        while(n--){
-            scanf("%s",ss);
-            joinTree();
-        }
-        getFail();
-        scanf("%s",ss);
-        printf("%d",ACgo());
-        return 0;
-    }
+​    #include <iostream>
+​    #include <cstdio>
+​    #include <cstdlib>
+​    #include <cstring>
+​    #include <cmath>
+​    #include <algorithm>
+​    #include <string>
+​    #include <queue>
+​    #include <vector>
+​    #include <stack>
+​    #include <map>
+​    #include <set>
+​    typedef long long int LL;
+​    const int INF = 0x7fffffff, SCF = 0x3fffffff;
+​    const int N = 1e7+4, M = 1e3+4;
+​    int n,idx;
+​    char ss[N];
+​    struct TT
+​    {
+​        int fail,id,nxt[26];
+​    }tree[N];
+​    void joinTree()
+​    {
+​        int len = strlen(ss), rt = 0;
+​        for(int i=0; i<len; i++){
+​            int pp = ss[i]-'a';
+​            if(!tree[rt].nxt[pp]){
+​                tree[rt].nxt[pp] = idx++;
+​            }
+​            rt = tree[rt].nxt[pp];
+​        }
+​        tree[rt].id += 1;
+​    }
+​    void getFail()
+​    {
+​        std::queue<int> q;
+​        int x,y,fail;
+​        for(int i=0; i<26; i++){
+​            y = tree[0].nxt[i];
+​            if(y>0){
+​                tree[y].fail = 0;
+​                q.push(y);
+​            }
+​        }
+​        while(!q.empty()){
+​            x = q.front(); q.pop();
+​            fail = tree[x].fail;
+​            for(int i=0; i<26; i++){
+​                y = tree[x].nxt[i];
+​                if(y>0){
+​                    tree[y].fail = tree[fail].nxt[i];
+​                    q.push(y);
+​                }
+​                else tree[x].nxt[i] = tree[fail].nxt[i];
+​            }
+​        }
+​    }
+​    int ACgo()
+​    {
+​        int rt = 0,len = strlen(ss),ans = 0;
+​        for(int i=0; i<len; i++){
+​            rt = tree[rt].nxt[ss[i]-'a'];
+​            for(int j=rt; j && tree[j].id != -1; j=tree[j].fail){
+​                ans += tree[j].id;
+​                tree[j].id = -1;
+​            }
+​        }
+​        return ans;
+​    }
+​    int main()
+​    {
+​        //freopen("D:\\EdgeDownloadPlace\\P3808_2.in","r",stdin);
+​        idx = 1;
+​        scanf("%d",&n);
+​        while(n--){
+​            scanf("%s",ss);
+​            joinTree();
+​        }
+​        getFail();
+​        scanf("%s",ss);
+​        printf("%d",ACgo());
+​        return 0;
+​    }
 
 
 ## 洛谷 P3796 【模板】AC自动机（加强版）

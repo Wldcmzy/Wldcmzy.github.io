@@ -2,9 +2,9 @@
 title: 【单源最短路 spfa Dijkstra】 _ 洛谷 P3371 【模板】单源最短路径（弱化版）_ ## lguou.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [算法, 图论]
 tags:
-  - OldBlog(Before20220505)
+  - BFS
 ---
 
 ## 说明 - 2022-05-05
@@ -14,8 +14,8 @@ tags:
 
 Dijkstra
 
-    
-    
+
+​    
     #include <cstdio>
     #include <iostream>
     #include <cstring>
@@ -81,12 +81,12 @@ Dijkstra
        }
        return 0;
     }
-    
+
 
 spfa(个人感觉就是纯bfs)
 
-    
-    
+
+​    
     #include <cstdio>
     #include <iostream>
     #include <cstring>
@@ -145,12 +145,12 @@ spfa(个人感觉就是纯bfs)
        }
        return 0;
     }
-    
+
 
 ## 洛谷P4779 【模板】单源最短路径（标准版）
 
-    
-    
+
+​    
     #include <cstdio>
     #include <iostream>
     #include <cstring>
@@ -216,5 +216,4 @@ spfa(个人感觉就是纯bfs)
        }
        return 0;
     }
-    
 

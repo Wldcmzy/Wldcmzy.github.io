@@ -2,9 +2,11 @@
 title: 【树的直径 dfs dp】P4408 [NOI2003] 逃学的小孩.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [算法, 图论]
 tags:
   - OldBlog(Before20220505)
+  - DFS
+  - DP
 ---
 
 ## 说明 - 2022-05-05
@@ -12,8 +14,8 @@ tags:
 
 ## P4408 [NOI2003] 逃学的小孩
 
-    
-    
+
+​    
     #include <iostream>
     #include <cstdio>
     #include <cstdlib>
@@ -92,5 +94,4 @@ tags:
         printf("%lld",tlong+plong);
         return 0;
     }
-    
 

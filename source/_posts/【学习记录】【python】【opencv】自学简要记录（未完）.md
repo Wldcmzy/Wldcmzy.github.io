@@ -2,9 +2,12 @@
 title: 【学习记录】【python】【opencv】自学简要记录（未完）.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [基础知识, python, opencv]
 tags:
   - OldBlog(Before20220505)
+  - python库
+  - 图像处理
+  - cv
 ---
 
 ## 说明 - 2022-05-05
@@ -21,8 +24,8 @@ tags:
 
 **读取图像**
 
-    
-    
+
+​    
     #读入图像 cv2.imread(filepath,flags)
     '''
     flags参数的取值：
@@ -31,12 +34,12 @@ tags:
     cv2.IMREAD_UNCHANGED：载入一个包含 Alpha 通道（透明度）的图像   可用-1代替
     '''
     img1=cv2.imread('imgs/lx.jpg',0)
-    
+
 
 **显示图像**
 
-    
-    
+
+​    
     #显示图像   cv2.imshow(wname,img)
     '''
     wname  窗口的名字 window name
@@ -48,12 +51,12 @@ tags:
     #cv2.destroyAllWindows()
     if key==27:
         print('Key_ESC has been pressed')
-    
+
 
 **保存图像**
 
-    
-    
+
+​    
     #保存图像 cv2.imwrite(file，img，num)
     '''
     file 文件名
@@ -69,12 +72,12 @@ tags:
     cv2.imwrite('imgs_save/lxGrey2.png',img1,[int(cv2.IMWRITE_PNG_COMPRESSION),3])
     # jpg属于有损压缩，是以图片的清晰度为代价的，数字越小，压缩比越高，图片质量损失越严重
     # png属于无损压缩，数字0-9，数字越低，压缩比越低
-    
+
 
 **读取视频文件**
 
-    
-    
+
+​    
     #读取视频 cv2.VideoCapture()
     '''
     参数为0 : 调用笔记本内置摄像头
@@ -112,7 +115,7 @@ tags:
         
     vd.release()
     cv2.destroyAllWindows() 
-    
+
 
 ## 002基础-简单变换
 
@@ -127,20 +130,20 @@ cv2.addWeighted**
 
 **裁剪**
 
-    
-    
+
+​    
     #图片裁剪
     img_cliped = img[100:600,50:1050]
     
     cv2.imshow('Clip', img_cliped)
     cv2.waitKey(0)
     cv2.destroyWindow('Clip')
-    
+
 
 **改变图片大小**
 
-    
-    
+
+​    
     #图片改变大小 cv2.resize(img,(整形宽，整形高),fx,fy)
     '''
     可以给出固定的宽高
@@ -153,12 +156,12 @@ cv2.addWeighted**
     cv2.imshow('Resize2', img_resized2)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    
+
 
 **改变图片大小-自己实现**
 
-    
-    
+
+​    
     #图片改变大小 自己实现
     import numpy as np
     import cv2
@@ -181,12 +184,12 @@ cv2.addWeighted**
     #cv2.imshow('lxRESIZED',np.dstack((new[:,:,0],new[:,:,1],new[:,:,2])))
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    
+
 
 **图片反转**
 
-    
-    
+
+​    
     #图片反转 cv2.flip(img,flipcode)
     
     '''
@@ -204,12 +207,12 @@ cv2.addWeighted**
     
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    
+
 
 **颜色通道分离与合并**
 
-    
-    
+
+​    
     #颜色通道分离与合并
     img = cv2.imread('imgs/sky1.png')
     imgC = img.copy()
@@ -225,12 +228,12 @@ cv2.addWeighted**
     
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    
+
 
 **cv2.cvtColor 通道转换**
 
-    
-    
+
+​    
     img = cv2.imread('imgs/sky1.png',1)
     imgBGR = cv2.cvtColor(img,cv2.COLOR_RGB2BGR)
     imgGRAY = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
@@ -238,15 +241,15 @@ cv2.addWeighted**
     ax[0].imshow(imgBGR)
     ax[1].imshow(imgGRAY,cmap = 'gray')
     plt.savefig('imgs_save/123.png')
-    
+
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210226121737443.png?x-oss-
 process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)
 
 **简单数值计算**
 
-    
-    
+
+​    
     #数值计算
     '''
     numpy(直接计算) 越界会%256
@@ -260,12 +263,12 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     cv2.imshow('another_img',another_img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    
+
 
 **cv2.addWeighted**
 
-    
-    
+
+​    
     #重叠两张图片
     img1 = cv2.imread('imgs/sky1.png')
     img2 = cv2.imread('imgs/lx.jpg')
@@ -279,12 +282,12 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     图MIX2手动实现了一下结果太亮了，所以最后-120达到和函数差不多的效果
     其中的原因改日探究
     '''
-    
+
 
 ## 003 基础-用matplotlib画图像
 
-    
-    
+
+​    
     img = cv2.imread('imgs/lx.jpg',1)
     
     #在matplotlib中画出图片 matplotlib.pyplot.imshow(img)
@@ -292,8 +295,9 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     B,G,R = cv2.split(img)
     img_rgb = cv2.merge((R,G,B))
     plt.imshow(img_rgb)
-    
-    
+
+
+​    
 
 ## 004 阈值
 
@@ -308,8 +312,8 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
 >  type: 指定阈值类型；下面会列出具体类型；  
 >  maxval: 当type指定为THRESH_BINARY或THRESH_BINARY_INV时，需要设置该值；  
 >  ‘’’
-    
-    
+
+
     gray = cv2.imread('imgs/sky1.png',0)
     thresh = 127
     maxval = 255
@@ -327,12 +331,12 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     
     #大于阈值变为阈值
     ret, threshed5 = cv2.threshold(gray,thresh,maxval,cv2.THRESH_TRUNC)      
-    
+
 
 用matplotlib画图
 
-    
-    
+
+​    
     fig, ax = plt.subplots(3,2,figsize = (10,10))
     ax[0,0].imshow(threshed1,cmap = 'gray')
     ax[0,1].imshow(threshed2,cmap = 'gray')
@@ -340,15 +344,15 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     ax[1,1].imshow(threshed4,cmap = 'gray')
     ax[2,0].imshow(threshed5,cmap = 'gray')
     ax[2,1].imshow(gray,cmap = 'gray')
-    
+
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2021022319264149.png?x-oss-
 process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)
 
 ## 005 平滑/模糊处理 // 滤波
 
-    
-    
+
+​    
     img = cv2.imread('imgs/sky1.png',1)
     lst = []
     name = ['blur','boxFilter','GaussianBlur','madianBlur']
@@ -370,18 +374,18 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     for i in range(len(lst)):
         b,g,r = cv2.split(lst[i])
         lst[i] = cv2.merge((r,g,b))
-    
+
 
 用matplotlib画图
 
-    
-    
+
+​    
     fig, ax = plt.subplots(2,2,figsize = (10,7))
     for i in range(len(lst)):
         ax[i//2,i%2].imshow(lst[i])
         ax[i//2,i%2].set_title(name[i])
     plt.savefig('imgs_save/blur.png')
-    
+
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210223193542528.png?x-oss-
 process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)
@@ -400,8 +404,8 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
 **膨胀** dilate：找局部最大  
 图像与核卷积，找核覆盖范围内最大值
 
-    
-    
+
+​    
     img = cv2.imread('imgs/plainstar.png',0)
     #fig,ax = plt.subplots(2,1,figsize = (8,12))
     
@@ -418,7 +422,7 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     
     tot = np.vstack([img,erosion,dilation_after_erosion])
     cv2.imwrite('imgs_save/plainstar_open.png',tot)
-    
+
 
 原图+腐蚀图+腐蚀图的膨胀图：  
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210223230722478.png?x-oss-
@@ -428,8 +432,8 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
 **闭运算** ：先膨胀后腐蚀  
 上方腐蚀与膨胀的示例代码就是一个开运算，下方代码时开运算+闭运算
 
-    
-    
+
+​    
     img = cv2.imread('imgs/plainstar.png',0)
     kernel = np.ones([5,5],dtype = np.int8)#卷积核
     '''
@@ -442,15 +446,15 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     
     tot = np.vstack([opening,closing])
     cv2.imwrite('imgs_save/plainstar_opening_and_closing.png',tot)
-    
+
 
 开运算与闭运算效果：  
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210223231418739.png?x-oss-
 process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)  
 **梯度运算** ：膨胀-腐蚀
 
-    
-    
+
+​    
     img = cv2.imread('imgs/cloud.png')
     kernel = np.ones([5,5],dtype = np.int8)#卷积核
     '''
@@ -461,7 +465,7 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     
     tot = np.vstack([img,gradient])
     cv2.imwrite('imgs_save/cloud_gradient.png',tot)
-    
+
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210223232605766.png?x-oss-
 process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)  
@@ -511,8 +515,8 @@ Canny边缘检测
 
 存疑⬆
 
-    
-    
+
+​    
     cloud = cv2.imread('imgs/sky1.png',0)
     cloud = cv2.resize(cloud,(0,0),fx = 0.3,fy = 0.3)
     
@@ -530,7 +534,7 @@ Canny边缘检测
     cv2.waitKey(0)
     cv2.destroyAllWindows()
     cv2.imwrite('imgs_save/cloud_grad.png',tot)
-    
+
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210224140134927.png?x-oss-
 process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)  
@@ -539,8 +543,8 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
 **Canny边缘检测**  
 原理（查资料）：<https://www.cnblogs.com/techyan1990/p/7291771.html>
 
-    
-    
+
+​    
     town = cv2.imread('imgs/town.jpg',0)
     town = cv2.resize(town,(0,0),fx = 0.3,fy = 0.3)
     
@@ -557,7 +561,7 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     canny2 = cv2.Canny(town,105,155)
     canny = np.hstack((canny1,canny2))
     cv2.imwrite('imgs_save/town_canny1.png',canny)
-    
+
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210225123904401.png?x-oss-
 process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)  
@@ -565,8 +569,8 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
 process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)  
 **轮廓检测**
 
-    
-    
+
+​    
     img = cv2.imread('imgs/mountain.png')
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
     ret, binary = cv2.threshold(gray,176,255,cv2.THRESH_BINARY)
@@ -605,12 +609,12 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     cv2.imshow('ss',con)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    
+
 
 **轮廓近似**
 
-    
-    
+
+​    
     #轮廓近似
     x = contour[0]
     epsilon1 = 0.05*cv2.arcLength(x,True)  #计算轮廓周长
@@ -620,8 +624,9 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     '''
     approx1 = cv2.approxPolyDP(x,epsilon1,True)
     approx2 = cv2.approxPolyDP(x,epsilon2,True)
-    
-    
+
+
+​    
     '''
     实测第二个参数形如approx结果只能在图上点点，若形如[approx]结果为点加连线
     '''
@@ -635,7 +640,7 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     cv2.waitKey(0)
     cv2.destroyAllWindows()
     cv2.imwrite('imgs_save/mountain+contour2.png',con)
-    
+
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210226153513165.png?x-oss-
 process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)  
@@ -654,8 +659,8 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
 
 <https://www.cnblogs.com/jiyanjiao-702521/p/10471032.html>
 
-    
-    
+
+​    
     template = cv2.imread('imgs/chess_part.jpg') #模板
     img = cv2.imread('imgs/chess.jpg') #原图
     
@@ -680,7 +685,7 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     fi = np.vstack(re)
     fi = cv2.resize(fi,(0,0),fx = 0.45, fy = 0.45)
     cv2.imwrite('imgs_save/chess_rec+\'str(cnt)+\'.png',fi)
-    
+
 
 模板  
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210226154317636.jpg#pic_center)  
@@ -695,8 +700,8 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
 
 **获得直方图数据**
 
-    
-    
+
+​    
     #得到直方图数据
     #cv2.calcHist(images, channels, mask, histSize, ranges[, hist[, accumulate ]])
     '''
@@ -724,7 +729,7 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
         hist = cv2.calcHist([img],[i],None,[256],[0,256])
         plt.plot(hist,color = each)
     plt.savefig('imgs_save/InLab1_0.2_zhifangtuRGB.png')
-    
+
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2021030415003013.png?x-oss-
 process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)  
@@ -734,8 +739,8 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
 原理（大概）:从小到大，像素依次变为像素的积累概率（这个像素以及比这个像素小的像素出现的总概率）*最大-最小？（255-0）  
 1.全局均衡化
 
-    
-    
+
+​    
     #直方图均衡化
     #cv2.equalizeHist(img)
     '''
@@ -746,12 +751,12 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     cv2.imshow('asdf',both)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    
+
 
 2.限制对比度自适应直方图均衡 CLAHE算法
 
-    
-    
+
+​    
     #自适应均衡化 分块+调整让块与块之间看起来没有界限
     '''
     clipLimit参数表示对比度的大小。
@@ -759,7 +764,7 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     '''
     clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
     clahed = clahe.apply(gray)
-    
+
 
 效果： 1 灰度图原图 . 2全局均衡化 3.CLAHE  
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210304150301662.png?x-oss-

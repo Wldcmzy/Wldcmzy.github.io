@@ -2,9 +2,11 @@
 title: C语言程序（有一点pp）实现PVZ一代修改，探索记录 (随缘更新).md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [教练我想学挂边躲牛, 逆向]
 tags:
   - OldBlog(Before20220505)
+  -	逆向
+  - 内存修改
 ---
 
 ## 说明 - 2022-05-05

@@ -2,9 +2,12 @@
 title: 学习在ECS上实现定期执行在学校官网发帖子签到的py脚本.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [教练我想学挂边躲牛, 爬虫]
 tags:
   - OldBlog(Before20220505)
+  - 爬虫
+  -	linux
+  - 服务器
 ---
 
 ## 说明 - 2022-05-05

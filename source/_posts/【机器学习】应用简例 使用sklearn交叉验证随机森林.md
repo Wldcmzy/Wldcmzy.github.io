@@ -2,9 +2,11 @@
 title: 【机器学习】应用简例 使用sklearn交叉验证随机森林.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [教练我想学挂边躲牛, 瞎学机器学习]
 tags:
   - OldBlog(Before20220505)
+  - 随机森林
+  - 机器学习
 ---
 
 ## 说明 - 2022-05-05
@@ -12,8 +14,8 @@ tags:
 
 从excel中导入训练集+交叉验证随机森林
 
-    
-    
+
+​    
     import numpy as np
     import pandas as pd
     from sklearn.ensemble import RandomForestClassifier
@@ -44,5 +46,4 @@ tags:
     # 画出来
     plt.plot(range(1,101),scores,label = 'RandomForest')
     plt.show()
-    
 

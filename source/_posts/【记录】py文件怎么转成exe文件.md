@@ -2,7 +2,7 @@
 title: 【记录】py文件怎么转成exe文件.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [教练我想学挂边躲牛, 杂乱]
 tags:
   - OldBlog(Before20220505)
 ---

@@ -2,9 +2,11 @@
 title: sql学习记录（sql sever）.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [基础知识, sql]
 tags:
   - OldBlog(Before20220505)
+  - 数据库
+  - sql
 ---
 
 ## 说明 - 2022-05-05

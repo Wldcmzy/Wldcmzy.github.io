@@ -2,8 +2,11 @@
 title: 【AC自动机 _ trie树】G - Word Puzzles   POJ - 1204.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [算法, 字符串]
 tags:
+  - 字符串
+  - AC自动机
+  - Trie树
   - OldBlog(Before20220505)
 ---
 

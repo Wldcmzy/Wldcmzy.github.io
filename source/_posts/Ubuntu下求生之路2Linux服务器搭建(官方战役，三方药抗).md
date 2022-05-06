@@ -2,9 +2,12 @@
 title: Ubuntu下求生之路2Linux服务器搭建(官方战役，三方药抗).md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [教练我想学挂边躲牛, 游戏, 求生之路2]
 tags:
   - OldBlog(Before20220505)
+  - 服务器
+  - linux
+  - 游戏
 ---
 
 ## 说明 - 2022-05-05

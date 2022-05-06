@@ -2,9 +2,10 @@
 title: 【差值并查集（口胡算法）】 HDU7136 CCPC2021网络选拔赛重赛1011 Jumping Monkey.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [算法, 图论]
 tags:
   - OldBlog(Before20220505)
+  - 并查集
 ---
 
 ## 说明 - 2022-05-05
@@ -48,8 +49,8 @@ boss 在每加入一个点时， 作为这一轮的唯一代表元
 
 时间826MS 空间5688K
 
-    
-    
+
+​    
     #include <bits/stdc++.h>
     const int N = 1e5 + 5;
     int t, n, u, v, idx, boss;
@@ -120,5 +121,4 @@ boss 在每加入一个点时， 作为这一轮的唯一代表元
         }
         return 0;
     }
-    
 

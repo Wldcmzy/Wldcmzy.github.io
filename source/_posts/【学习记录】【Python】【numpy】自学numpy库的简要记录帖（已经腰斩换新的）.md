@@ -2,9 +2,10 @@
 title: 【学习记录】【Python】【numpy】自学numpy库的简要记录帖（已经腰斩换新的）.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [基础知识, python, numpy]
 tags:
   - OldBlog(Before20220505)
+  - python库
 ---
 
 ## 说明 - 2022-05-05
@@ -12,8 +13,8 @@ tags:
 
 ## 1.极其基础的操作
 
-    
-    
+
+​    
     import numpy as np
     
     #创建一个数组 数组的类型为numpy.ndarray,其中数据的类型为numpy.int32s
@@ -44,17 +45,18 @@ tags:
     print(array1+array2.reshape(2,3,3))     #矩阵相加
     print(array1*array2.reshape(2,3,3))     #矩阵相乘
     print(array1+2)                         #矩阵元素+2
-    
+
 
 ## 2.索引
 
-    
-    
+
+​    
     import numpy as np
     
     array1=np.array([[[1,2,3],[4,5,6],[7,8,9]],[[10,11,12],[13,14,15],[16,17,18]]],dtype=np.int32)
-    
-    
+
+
+​    
     #取元素   第一维的一、二项，第二维的第一项，第三维的一、三项
     array2=array1[np.ix_([0,1],[0],[0,2])]
     print(array2)
@@ -78,13 +80,14 @@ tags:
     print(array3Final)
     array3Final_another=array3[array3%3==0] #得到array3中是3的倍数的项
     print(array3Final_another)
-    
-    
+
+
+​    
 
 ## 3.简单文件储存
 
-    
-    
+
+​    
     import numpy as np
     
     #txt
@@ -98,8 +101,9 @@ tags:
     print(y)
     
     np.savetxt('bca.txt',y,fmt='%s')
-    
-    
+
+
+​    
     print('分割线-----------------------')
     #二进制
     
@@ -114,20 +118,21 @@ tags:
     print(tmp_b)
     print(tmp_b['the_x'])                   #类似字典，key值为先前保存时的形参名，如the_x
     print(tmp_b['the_y'])
-    
+
 
 ## 4.简单练习 && 矩阵的合并与转置
 
-    
-    
+
+​    
     import numpy as np
     
     np.set_printoptions(precision=1,threshold=3000,suppress=True)
     #precision控制小数点位数
     #threshold控制输出值的个数，其他的以...代替(查的资料上这么说的，实际没看出效果)
     #suppress=True 取消使用科学计数法
-    
-    
+
+
+​    
     array1=np.genfromtxt(r'D:\0我的下载\上证指数\上证指数副本.txt',usecols=(0,4,6),)
     print(array1)
     
@@ -153,24 +158,26 @@ tags:
     #一维数组默认时列向量，要转化为行向量才能横向合并
     #eg:[1,2,3]这是一个列向量 (3,)
     #eg:[[1,2,3]]这时一个行向量(1,3)
-    
-    
-    
+
+
+​    
+​    
     #矩阵的转置
     print(arr_new.T)
-    
+
 
 ## 5.矩阵的切割
 
-    
-    
+
+​    
     import numpy as np
     
     #新建0-15的数组
     array1=np.arange(16).reshape(4,4)
     print(array1)
-    
-    
+
+
+​    
     #用hsplit(ary,indices_or_sections)拆分   (相当于split的axis参数=1)
     #纵向拆分
     #第二个参数：如果时整数x，则把数组平均分成x份，不能平均分会报错
@@ -179,8 +186,9 @@ tags:
     print(h_arr1)
     h_arr2=np.hsplit(array1,[1,3])
     print(h_arr2)
-    
-    
+
+
+​    
     #用split(ary, indices_or_sections, axis=0)拆分
     #用法基本同hsplit一样，只不过hsplit只能纵向拆分，split可以定义拆分维度
     #axis=0第一维，即横向拆分，axis=1第二维，即纵向拆分
@@ -188,8 +196,9 @@ tags:
     print(arr1)
     arr2=np.split(array1,[1,3],0)
     print(arr2)
-    
-    
+
+
+​    
 
 ## 6.图像通道的分离与合成
 
@@ -202,8 +211,8 @@ cv2.merge([zeros, zeros, img1R])
 
 **注意倒数第五句的注释**
 
-    
-    
+
+​    
     import cv2
     import numpy as np
     
@@ -225,25 +234,29 @@ cv2.merge([zeros, zeros, img1R])
         cv2.imshow('merge',cv2.merge([b,g,r]))
         cv2.waitKey(0)
         cv2.destroyAllWindows()
-    
-    
+
+
+​    
     img1=cv2.imread('theimg.png',1)
     
     img1B,img1G,img1R=np.dsplit(img1,3)
     #img1B,img1G,img1R=cv2.split(img1)
     
     print(img1B.dtype)          #矩阵元素的格式为uint8
-    
-    
-    
+
+
+​    
+​    
     showone(img1B)      #这里图像为灰色，原因是当调用cv2.imshow的时候G、R两个通道被默认设为了与B通道一样，三通道一样时显示灰度图
-    
-    
+
+
+​    
     showone_color(img1B,'B')
     showone_color(img1G,'G')
     showone_color(img1R,'R')
     
     showone_merge(img1B,img1G,img1R)        #合成后是原图
-    
-    
+
+
+​    
 

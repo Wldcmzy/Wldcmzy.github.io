@@ -2,9 +2,10 @@
 title: python graphviz的使用  改日填坑.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [基础知识, python, graphviz]
 tags:
   - OldBlog(Before20220505)
+  -	画图
 ---
 
 ## 说明 - 2022-05-05

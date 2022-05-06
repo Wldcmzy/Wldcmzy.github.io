@@ -2,8 +2,10 @@
 title: 【KM算法】B - Going Home POJ - 2195.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [算法, 图论]
 tags:
+  - 二分图
+  - KM算法
   - OldBlog(Before20220505)
 ---
 
@@ -102,13 +104,13 @@ N和M不大于100，房子数目不大于100
 
 推导可知：正确答案=（ML*房子数量）-KM算法得到的最大值
 
-    
-    
-    #include <cstdio>
-    #include <iostream>
-    #include <algorithm>
-    #include <cstring>
-    
+
+​    
+​    #include <cstdio>
+​    #include <iostream>
+​    #include <algorithm>
+​    #include <cstring>
+​    
     const int maxn=110;
     const int ML=220;//花费不可能超过200
     char cell[maxn][maxn];
@@ -223,6 +225,7 @@ N和M不大于100，房子数目不大于100
     
         return 0;
     }
-    
-    
+
+
+​    
 

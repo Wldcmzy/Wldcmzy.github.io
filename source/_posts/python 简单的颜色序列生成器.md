@@ -2,9 +2,10 @@
 title: python 简单的颜色序列生成器.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [教练我想学挂边躲牛, 杂乱]
 tags:
   - OldBlog(Before20220505)
+  - 画图
 ---
 
 ## 说明 - 2022-05-05

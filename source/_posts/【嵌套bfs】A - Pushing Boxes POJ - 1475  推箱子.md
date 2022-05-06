@@ -2,9 +2,10 @@
 title: 【嵌套bfs】A - Pushing Boxes POJ - 1475  推箱子.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [算法, 搜索]
 tags:
   - OldBlog(Before20220505)
+  - BFS
 ---
 
 ## 说明 - 2022-05-05
@@ -140,8 +141,8 @@ SSesswNNNNwnEEE
 **4.**  
 在箱子移动的bfs函数中嵌套人移动的bfs函数完成求解
 
-    
-    
+
+​    
     #include <cstdio>
     #include <iostream>
     #include <algorithm>
@@ -168,9 +169,10 @@ SSesswNNNNwnEEE
     //bpre和bnxt表示箱子的当前位置和下一个位置
     //tar表示终点位置
     //to表示箱子要移动到某个位置时，人要移动到的位置
-    
-    
-    
+
+
+​    
+​    
     //判断这个点是否在地图可行走范围之中
     bool cango(int x,int y)
     {
@@ -252,8 +254,9 @@ SSesswNNNNwnEEE
         std::cout << "Maze #" << counter++ << std::endl;
         std::cout << "Impossible." << std::endl << std::endl;
     }
-    
-    
+
+
+​    
     int main()
     {
         counter=1;
@@ -275,6 +278,7 @@ SSesswNNNNwnEEE
     
         return 0;
     }
-    
-    
+
+
+​    
 

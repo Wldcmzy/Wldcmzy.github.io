@@ -2,9 +2,10 @@
 title: 【学习记录】【Python】关于super及其MRO机制的个人理解（不一定对）.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [基础知识, python]
 tags:
   - OldBlog(Before20220505)
+  - 语言机制
 ---
 
 ## 说明 - 2022-05-05

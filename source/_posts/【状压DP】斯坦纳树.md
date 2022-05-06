@@ -2,9 +2,11 @@
 title: 【状压DP】斯坦纳树.md
 date: 1111-11-11 11:11:11
 categories:
-  - OldBlog(Before20220505)
+  - [算法, DP]
 tags:
   - OldBlog(Before20220505)
+  - DP
+  -	状态压缩
 ---
 
 ## 说明 - 2022-05-05
