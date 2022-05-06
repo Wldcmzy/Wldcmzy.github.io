@@ -2,7 +2,7 @@
 title: windows环境零基础使用hexo框架+Github搭建个人博客
 date: 2022-05-05 21:05:27
 categories:
-  - [教练我想学挂边多牛, 博客搭建]
+  - [教练我想学挂边躲牛, 博客搭建]
 tags:
   - 博客搭建
   - git
