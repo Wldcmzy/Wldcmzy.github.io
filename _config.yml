@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 深空星雨 月涌江流
+title: 蓝湖畔淅淅沥沥的雨
 subtitle: 'All tragedy erased, I see only wonders...'
 description: ''
 keywords:
@@ -40,7 +40,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:

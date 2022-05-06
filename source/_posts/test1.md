@@ -1,5 +1,5 @@
 ---
-title: 测试1
+title: test1
 date: 2022-05-05 17:55:16
 categories:
   - [测试, 无意义的测试]
@@ -56,3 +56,10 @@ x = \Sigma_{i = 1}^n [i^\beta * \alpha^i \mod p]
 y = \Pi_{i = 1}^m \lambda_i * \delta_i
 \end{cases}
 $$
+
+
+![test](test1/pic3.png)
+
+![pic5](test1/pic5.png)
+
+![pic1](test1/pic1.png)
