@@ -762,6 +762,5 @@ clahed = clahe.apply(gray)
 
 
 效果： 1 灰度图原图 . 2全局均衡化 3.CLAHE  
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210304150301662.png?x-oss-
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)
+![在这里插入图片描述](【学习记录】【python】【opencv】自学简要记录（未完）/20210304150301662.png)
 

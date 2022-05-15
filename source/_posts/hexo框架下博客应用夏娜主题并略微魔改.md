@@ -122,15 +122,15 @@ gaymenu_item:
 
 #### 修改右键菜单图标
 
-在 **\themes\shana\source\plugin\galmenu** 目录下修改img.png文件，自己P以下就行。
+在 **\themes\shana\source\plugin\galmenu** 目录下修改img.png文件，自己P一下就行。
 
 原图：
 
-![img1](hexo框架下的博客应用夏娜主题并略微魔改/img1.png)
+![img1](hexo框架下博客应用夏娜主题并略微魔改/img1.png)
 
 修改后：
 
-![img](hexo框架下的博客应用夏娜主题并略微魔改/img.png)
+![img](hexo框架下博客应用夏娜主题并略微魔改/img.png)
 
 #### 社交连接和友情连接
 
@@ -184,7 +184,7 @@ avatar: /images/avatar.png(这个是你的头像图片名)
 
 在 **\shana\source\css\images/** 目录下修改icon.png文件，可以自己找图或者p一个或者画一个。喜欢小骑士的可以用我这个:
 
-![icon](hexo框架下的博客应用夏娜主题并略微魔改/icon.png)
+![icon](hexo框架下博客应用夏娜主题并略微魔改/icon.png)
 
 #### 修改代码高亮、代码背景等
 
@@ -205,7 +205,7 @@ $code-block
 
 #### 修改文章版透明度
 
-修改文件 **\themes\shana\source\css\ _variables.styl **中color-background-rgba属性的第四个值
+修改文件 **\themes\shana\source\css\ _variables.styl ** 中color-background-rgba属性的第四个值
 
 #### 更换换页按钮的文本
 
@@ -220,5 +220,15 @@ $code-block
     }) %>
   </nav>
 <% } %>
+```
+
+#### 调宽博文显示栏
+
+打开文件 **\themes\shana\source\css\_partial\article.styl** 在.artical下增加宽度内容
+
+```stylus
+.article
+  margin: block-margin 0
+  width: 115%
 ```
 
