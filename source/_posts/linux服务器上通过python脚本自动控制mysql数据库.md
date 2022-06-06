@@ -1,5 +1,5 @@
 ---
-title: linux服务器上通过python脚本自动控制mysql数据库储存背单词软件前端传来的数据
+title: python语言实现服务器对mysql数据库的自动处理
 date: 2022-06-06 20:55:40
 categories:
   - [后端, 数据库]
