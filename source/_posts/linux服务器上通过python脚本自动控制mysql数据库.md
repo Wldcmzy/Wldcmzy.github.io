@@ -1,8 +1,8 @@
 ---
 title: linux服务器上通过python脚本自动控制mysql数据库储存背单词软件前端传来的数据
-date: 2022-05-06 18:35:40
+date: 2022-06-06 20:55:40
 categories:
-  - [小设计, 课程设计]
+  - [后端, 数据库]
 tags:
   - linux
   - socket
@@ -58,7 +58,14 @@ mysql -u username -p
 
 ## 数据库基本操作
 
-建增删改查等操作略，这里不详细讲解。
+建增删改查等操作示例。
+
+```mysql
+select ifUsed from invitation where invitationCode = 'xxx';
+update invitation set ifUsed = 'xxx' where invitationCode = 'xxx';
+delete from invitation where username = 'xxx';
+insert into userInfo values ('xxx', 'xxx', 'xxx', 0, 0, 0);
+```
 
 
 
@@ -94,6 +101,8 @@ pip install mypysql
 import pymysql
 ```
 
+##### 第一步
+
 首先创建**对象**和**游标**， 形如下方代码 
 
 参数database表示你要操作哪个数据库 ，用户名密码要正确，且用户要有访问权限才行
@@ -104,7 +113,7 @@ self.__connection = pymysql.connect(host = self.__host, user = self.__user, pass
 self.__cursor = self.__connection.cursor(cursor=pymysql.cursors.DictCursor) #游标
 ```
 
-**增删改查**
+##### 增删改查
 
 注意除了查询操作外，其他操作(也就是会改变数据库内容的操作)需要最后使用**commit()**方法,否则无法成功真正在数据库中完成操作
 
@@ -134,22 +143,11 @@ sql = 'insert into User values (%s, %s, %s, %s)' %(乱七八糟)
 self.__cursor.execute(sql)
 ```
 
-#### 部署后端
+##### 长时间未操作连接断开
 
-自己写个类，把想要的功能封装进去，就可以挂在服务器上自动跑脚本了。比如我正在做的东西有以下具体过程:
+Connection对象的ping 方法可以检查是否连接还在，将参数reconnect设为True表示若连接断开自动重连
 
-> 接受前端发来的数据
->
-> 数据解密
->
-> 验证数据正确性和完整性
->
-> 为自己写的数据库操作类创建一个对象，通过外来数据操作数据库
->
-> 编辑和加密回馈数据
->
-> 回馈前端
+```python
+self.__connection.ping(reconnect=True)
+```
 
-## 其他
-
-等学期末东西做完了应该会写一篇完整总结并附代码到github
