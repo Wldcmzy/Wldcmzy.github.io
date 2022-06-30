@@ -5,15 +5,15 @@
   
   <title>【LCA练习 倍增 tarjin】 洛谷P3379【模板】最近公共祖先 P1967货车运输.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 倍增 构造O(nlogn)，在线(单次)查询O(logn)tarjin 构造O(n) ，离线(全部)查询">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 倍增 构造O(nlogn)，在线(单次)查询O(logn) tarjin 构造O(n) ，离线(全部">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【LCA练习 倍增 tarjin】 洛谷P3379【模板】最近公共祖先 P1967货车运输.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90LCA%E7%BB%83%E4%B9%A0%20%E5%80%8D%E5%A2%9E%20tarjin%E3%80%91%20%E6%B4%9B%E8%B0%B7P3379%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88%20P1967%E8%B4%A7%E8%BD%A6%E8%BF%90%E8%BE%93/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 倍增 构造O(nlogn)，在线(单次)查询O(logn)tarjin 构造O(n) ，离线(全部)查询">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 倍增 构造O(nlogn)，在线(单次)查询O(logn) tarjin 构造O(n) ，离线(全部">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.430Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.775Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="LCA">
@@ -123,11 +123,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<p>倍增 构造O(nlogn)，在线(单次)查询O(logn)<br>tarjin 构造O(n) ，离线(全部)查询O(N+M)<br>根据题目 <strong>洛谷P3379【模板】最近公共祖先</strong> 的样例测试，tarjin和倍增不能通过占用的时间或空间评判高下，谁占优势应该跟数据的特征有关。</p>
-<h2 id="洛谷P3379【模板】最近公共祖先"><a href="#洛谷P3379【模板】最近公共祖先" class="headerlink" title="洛谷P3379【模板】最近公共祖先"></a>洛谷P3379【模板】最近公共祖先</h2><p>倍增方法</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<p>倍增 构造O(nlogn)，在线(单次)查询O(logn)<br>
+tarjin 构造O(n) ，离线(全部)查询O(N+M)<br>
+根据题目 <strong>洛谷P3379【模板】最近公共祖先</strong> 的样例测试，tarjin和倍增不能通过占用的时间或空间评判高下，谁占优势应该跟数据的特征有关。</p>
+<h2 id="洛谷p3379模板最近公共祖先"><a class="markdownIt-Anchor" href="#洛谷p3379模板最近公共祖先"></a> 洛谷P3379【模板】最近公共祖先</h2>
+<p>倍增方法</p>
 <blockquote>
-<p>构造fa数组的正确写法是这样的<br> for(int i&#x3D;1; i&lt;&#x3D;20; i++){<br> fa[x][i] &#x3D; fa[fa[x][i-1]][i-1];<br> }<br> 然而第一遍错写成了这样<br> for(int i&#x3D;1; i&lt;&#x3D;20; i++){<br> fa[x][i] &#x3D; fa[father][i-1];<br> }<br> 这显然是错误的，不是方法他的父亲的上2^i-1个节点，而是访问它的上2^i-1个节点的上2^i-1个节点<br> 引以为戒</p>
+<p>构造fa数组的正确写法是这样的<br>
+for(int i=1; i&lt;=20; i++){<br>
+fa[x][i] = fa[fa[x][i-1]][i-1];<br>
+}<br>
+然而第一遍错写成了这样<br>
+for(int i=1; i&lt;=20; i++){<br>
+fa[x][i] = fa[father][i-1];<br>
+}<br>
+这显然是错误的，不是方法他的父亲的上2<sup>i-1个节点，而是访问它的上2</sup>i-1个节点的上2^i-1个节点<br>
+引以为戒</p>
 </blockquote>
 <pre><code>#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
@@ -203,19 +216,424 @@ int main()
 &#125;
 </code></pre>
 <p>倍增方法可以提前算log优化</p>
-<p>​<br>​    #include <iostream><br>​    #include <cstdio><br>​    #include <algorithm><br>​    #include <queue><br>​    #include <map><br>​    #include <stack><br>​    #include <string><br>​    #include <cstring><br>​    #include <vector><br>​    #include <cmath><br>​    #include <set><br>​    typedef long long int LL;<br>​    const int N &#x3D; 5e5+5;<br>​    int fa[N][22],depth[N],head[N],old_brother[N];<br>​    int n,m,s,u,v;<br>​    int idx;<br>​    struct Edge<br>​    {<br>​        int to,nxt;<br>​    }edg[N&lt;&lt;1];<br>​    void addEdge(int fr,int to)<br>​    {<br>​        edg[idx].to &#x3D; to;<br>​        edg[idx].nxt &#x3D; head[fr];<br>​        head[fr] &#x3D; idx++;<br>​    }<br>​    void build(int x,int father)<br>​    {<br>​        fa[x][0] &#x3D; father;<br>​        depth[x] &#x3D; depth[father]+1;<br>​<br>​        for(int i&#x3D;1; i&lt;&#x3D;old_brother[depth[x]]; i++){<br>​        &#x2F;&#x2F;for(int i&#x3D;1; i&lt;&#x3D;20; i++){<br>​            fa[x][i] &#x3D; fa[fa[x][i-1]][i-1];<br>​        }<br>​<br>        for(int e&#x3D;head[x]; e; e&#x3D;edg[e].nxt){<br>            int y &#x3D; edg[e].to;<br>            if(y!&#x3D;father) build(y,x);<br>        }<br>    }<br>    int lca(int x,int y)<br>    {<br>        if(depth[x] &lt; depth[y]) std::swap(x,y);<br>    &#x2F;&#x2F;<br>        &#x2F;*<br>        for(int i&#x3D;20; i&gt;&#x3D;0; i–){<br>            if(fa[x][i]) if(depth[fa[x][i]]&gt;&#x3D;depth[y]){<br>                x &#x3D; fa[x][i];<br>                if(depth[x] &#x3D;&#x3D; depth[y]) break;<br>            }<br>        }<br>        *&#x2F;<br>        while(depth[x] &gt; depth[y]){<br>            x &#x3D; fa[x][old_brother[depth[x]-depth[y]]-1];<br>        }<br>    &#x2F;&#x2F;&#x2F;<br>        if(x &#x3D;&#x3D; y) return x;<br>        for(&#x2F;<em>int i&#x3D;20;</em>&#x2F; int i&#x3D;old_brother[depth[x]]-1; i&gt;&#x3D;0; i–){<br>            if(fa[x][i] !&#x3D; fa[y][i]){<br>                x &#x3D; fa[x][i];<br>                y &#x3D; fa[y][i];<br>            }<br>        }<br>        return fa[y][0];<br>    }<br>    int main()<br>    {<br>        &#x2F;&#x2F;freopen(“D:\EdgeDownloadPlace\P3379_2.in”,”r”,stdin);<br>        idx &#x3D; 2;<br>        scanf(“%d%d%d”,&amp;n,&amp;m,&amp;s);<br>        for(int i&#x3D;1; i&lt;n; i++){<br>            scanf(“%d%d”,&amp;u,&amp;v);<br>            addEdge(u,v); addEdge(v,u);<br>        }<br>        for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>            old_brother[i] &#x3D; old_brother[i-1] + (1 &lt;&lt; old_brother[i-1] &#x3D;&#x3D; i);<br>        }<br>        build(s,0);<br>        for(int i&#x3D;0; i&lt;m; i++){<br>            scanf(“%d%d”,&amp;u,&amp;v);<br>            printf(“%d\n”,lca(u,v));<br>        }<br>        return 0;<br>    }</p>
-<p>​    </p>
+<p>​<br>
+​    #include <iostream><br>
+​    #include <cstdio><br>
+​    #include <algorithm><br>
+​    #include <queue><br>
+​    #include <map><br>
+​    #include <stack><br>
+​    #include <string><br>
+​    #include <cstring><br>
+​    #include <vector><br>
+​    #include <cmath><br>
+​    #include <set><br>
+​    typedef long long int LL;<br>
+​    const int N = 5e5+5;<br>
+​    int fa[N][22],depth[N],head[N],old_brother[N];<br>
+​    int n,m,s,u,v;<br>
+​    int idx;<br>
+​    struct Edge<br>
+​    {<br>
+​        int to,nxt;<br>
+​    }edg[N&lt;&lt;1];<br>
+​    void addEdge(int fr,int to)<br>
+​    {<br>
+​        edg[idx].to = to;<br>
+​        edg[idx].nxt = head[fr];<br>
+​        head[fr] = idx++;<br>
+​    }<br>
+​    void build(int x,int father)<br>
+​    {<br>
+​        fa[x][0] = father;<br>
+​        depth[x] = depth[father]+1;<br>
+​<br>
+​        for(int i=1; i&lt;=old_brother[depth[x]]; i++){<br>
+​        //for(int i=1; i&lt;=20; i++){<br>
+​            fa[x][i] = fa[fa[x][i-1]][i-1];<br>
+​        }<br>
+​<br>
+for(int e=head[x]; e; e=edg[e].nxt){<br>
+int y = edg[e].to;<br>
+if(y!=father) build(y,x);<br>
+}<br>
+}<br>
+int lca(int x,int y)<br>
+{<br>
+if(depth[x] &lt; depth[y]) std::swap(x,y);<br>
+//<br>
+/*<br>
+for(int i=20; i&gt;=0; i–){<br>
+if(fa[x][i]) if(depth[fa[x][i]]&gt;=depth[y]){<br>
+x = fa[x][i];<br>
+if(depth[x] == depth[y]) break;<br>
+}<br>
+}<br>
+*/<br>
+while(depth[x] &gt; depth[y]){<br>
+x = fa[x][old_brother[depth[x]-depth[y]]-1];<br>
+}<br>
+///<br>
+if(x == y) return x;<br>
+for(/<em>int i=20;</em>/ int i=old_brother[depth[x]]-1; i&gt;=0; i–){<br>
+if(fa[x][i] != fa[y][i]){<br>
+x = fa[x][i];<br>
+y = fa[y][i];<br>
+}<br>
+}<br>
+return fa[y][0];<br>
+}<br>
+int main()<br>
+{<br>
+//freopen(“D:\EdgeDownloadPlace\P3379_2.in”,“r”,stdin);<br>
+idx = 2;<br>
+scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;s);<br>
+for(int i=1; i&lt;n; i++){<br>
+scanf(&quot;%d%d&quot;,&amp;u,&amp;v);<br>
+addEdge(u,v); addEdge(v,u);<br>
+}<br>
+for(int i=1; i&lt;=n; i++){<br>
+old_brother[i] = old_brother[i-1] + (1 &lt;&lt; old_brother[i-1] == i);<br>
+}<br>
+build(s,0);<br>
+for(int i=0; i&lt;m; i++){<br>
+scanf(&quot;%d%d&quot;,&amp;u,&amp;v);<br>
+printf(&quot;%d\n&quot;,lca(u,v));<br>
+}<br>
+return 0;<br>
+}</set></cmath></vector></cstring></string></stack></map></queue></algorithm></cstdio></iostream></p>
+<p>​</p>
 <p>tarjin方法</p>
-<p>​<br>​    #include <iostream><br>​    #include <cstdio><br>​    #include <cstring><br>​    #include <string><br>​    #include <cstdlib><br>​    #include <cmath><br>​    #include <algorithm><br>​    #include <queue><br>​    #include <stack><br>​    #include <vector><br>​    #include <set><br>​    #include <map><br>​    typedef long long int LL;<br>​    &#x2F;&#x2F;typedef std::pair&lt;int ,int&gt; PP;<br>​    const int N &#x3D; 5e5+5, M &#x3D; 1e6+5, INF &#x3D; 0x7fffffff;<br>​    int n, m, u, v, s;<br>​    int idx,qidx;<br>​    int head[N],sset[N],vis[N],ans[N],qhead[N];<br>​    struct Edge<br>​    {<br>​        int to, nxt;<br>​    } edg[M];<br>​    struct QEdge<br>​    {<br>​        int to, nxt, id;<br>​    } qedg[M];<br>​    void initial()<br>​    {<br>​        idx &#x3D; qidx &#x3D; 2;<br>​        for (int i &#x3D; 0; i &lt; N; i++)<br>​            sset[i] &#x3D; i;<br>​    }<br>​    int ffind(int x)<br>​    {<br>​        return sset[x] &#x3D;&#x3D; x ? x : sset[x] &#x3D; ffind(sset[x]);<br>​    }<br>​    void mmerge(int x,int  y)<br>​    {<br>​        sset[ffind(x)] &#x3D; ffind(y);<br>​    }<br>​    void addEdge(int fr,int to)<br>​    {<br>​        edg[idx].to &#x3D; to;<br>​        edg[idx].nxt &#x3D; head[fr];<br>​        head[fr] &#x3D; idx++;<br>​    }<br>​    void qaddEdge(int fr,int to,int id)<br>​    {<br>​        qedg[qidx].to &#x3D; to;<br>​        qedg[qidx].nxt &#x3D; qhead[fr];<br>​        qedg[qidx].id &#x3D; id;<br>​        qhead[fr] &#x3D; qidx++;<br>​    }<br>​    void tarjin(int x,int fr)<br>​    {<br>​        for (int e &#x3D; head[x]; e; e&#x3D;edg[e].nxt){<br>​            if((e^1) &#x3D;&#x3D; fr)<br>​                continue;<br>​            int y &#x3D; edg[e].to;<br>​            tarjin(y,e);<br>​            mmerge(y, x);<br>​        }<br>​        for (int e &#x3D; qhead[x]; e; e&#x3D;qedg[e].nxt){<br>​            int y &#x3D; qedg[e].to;<br>​            if(vis[y])<br>​                ans[qedg[e].id] &#x3D; ffind(y);<br>​        }<br>​        vis[x] &#x3D; 1;<br>​    }<br>​    int main()<br>​    {<br>​        initial();<br>​        scanf(“%d%d%d”,&amp;n,&amp;m,&amp;s);<br>​        for (int i &#x3D; 1; i &lt; n; i++){<br>​            scanf(“%d%d”,&amp;u,&amp;v);<br>​            addEdge(u, v);<br>​            addEdge(v, u);<br>​        }<br>​        for (int i &#x3D; 0; i &lt; m; i++){<br>​            scanf(“%d%d”,&amp;u,&amp;v);<br>​            qaddEdge(u, v, i);<br>​            qaddEdge(v, u, i);<br>​        }<br>​        tarjin(s,0);<br>​        for (int i &#x3D; 0; i &lt; m; i++)<br>​            printf(“%d\n”,ans[i]);<br>​        return 0;<br>​    }</p>
-<h2 id="洛谷-P1967-NOIP2013-提高组-货车运输"><a href="#洛谷-P1967-NOIP2013-提高组-货车运输" class="headerlink" title="洛谷 P1967 [NOIP2013 提高组] 货车运输"></a>洛谷 P1967 [NOIP2013 提高组] 货车运输</h2><p>最大生成树 + 倍增lca找最短距离<br>注意应该先更新ans，再使当前点倍增跳跃，刚才是有一处写反了，没注意到，导致WA</p>
-<p>​<br>​    #include <iostream><br>​    #include <cstdio><br>​    #include <cstdlib><br>​    #include <cstring><br>​    #include <cmath><br>​    #include <algorithm><br>​    #include <string><br>​    #include <queue><br>​    #include <vector><br>​    #include <stack><br>​    #include <map><br>​    #include <set><br>​    typedef long long int LL;<br>​    const int N &#x3D; 1e4+4, M &#x3D; 5e4+4, INF &#x3D; 0x7fffffff, LM &#x3D; 14;<br>​    int n,m,u,v,w,k,ans;<br>​    int idx;<br>​    int head[N],sset[N],fa[N][LM+1],dis[N][LM+1],depth[N],vis[N];<br>​    struct Esave<br>​    {<br>​        int fr,to,w;<br>​    }es[M&lt;&lt;1];<br>​    struct Edge<br>​    {<br>​        int to,nxt,w;<br>​    }edg[M&lt;&lt;1];<br>​    void addE(int u,int v,int w)<br>​    {<br>​        edg[idx].to &#x3D; v;<br>​        edg[idx].nxt &#x3D; head[u];<br>​        edg[idx].w &#x3D; w;<br>​        head[u] &#x3D; idx++;<br>​    }<br>​    void initial()<br>​    {<br>​        idx &#x3D; 2;<br>​        for(int i&#x3D;0; i&lt;N; i++) sset[i] &#x3D; i;<br>​    }<br>​    bool escmp(Esave x,Esave y)<br>​    {<br>​        return x.w &gt; y.w;<br>​    }<br>​    int ffind(int x)<br>​    {<br>​        return sset[x] &#x3D;&#x3D; x ? x : sset[x] &#x3D; ffind(sset[x]);<br>​    }<br>​    void mmerge(int x,int y)<br>​    {<br>​        sset[ffind(x)] &#x3D; ffind(y);<br>​    }<br>​    void build(int x,int father,int d)<br>​    {<br>​        fa[x][0] &#x3D; father;<br>​        dis[x][0] &#x3D; d;<br>​        depth[x] &#x3D; depth[father] + 1;<br>​        for(int i&#x3D;1; i&lt;&#x3D;LM; i++){<br>​            fa[x][i] &#x3D; fa[fa[x][i-1]][i-1];<br>​            dis[x][i] &#x3D; std::min(dis[fa[x][i-1]][i-1],dis[x][i-1]);<br>​        }<br>​        for(int e&#x3D;head[x]; e; e&#x3D;edg[e].nxt){<br>​            if(edg[e].to !&#x3D; father) build(edg[e].to,x,edg[e].w);<br>​        }<br>​    }<br>​    int lca(int x,int y)<br>​    {<br>​        ans &#x3D; INF;<br>​        if(ffind(x) !&#x3D; ffind(y)) return -1;<br>​        if(depth[x] &lt; depth[y]) std::swap(x,y);<br>​        for(int i&#x3D;LM; i&gt;&#x3D;0; i–){<br>​            if(fa[x][i]) if(depth[fa[x][i]] &gt;&#x3D; depth[y]){<br>​                ans &#x3D; std::min(ans,dis[x][i]);<br>​                x &#x3D; fa[x][i];<br>​            }<br>​            if(depth[x] &#x3D;&#x3D; depth[y]) break;<br>​        }<br>​        if(x &#x3D;&#x3D; y) return ans;<br>​        for(int i&#x3D;LM; i&gt;&#x3D;0; i–){<br>​            if(fa[x][i]) if(fa[x][i] !&#x3D; fa[y][i]){<br>​                ans &#x3D; std::min(ans,dis[x][i]);<br>​                ans &#x3D; std::min(ans,dis[y][i]);<br>​                x &#x3D; fa[x][i];<br>​                y &#x3D; fa[y][i];<br>​            }<br>​        }<br>​        return std::min(ans,std::min(dis[x][0],dis[y][0]));<br>​        &#x2F;&#x2F;return ans;<br>​    }<br>​    int main()<br>​    {<br>​        initial();<br>​        scanf(“%d%d”,&amp;n,&amp;m);<br>​        for(int i&#x3D;0; i&lt;m; i++) scanf(“%d%d%d”,&amp;es[i].fr,&amp;es[i].to,&amp;es[i].w);<br>​        std::sort(es,es+m,escmp);<br>​        for(int i&#x3D;0; i&lt;m;  i++){<br>​            u &#x3D; es[i].fr, v &#x3D; es[i].to, w &#x3D; es[i].w;<br>​            if(ffind(u) !&#x3D; ffind(v)){<br>​                mmerge(u,v);<br>​                addE(u,v,w); addE(v,u,w);<br>​            }<br>​        }<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++) if(!vis[ffind(i)]){<br>​            vis[ffind(i)] &#x3D; 1;<br>​            build(i,0,0);<br>​        }<br>​        scanf(“%d”,&amp;k);<br>​        while(k–){<br>​            scanf(“%d%d”,&amp;u,&amp;v);<br>​            printf(“%d\n”,lca(u,v));<br>​        }<br>​        return 0;<br>​    }</p>
+<p>​<br>
+​    #include <iostream><br>
+​    #include <cstdio><br>
+​    #include <cstring><br>
+​    #include <string><br>
+​    #include <cstdlib><br>
+​    #include <cmath><br>
+​    #include <algorithm><br>
+​    #include <queue><br>
+​    #include <stack><br>
+​    #include <vector><br>
+​    #include <set><br>
+​    #include <map><br>
+​    typedef long long int LL;<br>
+​    //typedef std::pair&lt;int ,int&gt; PP;<br>
+​    const int N = 5e5+5, M = 1e6+5, INF = 0x7fffffff;<br>
+​    int n, m, u, v, s;<br>
+​    int idx,qidx;<br>
+​    int head[N],sset[N],vis[N],ans[N],qhead[N];<br>
+​    struct Edge<br>
+​    {<br>
+​        int to, nxt;<br>
+​    } edg[M];<br>
+​    struct QEdge<br>
+​    {<br>
+​        int to, nxt, id;<br>
+​    } qedg[M];<br>
+​    void initial()<br>
+​    {<br>
+​        idx = qidx = 2;<br>
+​        for (int i = 0; i &lt; N; i++)<br>
+​            sset[i] = i;<br>
+​    }<br>
+​    int ffind(int x)<br>
+​    {<br>
+​        return sset[x] == x ? x : sset[x] = ffind(sset[x]);<br>
+​    }<br>
+​    void mmerge(int x,int  y)<br>
+​    {<br>
+​        sset[ffind(x)] = ffind(y);<br>
+​    }<br>
+​    void addEdge(int fr,int to)<br>
+​    {<br>
+​        edg[idx].to = to;<br>
+​        edg[idx].nxt = head[fr];<br>
+​        head[fr] = idx++;<br>
+​    }<br>
+​    void qaddEdge(int fr,int to,int id)<br>
+​    {<br>
+​        qedg[qidx].to = to;<br>
+​        qedg[qidx].nxt = qhead[fr];<br>
+​        qedg[qidx].id = id;<br>
+​        qhead[fr] = qidx++;<br>
+​    }<br>
+​    void tarjin(int x,int fr)<br>
+​    {<br>
+​        for (int e = head[x]; e; e=edg[e].nxt){<br>
+​            if((e^1) == fr)<br>
+​                continue;<br>
+​            int y = edg[e].to;<br>
+​            tarjin(y,e);<br>
+​            mmerge(y, x);<br>
+​        }<br>
+​        for (int e = qhead[x]; e; e=qedg[e].nxt){<br>
+​            int y = qedg[e].to;<br>
+​            if(vis[y])<br>
+​                ans[qedg[e].id] = ffind(y);<br>
+​        }<br>
+​        vis[x] = 1;<br>
+​    }<br>
+​    int main()<br>
+​    {<br>
+​        initial();<br>
+​        scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;s);<br>
+​        for (int i = 1; i &lt; n; i++){<br>
+​            scanf(&quot;%d%d&quot;,&amp;u,&amp;v);<br>
+​            addEdge(u, v);<br>
+​            addEdge(v, u);<br>
+​        }<br>
+​        for (int i = 0; i &lt; m; i++){<br>
+​            scanf(&quot;%d%d&quot;,&amp;u,&amp;v);<br>
+​            qaddEdge(u, v, i);<br>
+​            qaddEdge(v, u, i);<br>
+​        }<br>
+​        tarjin(s,0);<br>
+​        for (int i = 0; i &lt; m; i++)<br>
+​            printf(&quot;%d\n&quot;,ans[i]);<br>
+​        return 0;<br>
+​    }</map></set></vector></stack></queue></algorithm></cmath></cstdlib></string></cstring></cstdio></iostream></p>
+<h2 id="洛谷-p1967-noip2013-提高组-货车运输"><a class="markdownIt-Anchor" href="#洛谷-p1967-noip2013-提高组-货车运输"></a> 洛谷 P1967 [NOIP2013 提高组] 货车运输</h2>
+<p>最大生成树 + 倍增lca找最短距离<br>
+注意应该先更新ans，再使当前点倍增跳跃，刚才是有一处写反了，没注意到，导致WA</p>
+<p>​<br>
+​    #include <iostream><br>
+​    #include <cstdio><br>
+​    #include <cstdlib><br>
+​    #include <cstring><br>
+​    #include <cmath><br>
+​    #include <algorithm><br>
+​    #include <string><br>
+​    #include <queue><br>
+​    #include <vector><br>
+​    #include <stack><br>
+​    #include <map><br>
+​    #include <set><br>
+​    typedef long long int LL;<br>
+​    const int N = 1e4+4, M = 5e4+4, INF = 0x7fffffff, LM = 14;<br>
+​    int n,m,u,v,w,k,ans;<br>
+​    int idx;<br>
+​    int head[N],sset[N],fa[N][LM+1],dis[N][LM+1],depth[N],vis[N];<br>
+​    struct Esave<br>
+​    {<br>
+​        int fr,to,w;<br>
+​    }es[M&lt;&lt;1];<br>
+​    struct Edge<br>
+​    {<br>
+​        int to,nxt,w;<br>
+​    }edg[M&lt;&lt;1];<br>
+​    void addE(int u,int v,int w)<br>
+​    {<br>
+​        edg[idx].to = v;<br>
+​        edg[idx].nxt = head[u];<br>
+​        edg[idx].w = w;<br>
+​        head[u] = idx++;<br>
+​    }<br>
+​    void initial()<br>
+​    {<br>
+​        idx = 2;<br>
+​        for(int i=0; i&lt;N; i++) sset[i] = i;<br>
+​    }<br>
+​    bool escmp(Esave x,Esave y)<br>
+​    {<br>
+​        return x.w &gt; y.w;<br>
+​    }<br>
+​    int ffind(int x)<br>
+​    {<br>
+​        return sset[x] == x ? x : sset[x] = ffind(sset[x]);<br>
+​    }<br>
+​    void mmerge(int x,int y)<br>
+​    {<br>
+​        sset[ffind(x)] = ffind(y);<br>
+​    }<br>
+​    void build(int x,int father,int d)<br>
+​    {<br>
+​        fa[x][0] = father;<br>
+​        dis[x][0] = d;<br>
+​        depth[x] = depth[father] + 1;<br>
+​        for(int i=1; i&lt;=LM; i++){<br>
+​            fa[x][i] = fa[fa[x][i-1]][i-1];<br>
+​            dis[x][i] = std::min(dis[fa[x][i-1]][i-1],dis[x][i-1]);<br>
+​        }<br>
+​        for(int e=head[x]; e; e=edg[e].nxt){<br>
+​            if(edg[e].to != father) build(edg[e].to,x,edg[e].w);<br>
+​        }<br>
+​    }<br>
+​    int lca(int x,int y)<br>
+​    {<br>
+​        ans = INF;<br>
+​        if(ffind(x) != ffind(y)) return -1;<br>
+​        if(depth[x] &lt; depth[y]) std::swap(x,y);<br>
+​        for(int i=LM; i&gt;=0; i–){<br>
+​            if(fa[x][i]) if(depth[fa[x][i]] &gt;= depth[y]){<br>
+​                ans = std::min(ans,dis[x][i]);<br>
+​                x = fa[x][i];<br>
+​            }<br>
+​            if(depth[x] == depth[y]) break;<br>
+​        }<br>
+​        if(x == y) return ans;<br>
+​        for(int i=LM; i&gt;=0; i–){<br>
+​            if(fa[x][i]) if(fa[x][i] != fa[y][i]){<br>
+​                ans = std::min(ans,dis[x][i]);<br>
+​                ans = std::min(ans,dis[y][i]);<br>
+​                x = fa[x][i];<br>
+​                y = fa[y][i];<br>
+​            }<br>
+​        }<br>
+​        return std::min(ans,std::min(dis[x][0],dis[y][0]));<br>
+​        //return ans;<br>
+​    }<br>
+​    int main()<br>
+​    {<br>
+​        initial();<br>
+​        scanf(&quot;%d%d&quot;,&amp;n,&amp;m);<br>
+​        for(int i=0; i&lt;m; i++) scanf(&quot;%d%d%d&quot;,&amp;es[i].fr,&amp;es[i].to,&amp;es[i].w);<br>
+​        std::sort(es,es+m,escmp);<br>
+​        for(int i=0; i&lt;m;  i++){<br>
+​            u = es[i].fr, v = es[i].to, w = es[i].w;<br>
+​            if(ffind(u) != ffind(v)){<br>
+​                mmerge(u,v);<br>
+​                addE(u,v,w); addE(v,u,w);<br>
+​            }<br>
+​        }<br>
+​        for(int i=1; i&lt;=n; i++) if(!vis[ffind(i)]){<br>
+​            vis[ffind(i)] = 1;<br>
+​            build(i,0,0);<br>
+​        }<br>
+​        scanf(&quot;%d&quot;,&amp;k);<br>
+​        while(k–){<br>
+​            scanf(&quot;%d%d&quot;,&amp;u,&amp;v);<br>
+​            printf(&quot;%d\n&quot;,lca(u,v));<br>
+​        }<br>
+​        return 0;<br>
+​    }</set></map></stack></vector></queue></string></algorithm></cmath></cstring></cstdlib></cstdio></iostream></p>
 <p>求log优化版</p>
-<p>​<br>​    #include <iostream><br>​    #include <cstdio><br>​    #include <cstdlib><br>​    #include <cstring><br>​    #include <cmath><br>​    #include <algorithm><br>​    #include <string><br>​    #include <queue><br>​    #include <vector><br>​    #include <stack><br>​    #include <map><br>​    #include <set><br>​    typedef long long int LL;<br>​    const int N &#x3D; 1e4+4, M &#x3D; 5e4+4, INF &#x3D; 0x7fffffff, LM &#x3D; 14;<br>​    int n,m,u,v,w,k,ans;<br>​    int idx;<br>​    int head[N],sset[N],fa[N][LM+1],dis[N][LM+1],depth[N],vis[N],lg[N];<br>​    struct Esave<br>​    {<br>​        int fr,to,w;<br>​    }es[M&lt;&lt;1];<br>​    struct Edge<br>​    {<br>​        int to,nxt,w;<br>​    }edg[M&lt;&lt;1];<br>​    void addE(int u,int v,int w)<br>​    {<br>​        edg[idx].to &#x3D; v;<br>​        edg[idx].nxt &#x3D; head[u];<br>​        edg[idx].w &#x3D; w;<br>​        head[u] &#x3D; idx++;<br>​    }<br>​    void initial()<br>​    {<br>​        idx &#x3D; 2;<br>​        for(int i&#x3D;0; i&lt;N; i++) sset[i] &#x3D; i;<br>​        for(int i&#x3D;1; i&lt;N; i++) lg[i] &#x3D; lg[i-1] + (1 &lt;&lt; lg[i-1] &#x3D;&#x3D; i);<br>​    }<br>​    bool escmp(Esave x,Esave y)<br>​    {<br>​        return x.w &gt; y.w;<br>​    }<br>​    int ffind(int x)<br>​    {<br>​        return sset[x] &#x3D;&#x3D; x ? x : sset[x] &#x3D; ffind(sset[x]);<br>​    }<br>​    void mmerge(int x,int y)<br>​    {<br>​        sset[ffind(x)] &#x3D; ffind(y);<br>​    }<br>​    void build(int x,int father,int d)<br>​    {<br>​        fa[x][0] &#x3D; father;<br>​        dis[x][0] &#x3D; d;<br>​        depth[x] &#x3D; depth[father] + 1;<br>​        for(int i&#x3D;1; i&lt;&#x3D;lg[depth[x]]-1; i++){<br>​            fa[x][i] &#x3D; fa[fa[x][i-1]][i-1];<br>​            dis[x][i] &#x3D; std::min(dis[fa[x][i-1]][i-1],dis[x][i-1]);<br>​        }<br>​        for(int e&#x3D;head[x]; e; e&#x3D;edg[e].nxt){<br>​            if(edg[e].to !&#x3D; father) build(edg[e].to,x,edg[e].w);<br>​        }<br>​    }<br>​    int lca(int x,int y)<br>​    {<br>​        ans &#x3D; INF;<br>​        if(ffind(x) !&#x3D; ffind(y)) return -1;<br>​        if(depth[x] &lt; depth[y]) std::swap(x,y);<br>​        &#x2F;*<br>​        for(int i&#x3D;LM; i&gt;&#x3D;0; i–){<br>​            if(fa[x][i]) if(depth[fa[x][i]] &gt;&#x3D; depth[y]){<br>​                ans &#x3D; std::min(ans,dis[x][i]);<br>​                x &#x3D; fa[x][i];<br>​            }<br>​            if(depth[x] &#x3D;&#x3D; depth[y]) break;<br>​        }<br>​        <em>&#x2F;<br>​        *<br>​        while(depth[x] &gt; depth[y]){<br>​            u &#x3D; lg[depth[x]-depth[y]]-1;<br>​            ans &#x3D; std::min(ans,dis[x][u]);<br>​            x &#x3D; fa[x][u];<br>​        }<br>​        &#x2F;&#x2F;</em>&#x2F;<br>​        if(x &#x3D;&#x3D; y) return ans;<br>​        for(int i&#x3D;lg[depth[x]]-1; i&gt;&#x3D;0; i–){<br>​            if(fa[x][i]) if(fa[x][i] !&#x3D; fa[y][i]){<br>​                ans &#x3D; std::min(ans,dis[x][i]);<br>​                ans &#x3D; std::min(ans,dis[y][i]);<br>​                x &#x3D; fa[x][i];<br>​                y &#x3D; fa[y][i];<br>​            }<br>​        }<br>​        return std::min(ans,std::min(dis[x][0],dis[y][0]));<br>​        &#x2F;&#x2F;return ans;<br>​    }<br>​    int main()<br>​    {<br>​        initial();<br>​        scanf(“%d%d”,&amp;n,&amp;m);<br>​        for(int i&#x3D;0; i&lt;m; i++) scanf(“%d%d%d”,&amp;es[i].fr,&amp;es[i].to,&amp;es[i].w);<br>​        std::sort(es,es+m,escmp);<br>​        for(int i&#x3D;0; i&lt;m;  i++){<br>​            u &#x3D; es[i].fr, v &#x3D; es[i].to, w &#x3D; es[i].w;<br>​            if(ffind(u) !&#x3D; ffind(v)){<br>​                mmerge(u,v);<br>​                addE(u,v,w); addE(v,u,w);<br>​            }<br>​        }<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++) if(!vis[ffind(i)]){<br>​            vis[ffind(i)] &#x3D; 1;<br>​            build(i,0,0);<br>​        }<br>​        scanf(“%d”,&amp;k);<br>​        while(k–){<br>​            scanf(“%d%d”,&amp;u,&amp;v);<br>​            printf(“%d\n”,lca(u,v));<br>​        }<br>​        return 0;<br>​    }</p>
+<p>​<br>
+​    #include <iostream><br>
+​    #include <cstdio><br>
+​    #include <cstdlib><br>
+​    #include <cstring><br>
+​    #include <cmath><br>
+​    #include <algorithm><br>
+​    #include <string><br>
+​    #include <queue><br>
+​    #include <vector><br>
+​    #include <stack><br>
+​    #include <map><br>
+​    #include <set><br>
+​    typedef long long int LL;<br>
+​    const int N = 1e4+4, M = 5e4+4, INF = 0x7fffffff, LM = 14;<br>
+​    int n,m,u,v,w,k,ans;<br>
+​    int idx;<br>
+​    int head[N],sset[N],fa[N][LM+1],dis[N][LM+1],depth[N],vis[N],lg[N];<br>
+​    struct Esave<br>
+​    {<br>
+​        int fr,to,w;<br>
+​    }es[M&lt;&lt;1];<br>
+​    struct Edge<br>
+​    {<br>
+​        int to,nxt,w;<br>
+​    }edg[M&lt;&lt;1];<br>
+​    void addE(int u,int v,int w)<br>
+​    {<br>
+​        edg[idx].to = v;<br>
+​        edg[idx].nxt = head[u];<br>
+​        edg[idx].w = w;<br>
+​        head[u] = idx++;<br>
+​    }<br>
+​    void initial()<br>
+​    {<br>
+​        idx = 2;<br>
+​        for(int i=0; i&lt;N; i++) sset[i] = i;<br>
+​        for(int i=1; i&lt;N; i++) lg[i] = lg[i-1] + (1 &lt;&lt; lg[i-1] == i);<br>
+​    }<br>
+​    bool escmp(Esave x,Esave y)<br>
+​    {<br>
+​        return x.w &gt; y.w;<br>
+​    }<br>
+​    int ffind(int x)<br>
+​    {<br>
+​        return sset[x] == x ? x : sset[x] = ffind(sset[x]);<br>
+​    }<br>
+​    void mmerge(int x,int y)<br>
+​    {<br>
+​        sset[ffind(x)] = ffind(y);<br>
+​    }<br>
+​    void build(int x,int father,int d)<br>
+​    {<br>
+​        fa[x][0] = father;<br>
+​        dis[x][0] = d;<br>
+​        depth[x] = depth[father] + 1;<br>
+​        for(int i=1; i&lt;=lg[depth[x]]-1; i++){<br>
+​            fa[x][i] = fa[fa[x][i-1]][i-1];<br>
+​            dis[x][i] = std::min(dis[fa[x][i-1]][i-1],dis[x][i-1]);<br>
+​        }<br>
+​        for(int e=head[x]; e; e=edg[e].nxt){<br>
+​            if(edg[e].to != father) build(edg[e].to,x,edg[e].w);<br>
+​        }<br>
+​    }<br>
+​    int lca(int x,int y)<br>
+​    {<br>
+​        ans = INF;<br>
+​        if(ffind(x) != ffind(y)) return -1;<br>
+​        if(depth[x] &lt; depth[y]) std::swap(x,y);<br>
+​        /*<br>
+​        for(int i=LM; i&gt;=0; i–){<br>
+​            if(fa[x][i]) if(depth[fa[x][i]] &gt;= depth[y]){<br>
+​                ans = std::min(ans,dis[x][i]);<br>
+​                x = fa[x][i];<br>
+​            }<br>
+​            if(depth[x] == depth[y]) break;<br>
+​        }<br>
+​        <em>/<br>
+​        *<br>
+​        while(depth[x] &gt; depth[y]){<br>
+​            u = lg[depth[x]-depth[y]]-1;<br>
+​            ans = std::min(ans,dis[x][u]);<br>
+​            x = fa[x][u];<br>
+​        }<br>
+​        //</em>/<br>
+​        if(x == y) return ans;<br>
+​        for(int i=lg[depth[x]]-1; i&gt;=0; i–){<br>
+​            if(fa[x][i]) if(fa[x][i] != fa[y][i]){<br>
+​                ans = std::min(ans,dis[x][i]);<br>
+​                ans = std::min(ans,dis[y][i]);<br>
+​                x = fa[x][i];<br>
+​                y = fa[y][i];<br>
+​            }<br>
+​        }<br>
+​        return std::min(ans,std::min(dis[x][0],dis[y][0]));<br>
+​        //return ans;<br>
+​    }<br>
+​    int main()<br>
+​    {<br>
+​        initial();<br>
+​        scanf(&quot;%d%d&quot;,&amp;n,&amp;m);<br>
+​        for(int i=0; i&lt;m; i++) scanf(&quot;%d%d%d&quot;,&amp;es[i].fr,&amp;es[i].to,&amp;es[i].w);<br>
+​        std::sort(es,es+m,escmp);<br>
+​        for(int i=0; i&lt;m;  i++){<br>
+​            u = es[i].fr, v = es[i].to, w = es[i].w;<br>
+​            if(ffind(u) != ffind(v)){<br>
+​                mmerge(u,v);<br>
+​                addE(u,v,w); addE(v,u,w);<br>
+​            }<br>
+​        }<br>
+​        for(int i=1; i&lt;=n; i++) if(!vis[ffind(i)]){<br>
+​            vis[ffind(i)] = 1;<br>
+​            build(i,0,0);<br>
+​        }<br>
+​        scanf(&quot;%d&quot;,&amp;k);<br>
+​        while(k–){<br>
+​            scanf(&quot;%d%d&quot;,&amp;u,&amp;v);<br>
+​            printf(&quot;%d\n&quot;,lca(u,v));<br>
+​        }<br>
+​        return 0;<br>
+​    }</set></map></stack></vector></queue></string></algorithm></cmath></cstring></cstdlib></cstdio></iostream></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90LCA%E7%BB%83%E4%B9%A0%20%E5%80%8D%E5%A2%9E%20tarjin%E3%80%91%20%E6%B4%9B%E8%B0%B7P3379%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88%20P1967%E8%B4%A7%E8%BD%A6%E8%BF%90%E8%BE%93/" data-id="cl50tnlqr0017ycj3ffnna03z" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90LCA%E7%BB%83%E4%B9%A0%20%E5%80%8D%E5%A2%9E%20tarjin%E3%80%91%20%E6%B4%9B%E8%B0%B7P3379%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88%20P1967%E8%B4%A7%E8%BD%A6%E8%BF%90%E8%BE%93/" data-id="cl50x8cmm0017ccj3gl7q0qnn" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LCA/" rel="tag">LCA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>

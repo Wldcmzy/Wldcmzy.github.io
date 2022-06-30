@@ -5,15 +5,15 @@
   
   <title>【学习记录】【Python】【openpyxl】简要学习openpyxl   的    记录----未完待续.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 现阶段进行了简单的了解，不打算深究(后期来补: pandas挺好用的) 1.创建一个xls文件，随便写点">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 现阶段进行了简单的了解，不打算深究(后期来补: pandas挺好用的)  1.创建一个xls文件，随">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【学习记录】【Python】【openpyxl】简要学习openpyxl   的    记录----未完待续.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90openpyxl%E3%80%91%E7%AE%80%E8%A6%81%E5%AD%A6%E4%B9%A0openpyxl%20%20%20%E7%9A%84%20%20%20%20%E8%AE%B0%E5%BD%95----%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 现阶段进行了简单的了解，不打算深究(后期来补: pandas挺好用的) 1.创建一个xls文件，随便写点">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 现阶段进行了简单的了解，不打算深究(后期来补: pandas挺好用的)  1.创建一个xls文件，随">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.430Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.775Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="python库">
@@ -124,39 +124,48 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
 <p>现阶段进行了简单的了解，不打算深究(后期来补: pandas挺好用的)</p>
-<h2 id="1-创建一个xls文件，随便写点东西，并保存"><a href="#1-创建一个xls文件，随便写点东西，并保存" class="headerlink" title="1.创建一个xls文件，随便写点东西，并保存"></a>1.创建一个xls文件，随便写点东西，并保存</h2><p>​<br>    import openpyxl</p>
+<h2 id="1创建一个xls文件随便写点东西并保存"><a class="markdownIt-Anchor" href="#1创建一个xls文件随便写点东西并保存"></a> 1.创建一个xls文件，随便写点东西，并保存</h2>
+<p>​<br>
+import openpyxl</p>
 <pre><code>wb  = openpyxl.Workbook()   #创建一个工作表
 
 ws1 = wb.active             #获取“活跃的”表单
-ws1.title=&#39;sheeeet1&#39;         #更改表单的名字
+ws1.title='sheeeet1'         #更改表单的名字
 
-ws1[&#39;B7&#39;]=15                           #给单元格赋值
-ws1[&#39;C4&#39;]=&#39;CFour&#39;
-ws1[&#39;A2&#39;]=&#39;ttt&#39;
-ws1[&#39;A8&#39;]=&#39;AaAaAaAa&#39;
-ws1.append([1,2,&#39;sfaf&#39;,56,&#39;ABC&#39;])       #给一行中的多个单元格赋值
+ws1['B7']=15                           #给单元格赋值
+ws1['C4']='CFour'
+ws1['A2']='ttt'
+ws1['A8']='AaAaAaAa'
+ws1.append([1,2,'sfaf',56,'ABC'])       #给一行中的多个单元格赋值
 ws1.append([1,1,1,11,1,1,1,1])
 
 print(ws1.max_row)                      #最大行
 print(ws1.max_column)                   #最大列
 
-print(ws1[&#39;A2&#39;].value)              
-print(ws1[&#39;B14&#39;].value)
-print(ws1[&#39;B13&#39;].value)                 #单元格无数据返回None
+print(ws1['A2'].value)              
+print(ws1['B14'].value)
+print(ws1['B13'].value)                 #单元格无数据返回None
 </code></pre>
-<p>​<br>    ws2 &#x3D; wb.create_sheet(‘sheeeet2’)       #创建一个表单<br>    ws2[‘C3’]&#x3D;’ws2C3’</p>
-<p>​<br>    wb.save(‘xls_try1.xls’)                 #保存为xls文件</p>
-<p>​    </p>
-<p>目测openpyxl.worksheet.worksheet.Worksheet类的append方法的添加位置是：最后有内容的一行 的下一行<br>即openpyxl.worksheet.worksheet.Worksheet.max_row的下一行</p>
-<h2 id="2-打开一个xls文件，随便进行点操作"><a href="#2-打开一个xls文件，随便进行点操作" class="headerlink" title="2.打开一个xls文件，随便进行点操作"></a>2.打开一个xls文件，随便进行点操作</h2><p>​<br>    import openpyxl</p>
-<pre><code>wb = openpyxl.load_workbook(&#39;xls_try1.xlsx&#39;)
+<p>​<br>
+ws2 = wb.create_sheet(‘sheeeet2’)       #创建一个表单<br>
+ws2[‘C3’]=‘ws2C3’</p>
+<p>​<br>
+wb.save(‘xls_try1.xls’)                 #保存为xls文件</p>
+<p>​</p>
+<p>目测openpyxl.worksheet.worksheet.Worksheet类的append方法的添加位置是：最后有内容的一行 的下一行<br>
+即openpyxl.worksheet.worksheet.Worksheet.max_row的下一行</p>
+<h2 id="2打开一个xls文件随便进行点操作"><a class="markdownIt-Anchor" href="#2打开一个xls文件随便进行点操作"></a> 2.打开一个xls文件，随便进行点操作</h2>
+<p>​<br>
+import openpyxl</p>
+<pre><code>wb = openpyxl.load_workbook('xls_try1.xlsx')
 
-ws_one = wb[&#39;sheeeet1&#39;]
-print(ws_one[&#39;A2&#39;].value)       #输出一个单元格的值
+ws_one = wb['sheeeet1']
+print(ws_one['A2'].value)       #输出一个单元格的值
 
-for each_row in ws_one[&#39;A9&#39;:&#39;F10&#39;]:
+for each_row in ws_one['A9':'F10']:
     for each_cell in each_row:
         print(each_cell.value)      #输出多个单元格的值
 </code></pre>
@@ -164,7 +173,7 @@ for each_row in ws_one[&#39;A9&#39;:&#39;F10&#39;]:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90openpyxl%E3%80%91%E7%AE%80%E8%A6%81%E5%AD%A6%E4%B9%A0openpyxl%20%20%20%E7%9A%84%20%20%20%20%E8%AE%B0%E5%BD%95----%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD/" data-id="cl50tnlr70025ycj3c3ycf73s" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90openpyxl%E3%80%91%E7%AE%80%E8%A6%81%E5%AD%A6%E4%B9%A0openpyxl%20%20%20%E7%9A%84%20%20%20%20%E8%AE%B0%E5%BD%95----%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD/" data-id="cl50x8cmx0025ccj3ep6vgd49" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/excle/" rel="tag">excle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%BA%93/" rel="tag">python库</a></li></ul>
@@ -175,11 +184,11 @@ for each_row in ws_one[&#39;A9&#39;:&#39;F10&#39;]:
     
 <nav id="article-nav">
   
-    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90cv2%E3%80%91%E8%87%AA%E5%AD%A6cv2%20%E7%9A%84%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%EF%BC%88%E6%9C%AA%E5%AE%8C%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          【学习记录】【Python】【cv2】自学cv2 的简单记录（已经腰斩换新的）.md
+          【学习记录】【Python】【numpy】自学简要记录（未完）.md
         
       </div>
     </a>

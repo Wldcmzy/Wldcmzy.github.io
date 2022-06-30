@@ -5,15 +5,15 @@
   
   <title>记忆化搜索（貌似，不太清楚是不是，自己摸索题的时候猜了一个） L3-025 那就别担心了 (30 分).md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 题目&lt;https:&#x2F;&#x2F;pintia.cn&#x2F;problem-sets&#x2F;9948050463">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  题目 &lt;https:&#x2F;&#x2F;pintia.cn&#x2F;problem- sets&#x2F;9948050463">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记忆化搜索（貌似，不太清楚是不是，自己摸索题的时候猜了一个） L3-025 那就别担心了 (30 分).md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2%EF%BC%88%E8%B2%8C%E4%BC%BC%EF%BC%8C%E4%B8%8D%E5%A4%AA%E6%B8%85%E6%A5%9A%E6%98%AF%E4%B8%8D%E6%98%AF%EF%BC%8C%E8%87%AA%E5%B7%B1%E6%91%B8%E7%B4%A2%E9%A2%98%E7%9A%84%E6%97%B6%E5%80%99%E7%8C%9C%E4%BA%86%E4%B8%80%E4%B8%AA%EF%BC%89%20L3-025%20%E9%82%A3%E5%B0%B1%E5%88%AB%E6%8B%85%E5%BF%83%E4%BA%86%20(30%20%E5%88%86)/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 题目&lt;https:&#x2F;&#x2F;pintia.cn&#x2F;problem-sets&#x2F;9948050463">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  题目 &lt;https:&#x2F;&#x2F;pintia.cn&#x2F;problem- sets&#x2F;9948050463">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.477Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.822Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="DFS">
@@ -123,29 +123,64 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>&lt;<a target="_blank" rel="noopener" href="https://pintia.cn/problem-">https://pintia.cn/problem-</a><br>sets&#x2F;994805046380707840&#x2F;problems&#x2F;1336215880692482060&gt;<br>下图转自“英式没品笑话百科”的新浪微博 —— 所以无论有没有遇到难题，其实都不用担心。<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-/">https://img-</a><br>blog.csdnimg.cn&#x2F;img_convert&#x2F;c391ed5f2575c951739264f1eb9226e7.png#pic_center)<br>博主将这种逻辑推演称为“逻辑自洽”，即从某个命题出发的所有推理路径都会将结论引导到同一个最终命题（开玩笑的，千万别以为这是真正的逻辑自洽的定义……）。现给定一个更为复杂的逻辑推理图，本题就请你检查从一个给定命题到另一个命题的推理是否是“逻辑自洽”的，以及存在多少种不同的推理路径。例如上图，从“你遇到难题了吗？”到“那就别担心了”就是一种“逻辑自洽”的推理，一共有<br>3 条不同的推理路径。</p>
-<p>输入格式：<br>输入首先在一行中给出两个正整数 N（1&lt;N≤500）和 M，分别为命题个数和推理个数。这里我们假设命题从 1 到 N 编号。</p>
-<p>接下来 M 行，每行给出一对命题之间的推理关系，即两个命题的编号 S1 S2，表示可以从 S1 推出<br>S2。题目保证任意两命题之间只存在最多一种推理关系，且任一命题不能循环自证（即从该命题出发推出该命题自己）。</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h2>
+<p>&lt;<a target="_blank" rel="noopener" href="https://pintia.cn/problem-">https://pintia.cn/problem-</a><br>
+sets/994805046380707840/problems/1336215880692482060&gt;<br>
+下图转自“英式没品笑话百科”的新浪微博 —— 所以无论有没有遇到难题，其实都不用担心。<br>
+![在这里插入图片描述](https://img-<br>
+<a target="_blank" rel="noopener" href="http://blog.csdnimg.cn/img_convert/c391ed5f2575c951739264f1eb9226e7.png#pic_center">blog.csdnimg.cn/img_convert/c391ed5f2575c951739264f1eb9226e7.png#pic_center</a>)<br>
+博主将这种逻辑推演称为“逻辑自洽”，即从某个命题出发的所有推理路径都会将结论引导到同一个最终命题（开玩笑的，千万别以为这是真正的逻辑自洽的定义……）。现给定一个更为复杂的逻辑推理图，本题就请你检查从一个给定命题到另一个命题的推理是否是“逻辑自洽”的，以及存在多少种不同的推理路径。例如上图，从“你遇到难题了吗？”到“那就别担心了”就是一种“逻辑自洽”的推理，一共有<br>
+3 条不同的推理路径。</p>
+<p>输入格式：<br>
+输入首先在一行中给出两个正整数 N（1&lt;N≤500）和 M，分别为命题个数和推理个数。这里我们假设命题从 1 到 N 编号。</p>
+<p>接下来 M 行，每行给出一对命题之间的推理关系，即两个命题的编号 S1 S2，表示可以从 S1 推出<br>
+S2。题目保证任意两命题之间只存在最多一种推理关系，且任一命题不能循环自证（即从该命题出发推出该命题自己）。</p>
 <p>最后一行给出待检验的两个命题的编号 A B。</p>
-<p>输出格式：<br>在一行中首先输出从 A 到 B 有多少种不同的推理路径，然后输出 Yes 如果推理是“逻辑自洽”的，或 No 如果不是。</p>
+<p>输出格式：<br>
+在一行中首先输出从 A 到 B 有多少种不同的推理路径，然后输出 Yes 如果推理是“逻辑自洽”的，或 No 如果不是。</p>
 <p>题目保证输出数据不超过 1e​9。</p>
-<p>输入样例 1：<br>7 8<br>7 6<br>7 4<br>6 5<br>4 1<br>5 2<br>5 3<br>2 1<br>3 1<br>7 1<br>输出样例 1：<br>3 Yes<br>输入样例 2：<br>7 8<br>7 6<br>7 4<br>6 5<br>4 1<br>5 2<br>5 3<br>6 1<br>3 1<br>7 1<br>输出样例 2：<br>3 No</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>一开始暴力dfs最后一个样例过不了，不是开了一个vis数组记录。刚开始瞎记录，把找到终点的路径标记为true，但是会发生路径数与最终答案不同的错误。后来发现vis数组应该开int类型。然后继续摸索。<br>ac后总结了一下，vis数组记录的是当前节点通往终点的路径条数。<br>代码：</p>
-<p>​    </p>
+<p>输入样例 1：<br>
+7 8<br>
+7 6<br>
+7 4<br>
+6 5<br>
+4 1<br>
+5 2<br>
+5 3<br>
+2 1<br>
+3 1<br>
+7 1<br>
+输出样例 1：<br>
+3 Yes<br>
+输入样例 2：<br>
+7 8<br>
+7 6<br>
+7 4<br>
+6 5<br>
+4 1<br>
+5 2<br>
+5 3<br>
+6 1<br>
+3 1<br>
+7 1<br>
+输出样例 2：<br>
+3 No</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<p>一开始暴力dfs最后一个样例过不了，不是开了一个vis数组记录。刚开始瞎记录，把找到终点的路径标记为true，但是会发生路径数与最终答案不同的错误。后来发现vis数组应该开int类型。然后继续摸索。<br>
+ac后总结了一下，vis数组记录的是当前节点通往终点的路径条数。<br>
+代码：</p>
+<p>​</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">505</span>, M = <span class="number">250005</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> head[N],dout[N],vis[N];</span><br><span class="line"><span class="type">int</span> idx;</span><br><span class="line"><span class="type">int</span> n,m,u,v,to,zero;</span><br><span class="line"><span class="type">int</span> ans;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Edge</span>&#123;</span><br><span class="line">   <span class="type">int</span> to,nxt;</span><br><span class="line">&#125;edge[M];</span><br></pre></td></tr></table></figure>
-
-
-<p>​    </p>
+<p>​</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(vis[x]) &#123;</span><br><span class="line">      ans += vis[x];</span><br><span class="line">      <span class="keyword">return</span> vis[x];</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span>(!dout[x])&#123;</span><br><span class="line">      zero += <span class="number">1</span>;</span><br><span class="line">      dout[x] = <span class="number">-1</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=head[x]; i!=<span class="number">-1</span>; i= edge[i].nxt)&#123;</span><br><span class="line">      to = edge[i].to;</span><br><span class="line">      vis[x] += <span class="built_in">dfs</span>(to);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> vis[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   idx = <span class="number">-1</span>;</span><br><span class="line">   <span class="built_in">memset</span>(head,<span class="number">-1</span>,<span class="built_in">sizeof</span>(head));</span><br><span class="line">   <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;m; i++)&#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;u,&amp;v);</span><br><span class="line">      edge[++idx] = &#123;v,head[u]&#125;; head[u] = idx;</span><br><span class="line">      dout[u] += <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;u,&amp;v);</span><br><span class="line">   vis[v] = <span class="number">1</span>;</span><br><span class="line">   <span class="built_in">dfs</span>(u);</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d %s&quot;</span>,ans,(!zero) ? <span class="string">&quot;Yes&quot;</span> : <span class="string">&quot;No&quot;</span>);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>​    </p>
+<p>​</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2%EF%BC%88%E8%B2%8C%E4%BC%BC%EF%BC%8C%E4%B8%8D%E5%A4%AA%E6%B8%85%E6%A5%9A%E6%98%AF%E4%B8%8D%E6%98%AF%EF%BC%8C%E8%87%AA%E5%B7%B1%E6%91%B8%E7%B4%A2%E9%A2%98%E7%9A%84%E6%97%B6%E5%80%99%E7%8C%9C%E4%BA%86%E4%B8%80%E4%B8%AA%EF%BC%89%20L3-025%20%E9%82%A3%E5%B0%B1%E5%88%AB%E6%8B%85%E5%BF%83%E4%BA%86%20(30%20%E5%88%86)/" data-id="cl50tnltt00gcycj36jk1be47" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2%EF%BC%88%E8%B2%8C%E4%BC%BC%EF%BC%8C%E4%B8%8D%E5%A4%AA%E6%B8%85%E6%A5%9A%E6%98%AF%E4%B8%8D%E6%98%AF%EF%BC%8C%E8%87%AA%E5%B7%B1%E6%91%B8%E7%B4%A2%E9%A2%98%E7%9A%84%E6%97%B6%E5%80%99%E7%8C%9C%E4%BA%86%E4%B8%80%E4%B8%AA%EF%BC%89%20L3-025%20%E9%82%A3%E5%B0%B1%E5%88%AB%E6%8B%85%E5%BF%83%E4%BA%86%20(30%20%E5%88%86)/" data-id="cl50x8cpg00g9ccj3gm0texs1" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
@@ -156,11 +191,11 @@
     
 <nav id="article-nav">
   
-    <a href="/1111/11/11/%E7%AD%9B%E6%B3%95-%E7%B4%A0%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E7%BA%BF%E6%AE%B5%E6%A0%91%20~%E4%B9%B1%20------------------------%E9%98%BF%E5%B7%B4%E9%98%BF%E5%B7%B4%E9%98%BF%E5%B7%B4/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          筛法-素数.md
+          线段树 ~乱 ------------------------阿巴阿巴阿巴.md
         
       </div>
     </a>

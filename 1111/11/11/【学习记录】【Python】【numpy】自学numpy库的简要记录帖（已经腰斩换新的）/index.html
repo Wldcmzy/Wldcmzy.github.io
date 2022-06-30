@@ -5,15 +5,15 @@
   
   <title>【学习记录】【Python】【numpy】自学numpy库的简要记录帖（已经腰斩换新的）.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 1.极其基础的操作​    import numpy as np #创建一个数组 数组的类型为numpy">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  1.极其基础的操作 ​ import numpy as np #创建一个数组 数组的类型为nump">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【学习记录】【Python】【numpy】自学numpy库的简要记录帖（已经腰斩换新的）.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6numpy%E5%BA%93%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%E5%B8%96%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 1.极其基础的操作​    import numpy as np #创建一个数组 数组的类型为numpy">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  1.极其基础的操作 ​ import numpy as np #创建一个数组 数组的类型为nump">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.430Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.775Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="python库">
@@ -123,17 +123,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="1-极其基础的操作"><a href="#1-极其基础的操作" class="headerlink" title="1.极其基础的操作"></a>1.极其基础的操作</h2><p>​<br>    import numpy as np</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="1极其基础的操作"><a class="markdownIt-Anchor" href="#1极其基础的操作"></a> 1.极其基础的操作</h2>
+<p>​<br>
+import numpy as np</p>
 <pre><code>#创建一个数组 数组的类型为numpy.ndarray,其中数据的类型为numpy.int32s
 array1=np.array([[[1,2,3],[4,5,6],[7,8,9]],[[10,11,12],[13,14,15],[16,17,18]]],dtype=np.int32)
-print(array1,&#39;\ntype of array1 is:&#39;,type(array1))
+print(array1,'\ntype of array1 is:',type(array1))
 
 #查看数组维数
-print(&#39;dimensions of array1:&#39;,array1.ndim)
+print('dimensions of array1:',array1.ndim)
 
 #查看数组形状
-print(&#39;shape of array1:&#39;,array1.shape)
+print('shape of array1:',array1.shape)
 
 #改变数组形状
 array2=array1.reshape(6,3)
@@ -147,17 +150,22 @@ print(array2[:4])               #前四行
 print(array2[:4,:])             #前四行
 
 #数组的大小
-print(&#39;size of array1 and array2:&#39;,array1.size,array2.size)
+print('size of array1 and array2:',array1.size,array2.size)
 
 #矩阵计算
 print(array1+array2.reshape(2,3,3))     #矩阵相加
 print(array1*array2.reshape(2,3,3))     #矩阵相乘
 print(array1+2)                         #矩阵元素+2
 </code></pre>
-<h2 id="2-索引"><a href="#2-索引" class="headerlink" title="2.索引"></a>2.索引</h2><p>​<br>    import numpy as np</p>
+<h2 id="2索引"><a class="markdownIt-Anchor" href="#2索引"></a> 2.索引</h2>
+<p>​<br>
+import numpy as np</p>
 <pre><code>array1=np.array([[[1,2,3],[4,5,6],[7,8,9]],[[10,11,12],[13,14,15],[16,17,18]]],dtype=np.int32)
 </code></pre>
-<p>​<br>    #取元素   第一维的一、二项，第二维的第一项，第三维的一、三项<br>    array2&#x3D;array1[np.ix_([0,1],[0],[0,2])]<br>    print(array2)</p>
+<p>​<br>
+#取元素   第一维的一、二项，第二维的第一项，第三维的一、三项<br>
+array2=array1[np.ix_([0,1],[0],[0,2])]<br>
+print(array2)</p>
 <pre><code>#取 array1[0,0,0],以及 array1[1,2,1](最终取出两个数，1和17:[1,17])
 array3=array1[[0,1],[0,2],[0,1]]
 print(array3)
@@ -178,40 +186,48 @@ print(array3Final)
 array3Final_another=array3[array3%3==0] #得到array3中是3的倍数的项
 print(array3Final_another)
 </code></pre>
-<p>​    </p>
-<h2 id="3-简单文件储存"><a href="#3-简单文件储存" class="headerlink" title="3.简单文件储存"></a>3.简单文件储存</h2><p>​<br>    import numpy as np</p>
+<p>​</p>
+<h2 id="3简单文件储存"><a class="markdownIt-Anchor" href="#3简单文件储存"></a> 3.简单文件储存</h2>
+<p>​<br>
+import numpy as np</p>
 <pre><code>#txt
-x=np.genfromtxt(&#39;abc.txt&#39;,delimiter=&#39;&amp;&amp;&#39;,dtype=np.str,usecols=1)        #载入文件
+x=np.genfromtxt('abc.txt',delimiter='&amp;&amp;',dtype=np.str,usecols=1)        #载入文件
 print(x)
 #delimiter 分割值
 #dtype 数据类型
 #usecols 不太清楚
 
-y=np.loadtxt(&#39;abc.txt&#39;,delimiter=&#39;&amp;&amp;&#39;,dtype=np.str,usecols=1)           #载入文件
+y=np.loadtxt('abc.txt',delimiter='&amp;&amp;',dtype=np.str,usecols=1)           #载入文件
 print(y)
 
-np.savetxt(&#39;bca.txt&#39;,y,fmt=&#39;%s&#39;)
+np.savetxt('bca.txt',y,fmt='%s')
 </code></pre>
-<p>​<br>    print(‘分割线———————–’)<br>    #二进制</p>
-<pre><code>np.save(&#39;b_bca.npyy&#39;,y)                     #使用此方法保存的后缀名文件总为npy:  b_bca.npyy.npy
+<p>​<br>
+print(‘分割线-----------------------’)<br>
+#二进制</p>
+<pre><code>np.save('b_bca.npyy',y)                     #使用此方法保存的后缀名文件总为npy:  b_bca.npyy.npy
 
-np.savez(&#39;b_z_bca.npz&#39;,the_x=x,the_y=y)     #此方法可以保存多个数组，后缀名为npz  the_x等形参名对应导入后的操作的键名
+np.savez('b_z_bca.npz',the_x=x,the_y=y)     #此方法可以保存多个数组，后缀名为npz  the_x等形参名对应导入后的操作的键名
 
-tmp_a=np.load(&#39;b_bca.npy&#39;)
+tmp_a=np.load('b_bca.npy')
 print(tmp_a)
 
-tmp_b=np.load(&#39;b_z_bca.npz&#39;)
+tmp_b=np.load('b_z_bca.npz')
 print(tmp_b)
-print(tmp_b[&#39;the_x&#39;])                   #类似字典，key值为先前保存时的形参名，如the_x
-print(tmp_b[&#39;the_y&#39;])
+print(tmp_b['the_x'])                   #类似字典，key值为先前保存时的形参名，如the_x
+print(tmp_b['the_y'])
 </code></pre>
-<h2 id="4-简单练习-amp-amp-矩阵的合并与转置"><a href="#4-简单练习-amp-amp-矩阵的合并与转置" class="headerlink" title="4.简单练习 &amp;&amp; 矩阵的合并与转置"></a>4.简单练习 &amp;&amp; 矩阵的合并与转置</h2><p>​<br>    import numpy as np</p>
+<h2 id="4简单练习-矩阵的合并与转置"><a class="markdownIt-Anchor" href="#4简单练习-矩阵的合并与转置"></a> 4.简单练习 &amp;&amp; 矩阵的合并与转置</h2>
+<p>​<br>
+import numpy as np</p>
 <pre><code>np.set_printoptions(precision=1,threshold=3000,suppress=True)
 #precision控制小数点位数
 #threshold控制输出值的个数，其他的以...代替(查的资料上这么说的，实际没看出效果)
 #suppress=True 取消使用科学计数法
 </code></pre>
-<p>​<br>    array1&#x3D;np.genfromtxt(r’D:\0我的下载\上证指数\上证指数副本.txt’,usecols&#x3D;(0,4,6),)<br>    print(array1)</p>
+<p>​<br>
+array1=np.genfromtxt(r’D:\0我的下载\上证指数\上证指数副本.txt’,usecols=(0,4,6),)<br>
+print(array1)</p>
 <pre><code>daySpan=(array1[:,0]&gt;=20180901)&amp;(array1[:,0]&lt;20190101)  #筛选出其中2018年9月1日至2019年1月1日的信息
 array2=array1[daySpan]                                  #筛选出其中2018年9月1日至2019年1月1日的信息
 print(array2)
@@ -226,7 +242,7 @@ print(array_new)
 
 #横向合并
 arr1=np.array([[1,2,3],[4,5,6],[7,8,9]])
-arr2=np.array([[&#39;x&#39;,&#39;x&#39;,&#39;x&#39;]])
+arr2=np.array([['x','x','x']])
 
 arr_new=np.r_[arr1,arr2]#等同于arr_new=np.row_stack((arr1,arr2))
 print(arr_new)
@@ -235,53 +251,87 @@ print(arr_new)
 #eg:[1,2,3]这是一个列向量 (3,)
 #eg:[[1,2,3]]这时一个行向量(1,3)
 </code></pre>
-<p>​<br>​<br>    #矩阵的转置<br>    print(arr_new.T)</p>
-<h2 id="5-矩阵的切割"><a href="#5-矩阵的切割" class="headerlink" title="5.矩阵的切割"></a>5.矩阵的切割</h2><p>​<br>    import numpy as np</p>
+<p>​<br>
+​<br>
+#矩阵的转置<br>
+print(arr_new.T)</p>
+<h2 id="5矩阵的切割"><a class="markdownIt-Anchor" href="#5矩阵的切割"></a> 5.矩阵的切割</h2>
+<p>​<br>
+import numpy as np</p>
 <pre><code>#新建0-15的数组
 array1=np.arange(16).reshape(4,4)
 print(array1)
 </code></pre>
-<p>​<br>    #用hsplit(ary,indices_or_sections)拆分   (相当于split的axis参数&#x3D;1)<br>    #纵向拆分<br>    #第二个参数：如果时整数x，则把数组平均分成x份，不能平均分会报错<br>    #第二个参数，如果时列表，会以列表中的值为轴拆分<br>    h_arr1&#x3D;np.hsplit(array1,4)<br>    print(h_arr1)<br>    h_arr2&#x3D;np.hsplit(array1,[1,3])<br>    print(h_arr2)</p>
-<p>​<br>    #用split(ary, indices_or_sections, axis&#x3D;0)拆分<br>    #用法基本同hsplit一样，只不过hsplit只能纵向拆分，split可以定义拆分维度<br>    #axis&#x3D;0第一维，即横向拆分，axis&#x3D;1第二维，即纵向拆分<br>    arr1&#x3D;np.split(array1,4,0)<br>    print(arr1)<br>    arr2&#x3D;np.split(array1,[1,3],0)<br>    print(arr2)</p>
-<p>​    </p>
-<h2 id="6-图像通道的分离与合成"><a href="#6-图像通道的分离与合成" class="headerlink" title="6.图像通道的分离与合成"></a>6.图像通道的分离与合成</h2><p><strong>分离：</strong><br>img1B,img1G,img1R&#x3D;np.dsplit(img1,3)<br>img1B,img1G,img1R&#x3D;cv2.split(img1)都可以<br><strong>合成：</strong><br>cv2.merge([b,g,r])<br>cv2.merge([zeros, zeros, img1R])</p>
+<p>​<br>
+#用hsplit(ary,indices_or_sections)拆分   (相当于split的axis参数=1)<br>
+#纵向拆分<br>
+#第二个参数：如果时整数x，则把数组平均分成x份，不能平均分会报错<br>
+#第二个参数，如果时列表，会以列表中的值为轴拆分<br>
+h_arr1=np.hsplit(array1,4)<br>
+print(h_arr1)<br>
+h_arr2=np.hsplit(array1,[1,3])<br>
+print(h_arr2)</p>
+<p>​<br>
+#用split(ary, indices_or_sections, axis=0)拆分<br>
+#用法基本同hsplit一样，只不过hsplit只能纵向拆分，split可以定义拆分维度<br>
+#axis=0第一维，即横向拆分，axis=1第二维，即纵向拆分<br>
+arr1=np.split(array1,4,0)<br>
+print(arr1)<br>
+arr2=np.split(array1,[1,3],0)<br>
+print(arr2)</p>
+<p>​</p>
+<h2 id="6图像通道的分离与合成"><a class="markdownIt-Anchor" href="#6图像通道的分离与合成"></a> 6.图像通道的分离与合成</h2>
+<p><strong>分离：</strong><br>
+img1B,img1G,img1R=np.dsplit(img1,3)<br>
+img1B,img1G,img1R=cv2.split(img1)都可以<br>
+<strong>合成：</strong><br>
+cv2.merge([b,g,r])<br>
+cv2.merge([zeros, zeros, img1R])</p>
 <p><strong>注意倒数第五句的注释</strong></p>
-<p>​<br>    import cv2<br>    import numpy as np</p>
+<p>​<br>
+import cv2<br>
+import numpy as np</p>
 <pre><code>def showone(img):
-    cv2.imshow(&#39;show image&#39;,img)
+    cv2.imshow('show image',img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 def showone_color(img,color):
-    zeros=np.zeros(img.shape[:2],dtype=&#39;uint8&#39;) #记得调整格式
-    if color == &#39;B&#39;:
-        cv2.imshow(&#39;blue&#39;,cv2.merge([img1B,zeros,zeros]))
-    elif color == &#39;G&#39;:
-        cv2.imshow(&#39;green&#39;, cv2.merge([zeros, img1G, zeros]))
-    elif color == &#39;R&#39;:
-        cv2.imshow(&#39;red&#39;, cv2.merge([zeros, zeros, img1R]))
+    zeros=np.zeros(img.shape[:2],dtype='uint8') #记得调整格式
+    if color == 'B':
+        cv2.imshow('blue',cv2.merge([img1B,zeros,zeros]))
+    elif color == 'G':
+        cv2.imshow('green', cv2.merge([zeros, img1G, zeros]))
+    elif color == 'R':
+        cv2.imshow('red', cv2.merge([zeros, zeros, img1R]))
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 def showone_merge(b,g,r):
-    cv2.imshow(&#39;merge&#39;,cv2.merge([b,g,r]))
+    cv2.imshow('merge',cv2.merge([b,g,r]))
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 </code></pre>
-<p>​<br>    img1&#x3D;cv2.imread(‘theimg.png’,1)</p>
+<p>​<br>
+img1=cv2.imread(‘theimg.png’,1)</p>
 <pre><code>img1B,img1G,img1R=np.dsplit(img1,3)
 #img1B,img1G,img1R=cv2.split(img1)
 
 print(img1B.dtype)          #矩阵元素的格式为uint8
 </code></pre>
-<p>​<br>​<br>    showone(img1B)      #这里图像为灰色，原因是当调用cv2.imshow的时候G、R两个通道被默认设为了与B通道一样，三通道一样时显示灰度图</p>
-<p>​<br>    showone_color(img1B,’B’)<br>    showone_color(img1G,’G’)<br>    showone_color(img1R,’R’)</p>
+<p>​<br>
+​<br>
+showone(img1B)      #这里图像为灰色，原因是当调用cv2.imshow的时候G、R两个通道被默认设为了与B通道一样，三通道一样时显示灰度图</p>
+<p>​<br>
+showone_color(img1B,‘B’)<br>
+showone_color(img1G,‘G’)<br>
+showone_color(img1R,‘R’)</p>
 <pre><code>showone_merge(img1B,img1G,img1R)        #合成后是原图
 </code></pre>
-<p>​    </p>
+<p>​</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6numpy%E5%BA%93%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%E5%B8%96%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/" data-id="cl50tnlr1001vycj3hxdje6cz" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6numpy%E5%BA%93%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%E5%B8%96%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/" data-id="cl50x8cmv001xccj32mx45ict" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%BA%93/" rel="tag">python库</a></li></ul>
@@ -292,11 +342,11 @@ print(img1B.dtype)          #矩阵元素的格式为uint8
     
 <nav id="article-nav">
   
-    <a href="/1111/11/11/%E3%80%90%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%20spfa%20Dijkstra%E3%80%91%20_%20%E6%B4%9B%E8%B0%B7%20P3371%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88%E5%BC%B1%E5%8C%96%E7%89%88%EF%BC%89_%20##%20lguou/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90cv2%E3%80%91%E8%87%AA%E5%AD%A6cv2%20%E7%9A%84%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          【单源最短路 spfa Dijkstra】 _ 洛谷 P3371 【模板】单源最短路径（弱化版）_
+          【学习记录】【Python】【cv2】自学cv2 的简单记录（已经腰斩换新的）.md
         
       </div>
     </a>

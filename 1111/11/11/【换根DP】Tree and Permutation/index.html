@@ -5,15 +5,15 @@
   
   <title>【换根DP】Tree and Permutation.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 Tree and Permutation HUD6446题目大意给你一颗n个点的树， 有边权，求这个东西">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  Tree and Permutation HUD6446  题目大意 给你一颗n个点的树， 有边权">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【换根DP】Tree and Permutation.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E6%8D%A2%E6%A0%B9DP%E3%80%91Tree%20and%20Permutation/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 Tree and Permutation HUD6446题目大意给你一颗n个点的树， 有边权，求这个东西">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  Tree and Permutation HUD6446  题目大意 给你一颗n个点的树， 有边权">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.807Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="DP">
@@ -123,18 +123,91 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h1 id="Tree-and-Permutation-HUD6446"><a href="#Tree-and-Permutation-HUD6446" class="headerlink" title="Tree and Permutation HUD6446"></a>Tree and Permutation HUD6446</h1><h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>给你一颗n个点的树， 有边权，求这个东西：<br>Σ i &#x3D; 1 n Σ j &#x3D; 1 n d i s [ i t o j ] ∗ ( n − 1 ) ! \Sigma_{i &#x3D; 1} ^n<br>\Sigma_{j &#x3D; 1}^n dis[i<del>to</del>j] * (n - 1) ! Σi&#x3D;1n​Σj&#x3D;1n​dis[i to j]∗(n−1)!</p>
-<h2 id="换根dp"><a href="#换根dp" class="headerlink" title="换根dp"></a>换根dp</h2><p>用换根dp算前面一坨， 然后 * (n - 1)!<br>先dfs（类似树形dp）求任意一个点a到所有点的距离part[a]。<br>然后可以由已知点x的答案part[x]做简单变换， 推导出与x相邻的未知答案的点集Y (向量)的答案part[Y] (向量)， 所以又是一次DFS<br>然后对所有part求Sigma， 再乘 (n-1)! 记得取模。 完毕。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>​<br>    #include &lt;bits&#x2F;stdc++.h&gt;<br>    const int N &#x3D; 1e5 + 4, MOD &#x3D; 1e9 + 7;<br>    int n, u, v, ipart &#x3D; 1, idx;<br>    int size[N], head[N];<br>    long long dis[N], part[N], re, w;<br>    struct Edge{ int to, nxt; long long w; }edg[N &lt;&lt; 1];<br>    inline void addE(int fr, int to, long long w){<br>        edg[++ idx] &#x3D; (Edge){to, head[fr], w}; head[fr] &#x3D; idx;<br>        edg[++ idx] &#x3D; (Edge){fr, head[to], w}; head[to] &#x3D; idx;<br>    }<br>    void dfs(int x, int fa){<br>        size[x] &#x3D; 1;<br>        for(int e&#x3D;head[x]; e; e&#x3D;edg[e].nxt){<br>            int y &#x3D; edg[e].to;<br>            if(y &#x3D;&#x3D; fa) continue;<br>            dis[y] &#x3D; dis[x] + edg[e].w;<br>            dfs(y, x);<br>            size[x] +&#x3D; size[y];<br>        }<br>        part[ipart] &#x3D; (part[ipart] + dis[x]) % MOD;<br>    }<br>    void dfsN(int x, int fa){<br>        re &#x3D; (re + part[x]) % MOD;<br>        for(int e&#x3D;head[x]; e; e&#x3D;edg[e].nxt){<br>            int y &#x3D; edg[e].to;<br>            if(y &#x3D;&#x3D; fa) continue;<br>            part[y] &#x3D; part[x] + (n - (size[y] &lt;&lt; 1)) * edg[e].w;<br>            dfsN(y, x);<br>        }<br>    }<br>    int main(){<br>        while(scanf(“%d”, &amp;n) !&#x3D; EOF){<br>            idx &#x3D; 1, re &#x3D; 0, part[ipart] &#x3D; 0;<br>            memset(head, 0, sizeof(head));<br>            memset(size, 0, sizeof(size));<br>            memset(dis, 0, sizeof(dis));<br>            for(int i&#x3D;1; i&lt;n; i++){<br>                scanf(“%d%d%d”, &amp;u, &amp;v, &amp;w);<br>                addE(u, v, w);<br>            }<br>            dfs(ipart, -1);<br>            dfsN(ipart, -1);<br>            re &#x3D; (re + MOD) % MOD;<br>            for(int i&#x3D;n-1; i&gt;&#x3D;1; i–) re &#x3D; re * i % MOD;<br>            printf(“%lld\n”, re);<br>        }<br>        return 0;<br>    }</p>
-<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>There are N vertices connected by N−1 edges, each edge has its own length.<br>The set { 1,2,3,…,N } contains a total of N! unique permutations, let’s say<br>the i-th permutation is Pi and Pi,j is its j-th number.<br>For the i-th permutation, it can be a traverse sequence of the tree with N<br>vertices, which means we can go from the Pi,1-th vertex to the Pi,2-th vertex<br>by the shortest path, then go to the Pi,3-th vertex ( also by the shortest<br>path ) , and so on. Finally we’ll reach the Pi,N-th vertex, let’s define the<br>total distance of this route as D(Pi) , so please calculate the sum of D(Pi)<br>for all N! permutations.</p>
-<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>There are 10 test cases at most.<br>The first line of each test case contains one integer N ( 1≤N≤105 ) .<br>For the next N−1 lines, each line contains three integer X, Y and L, which<br>means there is an edge between X-th vertex and Y-th of length L (<br>1≤X,Y≤N,1≤L≤109 ) .</p>
-<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>For each test case, print the answer module 109+7 in one line.</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h1 id="tree-and-permutation-hud6446"><a class="markdownIt-Anchor" href="#tree-and-permutation-hud6446"></a> Tree and Permutation HUD6446</h1>
+<h2 id="题目大意"><a class="markdownIt-Anchor" href="#题目大意"></a> 题目大意</h2>
+<p>给你一颗n个点的树， 有边权，求这个东西：<br>
+Σ i = 1 n Σ j = 1 n d i s [ i t o j ] ∗ ( n − 1 ) ! \Sigma_{i = 1} ^n<br>
+\Sigma_{j = 1}^n dis[i<sub>to</sub>j] * (n - 1) ! Σi=1n​Σj=1n​dis[i to j]∗(n−1)!</p>
+<h2 id="换根dp"><a class="markdownIt-Anchor" href="#换根dp"></a> 换根dp</h2>
+<p>用换根dp算前面一坨， 然后 * (n - 1)!<br>
+先dfs（类似树形dp）求任意一个点a到所有点的距离part[a]。<br>
+然后可以由已知点x的答案part[x]做简单变换， 推导出与x相邻的未知答案的点集Y (向量)的答案part[Y] (向量)， 所以又是一次DFS<br>
+然后对所有part求Sigma， 再乘 (n-1)! 记得取模。 完毕。</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<p>​<br>
+#include &lt;bits/stdc++.h&gt;<br>
+const int N = 1e5 + 4, MOD = 1e9 + 7;<br>
+int n, u, v, ipart = 1, idx;<br>
+int size[N], head[N];<br>
+long long dis[N], part[N], re, w;<br>
+struct Edge{ int to, nxt; long long w; }edg[N &lt;&lt; 1];<br>
+inline void addE(int fr, int to, long long w){<br>
+edg[++ idx] = (Edge){to, head[fr], w}; head[fr] = idx;<br>
+edg[++ idx] = (Edge){fr, head[to], w}; head[to] = idx;<br>
+}<br>
+void dfs(int x, int fa){<br>
+size[x] = 1;<br>
+for(int e=head[x]; e; e=edg[e].nxt){<br>
+int y = edg[e].to;<br>
+if(y == fa) continue;<br>
+dis[y] = dis[x] + edg[e].w;<br>
+dfs(y, x);<br>
+size[x] += size[y];<br>
+}<br>
+part[ipart] = (part[ipart] + dis[x]) % MOD;<br>
+}<br>
+void dfsN(int x, int fa){<br>
+re = (re + part[x]) % MOD;<br>
+for(int e=head[x]; e; e=edg[e].nxt){<br>
+int y = edg[e].to;<br>
+if(y == fa) continue;<br>
+part[y] = part[x] + (n - (size[y] &lt;&lt; 1)) * edg[e].w;<br>
+dfsN(y, x);<br>
+}<br>
+}<br>
+int main(){<br>
+while(scanf(&quot;%d&quot;, &amp;n) != EOF){<br>
+idx = 1, re = 0, part[ipart] = 0;<br>
+memset(head, 0, sizeof(head));<br>
+memset(size, 0, sizeof(size));<br>
+memset(dis, 0, sizeof(dis));<br>
+for(int i=1; i&lt;n; i++){<br>
+scanf(&quot;%d%d%d&quot;, &amp;u, &amp;v, &amp;w);<br>
+addE(u, v, w);<br>
+}<br>
+dfs(ipart, -1);<br>
+dfsN(ipart, -1);<br>
+re = (re + MOD) % MOD;<br>
+for(int i=n-1; i&gt;=1; i–) re = re * i % MOD;<br>
+printf(&quot;%lld\n&quot;, re);<br>
+}<br>
+return 0;<br>
+}</p>
+<h2 id="描述"><a class="markdownIt-Anchor" href="#描述"></a> 描述</h2>
+<p>There are N vertices connected by N−1 edges, each edge has its own length.<br>
+The set { 1,2,3,…,N } contains a total of N! unique permutations, let’s say<br>
+the i-th permutation is Pi and Pi,j is its j-th number.<br>
+For the i-th permutation, it can be a traverse sequence of the tree with N<br>
+vertices, which means we can go from the Pi,1-th vertex to the Pi,2-th vertex<br>
+by the shortest path, then go to the Pi,3-th vertex ( also by the shortest<br>
+path ) , and so on. Finally we’ll reach the Pi,N-th vertex, let’s define the<br>
+total distance of this route as D(Pi) , so please calculate the sum of D(Pi)<br>
+for all N! permutations.</p>
+<h2 id="input"><a class="markdownIt-Anchor" href="#input"></a> Input</h2>
+<p>There are 10 test cases at most.<br>
+The first line of each test case contains one integer N ( 1≤N≤105 ) .<br>
+For the next N−1 lines, each line contains three integer X, Y and L, which<br>
+means there is an edge between X-th vertex and Y-th of length L (<br>
+1≤X,Y≤N,1≤L≤109 ) .</p>
+<h2 id="output"><a class="markdownIt-Anchor" href="#output"></a> Output</h2>
+<p>For each test case, print the answer module 109+7 in one line.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%8D%A2%E6%A0%B9DP%E3%80%91Tree%20and%20Permutation/" data-id="cl50tnlri0033ycj3hoie98ug" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%8D%A2%E6%A0%B9DP%E3%80%91Tree%20and%20Permutation/" data-id="cl50x8cn50030ccj3378217ys" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
@@ -145,19 +218,19 @@
     
 <nav id="article-nav">
   
-    <a href="/1111/11/11/%E3%80%90%E6%95%B0%E4%BD%8DDP%E3%80%91%20%E6%B4%9B%E8%B0%B7%20P2602%20%5BZJOI2010%5D%E6%95%B0%E5%AD%97%E8%AE%A1%E6%95%B0%20P2657%20%5BSCOI2009%5D%20windy%20%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E3%80%90%E6%8A%98%E5%8D%8A%E6%90%9C%E7%B4%A2%E3%80%91%20%E6%B4%9B%E8%B0%B7%20%20P4799%20%5BCEOI2015%20Day2%5D%E4%B8%96%E7%95%8C%E5%86%B0%E7%90%83%E9%94%A6%E6%A0%87%E8%B5%9B/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          【数位DP】 洛谷 P2602 [ZJOI2010]数字计数 P2657 [SCOI2009] windy 数.md
+          【折半搜索】 洛谷  P4799 [CEOI2015 Day2]世界冰球锦标赛.md
         
       </div>
     </a>
   
   
-    <a href="/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%20%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%20%E7%BD%91%E6%A0%BC%E5%8C%96%E6%90%9C%E7%B4%A2/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E3%80%90%E6%95%B0%E4%BD%8DDP%E3%80%91%20%E6%B4%9B%E8%B0%B7%20P2602%20%5BZJOI2010%5D%E6%95%B0%E5%AD%97%E8%AE%A1%E6%95%B0%20P2657%20%5BSCOI2009%5D%20windy%20%E6%95%B0/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">【机器学习】 应用简例 随机森林 交叉验证 网格化搜索.md</div>
+      <div class="article-nav-title">【数位DP】 洛谷 P2602 [ZJOI2010]数字计数 P2657 [SCOI2009] windy 数.md</div>
     </a>
   
 </nav>

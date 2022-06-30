@@ -5,15 +5,15 @@
   
   <title>【KM算法】B - Going Home POJ - 2195.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 https:&#x2F;&#x2F;vjudge.net&#x2F;contest&#x2F;389071#problem&#x2F;B 题目描述On a">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 https:&#x2F;&#x2F;vjudge.net&#x2F;contest&#x2F;389071#problem&#x2F;B  题目描述">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【KM算法】B - Going Home POJ - 2195.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90KM%E7%AE%97%E6%B3%95%E3%80%91B%20-%20Going%20Home%20POJ%20-%202195/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 https:&#x2F;&#x2F;vjudge.net&#x2F;contest&#x2F;389071#problem&#x2F;B 题目描述On a">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 https:&#x2F;&#x2F;vjudge.net&#x2F;contest&#x2F;389071#problem&#x2F;B  题目描述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.430Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.775Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="二分图">
@@ -124,26 +124,93 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
 <p><a target="_blank" rel="noopener" href="https://vjudge.net/contest/389071#problem/B">https://vjudge.net/contest/389071#problem/B</a></p>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>On a grid map there are n little men and n houses. In each unit time, every<br>little man can move one unit step, either horizontally, or vertically, to an<br>adjacent point. For each little man, you need to pay a $1 travel fee for every<br>step he moves, until he enters a house. The task is complicated with the<br>restriction that each house can accommodate only one little man.</p>
-<p>Your task is to compute the minimum amount of money you need to pay in order<br>to send these n little men into those n different houses. The input is a map<br>of the scenario, a ‘.’ means an empty space, an ‘H’ represents a house on that<br>point, and am ‘m’ indicates there is a little man on that point.</p>
-<p>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzI5ZGE0YzIyY2Q5YTM1ZWI5NmIyYTA4Yjc1Y2U4NDIw?x-oss-">https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzI5ZGE0YzIyY2Q5YTM1ZWI5NmIyYTA4Yjc1Y2U4NDIw?x-oss-</a><br>process&#x3D;image&#x2F;format,png#pic_center)</p>
-<p>You can think of each point on the grid map as a quite large square, so it can<br>hold n little men at the same time; also, it is okay if a little man steps on<br>a grid with a house without entering that house.</p>
-<h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><p>There are one or more test cases in the input. Each case starts with a line<br>giving two integers N and M, where N is the number of rows of the map, and M<br>is the number of columns. The rest of the input will be N lines describing the<br>map. You may assume both N and M are between 2 and 100, inclusive. There will<br>be the same number of ‘H’s and ‘m’s on the map; and there will be at most 100<br>houses. Input will terminate with 0 0 for N and M.</p>
-<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>For each test case, output one line with the single integer, which is the<br>minimum amount, in dollars, you need to pay.</p>
-<h2 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h2><p>2 2<br>.m<br>H.<br>5 5<br>HH…m<br>…<br>…<br>…<br>mm…H<br>7 8<br>…H…<br>…H…<br>…H…<br>mmmHmmmm<br>…H…<br>…H…<br>…H…<br>0 0</p>
-<h2 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h2><p>2<br>10<br>28</p>
-<h2 id="瞎翻译"><a href="#瞎翻译" class="headerlink" title="瞎翻译"></a>瞎翻译</h2><p>给你一张地图，地图被分割成了N行M列的网格。</p>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>On a grid map there are n little men and n houses. In each unit time, every<br>
+little man can move one unit step, either horizontally, or vertically, to an<br>
+adjacent point. For each little man, you need to pay a $1 travel fee for every<br>
+step he moves, until he enters a house. The task is complicated with the<br>
+restriction that each house can accommodate only one little man.</p>
+<p>Your task is to compute the minimum amount of money you need to pay in order<br>
+to send these n little men into those n different houses. The input is a map<br>
+of the scenario, a ‘.’ means an empty space, an ‘H’ represents a house on that<br>
+point, and am ‘m’ indicates there is a little man on that point.</p>
+<p>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzI5ZGE0YzIyY2Q5YTM1ZWI5NmIyYTA4Yjc1Y2U4NDIw?x-oss-">https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzI5ZGE0YzIyY2Q5YTM1ZWI5NmIyYTA4Yjc1Y2U4NDIw?x-oss-</a><br>
+process=image/format,png#pic_center)</p>
+<p>You can think of each point on the grid map as a quite large square, so it can<br>
+hold n little men at the same time; also, it is okay if a little man steps on<br>
+a grid with a house without entering that house.</p>
+<h2 id="输入"><a class="markdownIt-Anchor" href="#输入"></a> 输入</h2>
+<p>There are one or more test cases in the input. Each case starts with a line<br>
+giving two integers N and M, where N is the number of rows of the map, and M<br>
+is the number of columns. The rest of the input will be N lines describing the<br>
+map. You may assume both N and M are between 2 and 100, inclusive. There will<br>
+be the same number of 'H’s and 'm’s on the map; and there will be at most 100<br>
+houses. Input will terminate with 0 0 for N and M.</p>
+<h2 id="输出"><a class="markdownIt-Anchor" href="#输出"></a> 输出</h2>
+<p>For each test case, output one line with the single integer, which is the<br>
+minimum amount, in dollars, you need to pay.</p>
+<h2 id="样例输入"><a class="markdownIt-Anchor" href="#样例输入"></a> 样例输入</h2>
+<p>2 2<br>
+.m<br>
+H.<br>
+5 5<br>
+HH…m<br>
+…<br>
+…<br>
+…<br>
+mm…H<br>
+7 8<br>
+…H…<br>
+…H…<br>
+…H…<br>
+mmmHmmmm<br>
+…H…<br>
+…H…<br>
+…H…<br>
+0 0</p>
+<h2 id="样例输出"><a class="markdownIt-Anchor" href="#样例输出"></a> 样例输出</h2>
+<p>2<br>
+10<br>
+28</p>
+<h2 id="瞎翻译"><a class="markdownIt-Anchor" href="#瞎翻译"></a> 瞎翻译</h2>
+<p>给你一张地图，地图被分割成了N行M列的网格。</p>
 <p>第一行：输入N，M表示地图大小。</p>
 <p>第2 到 第N+1行： 输入地图内容， .代表空地，m代表人，H代表房子。</p>
 <p>N和M不大于100，房子数目不大于100</p>
-<p>人和房子的数量是相等的，而人要移动进入房子，且每个房子只能进一个人。<br>不过人每移动一格（横移或者竖移）要花一块钱。</p>
-<p><strong>问：</strong><br>要使人都进入房子最少花多少钱？<br>（地图的每一格都足够大，可以容纳无限多的人。）</p>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>思路：<br><strong>1.</strong><br>地图最大为100x100 ，所以人最多花不到200元钱，我们定一个常数ML&#x3D;210.<br><strong>2.</strong><br>先计算每个人到每个房子需要花的钱，用ML减去需要花的钱，得到的数值，存进数组map[][]（不是地图，我取的映射的意思）</p>
+<p>人和房子的数量是相等的，而人要移动进入房子，且每个房子只能进一个人。<br>
+不过人每移动一格（横移或者竖移）要花一块钱。</p>
+<p><strong>问：</strong><br>
+要使人都进入房子最少花多少钱？<br>
+（地图的每一格都足够大，可以容纳无限多的人。）</p>
+<h2 id="题解"><a class="markdownIt-Anchor" href="#题解"></a> 题解</h2>
+<p>思路：<br>
+<strong>1.</strong><br>
+地图最大为100x100 ，所以人最多花不到200元钱，我们定一个常数ML=210.<br>
+<strong>2.</strong><br>
+先计算每个人到每个房子需要花的钱，用ML减去需要花的钱，得到的数值，存进数组map[][]（不是地图，我取的映射的意思）</p>
 <p>这么存的原因是：KM算法可以算出最多要花多少钱，然而我们需要求最少要花多少钱，这样就只需要把“最小的”先暂时变成“最大的”，完成KM算法之后再额外通过一步计算得到正确答案。</p>
-<p>推导可知：正确答案&#x3D;（ML*房子数量）-KM算法得到的最大值</p>
-<p>​<br>​    #include <cstdio><br>​    #include <iostream><br>​    #include <algorithm><br>​    #include <cstring><br>​<br>    const int maxn&#x3D;110;<br>    const int ML&#x3D;220;&#x2F;&#x2F;花费不可能超过200<br>    char cell[maxn][maxn];<br>    int map[maxn][maxn],lx[maxn],ly[maxn],link[maxn];<br>    &#x2F;&#x2F;map取的意思是映射，map[i][j]表示第i个人到第j个房子的距离<br>    &#x2F;&#x2F;lx表示人顶标的值，ly表示房子顶标的值<br>    bool visx[maxn],visy[maxn];<br>    int pnum,ans;<br>    struct Node<br>    {<br>        int x,y;<br>    }person[maxn],house[maxn];</p>
+<p>推导可知：正确答案=（ML*房子数量）-KM算法得到的最大值</p>
+<p>​<br>
+​    #include <cstdio><br>
+​    #include <iostream><br>
+​    #include <algorithm><br>
+​    #include <cstring><br>
+​<br>
+const int maxn=110;<br>
+const int ML=220;//花费不可能超过200<br>
+char cell[maxn][maxn];<br>
+int map[maxn][maxn],lx[maxn],ly[maxn],link[maxn];<br>
+//map取的意思是映射，map[i][j]表示第i个人到第j个房子的距离<br>
+//lx表示人顶标的值，ly表示房子顶标的值<br>
+bool visx[maxn],visy[maxn];<br>
+int pnum,ans;<br>
+struct Node<br>
+{<br>
+int x,y;<br>
+}person[maxn],house[maxn];</cstring></algorithm></iostream></cstdio></p>
 <pre><code>bool dfs(int x)
 &#123;
 
@@ -222,12 +289,12 @@ int main()
             for(int j=0; j&lt;m ; j++)
             &#123;
                 std::cin &gt;&gt; cell[i][j];
-                if(cell[i][j]==&#39;m&#39;)
+                if(cell[i][j]=='m')
                 &#123;
                     person[p].x=i;
                     person[p++].y=j;
                 &#125;
-                else if(cell[i][j]==&#39;H&#39;)
+                else if(cell[i][j]=='H')
                 &#123;
                     house[h].x=i;
                     house[h++].y=j;
@@ -246,12 +313,12 @@ int main()
     return 0;
 &#125;
 </code></pre>
-<p>​    </p>
+<p>​</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90KM%E7%AE%97%E6%B3%95%E3%80%91B%20-%20Going%20Home%20POJ%20-%202195/" data-id="cl50tnlqr0015ycj3dqb342ge" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90KM%E7%AE%97%E6%B3%95%E3%80%91B%20-%20Going%20Home%20POJ%20-%202195/" data-id="cl50x8cml0015ccj32wd2c0jc" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KM%E7%AE%97%E6%B3%95/" rel="tag">KM算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E5%9B%BE/" rel="tag">二分图</a></li></ul>

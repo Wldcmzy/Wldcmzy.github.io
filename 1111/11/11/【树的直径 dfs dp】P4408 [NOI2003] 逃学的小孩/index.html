@@ -5,15 +5,15 @@
   
   <title>【树的直径 dfs dp】P4408 [NOI2003] 逃学的小孩.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 P4408 [NOI2003] 逃学的小孩​    #include     #include">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  P4408 [NOI2003] 逃学的小孩 ​ #include  #include  #incl">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【树的直径 dfs dp】P4408 [NOI2003] 逃学的小孩.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%20dfs%20dp%E3%80%91P4408%20[NOI2003]%20%E9%80%83%E5%AD%A6%E7%9A%84%E5%B0%8F%E5%AD%A9/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 P4408 [NOI2003] 逃学的小孩​    #include     #include">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  P4408 [NOI2003] 逃学的小孩 ​ #include  #include  #incl">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.807Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="DP">
@@ -124,13 +124,93 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="P4408-NOI2003-逃学的小孩"><a href="#P4408-NOI2003-逃学的小孩" class="headerlink" title="P4408 [NOI2003] 逃学的小孩"></a>P4408 [NOI2003] 逃学的小孩</h2><p>​<br>    #include <iostream><br>    #include <cstdio><br>    #include <cstdlib><br>    #include <cstring><br>    #include <cmath><br>    #include <algorithm><br>    #include <string><br>    #include <queue><br>    #include <vector><br>    #include <stack><br>    #include <map><br>    #include <set><br>    typedef long long int LL;<br>    const int N &#x3D; 2e5+5, M &#x3D; -1, INF &#x3D; 0x7fffffff;<br>    int n,m,u,v,pid,tid;<br>    LL w,plong,tlong;<br>    int idx;<br>    int head[N];<br>    LL disa[N],disb[N];<br>    struct Edge<br>    {<br>        int to,nxt;<br>        LL w;<br>    }edg[N&lt;&lt;1];<br>    void addEdge(int fr,int to,LL w)<br>    {<br>        edg[idx].to &#x3D; to;<br>        edg[idx].nxt &#x3D; head[fr];<br>        edg[idx].w &#x3D; w;<br>        head[fr] &#x3D; idx++;<br>    }<br>    void initial()<br>    {<br>        idx &#x3D; 2;<br>    }<br>    void dfs(LL leng,int id,int efrom)<br>    {<br>        if(leng &gt; plong){<br>            plong &#x3D; leng;<br>            pid &#x3D; id;<br>        }<br>        for(int e&#x3D;head[id]; e; e&#x3D;edg[e].nxt){<br>            if((e^1) &#x3D;&#x3D; efrom) continue;<br>            dfs(leng+edg[e].w,edg[e].to,e);<br>        }<br>    }<br>    void DFS(LL dis[],int x,int efrom,LL leng)<br>    {<br>        dis[x] &#x3D; leng;<br>        for(int e&#x3D;head[x]; e; e&#x3D;edg[e].nxt){<br>            if((e^1) &#x3D;&#x3D; efrom) continue;<br>            int y &#x3D; edg[e].to;<br>            DFS(dis,y,e,leng+edg[e].w);<br>        }<br>    }<br>    int main()<br>    {<br>        initial();<br>        scanf(“%d%d”,&amp;n,&amp;m);<br>        for(int i&#x3D;0; i&lt;m; i++) {<br>            scanf(“%d%d%lld”,&amp;u,&amp;v,&amp;w);<br>            addEdge(u,v,w);<br>            addEdge(v,u,w);<br>        }<br>        pid &#x3D; 1, plong &#x3D; 0;<br>        dfs(0,pid,0);<br>        tid &#x3D; pid;<br>        pid &#x3D; tid, plong &#x3D; 0;<br>        dfs(0,pid,0);<br>        DFS(disa,tid,0,0);<br>        DFS(disb,pid,0,0);<br>        tlong &#x3D; 0;<br>        for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>            tlong &#x3D; std::max(tlong,std::min(disa[i],disb[i]));<br>        }<br>        printf(“%lld”,tlong+plong);<br>        return 0;<br>    }</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="p4408-noi2003-逃学的小孩"><a class="markdownIt-Anchor" href="#p4408-noi2003-逃学的小孩"></a> P4408 [NOI2003] 逃学的小孩</h2>
+<p>​<br>
+#include <iostream><br>
+#include <cstdio><br>
+#include <cstdlib><br>
+#include <cstring><br>
+#include <cmath><br>
+#include <algorithm><br>
+#include <string><br>
+#include <queue><br>
+#include <vector><br>
+#include <stack><br>
+#include <map><br>
+#include <set><br>
+typedef long long int LL;<br>
+const int N = 2e5+5, M = -1, INF = 0x7fffffff;<br>
+int n,m,u,v,pid,tid;<br>
+LL w,plong,tlong;<br>
+int idx;<br>
+int head[N];<br>
+LL disa[N],disb[N];<br>
+struct Edge<br>
+{<br>
+int to,nxt;<br>
+LL w;<br>
+}edg[N&lt;&lt;1];<br>
+void addEdge(int fr,int to,LL w)<br>
+{<br>
+edg[idx].to = to;<br>
+edg[idx].nxt = head[fr];<br>
+edg[idx].w = w;<br>
+head[fr] = idx++;<br>
+}<br>
+void initial()<br>
+{<br>
+idx = 2;<br>
+}<br>
+void dfs(LL leng,int id,int efrom)<br>
+{<br>
+if(leng &gt; plong){<br>
+plong = leng;<br>
+pid = id;<br>
+}<br>
+for(int e=head[id]; e; e=edg[e].nxt){<br>
+if((e^1) == efrom) continue;<br>
+dfs(leng+edg[e].w,edg[e].to,e);<br>
+}<br>
+}<br>
+void DFS(LL dis[],int x,int efrom,LL leng)<br>
+{<br>
+dis[x] = leng;<br>
+for(int e=head[x]; e; e=edg[e].nxt){<br>
+if((e^1) == efrom) continue;<br>
+int y = edg[e].to;<br>
+DFS(dis,y,e,leng+edg[e].w);<br>
+}<br>
+}<br>
+int main()<br>
+{<br>
+initial();<br>
+scanf(&quot;%d%d&quot;,&amp;n,&amp;m);<br>
+for(int i=0; i&lt;m; i++) {<br>
+scanf(&quot;%d%d%lld&quot;,&amp;u,&amp;v,&amp;w);<br>
+addEdge(u,v,w);<br>
+addEdge(v,u,w);<br>
+}<br>
+pid = 1, plong = 0;<br>
+dfs(0,pid,0);<br>
+tid = pid;<br>
+pid = tid, plong = 0;<br>
+dfs(0,pid,0);<br>
+DFS(disa,tid,0,0);<br>
+DFS(disb,pid,0,0);<br>
+tlong = 0;<br>
+for(int i=1; i&lt;=n; i++){<br>
+tlong = std::max(tlong,std::min(disa[i],disb[i]));<br>
+}<br>
+printf(&quot;%lld&quot;,tlong+plong);<br>
+return 0;<br>
+}</set></map></stack></vector></queue></string></algorithm></cmath></cstring></cstdlib></cstdio></iostream></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%20dfs%20dp%E3%80%91P4408%20[NOI2003]%20%E9%80%83%E5%AD%A6%E7%9A%84%E5%B0%8F%E5%AD%A9/" data-id="cl50tnlrr003vycj3eztv7uow" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%20dfs%20dp%E3%80%91P4408%20[NOI2003]%20%E9%80%83%E5%AD%A6%E7%9A%84%E5%B0%8F%E5%AD%A9/" data-id="cl50x8cne003wccj31p7r9qi3" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
@@ -151,9 +231,9 @@
     </a>
   
   
-    <a href="/1111/11/11/%E3%80%90%E7%88%AC%E8%99%AB%E3%80%91%20%E7%88%AC%E5%8F%96%E4%BA%91%E7%8F%AD%E8%AF%BE%E4%B8%8A%E8%80%81%E5%B8%88%E5%8F%91%E7%9A%84%E8%A7%86%E9%A2%91%E8%B5%84%E6%BA%90%20python/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%E3%80%91%E6%A0%91%E5%BD%A2DP%E6%B1%82%E8%A7%A3/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">【爬虫】 爬取云班课上老师发的视频资源 python.md</div>
+      <div class="article-nav-title">【树的直径】树形DP求解.md</div>
     </a>
   
 </nav>

@@ -119,36 +119,51 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
 <p>发现随机森林的正确率在0.76-0.86左右，多次用随机森林找一个正确率大于0.84的模型输出答案</p>
-<p>这次用到的参数：<br>rfc&#x3D;RandomForestClassifier(n_estimators&#x3D;100 #决策树的数量<br>,criterion&#x3D;“entropy” #分类标准-信息熵or基尼系数<br>,max_depth&#x3D;4 #决策树最大深度<br>,min_samples_split&#x3D;10) #至少有10个数据，树才会继续分支<br>。</p>
-<p>把训练集分为新训练集和新问题集，在这上面验证准确性<br>Xtrain, Xtest, Ytrain, Ytest &#x3D;<br>train_test_split(arr_t[:,:-1],arr_t[:,-1],test_size&#x3D;0.3)<br>#（数据集，答案集，如何划分）0.3表示训练集和问题集三七分</p>
-<p>​<br>    import numpy as np<br>    import pandas as pd<br>    from sklearn.ensemble import RandomForestClassifier<br>    #随机森林分类器<br>    from sklearn.model_selection import train_test_split<br>    #功能：将数据集分为训练集测试集 Xtrain,Xtest,Ytrain,Ytest</p>
-<pre><code>df_t=pd.read_excel(r&#39;D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\train.xlsx&#39;)
-df_a=pd.read_excel(r&#39;D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\test.xlsx&#39;)
+<p>这次用到的参数：<br>
+rfc=RandomForestClassifier(n_estimators=100 #决策树的数量<br>
+,criterion=“entropy” #分类标准-信息熵or基尼系数<br>
+,max_depth=4 #决策树最大深度<br>
+,min_samples_split=10) #至少有10个数据，树才会继续分支<br>
+。</p>
+<p>把训练集分为新训练集和新问题集，在这上面验证准确性<br>
+Xtrain, Xtest, Ytrain, Ytest =<br>
+train_test_split(arr_t[:,:-1],arr_t[:,-1],test_size=0.3)<br>
+#（数据集，答案集，如何划分）0.3表示训练集和问题集三七分</p>
+<p>​<br>
+import numpy as np<br>
+import pandas as pd<br>
+from sklearn.ensemble import RandomForestClassifier<br>
+#随机森林分类器<br>
+from sklearn.model_selection import train_test_split<br>
+#功能：将数据集分为训练集测试集 Xtrain,Xtest,Ytrain,Ytest</p>
+<pre><code>df_t=pd.read_excel(r'D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\train.xlsx')
+df_a=pd.read_excel(r'D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\test.xlsx')
 
 def get_data_array_float64(df,test=False):
-    df = df.drop(columns=&#39;uid&#39;)
+    df = df.drop(columns='uid')
     #去列名对应的列
     if test == True:
-        df=df.drop(columns =&#39;target&#39;)
+        df=df.drop(columns ='target')
         #去列名对应的列
         
     col_mode_lst=[]
     for each_col in df.columns:#获得每一列的众数
         cnts = df[each_col].value_counts()
-           #得到每一列的所有值以及它们出现的次数 ，降序排列
-        if &#39;?&#39; in cnts and cnts.index[0] == &#39;?&#39;:
+   		#得到每一列的所有值以及它们出现的次数 ，降序排列
+        if '?' in cnts and cnts.index[0] == '?':
             idx=1
         else :
             idx=0
         col_mode_lst.append(cnts.index[idx])
 
     for i in range(len(df.columns)):
-        df[df.columns[i]][df[df.columns[i]] == &#39;?&#39;] = col_mode_lst[i]
+        df[df.columns[i]][df[df.columns[i]] == '?'] = col_mode_lst[i]
         #df[df.columns[i]]按照列名获得列
-        #按照列名获得列，找到列中值为‘？’的元素，将其改成col_mode_lst[i]
-        
+		#按照列名获得列，找到列中值为‘？’的元素，将其改成col_mode_lst[i]
+		
     df_array = df.values.astype(np.float64)
     #df.values得到DataFrame对象的矩阵形式
     #,astype()方法为矩阵转化元素类型
@@ -157,13 +172,14 @@ def get_data_array_float64(df,test=False):
 arr_t=get_data_array_float64(df_t)
 arr_a=get_data_array_float64(df_a,True)
 </code></pre>
-<p>​<br>    Xtrain, Xtest, Ytrain, Ytest &#x3D; train_test_split(arr_t[:,:-1],arr_t[:,-1],test_size&#x3D;0.3)</p>
+<p>​<br>
+Xtrain, Xtest, Ytrain, Ytest = train_test_split(arr_t[:,:-1],arr_t[:,-1],test_size=0.3)</p>
 <pre><code>while True:
     rfc=RandomForestClassifier(n_estimators=100
                                 ,criterion=&quot;entropy&quot;
                                ,max_depth=4
                                ,min_samples_split=10)
-                                   #实例化随机森林
+                           		#实例化随机森林
     rfc = rfc.fit(Xtrain,Ytrain)
     #训练模型
     score = rfc.score(Xtest,Ytest)
@@ -173,13 +189,13 @@ arr_a=get_data_array_float64(df_a,True)
         break
 
 answer_df=pd.DataFrame(answer)
-answer_df.to_excel(r&#39;D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\20201028ans.xlsx&#39;)
+answer_df.to_excel(r'D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\20201028ans.xlsx')
 </code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97-%E5%B0%8F%E7%99%BD%E6%97%A0%E8%84%91%E4%B9%B1%E7%94%A8/" data-id="cl50tnlro003nycj3h80d5urb" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97-%E5%B0%8F%E7%99%BD%E6%97%A0%E8%84%91%E4%B9%B1%E7%94%A8/" data-id="cl50x8cna003occj3ed4o6p7n" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" rel="tag">随机森林</a></li></ul>
@@ -229,8 +245,25 @@ answer_df.to_excel(r&#39;D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\2
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="洛谷-P2014选课"><a href="#洛谷-P2014选课" class="headerlink" title="洛谷 P2014选课"></a>洛谷 P2014选课</h2><p>​<br>    #include <iostream><br>    #include <cstdio><br>    #include <algorithm><br>    #include <cstdlib><br>    #include <cstring><br>    #include <cmath><br>    #include <queue><br>    #include <vector><br>    #include <stack><br>    #include <map><br>    typedef long long LL;<br>    const int N &#x3D; 305;<br>    int dp[N][N],score[N];<br>    std::vector<int>son[N];<br>    int n,m,f,g;</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="洛谷-p2014选课"><a class="markdownIt-Anchor" href="#洛谷-p2014选课"></a> 洛谷 P2014选课</h2>
+<p>​<br>
+#include <iostream><br>
+#include <cstdio><br>
+#include <algorithm><br>
+#include <cstdlib><br>
+#include <cstring><br>
+#include <cmath><br>
+#include <queue><br>
+#include <vector><br>
+#include <stack><br>
+#include <map><br>
+typedef long long LL;<br>
+const int N = 305;<br>
+int dp[N][N],score[N];<br>
+std::vector<int>son[N];<br>
+int n,m,f,g;</int></map></stack></vector></queue></cmath></cstring></cstdlib></algorithm></cstdio></iostream></p>
 <pre><code>void dfs(int rt)
 &#123;
    dp[rt][1] = score[rt];
@@ -253,11 +286,39 @@ answer_df.to_excel(r&#39;D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\2
    &#125;
 &#125;
 </code></pre>
-<p>​<br>    int main()<br>    {<br>       memset(dp,0,sizeof(dp));<br>       scanf(“%d%d”,&amp;n,&amp;m);<br>       for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>          scanf(“%d%d”,&amp;f,&amp;g);<br>          son[f].push_back(i);<br>          score[i] &#x3D; g;<br>       }<br>       score[0] &#x3D; 0;<br>       dfs(0);<br>       std::cout &lt;&lt; dp[0][m+1] &lt;&lt; std::endl;<br>       return 0;<br>    }</p>
-<p>​<br>​    </p>
+<p>​<br>
+int main()<br>
+{<br>
+memset(dp,0,sizeof(dp));<br>
+scanf(&quot;%d%d&quot;,&amp;n,&amp;m);<br>
+for(int i=1; i&lt;=n; i++){<br>
+scanf(&quot;%d%d&quot;,&amp;f,&amp;g);<br>
+son[f].push_back(i);<br>
+score[i] = g;<br>
+}<br>
+score[0] = 0;<br>
+dfs(0);<br>
+std::cout &lt;&lt; dp[0][m+1] &lt;&lt; std::endl;<br>
+return 0;<br>
+}</p>
+<p>​<br>
+​</p>
 <p>二刷改良</p>
-<p>​<br>    #include <iostream><br>    #include <cstdio><br>    #include <cstring><br>    #include <cstdlib><br>    #include <algorithm><br>    #include <cmath><br>    #include <queue><br>    #include <map><br>    #include <stack><br>    #include <set><br>    #include <vector><br>    const int N &#x3D; 305;</p>
-<p>​<br>    std::vector<int> son[N];</p>
+<p>​<br>
+#include <iostream><br>
+#include <cstdio><br>
+#include <cstring><br>
+#include <cstdlib><br>
+#include <algorithm><br>
+#include <cmath><br>
+#include <queue><br>
+#include <map><br>
+#include <stack><br>
+#include <set><br>
+#include <vector><br>
+const int N = 305;</vector></set></stack></map></queue></cmath></algorithm></cstdlib></cstring></cstdio></iostream></p>
+<p>​<br>
+std::vector<int> son[N];</int></p>
 <pre><code>int dp[N][N];
 int val[N];
 int n,m,f,v;
@@ -293,8 +354,11 @@ int main()
    return 0;
 &#125;
 </code></pre>
-<p>​    </p>
-<h2 id="洛谷-P1352-没有上司的舞会"><a href="#洛谷-P1352-没有上司的舞会" class="headerlink" title="洛谷 P1352 没有上司的舞会"></a>洛谷 P1352 没有上司的舞会</h2><p>​<br>    #include &lt;bits&#x2F;stdc++.h&gt;<br>    typedef long long LL;</p>
+<p>​</p>
+<h2 id="洛谷-p1352-没有上司的舞会"><a class="markdownIt-Anchor" href="#洛谷-p1352-没有上司的舞会"></a> 洛谷 P1352 没有上司的舞会</h2>
+<p>​<br>
+#include &lt;bits/stdc++.h&gt;<br>
+typedef long long LL;</p>
 <pre><code>const int N = 6e3+5;
 std::vector&lt;int&gt; son[N];
 int qu[N],has[N],dp[N][2];
@@ -312,9 +376,53 @@ void dfs(int rt)
    &#125;
 &#125;
 </code></pre>
-<p>​<br>    int main(){<br>       scanf(“%d”,&amp;n);<br>       for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>          scanf(“%d”,&amp;qu[i]);<br>       }<br>       for(int i&#x3D;1; i&lt;n; i++){<br>          scanf(“%d%d”,&amp;a,&amp;b);<br>          has[a] &#x3D; 1;<br>          son[b].push_back(a);<br>       }<br>       for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>          if(!has[i]){<br>             rt &#x3D; i;<br>             break;<br>          }<br>       }<br>       dfs(rt);<br>       printf(“%d”,std::max(dp[rt][0],dp[rt][1]));<br>       return 0;<br>    }</p>
-<p>​<br>​    </p>
-<h2 id="洛谷-P2016-战略游戏"><a href="#洛谷-P2016-战略游戏" class="headerlink" title="洛谷 P2016 战略游戏"></a>洛谷 P2016 战略游戏</h2><p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <cstdlib><br>    #include <algorithm><br>    #include <vector><br>    typedef std::pair&lt;int ,int&gt; PP;<br>    const int N &#x3D; 1502;<br>    std::vector<int> son[N];<br>    int n,k,u,v;<br>    int dp[N][2];<br>    void dfs(int x)<br>    {<br>       dp[x][0] &#x3D; 0;<br>       dp[x][1] &#x3D; 1;<br>       for(int i&#x3D;0; i&lt;son[x].size(); i++){<br>          int y &#x3D; son[x][i];<br>          dfs(y);<br>          dp[x][0] +&#x3D; dp[y][1];<br>          dp[x][1] +&#x3D; std::min(dp[y][1],dp[y][0]);<br>       }<br>    }</p>
+<p>​<br>
+int main(){<br>
+scanf(&quot;%d&quot;,&amp;n);<br>
+for(int i=1; i&lt;=n; i++){<br>
+scanf(&quot;%d&quot;,&amp;qu[i]);<br>
+}<br>
+for(int i=1; i&lt;n; i++){<br>
+scanf(&quot;%d%d&quot;,&amp;a,&amp;b);<br>
+has[a] = 1;<br>
+son[b].push_back(a);<br>
+}<br>
+for(int i=1; i&lt;=n; i++){<br>
+if(!has[i]){<br>
+rt = i;<br>
+break;<br>
+}<br>
+}<br>
+dfs(rt);<br>
+printf(&quot;%d&quot;,std::max(dp[rt][0],dp[rt][1]));<br>
+return 0;<br>
+}</p>
+<p>​<br>
+​</p>
+<h2 id="洛谷-p2016-战略游戏"><a class="markdownIt-Anchor" href="#洛谷-p2016-战略游戏"></a> 洛谷 P2016 战略游戏</h2>
+<p>​<br>
+#include <cstdio><br>
+#include <iostream><br>
+#include <cstring><br>
+#include <cstdlib><br>
+#include <algorithm><br>
+#include <vector><br>
+typedef std::pair&lt;int ,int&gt; PP;<br>
+const int N = 1502;<br>
+std::vector<int> son[N];<br>
+int n,k,u,v;<br>
+int dp[N][2];<br>
+void dfs(int x)<br>
+{<br>
+dp[x][0] = 0;<br>
+dp[x][1] = 1;<br>
+for(int i=0; i&lt;son[x].size(); i++){<br>
+int y = son[x][i];<br>
+dfs(y);<br>
+dp[x][0] += dp[y][1];<br>
+dp[x][1] += std::min(dp[y][1],dp[y][0]);<br>
+}<br>
+}</int></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
 <pre><code>int main()
 &#123;
 
@@ -336,7 +444,7 @@ void dfs(int rt)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E5%BD%A2dp%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P2014%E9%80%89%E8%AF%BE%20P1352%E6%B2%A1%E6%9C%89%E4%B8%8A%E5%8F%B8%E7%9A%84%E8%88%9E%E4%BC%9AP2016%E6%88%98%E7%95%A5%E6%B8%B8%E6%88%8F/" data-id="cl50tnlrp003pycj3bsjldvqh" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E5%BD%A2dp%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P2014%E9%80%89%E8%AF%BE%20P1352%E6%B2%A1%E6%9C%89%E4%B8%8A%E5%8F%B8%E7%9A%84%E8%88%9E%E4%BC%9AP2016%E6%88%98%E7%95%A5%E6%B8%B8%E6%88%8F/" data-id="cl50x8cnb003qccj3gx83caeq" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
@@ -386,8 +494,23 @@ void dfs(int rt)
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="洛谷-P3374-树状数组模板1"><a href="#洛谷-P3374-树状数组模板1" class="headerlink" title="洛谷 P3374 树状数组模板1"></a>洛谷 P3374 树状数组模板1</h2><p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <cstdlib><br>    #include <algorithm><br>    #include <vector><br>    #include <map><br>    #include <string><br>    &#x2F;&#x2F;typedef long long int LL;<br>    typedef std::pair&lt;std::string ,char&gt; PP;<br>    const int N &#x3D; 5e5+5;<br>    int tree[N];<br>    int n,m,vv,op,a,b;</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="洛谷-p3374-树状数组模板1"><a class="markdownIt-Anchor" href="#洛谷-p3374-树状数组模板1"></a> 洛谷 P3374 树状数组模板1</h2>
+<p>​<br>
+#include <cstdio><br>
+#include <iostream><br>
+#include <cstring><br>
+#include <cstdlib><br>
+#include <algorithm><br>
+#include <vector><br>
+#include <map><br>
+#include <string><br>
+//typedef long long int LL;<br>
+typedef std::pair&lt;std::string ,char&gt; PP;<br>
+const int N = 5e5+5;<br>
+int tree[N];<br>
+int n,m,vv,op,a,b;</string></map></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
 <pre><code>void add(int i,int v)
 &#123;
    while(i&lt;=n)&#123;
@@ -425,9 +548,24 @@ int main()
    return 0;
 &#125;
 </code></pre>
-<p>​    </p>
-<h2 id="洛谷-P3368树状数组模板2"><a href="#洛谷-P3368树状数组模板2" class="headerlink" title="洛谷 P3368树状数组模板2"></a>洛谷 P3368树状数组模板2</h2><p>在区间中求某一单点的树状数组。初始化树状数组时，增加的值为”此点比上一个点大多少”</p>
-<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <cstdlib><br>    #include <algorithm><br>    #include <vector><br>    #include <map><br>    #include <string><br>    typedef long long int LL;<br>    &#x2F;&#x2F;typedef std::pair&lt;std::string ,char&gt; PP;<br>    const int N &#x3D; 5e5+5;<br>    LL tree[N];<br>    int n,m,op,a,b;<br>    LL c,vv,ls;</p>
+<p>​</p>
+<h2 id="洛谷-p3368树状数组模板2"><a class="markdownIt-Anchor" href="#洛谷-p3368树状数组模板2"></a> 洛谷 P3368树状数组模板2</h2>
+<p>在区间中求某一单点的树状数组。初始化树状数组时，增加的值为&quot;此点比上一个点大多少&quot;</p>
+<p>​<br>
+#include <cstdio><br>
+#include <iostream><br>
+#include <cstring><br>
+#include <cstdlib><br>
+#include <algorithm><br>
+#include <vector><br>
+#include <map><br>
+#include <string><br>
+typedef long long int LL;<br>
+//typedef std::pair&lt;std::string ,char&gt; PP;<br>
+const int N = 5e5+5;<br>
+LL tree[N];<br>
+int n,m,op,a,b;<br>
+LL c,vv,ls;</string></map></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
 <pre><code>void add(int i,LL v)
 &#123;
    while(i&lt;=n)&#123;
@@ -471,9 +609,28 @@ int main()
    return 0;
 &#125;
 </code></pre>
-<p>​    </p>
-<h2 id="洛谷-P1908-逆序对"><a href="#洛谷-P1908-逆序对" class="headerlink" title="洛谷 P1908 逆序对"></a>洛谷 P1908 逆序对</h2><p>数据大小的范围是1e9，但是我们只需要知道他们的大小关系，所以可以压成5e5做</p>
-<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <cstdlib><br>    #include <algorithm><br>    #include <vector><br>    #include <map><br>    #include <set><br>    typedef long long int LL;<br>    &#x2F;&#x2F;typedef std::pair&lt;int ,int&gt; PP;<br>    const int N &#x3D; 5e5+5;<br>    int tree[N],ord[N];<br>    struct AA<br>    {<br>       int val,n;<br>    }qu[N];<br>    int n,v,idx;<br>    LL ans;</p>
+<p>​</p>
+<h2 id="洛谷-p1908-逆序对"><a class="markdownIt-Anchor" href="#洛谷-p1908-逆序对"></a> 洛谷 P1908 逆序对</h2>
+<p>数据大小的范围是1e9，但是我们只需要知道他们的大小关系，所以可以压成5e5做</p>
+<p>​<br>
+#include <cstdio><br>
+#include <iostream><br>
+#include <cstring><br>
+#include <cstdlib><br>
+#include <algorithm><br>
+#include <vector><br>
+#include <map><br>
+#include <set><br>
+typedef long long int LL;<br>
+//typedef std::pair&lt;int ,int&gt; PP;<br>
+const int N = 5e5+5;<br>
+int tree[N],ord[N];<br>
+struct AA<br>
+{<br>
+int val,n;<br>
+}qu[N];<br>
+int n,v,idx;<br>
+LL ans;</set></map></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
 <pre><code>void add(int i,int x)
 &#123;
    while(i&lt;=n)&#123;
@@ -524,7 +681,7 @@ int main()
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%9D%BF1%E3%80%812%20P1908%20%E9%80%86%E5%BA%8F%E5%AF%B9/" data-id="cl50tnlrr003tycj3ghpsfnt0" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%9D%BF1%E3%80%812%20P1908%20%E9%80%86%E5%BA%8F%E5%AF%B9/" data-id="cl50x8cnd003uccj33n756cra" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag">树状数组</a></li></ul>
@@ -574,208 +731,96 @@ int main()
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="P4408-NOI2003-逃学的小孩"><a href="#P4408-NOI2003-逃学的小孩" class="headerlink" title="P4408 [NOI2003] 逃学的小孩"></a>P4408 [NOI2003] 逃学的小孩</h2><p>​<br>    #include <iostream><br>    #include <cstdio><br>    #include <cstdlib><br>    #include <cstring><br>    #include <cmath><br>    #include <algorithm><br>    #include <string><br>    #include <queue><br>    #include <vector><br>    #include <stack><br>    #include <map><br>    #include <set><br>    typedef long long int LL;<br>    const int N &#x3D; 2e5+5, M &#x3D; -1, INF &#x3D; 0x7fffffff;<br>    int n,m,u,v,pid,tid;<br>    LL w,plong,tlong;<br>    int idx;<br>    int head[N];<br>    LL disa[N],disb[N];<br>    struct Edge<br>    {<br>        int to,nxt;<br>        LL w;<br>    }edg[N&lt;&lt;1];<br>    void addEdge(int fr,int to,LL w)<br>    {<br>        edg[idx].to &#x3D; to;<br>        edg[idx].nxt &#x3D; head[fr];<br>        edg[idx].w &#x3D; w;<br>        head[fr] &#x3D; idx++;<br>    }<br>    void initial()<br>    {<br>        idx &#x3D; 2;<br>    }<br>    void dfs(LL leng,int id,int efrom)<br>    {<br>        if(leng &gt; plong){<br>            plong &#x3D; leng;<br>            pid &#x3D; id;<br>        }<br>        for(int e&#x3D;head[id]; e; e&#x3D;edg[e].nxt){<br>            if((e^1) &#x3D;&#x3D; efrom) continue;<br>            dfs(leng+edg[e].w,edg[e].to,e);<br>        }<br>    }<br>    void DFS(LL dis[],int x,int efrom,LL leng)<br>    {<br>        dis[x] &#x3D; leng;<br>        for(int e&#x3D;head[x]; e; e&#x3D;edg[e].nxt){<br>            if((e^1) &#x3D;&#x3D; efrom) continue;<br>            int y &#x3D; edg[e].to;<br>            DFS(dis,y,e,leng+edg[e].w);<br>        }<br>    }<br>    int main()<br>    {<br>        initial();<br>        scanf(“%d%d”,&amp;n,&amp;m);<br>        for(int i&#x3D;0; i&lt;m; i++) {<br>            scanf(“%d%d%lld”,&amp;u,&amp;v,&amp;w);<br>            addEdge(u,v,w);<br>            addEdge(v,u,w);<br>        }<br>        pid &#x3D; 1, plong &#x3D; 0;<br>        dfs(0,pid,0);<br>        tid &#x3D; pid;<br>        pid &#x3D; tid, plong &#x3D; 0;<br>        dfs(0,pid,0);<br>        DFS(disa,tid,0,0);<br>        DFS(disb,pid,0,0);<br>        tlong &#x3D; 0;<br>        for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>            tlong &#x3D; std::max(tlong,std::min(disa[i],disb[i]));<br>        }<br>        printf(“%lld”,tlong+plong);<br>        return 0;<br>    }</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="p4408-noi2003-逃学的小孩"><a class="markdownIt-Anchor" href="#p4408-noi2003-逃学的小孩"></a> P4408 [NOI2003] 逃学的小孩</h2>
+<p>​<br>
+#include <iostream><br>
+#include <cstdio><br>
+#include <cstdlib><br>
+#include <cstring><br>
+#include <cmath><br>
+#include <algorithm><br>
+#include <string><br>
+#include <queue><br>
+#include <vector><br>
+#include <stack><br>
+#include <map><br>
+#include <set><br>
+typedef long long int LL;<br>
+const int N = 2e5+5, M = -1, INF = 0x7fffffff;<br>
+int n,m,u,v,pid,tid;<br>
+LL w,plong,tlong;<br>
+int idx;<br>
+int head[N];<br>
+LL disa[N],disb[N];<br>
+struct Edge<br>
+{<br>
+int to,nxt;<br>
+LL w;<br>
+}edg[N&lt;&lt;1];<br>
+void addEdge(int fr,int to,LL w)<br>
+{<br>
+edg[idx].to = to;<br>
+edg[idx].nxt = head[fr];<br>
+edg[idx].w = w;<br>
+head[fr] = idx++;<br>
+}<br>
+void initial()<br>
+{<br>
+idx = 2;<br>
+}<br>
+void dfs(LL leng,int id,int efrom)<br>
+{<br>
+if(leng &gt; plong){<br>
+plong = leng;<br>
+pid = id;<br>
+}<br>
+for(int e=head[id]; e; e=edg[e].nxt){<br>
+if((e^1) == efrom) continue;<br>
+dfs(leng+edg[e].w,edg[e].to,e);<br>
+}<br>
+}<br>
+void DFS(LL dis[],int x,int efrom,LL leng)<br>
+{<br>
+dis[x] = leng;<br>
+for(int e=head[x]; e; e=edg[e].nxt){<br>
+if((e^1) == efrom) continue;<br>
+int y = edg[e].to;<br>
+DFS(dis,y,e,leng+edg[e].w);<br>
+}<br>
+}<br>
+int main()<br>
+{<br>
+initial();<br>
+scanf(&quot;%d%d&quot;,&amp;n,&amp;m);<br>
+for(int i=0; i&lt;m; i++) {<br>
+scanf(&quot;%d%d%lld&quot;,&amp;u,&amp;v,&amp;w);<br>
+addEdge(u,v,w);<br>
+addEdge(v,u,w);<br>
+}<br>
+pid = 1, plong = 0;<br>
+dfs(0,pid,0);<br>
+tid = pid;<br>
+pid = tid, plong = 0;<br>
+dfs(0,pid,0);<br>
+DFS(disa,tid,0,0);<br>
+DFS(disb,pid,0,0);<br>
+tlong = 0;<br>
+for(int i=1; i&lt;=n; i++){<br>
+tlong = std::max(tlong,std::min(disa[i],disb[i]));<br>
+}<br>
+printf(&quot;%lld&quot;,tlong+plong);<br>
+return 0;<br>
+}</set></map></stack></vector></queue></string></algorithm></cmath></cstring></cstdlib></cstdio></iostream></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%20dfs%20dp%E3%80%91P4408%20[NOI2003]%20%E9%80%83%E5%AD%A6%E7%9A%84%E5%B0%8F%E5%AD%A9/" data-id="cl50tnlrr003vycj3eztv7uow" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%20dfs%20dp%E3%80%91P4408%20[NOI2003]%20%E9%80%83%E5%AD%A6%E7%9A%84%E5%B0%8F%E5%AD%A9/" data-id="cl50x8cne003wccj31p7r9qi3" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-【爬虫】 爬取云班课上老师发的视频资源 python" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E3%80%90%E7%88%AC%E8%99%AB%E3%80%91%20%E7%88%AC%E5%8F%96%E4%BA%91%E7%8F%AD%E8%AF%BE%E4%B8%8A%E8%80%81%E5%B8%88%E5%8F%91%E7%9A%84%E8%A7%86%E9%A2%91%E8%B5%84%E6%BA%90%20python/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E3%80%90%E7%88%AC%E8%99%AB%E3%80%91%20%E7%88%AC%E5%8F%96%E4%BA%91%E7%8F%AD%E8%AF%BE%E4%B8%8A%E8%80%81%E5%B8%88%E5%8F%91%E7%9A%84%E8%A7%86%E9%A2%91%E8%B5%84%E6%BA%90%20python/">【爬虫】 爬取云班课上老师发的视频资源 python.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/">教练我想学挂边躲牛</a>,<a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/%E7%88%AC%E8%99%AB/">爬虫</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="蒟蒻声明"><a href="#蒟蒻声明" class="headerlink" title="蒟蒻声明"></a>蒟蒻声明</h2><p>这个程序虽然可以差强人意地实现功能但是烂的一批，也不打算做出较大改动了。后面会总结一些不足之处，以警示以后。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>。  </p>
-<ol>
-<li>通过抓包发现云班课的视频时m3u8的，即一个m3u8的文件中记录了数个ts类型视频的链接，这些ts视频的时常一般为10秒。想爬取某个视频只需要获取视频对应的m3u8文件，依次把m3u8文件中的ts文件下载并通过os.system()调用命令行把一系列的ts文件合并为mp4  </li>
-<li>步骤1是单独下载一个视频的思路，若想下载所有视频，只需要找出所有视频的m3u8，重复步骤1。</li>
-</ol>
-<h2 id="单独下载一个m3u8"><a href="#单独下载一个m3u8" class="headerlink" title="单独下载一个m3u8"></a>单独下载一个m3u8</h2><p>笔者仅仅在要爬的课程中实验该程序可以达到目的，至于其他的m3u8就不清楚了  </p>
-<ol>
-<li>获取m3u8文件后解析其内容，做到可以提取出所有的ts文件链接  </li>
-<li>把所有的ts文件下载本地的同一个文件夹中  </li>
-<li>调用命令行，例如这样：<br>os.system(‘copy &#x2F;b ‘+os.path.abspath(tempworkpath)+’\ _.ts<br>‘+os.path.abspath(pathOUTPUT)+’\’+nameOUTPUT+’.mp4’)<br>合并所有ts文件为一个新的mp4文件  </li>
-<li>把这一次下载的ts文件删掉，以备下一次操作<br>os.system(‘del ‘+os.path.abspath(tempworkpath)+’_.ts’)import re<br>import requests<br>from bs4 import BeautifulSoup<br>import osdef DownOne(url,name):<br>toIdxStr &#x3D; lambda x : (‘000000000’+str(x))[-10:]<br><br>urlM3U8 &#x3D; url<br>nameOUTPUT &#x3D; name.replace(‘ ‘,’’)<br>pathOUTPUT &#x3D; ‘out’<br>sch &#x3D; re.search(‘(.+?&#x2F;[0-9].{3}&#x2F;[0-9].{1}&#x2F;[0-9].{1}&#x2F;)(.+?).m3u8’,urlM3U8)<br>headM3U8 &#x3D; sch.group(1)<br>nameM3U8 &#x3D;sch.group(2)<br>tempworkpath &#x3D; ‘aaabbbcccdddeeefffggghhhiii’<br><br>resM3U8 &#x3D; requests.get(urlM3U8)<br><br>lstTS &#x3D; re.findall(‘.+?ts’,resM3U8.text)<br><br>if not os.path.exists(tempworkpath):<br>    os.mkdir(tempworkpath)<br>if not os.path.exists(pathOUTPUT):<br>    os.mkdir(pathOUTPUT)<br><br>for i,each in enumerate(lstTS):<br>    print(i,’of’,len(lstTS))<br>    res &#x3D; requests.get(headM3U8+each)<br>    with open(tempworkpath+’&#x2F;‘+nameM3U8+toIdxStr(i)+’.ts’, ‘wb’) as f:<br>        f.write(res.content)<br><br>print(‘合并’)<br>print(‘copy &#x2F;b ‘+os.path.abspath(tempworkpath)+’\*.ts ‘+os.path.abspath(pathOUTPUT)+’\‘+nameOUTPUT+’.mp4’)<br>os.system(‘copy &#x2F;b ‘+os.path.abspath(tempworkpath)+’\*.ts ‘+os.path.abspath(pathOUTPUT)+’\‘+nameOUTPUT+’.mp4’)<br>os.system(‘del ‘+os.path.abspath(tempworkpath)+’\*.ts’)<br>if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘:<br>url &#x3D; input(‘m3u8 url:’)<br>name &#x3D; input(‘video name:’)<br>DownOne(url,name)</li>
-</ol>
-<h2 id="爬取全部的视频资源"><a href="#爬取全部的视频资源" class="headerlink" title="爬取全部的视频资源"></a>爬取全部的视频资源</h2><p>下方代码中的import DownloaderM3U8 as DOWN，这个库是上面爬一个m3u8的那一坨<br>下面的程序这些部分我改了，爬的话要填自己的账号密码等</p>
-<blockquote>
-<p>logData &#x3D; { ‘account_name’ : ‘这里是我的账号’<br> ,‘user_pwd’ : ‘这里是我的密码’<br> ,‘remember_me’ : ‘N’<br> }<br> targetURL &#x3D; ‘填需要获取资源的页面（云班课进入一个课程，再点资源，然后把链接复制过来）’<br> user-agent也改了，不太清楚这个是不是必要的</p>
-</blockquote>
-<h4 id="html解析思路"><a href="#html解析思路" class="headerlink" title="html解析思路"></a>html解析思路</h4><p>这是云班课储存资源的思路</p>
-<p>​<br>​    &lt;div1 这是包含所有视频的一块&gt;<br>​    	&lt;div2 第一单元的所有视频&gt;  所有的div2的集合对应程序里的d2<br>​    		&lt;div 视频&gt;</div>	 一个div2中所有div的集合对应程序里的d3<br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    	</div><br>​    	&lt;div2 第二单元的所有视频&gt;<br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    	</div><br>​    	&lt;div2 第三单元的所有视频&gt;<br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    	</div><br>​    </div></p>
-<p>。</p>
-<p>值得一提的是我没有在网页的html中找到m3u8的链接，但是每个视频有一张图片，图片的链接和视频的m3u8链接有许多相同点。<br>其中图片的链接中有形如： <strong>‘年份&#x2F;月份&#x2F;字符串’ <strong>的格式，而m3u8的链接中有形如：</strong> ‘年份&#x2F;月份&#x2F;日期&#x2F;字符串’</strong><br>的格式，并且这两段格式中除了图片链接没有日期外，其他完全相同</p>
-<p>​<br>​    #云班课视频资源获取 开始于2021&#x2F;03&#x2F;12<br>​    ‘’’<br>​    目前没有任何try,纯莽<br>​<br>    part1 登录 (成功)<br>    part2 找到所有视频块div(成功)<br>    part3 获取所有视频对应的m3u8链接(遇到问题)<br>        问题：<br>            html中没有找到对应的m3u8链接,但有一张图片的链接,其中有 #年份&#x2F;月份&#x2F;字符串# 的部分与我们需要的m3u8链接十分相似<br>            需要的m3u8链接的该部分格式为 #年份&#x2F;月份&#x2F;日期&#x2F;字符串# 所以尝试枚举已知月份中所有的日期暴力破解<br>            事实证明这种方法有概率失败,因为有的m3u8链接会与图片连接中的月份有偏差,不保证能完全获取所有的m3u8链接<br>        可能的解决方案：<br>            1.尝试枚举一年中的所有日期而不是这个月的(需要时间长,但不失为一种方法,尚未尝试),<br>              但不排除m3u8链接和img链接的年份也有偏差的可能<br>            &#x2F;&#x2F;———————————————————–<br>                2021&#x2F;03&#x2F;12:<br>                    若没有找到正确的m3u8链接,则尝试读取下一个月的所有日期<br>                    这样可以正确解析出更多的链接,但是仍然不能完全解决问题<br>            &#x2F;&#x2F;———————————————————–</p>
-<pre><code>part4 针对每一个m3u8链接下载其中的所有js链接,并尝试调用命令行指令合并ts文件为mp4(尚未开始,太懒了)
-    这一步脱离前三个part,独立进行
-&#39;&#39;&#39;
-
-import re
-import requests
-from bs4 import BeautifulSoup
-import DownloaderM3U8 as DOWN
-
-def monthIter(year,month):
-    monthMap = &#123; 1:  31 
-                ,2:  28
-                ,3:  31 
-                ,4:  30
-                ,5:  31
-                ,6:  30
-                ,7:  31
-                ,8:  31
-                ,9:  30
-                ,10: 31
-                ,11: 30
-                ,12: 31
-    &#125;
-    if month == 2:
-        if year%400 == 0 or (year%4 == 0 and year%100 != 0):
-            monthMap[2] += 1
-    return range(1,monthMap[month]+1)
-</code></pre>
-<p>​<br>​    def toLinkStr(ss):<br>​        ss &#x3D; str(ss)<br>​        return ‘0’+ss if len(ss) &#x3D;&#x3D; 1 else ss</p>
-<p>​<br>​    m3u8Head &#x3D; ‘<a target="_blank" rel="noopener" href="https://video-cdn-2.mosoteach.cn/mssvc/file&#39;">https://video-cdn-2.mosoteach.cn/mssvc/file&#39;</a><br>​    m3u8Tail &#x3D; ‘m3u8’<br>​<br>    logURL &#x3D; r’<a target="_blank" rel="noopener" href="https://www.mosoteach.cn/web/index.php?c=passport&amp;m=account_login&#39;">https://www.mosoteach.cn/web/index.php?c=passport&amp;m=account_login&#39;</a></p>
-<pre><code>session = requests.session()
-
-logHeader = &#123; &#39;Referer&#39;      : &#39;https://www.mosoteach.cn/web/index.php?c=passport&#39;
-             ,&#39;User-Agent&#39;   : &#39;填自己的，好像不填也行，不太清楚&#39;
-&#125;
-logData = &#123;  &#39;account_name&#39; : &#39;这里是我的账号&#39;
-            ,&#39;user_pwd&#39;     : &#39;这里是我的密码&#39;
-            ,&#39;remember_me&#39;  : &#39;N&#39;
-&#125; 
-
-logRES = session.post(logURL ,headers = logHeader, data = logData)
-
-targetURL = &#39;填需要获取资源的页面（云班课进入一个课程，再点资源，然后把链接复制过来）&#39;
-
-res = session.get(targetURL)
-soup = BeautifulSoup(res.text,features=&#39;lxml&#39;)
-d1 = soup.find(&#39;div&#39;, id = &#39;res-list-box&#39;)
-d2 = d1.find_all(&#39;div&#39;,class_ = &#39;hide-div&#39;)
-
-namelst = []
-lst = []
-cnt = 0
-jumplst = []
-for i,one in enumerate(d2):
-    #print(&#39;[第&#39;,i,&#39;块]&#39;)
-    d3 = one.find_all(&#39;div&#39;,class_ = &#39;res-row-open-enable res-row preview&#39;)
-    for j,each in enumerate(d3):
-        #print(&#39; 第&#39;,j,&#39;个&#39;,end = &#39; &#39;)
-        ss = each.find(&#39;img&#39;, class_ = &#39;res-icon&#39;)[&#39;src&#39;]
-        linkKey = re.search(&#39;capture/([0-9].&#123;3&#125;)/([0-9].&#123;1&#125;)(.+?)jpg?&#39;,ss)
-        m3u8Middle = m3u8Head + &#39;/&#39; + linkKey.group(1) + &#39;/&#39; + linkKey.group(2) + &#39;/&#123;day&#125;&#39; + linkKey.group(3) + m3u8Tail
-        m3u8MiddlePLUS = m3u8Head + &#39;/&#39; + linkKey.group(1) + &#39;/&#39; + &#39;&#123;mth&#125;&#39; + &#39;/&#123;day&#125;&#39; + linkKey.group(3) + m3u8Tail
-        cnt += 1 
-        print(cnt)
-        print(m3u8Middle)
-        #&#39;&#39;&#39;
-        found = False
-        zyear  = int(linkKey.group(1))
-        zmonth = int(linkKey.group(2))
-        for EE in monthIter(zyear,zmonth):
-            m3u8Final = m3u8Middle.format(day = toLinkStr(EE))
-            rr = requests.get(m3u8Final)
-            if re.search(&#39;Error&#39;,rr.text) == None:
-                lst.append(m3u8Final)
-                namelst.append(each.find(&#39;span&#39;,class_ = &#39;res-name&#39;)[&#39;title&#39;])
-                print(m3u8Final)
-                found = True
-                break
-        if found == False:
-            zmonth += 1
-            if zmonth &gt; 12:
-                zmonth = 1
-                zyear += 1
-                m3u8Middle = m3u8MiddlePLUS
-            for EE in monthIter(zyear,zmonth):
-                m3u8Final = m3u8Middle.format(day = toLinkStr(EE), mth = toLinkStr(zmonth))
-                rr = requests.get(m3u8Final)
-                if re.search(&#39;Error&#39;,rr.text) == None:
-                    lst.append(m3u8Final)
-                    namelst.append(each.find(&#39;span&#39;,class_ = &#39;res-name&#39;)[&#39;title&#39;])
-                    print(m3u8Final)
-                    found = True
-                    break
-        if found == False:
-            print(&#39;##第&#39;,i,&#39;块第&#39;,j,&#39;个已被跳过&#39;)
-            jumplst.append((i,j))
-        print(&#39;---&#39;)
-       # &#39;&#39;&#39;
-            #print(each,end = &#39; &#39;)
-        #print(int(linkKey.group(1)),int(linkKey.group(2)))
-
-print(&#39;共跳过个数:&#39;, len(jumplst), &#39;\n分别为:&#39;)
-for each in jumplst:
-    print(each)
-
-print(&#39;len(lst) == len(namelst) ?&#39;,len(lst),len(namelst))
-
-print(&#39;开始抓取&#39;)
-for i in range(len(lst)):
-    print(namelst[i])
-    DOWN.DownOne(lst[i],namelst[i])
-</code></pre>
-<p>​<br>​    print(‘共跳过个数:’, len(jumplst), ‘\n分别为:’)<br>​    for each in jumplst:<br>​        print(each)</p>
-<h2 id="不足-与-可以预期的改进（已经不会去改了，所以是可以预期的改进）"><a href="#不足-与-可以预期的改进（已经不会去改了，所以是可以预期的改进）" class="headerlink" title="不足 与 可以预期的改进（已经不会去改了，所以是可以预期的改进）"></a>不足 与 可以预期的改进（已经不会去改了，所以是可以预期的改进）</h2><h4 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h4><p>这个程序的思路是找到整个页面中所有的m3u8存入一个列表，然后遍历列表依次下载。这样时间非常长，如果中途出错还要从头开始重新来。<br>。<br>没有try，没有写try的意识，等着以后迎接暴毙吧</p>
-<h4 id="可以预期的改进"><a href="#可以预期的改进" class="headerlink" title="可以预期的改进"></a>可以预期的改进</h4><p>1.分块获取m3u8，先获取每一个大块，再在每一个大块中获得这一大块中所有视频的m3u8<br>2.细化获取项，提供获取某一特定块中所有视频的选项<br>3.细化获取项，提供在某一特定块中获取某一特定视频的选项<br>4.做出图形界面，以一级二级标签分好大块和每个大块中的视频，可以阵对视频多选，阵对块多选，进行下载</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%88%AC%E8%99%AB%E3%80%91%20%E7%88%AC%E5%8F%96%E4%BA%91%E7%8F%AD%E8%AF%BE%E4%B8%8A%E8%80%81%E5%B8%88%E5%8F%91%E7%9A%84%E8%A7%86%E9%A2%91%E8%B5%84%E6%BA%90%20python/" data-id="cl50tnlrs003zycj33nah6ve1" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li></ul>
 
     </footer>
   </div>
@@ -822,18 +867,385 @@ for i in range(len(lst)):
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>每次记录每个子树从根到叶的最长的链， 然后把最长前2长的拼起来<br>先更新D再更新dp， 否则会求出一条最长链*2</p>
-<p>​<br>    void dfs(int x, int efr){<br>        for(int e &#x3D; head[x]; e; e &#x3D; edg[e].nxt){<br>            if((e ^ 1) &#x3D;&#x3D; efr) continue;<br>            int y &#x3D; edg[e].to;<br>            dfs(y, e);<br>            D &#x3D; std::max(D, dp[x] + dp[y] + 1);<br>            dp[x] &#x3D; std::max(dp[x], dp[y] + 1);<br>        }<br>    }</p>
-<h2 id="HDU-6201-transaction-transaction-transaction（非模题）"><a href="#HDU-6201-transaction-transaction-transaction（非模题）" class="headerlink" title="HDU 6201 transaction transaction transaction（非模题）"></a>HDU 6201 transaction transaction transaction（非模题）</h2><p>​<br>    #include &lt;bits&#x2F;stdc++.h&gt;<br>    const int N &#x3D; 1e5 + 4;<br>    int val[N], dp[N][2], head[N];<br>    struct Edge{<br>        int to, nxt, va;<br>    }edg[N &lt;&lt; 1];<br>    int idx, n, t, u, v, w, ans;<br>    void addE(int fr, int to , int w){<br>        edg[idx].to &#x3D; to;<br>        edg[idx].nxt &#x3D; head[fr];<br>        edg[idx].va &#x3D; w;<br>        head[fr] &#x3D; idx ++;<br>    }<br>    void dfs(int x, int efr){<br>        dp[x][0] &#x3D; val[x], dp[x][1] &#x3D; -val[x];<br>        for(int e&#x3D;head[x]; e; e&#x3D;edg[e].nxt){<br>            if((e ^ 1) &#x3D;&#x3D; efr) continue;<br>            int y &#x3D; edg[e].to;<br>            dfs(y, e);<br>            dp[x][0] &#x3D; std::min(dp[x][0], dp[y][0] + edg[e].va);<br>            dp[x][1] &#x3D; std::min(dp[x][1], dp[y][1] + edg[e].va);<br>        }<br>        ans &#x3D; std::min(ans, dp[x][0] + dp[x][1]);<br>    }<br>    int main(){<br>        scanf(“%d”, &amp;t);<br>        while(t –){<br>            scanf(“%d”, &amp;n);<br>            idx &#x3D; 2, ans &#x3D; 0;<br>            for(int i&#x3D;0; i&lt;&#x3D;n; i++) head[i] &#x3D; 0;<br>            for(int i&#x3D;1; i&lt;&#x3D;n; i++) scanf(“%d”, &amp;val[i]);<br>            for(int i&#x3D;1; i&lt;n; i++){<br>                scanf(“%d%d%d”, &amp;u, &amp;v, &amp;w);<br>                addE(u, v, w), addE(v, u, w);<br>            }<br>            dfs(1, -1);<br>            printf(“%d\n”, -ans);<br>        }<br>        return 0;<br>    }</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<p>每次记录每个子树从根到叶的最长的链， 然后把最长前2长的拼起来<br>
+先更新D再更新dp， 否则会求出一条最长链*2</p>
+<p>​<br>
+void dfs(int x, int efr){<br>
+for(int e = head[x]; e; e = edg[e].nxt){<br>
+if((e ^ 1) == efr) continue;<br>
+int y = edg[e].to;<br>
+dfs(y, e);<br>
+D = std::max(D, dp[x] + dp[y] + 1);<br>
+dp[x] = std::max(dp[x], dp[y] + 1);<br>
+}<br>
+}</p>
+<h2 id="hdu-6201-transaction-transaction-transaction非模题"><a class="markdownIt-Anchor" href="#hdu-6201-transaction-transaction-transaction非模题"></a> HDU 6201 transaction transaction transaction（非模题）</h2>
+<p>​<br>
+#include &lt;bits/stdc++.h&gt;<br>
+const int N = 1e5 + 4;<br>
+int val[N], dp[N][2], head[N];<br>
+struct Edge{<br>
+int to, nxt, va;<br>
+}edg[N &lt;&lt; 1];<br>
+int idx, n, t, u, v, w, ans;<br>
+void addE(int fr, int to , int w){<br>
+edg[idx].to = to;<br>
+edg[idx].nxt = head[fr];<br>
+edg[idx].va = w;<br>
+head[fr] = idx <ins>;<br>
+}<br>
+void dfs(int x, int efr){<br>
+dp[x][0] = val[x], dp[x][1] = -val[x];<br>
+for(int e=head[x]; e; e=edg[e].nxt){<br>
+if((e ^ 1) == efr) continue;<br>
+int y = edg[e].to;<br>
+dfs(y, e);<br>
+dp[x][0] = std::min(dp[x][0], dp[y][0] + edg[e].va);<br>
+dp[x][1] = std::min(dp[x][1], dp[y][1] + edg[e].va);<br>
+}<br>
+ans = std::min(ans, dp[x][0] + dp[x][1]);<br>
+}<br>
+int main(){<br>
+scanf(&quot;%d&quot;, &amp;t);<br>
+while(t --){<br>
+scanf(&quot;%d&quot;, &amp;n);<br>
+idx = 2, ans = 0;<br>
+for(int i=0; i&lt;=n; i</ins>) head[i] = 0;<br>
+for(int i=1; i&lt;=n; i++) scanf(&quot;%d&quot;, &amp;val[i]);<br>
+for(int i=1; i&lt;n; i++){<br>
+scanf(&quot;%d%d%d&quot;, &amp;u, &amp;v, &amp;w);<br>
+addE(u, v, w), addE(v, u, w);<br>
+}<br>
+dfs(1, -1);<br>
+printf(&quot;%d\n&quot;, -ans);<br>
+}<br>
+return 0;<br>
+}</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%E3%80%91%E6%A0%91%E5%BD%A2DP%E6%B1%82%E8%A7%A3/" data-id="cl50tnlrt0041ycj35jfy1cl5" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%E3%80%91%E6%A0%91%E5%BD%A2DP%E6%B1%82%E8%A7%A3/" data-id="cl50x8cnf0040ccj3cvdd3u66" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【爬虫】 爬取云班课上老师发的视频资源 python" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E7%88%AC%E8%99%AB%E3%80%91%20%E7%88%AC%E5%8F%96%E4%BA%91%E7%8F%AD%E8%AF%BE%E4%B8%8A%E8%80%81%E5%B8%88%E5%8F%91%E7%9A%84%E8%A7%86%E9%A2%91%E8%B5%84%E6%BA%90%20python/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E7%88%AC%E8%99%AB%E3%80%91%20%E7%88%AC%E5%8F%96%E4%BA%91%E7%8F%AD%E8%AF%BE%E4%B8%8A%E8%80%81%E5%B8%88%E5%8F%91%E7%9A%84%E8%A7%86%E9%A2%91%E8%B5%84%E6%BA%90%20python/">【爬虫】 爬取云班课上老师发的视频资源 python.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/">教练我想学挂边躲牛</a>,<a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/%E7%88%AC%E8%99%AB/">爬虫</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="蒟蒻声明"><a class="markdownIt-Anchor" href="#蒟蒻声明"></a> 蒟蒻声明</h2>
+<p>这个程序虽然可以差强人意地实现功能但是烂的一批，也不打算做出较大改动了。后面会总结一些不足之处，以警示以后。</p>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<p>。<br>
+1.<br>
+通过抓包发现云班课的视频时m3u8的，即一个m3u8的文件中记录了数个ts类型视频的链接，这些ts视频的时常一般为10秒。想爬取某个视频只需要获取视频对应的m3u8文件，依次把m3u8文件中的ts文件下载并通过os.system()调用命令行把一系列的ts文件合并为mp4<br>
+2.<br>
+步骤1是单独下载一个视频的思路，若想下载所有视频，只需要找出所有视频的m3u8，重复步骤1。</p>
+<h2 id="单独下载一个m3u8"><a class="markdownIt-Anchor" href="#单独下载一个m3u8"></a> 单独下载一个m3u8</h2>
+<p>笔者仅仅在要爬的课程中实验该程序可以达到目的，至于其他的m3u8就不清楚了<br>
+1.<br>
+获取m3u8文件后解析其内容，做到可以提取出所有的ts文件链接<br>
+2.<br>
+把所有的ts文件下载本地的同一个文件夹中<br>
+3.<br>
+调用命令行，例如这样：<br>
+os.system(‘copy /b ‘+os.path.abspath(tempworkpath)+’\ _.ts<br>
+‘+os.path.abspath(pathOUTPUT)+’\’+nameOUTPUT+’.mp4’)<br>
+合并所有ts文件为一个新的mp4文件<br>
+4.<br>
+把这一次下载的ts文件删掉，以备下一次操作<br>
+os.system('del ‘+os.path.abspath(tempworkpath)+’_.ts’)</p>
+<pre><code>import re
+import requests
+from bs4 import BeautifulSoup
+import os
+
+
+def DownOne(url,name):
+    toIdxStr = lambda x : ('000000000'+str(x))[-10:]
+
+    urlM3U8 = url
+    nameOUTPUT = name.replace(' ','')
+    pathOUTPUT = 'out'
+    sch = re.search('(.+?/[0-9].&#123;3&#125;/[0-9].&#123;1&#125;/[0-9].&#123;1&#125;/)(.+?).m3u8',urlM3U8)
+    headM3U8 = sch.group(1)
+    nameM3U8 =sch.group(2)
+    tempworkpath = 'aaabbbcccdddeeefffggghhhiii'
+    
+    resM3U8 = requests.get(urlM3U8)
+    
+    lstTS = re.findall('.+?ts',resM3U8.text)
+    
+    if not os.path.exists(tempworkpath):
+        os.mkdir(tempworkpath)
+    if not os.path.exists(pathOUTPUT):
+        os.mkdir(pathOUTPUT)
+    
+    for i,each in enumerate(lstTS):
+        print(i,'of',len(lstTS))
+        res = requests.get(headM3U8+each)
+        with open(tempworkpath+'/'+nameM3U8+toIdxStr(i)+'.ts', 'wb') as f:
+            f.write(res.content)
+    
+    print('合并')
+    print('copy /b '+os.path.abspath(tempworkpath)+'\\*.ts '+os.path.abspath(pathOUTPUT)+'\\'+nameOUTPUT+'.mp4')
+    os.system('copy /b '+os.path.abspath(tempworkpath)+'\\*.ts '+os.path.abspath(pathOUTPUT)+'\\'+nameOUTPUT+'.mp4')
+    os.system('del '+os.path.abspath(tempworkpath)+'\\*.ts')
+
+if __name__ == '__main__':
+    url = input('m3u8 url:')
+    name = input('video name:')
+    DownOne(url,name)
+</code></pre>
+<h2 id="爬取全部的视频资源"><a class="markdownIt-Anchor" href="#爬取全部的视频资源"></a> 爬取全部的视频资源</h2>
+<p>下方代码中的import DownloaderM3U8 as DOWN，这个库是上面爬一个m3u8的那一坨<br>
+下面的程序这些部分我改了，爬的话要填自己的账号密码等</p>
+<blockquote>
+<p>logData = { ‘account_name’ : ‘这里是我的账号’<br>
+,‘user_pwd’ : ‘这里是我的密码’<br>
+,‘remember_me’ : ‘N’<br>
+}<br>
+targetURL = ‘填需要获取资源的页面（云班课进入一个课程，再点资源，然后把链接复制过来）’<br>
+user-agent也改了，不太清楚这个是不是必要的</p>
+</blockquote>
+<h4 id="html解析思路"><a class="markdownIt-Anchor" href="#html解析思路"></a> html解析思路</h4>
+<p>这是云班课储存资源的思路</p>
+<p>​<br>
+​    &lt;div1 这是包含所有视频的一块&gt;<br>
+​    	&lt;div2 第一单元的所有视频&gt;  所有的div2的集合对应程序里的d2<br>
+​    		&lt;div 视频&gt;	 一个div2中所有div的集合对应程序里的d3<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    	<br>
+​    	&lt;div2 第二单元的所有视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    	<br>
+​    	&lt;div2 第三单元的所有视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    	<br>
+​    </p>
+<p>。</p>
+<p>值得一提的是我没有在网页的html中找到m3u8的链接，但是每个视频有一张图片，图片的链接和视频的m3u8链接有许多相同点。<br>
+其中图片的链接中有形如： <strong>'年份/月份/字符串’ <strong>的格式，而m3u8的链接中有形如：</strong> ‘年份/月份/日期/字符串’</strong><br>
+的格式，并且这两段格式中除了图片链接没有日期外，其他完全相同</p>
+<p>​<br>
+​    #云班课视频资源获取 开始于2021/03/12<br>
+​    ‘’’<br>
+​    目前没有任何try,纯莽<br>
+​<br>
+part1 登录 (成功)<br>
+part2 找到所有视频块div(成功)<br>
+part3 获取所有视频对应的m3u8链接(遇到问题)<br>
+问题：<br>
+html中没有找到对应的m3u8链接,但有一张图片的链接,其中有 #年份/月份/字符串# 的部分与我们需要的m3u8链接十分相似<br>
+需要的m3u8链接的该部分格式为 #年份/月份/日期/字符串# 所以尝试枚举已知月份中所有的日期暴力破解<br>
+事实证明这种方法有概率失败,因为有的m3u8链接会与图片连接中的月份有偏差,不保证能完全获取所有的m3u8链接<br>
+可能的解决方案：<br>
+1.尝试枚举一年中的所有日期而不是这个月的(需要时间长,但不失为一种方法,尚未尝试),<br>
+但不排除m3u8链接和img链接的年份也有偏差的可能<br>
+//-----------------------------------------------------------<br>
+2021/03/12:<br>
+若没有找到正确的m3u8链接,则尝试读取下一个月的所有日期<br>
+这样可以正确解析出更多的链接,但是仍然不能完全解决问题<br>
+//-----------------------------------------------------------</p>
+<pre><code>part4 针对每一个m3u8链接下载其中的所有js链接,并尝试调用命令行指令合并ts文件为mp4(尚未开始,太懒了)
+    这一步脱离前三个part,独立进行
+'''
+
+import re
+import requests
+from bs4 import BeautifulSoup
+import DownloaderM3U8 as DOWN
+
+def monthIter(year,month):
+    monthMap = &#123; 1:  31 
+                ,2:  28
+                ,3:  31 
+                ,4:  30
+                ,5:  31
+                ,6:  30
+                ,7:  31
+                ,8:  31
+                ,9:  30
+                ,10: 31
+                ,11: 30
+                ,12: 31
+    &#125;
+    if month == 2:
+        if year%400 == 0 or (year%4 == 0 and year%100 != 0):
+            monthMap[2] += 1
+    return range(1,monthMap[month]+1)
+</code></pre>
+<p>​<br>
+​    def toLinkStr(ss):<br>
+​        ss = str(ss)<br>
+​        return ‘0’+ss if len(ss) == 1 else ss</p>
+<p>​<br>
+​    m3u8Head = ‘<a target="_blank" rel="noopener" href="https://video-cdn-2.mosoteach.cn/mssvc/file">https://video-cdn-2.mosoteach.cn/mssvc/file</a>’<br>
+​    m3u8Tail = ‘m3u8’<br>
+​<br>
+logURL = r’<a target="_blank" rel="noopener" href="https://www.mosoteach.cn/web/index.php?c=passport&amp;m=account_login">https://www.mosoteach.cn/web/index.php?c=passport&amp;m=account_login</a>’</p>
+<pre><code>session = requests.session()
+
+logHeader = &#123; 'Referer'      : 'https://www.mosoteach.cn/web/index.php?c=passport'
+             ,'User-Agent'   : '填自己的，好像不填也行，不太清楚'
+&#125;
+logData = &#123;  'account_name' : '这里是我的账号'
+            ,'user_pwd'     : '这里是我的密码'
+            ,'remember_me'  : 'N'
+&#125; 
+
+logRES = session.post(logURL ,headers = logHeader, data = logData)
+
+targetURL = '填需要获取资源的页面（云班课进入一个课程，再点资源，然后把链接复制过来）'
+
+res = session.get(targetURL)
+soup = BeautifulSoup(res.text,features='lxml')
+d1 = soup.find('div', id = 'res-list-box')
+d2 = d1.find_all('div',class_ = 'hide-div')
+
+namelst = []
+lst = []
+cnt = 0
+jumplst = []
+for i,one in enumerate(d2):
+    #print('[第',i,'块]')
+    d3 = one.find_all('div',class_ = 'res-row-open-enable res-row preview')
+    for j,each in enumerate(d3):
+        #print(' 第',j,'个',end = ' ')
+        ss = each.find('img', class_ = 'res-icon')['src']
+        linkKey = re.search('capture/([0-9].&#123;3&#125;)/([0-9].&#123;1&#125;)(.+?)jpg?',ss)
+        m3u8Middle = m3u8Head + '/' + linkKey.group(1) + '/' + linkKey.group(2) + '/&#123;day&#125;' + linkKey.group(3) + m3u8Tail
+        m3u8MiddlePLUS = m3u8Head + '/' + linkKey.group(1) + '/' + '&#123;mth&#125;' + '/&#123;day&#125;' + linkKey.group(3) + m3u8Tail
+        cnt += 1 
+        print(cnt)
+        print(m3u8Middle)
+        #'''
+        found = False
+        zyear  = int(linkKey.group(1))
+        zmonth = int(linkKey.group(2))
+        for EE in monthIter(zyear,zmonth):
+            m3u8Final = m3u8Middle.format(day = toLinkStr(EE))
+            rr = requests.get(m3u8Final)
+            if re.search('Error',rr.text) == None:
+                lst.append(m3u8Final)
+                namelst.append(each.find('span',class_ = 'res-name')['title'])
+                print(m3u8Final)
+                found = True
+                break
+        if found == False:
+            zmonth += 1
+            if zmonth &gt; 12:
+                zmonth = 1
+                zyear += 1
+                m3u8Middle = m3u8MiddlePLUS
+            for EE in monthIter(zyear,zmonth):
+                m3u8Final = m3u8Middle.format(day = toLinkStr(EE), mth = toLinkStr(zmonth))
+                rr = requests.get(m3u8Final)
+                if re.search('Error',rr.text) == None:
+                    lst.append(m3u8Final)
+                    namelst.append(each.find('span',class_ = 'res-name')['title'])
+                    print(m3u8Final)
+                    found = True
+                    break
+        if found == False:
+            print('##第',i,'块第',j,'个已被跳过')
+            jumplst.append((i,j))
+        print('---')
+       # '''
+            #print(each,end = ' ')
+        #print(int(linkKey.group(1)),int(linkKey.group(2)))
+
+print('共跳过个数:', len(jumplst), '\n分别为:')
+for each in jumplst:
+    print(each)
+
+print('len(lst) == len(namelst) ?',len(lst),len(namelst))
+
+print('开始抓取')
+for i in range(len(lst)):
+    print(namelst[i])
+    DOWN.DownOne(lst[i],namelst[i])
+</code></pre>
+<p>​<br>
+​    print(‘共跳过个数:’, len(jumplst), ‘\n分别为:’)<br>
+​    for each in jumplst:<br>
+​        print(each)</p>
+<h2 id="不足-与-可以预期的改进已经不会去改了所以是可以预期的改进"><a class="markdownIt-Anchor" href="#不足-与-可以预期的改进已经不会去改了所以是可以预期的改进"></a> 不足 与 可以预期的改进（已经不会去改了，所以是可以预期的改进）</h2>
+<h4 id="不足"><a class="markdownIt-Anchor" href="#不足"></a> 不足</h4>
+<p>这个程序的思路是找到整个页面中所有的m3u8存入一个列表，然后遍历列表依次下载。这样时间非常长，如果中途出错还要从头开始重新来。<br>
+。<br>
+没有try，没有写try的意识，等着以后迎接暴毙吧</p>
+<h4 id="可以预期的改进"><a class="markdownIt-Anchor" href="#可以预期的改进"></a> 可以预期的改进</h4>
+<p>1.分块获取m3u8，先获取每一个大块，再在每一个大块中获得这一大块中所有视频的m3u8<br>
+2.细化获取项，提供获取某一特定块中所有视频的选项<br>
+3.细化获取项，提供在某一特定块中获取某一特定视频的选项<br>
+4.做出图形界面，以一级二级标签分好大块和每个大块中的视频，可以阵对视频多选，阵对块多选，进行下载</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%88%AC%E8%99%AB%E3%80%91%20%E7%88%AC%E5%8F%96%E4%BA%91%E7%8F%AD%E8%AF%BE%E4%B8%8A%E8%80%81%E5%B8%88%E5%8F%91%E7%9A%84%E8%A7%86%E9%A2%91%E8%B5%84%E6%BA%90%20python/" data-id="cl50x8cng0042ccj3byiveox3" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li></ul>
 
     </footer>
   </div>
@@ -880,20 +1292,37 @@ for i in range(len(lst)):
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>斯坦纳树常用于解决类似这样的最小代价联通问题：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4294">https://www.luogu.com.cn/problem/P4294</a></p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p><strong>tip1:</strong><br>对于一个结点, 通过状态压缩的思想，用一个整数sta表示这个结点与所有目标节点的联通状态，<br>在sta的二进制位中，若第x位为1，表示该结点与第x个目标结点联通，反之则为不连通<br>用dp[i][sta]表示结点i联通sta状态的最小代价</p>
-<p><strong>状态转移part1</strong><br>若结点i与状态sta1和sta2都联通，且sta1与sta2无重合结点(即sta1, sta2<br>是对sta1+sta2的一个划分)。令P表示把点i联通所需的代价， 显然有:<br>dp[i][sta1 + sta2] &#x3D; MIN(dp[i][sta1 + sta2], dp[i][sta1] + dp[i][sta2] - P[i])<br>由于dp[i][sta1] 和dp[i][sta2]都包含了联通点i的代价P[i]，所以要减去一个P[i]。<br>dp[i][sta1]中的[i]只是一种结点的表示方法.<br><strong>状态转移part2</strong><br>按照边进行松弛<br>对于一个结点i， dp[i][sta] &#x3D; MIN(dp[i][sta], dp[i周围一步可达的结点][sta] + P[i])<br>像极了最短路， 直接spfa</p>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h4 id="P4294-WC2008-游览计划"><a href="#P4294-WC2008-游览计划" class="headerlink" title="P4294 [WC2008]游览计划"></a>P4294 [WC2008]游览计划</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4294">https://www.luogu.com.cn/problem/P4294</a></p>
-<p>由于你还需要输出所有位置的摆放 所以加入了pre数组记录某状态的前置状态。得出最小答案后通过dfs找出斯坦纳树的所有结点。<br>(对于状态转移part1, 只需要记录一个前置状态，另一个前置状态通过减法求出)</p>
-<p>​    </p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>斯坦纳树常用于解决类似这样的最小代价联通问题：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4294">https://www.luogu.com.cn/problem/P4294</a></p>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<p><strong>tip1:</strong><br>
+对于一个结点, 通过状态压缩的思想，用一个整数sta表示这个结点与所有目标节点的联通状态，<br>
+在sta的二进制位中，若第x位为1，表示该结点与第x个目标结点联通，反之则为不连通<br>
+用dp[i][sta]表示结点i联通sta状态的最小代价</p>
+<p><strong>状态转移part1</strong><br>
+若结点i与状态sta1和sta2都联通，且sta1与sta2无重合结点(即sta1, sta2<br>
+是对sta1+sta2的一个划分)。令P表示把点i联通所需的代价， 显然有:<br>
+dp[i][sta1 + sta2] = MIN(dp[i][sta1 + sta2], dp[i][sta1] + dp[i][sta2] - P[i])<br>
+由于dp[i][sta1] 和dp[i][sta2]都包含了联通点i的代价P[i]，所以要减去一个P[i]。<br>
+dp[i][sta1]中的[i]只是一种结点的表示方法.<br>
+<strong>状态转移part2</strong><br>
+按照边进行松弛<br>
+对于一个结点i， dp[i][sta] = MIN(dp[i][sta], dp[i周围一步可达的结点][sta] + P[i])<br>
+像极了最短路， 直接spfa</p>
+<h2 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h2>
+<h4 id="p4294-wc2008游览计划"><a class="markdownIt-Anchor" href="#p4294-wc2008游览计划"></a> P4294 [WC2008]游览计划</h4>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4294">https://www.luogu.com.cn/problem/P4294</a></p>
+<p>由于你还需要输出所有位置的摆放 所以加入了pre数组记录某状态的前置状态。得出最小答案后通过dfs找出斯坦纳树的所有结点。<br>
+(对于状态转移part1, 只需要记录一个前置状态，另一个前置状态通过减法求出)</p>
+<p>​</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">13</span>, LIM = <span class="number">1028</span>, INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="type">int</span> dx[] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>&#125;;</span><br><span class="line"><span class="type">int</span> dy[] = &#123;<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line"><span class="type">int</span> board[N][N], dp[N][N][LIM];</span><br><span class="line"><span class="type">int</span> n, m, idx, mSta, rex, rey;</span><br><span class="line"><span class="type">bool</span> vis[N][N], judge;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">PRE</span>&#123;</span><br><span class="line">    <span class="type">int</span> x, y, s;</span><br><span class="line">&#125;pre[N][N][LIM];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> st)</span></span>&#123;</span><br><span class="line">    vis[x][y] = <span class="literal">true</span>;</span><br><span class="line">    PRE tmp = pre[x][y][st];</span><br><span class="line">    <span class="keyword">if</span>(!tmp.x &amp;&amp; !tmp.y) <span class="keyword">return</span> ;</span><br><span class="line">    <span class="built_in">dfs</span>(tmp.x, tmp.y, tmp.s);</span><br><span class="line">    <span class="keyword">if</span>(tmp.x == x &amp;&amp; tmp.y == y) <span class="built_in">dfs</span>(x, y, st - tmp.s);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">cango</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;<span class="keyword">return</span> x&lt;=n &amp;&amp; y&lt;=m &amp;&amp; x&gt;=<span class="number">1</span> &amp;&amp; y&gt;=<span class="number">1</span>; &#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(dp, <span class="number">63</span>, <span class="built_in">sizeof</span>(dp));</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>; j&lt;=m; j++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;board[i][j]);</span><br><span class="line">        <span class="keyword">if</span>(!board[i][j]) dp[i][j][<span class="number">1</span> &lt;&lt; idx ++] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    mSta = <span class="number">1</span> &lt;&lt; idx;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> sta=<span class="number">1</span>; sta&lt;mSta; sta++)&#123;</span><br><span class="line">        std::queue&lt;std::pair&lt;<span class="type">int</span> ,<span class="type">int</span>&gt; &gt; q;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>; j&lt;=m; j++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> sub=sta; sub; sub=(sub<span class="number">-1</span>)&amp;sta)&#123;</span><br><span class="line">                <span class="keyword">if</span>(dp[i][j][sub] + dp[i][j][sta - sub] - board[i][j] &lt; dp[i][j][sta])&#123;</span><br><span class="line">                    dp[i][j][sta] = dp[i][j][sub] + dp[i][j][sta - sub] - board[i][j];</span><br><span class="line">                    pre[i][j][sta] = (PRE)&#123;i, j, sub&#125;;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(dp[i][j][sta] &lt; INF) q.<span class="built_in">push</span>(std::<span class="built_in">make_pair</span>(i, j)), vis[i][j] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            std::pair&lt;<span class="type">int</span> , <span class="type">int</span>&gt; x = q.<span class="built_in">front</span>(); q.<span class="built_in">pop</span>(); vis[x.first][x.second] = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">4</span>; i++)&#123;</span><br><span class="line">                <span class="type">int</span> xx = x.first + dx[i], yy = x.second + dy[i];</span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">cango</span>(xx, yy)) <span class="keyword">if</span>(dp[x.first][x.second][sta] + board[xx][yy] &lt; dp[xx][yy][sta])&#123;</span><br><span class="line">                    dp[xx][yy][sta] = dp[x.first][x.second][sta] + board[xx][yy];</span><br><span class="line">                    pre[xx][yy][sta] = (PRE)&#123;x.first, x.second, sta&#125;;</span><br><span class="line">                    <span class="keyword">if</span>(!vis[xx][yy]) vis[xx][yy] = <span class="literal">true</span>, q.<span class="built_in">push</span>(std::<span class="built_in">make_pair</span>(xx, yy));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n &amp;&amp; !judge; i++) <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>; j&lt;=m &amp;&amp; !judge; j++) <span class="keyword">if</span>(!board[i][j]) rex = i, rey = j, judge = <span class="literal">true</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, dp[rex][rey][mSta - <span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">dfs</span>(rex, rey, mSta - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>; j&lt;=m; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(board[i][j] == <span class="number">0</span>) <span class="built_in">putchar</span>(<span class="string">&#x27;x&#x27;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(vis[i][j] == <span class="number">1</span>) <span class="built_in">putchar</span>(<span class="string">&#x27;o&#x27;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">putchar</span>(<span class="string">&#x27;_&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%8A%B6%E5%8E%8BDP%E3%80%91%E6%96%AF%E5%9D%A6%E7%BA%B3%E6%A0%91/" data-id="cl50tnlru0044ycj31cig6aoh" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%8A%B6%E5%8E%8BDP%E3%80%91%E6%96%AF%E5%9D%A6%E7%BA%B3%E6%A0%91/" data-id="cl50x8cnh0045ccj33j2ldmhp" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/" rel="tag">状态压缩</a></li></ul>
@@ -943,247 +1372,54 @@ for i in range(len(lst)):
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
 <p>可以把一种只有两种状态的一维的数据组用一个整数表示，其二进制的值可以表示每一个位置的状态。如：1010 表示第1、3个位置有，第2、4个位置没有。</p>
-<h2 id="洛谷-P1896-SCOI2005-互不侵犯"><a href="#洛谷-P1896-SCOI2005-互不侵犯" class="headerlink" title="洛谷 P1896 [SCOI2005]互不侵犯"></a>洛谷 P1896 [SCOI2005]互不侵犯</h2><p>init函数枚举所有的m位不存在两个相邻的1的整数，将整数的值记录在status数组中，将此数含有1的数量记录在cnt数组中<br>dp[i][s][n] 表示进行道第i行时，在第s个状态，使用了n个国王的情况数。</p>
-<p>​    </p>
+<h2 id="洛谷-p1896-scoi2005互不侵犯"><a class="markdownIt-Anchor" href="#洛谷-p1896-scoi2005互不侵犯"></a> 洛谷 P1896 [SCOI2005]互不侵犯</h2>
+<p>init函数枚举所有的m位不存在两个相邻的1的整数，将整数的值记录在status数组中，将此数含有1的数量记录在cnt数组中<br>
+dp[i][s][n] 表示进行道第i行时，在第s个状态，使用了n个国王的情况数。</p>
+<p>​</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> std::pair&lt;<span class="type">int</span> ,<span class="type">int</span>&gt; PP;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="comment">//const int N = 1e5+5;</span></span><br><span class="line">LL dp[<span class="number">10</span>][<span class="number">1025</span>][<span class="number">100</span>];</span><br><span class="line"><span class="type">int</span> status[<span class="number">1025</span>],cnt[<span class="number">1025</span>];</span><br><span class="line"><span class="type">int</span> n,k;</span><br><span class="line"><span class="type">int</span> idx;</span><br><span class="line">LL ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">(<span class="type">int</span> v,<span class="type">int</span> b,<span class="type">int</span> total)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(b &gt;=n)&#123;</span><br><span class="line">      status[idx] = v;</span><br><span class="line">      cnt[idx++] = total;</span><br><span class="line">      <span class="keyword">return</span> ;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">init</span>(v,b+<span class="number">1</span>,total);</span><br><span class="line">   <span class="built_in">init</span>(v+(<span class="number">1</span>&lt;&lt;b),b+<span class="number">2</span>,total+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;k);</span><br><span class="line">   <span class="built_in">init</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;idx; i++)&#123;</span><br><span class="line">      dp[<span class="number">0</span>][i][cnt[i]] += <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> r=<span class="number">1</span>; r&lt;n; r++)&#123;</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;idx; i++)&#123;</span><br><span class="line">         <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;idx; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(status[i]&amp;status[j] || (status[i]&lt;&lt;<span class="number">1</span>)&amp;status[j] || (status[i]&gt;&gt;<span class="number">1</span>)&amp;status[j]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> x=cnt[i]; x&lt;=k; x++)&#123;</span><br><span class="line">               dp[r][i][x] += dp[r<span class="number">-1</span>][j][x-cnt[i]];</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   ans = <span class="number">0</span>;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;idx; i++) ans += dp[n<span class="number">-1</span>][i][k];</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>,ans);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="P2704-NOI2001-炮兵阵地"><a href="#P2704-NOI2001-炮兵阵地" class="headerlink" title="P2704 [NOI2001]炮兵阵地"></a>P2704 [NOI2001]炮兵阵地</h2><p>抄完了互不侵犯之后拿这道题练了练手，然后失败。</p>
-<p><strong>写一个错误的思路</strong><br>开 <strong>二维数组</strong> dp[i][s]表示进行到第i行时，当状态为s，可以摆放的最多的炮兵的数量。<br>初始化前两行后，当一种状态s可以摆放，则dp[i][s] &#x3D; max(自己，dp[i-2][上两行的状态]+上一行状态的总人数+这一行状态的总人数)<br><del>即用上到二行为止的最大人数+上一行某状态的人数+这一行s状态的人数来更新这一行的s状态</del><br>这种思路存在一个缺陷，即只记录了单行某个状态的最大人数。<br>沿用这个思路，当进行到第n行时，我们用“截止到n-2行k状态的最大人数”+“n-1行取状态j的人数”+“第n行状态s的人数”来更新第n行。 <strong>问题在于</strong><br>：我们无法保证当“截止到n-2行k状态的最大人数”取得时，用状态j当作n-2行的下一行时合法的，因为第n-1行的状态受到n-2行和n-3行限制，有可能当“截止到n-2行k状态的最大人数”取得时，j状态是不能与n-3行的状态共存的。然而在这种思路中，我们下意识地认为这种错误时合法的，所以在多数情况下无法得到正确答案。<br><strong>更正思路：</strong><br>开三维数组dp[i][s][last]，表示进行到第i行时，当状态为s，并且上一行状态为last时，可以摆放的最多的炮兵的数量。<br><strong>错误代码：</strong> (竟然还能得20分)</p>
-<p>​    </p>
+<h2 id="p2704-noi2001炮兵阵地"><a class="markdownIt-Anchor" href="#p2704-noi2001炮兵阵地"></a> P2704 [NOI2001]炮兵阵地</h2>
+<p>抄完了互不侵犯之后拿这道题练了练手，然后失败。</p>
+<p><strong>写一个错误的思路</strong><br>
+开 <strong>二维数组</strong> dp[i][s]表示进行到第i行时，当状态为s，可以摆放的最多的炮兵的数量。<br>
+初始化前两行后，当一种状态s可以摆放，则dp[i][s] = max(自己，dp[i-2][上两行的状态]+上一行状态的总人数+这一行状态的总人数)<br>
+<s>即用上到二行为止的最大人数+上一行某状态的人数+这一行s状态的人数来更新这一行的s状态</s><br>
+这种思路存在一个缺陷，即只记录了单行某个状态的最大人数。<br>
+沿用这个思路，当进行到第n行时，我们用“截止到n-2行k状态的最大人数”+“n-1行取状态j的人数”+“第n行状态s的人数”来更新第n行。 <strong>问题在于</strong><br>
+：我们无法保证当“截止到n-2行k状态的最大人数”取得时，用状态j当作n-2行的下一行时合法的，因为第n-1行的状态受到n-2行和n-3行限制，有可能当“截止到n-2行k状态的最大人数”取得时，j状态是不能与n-3行的状态共存的。然而在这种思路中，我们下意识地认为这种错误时合法的，所以在多数情况下无法得到正确答案。<br>
+<strong>更正思路：</strong><br>
+开三维数组dp[i][s][last]，表示进行到第i行时，当状态为s，并且上一行状态为last时，可以摆放的最多的炮兵的数量。<br>
+<strong>错误代码：</strong> (竟然还能得20分)</p>
+<p>​</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="comment">//typedef std::pair&lt;int ,int&gt; PP;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">105</span>,M = <span class="number">12</span>,ER9 = <span class="number">1030</span>;</span><br><span class="line"><span class="type">int</span> rows[N],status[ER9],va[ER9];</span><br><span class="line">LL dp[N][ER9];</span><br><span class="line"><span class="type">char</span> ss[<span class="number">12</span>];</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> idx;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> id[N],mp[N][ER9];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">toStatus</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="type">int</span> re = <span class="number">0</span>;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;m; i++)&#123;</span><br><span class="line">      re += (ss[i] == <span class="string">&#x27;H&#x27;</span>) ? (<span class="number">1</span>&lt;&lt;i) : <span class="number">0</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> re;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">(<span class="type">int</span> val,<span class="type">int</span> pos,<span class="type">int</span> cnt1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(pos &gt;= m)&#123;</span><br><span class="line">      status[idx] = val;</span><br><span class="line">      va[idx++] = cnt1;</span><br><span class="line">      <span class="keyword">return</span> ;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">init</span>(val,pos+<span class="number">1</span>,cnt1);</span><br><span class="line">   <span class="built_in">init</span>(val+(<span class="number">1</span>&lt;&lt;pos),pos+<span class="number">3</span>,cnt1+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++)&#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,ss);</span><br><span class="line">      rows[i] = <span class="built_in">toStatus</span>();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">init</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;idx; i++)&#123;</span><br><span class="line">      <span class="keyword">if</span>(status[i]&amp;rows[<span class="number">0</span>]) <span class="keyword">continue</span>;</span><br><span class="line">      mp[<span class="number">0</span>][id[<span class="number">0</span>]] = i;</span><br><span class="line">      dp[<span class="number">0</span>][id[<span class="number">0</span>]] = va[i];</span><br><span class="line">      id[<span class="number">0</span>] += <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;idx; i++)&#123;</span><br><span class="line">      <span class="keyword">if</span>(status[i]&amp;rows[<span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">      mp[<span class="number">1</span>][id[<span class="number">1</span>]] = i;</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;id[<span class="number">0</span>]; j++)&#123;</span><br><span class="line">         <span class="keyword">if</span>(status[i]&amp;status[mp[<span class="number">0</span>][j]]) <span class="keyword">continue</span>;</span><br><span class="line">         dp[<span class="number">1</span>][id[<span class="number">1</span>]] = std::<span class="built_in">max</span>(dp[<span class="number">1</span>][id[<span class="number">1</span>]],va[i]+dp[<span class="number">0</span>][j]);</span><br><span class="line">      &#125;</span><br><span class="line">      id[<span class="number">1</span>] += <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> r=<span class="number">2</span>; r&lt;n; r++)&#123;</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;idx; i++)&#123;</span><br><span class="line">         <span class="keyword">if</span>(status[i]&amp;rows[r]) <span class="keyword">continue</span>;</span><br><span class="line">         mp[r][id[r]] = i;</span><br><span class="line">         <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;id[r<span class="number">-1</span>]; j++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>; k&lt;id[r<span class="number">-2</span>]; k++)&#123;</span><br><span class="line">               <span class="keyword">if</span>(status[i]&amp;status[mp[r<span class="number">-1</span>][j]] || status[i]&amp;status[mp[r<span class="number">-2</span>][k]] || status[mp[r<span class="number">-2</span>][k]]&amp;status[mp[r<span class="number">-1</span>][j]]) <span class="keyword">continue</span>;</span><br><span class="line">               dp[r][id[r]] = std::<span class="built_in">max</span>(dp[r][id[r]],va[i]+va[mp[r<span class="number">-1</span>][j]]+dp[r<span class="number">-2</span>][k]);</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         id[r] += <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   LL ans = <span class="number">0</span>;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;id[n<span class="number">-1</span>]; i++)&#123;</span><br><span class="line">      ans = std::<span class="built_in">max</span>(ans,dp[n<span class="number">-1</span>][i]);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>,ans);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>​    </p>
-<p><strong>AC代码:</strong><br>看很多题解都说要用到三行的滚动数组，否则会MLE。<br>但是这个没有用,直接开了100行，可能是由于动态加状态节省了空间吧。 <del>破案了，题目改过，不限制空间了</del></p>
-<p>​    </p>
+<p>​</p>
+<p><strong>AC代码:</strong><br>
+看很多题解都说要用到三行的滚动数组，否则会MLE。<br>
+但是这个没有用,直接开了100行，可能是由于动态加状态节省了空间吧。 <s>破案了，题目改过，不限制空间了</s></p>
+<p>​</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="comment">//typedef std::pair&lt;int ,int&gt; PP;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">105</span>,M = <span class="number">12</span>,E10 = <span class="number">1024</span>;</span><br><span class="line"><span class="type">int</span> rows[N],status[E10],va[E10],dp[N][E10][E10];</span><br><span class="line"><span class="comment">//rows:把地图的每一行转化为数字，H为1，P为0，储存在rows数组</span></span><br><span class="line"><span class="comment">//status记录所有状态的对应的数字</span></span><br><span class="line"><span class="comment">//va记录所有状态对应的人数</span></span><br><span class="line"><span class="comment">//dp[i][j][k]表示第i行状态为j，且i-1行状态为k时，可以放置的最大炮兵数</span></span><br><span class="line"><span class="type">char</span> ss[<span class="number">12</span>];</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> idx,ans;</span><br><span class="line"><span class="comment">//idx记录status数组的大小</span></span><br><span class="line"><span class="type">int</span> id[N],mp[N][E10];</span><br><span class="line"><span class="comment">//id[i]数组记录第i行可行的总状态数</span></span><br><span class="line"><span class="comment">//mp[i][j]记录第i行第j个状态在status数组中对应的编号</span></span><br></pre></td></tr></table></figure>
-
-
-<p>​    </p>
+<p>​</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">toStatus</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="type">int</span> re = <span class="number">0</span>;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;m; i++)&#123;</span><br><span class="line">      re += (ss[i] == <span class="string">&#x27;H&#x27;</span>) ? (<span class="number">1</span>&lt;&lt;i) : <span class="number">0</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> re;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">(<span class="type">int</span> val,<span class="type">int</span> pos,<span class="type">int</span> cnt1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(pos &gt;= m)&#123;</span><br><span class="line">      status[idx] = val;</span><br><span class="line">      va[idx++] = cnt1;</span><br><span class="line">      <span class="keyword">return</span> ;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">init</span>(val,pos+<span class="number">1</span>,cnt1);</span><br><span class="line">   <span class="built_in">init</span>(val+(<span class="number">1</span>&lt;&lt;pos),pos+<span class="number">3</span>,cnt1+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++)&#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,ss);</span><br><span class="line">      rows[i] = <span class="built_in">toStatus</span>();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">init</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;idx; i++)&#123;</span><br><span class="line">      <span class="keyword">if</span>(status[i]&amp;rows[<span class="number">0</span>]) <span class="keyword">continue</span>;</span><br><span class="line">      mp[<span class="number">0</span>][id[<span class="number">0</span>]] = i;</span><br><span class="line">      dp[<span class="number">0</span>][id[<span class="number">0</span>]][<span class="number">0</span>] = va[i];</span><br><span class="line">      id[<span class="number">0</span>] += <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;idx; i++)&#123;</span><br><span class="line">      <span class="keyword">if</span>(status[i]&amp;rows[<span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">      mp[<span class="number">1</span>][id[<span class="number">1</span>]] = i;</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;id[<span class="number">0</span>]; j++)&#123;</span><br><span class="line">         <span class="keyword">if</span>(status[i]&amp;status[mp[<span class="number">0</span>][j]]) <span class="keyword">continue</span>;</span><br><span class="line">         dp[<span class="number">1</span>][id[<span class="number">1</span>]][j] = va[i] + dp[<span class="number">0</span>][j][<span class="number">0</span>];</span><br><span class="line">      &#125;</span><br><span class="line">      id[<span class="number">1</span>] += <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> r=<span class="number">2</span>; r&lt;n; r++)&#123;</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;idx; i++)&#123;</span><br><span class="line">         <span class="keyword">if</span>(status[i]&amp;rows[r]) <span class="keyword">continue</span>;</span><br><span class="line">         mp[r][id[r]] = i;</span><br><span class="line">         <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;id[r<span class="number">-1</span>]; j++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>; k&lt;id[r<span class="number">-2</span>]; k++)&#123;</span><br><span class="line">               <span class="keyword">if</span>(status[i]&amp;status[mp[r<span class="number">-1</span>][j]] || status[i]&amp;status[mp[r<span class="number">-2</span>][k]] || status[mp[r<span class="number">-2</span>][k]]&amp;status[mp[r<span class="number">-1</span>][j]]) <span class="keyword">continue</span>;</span><br><span class="line">               dp[r][id[r]][j] = std::<span class="built_in">max</span>(dp[r][id[r]][j],va[i]+dp[r<span class="number">-1</span>][j][k]);</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         id[r] += <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;id[n<span class="number">-1</span>]; i++) <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;id[n<span class="number">-2</span>]; j++)&#123;</span><br><span class="line">      ans = std::<span class="built_in">max</span>(dp[n<span class="number">-1</span>][i][j],ans);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,ans);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>​    </p>
+<p>​</p>
 <p>换了一波滚动数组，但是还是有10.+MB</p>
-<p>​    </p>
+<p>​</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="comment">//typedef std::pair&lt;int ,int&gt; PP;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">105</span>,M = <span class="number">12</span>,E10 = <span class="number">1024</span>;</span><br><span class="line"><span class="type">int</span> rows[N],status[E10],va[E10],dp[<span class="number">3</span>][E10][E10];</span><br><span class="line"><span class="comment">//rows:把地图的每一行转化为数字，H为1，P为0，储存在rows数组</span></span><br><span class="line"><span class="comment">//status记录所有状态的对应的数字</span></span><br><span class="line"><span class="comment">//va记录所有状态对应的人数</span></span><br><span class="line"><span class="comment">//dp[i][j][k]表示第i行状态为j，且i-1行状态为k时，可以放置的最大炮兵数</span></span><br><span class="line"><span class="type">char</span> ss[<span class="number">12</span>];</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> idx,ans;</span><br><span class="line"><span class="comment">//idx记录status数组的大小</span></span><br><span class="line"><span class="type">int</span> id[<span class="number">3</span>],mp[<span class="number">3</span>][E10];</span><br><span class="line"><span class="comment">//id[i]数组记录第i行可行的总状态数</span></span><br><span class="line"><span class="comment">//mp[i][j]记录第i行第j个状态在status数组中对应的编号</span></span><br></pre></td></tr></table></figure>
-
-
-<p>​    </p>
+<p>​</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">toStatus</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="type">int</span> re = <span class="number">0</span>;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;m; i++)&#123;</span><br><span class="line">      re += (ss[i] == <span class="string">&#x27;H&#x27;</span>) ? (<span class="number">1</span>&lt;&lt;i) : <span class="number">0</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> re;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">(<span class="type">int</span> val,<span class="type">int</span> pos,<span class="type">int</span> cnt1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(pos &gt;= m)&#123;</span><br><span class="line">      status[idx] = val;</span><br><span class="line">      va[idx++] = cnt1;</span><br><span class="line">      <span class="keyword">return</span> ;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">init</span>(val,pos+<span class="number">1</span>,cnt1);</span><br><span class="line">   <span class="built_in">init</span>(val+(<span class="number">1</span>&lt;&lt;pos),pos+<span class="number">3</span>,cnt1+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++)&#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,ss);</span><br><span class="line">      rows[i] = <span class="built_in">toStatus</span>();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">init</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;idx; i++)&#123;</span><br><span class="line">      <span class="keyword">if</span>(status[i]&amp;rows[<span class="number">0</span>]) <span class="keyword">continue</span>;</span><br><span class="line">      mp[<span class="number">0</span>][id[<span class="number">0</span>]] = i;</span><br><span class="line">      dp[<span class="number">0</span>][id[<span class="number">0</span>]][<span class="number">0</span>] = va[i];</span><br><span class="line">      id[<span class="number">0</span>] += <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;idx; i++)&#123;</span><br><span class="line">      <span class="keyword">if</span>(status[i]&amp;rows[<span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">      mp[<span class="number">1</span>][id[<span class="number">1</span>]] = i;</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;id[<span class="number">0</span>]; j++)&#123;</span><br><span class="line">         <span class="keyword">if</span>(status[i]&amp;status[mp[<span class="number">0</span>][j]]) <span class="keyword">continue</span>;</span><br><span class="line">         dp[<span class="number">1</span>][id[<span class="number">1</span>]][j] = va[i] + dp[<span class="number">0</span>][j][<span class="number">0</span>];</span><br><span class="line">      &#125;</span><br><span class="line">      id[<span class="number">1</span>] += <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> r=<span class="number">2</span>; r&lt;n; r++)&#123;</span><br><span class="line">      <span class="type">int</span> rm3 = r%<span class="number">3</span>,rs1m3 = (r<span class="number">-1</span>)%<span class="number">3</span>, rs2m3 = (r<span class="number">-2</span>)%<span class="number">3</span>;</span><br><span class="line">      <span class="built_in">memset</span>(dp[rm3],<span class="number">0</span>,<span class="built_in">sizeof</span>(rm3));</span><br><span class="line">      id[rm3] = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;idx; i++)&#123;</span><br><span class="line">         <span class="keyword">if</span>(status[i]&amp;rows[r]) <span class="keyword">continue</span>;</span><br><span class="line">         mp[rm3][id[rm3]] = i;</span><br><span class="line">         <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;id[rs1m3]; j++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>; k&lt;id[rs2m3]; k++)&#123;</span><br><span class="line">               <span class="keyword">if</span>(status[i]&amp;status[mp[rs1m3][j]] || status[i]&amp;status[mp[rs2m3][k]] || status[mp[rs2m3][k]]&amp;status[mp[rs1m3][j]]) <span class="keyword">continue</span>;</span><br><span class="line">               dp[rm3][id[rm3]][j] = std::<span class="built_in">max</span>(dp[rm3][id[rm3]][j],va[i]+dp[rs1m3][j][k]);</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         id[rm3] += <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="type">int</span> ns1m3 = (n<span class="number">-1</span>)%<span class="number">3</span>, ns2m3 = (n<span class="number">-2</span>)%<span class="number">3</span>;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;id[ns1m3]; i++) <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;id[ns2m3]; j++)&#123;</span><br><span class="line">      ans = std::<span class="built_in">max</span>(dp[ns1m3][i][j],ans);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,ans);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>​    </p>
-<h2 id="2020ICPC-江西省大学生程序设计竞赛L-WZB’s-Harem"><a href="#2020ICPC-江西省大学生程序设计竞赛L-WZB’s-Harem" class="headerlink" title="2020ICPC 江西省大学生程序设计竞赛L WZB’s Harem"></a>2020ICPC 江西省大学生程序设计竞赛L WZB’s Harem</h2><p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/15806/L">题目链接https://ac.nowcoder.com/acm/contest/15806/L</a><br>题目翻译： n皇后问题的退化版——n车问题 n&lt;&#x3D;20<br>状压 yyds</p>
-<p>​    </p>
+<p>​</p>
+<h2 id="2020icpc-江西省大学生程序设计竞赛l-wzbs-harem"><a class="markdownIt-Anchor" href="#2020icpc-江西省大学生程序设计竞赛l-wzbs-harem"></a> 2020ICPC 江西省大学生程序设计竞赛L WZB’s Harem</h2>
+<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/15806/L">题目链接https://ac.nowcoder.com/acm/contest/15806/L</a><br>
+题目翻译： n皇后问题的退化版——n车问题 n&lt;=20<br>
+状压 yyds</p>
+<p>​</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> <span class="type">int</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x7fffffff</span>, SCF = <span class="number">0x3fffffff</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">21</span>, MOD =  <span class="number">1000000007</span>;</span><br><span class="line"><span class="type">int</span> status[N][<span class="number">1</span>&lt;&lt;N],dp[N][<span class="number">1</span>&lt;&lt;N];</span><br><span class="line"><span class="type">int</span> id[N];</span><br><span class="line"><span class="type">int</span> board[N];</span><br><span class="line"><span class="type">int</span> qu[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">toStatus</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> re = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">        re = (re&lt;&lt;<span class="number">1</span>)+qu[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> re;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>; j&lt;=n; j++)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;qu[j]);</span><br><span class="line">        &#125;</span><br><span class="line">        board[i] = <span class="built_in">toStatus</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;(<span class="number">1</span>&lt;&lt;n); i++)&#123;</span><br><span class="line">        <span class="type">int</span> tt = i, cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(tt &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            cnt += (tt&amp;<span class="number">1</span>);</span><br><span class="line">            tt &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        status[cnt][id[cnt]++] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">//No.Status 0, id 0;</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>; k&lt;id[i<span class="number">-1</span>]; k++)&#123;</span><br><span class="line">            <span class="type">int</span> pre = status[i<span class="number">-1</span>][k];</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>((pre&gt;&gt;j)&amp;<span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span>( !( (<span class="number">1</span>&lt;&lt;j) &amp; board[i]) ) &#123;</span><br><span class="line">                    <span class="type">int</span> nxt = pre | (<span class="number">1</span>&lt;&lt;j);</span><br><span class="line">                    dp[i][nxt] = (dp[i][nxt] + dp[i<span class="number">-1</span>][pre]) % MOD;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    LL ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>; i&lt;=n; i++)&#123;</span><br><span class="line">        ans = ans*i%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>,ans * dp[n][(<span class="number">1</span>&lt;&lt;n)<span class="number">-1</span>] % MOD);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%8A%B6%E5%8E%8Bdp%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7P1896%20[SCOI2005]%E4%BA%92%E4%B8%8D%E4%BE%B5%E7%8A%AF%20P2704%20[NOI2001]%E7%82%AE%E5%85%B5%E9%98%B5%E5%9C%B0/" data-id="cl50tnlrv0048ycj34x0ifys0" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-【线形DP练习】洛谷 P1868饥饿的奶牛 P1091合唱队形 P1541乌龟棋 P1020导弹拦截" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E3%80%90%E7%BA%BF%E5%BD%A2DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1868%E9%A5%A5%E9%A5%BF%E7%9A%84%E5%A5%B6%E7%89%9B%20P1091%E5%90%88%E5%94%B1%E9%98%9F%E5%BD%A2%20P1541%E4%B9%8C%E9%BE%9F%E6%A3%8B%20P1020%E5%AF%BC%E5%BC%B9%E6%8B%A6%E6%88%AA/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E3%80%90%E7%BA%BF%E5%BD%A2DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1868%E9%A5%A5%E9%A5%BF%E7%9A%84%E5%A5%B6%E7%89%9B%20P1091%E5%90%88%E5%94%B1%E9%98%9F%E5%BD%A2%20P1541%E4%B9%8C%E9%BE%9F%E6%A3%8B%20P1020%E5%AF%BC%E5%BC%B9%E6%8B%A6%E6%88%AA/">【线形DP练习】洛谷 P1868饥饿的奶牛 P1091合唱队形 P1541乌龟棋 P1020导弹拦截.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/DP/">DP</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="洛谷-P1868-饥饿的奶牛"><a href="#洛谷-P1868-饥饿的奶牛" class="headerlink" title="洛谷 P1868 饥饿的奶牛"></a>洛谷 P1868 饥饿的奶牛</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1868">https://www.luogu.com.cn/problem/P1868</a><br>思路：<br>dp[N]表示 在前i块草皮中最多能吃到几块<br><strong>sort</strong> 把所有区间按照右端的大小排序<br><strong>for</strong> 遍历[0,区间中出现过的最大长度]<br>{<br>dp[i] &#x3D; dp[i-1] (继承上一个草皮的dp)<br><strong>if</strong> 存在区间[x,y] 使得y&#x3D;i 则dp[y] &#x3D; max ( dp[y] , dp[x-1]+len([x,y]) )<br>}</p>
-<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <algorithm><br>    #include <cmath><br>    #include <cstdlib><br>    #include <queue><br>    #include <map><br>    #include <set><br>    #include <stack><br>    #include <vector><br>    typedef long long LL;<br>    typedef std::pair&lt;int ,int&gt; PP;<br>    const int N &#x3D; 3e6+5;<br>    int n,v,vv;<br>    int dp[N];<br>    bool cmp(PP x, PP y)<br>    {<br>       return x.second &lt; y.second ;<br>    }</p>
-<pre><code>int main()
-&#123;
-   std::vector&lt;PP&gt; vc;
-   std::cin &gt;&gt; n;
-   for(int i=0; i&lt;n; i++)&#123;
-      std::cin&gt;&gt; v  &gt;&gt; vv;
-      vc.push_back(std::make_pair(v,vv));
-   &#125;
-   std::sort(vc.begin(),vc.end(),cmp);
-   int idx=1;
-   for(std::vector&lt;PP&gt;::iterator iter = vc.begin(); iter != vc.end(); iter++)&#123;
-      //这里要加等号，否则最后两个样例会WA
-      while(idx &lt;= iter-&gt;second)&#123;
-         dp[idx] = std::max(dp[idx],dp[idx-1]);
-         idx += 1;
-      &#125;
-      dp[iter-&gt;second] = std::max(dp[iter-&gt;first-1]+iter-&gt;second-iter-&gt;first+1,dp[iter-&gt;second]);
-   &#125;
-   std::cout &lt;&lt; dp[vc[vc.size()-1].second] &lt;&lt; std::endl;
-   return 0;
-&#125;
-</code></pre>
-<p>​    </p>
-<h2 id="洛谷-P1091-合唱队形"><a href="#洛谷-P1091-合唱队形" class="headerlink" title="洛谷 P1091 合唱队形"></a>洛谷 P1091 合唱队形</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/solution/P1091">https://www.luogu.com.cn/problem/solution/P1091</a><br>此题要求提出最少的人，获得一个最长的先单调递增后点掉递减的队伍，对于队伍递增递减部分的长度没有要求。<br>思路:<br>up[]数组记录 在正向遍历下 第i个位置的最长升序列长度（第一个长度计0）<br>dn[]数组记录 在反向遍历下 第i个位置的最长升序列长度（第一个长度计0）<br>然后遍历一遍 [0,n-1]，找出最大的 先增后降序列长度 (up[i]+dn[i]+1)<br>n-最大长度 即为答案</p>
-<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <algorithm><br>    #include <cmath><br>    #include <cstdlib><br>    #include <queue><br>    #include <map><br>    #include <set><br>    #include <stack><br>    #include <vector><br>    typedef long long LL;<br>    typedef std::pair&lt;int ,int&gt; PP;<br>    const int N &#x3D; 105;<br>    int qu[N],up[N],dn[N];<br>    int n;</p>
-<pre><code>int main()
-&#123;
-   scanf(&quot;%d&quot;,&amp;n);
-   for(int i=0; i&lt;n ;i++)&#123;
-      scanf(&quot;%d&quot;,&amp;qu[i]);
-   &#125;
-   for(int i=1; i&lt;n; i++)&#123;
-      for(int j=i-1; j&gt;=0; j--)&#123;
-         if(qu[i] &gt; qu[j])&#123;
-            up[i] = std::max(up[i],up[j]+1);
-         &#125;
-      &#125;
-   &#125;
-   for(int i=n-2; i&gt;=0; i--)&#123;
-      for(int j=i+1; j&lt;n; j++)&#123;
-         if(qu[i] &gt; qu[j])&#123;
-            dn[i] = std::max(dn[i],dn[j]+1);
-         &#125;
-      &#125;
-   &#125;
-   int mx = 0;
-   for(int i=0; i&lt;n; i++)&#123;
-      mx = std::max(up[i]+dn[i]+1,mx);
-   &#125;
-   std::cout &lt;&lt; n-mx;
-   return 0;
-&#125;
-</code></pre>
-<p>​    </p>
-<h2 id="洛谷-P1541-乌龟棋"><a href="#洛谷-P1541-乌龟棋" class="headerlink" title="洛谷 P1541 乌龟棋"></a>洛谷 P1541 乌龟棋</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1541">https://www.luogu.com.cn/problem/P1541</a><br>思路:<br>开四重循环dp，数组dp[i][j][k][r]记录当玩家使用i张1，j张2，k张3，r张4时能得到的最高分<br>.<br>最开始空间超限一个样例，由于dp数组中存在0下标时不好计算，我把数组的规模增加了1（用dp[1][1][1][1]当成没有牌时的情况，相当于原本的dp[0][0][0][0]）<br>.<br>存在未AC样例 时间40ms 空间150M 空间超限，应该需要刚好卡完美空间，不能增加规模</p>
-<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <algorithm><br>    #include <cmath><br>    #include <cstdlib><br>    #include <queue><br>    #include <map><br>    #include <set><br>    #include <stack><br>    #include <vector><br>    typedef long long LL;<br>    typedef std::pair&lt;int ,int&gt; PP;<br>    const int N &#x3D; 355,M &#x3D; 125;<br>    int dp[M][M][M][M];<br>    int cell[N],num[5];<br>    int n,m,v;</p>
-<pre><code>int main()
-&#123;
-   scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
-   for(int i=0; i&lt;n; i++)&#123;
-      scanf(&quot;%d&quot;,&amp;cell[i]);
-   &#125;
-   for(int i=0; i&lt;m; i++)&#123;
-      scanf(&quot;%d&quot;,&amp;v);
-      num[v] += 1;
-   &#125;
-   num[1] += 1;
-   num[2] += 1;
-   num[3] += 1;
-   num[4] += 1;
-   for(int i=1; i&lt;=num[1]; i++)&#123;
-      for(int j=1; j&lt;=num[2]; j++)&#123;
-         for(int k=1; k&lt;=num[3]; k++)&#123;
-            for(int r=1; r&lt;=num[4]; r++)&#123;
-               dp[i][j][k][r] = std::max(
-                  std::max(dp[i-1][j][k][r],dp[i][j-1][k][r])
-                 ,std::max(dp[i][j][k-1][r],dp[i][j][k][r-1])
-                  ) + cell[(i-1)+(j-1)*2+(k-1)*3+(r-1)*4];
-            &#125;
-         &#125;
-      &#125;
-   &#125;
-   std::cout &lt;&lt; dp[num[1]][num[2]][num[3]][num[4]];
-   return 0;
-&#125;
-</code></pre>
-<p>​    </p>
-<p>所以需要优化一下空间，数组规模需要缩减多加的那一个单位的规模<br>.<br>把原来的每一轮通过三个max函数进行一次dp，变成每一轮对i&#x2F;j&#x2F;k&#x2F;r dp四次<br>dp前做一次判断，只有当i&#x2F;j&#x2F;k&#x2F;r ！&#x3D; 0时，才进行dp<br>这样做的好处时第一轮时i&#x2F;j&#x2F;k&#x2F;r都&#x3D;0，所以dp[0][0][0][0]就可以空过，于是dp[0][0][0][0]就可以提前初始化而不用担心在循环中被更改<br>.<br>该样例AC 时间52ms 空间125M</p>
-<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <algorithm><br>    #include <cmath><br>    #include <cstdlib><br>    #include <queue><br>    #include <map><br>    #include <set><br>    #include <stack><br>    #include <vector><br>    typedef long long LL;<br>    typedef std::pair&lt;int ,int&gt; PP;<br>    const int N &#x3D; 355,M &#x3D; 125;<br>    int dp[M][M][M][M];<br>    int cell[N],num[5];<br>    int n,m,v;</p>
-<pre><code>int main()
-&#123;
-   scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
-   for(int i=0; i&lt;n; i++)&#123;
-      scanf(&quot;%d&quot;,&amp;cell[i]);
-   &#125;
-   for(int i=0; i&lt;m; i++)&#123;
-      scanf(&quot;%d&quot;,&amp;v);
-      num[v] += 1;
-   &#125;
-   dp[0][0][0][0] = cell[0];
-   for(int i=0; i&lt;=num[1]; i++)&#123;
-      for(int j=0; j&lt;=num[2]; j++)&#123;
-         for(int k=0; k&lt;=num[3]; k++)&#123;
-            for(int r=0; r&lt;=num[4]; r++)&#123;
-               int idx = i+j*2+k*3+r*4;
-               if(i) dp[i][j][k][r] = std::max(dp[i][j][k][r],dp[i-1][j][k][r]+cell[idx]);
-               if(j) dp[i][j][k][r] = std::max(dp[i][j][k][r],dp[i][j-1][k][r]+cell[idx]);
-               if(k) dp[i][j][k][r] = std::max(dp[i][j][k][r],dp[i][j][k-1][r]+cell[idx]);
-               if(r) dp[i][j][k][r] = std::max(dp[i][j][k][r],dp[i][j][k][r-1]+cell[idx]);
-            &#125;
-         &#125;
-      &#125;
-   &#125;
-   std::cout &lt;&lt; dp[num[1]][num[2]][num[3]][num[4]];
-   return 0;
-&#125;
-</code></pre>
-<p>​<br>​    </p>
-<h2 id="洛谷-P1020-导弹拦截"><a href="#洛谷-P1020-导弹拦截" class="headerlink" title="洛谷 P1020 导弹拦截"></a>洛谷 P1020 导弹拦截</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1020">https://www.luogu.com.cn/problem/P1020</a><br>两个输出分别为：最长不上升子序列长度，最长上升子序列长度<br>O(n2)思路: dp<br>用dp[]数组记录到第i个位置的最长不上升子序列长度。遍历所有导弹[0,n-1]，遍历到i是，检查i之前的不比i低的导弹j dp[i] &#x3D;<br>max(dp[i] , dp[j]+1)<br>最长上升同理</p>
-<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <algorithm><br>    #include <cmath><br>    #include <cstdlib><br>    #include <queue><br>    #include <map><br>    #include <set><br>    #include <stack><br>    #include <vector><br>    typedef long long LL;</p>
-<pre><code>const int N = 100005;
-int hh[N],noup[N],up[N];
-</code></pre>
-<p>​<br>    int main()<br>    {<br>       int idx&#x3D;0,mxno,mxup;<br>       do{<br>          scanf(“%d”,&amp;hh[++idx]);<br>       }while(getchar() &#x3D;&#x3D; ‘ ‘);<br>       mxno &#x3D; mxup &#x3D; 0;<br>       for(int i&#x3D;2; i&lt;&#x3D;idx; i++){<br>          for(int j&#x3D;i-1; j&gt;&#x3D;1; j–){<br>             if(hh[i]&lt;&#x3D;hh[j]) noup[i] &#x3D; std::max(noup[i],noup[j]+1);<br>             else up[i] &#x3D; std::max(up[i],up[j]+1);<br>          }<br>          mxno &#x3D; std::max(noup[i],mxno);<br>          mxup &#x3D; std::max(up[i],mxup);<br>       }<br>       printf(“%d\n%d”,mxno+1,mxup+1);<br>       return 0;<br>    }</p>
-<p>​    </p>
-<p>O(nlog2)思路：<br>遍历所有导弹[0,n-1]<br>若第i个导弹对于前面的导弹满足“不上升”则存入数组arr[]的尾部，若打破了不上升原则，则再arr[]中二分查找height[i]（i导弹的高度）,使得最后可以用height[i]代替最左边的可以使height[i]代替此位置后满足“不上升”原则的位置<br>最后arr数组的长度就是所求答案<br>最长上升同理</p>
-<p>注意：若序列12 13 15，插入13 若求不下降 则 变成 12 13 13， 若求上升 则变成 12 13 15</p>
-<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <algorithm><br>    #include <cmath><br>    #include <cstdlib><br>    #include <queue><br>    #include <map><br>    #include <set><br>    #include <stack><br>    #include <vector><br>    typedef long long LL;<br>    typedef std::pair&lt;int ,int&gt; PP;<br>    const int N &#x3D; 100005,M &#x3D; 125;<br>    int qu[N],up[N],noup[N];<br>    int idx,lno,lup;<br>    int main()<br>    {<br>       do{<br>          scanf(“%d”,&amp;qu[idx++]);<br>       }while(getchar() &#x3D;&#x3D; ‘ ‘);</p>
-<pre><code>   noup[0] = up[0] = qu[0];
-   for(int i=1; i&lt;idx; i++)&#123;
-      if(qu[i] &lt;= noup[lno]) noup[++lno] = qu[i];
-      else *std::upper_bound(noup,noup+lno+1,qu[i],std::greater&lt;int&gt;()) = qu[i];
-
-      if(qu[i] &gt; up[lup]) up[++lup] = qu[i];
-      else *std::lower_bound(up,up+lup+1,qu[i]) = qu[i];
-   &#125;
-   std::cout &lt;&lt; lno+1 &lt;&lt; std::endl &lt;&lt; lup+1;
-   return 0;
-&#125;
-</code></pre>
-<p>​    </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%BA%BF%E5%BD%A2DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1868%E9%A5%A5%E9%A5%BF%E7%9A%84%E5%A5%B6%E7%89%9B%20P1091%E5%90%88%E5%94%B1%E9%98%9F%E5%BD%A2%20P1541%E4%B9%8C%E9%BE%9F%E6%A3%8B%20P1020%E5%AF%BC%E5%BC%B9%E6%8B%A6%E6%88%AA/" data-id="cl50tnlrv004cycj3gupn5g6i" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%8A%B6%E5%8E%8Bdp%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7P1896%20[SCOI2005]%E4%BA%92%E4%B8%8D%E4%BE%B5%E7%8A%AF%20P2704%20[NOI2001]%E7%82%AE%E5%85%B5%E9%98%B5%E5%9C%B0/" data-id="cl50x8cni0049ccj3ahk0b02n" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
@@ -1233,35 +1469,78 @@ int hh[N],noup[N],up[N];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
 <p><img src="https://img-blog.csdnimg.cn/20210416214105534.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="0-预留位置"><a href="#0-预留位置" class="headerlink" title="0.预留位置"></a>0.预留位置</h2><h2 id="1-使用Manacher算法求最长回文子串"><a href="#1-使用Manacher算法求最长回文子串" class="headerlink" title="1.使用Manacher算法求最长回文子串"></a>1.使用Manacher算法求最长回文子串</h2><p>给出一个字符串，要求计算出这一字符串的最长回文子串的长度。<br>如果遍历每一个字符，并以该字符为中心向两边查找，则其时间<br>复杂度为O(n2)。<br>Manacher算法，又被戏称为“马拉车”算法，可以在时间复杂度<br>为O(n)的情况下求解一个字符串的最长回文子串的长度。</p>
-<h6 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h6><p>回文串分为奇回文（abcba）和偶回文（baccba），为了避免区分奇偶的麻烦，把字符串变一下形式，在字符串之间加入特殊符号，并且<br><strong>首位再加不同的特殊符号以防越界</strong> ，于是字符串变成奇回文（上述偶回文得到的新字符串：@#a#b#c#c#b#a!）</p>
-<h6 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h6><p>给得到的新字符串str_new定义一个辅助数组int p[]，p[i]表示在str_new中以第i个位置为中心得到的最长回文串的 <strong>半径</strong></p>
-<h6 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h6><p>可想而知，若新字符串str_new的最大半径为p[i]，则原字符串的最长回文子串长度为p[i]-1</p>
-<h6 id="4-在这里插入图片描述-https-img-blog-csdnimg-cn-20200722184021570-PNG-x-oss"><a href="#4-在这里插入图片描述-https-img-blog-csdnimg-cn-20200722184021570-PNG-x-oss" class="headerlink" title="4.![在这里插入图片描述](https://img-blog.csdnimg.cn/20200722184021570.PNG?x-oss-"></a>4.![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200722184021570.PNG?x-oss-">https://img-blog.csdnimg.cn/20200722184021570.PNG?x-oss-</a></h6><p>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70)</p>
-<p>对于p[i]，如果i&lt;mx，设j是i关于id对称点，如图所示，则基于以下三<br>种情况，可以求出p[i]的值：<br>（1）以j为中心的回文串有一部分在以id为中心的回文串之外。因为mx<br>是以id为中心的最长回文的右边界，所以以i为中心的回文串不可能会<br>有字符在以id为中心的回文串之外；否则mx就不是以id为中心的最长回<br>文的右边界。所以，在这种情况下，p[i]&#x3D;mx–i。<br>（2）以j为中心的回文串全部在以id为中心的回文串的内部，则<br>p[i]&#x3D;p[j]，而且p[i]不可能再增加。<br>（3）以j为中心的回文串的左端正好与以id为中心的回文串的左端重合。<br>则p[i]&#x3D;p[j]或p[i]&#x3D;mx–i，并且p[i]还有可能会继续增加，即while<br>(str_new[i-p[i]]&#x3D;&#x3D;str_new[i+p[i]]) p[i]++;</p>
-<h6 id="5"><a href="#5" class="headerlink" title="5."></a>5.</h6><p>从str[1]开始遍历到末尾<br>先通过</p>
-<p>​<br>    if(i&lt;mx)    p[i]&#x3D;std::min(p[2*id-i],mx-i);<br>    else        p[i]&#x3D;1;</p>
+<h2 id="0预留位置"><a class="markdownIt-Anchor" href="#0预留位置"></a> 0.预留位置</h2>
+<h2 id="1使用manacher算法求最长回文子串"><a class="markdownIt-Anchor" href="#1使用manacher算法求最长回文子串"></a> 1.使用Manacher算法求最长回文子串</h2>
+<p>给出一个字符串，要求计算出这一字符串的最长回文子串的长度。<br>
+如果遍历每一个字符，并以该字符为中心向两边查找，则其时间<br>
+复杂度为O(n2)。<br>
+Manacher算法，又被戏称为“马拉车”算法，可以在时间复杂度<br>
+为O(n)的情况下求解一个字符串的最长回文子串的长度。</p>
+<h6 id="1"><a class="markdownIt-Anchor" href="#1"></a> 1.</h6>
+<p>回文串分为奇回文（abcba）和偶回文（baccba），为了避免区分奇偶的麻烦，把字符串变一下形式，在字符串之间加入特殊符号，并且<br>
+<strong>首位再加不同的特殊符号以防越界</strong> ，于是字符串变成奇回文（上述偶回文得到的新字符串：@#a#b#c#c#b#a!）</p>
+<h6 id="2"><a class="markdownIt-Anchor" href="#2"></a> 2.</h6>
+<p>给得到的新字符串str_new定义一个辅助数组int p[]，p[i]表示在str_new中以第i个位置为中心得到的最长回文串的 <strong>半径</strong></p>
+<h6 id="3"><a class="markdownIt-Anchor" href="#3"></a> 3.</h6>
+<p>可想而知，若新字符串str_new的最大半径为p[i]，则原字符串的最长回文子串长度为p[i]-1</p>
+<h6 id="4在这里插入图片描述httpsimg-blogcsdnimgcn20200722184021570pngx-oss-"><a class="markdownIt-Anchor" href="#4在这里插入图片描述httpsimg-blogcsdnimgcn20200722184021570pngx-oss-"></a> 4.![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200722184021570.PNG?x-oss-">https://img-blog.csdnimg.cn/20200722184021570.PNG?x-oss-</a></h6>
+<p>process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70)</p>
+<p>对于p[i]，如果i&lt;mx，设j是i关于id对称点，如图所示，则基于以下三<br>
+种情况，可以求出p[i]的值：<br>
+（1）以j为中心的回文串有一部分在以id为中心的回文串之外。因为mx<br>
+是以id为中心的最长回文的右边界，所以以i为中心的回文串不可能会<br>
+有字符在以id为中心的回文串之外；否则mx就不是以id为中心的最长回<br>
+文的右边界。所以，在这种情况下，p[i]=mx–i。<br>
+（2）以j为中心的回文串全部在以id为中心的回文串的内部，则<br>
+p[i]=p[j]，而且p[i]不可能再增加。<br>
+（3）以j为中心的回文串的左端正好与以id为中心的回文串的左端重合。<br>
+则p[i]=p[j]或p[i]=mx–i，并且p[i]还有可能会继续增加，即while<br>
+(str_new[i-p[i]]==str_new[i+p[i]]) p[i]++;</p>
+<h6 id="5"><a class="markdownIt-Anchor" href="#5"></a> 5.</h6>
+<p>从str[1]开始遍历到末尾<br>
+先通过</p>
+<p>​<br>
+if(i&lt;mx)    p[i]=std::min(p[2*id-i],mx-i);<br>
+else        p[i]=1;</p>
 <p>确定好id-mx范围内的以i为中心的最长子串半径，然后再通过</p>
-<p>​<br>    while(str[i+p[i]]&#x3D;&#x3D;str[i-p[i]])     p[i]+&#x3D;1;</p>
+<p>​<br>
+while(str[i+p[i]]==str[i-p[i]])     p[i]+=1;</p>
 <p>确定最长半径</p>
 <p>若得到以i为中心的子串最右位置超过mx，则更新范围</p>
-<p>​<br>    if(p[i]+i&gt;mx)           &#x2F;&#x2F;超出最右边就更新范围<br>            {<br>                id&#x3D;i;<br>                mx&#x3D;p[i]+i;<br>                mxsub&#x3D;std::max(mxsub,p[i]);     &#x2F;&#x2F;更新最长子串长度<br>            }</p>
-<h6 id="代码：输入一个字符串，用Manacher算法求其中最长回文子串的长度"><a href="#代码：输入一个字符串，用Manacher算法求其中最长回文子串的长度" class="headerlink" title="代码：输入一个字符串，用Manacher算法求其中最长回文子串的长度"></a>代码：输入一个字符串，用Manacher算法求其中最长回文子串的长度</h6><p>​<br>    #include<iostream><br>    #include<cstring><br>    #include<cstdio><br>    #include<algorithm><br>    const int max_len &#x3D; 1e6+3;      &#x2F;&#x2F;输入字符串的最大长度<br>    const int inPos&#x3D;max_len+2;      &#x2F;&#x2F;字符串输入位置，从str数组中间输入字符串<br>    int p[max_len<em>2];               &#x2F;&#x2F;p[i]:以i为中心的回文串的最大长度<br>    int len;<br>    char str[max_len</em>2];            &#x2F;&#x2F;用于储存输入的字符串</p>
+<p>​<br>
+if(p[i]+i&gt;mx)           //超出最右边就更新范围<br>
+{<br>
+id=i;<br>
+mx=p[i]+i;<br>
+mxsub=std::max(mxsub,p[i]);     //更新最长子串长度<br>
+}</p>
+<h6 id="代码输入一个字符串用manacher算法求其中最长回文子串的长度"><a class="markdownIt-Anchor" href="#代码输入一个字符串用manacher算法求其中最长回文子串的长度"></a> 代码：输入一个字符串，用Manacher算法求其中最长回文子串的长度</h6>
+<p>​<br>
+#include<iostream><br>
+#include<cstring><br>
+#include<cstdio><br>
+#include<algorithm><br>
+const int max_len = 1e6+3;      //输入字符串的最大长度<br>
+const int inPos=max_len+2;      //字符串输入位置，从str数组中间输入字符串<br>
+int p[max_len<em>2];               //p[i]:以i为中心的回文串的最大长度<br>
+int len;<br>
+char str[max_len</em>2];            //用于储存输入的字符串</algorithm></cstdio></cstring></iostream></p>
 <pre><code>//把字符串各字符之间插入字符，首位再各插入不同字符防止越界
 void change_str()
 &#123;
     int index=0;
     len=strlen(str);            //获得输入字符串的长度
-    str[index++]=&#39;@&#39;;
+    str[index++]='@';
     for(int i=inPos; i&lt;len; i++)
     &#123;
-        str[index++]=&#39;#&#39;;
+        str[index++]='#';
         str[index++]=str[i];
     &#125;
-    str[index++]=&#39;#&#39;;
-    str[index]=&#39;!&#39;;
+    str[index++]='#';
+    str[index]='!';
     len=index;                  //获得改造后字符串的长度
 &#125;
 
@@ -1286,35 +1565,118 @@ int manacher()
 
 int main()
 &#123;
-    memset(str,&#39; &#39;,sizeof(str));
+    memset(str,' ',sizeof(str));
     scanf(&quot;%s&quot;,str+inPos);
     change_str();
     std::cout &lt;&lt; manacher() &lt;&lt; std::endl;
     return 0;
 &#125;
 </code></pre>
-<p>​    </p>
-<h2 id="2-用树结构支持并查集"><a href="#2-用树结构支持并查集" class="headerlink" title="2.用树结构支持并查集"></a>2.用树结构支持并查集</h2><h6 id="并查集："><a href="#并查集：" class="headerlink" title="并查集："></a>并查集：</h6><p>在一些应用中，需要把n个不同元素划分成不相交的若干组，每<br>一组的元素构成一个集合，由于这类问题主要涉及对集合的合<br>并和查找，因此称为并查集。<br>并查集维护一些互不相交的集合S&#x3D;{S1<br>, S2<br>, …, Sr}，每个集合Si<br>都有一个特殊元素rep[Si]，称为集合的代表元。</p>
-<h6 id="并查集的三种操作："><a href="#并查集的三种操作：" class="headerlink" title="并查集的三种操作："></a>并查集的三种操作：</h6><p>Make_Set(x)：加入一个含单元素x的集合{x}到并查集S，且rep[{x}]&#x3D;x。 x不能被包含在任何一个Si中, 因为S里任何两个集合是不相交的。<br>初始时，对每个元素x执行一次Make_Set(x)。</p>
-<p>join(x, y)：把x和y所在的两个不同集合Sx和Sy<br>合并：从S中删除Sx和Sy，<br>并加入Sx与Sy的并集。</p>
-<p>set_find(x)：返回x所在集合Sx<br>的代表元rep[Sx]。</p>
-<h6 id="树结构"><a href="#树结构" class="headerlink" title="树结构"></a>树结构</h6><p>每个集合用一棵树表示, 根为集合的代表元。每个节点p设一个指针(抄的原话，看起来不像指针)<br>set[p]，记录它所在树的根节点序号。如果set[p]&lt;0，则表明p为根节点。<br>初始时，为每一个元素建立一个集合，即 set[x]&#x3D;-1（1≤x≤n）。</p>
-<h6 id="树结构查找操作set-find-x-：边查找边“路径压缩”"><a href="#树结构查找操作set-find-x-：边查找边“路径压缩”" class="headerlink" title="树结构查找操作set_find(x) ：边查找边“路径压缩”"></a>树结构查找操作set_find(x) ：边查找边“路径压缩”</h6><p>首先，从节点x出发，沿set指针查找节点x所在树的根节点f（set[f]&lt;0）。<br>然后，进行路径压缩，将x至f的路径上经过的每个节点的set指针都指向f。<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200722203030627.PNG?x-oss-">https://img-blog.csdnimg.cn/20200722203030627.PNG?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70)</p>
-<h6 id="树结构查找操作："><a href="#树结构查找操作：" class="headerlink" title="树结构查找操作："></a>树结构查找操作：</h6><p>int set_find(int p) &#x2F;&#x2F; 查找p所在集合的代表元，用路径压缩优化<br>{<br>if (set[p]&lt;0)<br>return p;<br>return set[p]&#x3D;set_find(set[p]);<br>}</p>
-<h6 id="树结构合并操作join-x-y-：将两棵树的根节点相连"><a href="#树结构合并操作join-x-y-：将两棵树的根节点相连" class="headerlink" title="树结构合并操作join(x, y) ：将两棵树的根节点相连"></a>树结构合并操作join(x, y) ：将两棵树的根节点相连</h6><p>计算x元素所在并查集的树根fx和y元素所在并查集的树根fy。如果fx&#x3D;&#x3D;fy，则说<br>明元素x和元素y在同一并查集中；否则将x所在的集合并入y所在的集合，也就<br>是将fx的set指针设为fy。</p>
-<h6 id="题目：Find-them-Catch-them"><a href="#题目：Find-them-Catch-them" class="headerlink" title="题目：Find them, Catch them"></a>题目：Find them, Catch them</h6><blockquote>
-<p>The police office in Tadu City decides to say ends to the chaos, as<br> launch actions to root up the TWO gangs in the city, Gang Dragon and<br> Gang Snake. However, the police first needs to identify which gang a<br> criminal belongs to. The present question is, given two criminals; do<br> they belong to a same clan? You must give your judgment based on<br> incomplete information. (Since the gangsters are always acting<br> secretly.)</p>
-<p>Assume N (N &lt;&#x3D; 10^5) criminals are currently in Tadu City, numbered<br> from 1 to N. And of course, at least one of them belongs to Gang<br> Dragon, and the same for Gang Snake. You will be given M (M &lt;&#x3D; 10^5)<br> messages in sequence, which are in the following two kinds:</p>
-<p>D [a] [b] where [a] and [b] are the numbers of two criminals, and they<br> belong to different gangs.</p>
-<p>A [a] [b] where [a] and [b] are the numbers of two criminals. This<br> requires you to decide whether a and b belong to a same gang. Input<br> The first line of the input contains a single integer T (1 &lt;&#x3D; T &lt;&#x3D;<br> 20), the number of test cases. Then T cases follow. Each test case<br> begins with a line with two integers N and M, followed by M lines each<br> containing one message as described above. Output For each message “A<br> [a] [b]” in each case, your program should give the judgment based on<br> the information got before. The answers might be one of “In the same<br> gang.”, “In different gangs.” and “Not sure yet.”</p>
-<p>Sample Input<br> 1<br> 5 5<br> A 1 2<br> D 1 2<br> A 1 2<br> D 2 4<br> A 1 4<br> Sample Output Not<br> sure yet.<br> In different gangs.<br> In the same gang.</p>
+<p>​</p>
+<h2 id="2用树结构支持并查集"><a class="markdownIt-Anchor" href="#2用树结构支持并查集"></a> 2.用树结构支持并查集</h2>
+<h6 id="并查集"><a class="markdownIt-Anchor" href="#并查集"></a> 并查集：</h6>
+<p>在一些应用中，需要把n个不同元素划分成不相交的若干组，每<br>
+一组的元素构成一个集合，由于这类问题主要涉及对集合的合<br>
+并和查找，因此称为并查集。<br>
+并查集维护一些互不相交的集合S={S1<br>
+, S2<br>
+, …, Sr}，每个集合Si<br>
+都有一个特殊元素rep[Si]，称为集合的代表元。</p>
+<h6 id="并查集的三种操作"><a class="markdownIt-Anchor" href="#并查集的三种操作"></a> 并查集的三种操作：</h6>
+<p>Make_Set(x)：加入一个含单元素x的集合{x}到并查集S，且rep[{x}]=x。 x不能被包含在任何一个Si中, 因为S里任何两个集合是不相交的。<br>
+初始时，对每个元素x执行一次Make_Set(x)。</p>
+<p>join(x, y)：把x和y所在的两个不同集合Sx和Sy<br>
+合并：从S中删除Sx和Sy，<br>
+并加入Sx与Sy的并集。</p>
+<p>set_find(x)：返回x所在集合Sx<br>
+的代表元rep[Sx]。</p>
+<h6 id="树结构"><a class="markdownIt-Anchor" href="#树结构"></a> 树结构</h6>
+<p>每个集合用一棵树表示, 根为集合的代表元。每个节点p设一个指针(抄的原话，看起来不像指针)<br>
+set[p]，记录它所在树的根节点序号。如果set[p]&lt;0，则表明p为根节点。<br>
+初始时，为每一个元素建立一个集合，即 set[x]=-1（1≤x≤n）。</p>
+<h6 id="树结构查找操作set_findx-边查找边路径压缩"><a class="markdownIt-Anchor" href="#树结构查找操作set_findx-边查找边路径压缩"></a> 树结构查找操作set_find(x) ：边查找边“路径压缩”</h6>
+<p>首先，从节点x出发，沿set指针查找节点x所在树的根节点f（set[f]&lt;0）。<br>
+然后，进行路径压缩，将x至f的路径上经过的每个节点的set指针都指向f。<br>
+![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200722203030627.PNG?x-oss-">https://img-blog.csdnimg.cn/20200722203030627.PNG?x-oss-</a><br>
+process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70)</p>
+<h6 id="树结构查找操作"><a class="markdownIt-Anchor" href="#树结构查找操作"></a> 树结构查找操作：</h6>
+<p>int set_find(int p) // 查找p所在集合的代表元，用路径压缩优化<br>
+{<br>
+if (set[p]&lt;0)<br>
+return p;<br>
+return set[p]=set_find(set[p]);<br>
+}</p>
+<h6 id="树结构合并操作joinx-y-将两棵树的根节点相连"><a class="markdownIt-Anchor" href="#树结构合并操作joinx-y-将两棵树的根节点相连"></a> 树结构合并操作join(x, y) ：将两棵树的根节点相连</h6>
+<p>计算x元素所在并查集的树根fx和y元素所在并查集的树根fy。如果fx==fy，则说<br>
+明元素x和元素y在同一并查集中；否则将x所在的集合并入y所在的集合，也就<br>
+是将fx的set指针设为fy。</p>
+<h6 id="题目find-them-catch-them"><a class="markdownIt-Anchor" href="#题目find-them-catch-them"></a> 题目：Find them, Catch them</h6>
+<blockquote>
+<p>The police office in Tadu City decides to say ends to the chaos, as<br>
+launch actions to root up the TWO gangs in the city, Gang Dragon and<br>
+Gang Snake. However, the police first needs to identify which gang a<br>
+criminal belongs to. The present question is, given two criminals; do<br>
+they belong to a same clan? You must give your judgment based on<br>
+incomplete information. (Since the gangsters are always acting<br>
+secretly.)</p>
+<p>Assume N (N &lt;= 10^5) criminals are currently in Tadu City, numbered<br>
+from 1 to N. And of course, at least one of them belongs to Gang<br>
+Dragon, and the same for Gang Snake. You will be given M (M &lt;= 10^5)<br>
+messages in sequence, which are in the following two kinds:</p>
+<p>D [a] [b] where [a] and [b] are the numbers of two criminals, and they<br>
+belong to different gangs.</p>
+<p>A [a] [b] where [a] and [b] are the numbers of two criminals. This<br>
+requires you to decide whether a and b belong to a same gang. Input<br>
+The first line of the input contains a single integer T (1 &lt;= T &lt;=<br>
+20), the number of test cases. Then T cases follow. Each test case<br>
+begins with a line with two integers N and M, followed by M lines each<br>
+containing one message as described above. Output For each message “A<br>
+[a] [b]” in each case, your program should give the judgment based on<br>
+the information got before. The answers might be one of “In the same<br>
+gang.”, “In different gangs.” and “Not sure yet.”</p>
+<p>Sample Input<br>
+1<br>
+5 5<br>
+A 1 2<br>
+D 1 2<br>
+A 1 2<br>
+D 2 4<br>
+A 1 4<br>
+Sample Output Not<br>
+sure yet.<br>
+In different gangs.<br>
+In the same gang.</p>
 </blockquote>
 <p>翻译一下：</p>
 <blockquote>
-<p>Tadu市的警察局决定结束混乱，因此要采取行动，根除城市中的两大 帮派：龙帮和蛇帮。然而，警方首先需要确定某个罪犯是属于哪个帮派。<br> 目前的问题是，给出两个罪犯，他们是属于同一个帮派吗？您要基于不 完全的信息给出您的判断，因为歹徒总是在暗中行事。<br> 假设在Tadu市现在有N（N≤105 ）个罪犯，编号从1到N。当然，至少有 一个罪犯属于龙帮，也至少有一个罪犯属于蛇帮。给出M（M≤105<br> ）条 消息组成的序列，消息有下列两种形式：<br> D [a] [b] 其中[a]和[b]是两个犯罪分子的编号，他们属于不同的帮派；<br> A [a] [b] 其中[a]和[b]是两个犯罪分子的编号，您要确定a和b是否属于同一帮派。 输入<br>输入的第一行给出给出一个整数T（1≤T≤20），表示测试用例的个 数。后面跟着T个测试用例，每个测试用例的第一行给出两个整数<br> N和M，后面的M行每行给出一条如上面所描述的消息。 输出 对于在测试用例中的每条“A [a] [b]”消息，您的程序要基于此前<br> 给出的信息做出判断。回答是如下之一 “In the same gang.”， “In different gangs.”或“Not sure<br> yet.”。</p>
+<p>Tadu市的警察局决定结束混乱，因此要采取行动，根除城市中的两大 帮派：龙帮和蛇帮。然而，警方首先需要确定某个罪犯是属于哪个帮派。<br>
+目前的问题是，给出两个罪犯，他们是属于同一个帮派吗？您要基于不 完全的信息给出您的判断，因为歹徒总是在暗中行事。<br>
+假设在Tadu市现在有N（N≤105 ）个罪犯，编号从1到N。当然，至少有 一个罪犯属于龙帮，也至少有一个罪犯属于蛇帮。给出M（M≤105<br>
+）条 消息组成的序列，消息有下列两种形式：<br>
+D [a] [b] 其中[a]和[b]是两个犯罪分子的编号，他们属于不同的帮派；<br>
+A [a] [b] 其中[a]和[b]是两个犯罪分子的编号，您要确定a和b是否属于同一帮派。 输入<br>
+输入的第一行给出给出一个整数T（1≤T≤20），表示测试用例的个 数。后面跟着T个测试用例，每个测试用例的第一行给出两个整数<br>
+N和M，后面的M行每行给出一条如上面所描述的消息。 输出 对于在测试用例中的每条“A [a] [b]”消息，您的程序要基于此前<br>
+给出的信息做出判断。回答是如下之一 “In the same gang.”， “In different gangs.”或“Not sure<br>
+yet.”。</p>
 </blockquote>
-<h6 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h6><p>1.建立一个数组int<br>set[]其大小大于等于罪犯数的两倍，把数组初始化为-1，即数组的每个元素代表一个独立的集合。把set[i+n]看作是集合set[i]的对立集合(n为罪犯数目)<br>2.遇到D[a]<br>[b]语句，说明a和b不能在同一个集合，就把a所在的集合的值set[a]赋值为b的对立集合set[b+n]对应的下标b+n，把b所在的集合的值赋值给a的对立集合的下标a+n<br>每次遇到D[a] [b]语句都进行如此操作，便可以做到集合合并（相互链接的就算一个集合了）<br>3.遇到A[a] [b]语句，查询（参照路径压缩的思路）a、b所在的集合与b所在的集合相同，输出 “In the same gang.”<br>，若a、b所在的集合不同，而且a不在b的对立集合，输出“Not sure<br>yet.”，否则输出 “In different gangs.”</p>
-<h6 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h6><p>​<br>    #include<iostream><br>    #include<cstring><br>    #include<cstdio><br>    #include<algorithm><br>    const int max_criminal &#x3D; 1e5+5;<br>    int sett[max_criminal*2];           &#x2F;&#x2F;建立多于罪犯总数两倍个集合</p>
+<h6 id="解题思路"><a class="markdownIt-Anchor" href="#解题思路"></a> 解题思路：</h6>
+<p>1.建立一个数组int<br>
+set[]其大小大于等于罪犯数的两倍，把数组初始化为-1，即数组的每个元素代表一个独立的集合。把set[i+n]看作是集合set[i]的对立集合(n为罪犯数目)<br>
+2.遇到D[a]<br>
+[b]语句，说明a和b不能在同一个集合，就把a所在的集合的值set[a]赋值为b的对立集合set[b+n]对应的下标b+n，把b所在的集合的值赋值给a的对立集合的下标a+n<br>
+每次遇到D[a] [b]语句都进行如此操作，便可以做到集合合并（相互链接的就算一个集合了）<br>
+3.遇到A[a] [b]语句，查询（参照路径压缩的思路）a、b所在的集合与b所在的集合相同，输出 “In the same gang.”<br>
+，若a、b所在的集合不同，而且a不在b的对立集合，输出“Not sure<br>
+yet.”，否则输出 “In different gangs.”</p>
+<h6 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码：</h6>
+<p>​<br>
+#include<iostream><br>
+#include<cstring><br>
+#include<cstdio><br>
+#include<algorithm><br>
+const int max_criminal = 1e5+5;<br>
+int sett[max_criminal*2];           //建立多于罪犯总数两倍个集合</algorithm></cstdio></cstring></iostream></p>
 <pre><code>//查找元素所在的集合(顺便压缩路径)
 int set_find(int index)
 &#123;
@@ -1334,7 +1696,7 @@ int main()
         for(int i=0; i&lt;m; i++)
         &#123;
             std::cin &gt;&gt; ch &gt;&gt; a &gt;&gt; b;
-            if(ch==&#39;D&#39;)
+            if(ch=='D')
             &#123;
                 sett[set_find(a)]=set_find(b+n);
                 sett[set_find(b)]=set_find(a+n);
@@ -1353,12 +1715,53 @@ int main()
     return 0;
 &#125;
 </code></pre>
-<h2 id="3-应用Trie树查询字符串"><a href="#3-应用Trie树查询字符串" class="headerlink" title="3.应用Trie树查询字符串"></a>3.应用Trie树查询字符串</h2><h6 id="定义（Trie树）"><a href="#定义（Trie树）" class="headerlink" title="定义（Trie树）"></a>定义（Trie树）</h6><p>Trie树，也被称为单词查找树，前缀树，或字典树。<br>其基本性质如下：<br>• 1，根节点不包含字符，除根节点外，每个节点只包含一个字符。<br>• 2，将从根节点到某一个节点的路上经过的节点所包含的字符连<br>接起来，就是该节点对应的字符串。<br>• 3，对于每个节点，其所有子节点包含的字符是不相同的。</p>
-<p>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200723171651441.PNG?x-oss-">https://img-blog.csdnimg.cn/20200723171651441.PNG?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70)<br>Trie树的根节点root对应空字符串。一般情况下，不是所有的节点<br>都有对应的值，只有叶节点和部分内节点所对应的字符串才有相<br>关的值。所以，Trie树是一种用于快速检索的多叉树结构，每个<br>节点保存一个字符，一条路可以用于表示一个字符串、一个电话<br>号码等等信息。</p>
-<h6 id="题目：Shortest-Prefixes"><a href="#题目：Shortest-Prefixes" class="headerlink" title="题目：Shortest Prefixes"></a>题目：Shortest Prefixes</h6><p>字符串的前缀是从给出的字符串的开头开始的子字符串。<br>“carbon”的前缀是：“c”，“ca”，“car”，“carb”，“carbo”和”carbon”。<br>在本题中，空串不被视为前缀，但是每个非空字符串都被视为其<br>自身的前缀。在日常语言中，我们会用前缀来缩写单词。例如，<br>“carbohydrate” （“碳水化合物”）通常被缩写为”carb”。在本题<br>中，给出一组单词，请您为每个单词找出能唯一标识该单词的最<br>短前缀。<br>• 在给出的样例输入中，“carbohydrate”可以被缩写为”carboh”，但<br>不能被缩写为”carbo”（或者更短），因为有其他单词以”carbo”开<br>头。<br>• 完全匹配也可以作为前缀匹配。例如，给出的单词”car”，其前缀<br>“car”与”car”完全匹配。因此，”car”是”car”的缩写，而不是<br>“carriage”或列表中以”car”开头的其他任何其他词的缩写。</p>
-<p>• <strong>输入</strong><br>• 输入至少有两行，最多不超过1000行。每行给出一个由1到20<br>个小写字母组成的单词。</p>
-<p>• <strong>输出</strong><br>• 输出的行数与输入的行数相同。输出的每一行先给出输入对应行<br>中的单词，然后给出一个空格，最后给出唯一（无歧义）标识该<br>单词的最短前缀。</p>
-<h6 id="代码（可能有问题）："><a href="#代码（可能有问题）：" class="headerlink" title="代码（可能有问题）："></a>代码（可能有问题）：</h6><p>​<br>    #include <iostream><br>    #include <cstdio><br>    #include <cstring><br>    #include <algorithm><br>    int len,idx,letterIdx;             &#x2F;&#x2F;letterIdx表示英文字母按字母表的序号（0-25）<br>    const int max_node &#x3D; 1000*22;       &#x2F;&#x2F;最大节点数<br>    char save_str[1001][22];            &#x2F;&#x2F;用于保存字符串<br>    int Node[max_node][26];             &#x2F;&#x2F;提前给节点开出空间来<br>    int vis[max_node];                  &#x2F;&#x2F;节点访问次数</p>
+<h2 id="3应用trie树查询字符串"><a class="markdownIt-Anchor" href="#3应用trie树查询字符串"></a> 3.应用Trie树查询字符串</h2>
+<h6 id="定义trie树"><a class="markdownIt-Anchor" href="#定义trie树"></a> 定义（Trie树）</h6>
+<p>Trie树，也被称为单词查找树，前缀树，或字典树。<br>
+其基本性质如下：<br>
+• 1，根节点不包含字符，除根节点外，每个节点只包含一个字符。<br>
+• 2，将从根节点到某一个节点的路上经过的节点所包含的字符连<br>
+接起来，就是该节点对应的字符串。<br>
+• 3，对于每个节点，其所有子节点包含的字符是不相同的。</p>
+<p>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200723171651441.PNG?x-oss-">https://img-blog.csdnimg.cn/20200723171651441.PNG?x-oss-</a><br>
+process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70)<br>
+Trie树的根节点root对应空字符串。一般情况下，不是所有的节点<br>
+都有对应的值，只有叶节点和部分内节点所对应的字符串才有相<br>
+关的值。所以，Trie树是一种用于快速检索的多叉树结构，每个<br>
+节点保存一个字符，一条路可以用于表示一个字符串、一个电话<br>
+号码等等信息。</p>
+<h6 id="题目shortest-prefixes"><a class="markdownIt-Anchor" href="#题目shortest-prefixes"></a> 题目：Shortest Prefixes</h6>
+<p>字符串的前缀是从给出的字符串的开头开始的子字符串。<br>
+“carbon&quot;的前缀是：“c”，“ca”，“car”，“carb”，“carbo&quot;和&quot;carbon”。<br>
+在本题中，空串不被视为前缀，但是每个非空字符串都被视为其<br>
+自身的前缀。在日常语言中，我们会用前缀来缩写单词。例如，<br>
+“carbohydrate” （“碳水化合物”）通常被缩写为&quot;carb”。在本题<br>
+中，给出一组单词，请您为每个单词找出能唯一标识该单词的最<br>
+短前缀。<br>
+• 在给出的样例输入中，“carbohydrate&quot;可以被缩写为&quot;carboh”，但<br>
+不能被缩写为&quot;carbo&quot;（或者更短），因为有其他单词以&quot;carbo&quot;开<br>
+头。<br>
+• 完全匹配也可以作为前缀匹配。例如，给出的单词&quot;car&quot;，其前缀<br>
+&quot;car&quot;与&quot;car&quot;完全匹配。因此，&quot;car&quot;是&quot;car&quot;的缩写，而不是<br>
+&quot;carriage&quot;或列表中以&quot;car&quot;开头的其他任何其他词的缩写。</p>
+<p>• <strong>输入</strong><br>
+• 输入至少有两行，最多不超过1000行。每行给出一个由1到20<br>
+个小写字母组成的单词。</p>
+<p>• <strong>输出</strong><br>
+• 输出的行数与输入的行数相同。输出的每一行先给出输入对应行<br>
+中的单词，然后给出一个空格，最后给出唯一（无歧义）标识该<br>
+单词的最短前缀。</p>
+<h6 id="代码可能有问题"><a class="markdownIt-Anchor" href="#代码可能有问题"></a> 代码（可能有问题）：</h6>
+<p>​<br>
+#include <iostream><br>
+#include <cstdio><br>
+#include <cstring><br>
+#include <algorithm><br>
+int len,idx,letterIdx;             //letterIdx表示英文字母按字母表的序号（0-25）<br>
+const int max_node = 1000*22;       //最大节点数<br>
+char save_str[1001][22];            //用于保存字符串<br>
+int Node[max_node][26];             //提前给节点开出空间来<br>
+int vis[max_node];                  //节点访问次数</algorithm></cstring></cstdio></iostream></p>
 <pre><code>struct Trie
 &#123;
     int tidx;                       //目前第一个尚未使用的节点序号（到目前位置一共使用了多少节点）
@@ -1371,7 +1774,7 @@ int main()
     //得到字母序号letterIdx
     int getletterIdx(char ch)
     &#123;
-        return ch-&#39;a&#39;;
+        return ch-'a';
     &#125;
 
     void insert(char * str)
@@ -1429,11 +1832,25 @@ int main()
 &#125;
 </code></pre>
 <p>这个解法必须建立在所有输入没有重复的前提上，有的话要另外加对应的处理。</p>
-<h2 id="4-使用KMP算法匹配字符串"><a href="#4-使用KMP算法匹配字符串" class="headerlink" title="4.使用KMP算法匹配字符串"></a>4.使用KMP算法匹配字符串</h2><p>Knuth-Morris-Pratt 字符串查找算法，简称为 “KMP算法”，常用于在一个文本串S内查找一个模式串P 的出现位置，这个算法由Donald<br>Knuth、Vaughan Pratt、James H. Morris三人于1977年联合发表，故取这3人的姓氏命名此算法。</p>
+<h2 id="4使用kmp算法匹配字符串"><a class="markdownIt-Anchor" href="#4使用kmp算法匹配字符串"></a> 4.使用KMP算法匹配字符串</h2>
+<p>Knuth-Morris-Pratt 字符串查找算法，简称为 “KMP算法”，常用于在一个文本串S内查找一个模式串P 的出现位置，这个算法由Donald<br>
+Knuth、Vaughan Pratt、James H. Morris三人于1977年联合发表，故取这3人的姓氏命名此算法。</p>
 <p>以下为个人理解</p>
-<h6 id="大概思路："><a href="#大概思路：" class="headerlink" title="大概思路："></a>大概思路：</h6><p>为了避免逐位查找带来的时间浪费，KMP算法使用一个数组 int<br>next[]记录一个字符串从第0位到第i位相同的前缀和后缀长度（或者此长度-1，都可以），查询时可以跨指定长度匹配，这个next数组怎么求稍后说。这样可以提高匹配速度。<br><strong>比如：</strong> 字符串 <strong>str1：abcababcabca</strong> 与字符串 <strong>str2：abcabc</strong><br>匹配，str2的next数组为{-1，-1，-1，0，1，2}。两字符串匹配到str1[4]与str2[4]完全相同，第五位不同，不完全相同。下一次匹配不需要逐位匹配（从str1[1]与str[0]开始匹配），而是尝试从str1[5]与str2[next[4]+1]匹配</p>
-<h6 id="next数组求法："><a href="#next数组求法：" class="headerlink" title="next数组求法："></a>next数组求法：</h6><p>对所查询字符串求next数组，第一位不管（一般为0或-1），从第二位开始，根据以前的信息，如果上一位前后缀匹配，则直接判断下一位是否匹配，若下一位也匹配，长度求出，若下一位不匹配，则在目前已经匹配了的若干为中，寻找最长相同前后缀</p>
-<h6 id="代码：（匹配一个字符串在另一个字符串中的出现次数）"><a href="#代码：（匹配一个字符串在另一个字符串中的出现次数）" class="headerlink" title="代码：（匹配一个字符串在另一个字符串中的出现次数）"></a>代码：（匹配一个字符串在另一个字符串中的出现次数）</h6><p>​<br>    #include <iostream><br>    #include <cstdio><br>    #include <cstring><br>    #include <algorithm><br>    char str1[100005],str2[1005];<br>    int next[1005];</p>
+<h6 id="大概思路"><a class="markdownIt-Anchor" href="#大概思路"></a> 大概思路：</h6>
+<p>为了避免逐位查找带来的时间浪费，KMP算法使用一个数组 int<br>
+next[]记录一个字符串从第0位到第i位相同的前缀和后缀长度（或者此长度-1，都可以），查询时可以跨指定长度匹配，这个next数组怎么求稍后说。这样可以提高匹配速度。<br>
+<strong>比如：</strong> 字符串 <strong>str1：abcababcabca</strong> 与字符串 <strong>str2：abcabc</strong><br>
+匹配，str2的next数组为{-1，-1，-1，0，1，2}。两字符串匹配到str1[4]与str2[4]完全相同，第五位不同，不完全相同。下一次匹配不需要逐位匹配（从str1[1]与str[0]开始匹配），而是尝试从str1[5]与str2[next[4]+1]匹配</p>
+<h6 id="next数组求法"><a class="markdownIt-Anchor" href="#next数组求法"></a> next数组求法：</h6>
+<p>对所查询字符串求next数组，第一位不管（一般为0或-1），从第二位开始，根据以前的信息，如果上一位前后缀匹配，则直接判断下一位是否匹配，若下一位也匹配，长度求出，若下一位不匹配，则在目前已经匹配了的若干为中，寻找最长相同前后缀</p>
+<h6 id="代码匹配一个字符串在另一个字符串中的出现次数"><a class="markdownIt-Anchor" href="#代码匹配一个字符串在另一个字符串中的出现次数"></a> 代码：（匹配一个字符串在另一个字符串中的出现次数）</h6>
+<p>​<br>
+#include <iostream><br>
+#include <cstdio><br>
+#include <cstring><br>
+#include <algorithm><br>
+char str1[100005],str2[1005];<br>
+int next[1005];</algorithm></cstring></cstdio></iostream></p>
 <pre><code>void getNext()
 &#123;
     next[0]=-1;
@@ -1483,15 +1900,375 @@ int main()
     return 0;
 &#125;
 </code></pre>
-<p>​    </p>
+<p>​</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E3%80%90C++%E3%80%91%E5%88%9D%E5%AD%A6%E7%AE%97%E6%B3%95%EF%BC%8C%E5%9C%A8%E6%AD%A4%E8%AE%B0%E5%BD%95/" data-id="cl50tnlrx004gycj3eyn6hvtq" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E3%80%90C++%E3%80%91%E5%88%9D%E5%AD%A6%E7%AE%97%E6%B3%95%EF%BC%8C%E5%9C%A8%E6%AD%A4%E8%AE%B0%E5%BD%95/" data-id="cl50x8cnj004cccj34k71guvv" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【线形DP练习】洛谷 P1868饥饿的奶牛 P1091合唱队形 P1541乌龟棋 P1020导弹拦截" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E7%BA%BF%E5%BD%A2DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1868%E9%A5%A5%E9%A5%BF%E7%9A%84%E5%A5%B6%E7%89%9B%20P1091%E5%90%88%E5%94%B1%E9%98%9F%E5%BD%A2%20P1541%E4%B9%8C%E9%BE%9F%E6%A3%8B%20P1020%E5%AF%BC%E5%BC%B9%E6%8B%A6%E6%88%AA/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E7%BA%BF%E5%BD%A2DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1868%E9%A5%A5%E9%A5%BF%E7%9A%84%E5%A5%B6%E7%89%9B%20P1091%E5%90%88%E5%94%B1%E9%98%9F%E5%BD%A2%20P1541%E4%B9%8C%E9%BE%9F%E6%A3%8B%20P1020%E5%AF%BC%E5%BC%B9%E6%8B%A6%E6%88%AA/">【线形DP练习】洛谷 P1868饥饿的奶牛 P1091合唱队形 P1541乌龟棋 P1020导弹拦截.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/DP/">DP</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="洛谷-p1868-饥饿的奶牛"><a class="markdownIt-Anchor" href="#洛谷-p1868-饥饿的奶牛"></a> 洛谷 P1868 饥饿的奶牛</h2>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1868">https://www.luogu.com.cn/problem/P1868</a><br>
+思路：<br>
+dp[N]表示 在前i块草皮中最多能吃到几块<br>
+<strong>sort</strong> 把所有区间按照右端的大小排序<br>
+<strong>for</strong> 遍历[0,区间中出现过的最大长度]<br>
+{<br>
+dp[i] = dp[i-1] (继承上一个草皮的dp)<br>
+<strong>if</strong> 存在区间[x,y] 使得y=i 则dp[y] = max ( dp[y] , dp[x-1]+len([x,y]) )<br>
+}</p>
+<p>​<br>
+#include <cstdio><br>
+#include <iostream><br>
+#include <cstring><br>
+#include <algorithm><br>
+#include <cmath><br>
+#include <cstdlib><br>
+#include <queue><br>
+#include <map><br>
+#include <set><br>
+#include <stack><br>
+#include <vector><br>
+typedef long long LL;<br>
+typedef std::pair&lt;int ,int&gt; PP;<br>
+const int N = 3e6+5;<br>
+int n,v,vv;<br>
+int dp[N];<br>
+bool cmp(PP x, PP y)<br>
+{<br>
+return x.second &lt; y.second ;<br>
+}</vector></stack></set></map></queue></cstdlib></cmath></algorithm></cstring></iostream></cstdio></p>
+<pre><code>int main()
+&#123;
+   std::vector&lt;PP&gt; vc;
+   std::cin &gt;&gt; n;
+   for(int i=0; i&lt;n; i++)&#123;
+      std::cin&gt;&gt; v  &gt;&gt; vv;
+      vc.push_back(std::make_pair(v,vv));
+   &#125;
+   std::sort(vc.begin(),vc.end(),cmp);
+   int idx=1;
+   for(std::vector&lt;PP&gt;::iterator iter = vc.begin(); iter != vc.end(); iter++)&#123;
+      //这里要加等号，否则最后两个样例会WA
+      while(idx &lt;= iter-&gt;second)&#123;
+         dp[idx] = std::max(dp[idx],dp[idx-1]);
+         idx += 1;
+      &#125;
+      dp[iter-&gt;second] = std::max(dp[iter-&gt;first-1]+iter-&gt;second-iter-&gt;first+1,dp[iter-&gt;second]);
+   &#125;
+   std::cout &lt;&lt; dp[vc[vc.size()-1].second] &lt;&lt; std::endl;
+   return 0;
+&#125;
+</code></pre>
+<p>​</p>
+<h2 id="洛谷-p1091-合唱队形"><a class="markdownIt-Anchor" href="#洛谷-p1091-合唱队形"></a> 洛谷 P1091 合唱队形</h2>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/solution/P1091">https://www.luogu.com.cn/problem/solution/P1091</a><br>
+此题要求提出最少的人，获得一个最长的先单调递增后点掉递减的队伍，对于队伍递增递减部分的长度没有要求。<br>
+思路:<br>
+up[]数组记录 在正向遍历下 第i个位置的最长升序列长度（第一个长度计0）<br>
+dn[]数组记录 在反向遍历下 第i个位置的最长升序列长度（第一个长度计0）<br>
+然后遍历一遍 [0,n-1]，找出最大的 先增后降序列长度 (up[i]+dn[i]+1)<br>
+n-最大长度 即为答案</p>
+<p>​<br>
+#include <cstdio><br>
+#include <iostream><br>
+#include <cstring><br>
+#include <algorithm><br>
+#include <cmath><br>
+#include <cstdlib><br>
+#include <queue><br>
+#include <map><br>
+#include <set><br>
+#include <stack><br>
+#include <vector><br>
+typedef long long LL;<br>
+typedef std::pair&lt;int ,int&gt; PP;<br>
+const int N = 105;<br>
+int qu[N],up[N],dn[N];<br>
+int n;</vector></stack></set></map></queue></cstdlib></cmath></algorithm></cstring></iostream></cstdio></p>
+<pre><code>int main()
+&#123;
+   scanf(&quot;%d&quot;,&amp;n);
+   for(int i=0; i&lt;n ;i++)&#123;
+      scanf(&quot;%d&quot;,&amp;qu[i]);
+   &#125;
+   for(int i=1; i&lt;n; i++)&#123;
+      for(int j=i-1; j&gt;=0; j--)&#123;
+         if(qu[i] &gt; qu[j])&#123;
+            up[i] = std::max(up[i],up[j]+1);
+         &#125;
+      &#125;
+   &#125;
+   for(int i=n-2; i&gt;=0; i--)&#123;
+      for(int j=i+1; j&lt;n; j++)&#123;
+         if(qu[i] &gt; qu[j])&#123;
+            dn[i] = std::max(dn[i],dn[j]+1);
+         &#125;
+      &#125;
+   &#125;
+   int mx = 0;
+   for(int i=0; i&lt;n; i++)&#123;
+      mx = std::max(up[i]+dn[i]+1,mx);
+   &#125;
+   std::cout &lt;&lt; n-mx;
+   return 0;
+&#125;
+</code></pre>
+<p>​</p>
+<h2 id="洛谷-p1541-乌龟棋"><a class="markdownIt-Anchor" href="#洛谷-p1541-乌龟棋"></a> 洛谷 P1541 乌龟棋</h2>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1541">https://www.luogu.com.cn/problem/P1541</a><br>
+思路:<br>
+开四重循环dp，数组dp[i][j][k][r]记录当玩家使用i张1，j张2，k张3，r张4时能得到的最高分<br>
+.<br>
+最开始空间超限一个样例，由于dp数组中存在0下标时不好计算，我把数组的规模增加了1（用dp[1][1][1][1]当成没有牌时的情况，相当于原本的dp[0][0][0][0]）<br>
+.<br>
+存在未AC样例 时间40ms 空间150M 空间超限，应该需要刚好卡完美空间，不能增加规模</p>
+<p>​<br>
+#include <cstdio><br>
+#include <iostream><br>
+#include <cstring><br>
+#include <algorithm><br>
+#include <cmath><br>
+#include <cstdlib><br>
+#include <queue><br>
+#include <map><br>
+#include <set><br>
+#include <stack><br>
+#include <vector><br>
+typedef long long LL;<br>
+typedef std::pair&lt;int ,int&gt; PP;<br>
+const int N = 355,M = 125;<br>
+int dp[M][M][M][M];<br>
+int cell[N],num[5];<br>
+int n,m,v;</vector></stack></set></map></queue></cstdlib></cmath></algorithm></cstring></iostream></cstdio></p>
+<pre><code>int main()
+&#123;
+   scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+   for(int i=0; i&lt;n; i++)&#123;
+      scanf(&quot;%d&quot;,&amp;cell[i]);
+   &#125;
+   for(int i=0; i&lt;m; i++)&#123;
+      scanf(&quot;%d&quot;,&amp;v);
+      num[v] += 1;
+   &#125;
+   num[1] += 1;
+   num[2] += 1;
+   num[3] += 1;
+   num[4] += 1;
+   for(int i=1; i&lt;=num[1]; i++)&#123;
+      for(int j=1; j&lt;=num[2]; j++)&#123;
+         for(int k=1; k&lt;=num[3]; k++)&#123;
+            for(int r=1; r&lt;=num[4]; r++)&#123;
+               dp[i][j][k][r] = std::max(
+                  std::max(dp[i-1][j][k][r],dp[i][j-1][k][r])
+                 ,std::max(dp[i][j][k-1][r],dp[i][j][k][r-1])
+                  ) + cell[(i-1)+(j-1)*2+(k-1)*3+(r-1)*4];
+            &#125;
+         &#125;
+      &#125;
+   &#125;
+   std::cout &lt;&lt; dp[num[1]][num[2]][num[3]][num[4]];
+   return 0;
+&#125;
+</code></pre>
+<p>​</p>
+<p>所以需要优化一下空间，数组规模需要缩减多加的那一个单位的规模<br>
+.<br>
+把原来的每一轮通过三个max函数进行一次dp，变成每一轮对i/j/k/r dp四次<br>
+dp前做一次判断，只有当i/j/k/r ！= 0时，才进行dp<br>
+这样做的好处时第一轮时i/j/k/r都=0，所以dp[0][0][0][0]就可以空过，于是dp[0][0][0][0]就可以提前初始化而不用担心在循环中被更改<br>
+.<br>
+该样例AC 时间52ms 空间125M</p>
+<p>​<br>
+#include <cstdio><br>
+#include <iostream><br>
+#include <cstring><br>
+#include <algorithm><br>
+#include <cmath><br>
+#include <cstdlib><br>
+#include <queue><br>
+#include <map><br>
+#include <set><br>
+#include <stack><br>
+#include <vector><br>
+typedef long long LL;<br>
+typedef std::pair&lt;int ,int&gt; PP;<br>
+const int N = 355,M = 125;<br>
+int dp[M][M][M][M];<br>
+int cell[N],num[5];<br>
+int n,m,v;</vector></stack></set></map></queue></cstdlib></cmath></algorithm></cstring></iostream></cstdio></p>
+<pre><code>int main()
+&#123;
+   scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+   for(int i=0; i&lt;n; i++)&#123;
+      scanf(&quot;%d&quot;,&amp;cell[i]);
+   &#125;
+   for(int i=0; i&lt;m; i++)&#123;
+      scanf(&quot;%d&quot;,&amp;v);
+      num[v] += 1;
+   &#125;
+   dp[0][0][0][0] = cell[0];
+   for(int i=0; i&lt;=num[1]; i++)&#123;
+      for(int j=0; j&lt;=num[2]; j++)&#123;
+         for(int k=0; k&lt;=num[3]; k++)&#123;
+            for(int r=0; r&lt;=num[4]; r++)&#123;
+               int idx = i+j*2+k*3+r*4;
+               if(i) dp[i][j][k][r] = std::max(dp[i][j][k][r],dp[i-1][j][k][r]+cell[idx]);
+               if(j) dp[i][j][k][r] = std::max(dp[i][j][k][r],dp[i][j-1][k][r]+cell[idx]);
+               if(k) dp[i][j][k][r] = std::max(dp[i][j][k][r],dp[i][j][k-1][r]+cell[idx]);
+               if(r) dp[i][j][k][r] = std::max(dp[i][j][k][r],dp[i][j][k][r-1]+cell[idx]);
+            &#125;
+         &#125;
+      &#125;
+   &#125;
+   std::cout &lt;&lt; dp[num[1]][num[2]][num[3]][num[4]];
+   return 0;
+&#125;
+</code></pre>
+<p>​<br>
+​</p>
+<h2 id="洛谷-p1020-导弹拦截"><a class="markdownIt-Anchor" href="#洛谷-p1020-导弹拦截"></a> 洛谷 P1020 导弹拦截</h2>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1020">https://www.luogu.com.cn/problem/P1020</a><br>
+两个输出分别为：最长不上升子序列长度，最长上升子序列长度<br>
+O(n2)思路: dp<br>
+用dp[]数组记录到第i个位置的最长不上升子序列长度。遍历所有导弹[0,n-1]，遍历到i是，检查i之前的不比i低的导弹j dp[i] =<br>
+max(dp[i] , dp[j]+1)<br>
+最长上升同理</p>
+<p>​<br>
+#include <cstdio><br>
+#include <iostream><br>
+#include <cstring><br>
+#include <algorithm><br>
+#include <cmath><br>
+#include <cstdlib><br>
+#include <queue><br>
+#include <map><br>
+#include <set><br>
+#include <stack><br>
+#include <vector><br>
+typedef long long LL;</vector></stack></set></map></queue></cstdlib></cmath></algorithm></cstring></iostream></cstdio></p>
+<pre><code>const int N = 100005;
+int hh[N],noup[N],up[N];
+</code></pre>
+<p>​<br>
+int main()<br>
+{<br>
+int idx=0,mxno,mxup;<br>
+do{<br>
+scanf(&quot;%d&quot;,&amp;hh[<ins>idx]);<br>
+}while(getchar() == ’ ');<br>
+mxno = mxup = 0;<br>
+for(int i=2; i&lt;=idx; i</ins>){<br>
+for(int j=i-1; j&gt;=1; j–){<br>
+if(hh[i]&lt;=hh[j]) noup[i] = std::max(noup[i],noup[j]+1);<br>
+else up[i] = std::max(up[i],up[j]+1);<br>
+}<br>
+mxno = std::max(noup[i],mxno);<br>
+mxup = std::max(up[i],mxup);<br>
+}<br>
+printf(&quot;%d\n%d&quot;,mxno+1,mxup+1);<br>
+return 0;<br>
+}</p>
+<p>​</p>
+<p>O(nlog2)思路：<br>
+遍历所有导弹[0,n-1]<br>
+若第i个导弹对于前面的导弹满足“不上升”则存入数组arr[]的尾部，若打破了不上升原则，则再arr[]中二分查找height[i]（i导弹的高度）,使得最后可以用height[i]代替最左边的可以使height[i]代替此位置后满足“不上升”原则的位置<br>
+最后arr数组的长度就是所求答案<br>
+最长上升同理</p>
+<p>注意：若序列12 13 15，插入13 若求不下降 则 变成 12 13 13， 若求上升 则变成 12 13 15</p>
+<p>​<br>
+#include <cstdio><br>
+#include <iostream><br>
+#include <cstring><br>
+#include <algorithm><br>
+#include <cmath><br>
+#include <cstdlib><br>
+#include <queue><br>
+#include <map><br>
+#include <set><br>
+#include <stack><br>
+#include <vector><br>
+typedef long long LL;<br>
+typedef std::pair&lt;int ,int&gt; PP;<br>
+const int N = 100005,M = 125;<br>
+int qu[N],up[N],noup[N];<br>
+int idx,lno,lup;<br>
+int main()<br>
+{<br>
+do{<br>
+scanf(&quot;%d&quot;,&amp;qu[idx++]);<br>
+}while(getchar() == ’ ');</vector></stack></set></map></queue></cstdlib></cmath></algorithm></cstring></iostream></cstdio></p>
+<pre><code>   noup[0] = up[0] = qu[0];
+   for(int i=1; i&lt;idx; i++)&#123;
+      if(qu[i] &lt;= noup[lno]) noup[++lno] = qu[i];
+      else *std::upper_bound(noup,noup+lno+1,qu[i],std::greater&lt;int&gt;()) = qu[i];
+
+      if(qu[i] &gt; up[lup]) up[++lup] = qu[i];
+      else *std::lower_bound(up,up+lup+1,qu[i]) = qu[i];
+   &#125;
+   std::cout &lt;&lt; lno+1 &lt;&lt; std::endl &lt;&lt; lup+1;
+   return 0;
+&#125;
+</code></pre>
+<p>​</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%BA%BF%E5%BD%A2DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1868%E9%A5%A5%E9%A5%BF%E7%9A%84%E5%A5%B6%E7%89%9B%20P1091%E5%90%88%E5%94%B1%E9%98%9F%E5%BD%A2%20P1541%E4%B9%8C%E9%BE%9F%E6%A3%8B%20P1020%E5%AF%BC%E5%BC%B9%E6%8B%A6%E6%88%AA/" data-id="cl50x8cnk004hccj3gkodhrzg" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
 
     </footer>
   </div>

@@ -5,15 +5,15 @@
   
   <title>【成长记录】【C语言】尝试用C语言实现简易贪吃蛇.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 刚开始查阅资料看别人的贪吃蛇代码，看得一头雾水，比如：SetConsoleTextAttribute(G">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 刚开始查阅资料看别人的贪吃蛇代码，看得一头雾水，比如： SetConsoleTextAttribut">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【成长记录】【C语言】尝试用C语言实现简易贪吃蛇.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90C%E8%AF%AD%E8%A8%80%E3%80%91%E5%B0%9D%E8%AF%95%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AA%E5%90%83%E8%9B%87/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 刚开始查阅资料看别人的贪吃蛇代码，看得一头雾水，比如：SetConsoleTextAttribute(G">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 刚开始查阅资料看别人的贪吃蛇代码，看得一头雾水，比如： SetConsoleTextAttribut">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.807Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta name="twitter:card" content="summary">
@@ -122,44 +122,433 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<p>刚开始查阅资料看别人的贪吃蛇代码，看得一头雾水，比如：<br>SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);<br>这是个什么玩意儿？<br>于是只能先去查阅一些资料。</p>
-<h1 id="1-技术支持"><a href="#1-技术支持" class="headerlink" title="1.技术支持"></a>1.技术支持</h1><p>在稍微了解了控制台API函数后，发现这一堆巨长的字母也就是这么回事，虽然没背过，但拿过来用还是可以的。</p>
-<p><strong>移动光标的函数</strong><br>个人感觉这个算比较重要的</p>
-<p>​<br>    void Gotoxy(int x, int y)<br>    {<br>        COORD position &#x3D; { y, x };<br>        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);<br>    }</p>
-<p><strong>更改字体颜色的函数</strong><br>这个可以不要，纯粹是为了好看</p>
-<p>​<br>    int color(int c)<br>    {<br>        &#x2F;&#x2F;SetConsoleTextAttribute是API设置控制台窗口字体颜色和背景色的函数<br>        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);<br>        return 0;<br>    }</p>
-<p><strong>隐藏光标的函数</strong><br>在制作的过程中发现光标一闪一闪的很碍眼，最初的操作是在不需要在地图上打印东西时把光标移动到（0，0），但发现有时候光标还是会在地图内闪烁，于是加入了这个函数（这里对我来说有一个问题，会在“遗留问题部分说明”）</p>
-<p>​<br>    void cursor_visible(int size,int visible)<br>    {<br>        CONSOLE_CURSOR_INFO cursor_info;<br>        cursor_info.bVisible&#x3D;visible;<br>        cursor_info.dwSize&#x3D;size;<br>        SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &amp;cursor_info);<br>    }</p>
-<p><strong>其他</strong><br>笔者自己的理解：<br>fflush(stdin);清空缓冲区<br>system(“cls”);刷屏<br>_kbhit() 相应键盘输入<br>getch() 接收字符</p>
-<h1 id="2-前期设定"><a href="#2-前期设定" class="headerlink" title="2.前期设定"></a>2.前期设定</h1><p>设置一些基本的要素，如一些宏定义，全局变量，蛇与食物的结构体，函数声明，下面的代码中有一些时一开始就写上的，有一些是边写边加的（做完之后发现相较于最初的设想，改了好多东西）。<br><strong>我把它们写在了自己的头文件head.h里：</strong></p>
-<p>​<br>    #ifndef HEAD_H_INCLUDED<br>    #define HEAD_H_INCLUDED<br>    #define TALL 30&#x2F;&#x2F;地图高度<br>    #define DBW 68&#x2F;&#x2F;地图宽度<br>    #define SNAKE_MAXLEN 500&#x2F;&#x2F;蛇的极限长度（用于定义数组）<br>    #define SNAKE_INI_LEN 4<br>    #define SNAKE_INI_DELAY 200<br>    void cursor_visible(int,int);<br>    int color(int);<br>    void Gotoxy(int,int);<br>    void welcome(void);<br>    void printboard(void);<br>    void printnotes(void);<br>    void printsnake(void);<br>    void printfood(void);<br>    void snakemove(void);<br>    int jgameover(void);<br>    void gameover(int);<br>    int jeat(void);<br>    void repr_info(void);<br>    int score;<br>    struct<br>    {<br>        int x[SNAKE_MAXLEN];<br>        int y[SNAKE_MAXLEN];<br>        int delay;<br>        int len;&#x2F;&#x2F;目前蛇的长度<br>        int dire;&#x2F;&#x2F;direction蛇的移动方向<br>    }snake;<br>    struct<br>    {<br>        int x;<br>        int y;<br>    }food;<br>    #endif &#x2F;&#x2F; HEAD_H_INCLUDED</p>
-<p>看别人写的贪吃蛇都没有用数组来记录蛇的位置，（猜）可能是因为数组会占用连续的空间，这样不太好。<br>（2020.04.15更新：他们都用的链表，当时我都没听过这东西）</p>
-<h1 id="3-着手实现"><a href="#3-着手实现" class="headerlink" title="3.着手实现"></a>3.着手实现</h1><p><strong>显示最初界面的函数</strong></p>
-<p>​<br>    void welcome(void)<br>    {<br>        color(6);<br>        Gotoxy(3,10);<br>        printf(“欢迎来到真·终极蛇皮上帝视角之皮死人不偿命之来回咕畜之贪吃蛇！”);<br>        Gotoxy(6,10);<br>        printf(“不温馨的提示：请先把游戏窗口调整至&quot;足够大&quot;，否则后果自负”);<br>        Gotoxy(9,10);<br>        printf(“按E可赛艇…  我是指按任意键开始游戏。”);<br>        Gotoxy(12,10);<br>        color(7);<br>        system(“pause”);<br>    }</p>
-<p>效果图<br>![效果图](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/2020020420582644.png?x-oss-">https://img-blog.csdnimg.cn/2020020420582644.png?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70)<br><strong>画地图</strong><br>发现代码写得好粗啊，浪费资源</p>
-<p>​<br>    void printboard(void)<br>    {<br>        int i,j;<br>        system(“cls”);<br>        color(9);<br>        for(i&#x3D;0;i&lt;&#x3D;TALL;i++)<br>            for(j&#x3D;0;j&lt;&#x3D;DBW;j+&#x3D;2)<br>                if(i&#x3D;&#x3D;0||i&#x3D;&#x3D;TALL||j&#x3D;&#x3D;0||j&#x3D;&#x3D;DBW)<br>                {<br>                    Gotoxy(i,j);<br>                    printf(“■”);<br>                }<br>        color(7);<br>    }</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<p>刚开始查阅资料看别人的贪吃蛇代码，看得一头雾水，比如：<br>
+SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);<br>
+这是个什么玩意儿？<br>
+于是只能先去查阅一些资料。</p>
+<h1 id="1技术支持"><a class="markdownIt-Anchor" href="#1技术支持"></a> 1.技术支持</h1>
+<p>在稍微了解了控制台API函数后，发现这一堆巨长的字母也就是这么回事，虽然没背过，但拿过来用还是可以的。</p>
+<p><strong>移动光标的函数</strong><br>
+个人感觉这个算比较重要的</p>
+<p>​<br>
+void Gotoxy(int x, int y)<br>
+{<br>
+COORD position = { y, x };<br>
+SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);<br>
+}</p>
+<p><strong>更改字体颜色的函数</strong><br>
+这个可以不要，纯粹是为了好看</p>
+<p>​<br>
+int color(int c)<br>
+{<br>
+//SetConsoleTextAttribute是API设置控制台窗口字体颜色和背景色的函数<br>
+SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);<br>
+return 0;<br>
+}</p>
+<p><strong>隐藏光标的函数</strong><br>
+在制作的过程中发现光标一闪一闪的很碍眼，最初的操作是在不需要在地图上打印东西时把光标移动到（0，0），但发现有时候光标还是会在地图内闪烁，于是加入了这个函数（这里对我来说有一个问题，会在“遗留问题部分说明”）</p>
+<p>​<br>
+void cursor_visible(int size,int visible)<br>
+{<br>
+CONSOLE_CURSOR_INFO cursor_info;<br>
+cursor_info.bVisible=visible;<br>
+cursor_info.dwSize=size;<br>
+SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &amp;cursor_info);<br>
+}</p>
+<p><strong>其他</strong><br>
+笔者自己的理解：<br>
+fflush(stdin);清空缓冲区<br>
+system(“cls”);刷屏<br>
+_kbhit() 相应键盘输入<br>
+getch() 接收字符</p>
+<h1 id="2前期设定"><a class="markdownIt-Anchor" href="#2前期设定"></a> 2.前期设定</h1>
+<p>设置一些基本的要素，如一些宏定义，全局变量，蛇与食物的结构体，函数声明，下面的代码中有一些时一开始就写上的，有一些是边写边加的（做完之后发现相较于最初的设想，改了好多东西）。<br>
+<strong>我把它们写在了自己的头文件head.h里：</strong></p>
+<p>​<br>
+#ifndef HEAD_H_INCLUDED<br>
+#define HEAD_H_INCLUDED<br>
+#define TALL 30//地图高度<br>
+#define DBW 68//地图宽度<br>
+#define SNAKE_MAXLEN 500//蛇的极限长度（用于定义数组）<br>
+#define SNAKE_INI_LEN 4<br>
+#define SNAKE_INI_DELAY 200<br>
+void cursor_visible(int,int);<br>
+int color(int);<br>
+void Gotoxy(int,int);<br>
+void welcome(void);<br>
+void printboard(void);<br>
+void printnotes(void);<br>
+void printsnake(void);<br>
+void printfood(void);<br>
+void snakemove(void);<br>
+int jgameover(void);<br>
+void gameover(int);<br>
+int jeat(void);<br>
+void repr_info(void);<br>
+int score;<br>
+struct<br>
+{<br>
+int x[SNAKE_MAXLEN];<br>
+int y[SNAKE_MAXLEN];<br>
+int delay;<br>
+int len;//目前蛇的长度<br>
+int dire;//direction蛇的移动方向<br>
+}snake;<br>
+struct<br>
+{<br>
+int x;<br>
+int y;<br>
+}food;<br>
+#endif // HEAD_H_INCLUDED</p>
+<p>看别人写的贪吃蛇都没有用数组来记录蛇的位置，（猜）可能是因为数组会占用连续的空间，这样不太好。<br>
+（2020.04.15更新：他们都用的链表，当时我都没听过这东西）</p>
+<h1 id="3着手实现"><a class="markdownIt-Anchor" href="#3着手实现"></a> 3.着手实现</h1>
+<p><strong>显示最初界面的函数</strong></p>
+<p>​<br>
+void welcome(void)<br>
+{<br>
+color(6);<br>
+Gotoxy(3,10);<br>
+printf(“欢迎来到真·终极蛇皮上帝视角之皮死人不偿命之来回咕畜之贪吃蛇！”);<br>
+Gotoxy(6,10);<br>
+printf(“不温馨的提示：请先把游戏窗口调整至&quot;足够大”，否则后果自负&quot;);<br>
+Gotoxy(9,10);<br>
+printf(“按E可赛艇…  我是指按任意键开始游戏。”);<br>
+Gotoxy(12,10);<br>
+color(7);<br>
+system(“pause”);<br>
+}</p>
+<p>效果图<br>
+![效果图](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/2020020420582644.png?x-oss-">https://img-blog.csdnimg.cn/2020020420582644.png?x-oss-</a><br>
+process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70)<br>
+<strong>画地图</strong><br>
+发现代码写得好粗啊，浪费资源</p>
+<p>​<br>
+void printboard(void)<br>
+{<br>
+int i,j;<br>
+system(“cls”);<br>
+color(9);<br>
+for(i=0;i&lt;=TALL;i++)<br>
+for(j=0;j&lt;=DBW;j+=2)<br>
+if(i<mark>0||i</mark>TALL||j<mark>0||j</mark>DBW)<br>
+{<br>
+Gotoxy(i,j);<br>
+printf(“■”);<br>
+}<br>
+color(7);<br>
+}</p>
 <p><strong>显示地图之外的一些信息</strong></p>
-<p>​<br>    void printnotes(void)<br>    {<br>        color(2);<br>        Gotoxy(3,74);<br>        printf(“当前得分：%d”,score);<br>        Gotoxy(4,74);<br>        printf(“当前蛇长：%d节”,SNAKE_INI_LEN);<br>        Gotoxy(8,74);<br>        printf(“当前难度：较为平和”);<br>        Gotoxy(9,74);<br>        printf(“等待延迟：%d    ms（最小为20ms）”,SNAKE_INI_DELAY);<br>        &#x2F;&#x2F;Gotoxy(12,74);<br>        &#x2F;&#x2F;printf(“历史最高分为：”);<br>        color(7);<br>    }</p>
+<p>​<br>
+void printnotes(void)<br>
+{<br>
+color(2);<br>
+Gotoxy(3,74);<br>
+printf(“当前得分：%d”,score);<br>
+Gotoxy(4,74);<br>
+printf(“当前蛇长：%d节”,SNAKE_INI_LEN);<br>
+Gotoxy(8,74);<br>
+printf(“当前难度：较为平和”);<br>
+Gotoxy(9,74);<br>
+printf(“等待延迟：%d    ms（最小为20ms）”,SNAKE_INI_DELAY);<br>
+//Gotoxy(12,74);<br>
+//printf(“历史最高分为：”);<br>
+color(7);<br>
+}</p>
 <p><strong>画静态蛇</strong></p>
-<p>​<br>    void printsnake(void)<br>    {<br>        snake.x[0]&#x3D;TALL&#x2F;2;<br>        snake.y[0]&#x3D;DBW&#x2F;2;<br>        snake.delay&#x3D;SNAKE_INI_DELAY;<br>        snake.len&#x3D;SNAKE_INI_LEN;<br>        snake.dire&#x3D;’w’;<br>        Gotoxy(snake.x[0],snake.y[0]);<br>        printf(“⊙”);<br>        for(int i&#x3D;1;i&lt;4;i++)<br>        {<br>            snake.x[i]&#x3D;snake.x[i-1];<br>            snake.y[i]&#x3D;snake.y[i-1]+2;<br>            Gotoxy(snake.x[i],snake.y[i]);<br>            printf(“■”);<br>        }</p>
-<p><strong>随机生成食物</strong><br>要通过一些措施保证食物在地图之内，而且还不能出现在蛇的身上。（这里也存在一个问题，会在之后的“遗留问题”部分说明。）<br>需要注意一个细节，‘■’会横向占用两个字节，所以要让它们统一在偶数坐标生成</p>
-<p>​<br>    void printfood(void)<br>    {<br>        food.x&#x3D;rand()%(TALL-2)+1;<br>        food.y&#x3D;rand()%(DBW-4)+2;<br>        if(food.y%2)<br>            food.y++;<br>        int notput&#x3D;1;<br>        while(notput)<br>        {<br>            for(int i&#x3D;0;i&lt;snake.len;i++)<br>            {<br>                if(!(food.x&#x3D;&#x3D;snake.x[i]&amp;&amp;food.y&#x3D;&#x3D;snake.y[i]))<br>                {<br>                    Gotoxy(food.x,food.y);<br>                    printf(“奥”);<br>                    notput&#x3D;0;<br>                    break;<br>                }<br>            }<br>        }<br>    }</p>
-<p><strong>蛇的移动</strong><br>思路是先记录蛇最后一节的位置，用“<br>”（两个空格）覆盖蛇尾，在蛇的移动方向的下一个位置画蛇头，如果蛇吃到了食物，则在擦去的地方给蛇补充一节，一些相应的信息也要作改变<br>查阅资料得到了_kbhit()和getch()的用法，_kbhit()可以响应键盘输入（大概），getch()可以接收字符，由于作者的了解也不深入，所以不多说。<br>PS:隐藏光标的操作是后来加上的，导致某些移动光标的操作纯属多余</p>
-<p>​<br>    void snakemove(void)<br>    {<br>        int lastx&#x3D;snake.x[snake.len-1],lasty&#x3D;snake.y[snake.len-1];<br>        if(_kbhit())<br>        {<br>            fflush(stdin);<br>            snake.dire&#x3D;getch();<br>        }<br>        for(int i&#x3D;snake.len-1;i&gt;0;i–)<br>        {<br>            snake.x[i]&#x3D;snake.x[i-1];<br>            snake.y[i]&#x3D;snake.y[i-1];<br>        }<br>        switch(snake.dire)<br>        {<br>        case ‘w’:<br>        case ‘W’:<br>            snake.x[0]-&#x3D;1;<br>            break;<br>        case ‘S’:<br>        case ‘s’:<br>            snake.x[0]+&#x3D;1;<br>            break;<br>        case ‘A’:<br>        case ‘a’:<br>            snake.y[0]-&#x3D;2;<br>            break;<br>        case ‘D’:<br>        case ‘d’:<br>            snake.y[0]+&#x3D;2;<br>            break;<br>        }<br>        Gotoxy(snake.x[1],snake.y[1]);<br>        printf(“■”);<br>        Gotoxy(snake.x[0],snake.y[0]);<br>        printf(“⊙”);<br>        if(jeat())<br>        {<br>            score++;<br>            if(snake.len&lt;SNAKE_MAXLEN)<br>                snake.len++;<br>            if(snake.delay&gt;&#x3D;22)<br>                snake.delay-&#x3D;2;<br>            snake.x[snake.len-1]&#x3D;lastx;<br>            snake.y[snake.len-1]&#x3D;lasty;<br>            printfood();<br>            repr_info();<br>        }<br>        else<br>        {<br>            Gotoxy(lastx,lasty);<br>            printf(“  “);<br>        }<br>        Gotoxy(0,0);<br>    }</p>
-<p><strong>在蛇吃到食物后，改变一些显示信息</strong><br>reprint information</p>
-<p>​<br>    void repr_info(void)<br>    {<br>        Gotoxy(3,84);<br>        color(2);<br>        printf(“%d”,score);<br>        Gotoxy(4,84);<br>        printf(“%d”,snake.len);<br>        Gotoxy(8,84);<br>        if(snake.delay&gt;&#x3D;170)<br>            printf(“较为平和”);<br>        else if(snake.delay&gt;&#x3D;120)<br>            printf(“略高一筹”);<br>        else if(snake.delay&gt;&#x3D;90)<br>            printf(“考验手速”);<br>        else if(snake.delay&gt;&#x3D;50)<br>            printf(“高能预警”);<br>        else if(snake.delay&gt;&#x3D;22)<br>            printf(“终极蛇皮”);<br>        else<br>            printf(“MAX     “);<br>        Gotoxy(9,84);<br>        printf(“%d  “,snake.delay);<br>        color(7);<br>    }</p>
-<p><strong>检验是否吃到食物</strong><br>judge eat</p>
-<p>​<br>    int jeat(void)<br>    {<br>        if(food.x&#x3D;&#x3D;snake.x[0]&amp;&amp;food.y&#x3D;&#x3D;snake.y[0])<br>            return 1;<br>        return 0;<br>    }</p>
+<p>​<br>
+void printsnake(void)<br>
+{<br>
+snake.x[0]=TALL/2;<br>
+snake.y[0]=DBW/2;<br>
+snake.delay=SNAKE_INI_DELAY;<br>
+snake.len=SNAKE_INI_LEN;<br>
+snake.dire=‘w’;<br>
+Gotoxy(snake.x[0],snake.y[0]);<br>
+printf(“⊙”);<br>
+for(int i=1;i&lt;4;i++)<br>
+{<br>
+snake.x[i]=snake.x[i-1];<br>
+snake.y[i]=snake.y[i-1]+2;<br>
+Gotoxy(snake.x[i],snake.y[i]);<br>
+printf(“■”);<br>
+}</p>
+<p><strong>随机生成食物</strong><br>
+要通过一些措施保证食物在地图之内，而且还不能出现在蛇的身上。（这里也存在一个问题，会在之后的“遗留问题”部分说明。）<br>
+需要注意一个细节，‘■’会横向占用两个字节，所以要让它们统一在偶数坐标生成</p>
+<p>​<br>
+void printfood(void)<br>
+{<br>
+food.x=rand()%(TALL-2)+1;<br>
+food.y=rand()%(DBW-4)+2;<br>
+if(food.y%2)<br>
+food.y++;<br>
+int notput=1;<br>
+while(notput)<br>
+{<br>
+for(int i=0;i&lt;snake.len;i++)<br>
+{<br>
+if(!(food.x<mark>snake.x[i]&amp;&amp;food.y</mark>snake.y[i]))<br>
+{<br>
+Gotoxy(food.x,food.y);<br>
+printf(“奥”);<br>
+notput=0;<br>
+break;<br>
+}<br>
+}<br>
+}<br>
+}</p>
+<p><strong>蛇的移动</strong><br>
+思路是先记录蛇最后一节的位置，用“<br>
+”（两个空格）覆盖蛇尾，在蛇的移动方向的下一个位置画蛇头，如果蛇吃到了食物，则在擦去的地方给蛇补充一节，一些相应的信息也要作改变<br>
+查阅资料得到了_kbhit()和getch()的用法，_kbhit()可以响应键盘输入（大概），getch()可以接收字符，由于作者的了解也不深入，所以不多说。<br>
+PS:隐藏光标的操作是后来加上的，导致某些移动光标的操作纯属多余</p>
+<p>​<br>
+void snakemove(void)<br>
+{<br>
+int lastx=snake.x[snake.len-1],lasty=snake.y[snake.len-1];<br>
+if(_kbhit())<br>
+{<br>
+fflush(stdin);<br>
+snake.dire=getch();<br>
+}<br>
+for(int i=snake.len-1;i&gt;0;i–)<br>
+{<br>
+snake.x[i]=snake.x[i-1];<br>
+snake.y[i]=snake.y[i-1];<br>
+}<br>
+switch(snake.dire)<br>
+{<br>
+case ‘w’:<br>
+case ‘W’:<br>
+snake.x[0]-=1;<br>
+break;<br>
+case ‘S’:<br>
+case ‘s’:<br>
+snake.x[0]+=1;<br>
+break;<br>
+case ‘A’:<br>
+case ‘a’:<br>
+snake.y[0]-=2;<br>
+break;<br>
+case ‘D’:<br>
+case ‘d’:<br>
+snake.y[0]+=2;<br>
+break;<br>
+}<br>
+Gotoxy(snake.x[1],snake.y[1]);<br>
+printf(“■”);<br>
+Gotoxy(snake.x[0],snake.y[0]);<br>
+printf(“⊙”);<br>
+if(jeat())<br>
+{<br>
+score++;<br>
+if(snake.len&lt;SNAKE_MAXLEN)<br>
+snake.len++;<br>
+if(snake.delay&gt;=22)<br>
+snake.delay-=2;<br>
+snake.x[snake.len-1]=lastx;<br>
+snake.y[snake.len-1]=lasty;<br>
+printfood();<br>
+repr_info();<br>
+}<br>
+else<br>
+{<br>
+Gotoxy(lastx,lasty);<br>
+printf(&quot;  &quot;);<br>
+}<br>
+Gotoxy(0,0);<br>
+}</p>
+<p><strong>在蛇吃到食物后，改变一些显示信息</strong><br>
+reprint information</p>
+<p>​<br>
+void repr_info(void)<br>
+{<br>
+Gotoxy(3,84);<br>
+color(2);<br>
+printf(&quot;%d&quot;,score);<br>
+Gotoxy(4,84);<br>
+printf(&quot;%d&quot;,snake.len);<br>
+Gotoxy(8,84);<br>
+if(snake.delay&gt;=170)<br>
+printf(“较为平和”);<br>
+else if(snake.delay&gt;=120)<br>
+printf(“略高一筹”);<br>
+else if(snake.delay&gt;=90)<br>
+printf(“考验手速”);<br>
+else if(snake.delay&gt;=50)<br>
+printf(“高能预警”);<br>
+else if(snake.delay&gt;=22)<br>
+printf(“终极蛇皮”);<br>
+else<br>
+printf(&quot;MAX     “);<br>
+Gotoxy(9,84);<br>
+printf(”%d  &quot;,snake.delay);<br>
+color(7);<br>
+}</p>
+<p><strong>检验是否吃到食物</strong><br>
+judge eat</p>
+<p>​<br>
+int jeat(void)<br>
+{<br>
+if(food.x<mark>snake.x[0]&amp;&amp;food.y</mark>snake.y[0])<br>
+return 1;<br>
+return 0;<br>
+}</p>
 <p><strong>检验蛇是否死亡</strong></p>
-<p>​<br>    int jgameover(void)<br>    {<br>        if(snake.x[0]&#x3D;&#x3D;TALL||snake.x[0]&#x3D;&#x3D;0||snake.y[0]&#x3D;&#x3D;0||snake.y[0]&#x3D;&#x3D;DBW)<br>            return 1;<br>        for(int i&#x3D;1;i&lt;snake.len;i++)<br>        {<br>            if(snake.x[0]&#x3D;&#x3D;snake.x[i]&amp;&amp;snake.y[0]&#x3D;&#x3D;snake.y[i])<br>                return 2;<br>        }<br>        return 0;<br>    }</p>
+<p>​<br>
+int jgameover(void)<br>
+{<br>
+if(snake.x[0]==TALL||snake.x[0]==0||snake.y[0]==0||snake.y[0]==DBW)<br>
+return 1;<br>
+for(int i=1;i&lt;snake.len;i++)<br>
+{<br>
+if(snake.x[0]==snake.x[i]&amp;&amp;snake.y[0]==snake.y[i])<br>
+return 2;<br>
+}<br>
+return 0;<br>
+}</p>
 <p><strong>打印死亡后显示的一些东西</strong></p>
-<p>​<br>    void gameover(int j)<br>    {<br>        Gotoxy(20,75);<br>        printf(“Game over\n”);<br>        Gotoxy(21,73);<br>        if(j&#x3D;&#x3D;1)<br>            printf(“死因：铁齿铜牙与头铁”);<br>        else if(j&#x3D;&#x3D;2)<br>            printf(“死因：我吃我自己”);<br>    }</p>
-<h1 id="以下是所有代码"><a href="#以下是所有代码" class="headerlink" title="以下是所有代码"></a>以下是所有代码</h1><h2 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h2><p>​<br>    #ifndef HEAD_H_INCLUDED<br>    #define HEAD_H_INCLUDED<br>    #define TALL 30&#x2F;&#x2F;地图高度<br>    #define DBW 68&#x2F;&#x2F;地图宽度<br>    #define SNAKE_MAXLEN 500&#x2F;&#x2F;蛇的极限长度（用于定义数组）<br>    #define SNAKE_INI_LEN 4<br>    #define SNAKE_INI_DELAY 200<br>    void cursor_visible(int,int);<br>    int color(int);<br>    void Gotoxy(int,int);<br>    void welcome(void);<br>    void printboard(void);<br>    void printnotes(void);<br>    void printsnake(void);<br>    void printfood(void);<br>    void snakemove(void);<br>    int jgameover(void);<br>    void gameover(int);<br>    int jeat(void);<br>    void repr_info(void);<br>    int score;<br>    struct<br>    {<br>        int x[SNAKE_MAXLEN];<br>        int y[SNAKE_MAXLEN];<br>        int delay;<br>        int len;&#x2F;&#x2F;目前蛇的长度<br>        int dire;&#x2F;&#x2F;direction蛇的移动方向<br>    }snake;<br>    struct<br>    {<br>        int x;<br>        int y;<br>    }food;</p>
-<p>​<br>    #endif &#x2F;&#x2F; HEAD_H_INCLUDED</p>
-<p>​<br>​    </p>
-<h2 id="源文件"><a href="#源文件" class="headerlink" title="源文件"></a>源文件</h2><p>主函数单独写了</p>
-<p>​<br>    #include &lt;stdio.h&gt;<br>    #include &lt;stdlib.h&gt;<br>    #include &lt;windows.h&gt;<br>    #include &lt;unistd.h&gt;<br>    #include &lt;time.h&gt;<br>    #include &lt;string.h&gt;<br>    #include “head.h”<br>    void cursor_visible(int size,int visible)<br>    {<br>        CONSOLE_CURSOR_INFO cursor_info;<br>        cursor_info.bVisible&#x3D;visible;<br>        cursor_info.dwSize&#x3D;size;<br>        SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &amp;cursor_info);<br>    }<br>    int color(int c)<br>    {<br>        &#x2F;&#x2F;SetConsoleTextAttribute是API设置控制台窗口字体颜色和背景色的函数<br>        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);<br>        return 0;<br>    }<br>    void Gotoxy(int x, int y)<br>    {<br>        COORD position &#x3D; { y, x };<br>        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);<br>    }<br>    void welcome(void)<br>    {<br>        color(6);<br>        Gotoxy(3,10);<br>        printf(“欢迎来到真·终极蛇皮上帝视角之皮死人不偿命之来回咕畜之贪吃蛇！”);<br>        Gotoxy(6,10);<br>        printf(“不温馨的提示：请先把游戏窗口调整至&quot;足够大&quot;，否则后果自负”);<br>        Gotoxy(9,10);<br>        printf(“按E可赛艇…  我是指按任意键开始游戏。”);<br>        Gotoxy(12,10);<br>        color(7);<br>        system(“pause”);<br>    }<br>    void printboard(void)<br>    {<br>        int i,j;<br>        system(“cls”);<br>        color(9);<br>        for(i&#x3D;0;i&lt;&#x3D;TALL;i++)<br>            for(j&#x3D;0;j&lt;&#x3D;DBW;j+&#x3D;2)<br>                if(i&#x3D;&#x3D;0||i&#x3D;&#x3D;TALL||j&#x3D;&#x3D;0||j&#x3D;&#x3D;DBW)<br>                {<br>                    Gotoxy(i,j);<br>                    printf(“■”);<br>                }<br>        color(7);<br>    }<br>    void printnotes(void)<br>    {<br>        color(2);<br>        Gotoxy(3,74);<br>        printf(“当前得分：%d”,score);<br>        Gotoxy(4,74);<br>        printf(“当前蛇长：%d节”,SNAKE_INI_LEN);<br>        Gotoxy(8,74);<br>        printf(“当前难度：较为平和”);<br>        Gotoxy(9,74);<br>        printf(“等待延迟：%d    ms（最小为20ms）”,SNAKE_INI_DELAY);<br>        &#x2F;&#x2F;Gotoxy(12,74);<br>        &#x2F;&#x2F;printf(“历史最高分为：”);<br>        color(7);<br>    }<br>    void printsnake(void)<br>    {<br>        snake.x[0]&#x3D;TALL&#x2F;2;<br>        snake.y[0]&#x3D;DBW&#x2F;2;<br>        snake.delay&#x3D;SNAKE_INI_DELAY;<br>        snake.len&#x3D;SNAKE_INI_LEN;<br>        snake.dire&#x3D;’w’;<br>        Gotoxy(snake.x[0],snake.y[0]);<br>        printf(“⊙”);<br>        for(int i&#x3D;1;i&lt;4;i++)<br>        {<br>            snake.x[i]&#x3D;snake.x[i-1];<br>            snake.y[i]&#x3D;snake.y[i-1]+2;<br>            Gotoxy(snake.x[i],snake.y[i]);<br>            printf(“■”);<br>        }</p>
+<p>​<br>
+void gameover(int j)<br>
+{<br>
+Gotoxy(20,75);<br>
+printf(“Game over\n”);<br>
+Gotoxy(21,73);<br>
+if(j<mark>1)<br>
+printf(“死因：铁齿铜牙与头铁”);<br>
+else if(j</mark>2)<br>
+printf(“死因：我吃我自己”);<br>
+}</p>
+<h1 id="以下是所有代码"><a class="markdownIt-Anchor" href="#以下是所有代码"></a> 以下是所有代码</h1>
+<h2 id="头文件"><a class="markdownIt-Anchor" href="#头文件"></a> 头文件</h2>
+<p>​<br>
+#ifndef HEAD_H_INCLUDED<br>
+#define HEAD_H_INCLUDED<br>
+#define TALL 30//地图高度<br>
+#define DBW 68//地图宽度<br>
+#define SNAKE_MAXLEN 500//蛇的极限长度（用于定义数组）<br>
+#define SNAKE_INI_LEN 4<br>
+#define SNAKE_INI_DELAY 200<br>
+void cursor_visible(int,int);<br>
+int color(int);<br>
+void Gotoxy(int,int);<br>
+void welcome(void);<br>
+void printboard(void);<br>
+void printnotes(void);<br>
+void printsnake(void);<br>
+void printfood(void);<br>
+void snakemove(void);<br>
+int jgameover(void);<br>
+void gameover(int);<br>
+int jeat(void);<br>
+void repr_info(void);<br>
+int score;<br>
+struct<br>
+{<br>
+int x[SNAKE_MAXLEN];<br>
+int y[SNAKE_MAXLEN];<br>
+int delay;<br>
+int len;//目前蛇的长度<br>
+int dire;//direction蛇的移动方向<br>
+}snake;<br>
+struct<br>
+{<br>
+int x;<br>
+int y;<br>
+}food;</p>
+<p>​<br>
+#endif // HEAD_H_INCLUDED</p>
+<p>​<br>
+​</p>
+<h2 id="源文件"><a class="markdownIt-Anchor" href="#源文件"></a> 源文件</h2>
+<p>主函数单独写了</p>
+<p>​<br>
+#include &lt;stdio.h&gt;<br>
+#include &lt;stdlib.h&gt;<br>
+#include &lt;windows.h&gt;<br>
+#include &lt;unistd.h&gt;<br>
+#include &lt;time.h&gt;<br>
+#include &lt;string.h&gt;<br>
+#include “head.h”<br>
+void cursor_visible(int size,int visible)<br>
+{<br>
+CONSOLE_CURSOR_INFO cursor_info;<br>
+cursor_info.bVisible=visible;<br>
+cursor_info.dwSize=size;<br>
+SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &amp;cursor_info);<br>
+}<br>
+int color(int c)<br>
+{<br>
+//SetConsoleTextAttribute是API设置控制台窗口字体颜色和背景色的函数<br>
+SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);<br>
+return 0;<br>
+}<br>
+void Gotoxy(int x, int y)<br>
+{<br>
+COORD position = { y, x };<br>
+SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);<br>
+}<br>
+void welcome(void)<br>
+{<br>
+color(6);<br>
+Gotoxy(3,10);<br>
+printf(“欢迎来到真·终极蛇皮上帝视角之皮死人不偿命之来回咕畜之贪吃蛇！”);<br>
+Gotoxy(6,10);<br>
+printf(“不温馨的提示：请先把游戏窗口调整至&quot;足够大”，否则后果自负&quot;);<br>
+Gotoxy(9,10);<br>
+printf(“按E可赛艇…  我是指按任意键开始游戏。”);<br>
+Gotoxy(12,10);<br>
+color(7);<br>
+system(“pause”);<br>
+}<br>
+void printboard(void)<br>
+{<br>
+int i,j;<br>
+system(“cls”);<br>
+color(9);<br>
+for(i=0;i&lt;=TALL;i++)<br>
+for(j=0;j&lt;=DBW;j+=2)<br>
+if(i<mark>0||i</mark>TALL||j<mark>0||j</mark>DBW)<br>
+{<br>
+Gotoxy(i,j);<br>
+printf(“■”);<br>
+}<br>
+color(7);<br>
+}<br>
+void printnotes(void)<br>
+{<br>
+color(2);<br>
+Gotoxy(3,74);<br>
+printf(“当前得分：%d”,score);<br>
+Gotoxy(4,74);<br>
+printf(“当前蛇长：%d节”,SNAKE_INI_LEN);<br>
+Gotoxy(8,74);<br>
+printf(“当前难度：较为平和”);<br>
+Gotoxy(9,74);<br>
+printf(“等待延迟：%d    ms（最小为20ms）”,SNAKE_INI_DELAY);<br>
+//Gotoxy(12,74);<br>
+//printf(“历史最高分为：”);<br>
+color(7);<br>
+}<br>
+void printsnake(void)<br>
+{<br>
+snake.x[0]=TALL/2;<br>
+snake.y[0]=DBW/2;<br>
+snake.delay=SNAKE_INI_DELAY;<br>
+snake.len=SNAKE_INI_LEN;<br>
+snake.dire=‘w’;<br>
+Gotoxy(snake.x[0],snake.y[0]);<br>
+printf(“⊙”);<br>
+for(int i=1;i&lt;4;i++)<br>
+{<br>
+snake.x[i]=snake.x[i-1];<br>
+snake.y[i]=snake.y[i-1]+2;<br>
+Gotoxy(snake.x[i],snake.y[i]);<br>
+printf(“■”);<br>
+}</p>
 <pre><code>&#125;
 void printfood(void)
 &#123;
@@ -197,20 +586,20 @@ void snakemove(void)
     &#125;
     switch(snake.dire)
     &#123;
-    case &#39;w&#39;:
-    case &#39;W&#39;:
+    case 'w':
+    case 'W':
         snake.x[0]-=1;
         break;
-    case &#39;S&#39;:
-    case &#39;s&#39;:
+    case 'S':
+    case 's':
         snake.x[0]+=1;
         break;
-    case &#39;A&#39;:
-    case &#39;a&#39;:
+    case 'A':
+    case 'a':
         snake.y[0]-=2;
         break;
-    case &#39;D&#39;:
-    case &#39;d&#39;:
+    case 'D':
+    case 'd':
         snake.y[0]+=2;
         break;
     &#125;
@@ -289,24 +678,72 @@ void repr_info(void)
     color(7);
 &#125;
 </code></pre>
-<p>​    </p>
-<h2 id="主函数"><a href="#主函数" class="headerlink" title="主函数"></a>主函数</h2><p>​<br>    int main()<br>    {<br>        cursor_visible(25,0);<br>        score&#x3D;0;<br>        srand(time(NULL));<br>        welcome();<br>        printboard();<br>        printnotes();<br>        printsnake();<br>        printfood();<br>        while(1)<br>        {<br>            int j;<br>            snakemove();<br>            if(j&#x3D;jgameover())<br>            {<br>                gameover(j);<br>                break;<br>            }<br>            Sleep(snake.delay);<br>        }<br>        Gotoxy(TALL+1,0);<br>        cursor_visible(25,1);<br>        system(“pause”);<br>        return 0;<br>    }</p>
-<p>​    </p>
-<p>游戏效果图<br>![游戏效果图](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200204215133333.png?x-oss-">https://img-blog.csdnimg.cn/20200204215133333.png?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70)</p>
-<h1 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h1><p><strong>1.关于随机生成食物（程序问题）</strong><br>笔者认为已经对食物的出现未知作出了判断，但在实际操作过程中还是会出现食物生成在蛇身上的状况</p>
-<p><strong>2.关于光标隐藏（知识盲点）</strong><br>笔者最早的光标移动函数是这么写的</p>
-<p>​<br>    void cursor_visible(int visible)<br>    {<br>        CONSOLE_CURSOR_INFO cursor_info;<br>        cursor_info.bVisible&#x3D;visible;<br>        SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &amp;cursor_info);<br>    }</p>
-<p>但发现通过cursor_visible(0);这个操作并不能隐藏光标。<br>本着一本正经乱改的心态改成了这样</p>
-<p>​<br>    void cursor_visible(int size,int visible)<br>    {<br>        CONSOLE_CURSOR_INFO cursor_info;<br>        cursor_info.bVisible&#x3D;visible;<br>        cursor_info.dwSize&#x3D;size;<br>        SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &amp;cursor_info);<br>    }</p>
+<p>​</p>
+<h2 id="主函数"><a class="markdownIt-Anchor" href="#主函数"></a> 主函数</h2>
+<p>​<br>
+int main()<br>
+{<br>
+cursor_visible(25,0);<br>
+score=0;<br>
+srand(time(NULL));<br>
+welcome();<br>
+printboard();<br>
+printnotes();<br>
+printsnake();<br>
+printfood();<br>
+while(1)<br>
+{<br>
+int j;<br>
+snakemove();<br>
+if(j=jgameover())<br>
+{<br>
+gameover(j);<br>
+break;<br>
+}<br>
+Sleep(snake.delay);<br>
+}<br>
+Gotoxy(TALL+1,0);<br>
+cursor_visible(25,1);<br>
+system(“pause”);<br>
+return 0;<br>
+}</p>
+<p>​</p>
+<p>游戏效果图<br>
+![游戏效果图](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200204215133333.png?x-oss-">https://img-blog.csdnimg.cn/20200204215133333.png?x-oss-</a><br>
+process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70)</p>
+<h1 id="遗留问题"><a class="markdownIt-Anchor" href="#遗留问题"></a> 遗留问题</h1>
+<p><strong>1.关于随机生成食物（程序问题）</strong><br>
+笔者认为已经对食物的出现未知作出了判断，但在实际操作过程中还是会出现食物生成在蛇身上的状况</p>
+<p><strong>2.关于光标隐藏（知识盲点）</strong><br>
+笔者最早的光标移动函数是这么写的</p>
+<p>​<br>
+void cursor_visible(int visible)<br>
+{<br>
+CONSOLE_CURSOR_INFO cursor_info;<br>
+cursor_info.bVisible=visible;<br>
+SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &amp;cursor_info);<br>
+}</p>
+<p>但发现通过cursor_visible(0);这个操作并不能隐藏光标。<br>
+本着一本正经乱改的心态改成了这样</p>
+<p>​<br>
+void cursor_visible(int size,int visible)<br>
+{<br>
+CONSOLE_CURSOR_INFO cursor_info;<br>
+cursor_info.bVisible=visible;<br>
+cursor_info.dwSize=size;<br>
+SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &amp;cursor_info);<br>
+}</p>
 <p>笔者认为调节光标尺寸应该与是否隐藏光标没什么关系，然而事实却是即使使用光标的默认尺寸25（即不对光标尺寸做更改），通过cursor_visible(25，0);也可以隐藏光标。</p>
-<p><strong>3.当快速连续有效输入（程序问题）</strong><br>当快速连续按下方向键，比如“sdsdsdsdsdsdsdsdsdsdsd”，（猜）可能有大量的字符留在缓冲区，使蛇“延迟”，不听操作，但笔者暂时不会修正这个bug。</p>
-<p><strong>4.蛇可以直接反向撞自己导致死亡</strong><br>可能需要加入一些限制，比如snake.dire&#x3D;‘w’时不能直接反向改变其值为’s’</p>
+<p><strong>3.当快速连续有效输入（程序问题）</strong><br>
+当快速连续按下方向键，比如“sdsdsdsdsdsdsdsdsdsdsd”，（猜）可能有大量的字符留在缓冲区，使蛇“延迟”，不听操作，但笔者暂时不会修正这个bug。</p>
+<p><strong>4.蛇可以直接反向撞自己导致死亡</strong><br>
+可能需要加入一些限制，比如snake.dire=‘w’时不能直接反向改变其值为’s’</p>
 <p><strong>5.可能还存在众多未发现的问题</strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90C%E8%AF%AD%E8%A8%80%E3%80%91%E5%B0%9D%E8%AF%95%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AA%E5%90%83%E8%9B%87/" data-id="cl50tnlrf002tycj31sjobtvo" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90C%E8%AF%AD%E8%A8%80%E3%80%91%E5%B0%9D%E8%AF%95%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AA%E5%90%83%E8%9B%87/" data-id="cl50x8cn3002tccj3a3ki0u5m" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>

@@ -5,15 +5,15 @@
   
   <title>【嵌套bfs】A - Pushing Boxes POJ - 1475  推箱子.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 https:&#x2F;&#x2F;vjudge.net&#x2F;contest&#x2F;387870#problem&#x2F;A 题目描述Imag">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 https:&#x2F;&#x2F;vjudge.net&#x2F;contest&#x2F;387870#problem&#x2F;A  题目描述">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【嵌套bfs】A - Pushing Boxes POJ - 1475  推箱子.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 https:&#x2F;&#x2F;vjudge.net&#x2F;contest&#x2F;387870#problem&#x2F;A 题目描述Imag">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 https:&#x2F;&#x2F;vjudge.net&#x2F;contest&#x2F;387870#problem&#x2F;A  题目描述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.807Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="BFS">
@@ -123,30 +123,113 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
 <p><a target="_blank" rel="noopener" href="https://vjudge.net/contest/387870#problem/A">https://vjudge.net/contest/387870#problem/A</a></p>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Imagine you are standing inside a two-dimensional maze composed of square<br>cells which may or may not be filled with rock. You can move north, south,<br>east or west one cell at a step. These moves are called walks.<br>One of the empty cells contains a box which can be moved to an adjacent free<br>cell by standing next to the box and then moving in the direction of the box.<br>Such a move is called a push. The box cannot be moved in any other way than by<br>pushing, which means that if you push it into a corner you can never get it<br>out of the corner again.</p>
-<p>One of the empty cells is marked as the target cell. Your job is to bring the<br>box to the target cell by a sequence of walks and pushes. As the box is very<br>heavy, you would like to minimize the number of pushes. Can you write a<br>program that will work out the best such sequence?<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzk2MTQ4YTA0MzgzZDlmZTI2MzBhM2FjNzcyZjEyMjYx?x-oss-">https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzk2MTQ4YTA0MzgzZDlmZTI2MzBhM2FjNzcyZjEyMjYx?x-oss-</a><br>process&#x3D;image&#x2F;format,png#pic_center)</p>
-<h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><p>The input contains the descriptions of several mazes. Each maze description<br>starts with a line containing two integers r and c (both &lt;&#x3D; 20) representing<br>the number of rows and columns of the maze.</p>
-<p>Following this are r lines each containing c characters. Each character<br>describes one cell of the maze. A cell full of rock is indicated by a <code>#&#39; and an empty cell is represented by a</code>.’. Your starting position is symbolized by<br><code>S&#39;, the starting position of the box by</code>B’ and the target cell by &#96;T’.</p>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Imagine you are standing inside a two-dimensional maze composed of square<br>
+cells which may or may not be filled with rock. You can move north, south,<br>
+east or west one cell at a step. These moves are called walks.<br>
+One of the empty cells contains a box which can be moved to an adjacent free<br>
+cell by standing next to the box and then moving in the direction of the box.<br>
+Such a move is called a push. The box cannot be moved in any other way than by<br>
+pushing, which means that if you push it into a corner you can never get it<br>
+out of the corner again.</p>
+<p>One of the empty cells is marked as the target cell. Your job is to bring the<br>
+box to the target cell by a sequence of walks and pushes. As the box is very<br>
+heavy, you would like to minimize the number of pushes. Can you write a<br>
+program that will work out the best such sequence?<br>
+![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzk2MTQ4YTA0MzgzZDlmZTI2MzBhM2FjNzcyZjEyMjYx?x-oss-">https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzk2MTQ4YTA0MzgzZDlmZTI2MzBhM2FjNzcyZjEyMjYx?x-oss-</a><br>
+process=image/format,png#pic_center)</p>
+<h2 id="输入"><a class="markdownIt-Anchor" href="#输入"></a> 输入</h2>
+<p>The input contains the descriptions of several mazes. Each maze description<br>
+starts with a line containing two integers r and c (both &lt;= 20) representing<br>
+the number of rows and columns of the maze.</p>
+<p>Following this are r lines each containing c characters. Each character<br>
+describes one cell of the maze. A cell full of rock is indicated by a <code>#' and an empty cell is represented by a</code>.’. Your starting position is symbolized by<br>
+<code>S', the starting position of the box by</code>B’ and the target cell by `T’.</p>
 <p>Input is terminated by two zeroes for r and c.</p>
-<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>For each maze in the input, first print the number of the maze, as shown in<br>the sample output. Then, if it is impossible to bring the box to the target<br>cell, print &#96;&#96;Impossible.’’.</p>
-<p>Otherwise, output a sequence that minimizes the number of pushes. If there is<br>more than one such sequence, choose the one that minimizes the number of total<br>moves (walks and pushes). If there is still more than one such sequence, any<br>one is acceptable.</p>
-<p>Print the sequence as a string of the characters N, S, E, W, n, s, e and w<br>where uppercase letters stand for pushes, lowercase letters stand for walks<br>and the different letters stand for the directions north, south, east and<br>west.</p>
+<h2 id="输出"><a class="markdownIt-Anchor" href="#输出"></a> 输出</h2>
+<p>For each maze in the input, first print the number of the maze, as shown in<br>
+the sample output. Then, if it is impossible to bring the box to the target<br>
+cell, print ``Impossible.’’.</p>
+<p>Otherwise, output a sequence that minimizes the number of pushes. If there is<br>
+more than one such sequence, choose the one that minimizes the number of total<br>
+moves (walks and pushes). If there is still more than one such sequence, any<br>
+one is acceptable.</p>
+<p>Print the sequence as a string of the characters N, S, E, W, n, s, e and w<br>
+where uppercase letters stand for pushes, lowercase letters stand for walks<br>
+and the different letters stand for the directions north, south, east and<br>
+west.</p>
 <p>Output a single blank line after each test case.</p>
-<h2 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h2><p>1 7<br>SB…T<br>1 7<br>SB…#.T<br>7 11<br>###########<br>#T##…#<br>#.#.#…####<br>#…B…#<br>#.######…#<br>#…S…#<br>###########<br>8 4<br>…<br>.##.<br>.#…<br>.#…<br>.#.B<br>.##S<br>…<br>###T<br>0 0</p>
-<h2 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h2><p>Maze #1<br>EEEEE</p>
-<p>Maze #2<br>Impossible.</p>
-<p>Maze #3<br>eennwwWWWWeeeeeesswwwwwwwnNN</p>
-<p>Maze #4<br>swwwnnnnnneeesssSSS</p>
-<h2 id="自己加一组样例输入"><a href="#自己加一组样例输入" class="headerlink" title="自己加一组样例输入"></a>自己加一组样例输入</h2><p>6 5<br>…T<br>.S…<br>#B###<br>…<br>…<br>…</p>
-<h2 id="自己加的样例的输出"><a href="#自己加的样例的输出" class="headerlink" title="自己加的样例的输出"></a>自己加的样例的输出</h2><p>Maze #1<br>SSesswNNNNwnEEE</p>
-<h2 id="瞎翻译"><a href="#瞎翻译" class="headerlink" title="瞎翻译"></a>瞎翻译</h2><p>这是一个推箱子游戏。人要把箱子推到终点，我们需要输出人走的路径（方向用nswe或NSWE表示，人不推箱子只走路时路径用小写字母nswe表示，人推箱子走路时路径用大写字母NSWE表示）</p>
+<h2 id="样例输入"><a class="markdownIt-Anchor" href="#样例输入"></a> 样例输入</h2>
+<p>1 7<br>
+SB…T<br>
+1 7<br>
+SB…#.T<br>
+7 11<br>
+###########<br>
+#T##…#<br>
+#.#.#…####<br>
+#…B…#<br>
+#.######…#<br>
+#…S…#<br>
+###########<br>
+8 4<br>
+…<br>
+.##.<br>
+.#…<br>
+.#…<br>
+.#.B<br>
+.##S<br>
+…<br>
+###T<br>
+0 0</p>
+<h2 id="样例输出"><a class="markdownIt-Anchor" href="#样例输出"></a> 样例输出</h2>
+<p>Maze #1<br>
+EEEEE</p>
+<p>Maze #2<br>
+Impossible.</p>
+<p>Maze #3<br>
+eennwwWWWWeeeeeesswwwwwwwnNN</p>
+<p>Maze #4<br>
+swwwnnnnnneeesssSSS</p>
+<h2 id="自己加一组样例输入"><a class="markdownIt-Anchor" href="#自己加一组样例输入"></a> 自己加一组样例输入</h2>
+<p>6 5<br>
+…T<br>
+.S…<br>
+#B###<br>
+…<br>
+…<br>
+…</p>
+<h2 id="自己加的样例的输出"><a class="markdownIt-Anchor" href="#自己加的样例的输出"></a> 自己加的样例的输出</h2>
+<p>Maze #1<br>
+SSesswNNNNwnEEE</p>
+<h2 id="瞎翻译"><a class="markdownIt-Anchor" href="#瞎翻译"></a> 瞎翻译</h2>
+<p>这是一个推箱子游戏。人要把箱子推到终点，我们需要输出人走的路径（方向用nswe或NSWE表示，人不推箱子只走路时路径用小写字母nswe表示，人推箱子走路时路径用大写字母NSWE表示）</p>
 <p>先输入两个整数row和col，表示地图大小</p>
 <p>之后输入一个row行col列的char类型矩阵，其中#代表墙，.代表路，S代表人的起始位置，B代表箱子起始位置，T代表终点（箱子要被推到的位置）</p>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p><strong>1.</strong><br>先设想箱子会自己动，想象一下如何用简单的bfs求得“箱子自己动”情况下的答案<br><strong>2.</strong><br>在”箱子自己动“的代码基础上加入人：<br>假设箱子要往右动，那么先对人进行bfs，让人从自己的位置走到箱子的左边的位置，如果人可以走过去，则箱子可以往右移动。<br><strong>2.5</strong><br>记得人推箱子的时候人也要动，而不是仅仅箱子移动（人与箱子往相同方向移动，或者直接把人移动到箱子的上一个位置）。<br><strong>3.</strong><br>这是笔者自己犯的一个错误：<br>不能仅仅用形如visb[][]的二维数组标记箱子到过的位置，因为在某些情况下人想推箱子到终点，是需要【箱子折返】的（箱子有可能去一个地方两次或多次，可以见我自己加的输入样例）<br>所以要用三维数组：visb[][][4],第三维记录箱子来时的方向</p>
-<p><strong>4.</strong><br>在箱子移动的bfs函数中嵌套人移动的bfs函数完成求解</p>
-<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <algorithm><br>    #include <cstring><br>    #include <queue><br>    #include <string></p>
+<h2 id="题解"><a class="markdownIt-Anchor" href="#题解"></a> 题解</h2>
+<p><strong>1.</strong><br>
+先设想箱子会自己动，想象一下如何用简单的bfs求得“箱子自己动”情况下的答案<br>
+<strong>2.</strong><br>
+在”箱子自己动“的代码基础上加入人：<br>
+假设箱子要往右动，那么先对人进行bfs，让人从自己的位置走到箱子的左边的位置，如果人可以走过去，则箱子可以往右移动。<br>
+<strong>2.5</strong><br>
+记得人推箱子的时候人也要动，而不是仅仅箱子移动（人与箱子往相同方向移动，或者直接把人移动到箱子的上一个位置）。<br>
+<strong>3.</strong><br>
+这是笔者自己犯的一个错误：<br>
+不能仅仅用形如visb[][]的二维数组标记箱子到过的位置，因为在某些情况下人想推箱子到终点，是需要【箱子折返】的（箱子有可能去一个地方两次或多次，可以见我自己加的输入样例）<br>
+所以要用三维数组：visb[][][4],第三维记录箱子来时的方向</p>
+<p><strong>4.</strong><br>
+在箱子移动的bfs函数中嵌套人移动的bfs函数完成求解</p>
+<p>​<br>
+#include <cstdio><br>
+#include <iostream><br>
+#include <algorithm><br>
+#include <cstring><br>
+#include <queue><br>
+#include <string></string></queue></cstring></algorithm></iostream></cstdio></p>
 <pre><code>int row,col,counter;
 const int maxn=25;
 char cell[maxn][maxn];
@@ -167,7 +250,15 @@ struct Pos
 //tar表示终点位置
 //to表示箱子要移动到某个位置时，人要移动到的位置
 </code></pre>
-<p>​<br>​<br>    &#x2F;&#x2F;判断这个点是否在地图可行走范围之中<br>    bool cango(int x,int y)<br>    {<br>        if(x&gt;&#x3D;0 &amp;&amp; x&lt;row &amp;&amp; y&gt;&#x3D;0 &amp;&amp; y&lt;col &amp;&amp; cell[x][y]!&#x3D;’#’)<br>            return true;<br>        return false;<br>    }</p>
+<p>​<br>
+​<br>
+//判断这个点是否在地图可行走范围之中<br>
+bool cango(int x,int y)<br>
+{<br>
+if(x&gt;=0 &amp;&amp; x&lt;row &amp;&amp; y&gt;=0 &amp;&amp; y&lt;col &amp;&amp; cell[x][y]!=’#’)<br>
+return true;<br>
+return false;<br>
+}</p>
 <pre><code>//人从自己所在的位置，移动到to.x,to.y的位置，简单bfs
 bool bfsMan()
 &#123;
@@ -242,16 +333,34 @@ void bfs()
     std::cout &lt;&lt; &quot;Impossible.&quot; &lt;&lt; std::endl &lt;&lt; std::endl;
 &#125;
 </code></pre>
-<p>​<br>    int main()<br>    {<br>        counter&#x3D;1;<br>        while(std::cin &gt;&gt; row &gt;&gt; col &amp;&amp; !(row&#x3D;&#x3D;0 &amp;&amp; col&#x3D;&#x3D;0))<br>        {<br>            memset(visb,false,sizeof(visb));<br>            for(int i&#x3D;0; i&lt;row; i++)<br>            {<br>                std::cin &gt;&gt; cell[i];<br>                for(int j&#x3D;0; j&lt;col; j++)<br>                {<br>                    if(cell[i][j]&#x3D;&#x3D;’S’)  mpre.x&#x3D;i,mpre.y&#x3D;j;<br>                    else if(cell[i][j]&#x3D;&#x3D;’B’) bpre.x&#x3D;i,bpre.y&#x3D;j;<br>                    else if(cell[i][j]&#x3D;&#x3D;’T’) tar.x&#x3D;i,tar.y&#x3D;j;<br>                }<br>            }<br>            bfs();<br>        }</p>
+<p>​<br>
+int main()<br>
+{<br>
+counter=1;<br>
+while(std::cin &gt;&gt; row &gt;&gt; col &amp;&amp; !(row<mark>0 &amp;&amp; col</mark>0))<br>
+{<br>
+memset(visb,false,sizeof(visb));<br>
+for(int i=0; i&lt;row; i++)<br>
+{<br>
+std::cin &gt;&gt; cell[i];<br>
+for(int j=0; j&lt;col; j++)<br>
+{<br>
+if(cell[i][j]<mark>‘S’)  mpre.x=i,mpre.y=j;<br>
+else if(cell[i][j]</mark>‘B’) bpre.x=i,bpre.y=j;<br>
+else if(cell[i][j]==‘T’) tar.x=i,tar.y=j;<br>
+}<br>
+}<br>
+bfs();<br>
+}</p>
 <pre><code>    return 0;
 &#125;
 </code></pre>
-<p>​    </p>
+<p>​</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/" data-id="cl50tnlre002mycj36nkb04kb" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/" data-id="cl50x8cn1002mccj3htcybpw5" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>

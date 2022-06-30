@@ -5,15 +5,15 @@
   
   <title>【记录】py文件怎么转成exe文件.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 其实转完了之后我也是啥也不会的状态，所有的操作仅仅是照葫芦画瓢 第一步：首先你要有 pyinstalle">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 其实转完了之后我也是啥也不会的状态，所有的操作仅仅是照葫芦画瓢 第一步： 首先你要有 pyinsta">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【记录】py文件怎么转成exe文件.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E8%AE%B0%E5%BD%95%E3%80%91py%E6%96%87%E4%BB%B6%E6%80%8E%E4%B9%88%E8%BD%AC%E6%88%90exe%E6%96%87%E4%BB%B6/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 其实转完了之后我也是啥也不会的状态，所有的操作仅仅是照葫芦画瓢 第一步：首先你要有 pyinstalle">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 其实转完了之后我也是啥也不会的状态，所有的操作仅仅是照葫芦画瓢 第一步： 首先你要有 pyinsta">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.822Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta name="twitter:card" content="summary">
@@ -122,17 +122,39 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
 <p>其实转完了之后我也是啥也不会的状态，所有的操作仅仅是照葫芦画瓢</p>
-<p>第一步：<br>首先你要有 pyinstaller</p>
-<p>第二步：<br>打开cmd 输入pyinstaller -F –onefile 需要转换的文件<br>这样就ok了</p>
-<p>附带一些pyinstaller的用法（转自<a target="_blank" rel="noopener" href="https://blog.csdn.net/jirryzhang/article/details/78881512">https://blog.csdn.net/jirryzhang/article/details/78881512</a>）<br>-F, –onefile 产生一个文件用于部署 (参见XXXXX).<br>-D, –onedir 产生一个目录用于部署 (默认)<br>-K, –tk 在部署时包含 TCL&#x2F;TK<br>-a, –ascii 不包含编码.在支持Unicode的python版本上默认包含所有的编码.<br>-d, –debug 产生debug版本的可执行文件<br>-w,–windowed,–noconsole 使用Windows子系统执行.当程序启动的时候不会打开命令行(只对Windows有效)<br>-c,–nowindowed,–console 使用控制台子系统执行(默认)(只对Windows有效)<br>-s,–strip 可执行文件和共享库将run through strip.注意Cygwin的strip往往使普通的win32 Dll无法使用.<br>-X, –upx 如果有UPX安装(执行Configure.py时检测),会压缩执行文件(Windows系统中的DLL也会)(参见note)<br>-o DIR, –out&#x3D;DIR 指定spec文件的生成目录,如果没有指定,而且当前目录是PyInstaller的根目录,会自动创建一个用于输出(spec和生成的可执行文件)的目录.如果没有指定,而当前目录不是PyInstaller的根目录,则会输出到当前的目录下.<br>-p DIR, –path&#x3D;DIR 设置导入路径(和使用PYTHONPATH效果相似).可以用路径分割符(Windows使用分号,Linux使用冒号)分割,指定多个目录.也可以使用多个-p参数来设置多个导入路径<br>–icon&#x3D;&lt;FILE.ICO&gt; 将file.ico添加为可执行文件的资源(只对Windows系统有效)<br>–icon&#x3D;&lt;FILE.EXE,N&gt; 将file.exe的第n个图标添加为可执行文件的资源(只对Windows系统有效)<br>-v FILE, –version&#x3D;FILE 将verfile作为可执行文件的版本资源(只对Windows系统有效)<br>-n NAME, –name&#x3D;NAME 可选的项目(产生的spec的)名字.如果省略,第一个脚本的主文件名将作为spec的名字<br>————————————————<br>版权声明：本文为CSDN博主「jirryzhang」的原创文章<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/jirryzhang/article/details/78881512">https://blog.csdn.net/jirryzhang/article/details/78881512</a></p>
-<p>pyinstaller -F -i icon.ico -w sadf.py</p>
+<p>第一步：<br>
+首先你要有 pyinstaller</p>
+<p>第二步：<br>
+打开cmd 输入pyinstaller -F --onefile 需要转换的文件<br>
+这样就ok了</p>
+<p>附带一些pyinstaller的用法（转自<a target="_blank" rel="noopener" href="https://blog.csdn.net/jirryzhang/article/details/78881512">https://blog.csdn.net/jirryzhang/article/details/78881512</a>）<br>
+-F, –onefile 产生一个文件用于部署 (参见XXXXX).<br>
+-D, –onedir 产生一个目录用于部署 (默认)<br>
+-K, –tk 在部署时包含 TCL/TK<br>
+-a, –ascii 不包含编码.在支持Unicode的python版本上默认包含所有的编码.<br>
+-d, –debug 产生debug版本的可执行文件<br>
+-w,–windowed,–noconsole 使用Windows子系统执行.当程序启动的时候不会打开命令行(只对Windows有效)<br>
+-c,–nowindowed,–console 使用控制台子系统执行(默认)(只对Windows有效)<br>
+-s,–strip 可执行文件和共享库将run through strip.注意Cygwin的strip往往使普通的win32 Dll无法使用.<br>
+-X, –upx 如果有UPX安装(执行Configure.py时检测),会压缩执行文件(Windows系统中的DLL也会)(参见note)<br>
+-o DIR, –out=DIR 指定spec文件的生成目录,如果没有指定,而且当前目录是PyInstaller的根目录,会自动创建一个用于输出(spec和生成的可执行文件)的目录.如果没有指定,而当前目录不是PyInstaller的根目录,则会输出到当前的目录下.<br>
+-p DIR, –path=DIR 设置导入路径(和使用PYTHONPATH效果相似).可以用路径分割符(Windows使用分号,Linux使用冒号)分割,指定多个目录.也可以使用多个-p参数来设置多个导入路径<br>
+–icon=&lt;FILE.ICO&gt; 将file.ico添加为可执行文件的资源(只对Windows系统有效)<br>
+–icon=&lt;FILE.EXE,N&gt; 将file.exe的第n个图标添加为可执行文件的资源(只对Windows系统有效)<br>
+-v FILE, –version=FILE 将verfile作为可执行文件的版本资源(只对Windows系统有效)<br>
+-n NAME, –name=NAME 可选的项目(产生的spec的)名字.如果省略,第一个脚本的主文件名将作为spec的名字<br>
+————————————————<br>
+版权声明：本文为CSDN博主「jirryzhang」的原创文章<br>
+原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/jirryzhang/article/details/78881512">https://blog.csdn.net/jirryzhang/article/details/78881512</a></p>
+<p>pyinstaller -F -i icon.ico -w <a target="_blank" rel="noopener" href="http://sadf.py">sadf.py</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E8%AE%B0%E5%BD%95%E3%80%91py%E6%96%87%E4%BB%B6%E6%80%8E%E4%B9%88%E8%BD%AC%E6%88%90exe%E6%96%87%E4%BB%B6/" data-id="cl50tnls1004wycj3eas6a0uw" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E8%AE%B0%E5%BD%95%E3%80%91py%E6%96%87%E4%BB%B6%E6%80%8E%E4%B9%88%E8%BD%AC%E6%88%90exe%E6%96%87%E4%BB%B6/" data-id="cl50x8cnp004xccj3fcvl42gx" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>

@@ -5,15 +5,15 @@
   
   <title>【机器学习】 应用简例 随机森林 交叉验证 网格化搜索.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 %matplotlib inline import numpy as np import pandas">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 %matplotlib inline import numpy as np import panda">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【机器学习】 应用简例 随机森林 交叉验证 网格化搜索.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%20%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%20%E7%BD%91%E6%A0%BC%E5%8C%96%E6%90%9C%E7%B4%A2/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 %matplotlib inline import numpy as np import pandas">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 %matplotlib inline import numpy as np import panda">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.807Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="随机森林">
@@ -124,7 +124,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
 <pre><code>%matplotlib inline
 import numpy as np
 import pandas as pd
@@ -136,26 +137,57 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import GridSearchCV
 </code></pre>
 <p>导入数据</p>
-<p>​<br>    # 从excel表导入数据<br>    df_t &#x3D; pd.read_excel(r’D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\train.xlsx’)</p>
+<p>​<br>
+# 从excel表导入数据<br>
+df_t = pd.read_excel(r’D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\train.xlsx’)</p>
 <pre><code># 删除uid列
-df_t = df_t.drop(columns=&#39;uid&#39;)
+df_t = df_t.drop(columns='uid')
 
-# 把数据中的&#39;?&#39;换成每一列的众数
+# 把数据中的'?'换成每一列的众数
 for col in df_t.columns:
     idx = df_t[col].value_counts().index
-    df_t[col][df_t[col] == &#39;?&#39;] = idx[0] if idx[0] != &#39;?&#39; else idx[1]
+    df_t[col][df_t[col] == '?'] = idx[0] if idx[0] != '?' else idx[1]
 
 # 把pandas.DataFrame数据转化为numpy.darray数据 元素类型为np.float32
 arr_t = df_t.values.astype(np.float32)
 </code></pre>
 <p>交叉验证找分数最高的n_estimators</p>
-<p>​<br>    score_tt &#x3D; []<br>    for i in range(0,300,15):<br>        rfc &#x3D; RandomForestClassifier(n_estimators &#x3D; i+1<br>                                    ,n_jobs &#x3D; -1<br>                                    ,random_state &#x3D; 156535<br>                                    )<br>        score &#x3D; cross_val_score(rfc, arr_t[:,:-1],arr_t[:,-1],cv&#x3D;10).mean()<br>        score_tt.append(score)<br>    peak &#x3D; [max(score_tt), score_tt.index(max(score_tt))*15+1]<br>    plt.figure(figsize &#x3D; [20,5])<br>    plt.plot(range(1,301,15),score_tt)<br>    plt.show()<br>    peak</p>
-<p>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201031121122721.PNG?x-oss-">https://img-blog.csdnimg.cn/20201031121122721.PNG?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70#pic_center)</p>
-<p>​<br>    score_tt &#x3D; []<br>    for i in range(peak[1]-15,peak[1]+15):<br>        rfc &#x3D; RandomForestClassifier(n_estimators &#x3D; i+1<br>                                    ,n_jobs &#x3D; -1<br>                                    ,random_state &#x3D; 156535)<br>        score &#x3D; cross_val_score(rfc, arr_t[:,:-1],arr_t[:,-1],cv&#x3D;10).mean()<br>        score_tt.append(score)<br>    peak &#x3D; [max(score_tt), ([*range(peak[1]-15,peak[1]+15)][score_tt.index(max(score_tt))])]<br>    plt.figure(figsize &#x3D; [20,5])<br>    plt.plot(range(peak[1]-15,peak[1]+15),score_tt)<br>    plt.show()<br>    peak</p>
-<p>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201031121129915.PNG?x-oss-">https://img-blog.csdnimg.cn/20201031121129915.PNG?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70#pic_center)</p>
-<p>​<br>    n_peak &#x3D; peak[1]</p>
+<p>​<br>
+score_tt = []<br>
+for i in range(0,300,15):<br>
+rfc = RandomForestClassifier(n_estimators = i+1<br>
+,n_jobs = -1<br>
+,random_state = 156535<br>
+)<br>
+score = cross_val_score(rfc, arr_t[:,:-1],arr_t[:,-1],cv=10).mean()<br>
+score_tt.append(score)<br>
+peak = [max(score_tt), score_tt.index(max(score_tt))*15+1]<br>
+plt.figure(figsize = [20,5])<br>
+plt.plot(range(1,301,15),score_tt)<br>
+plt.show()<br>
+peak</p>
+<p>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201031121122721.PNG?x-oss-">https://img-blog.csdnimg.cn/20201031121122721.PNG?x-oss-</a><br>
+process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)</p>
+<p>​<br>
+score_tt = []<br>
+for i in range(peak[1]-15,peak[1]+15):<br>
+rfc = RandomForestClassifier(n_estimators = i+1<br>
+,n_jobs = -1<br>
+,random_state = 156535)<br>
+score = cross_val_score(rfc, arr_t[:,:-1],arr_t[:,-1],cv=10).mean()<br>
+score_tt.append(score)<br>
+peak = [max(score_tt), ([*range(peak[1]-15,peak[1]+15)][score_tt.index(max(score_tt))])]<br>
+plt.figure(figsize = [20,5])<br>
+plt.plot(range(peak[1]-15,peak[1]+15),score_tt)<br>
+plt.show()<br>
+peak</p>
+<p>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201031121129915.PNG?x-oss-">https://img-blog.csdnimg.cn/20201031121129915.PNG?x-oss-</a><br>
+process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)</p>
+<p>​<br>
+n_peak = peak[1]</p>
 <p>网格化搜索找最大深度</p>
-<p>​<br>    param_grid &#x3D; {‘max_depth’ : np.arange(1,14)}</p>
+<p>​<br>
+param_grid = {‘max_depth’ : np.arange(1,14)}</p>
 <pre><code>rfc =  rfc = RandomForestClassifier(n_estimators = n_peak
                                 ,random_state = 156535
                                    ) 
@@ -168,9 +200,12 @@ GS.fit(arr_t[:,:-1],arr_t[:,-1])
 
 [GS.best_score_, GS.best_params_]
 </code></pre>
-<p>​<br>​<br>    depth_peak&#x3D;GS.best_params_[‘max_depth’]</p>
+<p>​<br>
+​<br>
+depth_peak=GS.best_params_[‘max_depth’]</p>
 <p>同理min_samples_split</p>
-<p>​<br>    param_grid &#x3D; {‘min_samples_split’ : np.arange(2,30)}</p>
+<p>​<br>
+param_grid = {‘min_samples_split’ : np.arange(2,30)}</p>
 <pre><code>rfc =  rfc = RandomForestClassifier(n_estimators = n_peak
                                 ,random_state = 156535
                                 ,max_depth = depth_peak
@@ -185,7 +220,8 @@ GS.fit(arr_t[:,:-1],arr_t[:,-1])
 [GS.best_score_, GS.best_params_]
 </code></pre>
 <p>同理 criterion</p>
-<p>​<br>    param_grid &#x3D; {‘criterion’ : [‘gini’,’entropy’]}</p>
+<p>​<br>
+param_grid = {‘criterion’ : [‘gini’,‘entropy’]}</p>
 <pre><code>rfc =  rfc = RandomForestClassifier(n_estimators = n_peak
                                 ,random_state = 156535
                                 ,max_depth = depth_peak
@@ -200,7 +236,8 @@ GS.fit(arr_t[:,:-1],arr_t[:,-1])
 [GS.best_score_, GS.best_params_]
 </code></pre>
 <p>网格化搜索n_estimators</p>
-<p>​<br>    param_grid &#x3D; {‘n_estimators’ : np.arange(1,300,15)}</p>
+<p>​<br>
+param_grid = {‘n_estimators’ : np.arange(1,300,15)}</p>
 <pre><code>rfc = RandomForestClassifier( random_state = 156535
                                
                                    )
@@ -217,7 +254,7 @@ GS.fit(arr_t[:,:-1],arr_t[:,-1])
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%20%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%20%E7%BD%91%E6%A0%BC%E5%8C%96%E6%90%9C%E7%B4%A2/" data-id="cl50tnlri0037ycj39wdw6g8g" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%20%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%20%E7%BD%91%E6%A0%BC%E5%8C%96%E6%90%9C%E7%B4%A2/" data-id="cl50x8cn7003bccj36moa52yq" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" rel="tag">随机森林</a></li></ul>
@@ -228,19 +265,19 @@ GS.fit(arr_t[:,:-1],arr_t[:,-1])
     
 <nav id="article-nav">
   
-    <a href="/1111/11/11/%E3%80%90%E6%8D%A2%E6%A0%B9DP%E3%80%91Tree%20and%20Permutation/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E3%80%90%E6%97%A0%E5%90%91%E5%9B%BE%20-%20%E5%B8%A6%E6%9D%A1%E4%BB%B6(%E6%9C%80%E5%B0%8F%E6%8D%A2%E4%B9%98)%E6%9C%80%E7%9F%AD%E8%B7%AF%E3%80%91L3-014%20%E5%91%A8%E6%B8%B8%E4%B8%96%E7%95%8C%20(30%E5%88%86)/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          【换根DP】Tree and Permutation.md
+          【无向图 - 带条件(最小换乘)最短路】L3-014 周游世界 (30分).md
         
       </div>
     </a>
   
   
-    <a href="/1111/11/11/%E3%80%90%E6%97%A0%E5%90%91%E5%9B%BE%20-%20%E5%B8%A6%E6%9D%A1%E4%BB%B6(%E6%9C%80%E5%B0%8F%E6%8D%A2%E4%B9%98)%E6%9C%80%E7%9F%AD%E8%B7%AF%E3%80%91L3-014%20%E5%91%A8%E6%B8%B8%E4%B8%96%E7%95%8C%20(30%E5%88%86)/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E4%BD%BF%E7%94%A8sklearn%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">【无向图 - 带条件(最小换乘)最短路】L3-014 周游世界 (30分).md</div>
+      <div class="article-nav-title">【机器学习】应用简例 使用sklearn交叉验证随机森林.md</div>
     </a>
   
 </nav>

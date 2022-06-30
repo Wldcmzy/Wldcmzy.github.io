@@ -5,15 +5,15 @@
   
   <title>学习在ECS上实现定期执行在学校官网发帖子签到的py脚本.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 本文不作为较专业的资料，仅为萌新不专业的试水和踩坑  1.编写签到脚本从这个环节开始我就遇到了许多问题，">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 本文不作为较专业的资料，仅为萌新不专业的试水和踩坑  1.编写签到脚本 从这个环节开始我就遇到了许多">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习在ECS上实现定期执行在学校官网发帖子签到的py脚本.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E5%AD%A6%E4%B9%A0%E5%9C%A8ECS%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%9C%9F%E6%89%A7%E8%A1%8C%E5%9C%A8%E5%AD%A6%E6%A0%A1%E5%AE%98%E7%BD%91%E5%8F%91%E5%B8%96%E5%AD%90%E7%AD%BE%E5%88%B0%E7%9A%84py%E8%84%9A%E6%9C%AC/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 本文不作为较专业的资料，仅为萌新不专业的试水和踩坑  1.编写签到脚本从这个环节开始我就遇到了许多问题，">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 本文不作为较专业的资料，仅为萌新不专业的试水和踩坑  1.编写签到脚本 从这个环节开始我就遇到了许多">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.477Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.822Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="服务器">
@@ -125,37 +125,48 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<p><strong>本文不作为较专业的资料，仅为萌新不专业的试水和踩坑</strong> </p>
-<h2 id="1-编写签到脚本"><a href="#1-编写签到脚本" class="headerlink" title="1.编写签到脚本"></a>1.编写签到脚本</h2><p>从这个环节开始我就遇到了许多问题，比如可以复制cookie实现签到，但不会获取cooike<br>实际上直到现在写博客，我始终没有做到完整地吧所需要的cookie提取出来，对于爬虫也是一知半解</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<p><strong>本文不作为较专业的资料，仅为萌新不专业的试水和踩坑</strong></p>
+<h2 id="1编写签到脚本"><a class="markdownIt-Anchor" href="#1编写签到脚本"></a> 1.编写签到脚本</h2>
+<p>从这个环节开始我就遇到了许多问题，比如可以复制cookie实现签到，但不会获取cooike<br>
+实际上直到现在写博客，我始终没有做到完整地吧所需要的cookie提取出来，对于爬虫也是一知半解</p>
 <p>直接上误打误撞写出来的拉跨代码（部分内容隐蔽或更改）：</p>
-<p>​    </p>
+<p>​</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">url=<span class="string">&#x27;在学校官网登录请求的url&#x27;</span></span><br><span class="line">header=&#123;</span><br><span class="line">        <span class="string">&#x27;Referer&#x27;</span>: <span class="string">&#x27;secret&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;mystery&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">data=&#123;</span><br><span class="line">        <span class="string">&#x27;IPT_LOGINUSERNAME&#x27;</span>: <span class="string">&#x27;what?&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;IPT_LOGINPASSWORD&#x27;</span>: <span class="string">&#x27;you don\&#x27;t know&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">session=requests.session()</span><br><span class="line">res=session.post(url,headers=header,data=data)</span><br><span class="line"></span><br><span class="line">posturl=<span class="string">&#x27;发帖子请求的url&#x27;</span></span><br></pre></td></tr></table></figure>
-
-
-<p>​    </p>
+<p>​</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">headersx=&#123;</span><br><span class="line">        <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;Referer&#x27;</span>: <span class="string">&#x27;mytsery&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;jsadsadfsadfasd&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">datax=&#123;</span><br><span class="line">        <span class="string">&#x27;opt&#x27;</span>: <span class="string">&#x27;toreply&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;frompage&#x27;</span>: <span class="string">&#x27;common&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;forumid&#x27;</span>:<span class="string">&#x27;3743&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;threadid&#x27;</span>:<span class="string">&#x27;114775&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;parentid&#x27;</span>:<span class="string">&#x27;239973&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;0&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;subject&#x27;</span>:<span class="string">&#x27;帖子标题的一些内容&#x27;</span>.encode(<span class="string">&quot;gbk&quot;</span>),</span><br><span class="line">        <span class="string">&#x27;body&#x27;</span>: <span class="string">&#x27;&lt;p&gt;学号 某某签到&lt;/p&gt;&#x27;</span>.encode(<span class="string">&quot;gbk&quot;</span>)<span class="comment">#编码格式一定要换，否则发出乱码</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">resx=session.post(posturl,headers=headersx,data=datax)</span><br><span class="line"></span><br><span class="line"><span class="comment">#相当于一个日志</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;journal.txt&#x27;</span>,<span class="string">&#x27;a&#x27;</span>) <span class="keyword">as</span> f:<span class="comment">#这是在本地写的，放在服务器上要使用绝对路径，否则会在根目录创建文件</span></span><br><span class="line">    string=<span class="string">&#x27;&#x27;</span></span><br><span class="line">    tm=time.localtime()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">6</span>):</span><br><span class="line">        string+=<span class="built_in">str</span>(tm[i])+<span class="string">&#x27; &#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        string+=<span class="string">&#x27;OVER \n&#x27;</span></span><br><span class="line">    f.write(string)</span><br></pre></td></tr></table></figure>
-
-
-<p>​    </p>
-<h2 id="2-在ECS上令其定时执行"><a href="#2-在ECS上令其定时执行" class="headerlink" title="2.在ECS上令其定时执行"></a>2.在ECS上令其定时执行</h2><p>我的云服务器装的乌班图系统</p>
+<p>​</p>
+<h2 id="2在ecs上令其定时执行"><a class="markdownIt-Anchor" href="#2在ecs上令其定时执行"></a> 2.在ECS上令其定时执行</h2>
+<p>我的云服务器装的乌班图系统</p>
 <p>先通过以下操作测试了一下py文件是否能在云服务器上运行，且运行成功</p>
 <blockquote>
 <p>python3 签到文件</p>
 </blockquote>
-<p>然后通过第一行的操作打开控制定时执行的文件，添加内容，最后两行是我新添加的内容(排版不是很好，服务器上看是很清晰的)。<br>关于怎样设置执行时间见传送门：<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-crontab.html">https://www.runoob.com/linux/linux-comm-crontab.html</a></p>
+<p>然后通过第一行的操作打开控制定时执行的文件，添加内容，最后两行是我新添加的内容(排版不是很好，服务器上看是很清晰的)。<br>
+关于怎样设置执行时间见传送门：<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-crontab.html">https://www.runoob.com/linux/linux-comm-crontab.html</a></p>
 <blockquote>
-<p>vi &#x2F;etc&#x2F;corntab</p>
+<p>vi /etc/corntab</p>
 </blockquote>
 <blockquote>
-<h1 id="m-h-dom-mon-dow-user-command"><a href="#m-h-dom-mon-dow-user-command" class="headerlink" title="m h dom mon dow user command"></a>m h dom mon dow user command</h1><p> 17 * * * * root cd &#x2F; &amp;&amp; run-parts –report &#x2F;etc&#x2F;cron.hourly<br> 25 6 * * * root test -x &#x2F;usr&#x2F;sbin&#x2F;anacron || ( cd &#x2F; &amp;&amp; run-parts –report<br>&#x2F;etc&#x2F;cron.daily )<br> 47 6 * * 7 root test -x &#x2F;usr&#x2F;sbin&#x2F;anacron || ( cd &#x2F; &amp;&amp; run-parts –report<br>&#x2F;etc&#x2F;cron.weekly )<br> 52 6 1 * * root test -x &#x2F;usr&#x2F;sbin&#x2F;anacron || ( cd &#x2F; &amp;&amp; run-parts –report<br>&#x2F;etc&#x2F;cron.monthly )<br> 0 14 * * 3 root &#x2F;usr&#x2F;bin&#x2F;python3.6 &#x2F;home&#x2F;signIn195C&#x2F;login195C.py<br> 0 10 * * 5 root &#x2F;usr&#x2F;bin&#x2F;python3.6 &#x2F;home&#x2F;signIn195C&#x2F;login195C.py</p>
+<h1 id="m-h-dom-mon-dow-user-command"><a class="markdownIt-Anchor" href="#m-h-dom-mon-dow-user-command"></a> m h dom mon dow user command</h1>
+<p>17 * * * * root cd / &amp;&amp; run-parts --report /etc/cron.hourly<br>
+25 6 * * * root test -x /usr/sbin/anacron || ( cd / &amp;&amp; run-parts --report<br>
+/etc/cron.daily )<br>
+47 6 * * 7 root test -x /usr/sbin/anacron || ( cd / &amp;&amp; run-parts --report<br>
+/etc/cron.weekly )<br>
+52 6 1 * * root test -x /usr/sbin/anacron || ( cd / &amp;&amp; run-parts --report<br>
+/etc/cron.monthly )<br>
+0 14 * * 3 root /usr/bin/python3.6 /home/signIn195C/login195C.py<br>
+0 10 * * 5 root /usr/bin/python3.6 /home/signIn195C/login195C.py</p>
 </blockquote>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>python脚本若要建立（或写入）文件一定要使用绝对路径。笔者手动执行程序时会在脚本所在的目录建立（或写入）文件，但自动执行时文件会在根目录建立（或写入）</p>
+<h2 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意</h2>
+<p>python脚本若要建立（或写入）文件一定要使用绝对路径。笔者手动执行程序时会在脚本所在的目录建立（或写入）文件，但自动执行时文件会在根目录建立（或写入）</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E5%AD%A6%E4%B9%A0%E5%9C%A8ECS%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%9C%9F%E6%89%A7%E8%A1%8C%E5%9C%A8%E5%AD%A6%E6%A0%A1%E5%AE%98%E7%BD%91%E5%8F%91%E5%B8%96%E5%AD%90%E7%AD%BE%E5%88%B0%E7%9A%84py%E8%84%9A%E6%9C%AC/" data-id="cl50tnls8005fycj3dl71050r" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E5%AD%A6%E4%B9%A0%E5%9C%A8ECS%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%9C%9F%E6%89%A7%E8%A1%8C%E5%9C%A8%E5%AD%A6%E6%A0%A1%E5%AE%98%E7%BD%91%E5%8F%91%E5%B8%96%E5%AD%90%E7%AD%BE%E5%88%B0%E7%9A%84py%E8%84%9A%E6%9C%AC/" data-id="cl50x8cnv005gccj34a40dx0q" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li></ul>

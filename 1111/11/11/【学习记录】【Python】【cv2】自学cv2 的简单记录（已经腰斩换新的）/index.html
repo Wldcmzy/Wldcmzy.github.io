@@ -5,15 +5,15 @@
   
   <title>【学习记录】【Python】【cv2】自学cv2 的简单记录（已经腰斩换新的）.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 1.图像的载入、显示、保存​​    import cv2​    #读入图像 cv2.imread(f">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  1.图像的载入、显示、保存 ​ ​    import cv2 ​ #读入图像 cv2.imrea">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【学习记录】【Python】【cv2】自学cv2 的简单记录（已经腰斩换新的）.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90cv2%E3%80%91%E8%87%AA%E5%AD%A6cv2%20%E7%9A%84%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 1.图像的载入、显示、保存​​    import cv2​    #读入图像 cv2.imread(f">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  1.图像的载入、显示、保存 ​ ​    import cv2 ​ #读入图像 cv2.imrea">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.430Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.775Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="python库">
@@ -125,50 +125,134 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="1-图像的载入、显示、保存"><a href="#1-图像的载入、显示、保存" class="headerlink" title="1.图像的载入、显示、保存"></a>1.图像的载入、显示、保存</h2><p>​<br>​    import cv2<br>​<br>    #读入图像 cv2.imread(filepath,flags)<br>    #flags参数的取值：<br>    #cv2.IMREAD_COLOR：默认，载入一个彩色图像，忽略透明度   可用1代替<br>    #cv2.IMREAD_GRAYSCALE：载入一个灰阶图像  可用0代替<br>    #cv2.IMREAD_UNCHANGED：载入一个包含 Alpha 通道（透明度）的图像   可用-1代替<br>    img1&#x3D;cv2.imread(‘img_chess.jpg’,0)</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="1图像的载入-显示-保存"><a class="markdownIt-Anchor" href="#1图像的载入-显示-保存"></a> 1.图像的载入、显示、保存</h2>
+<p>​<br>
+​    import cv2<br>
+​<br>
+#读入图像 cv2.imread(filepath,flags)<br>
+#flags参数的取值：<br>
+#cv2.IMREAD_COLOR：默认，载入一个彩色图像，忽略透明度   可用1代替<br>
+#cv2.IMREAD_GRAYSCALE：载入一个灰阶图像  可用0代替<br>
+#cv2.IMREAD_UNCHANGED：载入一个包含 Alpha 通道（透明度）的图像   可用-1代替<br>
+img1=cv2.imread(‘img_chess.jpg’,0)</p>
 <pre><code>#显示图像   cv2.imshow(wname,img)
 #wname  窗口的名字 window name
 #img 要显示的图像 窗口他大小为自动调整图片大小
-cv2.imshow(&#39;image_one&#39;,img1)
+cv2.imshow('image_one',img1)
 key=cv2.waitKey(0)                  #等待键盘输入，单位毫秒，0为无限等待  没有这句话窗口只会闪一下就消失
 if key==27:
-    print(&#39;您按了ESC&#39;)
+    print('您按了ESC')
 #cv2.destroyAllWindows()            #销毁所有窗口
-cv2.destroyWindow(&#39;image_one&#39;)      #指定窗口名字销毁窗口
+cv2.destroyWindow('image_one')      #指定窗口名字销毁窗口
 </code></pre>
-<p>​<br>​    #保存图像 cv2.imwrite(file，img，num)<br>​    #file 文件名<br>​    #img  要保存的图像<br>​    #num 对于JPEG，其表示的是图像的质量，用0 - 100的整数表示，默认95;对于png 用0-9 ,第三个参数表示的是压缩级别。默认为3.<br>​    cv2.imwrite(‘img_chess_gray.jpg’,img1,[cv2.IMWRITE_JPEG_QUALITY,0])<br>​    cv2.imwrite(‘img_chess_gray.png’,img1,[cv2.IMWRITE_PNG_COMPRESSION,0])<br>​    # jpg属于有损压缩，是以图片的清晰度为代价的，数字越小，压缩比越高，图片质量损失越严重<br>​    # png属于无损压缩，数字0-9，数字越低，压缩比越低<br>​<br>    input(‘按回车退出程序’)</p>
+<p>​<br>
+​    #保存图像 cv2.imwrite(file，img，num)<br>
+​    #file 文件名<br>
+​    #img  要保存的图像<br>
+​    #num 对于JPEG，其表示的是图像的质量，用0 - 100的整数表示，默认95;对于png 用0-9 ,第三个参数表示的是压缩级别。默认为3.<br>
+​    cv2.imwrite(‘img_chess_gray.jpg’,img1,[cv2.IMWRITE_JPEG_QUALITY,0])<br>
+​    cv2.imwrite(‘img_chess_gray.png’,img1,[cv2.IMWRITE_PNG_COMPRESSION,0])<br>
+​    # jpg属于有损压缩，是以图片的清晰度为代价的，数字越小，压缩比越高，图片质量损失越严重<br>
+​    # png属于无损压缩，数字0-9，数字越低，压缩比越低<br>
+​<br>
+input(‘按回车退出程序’)</p>
 <p>那张保存为jpg格式的图片惨不忍睹</p>
-<h2 id="2-简单的图片操作-反转、复制、缩放、裁剪"><a href="#2-简单的图片操作-反转、复制、缩放、裁剪" class="headerlink" title="2.简单的图片操作 反转、复制、缩放、裁剪"></a>2.简单的图片操作 反转、复制、缩放、裁剪</h2><p>flip copy resize</p>
-<p>​<br>​    import cv2<br>​<br>    img1&#x3D;cv2.imread(‘img_chess.jpg’)</p>
+<h2 id="2简单的图片操作-反转-复制-缩放-裁剪"><a class="markdownIt-Anchor" href="#2简单的图片操作-反转-复制-缩放-裁剪"></a> 2.简单的图片操作 反转、复制、缩放、裁剪</h2>
+<p>flip copy resize</p>
+<p>​<br>
+​    import cv2<br>
+​<br>
+img1=cv2.imread(‘img_chess.jpg’)</p>
 <pre><code>#图片反转 cv2.flip(img,flipcode)
 #flipcode &gt;0 沿x轴 flipcode=0 沿y轴 flipcode&lt;0 xy轴同时反转
 img1_flipx=cv2.flip(img1,1)
 img1_flipy=cv2.flip(img1,0)
 img1_flipxy=cv2.flip(img1,-1)
 
-cv2.imshow(&#39;1fx&#39;,img1_flipx)
-cv2.imshow(&#39;1fy&#39;,img1_flipy)
-cv2.imshow(&#39;1fxy&#39;,img1_flipxy)
+cv2.imshow('1fx',img1_flipx)
+cv2.imshow('1fy',img1_flipy)
+cv2.imshow('1fxy',img1_flipxy)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 </code></pre>
-<p>​<br>​    #图像复制<br>​    img1_cp&#x3D;img1.copy()<br>​    cv2.imshow(‘1cp’,img1_cp)<br>​    cv2.waitKey()<br>​    cv2.destroyAllWindows()</p>
-<p>​<br>​    #图像的缩放<br>​    img_info&#x3D;img1.shape<br>​    height&#x3D;img_info[0]<br>​    width&#x3D;img_info[1]<br>​    img1_resized&#x3D;cv2.resize(img1.copy(),(int(width<em>1.2),int(height</em>0.6)))<br>​    cv2.imshow(‘1resized’,img1_resized)<br>​    cv2.waitKey(0)<br>​    cv2.destroyAllWindows()<br>​<br>    #图像的裁剪<br>    img1_cut&#x3D;img1[350:800,60:500]<br>    h,w,n&#x3D;img1.shape<br>    img1_cut2&#x3D;img1[int(h&#x2F;4):int(h<em>3&#x2F;4),int(w&#x2F;4):int(w</em>3&#x2F;4)]<br>    cv2.imshow(‘1cut’,img1_cut)<br>    cv2.imshow(‘1cut2’,img1_cut2)<br>    cv2.waitKey(0)<br>    cv2.destroyAllWindows()</p>
-<h2 id="3-图像通道的分离与合成"><a href="#3-图像通道的分离与合成" class="headerlink" title="3.图像通道的分离与合成"></a>3.图像通道的分离与合成</h2><p><strong>分离：</strong><br>img1B,img1G,img1R&#x3D;np.dsplit(img1,3)<br>img1B,img1G,img1R&#x3D;cv2.split(img1)都可以<br><strong>合成：</strong><br>cv2.merge([b,g,r])<br>cv2.merge([zeros, zeros, img1R])</p>
+<p>​<br>
+​    #图像复制<br>
+​    img1_cp=img1.copy()<br>
+​    cv2.imshow(‘1cp’,img1_cp)<br>
+​    cv2.waitKey()<br>
+​    cv2.destroyAllWindows()</p>
+<p>​<br>
+​    #图像的缩放<br>
+​    img_info=img1.shape<br>
+​    height=img_info[0]<br>
+​    width=img_info[1]<br>
+​    img1_resized=cv2.resize(img1.copy(),(int(width<em>1.2),int(height</em>0.6)))<br>
+​    cv2.imshow(‘1resized’,img1_resized)<br>
+​    cv2.waitKey(0)<br>
+​    cv2.destroyAllWindows()<br>
+​<br>
+#图像的裁剪<br>
+img1_cut=img1[350:800,60:500]<br>
+h,w,n=img1.shape<br>
+img1_cut2=img1[int(h/4):int(h<em>3/4),int(w/4):int(w</em>3/4)]<br>
+cv2.imshow(‘1cut’,img1_cut)<br>
+cv2.imshow(‘1cut2’,img1_cut2)<br>
+cv2.waitKey(0)<br>
+cv2.destroyAllWindows()</p>
+<h2 id="3图像通道的分离与合成"><a class="markdownIt-Anchor" href="#3图像通道的分离与合成"></a> 3.图像通道的分离与合成</h2>
+<p><strong>分离：</strong><br>
+img1B,img1G,img1R=np.dsplit(img1,3)<br>
+img1B,img1G,img1R=cv2.split(img1)都可以<br>
+<strong>合成：</strong><br>
+cv2.merge([b,g,r])<br>
+cv2.merge([zeros, zeros, img1R])</p>
 <p><strong>注意倒数第五句的注释</strong></p>
-<p>​<br>​    import cv2<br>​    import numpy as np<br>​<br>    def showone(img):<br>        cv2.imshow(‘show image’,img)<br>        cv2.waitKey(0)<br>        cv2.destroyAllWindows()<br>    def showone_color(img,color):<br>        zeros&#x3D;np.zeros(img.shape[:2],dtype&#x3D;’uint8’) #记得调整格式<br>        if color &#x3D;&#x3D; ‘B’:<br>            cv2.imshow(‘blue’,cv2.merge([img1B,zeros,zeros]))<br>        elif color &#x3D;&#x3D; ‘G’:<br>            cv2.imshow(‘green’, cv2.merge([zeros, img1G, zeros]))<br>        elif color &#x3D;&#x3D; ‘R’:<br>            cv2.imshow(‘red’, cv2.merge([zeros, zeros, img1R]))<br>        cv2.waitKey(0)<br>        cv2.destroyAllWindows()<br>    def showone_merge(b,g,r):<br>        cv2.imshow(‘merge’,cv2.merge([b,g,r]))<br>        cv2.waitKey(0)<br>        cv2.destroyAllWindows()</p>
-<p>​<br>​    img1&#x3D;cv2.imread(‘theimg.png’,1)<br>​<br>    img1B,img1G,img1R&#x3D;np.dsplit(img1,3)<br>    #img1B,img1G,img1R&#x3D;cv2.split(img1)</p>
+<p>​<br>
+​    import cv2<br>
+​    import numpy as np<br>
+​<br>
+def showone(img):<br>
+cv2.imshow(‘show image’,img)<br>
+cv2.waitKey(0)<br>
+cv2.destroyAllWindows()<br>
+def showone_color(img,color):<br>
+zeros=np.zeros(img.shape[:2],dtype=‘uint8’) #记得调整格式<br>
+if color == ‘B’:<br>
+cv2.imshow(‘blue’,cv2.merge([img1B,zeros,zeros]))<br>
+elif color == ‘G’:<br>
+cv2.imshow(‘green’, cv2.merge([zeros, img1G, zeros]))<br>
+elif color == ‘R’:<br>
+cv2.imshow(‘red’, cv2.merge([zeros, zeros, img1R]))<br>
+cv2.waitKey(0)<br>
+cv2.destroyAllWindows()<br>
+def showone_merge(b,g,r):<br>
+cv2.imshow(‘merge’,cv2.merge([b,g,r]))<br>
+cv2.waitKey(0)<br>
+cv2.destroyAllWindows()</p>
+<p>​<br>
+​    img1=cv2.imread(‘theimg.png’,1)<br>
+​<br>
+img1B,img1G,img1R=np.dsplit(img1,3)<br>
+#img1B,img1G,img1R=cv2.split(img1)</p>
 <pre><code>print(img1B.dtype)          #矩阵元素的格式为uint8
 </code></pre>
-<p>​<br>​<br>​    showone(img1B)      #这里图像为灰色，原因是当调用cv2.imshow的时候G、R两个通道被默认设为了与B通道一样，三通道一样时显示灰度图</p>
-<p>​<br>​    showone_color(img1B,’B’)<br>​    showone_color(img1G,’G’)<br>​    showone_color(img1R,’R’)<br>​<br>    showone_merge(img1B,img1G,img1R)        #合成后是原图</p>
-<p>​    </p>
+<p>​<br>
+​<br>
+​    showone(img1B)      #这里图像为灰色，原因是当调用cv2.imshow的时候G、R两个通道被默认设为了与B通道一样，三通道一样时显示灰度图</p>
+<p>​<br>
+​    showone_color(img1B,‘B’)<br>
+​    showone_color(img1G,‘G’)<br>
+​    showone_color(img1R,‘R’)<br>
+​<br>
+showone_merge(img1B,img1G,img1R)        #合成后是原图</p>
+<p>​</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90cv2%E3%80%91%E8%87%AA%E5%AD%A6cv2%20%E7%9A%84%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/" data-id="cl50tnlr50022ycj3e11hh7yd" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90cv2%E3%80%91%E8%87%AA%E5%AD%A6cv2%20%E7%9A%84%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/" data-id="cl50x8cmu001wccj3awxy59fa" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cv/" rel="tag">cv</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%BA%93/" rel="tag">python库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a></li></ul>
@@ -179,19 +263,19 @@ cv2.destroyAllWindows()
     
 <nav id="article-nav">
   
-    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%EF%BC%88%E6%9C%AA%E5%AE%8C%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91python%20matplotlib%20%E8%87%AA%E5%AD%A6%E5%85%A5%E9%97%A8%EF%BC%88%E9%9A%8F%E7%BC%98%E6%9B%B4%E6%96%B0%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          【学习记录】【Python】【numpy】自学简要记录（未完）.md
+          【学习记录】python matplotlib 自学入门（随缘更新）.md
         
       </div>
     </a>
   
   
-    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90openpyxl%E3%80%91%E7%AE%80%E8%A6%81%E5%AD%A6%E4%B9%A0openpyxl%20%20%20%E7%9A%84%20%20%20%20%E8%AE%B0%E5%BD%95----%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6numpy%E5%BA%93%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%E5%B8%96%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">【学习记录】【Python】【openpyxl】简要学习openpyxl   的    记录----未完待续.md</div>
+      <div class="article-nav-title">【学习记录】【Python】【numpy】自学numpy库的简要记录帖（已经腰斩换新的）.md</div>
     </a>
   
 </nav>

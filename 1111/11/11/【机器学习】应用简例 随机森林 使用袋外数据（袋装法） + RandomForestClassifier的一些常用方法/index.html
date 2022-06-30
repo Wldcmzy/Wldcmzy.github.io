@@ -5,15 +5,15 @@
   
   <title>【机器学习】应用简例 随机森林 使用袋外数据（袋装法） + RandomForestClassifier的一些常用方法.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 import numpy as np import pandas as pd from sklearn.">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 import numpy as np import pandas as pd from sklear">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【机器学习】应用简例 随机森林 使用袋外数据（袋装法） + RandomForestClassifier的一些常用方法.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BD%BF%E7%94%A8%E8%A2%8B%E5%A4%96%E6%95%B0%E6%8D%AE%EF%BC%88%E8%A2%8B%E8%A3%85%E6%B3%95%EF%BC%89%20+%20RandomForestClassifier%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 import numpy as np import pandas as pd from sklearn.">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 import numpy as np import pandas as pd from sklear">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.807Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="随机森林">
@@ -124,29 +124,37 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
 <pre><code>import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 
 # 从excel表导入数据
-df_t = pd.read_excel(r&#39;D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\train.xlsx&#39;)
+df_t = pd.read_excel(r'D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\train.xlsx')
 
 # 删除uid列
-df_t = df_t.drop(columns=&#39;uid&#39;)
+df_t = df_t.drop(columns='uid')
 
-# 把数据中的&#39;?&#39;换成每一列的众数
+# 把数据中的'?'换成每一列的众数
 for col in df_t.columns:
     idx = df_t[col].value_counts().index
-    df_t[col][df_t[col] == &#39;?&#39;] = idx[0] if idx[0] != &#39;?&#39; else idx[1]
+    df_t[col][df_t[col] == '?'] = idx[0] if idx[0] != '?' else idx[1]
 
 # 把pandas.DataFrame数据转化为numpy.darray数据 元素类型为np.float32
 arr_t = df_t.values.astype(np.float32)
 </code></pre>
-<p>​<br>​<br>    rfc &#x3D; RandomForestClassifier(bootstrap&#x3D;True #boostrap默认为True 即使用装袋法<br>                                 ,oob_score&#x3D;True #oob_score默认为False 为True即使用袋外数据做测试集，训练模型时不需要划分训练集和测试集#<br>                                 ,max_depth&#x3D;4<br>                                 )<br>    rfc &#x3D; rfc.fit(arr_t[:,:-1],arr_t[:,-1])</p>
+<p>​<br>
+​<br>
+rfc = RandomForestClassifier(bootstrap=True #boostrap默认为True 即使用装袋法<br>
+,oob_score=True #oob_score默认为False 为True即使用袋外数据做测试集，训练模型时不需要划分训练集和测试集#<br>
+,max_depth=4<br>
+)<br>
+rfc = rfc.fit(arr_t[:,:-1],arr_t[:,-1])</p>
 <pre><code>print(rfc.oob_score_) #打印成绩
 </code></pre>
-<p>​<br>    print(rfc.estimators_) #打印所有的树</p>
+<p>​<br>
+print(rfc.estimators_) #打印所有的树</p>
 <pre><code>print(rfc.feature_importances_) #打印特征的重要性
 
 Xtrain,Xtest,Ytrain,Ytest = train_test_split(arr_t[:,:-1],arr_t[:,-1],test_size=0.3)
@@ -163,7 +171,7 @@ print(rfc.predict_proba(Xtest)) #返回每一个样本被分到每一个标签�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BD%BF%E7%94%A8%E8%A2%8B%E5%A4%96%E6%95%B0%E6%8D%AE%EF%BC%88%E8%A2%8B%E8%A3%85%E6%B3%95%EF%BC%89%20+%20RandomForestClassifier%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" data-id="cl50tnlrm003kycj381wve1zg" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BD%BF%E7%94%A8%E8%A2%8B%E5%A4%96%E6%95%B0%E6%8D%AE%EF%BC%88%E8%A2%8B%E8%A3%85%E6%B3%95%EF%BC%89%20+%20RandomForestClassifier%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" data-id="cl50x8cn9003kccj38xj0f79p" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" rel="tag">随机森林</a></li></ul>

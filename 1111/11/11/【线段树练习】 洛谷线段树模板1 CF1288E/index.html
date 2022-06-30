@@ -5,15 +5,15 @@
   
   <title>【线段树练习】 洛谷线段树模板1 CF1288E.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 洛谷 P3372 线段树模板1​    #include &lt;bits&#x2F;stdc++.h&amp;">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  洛谷 P3372 线段树模板1 ​ #include &lt;bits&#x2F;stdc++.h&gt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【线段树练习】 洛谷线段树模板1 CF1288E.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E7%BA%BF%E6%AE%B5%E6%A0%91%E7%BB%83%E4%B9%A0%E3%80%91%20%E6%B4%9B%E8%B0%B7%E7%BA%BF%E6%AE%B5%E6%A0%91%E6%A8%A1%E6%9D%BF1%20CF1288E/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 洛谷 P3372 线段树模板1​    #include &lt;bits&#x2F;stdc++.h&amp;">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  洛谷 P3372 线段树模板1 ​ #include &lt;bits&#x2F;stdc++.h&gt;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.822Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="线段树">
@@ -123,8 +123,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="洛谷-P3372-线段树模板1"><a href="#洛谷-P3372-线段树模板1" class="headerlink" title="洛谷 P3372 线段树模板1"></a>洛谷 P3372 线段树模板1</h2><p>​<br>    #include &lt;bits&#x2F;stdc++.h&gt;</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="洛谷-p3372-线段树模板1"><a class="markdownIt-Anchor" href="#洛谷-p3372-线段树模板1"></a> 洛谷 P3372 线段树模板1</h2>
+<p>​<br>
+#include &lt;bits/stdc++.h&gt;</p>
 <pre><code>const int N = 1e5+4;
 typedef long long LL;
 LL val[N&lt;&lt;2],lazy[N&lt;&lt;2];
@@ -158,7 +161,16 @@ void pushdown(int l,int r,int rt)
    lazy[rt] = 0;
 &#125;
 </code></pre>
-<p>​<br>    LL query(int sl,int sr,int l,int r,int rt)<br>    {<br>       if(sl &gt;&#x3D; l &amp;&amp; sr &lt;&#x3D; r) return val[rt];<br>       pushdown(sl,sr,rt);<br>       int mid &#x3D; getMid(sl,sr);<br>       if(r &lt;&#x3D;mid) return query(sl,mid,l,r,rt&lt;&lt;1);<br>       else if(l &gt; mid) return query(mid+1,sr,l,r,rt&lt;&lt;1|1);<br>       else return query(sl,mid,l,r,rt&lt;&lt;1) + query(mid+1,sr,l,r,rt&lt;&lt;1|1);<br>    }</p>
+<p>​<br>
+LL query(int sl,int sr,int l,int r,int rt)<br>
+{<br>
+if(sl &gt;= l &amp;&amp; sr &lt;= r) return val[rt];<br>
+pushdown(sl,sr,rt);<br>
+int mid = getMid(sl,sr);<br>
+if(r &lt;=mid) return query(sl,mid,l,r,rt&lt;&lt;1);<br>
+else if(l &gt; mid) return query(mid+1,sr,l,r,rt&lt;&lt;1|1);<br>
+else return query(sl,mid,l,r,rt&lt;&lt;1) + query(mid+1,sr,l,r,rt&lt;&lt;1|1);<br>
+}</p>
 <pre><code>void update(int sl,int sr,int l,int r,int v,int rt)
 &#123;
    if(sl &gt;= l &amp;&amp; sr &lt;= r)&#123;
@@ -210,16 +222,50 @@ int main()
    return 0;
 &#125;
 </code></pre>
-<p>​    </p>
-<h2 id="CF1288E"><a href="#CF1288E" class="headerlink" title="CF1288E"></a>CF1288E</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF1288E">https://www.luogu.com.cn/problem/CF1288E</a><br><strong>最小的排名</strong> 可想而知，若发过消息，则是1，否则为初始值。<br><strong>最大的排名</strong> ，用线段树记录：</p>
+<p>​</p>
+<h2 id="cf1288e"><a class="markdownIt-Anchor" href="#cf1288e"></a> CF1288E</h2>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF1288E">https://www.luogu.com.cn/problem/CF1288E</a><br>
+<strong>最小的排名</strong> 可想而知，若发过消息，则是1，否则为初始值。<br>
+<strong>最大的排名</strong> ，用线段树记录：</p>
 <blockquote>
-<p>假设人数为N，发消息次数为M，则开一个区间大小为M+N的线段树，用于记录所有人的最大排名。前M位初始化为1，后N为为[1，2，3，4…N]。（代码中用qu[]数组模拟出这样的值，然后初始化线段树），初始化整形变量idx&#x3D;M</p>
+<p>假设人数为N，发消息次数为M，则开一个区间大小为M+N的线段树，用于记录所有人的最大排名。前M位初始化为1，后N为为[1，2，3，4…N]。（代码中用qu[]数组模拟出这样的值，然后初始化线段树），初始化整形变量idx=M</p>
 </blockquote>
 <p>把每个人的最小排名和最晚排名都初始化为其序号。</p>
 <p>用qu[]数组记录每个人最后出现的位置。(发一次消息算出现一次，qu[]具体表示什么，看完下方的3条就明白了)</p>
-<h4 id="每当一个人i发消息："><a href="#每当一个人i发消息：" class="headerlink" title="每当一个人i发消息："></a>每当一个人i发消息：</h4><p>1.更新这个人的最小排名为1，最大排名为max(原最大排名,线段树查询qu[i]位置的结果)<br>2.把区间[idx+1,qu[i]]即这个人以及之前所有人对应的区间+1（是否包含这个人时无所谓的）<br>3.然后把这个人提前为第一个人，即qu[i]改为出现的位置改为idx–（也可以先提前，这样的话线段树区间应该初始化为0），</p>
-<h4 id="输出答案时"><a href="#输出答案时" class="headerlink" title="输出答案时"></a>输出答案时</h4><p>最小排名即记录中的最小排名，直接输出<br>最大排名为max(记录中的最大排名，线段树查询qu[i]位置的结果)</p>
-<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <cstdlib><br>    #include <algorithm><br>    #include <vector><br>    #include <map><br>    #include <string><br>    typedef long long int LL;<br>    typedef std::pair&lt;int ,int&gt; PP;<br>    const int N &#x3D; 3e5+2;<br>    int lazy[(N+N)&lt;&lt;2];<br>    PP span[N];<br>    int qu[N+N];<br>    int idx;<br>    int n,m,k;<br>    void build(int l,int r,int rt)<br>    {<br>       if(l &#x3D;&#x3D; r){<br>          lazy[rt] &#x3D; qu[l];<br>          return ;<br>       }<br>       int mid &#x3D; (l+r) &gt;&gt; 1;<br>       build(l,mid,rt&lt;&lt;1);<br>       build(mid+1,r,rt&lt;&lt;1|1);<br>    }</p>
+<h4 id="每当一个人i发消息"><a class="markdownIt-Anchor" href="#每当一个人i发消息"></a> 每当一个人i发消息：</h4>
+<p>1.更新这个人的最小排名为1，最大排名为max(原最大排名,线段树查询qu[i]位置的结果)<br>
+2.把区间[idx+1,qu[i]]即这个人以及之前所有人对应的区间+1（是否包含这个人时无所谓的）<br>
+3.然后把这个人提前为第一个人，即qu[i]改为出现的位置改为idx–（也可以先提前，这样的话线段树区间应该初始化为0），</p>
+<h4 id="输出答案时"><a class="markdownIt-Anchor" href="#输出答案时"></a> 输出答案时</h4>
+<p>最小排名即记录中的最小排名，直接输出<br>
+最大排名为max(记录中的最大排名，线段树查询qu[i]位置的结果)</p>
+<p>​<br>
+#include <cstdio><br>
+#include <iostream><br>
+#include <cstring><br>
+#include <cstdlib><br>
+#include <algorithm><br>
+#include <vector><br>
+#include <map><br>
+#include <string><br>
+typedef long long int LL;<br>
+typedef std::pair&lt;int ,int&gt; PP;<br>
+const int N = 3e5+2;<br>
+int lazy[(N+N)&lt;&lt;2];<br>
+PP span[N];<br>
+int qu[N+N];<br>
+int idx;<br>
+int n,m,k;<br>
+void build(int l,int r,int rt)<br>
+{<br>
+if(l == r){<br>
+lazy[rt] = qu[l];<br>
+return ;<br>
+}<br>
+int mid = (l+r) &gt;&gt; 1;<br>
+build(l,mid,rt&lt;&lt;1);<br>
+build(mid+1,r,rt&lt;&lt;1|1);<br>
+}</string></map></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
 <pre><code>void pushdown(int rt)
 &#123;
    if(!lazy[rt]) return;
@@ -282,12 +328,12 @@ int main()
    return 0;
 &#125;
 </code></pre>
-<p>​    </p>
+<p>​</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%BA%BF%E6%AE%B5%E6%A0%91%E7%BB%83%E4%B9%A0%E3%80%91%20%E6%B4%9B%E8%B0%B7%E7%BA%BF%E6%AE%B5%E6%A0%91%E6%A8%A1%E6%9D%BF1%20CF1288E/" data-id="cl50tnlry004oycj3dsvxhin1" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%BA%BF%E6%AE%B5%E6%A0%91%E7%BB%83%E4%B9%A0%E3%80%91%20%E6%B4%9B%E8%B0%B7%E7%BA%BF%E6%AE%B5%E6%A0%91%E6%A8%A1%E6%9D%BF1%20CF1288E/" data-id="cl50x8cno004pccj3elt1grc3" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li></ul>

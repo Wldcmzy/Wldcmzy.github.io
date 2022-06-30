@@ -5,15 +5,15 @@
   
   <title>【tarjin算法练习 缩点，割点，割边】洛谷_P3387缩点模板P3388割点模板 HDU4738 caocao‘bridge.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 洛谷 P3387缩点模板vis数组是必要的，如果遇到vis[i]&#x3D;false的点，说明此点对应">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  洛谷 P3387缩点模板 vis数组是必要的，如果遇到vis[i]&#x3D;false的点，说明此点对应的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【tarjin算法练习 缩点，割点，割边】洛谷_P3387缩点模板P3388割点模板 HDU4738 caocao‘bridge.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90tarjin%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0%20%E7%BC%A9%E7%82%B9%EF%BC%8C%E5%89%B2%E7%82%B9%EF%BC%8C%E5%89%B2%E8%BE%B9%E3%80%91%E6%B4%9B%E8%B0%B7_P3387%E7%BC%A9%E7%82%B9%E6%A8%A1%E6%9D%BFP3388%E5%89%B2%E7%82%B9%E6%A8%A1%E6%9D%BF%20HDU4738%20caocao%E2%80%98bridge/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 洛谷 P3387缩点模板vis数组是必要的，如果遇到vis[i]&#x3D;false的点，说明此点对应">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  洛谷 P3387缩点模板 vis数组是必要的，如果遇到vis[i]&#x3D;false的点，说明此点对应的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.430Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.775Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="tarjin">
@@ -126,25 +126,371 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="洛谷-P3387缩点模板"><a href="#洛谷-P3387缩点模板" class="headerlink" title="洛谷 P3387缩点模板"></a>洛谷 P3387缩点模板</h2><p>vis数组是必要的，如果遇到vis[i]&#x3D;false的点，说明此点对应的强连通已经被缩点过了,而访问的i的起点并不属于这一强连通分量。若这时执行low[x]<br>&#x3D; std::min(low[x],dfn[y]);可能会导致一些点在栈内无法弹出。</p>
-<p>​<br>​    #include <cstdio><br>​    #include <iostream><br>​    #include <cstring><br>​    #include <cstdlib><br>​    #include <algorithm><br>​    #include <vector><br>​    #include <map><br>​    #include <set><br>​    #include <queue><br>​    #include <stack><br>​    typedef long long int LL;<br>​    &#x2F;&#x2F;typedef std::pair&lt;int ,int&gt; PP;<br>​    const int N &#x3D; 1e4+5, M &#x3D; 1e5+5;<br>​    int vis[N],low[N],dfn[N],val[N],head[N],stk[N],suo[N],weight[N],hh[N],in[N],dp[N];<br>​    struct Edge<br>​    {<br>​       int to,nxt;<br>​    }edg[M&lt;&lt;1];<br>​    int n,m,u,v;<br>​    int idx,timer,top,id,tt;<br>​    void addEdge(int fr,int to)<br>​    {<br>​       edg[idx].to  &#x3D; to;<br>​       edg[idx].nxt &#x3D; head[fr];<br>​       head[fr] &#x3D; idx++;<br>​    }<br>​    void tarjin(int x)<br>​    {<br>​       low[x] &#x3D; dfn[x] &#x3D; ++timer;<br>​       stk[++top] &#x3D; x,vis[x] &#x3D; 1;<br>​       for(int e&#x3D;head[x]; e!&#x3D;-1; e&#x3D;edg[e].nxt){<br>​          int y &#x3D; edg[e].to;<br>​          if(!dfn[y]){<br>​             tarjin(y);<br>​             low[x] &#x3D; std::min(low[x],low[y]);<br>​          }<br>​          else if(vis[y]){<br>​             low[x] &#x3D; std::min(low[x],dfn[y]);<br>​          }<br>​       }<br>​       if(low[x] &#x3D;&#x3D; dfn[x]){<br>​          id +&#x3D; 1;<br>​          while(true){<br>​             vis[stk[top]] &#x3D; 0;<br>​             suo[stk[top]] &#x3D; id;<br>​             weight[id] +&#x3D; val[stk[top]];<br>​             if(x &#x3D;&#x3D; stk[top–]) break;<br>​          }<br>​       }<br>​    }<br>​    void rebuild()<br>​    {<br>​       for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​          for(int e&#x3D;head[i]; e!&#x3D;-1; e&#x3D;edg[e].nxt){<br>​             int y  &#x3D; edg[e].to;<br>​             int ii &#x3D; suo[i],yy &#x3D; suo[y];<br>​             if(ii !&#x3D; yy){<br>​                in[yy] +&#x3D; 1;<br>​                edg[idx].to &#x3D; yy;<br>​                edg[idx].nxt &#x3D; hh[ii];<br>​                hh[ii] &#x3D; idx++;<br>​             }<br>​          }<br>​       }<br>​    }<br>​    int tpsort()<br>​    {<br>​       std::queue<int> q;<br>​       for(int i&#x3D;1; i&lt;&#x3D;id; i++){<br>​          if(!in[i]){<br>​             q.push(i);<br>​             dp[i] &#x3D; weight[i];<br>​          }<br>​       }<br>​       while(!q.empty()){<br>​          int cur &#x3D; q.front(); q.pop();<br>​          for(int e&#x3D;hh[cur]; e!&#x3D;-1; e&#x3D;edg[e].nxt){<br>​             int  to &#x3D; edg[e].to;<br>​             dp[to] &#x3D; std::max(dp[to],dp[cur]+weight[to]);<br>​             in[to] -&#x3D; 1;<br>​             if(!in[to]) q.push(to);<br>​          }<br>​       }<br>​       int ans &#x3D; 0;<br>​       for(int i&#x3D;1; i&lt;&#x3D;id; i++){<br>​          ans &#x3D; std::max(ans,dp[i]);<br>​       }<br>​       return ans;<br>​    }<br>​    int main()<br>​    {<br>​       memset(head,-1,sizeof(head));<br>​       memset(hh,-1,sizeof(hh));<br>​       scanf(“%d%d”,&amp;n,&amp;m);<br>​       for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​          scanf(“%d”,&amp;val[i]);<br>​       }<br>​       for(int i&#x3D;0; i&lt;m; i++){<br>​          scanf(“%d%d”,&amp;u,&amp;v);<br>​          addEdge(u,v);<br>​       }<br>​       for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​          if(!dfn[i]) tarjin(i);<br>​       }<br>​       rebuild();<br>​       printf(“%d”,tpsort());<br>​<br>       return 0;<br>    }</p>
-<h2 id="洛谷P3388割点模板"><a href="#洛谷P3388割点模板" class="headerlink" title="洛谷P3388割点模板"></a>洛谷P3388割点模板</h2><p>trajin中的形参意义为（此点，上一个点），最好改为（此点，过来的边），在做caocao‘s bridge的时候暴露了一些问题</p>
-<p>​<br>​    #include <cstdio><br>​    #include <iostream><br>​    #include <cstring><br>​    #include <cstdlib><br>​    #include <algorithm><br>​    #include <vector><br>​    #include <map><br>​    #include <set><br>​    #include <queue><br>​    #include <stack><br>​    typedef long long int LL;<br>​    const int N &#x3D; 2e4+5, M &#x3D; 2e5+5;<br>​    int n,m,u,v;<br>​    int ans;<br>​    int idx,timer;<br>​    int head[N];<br>​    int low[N],dfn[N],flag[N];<br>​    struct Edge<br>​    {<br>​       int to,nxt;<br>​    }edg[M];<br>​    void addEdge(int fr,int to)<br>​    {<br>​       edg[idx].to &#x3D; to;<br>​       edg[idx].nxt &#x3D; head[fr];<br>​       head[fr] &#x3D; idx++;<br>​    }<br>​    void tarjin(int x,int fa)<br>​    {<br>​       low[x] &#x3D; dfn[x] &#x3D; ++timer;<br>​       int son &#x3D; 0;<br>​       for(int e&#x3D;head[x]; e!&#x3D;-1; e&#x3D;edg[e].nxt){<br>​          int to &#x3D; edg[e].to;<br>​          if(!dfn[to]){<br>​             son +&#x3D; 1;<br>​             tarjin(to,x);<br>​             low[x] &#x3D; std::min(low[x],low[to]);<br>​             if(fa &amp;&amp; dfn[x] &lt;&#x3D; low[to] &amp;&amp; !flag[x]){<br>​                flag[x] &#x3D; 1;<br>​                ans +&#x3D; 1;<br>​             }<br>​          }<br>​          else if(to !&#x3D; fa)low[x] &#x3D; std::min(low[x],dfn[to]);<br>​       }<br>​       if(!fa &amp;&amp; son&gt;&#x3D;2 &amp;&amp; !flag[x]){<br>​          flag[x] &#x3D; 1;<br>​          ans +&#x3D; 1;<br>​       }<br>​    }<br>​    int main()<br>​    {<br>​       &#x2F;&#x2F;freopen(“D:\EdgeDownloadPlace\P3388_4.in”,”r”,stdin);<br>​       memset(head,-1,sizeof(head));<br>​       scanf(“%d%d”,&amp;n,&amp;m);<br>​       for(int i&#x3D;0; i&lt;m; i++){<br>​          scanf(“%d%d”,&amp;u,&amp;v);<br>​          addEdge(u,v); addEdge(v,u);<br>​       }<br>​       for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​         tarjin(i,0);<br>​       }<br>​       printf(“%d\n”,ans);<br>​       for(int i&#x3D;1; i&lt;&#x3D;n; i++){<code>在这里插入代码片</code><br>​          if(flag[i]) printf(“%d “,i);<br>​       }<br>​       return 0;<br>​    }</p>
-<h2 id="HDU4738-caocao’bridge"><a href="#HDU4738-caocao’bridge" class="headerlink" title="HDU4738 caocao’bridge"></a>HDU4738 caocao’bridge</h2><p>坑点：</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="洛谷-p3387缩点模板"><a class="markdownIt-Anchor" href="#洛谷-p3387缩点模板"></a> 洛谷 P3387缩点模板</h2>
+<p>vis数组是必要的，如果遇到vis[i]=false的点，说明此点对应的强连通已经被缩点过了,而访问的i的起点并不属于这一强连通分量。若这时执行low[x]<br>
+= std::min(low[x],dfn[y]);可能会导致一些点在栈内无法弹出。</p>
+<p>​<br>
+​    #include <cstdio><br>
+​    #include <iostream><br>
+​    #include <cstring><br>
+​    #include <cstdlib><br>
+​    #include <algorithm><br>
+​    #include <vector><br>
+​    #include <map><br>
+​    #include <set><br>
+​    #include <queue><br>
+​    #include <stack><br>
+​    typedef long long int LL;<br>
+​    //typedef std::pair&lt;int ,int&gt; PP;<br>
+​    const int N = 1e4+5, M = 1e5+5;<br>
+​    int vis[N],low[N],dfn[N],val[N],head[N],stk[N],suo[N],weight[N],hh[N],in[N],dp[N];<br>
+​    struct Edge<br>
+​    {<br>
+​       int to,nxt;<br>
+​    }edg[M&lt;&lt;1];<br>
+​    int n,m,u,v;<br>
+​    int idx,timer,top,id,tt;<br>
+​    void addEdge(int fr,int to)<br>
+​    {<br>
+​       edg[idx].to  = to;<br>
+​       edg[idx].nxt = head[fr];<br>
+​       head[fr] = idx++;<br>
+​    }<br>
+​    void tarjin(int x)<br>
+​    {<br>
+​       low[x] = dfn[x] = <ins>timer;<br>
+​       stk[<ins>top] = x,vis[x] = 1;<br>
+​       for(int e=head[x]; e!=-1; e=edg[e].nxt){<br>
+​          int y = edg[e].to;<br>
+​          if(!dfn[y]){<br>
+​             tarjin(y);<br>
+​             low[x] = std::min(low[x],low[y]);<br>
+​          }<br>
+​          else if(vis[y]){<br>
+​             low[x] = std::min(low[x],dfn[y]);<br>
+​          }<br>
+​       }<br>
+​       if(low[x] == dfn[x]){<br>
+​          id += 1;<br>
+​          while(true){<br>
+​             vis[stk[top]] = 0;<br>
+​             suo[stk[top]] = id;<br>
+​             weight[id] += val[stk[top]];<br>
+​             if(x == stk[top–]) break;<br>
+​          }<br>
+​       }<br>
+​    }<br>
+​    void rebuild()<br>
+​    {<br>
+​       for(int i=1; i&lt;=n; i</ins>){<br>
+​          for(int e=head[i]; e!=-1; e=edg[e].nxt){<br>
+​             int y  = edg[e].to;<br>
+​             int ii = suo[i],yy = suo[y];<br>
+​             if(ii != yy){<br>
+​                in[yy] += 1;<br>
+​                edg[idx].to = yy;<br>
+​                edg[idx].nxt = hh[ii];<br>
+​                hh[ii] = idx</ins>;<br>
+​             }<br>
+​          }<br>
+​       }<br>
+​    }<br>
+​    int tpsort()<br>
+​    {<br>
+​       std::queue<int> q;<br>
+​       for(int i=1; i&lt;=id; i++){<br>
+​          if(!in[i]){<br>
+​             q.push(i);<br>
+​             dp[i] = weight[i];<br>
+​          }<br>
+​       }<br>
+​       while(!q.empty()){<br>
+​          int cur = q.front(); q.pop();<br>
+​          for(int e=hh[cur]; e!=-1; e=edg[e].nxt){<br>
+​             int  to = edg[e].to;<br>
+​             dp[to] = std::max(dp[to],dp[cur]+weight[to]);<br>
+​             in[to] -= 1;<br>
+​             if(!in[to]) q.push(to);<br>
+​          }<br>
+​       }<br>
+​       int ans = 0;<br>
+​       for(int i=1; i&lt;=id; i++){<br>
+​          ans = std::max(ans,dp[i]);<br>
+​       }<br>
+​       return ans;<br>
+​    }<br>
+​    int main()<br>
+​    {<br>
+​       memset(head,-1,sizeof(head));<br>
+​       memset(hh,-1,sizeof(hh));<br>
+​       scanf(&quot;%d%d&quot;,&amp;n,&amp;m);<br>
+​       for(int i=1; i&lt;=n; i++){<br>
+​          scanf(&quot;%d&quot;,&amp;val[i]);<br>
+​       }<br>
+​       for(int i=0; i&lt;m; i++){<br>
+​          scanf(&quot;%d%d&quot;,&amp;u,&amp;v);<br>
+​          addEdge(u,v);<br>
+​       }<br>
+​       for(int i=1; i&lt;=n; i++){<br>
+​          if(!dfn[i]) tarjin(i);<br>
+​       }<br>
+​       rebuild();<br>
+​       printf(&quot;%d&quot;,tpsort());<br>
+​<br>
+return 0;<br>
+}</int></stack></queue></set></map></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
+<h2 id="洛谷p3388割点模板"><a class="markdownIt-Anchor" href="#洛谷p3388割点模板"></a> 洛谷P3388割点模板</h2>
+<p>trajin中的形参意义为（此点，上一个点），最好改为（此点，过来的边），在做caocao‘s bridge的时候暴露了一些问题</p>
+<p>​<br>
+​    #include <cstdio><br>
+​    #include <iostream><br>
+​    #include <cstring><br>
+​    #include <cstdlib><br>
+​    #include <algorithm><br>
+​    #include <vector><br>
+​    #include <map><br>
+​    #include <set><br>
+​    #include <queue><br>
+​    #include <stack><br>
+​    typedef long long int LL;<br>
+​    const int N = 2e4+5, M = 2e5+5;<br>
+​    int n,m,u,v;<br>
+​    int ans;<br>
+​    int idx,timer;<br>
+​    int head[N];<br>
+​    int low[N],dfn[N],flag[N];<br>
+​    struct Edge<br>
+​    {<br>
+​       int to,nxt;<br>
+​    }edg[M];<br>
+​    void addEdge(int fr,int to)<br>
+​    {<br>
+​       edg[idx].to = to;<br>
+​       edg[idx].nxt = head[fr];<br>
+​       head[fr] = idx++;<br>
+​    }<br>
+​    void tarjin(int x,int fa)<br>
+​    {<br>
+​       low[x] = dfn[x] = <ins>timer;<br>
+​       int son = 0;<br>
+​       for(int e=head[x]; e!=-1; e=edg[e].nxt){<br>
+​          int to = edg[e].to;<br>
+​          if(!dfn[to]){<br>
+​             son += 1;<br>
+​             tarjin(to,x);<br>
+​             low[x] = std::min(low[x],low[to]);<br>
+​             if(fa &amp;&amp; dfn[x] &lt;= low[to] &amp;&amp; !flag[x]){<br>
+​                flag[x] = 1;<br>
+​                ans += 1;<br>
+​             }<br>
+​          }<br>
+​          else if(to != fa)low[x] = std::min(low[x],dfn[to]);<br>
+​       }<br>
+​       if(!fa &amp;&amp; son&gt;=2 &amp;&amp; !flag[x]){<br>
+​          flag[x] = 1;<br>
+​          ans += 1;<br>
+​       }<br>
+​    }<br>
+​    int main()<br>
+​    {<br>
+​       //freopen(“D:\EdgeDownloadPlace\P3388_4.in”,“r”,stdin);<br>
+​       memset(head,-1,sizeof(head));<br>
+​       scanf(&quot;%d%d&quot;,&amp;n,&amp;m);<br>
+​       for(int i=0; i&lt;m; i</ins>){<br>
+​          scanf(&quot;%d%d&quot;,&amp;u,&amp;v);<br>
+​          addEdge(u,v); addEdge(v,u);<br>
+​       }<br>
+​       for(int i=1; i&lt;=n; i++){<br>
+​         tarjin(i,0);<br>
+​       }<br>
+​       printf(&quot;%d\n&quot;,ans);<br>
+​       for(int i=1; i&lt;=n; i++){<code>在这里插入代码片</code><br>
+​          if(flag[i]) printf(&quot;%d &quot;,i);<br>
+​       }<br>
+​       return 0;<br>
+​    }</stack></queue></set></map></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
+<h2 id="hdu4738-caocaobridge"><a class="markdownIt-Anchor" href="#hdu4738-caocaobridge"></a> HDU4738 caocao’bridge</h2>
+<p>坑点：</p>
 <ol>
 <li>你需要判断图是否是全部联通的，若不是输出0</li>
 <li>若需要派出0个人，则要输出1，至少需要1人才能炸桥</li>
 </ol>
-<p>——————<br>最开始在tarjin记录（此点，上一个点），一直wa，猜测可能是有重边，改为记录（此点，过来的边）ac。懒得动脑以后再想。</p>
-<p>​<br>​    #include <cstdio><br>​    #include <iostream><br>​    #include <cstring><br>​    #include <cstdlib><br>​    #include <algorithm><br>​    #include <vector><br>​    #include <map><br>​    #include <set><br>​    #include <queue><br>​    #include <stack><br>​    typedef long long int LL;<br>​    const int N &#x3D; 1005, M &#x3D; 1000005,INF &#x3D; 1e6;<br>​    int n,m,u,v,p;<br>​    int ans;<br>​    int head[N],low[N],dfn[N],pp[M];<br>​    int idx,timer;<br>​    struct Edge<br>​    {<br>​       int to,nxt,p;<br>​    }edg[M];<br>​    void addEdge(int u,int v,int p)<br>​    {<br>​       edg[idx].to &#x3D; v;<br>​       edg[idx].nxt &#x3D; head[u];<br>​       edg[idx].p &#x3D; p;<br>​       head[u] &#x3D; idx++;<br>​    }<br>​    void initial()<br>​    {<br>​       idx &#x3D; timer &#x3D; 0;<br>​       ans &#x3D; INF;<br>​       memset(head,-1,sizeof(head));<br>​       memset(low,0,sizeof(low));<br>​       memset(dfn,0,sizeof(dfn));<br>​       memset(pp,0,sizeof(pp));<br>​    }<br>​    void tarjin(int x,int bri)<br>​    {<br>​       low[x] &#x3D; dfn[x] &#x3D; ++timer;<br>​       for(int e&#x3D;head[x]; e!&#x3D;-1; e&#x3D;edg[e].nxt){<br>​          if((e^1) &#x3D;&#x3D; bri) continue;<br>​          int y &#x3D; edg[e].to;<br>​          if(!dfn[y]){<br>​             tarjin(y,e);<br>​             low[x] &#x3D; std::min(low[x],low[y]);<br>​             if(dfn[x] &lt; low[y]) pp[e] &#x3D; pp[e^1] &#x3D; 1;<br>​          }<br>​          else low[x] &#x3D; std::min(low[x],dfn[y]);<br>​       }<br>​    }<br>​    int main()<br>​    {<br>​       while(scanf(“%d%d”,&amp;n,&amp;m)){<br>​          if(n &#x3D;&#x3D; 0 &amp;&amp; m &#x3D;&#x3D; 0) break;<br>​          initial();<br>​          for(int i&#x3D;0; i&lt;m; i++){<br>​             scanf(“%d%d%d”,&amp;u,&amp;v,&amp;p);<br>​             addEdge(u,v,p); addEdge(v,u,p);<br>​          }<br>​          tarjin(1,-1);<br>​          bool judge &#x3D; false;<br>​          for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​             if(!dfn[i]){<br>​                judge &#x3D; true;<br>​                break;<br>​             }<br>​          }<br>​          if(judge) printf(“0\n”);<br>​          else{<br>​             for(int e&#x3D;0; e&lt;idx; e++){<br>​                if(pp[e] &#x3D;&#x3D; 1) ans &#x3D; std::min(ans,edg[e].p);<br>​             }<br>​             if(!ans) ans +&#x3D; 1;<br>​             else if(ans &#x3D;&#x3D; INF) ans &#x3D; -1;<br>​             printf(“%d\n”,ans);<br>​          }<br>​       }<br>​       return 0;<br>​    }</p>
-<p>​    </p>
-<h2 id="洛谷P2341-USACO03FALL-HAOI2006-受欢迎的牛-G"><a href="#洛谷P2341-USACO03FALL-HAOI2006-受欢迎的牛-G" class="headerlink" title="洛谷P2341 [USACO03FALL][HAOI2006]受欢迎的牛 G"></a>洛谷P2341 [USACO03FALL][HAOI2006]受欢迎的牛 G</h2><p>​<br>​    #include <iostream><br>​    #include <cstdio><br>​    #include <cstring><br>​    #include <string><br>​    #include <cstdlib><br>​    #include <cmath><br>​    #include <algorithm><br>​    #include <queue><br>​    #include <stack><br>​    #include <vector><br>​    #include <set><br>​    #include <map><br>​    typedef long long int LL;<br>​    typedef std::pair&lt;int ,int&gt; PP;<br>​    const int N &#x3D; 1e4, M &#x3D; 5e4+5, INF &#x3D; 0x7fffffff;<br>​    int n,m,u,v,su,sv,cnt;<br>​    int idx,timer,counter;<br>​    int head[N],low[N],dfn[N],vis[N],suo[N],num[N],out[N];<br>​    PP qry[M];<br>​    std::stack<int> stk;<br>​    struct Edge<br>​    {<br>​        int to,nxt;<br>​    }edg[M];<br>​    void initial()<br>​    {<br>​        idx &#x3D; 2;<br>​    }<br>​    void addEdge(int fr,int to)<br>​    {<br>​        edg[idx].to &#x3D;to;<br>​        edg[idx].nxt &#x3D; head[fr];<br>​        head[fr] &#x3D; idx++;<br>​    }<br>​    void tarjin(int x)<br>​    {<br>​        dfn[x] &#x3D; low[x] &#x3D; ++timer;<br>​        vis[x] &#x3D; true;<br>​        stk.push(x);<br>​        for(int e&#x3D;head[x]; e; e&#x3D;edg[e].nxt){<br>​            int y &#x3D; edg[e].to;<br>​            if(!dfn[y]){<br>​                tarjin(y);<br>​                low[x] &#x3D; std::min(low[x],low[y]);<br>​            }<br>​            else if(vis[y]) low[x] &#x3D; std::min(low[x],dfn[y]);<br>​        }<br>​        if(low[x] &#x3D;&#x3D; dfn[x]){<br>​            counter +&#x3D; 1;<br>​            while(true){<br>​                int t &#x3D; stk.top(); stk.pop();<br>​                suo[t] &#x3D; counter;<br>​                num[counter] +&#x3D; 1;<br>​                vis[t] &#x3D; false;<br>​                if(t &#x3D;&#x3D; x) break;<br>​            }<br>​        }<br>​    }<br>​    int main()<br>​    {<br>​        initial();<br>​        scanf(“%d%d”,&amp;n,&amp;m);<br>​        for(int i&#x3D;0; i&lt;m; i++){<br>​            scanf(“%d%d”,&amp;qry[i].first,&amp;qry[i].second);<br>​            addEdge(qry[i].first,qry[i].second);<br>​        }<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++) if(!dfn[i]) tarjin(i);<br>​        for(int i&#x3D;0; i&lt;m; i++){<br>​            u &#x3D; qry[i].first , v &#x3D; qry[i].second;<br>​            su &#x3D; suo[u] , sv &#x3D; suo[v];<br>​            if(su &#x3D;&#x3D; sv) continue;<br>​            out[su] +&#x3D; 1;<br>​        }<br>​        for(int i&#x3D;1; i&lt;&#x3D;counter; i++){<br>​            if(!out[i]){<br>​                cnt +&#x3D; 1;<br>​                u &#x3D; i;<br>​                if(cnt &gt; 1) break;<br>​            }<br>​        }<br>​        if(cnt &#x3D;&#x3D; 1) printf(“%d”,num[u]);<br>​        else printf(“0”);<br>​        return 0;<br>​    }</p>
+<p>——————<br>
+最开始在tarjin记录（此点，上一个点），一直wa，猜测可能是有重边，改为记录（此点，过来的边）ac。懒得动脑以后再想。</p>
+<p>​<br>
+​    #include <cstdio><br>
+​    #include <iostream><br>
+​    #include <cstring><br>
+​    #include <cstdlib><br>
+​    #include <algorithm><br>
+​    #include <vector><br>
+​    #include <map><br>
+​    #include <set><br>
+​    #include <queue><br>
+​    #include <stack><br>
+​    typedef long long int LL;<br>
+​    const int N = 1005, M = 1000005,INF = 1e6;<br>
+​    int n,m,u,v,p;<br>
+​    int ans;<br>
+​    int head[N],low[N],dfn[N],pp[M];<br>
+​    int idx,timer;<br>
+​    struct Edge<br>
+​    {<br>
+​       int to,nxt,p;<br>
+​    }edg[M];<br>
+​    void addEdge(int u,int v,int p)<br>
+​    {<br>
+​       edg[idx].to = v;<br>
+​       edg[idx].nxt = head[u];<br>
+​       edg[idx].p = p;<br>
+​       head[u] = idx++;<br>
+​    }<br>
+​    void initial()<br>
+​    {<br>
+​       idx = timer = 0;<br>
+​       ans = INF;<br>
+​       memset(head,-1,sizeof(head));<br>
+​       memset(low,0,sizeof(low));<br>
+​       memset(dfn,0,sizeof(dfn));<br>
+​       memset(pp,0,sizeof(pp));<br>
+​    }<br>
+​    void tarjin(int x,int bri)<br>
+​    {<br>
+​       low[x] = dfn[x] = <ins>timer;<br>
+​       for(int e=head[x]; e!=-1; e=edg[e].nxt){<br>
+​          if((e^1) == bri) continue;<br>
+​          int y = edg[e].to;<br>
+​          if(!dfn[y]){<br>
+​             tarjin(y,e);<br>
+​             low[x] = std::min(low[x],low[y]);<br>
+​             if(dfn[x] &lt; low[y]) pp[e] = pp[e^1] = 1;<br>
+​          }<br>
+​          else low[x] = std::min(low[x],dfn[y]);<br>
+​       }<br>
+​    }<br>
+​    int main()<br>
+​    {<br>
+​       while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m)){<br>
+​          if(n == 0 &amp;&amp; m == 0) break;<br>
+​          initial();<br>
+​          for(int i=0; i&lt;m; i</ins>){<br>
+​             scanf(&quot;%d%d%d&quot;,&amp;u,&amp;v,&amp;p);<br>
+​             addEdge(u,v,p); addEdge(v,u,p);<br>
+​          }<br>
+​          tarjin(1,-1);<br>
+​          bool judge = false;<br>
+​          for(int i=1; i&lt;=n; i++){<br>
+​             if(!dfn[i]){<br>
+​                judge = true;<br>
+​                break;<br>
+​             }<br>
+​          }<br>
+​          if(judge) printf(“0\n”);<br>
+​          else{<br>
+​             for(int e=0; e&lt;idx; e++){<br>
+​                if(pp[e] == 1) ans = std::min(ans,edg[e].p);<br>
+​             }<br>
+​             if(!ans) ans += 1;<br>
+​             else if(ans == INF) ans = -1;<br>
+​             printf(&quot;%d\n&quot;,ans);<br>
+​          }<br>
+​       }<br>
+​       return 0;<br>
+​    }</stack></queue></set></map></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
+<p>​</p>
+<h2 id="洛谷p2341-usaco03fallhaoi2006受欢迎的牛-g"><a class="markdownIt-Anchor" href="#洛谷p2341-usaco03fallhaoi2006受欢迎的牛-g"></a> 洛谷P2341 [USACO03FALL][HAOI2006]受欢迎的牛 G</h2>
+<p>​<br>
+​    #include <iostream><br>
+​    #include <cstdio><br>
+​    #include <cstring><br>
+​    #include <string><br>
+​    #include <cstdlib><br>
+​    #include <cmath><br>
+​    #include <algorithm><br>
+​    #include <queue><br>
+​    #include <stack><br>
+​    #include <vector><br>
+​    #include <set><br>
+​    #include <map><br>
+​    typedef long long int LL;<br>
+​    typedef std::pair&lt;int ,int&gt; PP;<br>
+​    const int N = 1e4, M = 5e4+5, INF = 0x7fffffff;<br>
+​    int n,m,u,v,su,sv,cnt;<br>
+​    int idx,timer,counter;<br>
+​    int head[N],low[N],dfn[N],vis[N],suo[N],num[N],out[N];<br>
+​    PP qry[M];<br>
+​    std::stack<int> stk;<br>
+​    struct Edge<br>
+​    {<br>
+​        int to,nxt;<br>
+​    }edg[M];<br>
+​    void initial()<br>
+​    {<br>
+​        idx = 2;<br>
+​    }<br>
+​    void addEdge(int fr,int to)<br>
+​    {<br>
+​        edg[idx].to =to;<br>
+​        edg[idx].nxt = head[fr];<br>
+​        head[fr] = idx++;<br>
+​    }<br>
+​    void tarjin(int x)<br>
+​    {<br>
+​        dfn[x] = low[x] = <ins>timer;<br>
+​        vis[x] = true;<br>
+​        stk.push(x);<br>
+​        for(int e=head[x]; e; e=edg[e].nxt){<br>
+​            int y = edg[e].to;<br>
+​            if(!dfn[y]){<br>
+​                tarjin(y);<br>
+​                low[x] = std::min(low[x],low[y]);<br>
+​            }<br>
+​            else if(vis[y]) low[x] = std::min(low[x],dfn[y]);<br>
+​        }<br>
+​        if(low[x] == dfn[x]){<br>
+​            counter += 1;<br>
+​            while(true){<br>
+​                int t = stk.top(); stk.pop();<br>
+​                suo[t] = counter;<br>
+​                num[counter] += 1;<br>
+​                vis[t] = false;<br>
+​                if(t == x) break;<br>
+​            }<br>
+​        }<br>
+​    }<br>
+​    int main()<br>
+​    {<br>
+​        initial();<br>
+​        scanf(&quot;%d%d&quot;,&amp;n,&amp;m);<br>
+​        for(int i=0; i&lt;m; i</ins>){<br>
+​            scanf(&quot;%d%d&quot;,&amp;qry[i].first,&amp;qry[i].second);<br>
+​            addEdge(qry[i].first,qry[i].second);<br>
+​        }<br>
+​        for(int i=1; i&lt;=n; i++) if(!dfn[i]) tarjin(i);<br>
+​        for(int i=0; i&lt;m; i++){<br>
+​            u = qry[i].first , v = qry[i].second;<br>
+​            su = suo[u] , sv = suo[v];<br>
+​            if(su == sv) continue;<br>
+​            out[su] += 1;<br>
+​        }<br>
+​        for(int i=1; i&lt;=counter; i++){<br>
+​            if(!out[i]){<br>
+​                cnt += 1;<br>
+​                u = i;<br>
+​                if(cnt &gt; 1) break;<br>
+​            }<br>
+​        }<br>
+​        if(cnt == 1) printf(&quot;%d&quot;,num[u]);<br>
+​        else printf(“0”);<br>
+​        return 0;<br>
+​    }</int></map></set></vector></stack></queue></algorithm></cmath></cstdlib></string></cstring></cstdio></iostream></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90tarjin%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0%20%E7%BC%A9%E7%82%B9%EF%BC%8C%E5%89%B2%E7%82%B9%EF%BC%8C%E5%89%B2%E8%BE%B9%E3%80%91%E6%B4%9B%E8%B0%B7_P3387%E7%BC%A9%E7%82%B9%E6%A8%A1%E6%9D%BFP3388%E5%89%B2%E7%82%B9%E6%A8%A1%E6%9D%BF%20HDU4738%20caocao%E2%80%98bridge/" data-id="cl50tnlqw001gycj3ecrkdbo9" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90tarjin%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0%20%E7%BC%A9%E7%82%B9%EF%BC%8C%E5%89%B2%E7%82%B9%EF%BC%8C%E5%89%B2%E8%BE%B9%E3%80%91%E6%B4%9B%E8%B0%B7_P3387%E7%BC%A9%E7%82%B9%E6%A8%A1%E6%9D%BFP3388%E5%89%B2%E7%82%B9%E6%A8%A1%E6%9D%BF%20HDU4738%20caocao%E2%80%98bridge/" data-id="cl50x8cmo001cccj316bnae9r" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tarjin/" rel="tag">tarjin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%B2%E7%82%B9/" rel="tag">割点</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%B2%E8%BE%B9/" rel="tag">割边</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%A9%E7%82%B9/" rel="tag">缩点</a></li></ul>
@@ -155,19 +501,19 @@
     
 <nav id="article-nav">
   
-    <a href="/1111/11/11/%E3%80%90%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D%20%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7P3386%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8DP2756%E9%A3%9E%E8%A1%8C%E5%91%98%E9%85%8D%E5%AF%B9%E6%96%B9%E6%A1%88%E9%97%AE%E9%A2%98P1129%E7%9F%A9%E9%98%B5%E6%B8%B8%E6%88%8FP1559%E8%BF%90%E5%8A%A8%E5%91%98%E6%9C%80%E4%BD%B3%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98P4014%E5%88%86%E9%85%8D%E9%97%AE%E9%A2%98P1640%E8%BF%9E%E7%BB%AD%E6%94%BB%E5%87%BB%E6%B8%B8%E6%88%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E3%80%90Trie%E6%A0%91&AC%E8%87%AA%E5%8A%A8%E6%9C%BA%E3%80%91P3879%5BTJOI2010%5D%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3%20P3808%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91AC%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%88%E7%AE%80%E5%8D%95%E7%89%88%EF%BC%89P3796%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91AC%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%88%E5%8A%A0%E5%BC%BA%E7%89%88%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          【二分图匹配 练习】洛谷P3386【模板】二分图最大匹配P2756飞行员配对方案问题P1129矩阵游戏P1559运动员最佳匹配问题P4014分配问题P1640连续攻击游戏.md
+          【Trie树&amp;AC自动机】P3879[TJOI2010]阅读理解 P3808 【模板】AC自动机（简单版）P3796 【模板】AC自动机（加强版）.md
         
       </div>
     </a>
   
   
-    <a href="/1111/11/11/%E3%80%90%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%91%20%E7%BB%99%E5%87%BA%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%20%E5%92%8C%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86%E6%88%96%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%20%E7%A1%AE%E5%AE%9A%E4%BA%8C%E5%8F%89%E6%A0%91/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E3%80%90%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D%20%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7P3386%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8DP2756%E9%A3%9E%E8%A1%8C%E5%91%98%E9%85%8D%E5%AF%B9%E6%96%B9%E6%A1%88%E9%97%AE%E9%A2%98P1129%E7%9F%A9%E9%98%B5%E6%B8%B8%E6%88%8FP1559%E8%BF%90%E5%8A%A8%E5%91%98%E6%9C%80%E4%BD%B3%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98P4014%E5%88%86%E9%85%8D%E9%97%AE%E9%A2%98P1640%E8%BF%9E%E7%BB%AD%E6%94%BB%E5%87%BB%E6%B8%B8%E6%88%8F/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">【二叉树】 给出二叉树的中序遍历 和先序遍历或后序遍历 确定二叉树.md</div>
+      <div class="article-nav-title">【二分图匹配 练习】洛谷P3386【模板】二分图最大匹配P2756飞行员配对方案问题P1129矩阵游戏P1559运动员最佳匹配问题P4014分配问题P1640连续攻击游戏.md</div>
     </a>
   
 </nav>

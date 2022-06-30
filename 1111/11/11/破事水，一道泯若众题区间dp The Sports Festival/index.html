@@ -5,15 +5,15 @@
   
   <title>破事水，一道泯若众题区间dp The Sports Festival.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 The Sports Festival题目描述给 你 一 个 序 列 ( 数 据 可 重 复 ) ， 你">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  The Sports Festival  题目描述 给 你 一 个 序 列 ( 数 据 可 重 复">
 <meta property="og:type" content="article">
 <meta property="og:title" content="破事水，一道泯若众题区间dp The Sports Festival.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E7%A0%B4%E4%BA%8B%E6%B0%B4%EF%BC%8C%E4%B8%80%E9%81%93%E6%B3%AF%E8%8B%A5%E4%BC%97%E9%A2%98%E5%8C%BA%E9%97%B4dp%20The%20Sports%20Festival/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 The Sports Festival题目描述给 你 一 个 序 列 ( 数 据 可 重 复 ) ， 你">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  The Sports Festival  题目描述 给 你 一 个 序 列 ( 数 据 可 重 复">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.477Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.822Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="DP">
@@ -123,17 +123,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="The-Sports-Festival"><a href="#The-Sports-Festival" class="headerlink" title="The Sports Festival"></a>The Sports Festival</h2><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给 你 一 个 序 列 ( 数 据 可 重 复 ) ， 你 可 以 将 其 任 意 排 序 ， 最 小 化 Σ i &#x3D; 1 n ( 前 i 个 数 的 极<br>差 ) 给你一个序列(数据可重复)， 你可以将其任意排序， 最小化 \\ \Sigma_{i &#x3D; 1} ^ n (前i个数的极差)<br>给你一个序列(数据可重复)，你可以将其任意排序，最小化Σi&#x3D;1n​(前i个数的极差)</p>
-<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>0.排一下序<br>1.首先我们不可能先选一个最大的，再选一个最小的， 如果这样选就得到了最大值， 就g了， 除非数据特殊<br>2.那我们肯定是要循序渐进一点点增大极差， 那就必须要选定某一个点开始， 然后慢慢把范围往两边阔<br>3.那我们直接一波区间dp求出所有的情况并选个最小的就行了</p>
-<p>​    </p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="the-sports-festival"><a class="markdownIt-Anchor" href="#the-sports-festival"></a> The Sports Festival</h2>
+<h4 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h4>
+<p>给 你 一 个 序 列 ( 数 据 可 重 复 ) ， 你 可 以 将 其 任 意 排 序 ， 最 小 化 Σ i = 1 n ( 前 i 个 数 的 极<br>
+差 ) 给你一个序列(数据可重复)， 你可以将其任意排序， 最小化 \\ \Sigma_{i = 1} ^ n (前i个数的极差)<br>
+给你一个序列(数据可重复)，你可以将其任意排序，最小化Σi=1n​(前i个数的极差)</p>
+<h4 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h4>
+<p>0.排一下序<br>
+1.首先我们不可能先选一个最大的，再选一个最小的， 如果这样选就得到了最大值， 就g了， 除非数据特殊<br>
+2.那我们肯定是要循序渐进一点点增大极差， 那就必须要选定某一个点开始， 然后慢慢把范围往两边阔<br>
+3.那我们直接一波区间dp求出所有的情况并选个最小的就行了</p>
+<p>​</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2005</span>;</span><br><span class="line"><span class="type">int</span> dp[N][N], x[N], n;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;x[i]);</span><br><span class="line">    std::<span class="built_in">sort</span>(x + <span class="number">1</span>, x + <span class="number">1</span> + n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> s = <span class="number">1</span>; s &lt; n; s ++) <span class="keyword">for</span>(<span class="type">int</span> st = <span class="number">1</span>, ed; (ed = st + s) &lt;= n; st ++)&#123;</span><br><span class="line">        dp[st][ed] = std::<span class="built_in">min</span>(dp[st + <span class="number">1</span>][ed], dp[st][ed - <span class="number">1</span>]) + x[ed] - x[st];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>, dp[<span class="number">1</span>][n]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E7%A0%B4%E4%BA%8B%E6%B0%B4%EF%BC%8C%E4%B8%80%E9%81%93%E6%B3%AF%E8%8B%A5%E4%BC%97%E9%A2%98%E5%8C%BA%E9%97%B4dp%20The%20Sports%20Festival/" data-id="cl50tnlsd0063ycj30b1309ed" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E7%A0%B4%E4%BA%8B%E6%B0%B4%EF%BC%8C%E4%B8%80%E9%81%93%E6%B3%AF%E8%8B%A5%E4%BC%97%E9%A2%98%E5%8C%BA%E9%97%B4dp%20The%20Sports%20Festival/" data-id="cl50x8co00064ccj342rg5a7j" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
@@ -154,9 +162,9 @@
     </a>
   
   
-    <a href="/1111/11/11/%E7%BA%BF%E6%AE%B5%E6%A0%91%20~%E4%B9%B1%20------------------------%E9%98%BF%E5%B7%B4%E9%98%BF%E5%B7%B4%E9%98%BF%E5%B7%B4/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E7%AD%9B%E6%B3%95-%E7%B4%A0%E6%95%B0/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">线段树 ~乱 ------------------------阿巴阿巴阿巴.md</div>
+      <div class="article-nav-title">筛法-素数.md</div>
     </a>
   
 </nav>

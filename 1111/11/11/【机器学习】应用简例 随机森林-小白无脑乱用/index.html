@@ -5,15 +5,15 @@
   
   <title>【机器学习】应用简例 随机森林-小白无脑乱用.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 发现随机森林的正确率在0.76-0.86左右，多次用随机森林找一个正确率大于0.84的模型输出答案 这次">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 发现随机森林的正确率在0.76-0.86左右，多次用随机森林找一个正确率大于0.84的模型输出答案">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【机器学习】应用简例 随机森林-小白无脑乱用.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97-%E5%B0%8F%E7%99%BD%E6%97%A0%E8%84%91%E4%B9%B1%E7%94%A8/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 发现随机森林的正确率在0.76-0.86左右，多次用随机森林找一个正确率大于0.84的模型输出答案 这次">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 发现随机森林的正确率在0.76-0.86左右，多次用随机森林找一个正确率大于0.84的模型输出答案">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.807Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="随机森林">
@@ -124,36 +124,51 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
 <p>发现随机森林的正确率在0.76-0.86左右，多次用随机森林找一个正确率大于0.84的模型输出答案</p>
-<p>这次用到的参数：<br>rfc&#x3D;RandomForestClassifier(n_estimators&#x3D;100 #决策树的数量<br>,criterion&#x3D;“entropy” #分类标准-信息熵or基尼系数<br>,max_depth&#x3D;4 #决策树最大深度<br>,min_samples_split&#x3D;10) #至少有10个数据，树才会继续分支<br>。</p>
-<p>把训练集分为新训练集和新问题集，在这上面验证准确性<br>Xtrain, Xtest, Ytrain, Ytest &#x3D;<br>train_test_split(arr_t[:,:-1],arr_t[:,-1],test_size&#x3D;0.3)<br>#（数据集，答案集，如何划分）0.3表示训练集和问题集三七分</p>
-<p>​<br>    import numpy as np<br>    import pandas as pd<br>    from sklearn.ensemble import RandomForestClassifier<br>    #随机森林分类器<br>    from sklearn.model_selection import train_test_split<br>    #功能：将数据集分为训练集测试集 Xtrain,Xtest,Ytrain,Ytest</p>
-<pre><code>df_t=pd.read_excel(r&#39;D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\train.xlsx&#39;)
-df_a=pd.read_excel(r&#39;D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\test.xlsx&#39;)
+<p>这次用到的参数：<br>
+rfc=RandomForestClassifier(n_estimators=100 #决策树的数量<br>
+,criterion=“entropy” #分类标准-信息熵or基尼系数<br>
+,max_depth=4 #决策树最大深度<br>
+,min_samples_split=10) #至少有10个数据，树才会继续分支<br>
+。</p>
+<p>把训练集分为新训练集和新问题集，在这上面验证准确性<br>
+Xtrain, Xtest, Ytrain, Ytest =<br>
+train_test_split(arr_t[:,:-1],arr_t[:,-1],test_size=0.3)<br>
+#（数据集，答案集，如何划分）0.3表示训练集和问题集三七分</p>
+<p>​<br>
+import numpy as np<br>
+import pandas as pd<br>
+from sklearn.ensemble import RandomForestClassifier<br>
+#随机森林分类器<br>
+from sklearn.model_selection import train_test_split<br>
+#功能：将数据集分为训练集测试集 Xtrain,Xtest,Ytrain,Ytest</p>
+<pre><code>df_t=pd.read_excel(r'D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\train.xlsx')
+df_a=pd.read_excel(r'D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\test.xlsx')
 
 def get_data_array_float64(df,test=False):
-    df = df.drop(columns=&#39;uid&#39;)
+    df = df.drop(columns='uid')
     #去列名对应的列
     if test == True:
-        df=df.drop(columns =&#39;target&#39;)
+        df=df.drop(columns ='target')
         #去列名对应的列
         
     col_mode_lst=[]
     for each_col in df.columns:#获得每一列的众数
         cnts = df[each_col].value_counts()
-           #得到每一列的所有值以及它们出现的次数 ，降序排列
-        if &#39;?&#39; in cnts and cnts.index[0] == &#39;?&#39;:
+   		#得到每一列的所有值以及它们出现的次数 ，降序排列
+        if '?' in cnts and cnts.index[0] == '?':
             idx=1
         else :
             idx=0
         col_mode_lst.append(cnts.index[idx])
 
     for i in range(len(df.columns)):
-        df[df.columns[i]][df[df.columns[i]] == &#39;?&#39;] = col_mode_lst[i]
+        df[df.columns[i]][df[df.columns[i]] == '?'] = col_mode_lst[i]
         #df[df.columns[i]]按照列名获得列
-        #按照列名获得列，找到列中值为‘？’的元素，将其改成col_mode_lst[i]
-        
+		#按照列名获得列，找到列中值为‘？’的元素，将其改成col_mode_lst[i]
+		
     df_array = df.values.astype(np.float64)
     #df.values得到DataFrame对象的矩阵形式
     #,astype()方法为矩阵转化元素类型
@@ -162,13 +177,14 @@ def get_data_array_float64(df,test=False):
 arr_t=get_data_array_float64(df_t)
 arr_a=get_data_array_float64(df_a,True)
 </code></pre>
-<p>​<br>    Xtrain, Xtest, Ytrain, Ytest &#x3D; train_test_split(arr_t[:,:-1],arr_t[:,-1],test_size&#x3D;0.3)</p>
+<p>​<br>
+Xtrain, Xtest, Ytrain, Ytest = train_test_split(arr_t[:,:-1],arr_t[:,-1],test_size=0.3)</p>
 <pre><code>while True:
     rfc=RandomForestClassifier(n_estimators=100
                                 ,criterion=&quot;entropy&quot;
                                ,max_depth=4
                                ,min_samples_split=10)
-                                   #实例化随机森林
+                           		#实例化随机森林
     rfc = rfc.fit(Xtrain,Ytrain)
     #训练模型
     score = rfc.score(Xtest,Ytest)
@@ -178,13 +194,13 @@ arr_a=get_data_array_float64(df_a,True)
         break
 
 answer_df=pd.DataFrame(answer)
-answer_df.to_excel(r&#39;D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\20201028ans.xlsx&#39;)
+answer_df.to_excel(r'D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\20201028ans.xlsx')
 </code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97-%E5%B0%8F%E7%99%BD%E6%97%A0%E8%84%91%E4%B9%B1%E7%94%A8/" data-id="cl50tnlro003nycj3h80d5urb" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97-%E5%B0%8F%E7%99%BD%E6%97%A0%E8%84%91%E4%B9%B1%E7%94%A8/" data-id="cl50x8cna003occj3ed4o6p7n" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" rel="tag">随机森林</a></li></ul>

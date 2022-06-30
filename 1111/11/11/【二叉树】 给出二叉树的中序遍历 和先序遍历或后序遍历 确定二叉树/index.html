@@ -5,15 +5,15 @@
   
   <title>【二叉树】 给出二叉树的中序遍历 和先序遍历或后序遍历 确定二叉树.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 讨论的内容如题 分析拿中序遍历和后序遍历的组合举例子设数组last[]储存后续遍历 in[]中序遍历，它">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 讨论的内容如题  分析 拿中序遍历和后序遍历的组合举例子 设数组last[]储存后续遍历 in[]中">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【二叉树】 给出二叉树的中序遍历 和先序遍历或后序遍历 确定二叉树.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%91%20%E7%BB%99%E5%87%BA%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%20%E5%92%8C%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86%E6%88%96%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%20%E7%A1%AE%E5%AE%9A%E4%BA%8C%E5%8F%89%E6%A0%91/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 讨论的内容如题 分析拿中序遍历和后序遍历的组合举例子设数组last[]储存后续遍历 in[]中序遍历，它">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 讨论的内容如题  分析 拿中序遍历和后序遍历的组合举例子 设数组last[]储存后续遍历 in[]中">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.430Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.775Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="DFS序">
@@ -124,15 +124,103 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
 <p><strong>讨论的内容如题</strong></p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>拿中序遍历和后序遍历的组合举例子<br>设数组last[]储存后续遍历 in[]中序遍历，它们的长度都是n(数组从1开始计，下标范围是1-n)</p>
-<p>树根自然为last[n]<br>，这时我们遍历in[]数组，在in[]数组中找到last[n]的值的下标idx，因为in[]储存的是中序遍历，显然我们以idx为界把in数组的序列分成两份[1,idx-1],[idx+1,n]，分别为两颗子树上的节点。</p>
+<h2 id="分析"><a class="markdownIt-Anchor" href="#分析"></a> 分析</h2>
+<p>拿中序遍历和后序遍历的组合举例子<br>
+设数组last[]储存后续遍历 in[]中序遍历，它们的长度都是n(数组从1开始计，下标范围是1-n)</p>
+<p>树根自然为last[n]<br>
+，这时我们遍历in[]数组，在in[]数组中找到last[n]的值的下标idx，因为in[]储存的是中序遍历，显然我们以idx为界把in数组的序列分成两份[1,idx-1],[idx+1,n]，分别为两颗子树上的节点。</p>
 <p>之后我们便可以在分出的两个区间之中重复上述操作，分别找目前子树的根节点，再二分区间，直到获得完整的二叉树</p>
 <p>可以使用递归来完成 函数(区间左，区间右，根节点，偏移量)</p>
-<p>此时注意一个问题：当区间被二分之后，我们发现后面的区间在in[]数组和last[]数组中的下标“对不齐”了，即下标发生了偏移，如下图。所以要引入一个变量shift来记录偏移量。（偏移量最开始是0，递归时前面的区间继承原偏移量，后面的区间偏移量为原偏移量+1）<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201008231828150.png?x-oss-">https://img-blog.csdnimg.cn/20201008231828150.png?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70#pic_center)<br>（在前序遍历和中序遍历的组合中，下标发生偏移的是前面的区间）</p>
-<h2 id="例题-后序遍历和中序遍历的组合"><a href="#例题-后序遍历和中序遍历的组合" class="headerlink" title="例题 后序遍历和中序遍历的组合"></a>例题 后序遍历和中序遍历的组合</h2><p><a target="_blank" rel="noopener" href="https://vjudge.net/contest/386054#problem/E">https://vjudge.net/contest/386054#problem/E</a></p>
-<p>​<br>    #include <iostream><br>    #include <cstring><br>    #include <cstdio><br>    struct Node<br>    {<br>        int l,r;<br>    };<br>    Node treeN[10010];<br>    int inorder[10010],postorder[10010];<br>    int len,rt,least,lstPos;<br>    int input()&#x2F;&#x2F;返回数组长度<br>    {<br>        int n,idx&#x3D;1;<br>        char ch;<br>        while(scanf(“%d”,&amp;n)!&#x3D;EOF)<br>        {<br>            inorder[idx++]&#x3D;n;<br>            ch&#x3D;getchar();<br>            if(ch&#x3D;&#x3D;’\n’)<br>                break;<br>        }<br>        idx&#x3D;1;<br>        while(scanf(“%d”,&amp;n)!&#x3D;EOF)<br>        {<br>            postorder[idx++]&#x3D;n;<br>            ch&#x3D;getchar();<br>            if(ch&#x3D;&#x3D;’\n’)<br>                break;<br>        }<br>        return idx-1;<br>    }<br>    int makeTree(int l,int r,int root,int n)<br>    {<br>        if(l&gt;r)<br>            return -1;<br>        int idx&#x3D;-1;<br>        for(int i&#x3D;l; i&lt;&#x3D;r; i++)<br>        {<br>            if(inorder[i]&#x3D;&#x3D;root)<br>            {<br>                idx&#x3D;i;<br>                break;<br>            }<br>        }<br>        if(idx&gt;0)<br>        {<br>            treeN[root].l&#x3D;makeTree(l,idx-1,postorder[idx-n-1],n);<br>            treeN[root].r&#x3D;makeTree(idx+1,r,postorder[r-n-1],n+1);<br>        }<br>        return root;<br>    }<br>    void add(int root,int base)<br>    {<br>        int total&#x3D;base+root;<br>        if(treeN[root].l&#x3D;&#x3D;-1 &amp;&amp; treeN[root].r&#x3D;&#x3D;-1)<br>        {<br>            if(lstPos&#x3D;&#x3D;-1)<br>            {<br>                least&#x3D;total;<br>                lstPos&#x3D;root;<br>            }<br>            else<br>            {<br>                if(total&lt;least)<br>                {<br>                    least&#x3D;total;<br>                    lstPos&#x3D;root;<br>                }<br>            }<br>            return ;<br>        }<br>        if(treeN[root].l&gt;0)<br>        {<br>            add(treeN[root].l,total);<br>        }<br>        if(treeN[root].r&gt;0)<br>        {<br>            add(treeN[root].r,total);<br>        }<br>    }</p>
+<p>此时注意一个问题：当区间被二分之后，我们发现后面的区间在in[]数组和last[]数组中的下标“对不齐”了，即下标发生了偏移，如下图。所以要引入一个变量shift来记录偏移量。（偏移量最开始是0，递归时前面的区间继承原偏移量，后面的区间偏移量为原偏移量+1）<br>
+![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201008231828150.png?x-oss-">https://img-blog.csdnimg.cn/20201008231828150.png?x-oss-</a><br>
+process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)<br>
+（在前序遍历和中序遍历的组合中，下标发生偏移的是前面的区间）</p>
+<h2 id="例题-后序遍历和中序遍历的组合"><a class="markdownIt-Anchor" href="#例题-后序遍历和中序遍历的组合"></a> 例题 后序遍历和中序遍历的组合</h2>
+<p><a target="_blank" rel="noopener" href="https://vjudge.net/contest/386054#problem/E">https://vjudge.net/contest/386054#problem/E</a></p>
+<p>​<br>
+#include <iostream><br>
+#include <cstring><br>
+#include <cstdio><br>
+struct Node<br>
+{<br>
+int l,r;<br>
+};<br>
+Node treeN[10010];<br>
+int inorder[10010],postorder[10010];<br>
+int len,rt,least,lstPos;<br>
+int input()//返回数组长度<br>
+{<br>
+int n,idx=1;<br>
+char ch;<br>
+while(scanf(&quot;%d&quot;,&amp;n)!=EOF)<br>
+{<br>
+inorder[idx++]=n;<br>
+ch=getchar();<br>
+if(ch==’\n’)<br>
+break;<br>
+}<br>
+idx=1;<br>
+while(scanf(&quot;%d&quot;,&amp;n)!=EOF)<br>
+{<br>
+postorder[idx++]=n;<br>
+ch=getchar();<br>
+if(ch==’\n’)<br>
+break;<br>
+}<br>
+return idx-1;<br>
+}<br>
+int makeTree(int l,int r,int root,int n)<br>
+{<br>
+if(l&gt;r)<br>
+return -1;<br>
+int idx=-1;<br>
+for(int i=l; i&lt;=r; i++)<br>
+{<br>
+if(inorder[i]<mark>root)<br>
+{<br>
+idx=i;<br>
+break;<br>
+}<br>
+}<br>
+if(idx&gt;0)<br>
+{<br>
+treeN[root].l=makeTree(l,idx-1,postorder[idx-n-1],n);<br>
+treeN[root].r=makeTree(idx+1,r,postorder[r-n-1],n+1);<br>
+}<br>
+return root;<br>
+}<br>
+void add(int root,int base)<br>
+{<br>
+int total=base+root;<br>
+if(treeN[root].l</mark>-1 &amp;&amp; treeN[root].r==-1)<br>
+{<br>
+if(lstPos==-1)<br>
+{<br>
+least=total;<br>
+lstPos=root;<br>
+}<br>
+else<br>
+{<br>
+if(total&lt;least)<br>
+{<br>
+least=total;<br>
+lstPos=root;<br>
+}<br>
+}<br>
+return ;<br>
+}<br>
+if(treeN[root].l&gt;0)<br>
+{<br>
+add(treeN[root].l,total);<br>
+}<br>
+if(treeN[root].r&gt;0)<br>
+{<br>
+add(treeN[root].r,total);<br>
+}<br>
+}</cstdio></cstring></iostream></p>
 <pre><code>int main()
 &#123;
     while((len=input())&gt;0)
@@ -146,9 +234,19 @@
     return 0;
 &#125;
 </code></pre>
-<p>​    </p>
-<h2 id="例题-前序遍历和中序遍历的组合"><a href="#例题-前序遍历和中序遍历的组合" class="headerlink" title="例题 前序遍历和中序遍历的组合"></a>例题 前序遍历和中序遍历的组合</h2><p>&lt;<a target="_blank" rel="noopener" href="https://pintia.cn/problem-">https://pintia.cn/problem-</a><br>sets&#x2F;1303281293857476608&#x2F;problems&#x2F;1303281404742291466&gt;</p>
-<p>​<br>    #include <iostream><br>    #include <cstdio><br>    #include <cstring><br>    #include <algorithm><br>    #include <iomanip><br>    #include <queue><br>    #include <cmath><br>    #include <map></p>
+<p>​</p>
+<h2 id="例题-前序遍历和中序遍历的组合"><a class="markdownIt-Anchor" href="#例题-前序遍历和中序遍历的组合"></a> 例题 前序遍历和中序遍历的组合</h2>
+<p>&lt;<a target="_blank" rel="noopener" href="https://pintia.cn/problem-">https://pintia.cn/problem-</a><br>
+sets/1303281293857476608/problems/1303281404742291466&gt;</p>
+<p>​<br>
+#include <iostream><br>
+#include <cstdio><br>
+#include <cstring><br>
+#include <algorithm><br>
+#include <iomanip><br>
+#include <queue><br>
+#include <cmath><br>
+#include <map></map></cmath></queue></iomanip></algorithm></cstring></cstdio></iostream></p>
 <pre><code>const int N=32;
 int n;
 struct Node
@@ -206,12 +304,12 @@ int main()
     return 0;
 &#125;
 </code></pre>
-<p>​    </p>
+<p>​</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%91%20%E7%BB%99%E5%87%BA%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%20%E5%92%8C%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86%E6%88%96%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%20%E7%A1%AE%E5%AE%9A%E4%BA%8C%E5%8F%89%E6%A0%91/" data-id="cl50tnlqx001iycj3cu7iar20" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%91%20%E7%BB%99%E5%87%BA%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%20%E5%92%8C%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86%E6%88%96%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%20%E7%A1%AE%E5%AE%9A%E4%BA%8C%E5%8F%89%E6%A0%91/" data-id="cl50x8cmr001jccj3bt4s9y88" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS%E5%BA%8F/" rel="tag">DFS序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
@@ -222,19 +320,19 @@ int main()
     
 <nav id="article-nav">
   
-    <a href="/1111/11/11/%E3%80%90tarjin%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0%20%E7%BC%A9%E7%82%B9%EF%BC%8C%E5%89%B2%E7%82%B9%EF%BC%8C%E5%89%B2%E8%BE%B9%E3%80%91%E6%B4%9B%E8%B0%B7_P3387%E7%BC%A9%E7%82%B9%E6%A8%A1%E6%9D%BFP3388%E5%89%B2%E7%82%B9%E6%A8%A1%E6%9D%BF%20HDU4738%20caocao%E2%80%98bridge/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E3%80%90%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D%20%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7P3386%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8DP2756%E9%A3%9E%E8%A1%8C%E5%91%98%E9%85%8D%E5%AF%B9%E6%96%B9%E6%A1%88%E9%97%AE%E9%A2%98P1129%E7%9F%A9%E9%98%B5%E6%B8%B8%E6%88%8FP1559%E8%BF%90%E5%8A%A8%E5%91%98%E6%9C%80%E4%BD%B3%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98P4014%E5%88%86%E9%85%8D%E9%97%AE%E9%A2%98P1640%E8%BF%9E%E7%BB%AD%E6%94%BB%E5%87%BB%E6%B8%B8%E6%88%8F/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          【tarjin算法练习 缩点，割点，割边】洛谷_P3387缩点模板P3388割点模板 HDU4738 caocao‘bridge.md
+          【二分图匹配 练习】洛谷P3386【模板】二分图最大匹配P2756飞行员配对方案问题P1129矩阵游戏P1559运动员最佳匹配问题P4014分配问题P1640连续攻击游戏.md
         
       </div>
     </a>
   
   
-    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91python%20matplotlib%20%E8%87%AA%E5%AD%A6%E5%85%A5%E9%97%A8%EF%BC%88%E9%9A%8F%E7%BC%98%E6%9B%B4%E6%96%B0%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E3%80%90%E5%8C%BA%E9%97%B4DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1880%5BNOI1995%5D%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6%20P1063%E8%83%BD%E9%87%8F%E9%A1%B9%E9%93%BEP2654%20%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E5%9F%B9%E5%85%BB/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">【学习记录】python matplotlib 自学入门（随缘更新）.md</div>
+      <div class="article-nav-title">【区间DP练习】洛谷 P1880[NOI1995]石子合并 P1063能量项链P2654 原核生物培养.md</div>
     </a>
   
 </nav>

@@ -5,15 +5,15 @@
   
   <title>【机器学习】应用简例 决策树 并用graphviz可视化树.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 导入库 ​    import pandas as pd    import numpy as np">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 导入库 ​ import pandas as pd import numpy as np from">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【机器学习】应用简例 决策树 并用graphviz可视化树.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E5%86%B3%E7%AD%96%E6%A0%91%20%E5%B9%B6%E7%94%A8graphviz%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A0%91/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 导入库 ​    import pandas as pd    import numpy as np">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 导入库 ​ import pandas as pd import numpy as np from">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.807Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="机器学习">
@@ -124,33 +124,69 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
 <p>导入库</p>
-<p>​<br>    import pandas as pd<br>    import numpy as np<br>    from sklearn import tree<br>    from sklearn.model_selection import train_test_split</p>
+<p>​<br>
+import pandas as pd<br>
+import numpy as np<br>
+from sklearn import tree<br>
+from sklearn.model_selection import train_test_split</p>
 <p>导入数据</p>
-<p>​<br>    df_t&#x3D;pd.read_excel(r’D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\train.xlsx’)<br>    df_t&#x3D;df_t.drop(columns&#x3D;’uid’)<br>    df_t</p>
-<p>![df_t](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201028221351794.png?x-oss-">https://img-blog.csdnimg.cn/20201028221351794.png?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70#pic_center)<br>用众数替换问号</p>
-<p>​<br>    for col in df_t.columns:<br>        df_t[col][df_t[col] &#x3D;&#x3D; ‘?’] &#x3D; df_t[col].value_counts().index[0] if df_t[col].value_counts().index[0] !&#x3D; ‘?’ else df_t[col].value_counts().index[1]<br>    df_t</p>
-<p>![df_t2](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201028221513308.png?x-oss-">https://img-blog.csdnimg.cn/20201028221513308.png?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70#pic_center)<br>得到float类型矩阵</p>
-<p>​<br>    arr_t&#x3D;df_t.values.astype(np.float32)<br>    arr_t</p>
+<p>​<br>
+df_t=pd.read_excel(r’D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\train.xlsx’)<br>
+df_t=df_t.drop(columns=‘uid’)<br>
+df_t</p>
+<p>![df_t](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201028221351794.png?x-oss-">https://img-blog.csdnimg.cn/20201028221351794.png?x-oss-</a><br>
+process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)<br>
+用众数替换问号</p>
+<p>​<br>
+for col in df_t.columns:<br>
+df_t[col][df_t[col] == ‘?’] = df_t[col].value_counts().index[0] if df_t[col].value_counts().index[0] != ‘?’ else df_t[col].value_counts().index[1]<br>
+df_t</p>
+<p>![df_t2](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201028221513308.png?x-oss-">https://img-blog.csdnimg.cn/20201028221513308.png?x-oss-</a><br>
+process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)<br>
+得到float类型矩阵</p>
+<p>​<br>
+arr_t=df_t.values.astype(np.float32)<br>
+arr_t</p>
 <blockquote>
-<p>array([[61., 0., 2., …, 0., 7., 0.],<br> [64., 1., 3., …, 0., 7., 1.],<br> [40., 0., 4., …, 0., 6., 1.],<br> …,<br> [65., 0., 3., …, 1., 3., 0.],<br> [63., 1., 4., …, 0., 7., 0.],<br> [55., 0., 4., …, 1., 7., 1.]], dtype&#x3D;float32)<br> 把训练集分成测试集训练集(倒入的全是训练集)</p>
+<p>array([[61., 0., 2., …, 0., 7., 0.],<br>
+[64., 1., 3., …, 0., 7., 1.],<br>
+[40., 0., 4., …, 0., 6., 1.],<br>
+…,<br>
+[65., 0., 3., …, 1., 3., 0.],<br>
+[63., 1., 4., …, 0., 7., 0.],<br>
+[55., 0., 4., …, 1., 7., 1.]], dtype=float32)<br>
+把训练集分成测试集训练集(倒入的全是训练集)</p>
 </blockquote>
 <pre><code>Xtrain,Xtest,Ytrain,Ytest = train_test_split(arr_t[:,:-1],arr_t[:,-1],test_size=0.3)
 </code></pre>
 <p>实例化决策树，训练模型，查看正确率</p>
-<p>​<br>    dtc &#x3D; tree.DecisionTreeClassifier(criterion&#x3D;”entropy”<br>                                     ,max_depth&#x3D;4<br>                                     ,min_samples_split&#x3D;10).fit(Xtrain,Ytrain)<br>    score &#x3D; dtc.score(Xtest,Ytest)<br>    score</p>
+<p>​<br>
+dtc = tree.DecisionTreeClassifier(criterion=“entropy”<br>
+,max_depth=4<br>
+,min_samples_split=10).fit(Xtrain,Ytrain)<br>
+score = dtc.score(Xtest,Ytest)<br>
+score</p>
 <blockquote>
 <p>0.8140703517587939</p>
 </blockquote>
 <p>画图</p>
-<p>​<br>    graph_tree &#x3D; graphviz.Source(tree.export_graphviz(dtc<br>                                     ,feature_names &#x3D; df_t.keys()[:-1]<br>                                     ,class_names &#x3D; [‘患病’,’不患病’]<br>                                     ,filled &#x3D; True<br>                                     ,rounded &#x3D; True))<br>    graph_tree</p>
-<p>![graph_tree](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201028221815494.png?x-oss-">https://img-blog.csdnimg.cn/20201028221815494.png?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70#pic_center)</p>
+<p>​<br>
+graph_tree = graphviz.Source(tree.export_graphviz(dtc<br>
+,feature_names = df_t.keys()[:-1]<br>
+,class_names = [‘患病’,‘不患病’]<br>
+,filled = True<br>
+,rounded = True))<br>
+graph_tree</p>
+<p>![graph_tree](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201028221815494.png?x-oss-">https://img-blog.csdnimg.cn/20201028221815494.png?x-oss-</a><br>
+process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E5%86%B3%E7%AD%96%E6%A0%91%20%E5%B9%B6%E7%94%A8graphviz%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A0%91/" data-id="cl50tnlrl003iycj3418l4ia9" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E5%86%B3%E7%AD%96%E6%A0%91%20%E5%B9%B6%E7%94%A8graphviz%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A0%91/" data-id="cl50x8cn9003iccj30syu65mk" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>

@@ -5,15 +5,15 @@
   
   <title>【树的直径】树形DP求解.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 思路每次记录每个子树从根到叶的最长的链， 然后把最长前2长的拼起来先更新D再更新dp， 否则会求出一条最">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  思路 每次记录每个子树从根到叶的最长的链， 然后把最长前2长的拼起来 先更新D再更新dp， 否则会">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【树的直径】树形DP求解.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%E3%80%91%E6%A0%91%E5%BD%A2DP%E6%B1%82%E8%A7%A3/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 思路每次记录每个子树从根到叶的最长的链， 然后把最长前2长的拼起来先更新D再更新dp， 否则会求出一条最">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  思路 每次记录每个子树从根到叶的最长的链， 然后把最长前2长的拼起来 先更新D再更新dp， 否则会">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.807Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="DP">
@@ -123,15 +123,68 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>每次记录每个子树从根到叶的最长的链， 然后把最长前2长的拼起来<br>先更新D再更新dp， 否则会求出一条最长链*2</p>
-<p>​<br>    void dfs(int x, int efr){<br>        for(int e &#x3D; head[x]; e; e &#x3D; edg[e].nxt){<br>            if((e ^ 1) &#x3D;&#x3D; efr) continue;<br>            int y &#x3D; edg[e].to;<br>            dfs(y, e);<br>            D &#x3D; std::max(D, dp[x] + dp[y] + 1);<br>            dp[x] &#x3D; std::max(dp[x], dp[y] + 1);<br>        }<br>    }</p>
-<h2 id="HDU-6201-transaction-transaction-transaction（非模题）"><a href="#HDU-6201-transaction-transaction-transaction（非模题）" class="headerlink" title="HDU 6201 transaction transaction transaction（非模题）"></a>HDU 6201 transaction transaction transaction（非模题）</h2><p>​<br>    #include &lt;bits&#x2F;stdc++.h&gt;<br>    const int N &#x3D; 1e5 + 4;<br>    int val[N], dp[N][2], head[N];<br>    struct Edge{<br>        int to, nxt, va;<br>    }edg[N &lt;&lt; 1];<br>    int idx, n, t, u, v, w, ans;<br>    void addE(int fr, int to , int w){<br>        edg[idx].to &#x3D; to;<br>        edg[idx].nxt &#x3D; head[fr];<br>        edg[idx].va &#x3D; w;<br>        head[fr] &#x3D; idx ++;<br>    }<br>    void dfs(int x, int efr){<br>        dp[x][0] &#x3D; val[x], dp[x][1] &#x3D; -val[x];<br>        for(int e&#x3D;head[x]; e; e&#x3D;edg[e].nxt){<br>            if((e ^ 1) &#x3D;&#x3D; efr) continue;<br>            int y &#x3D; edg[e].to;<br>            dfs(y, e);<br>            dp[x][0] &#x3D; std::min(dp[x][0], dp[y][0] + edg[e].va);<br>            dp[x][1] &#x3D; std::min(dp[x][1], dp[y][1] + edg[e].va);<br>        }<br>        ans &#x3D; std::min(ans, dp[x][0] + dp[x][1]);<br>    }<br>    int main(){<br>        scanf(“%d”, &amp;t);<br>        while(t –){<br>            scanf(“%d”, &amp;n);<br>            idx &#x3D; 2, ans &#x3D; 0;<br>            for(int i&#x3D;0; i&lt;&#x3D;n; i++) head[i] &#x3D; 0;<br>            for(int i&#x3D;1; i&lt;&#x3D;n; i++) scanf(“%d”, &amp;val[i]);<br>            for(int i&#x3D;1; i&lt;n; i++){<br>                scanf(“%d%d%d”, &amp;u, &amp;v, &amp;w);<br>                addE(u, v, w), addE(v, u, w);<br>            }<br>            dfs(1, -1);<br>            printf(“%d\n”, -ans);<br>        }<br>        return 0;<br>    }</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<p>每次记录每个子树从根到叶的最长的链， 然后把最长前2长的拼起来<br>
+先更新D再更新dp， 否则会求出一条最长链*2</p>
+<p>​<br>
+void dfs(int x, int efr){<br>
+for(int e = head[x]; e; e = edg[e].nxt){<br>
+if((e ^ 1) == efr) continue;<br>
+int y = edg[e].to;<br>
+dfs(y, e);<br>
+D = std::max(D, dp[x] + dp[y] + 1);<br>
+dp[x] = std::max(dp[x], dp[y] + 1);<br>
+}<br>
+}</p>
+<h2 id="hdu-6201-transaction-transaction-transaction非模题"><a class="markdownIt-Anchor" href="#hdu-6201-transaction-transaction-transaction非模题"></a> HDU 6201 transaction transaction transaction（非模题）</h2>
+<p>​<br>
+#include &lt;bits/stdc++.h&gt;<br>
+const int N = 1e5 + 4;<br>
+int val[N], dp[N][2], head[N];<br>
+struct Edge{<br>
+int to, nxt, va;<br>
+}edg[N &lt;&lt; 1];<br>
+int idx, n, t, u, v, w, ans;<br>
+void addE(int fr, int to , int w){<br>
+edg[idx].to = to;<br>
+edg[idx].nxt = head[fr];<br>
+edg[idx].va = w;<br>
+head[fr] = idx <ins>;<br>
+}<br>
+void dfs(int x, int efr){<br>
+dp[x][0] = val[x], dp[x][1] = -val[x];<br>
+for(int e=head[x]; e; e=edg[e].nxt){<br>
+if((e ^ 1) == efr) continue;<br>
+int y = edg[e].to;<br>
+dfs(y, e);<br>
+dp[x][0] = std::min(dp[x][0], dp[y][0] + edg[e].va);<br>
+dp[x][1] = std::min(dp[x][1], dp[y][1] + edg[e].va);<br>
+}<br>
+ans = std::min(ans, dp[x][0] + dp[x][1]);<br>
+}<br>
+int main(){<br>
+scanf(&quot;%d&quot;, &amp;t);<br>
+while(t --){<br>
+scanf(&quot;%d&quot;, &amp;n);<br>
+idx = 2, ans = 0;<br>
+for(int i=0; i&lt;=n; i</ins>) head[i] = 0;<br>
+for(int i=1; i&lt;=n; i++) scanf(&quot;%d&quot;, &amp;val[i]);<br>
+for(int i=1; i&lt;n; i++){<br>
+scanf(&quot;%d%d%d&quot;, &amp;u, &amp;v, &amp;w);<br>
+addE(u, v, w), addE(v, u, w);<br>
+}<br>
+dfs(1, -1);<br>
+printf(&quot;%d\n&quot;, -ans);<br>
+}<br>
+return 0;<br>
+}</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%E3%80%91%E6%A0%91%E5%BD%A2DP%E6%B1%82%E8%A7%A3/" data-id="cl50tnlrt0041ycj35jfy1cl5" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%E3%80%91%E6%A0%91%E5%BD%A2DP%E6%B1%82%E8%A7%A3/" data-id="cl50x8cnf0040ccj3cvdd3u66" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
@@ -142,19 +195,19 @@
     
 <nav id="article-nav">
   
-    <a href="/1111/11/11/%E3%80%90%E7%88%AC%E8%99%AB%E3%80%91%20%E7%88%AC%E5%8F%96%E4%BA%91%E7%8F%AD%E8%AF%BE%E4%B8%8A%E8%80%81%E5%B8%88%E5%8F%91%E7%9A%84%E8%A7%86%E9%A2%91%E8%B5%84%E6%BA%90%20python/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%20dfs%20dp%E3%80%91P4408%20%5BNOI2003%5D%20%E9%80%83%E5%AD%A6%E7%9A%84%E5%B0%8F%E5%AD%A9/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          【爬虫】 爬取云班课上老师发的视频资源 python.md
+          【树的直径 dfs dp】P4408 [NOI2003] 逃学的小孩.md
         
       </div>
     </a>
   
   
-    <a href="/1111/11/11/%E3%80%90%E7%8A%B6%E5%8E%8BDP%E3%80%91%E6%96%AF%E5%9D%A6%E7%BA%B3%E6%A0%91/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E3%80%90%E7%88%AC%E8%99%AB%E3%80%91%20%E7%88%AC%E5%8F%96%E4%BA%91%E7%8F%AD%E8%AF%BE%E4%B8%8A%E8%80%81%E5%B8%88%E5%8F%91%E7%9A%84%E8%A7%86%E9%A2%91%E8%B5%84%E6%BA%90%20python/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">【状压DP】斯坦纳树.md</div>
+      <div class="article-nav-title">【爬虫】 爬取云班课上老师发的视频资源 python.md</div>
     </a>
   
 </nav>

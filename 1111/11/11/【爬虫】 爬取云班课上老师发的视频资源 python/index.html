@@ -5,15 +5,15 @@
   
   <title>【爬虫】 爬取云班课上老师发的视频资源 python.md | 蓝湖畔淅淅沥沥的雨</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 蒟蒻声明这个程序虽然可以差强人意地实现功能但是烂的一批，也不打算做出较大改动了。后面会总结一些不足之处，">
+  <meta name="description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  蒟蒻声明 这个程序虽然可以差强人意地实现功能但是烂的一批，也不打算做出较大改动了。后面会总结一些不">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【爬虫】 爬取云班课上老师发的视频资源 python.md">
 <meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E7%88%AC%E8%99%AB%E3%80%91%20%E7%88%AC%E5%8F%96%E4%BA%91%E7%8F%AD%E8%AF%BE%E4%B8%8A%E8%80%81%E5%B8%88%E5%8F%91%E7%9A%84%E8%A7%86%E9%A2%91%E8%B5%84%E6%BA%90%20python/index.html">
 <meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
-<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 蒟蒻声明这个程序虽然可以差强人意地实现功能但是烂的一批，也不打算做出较大改动了。后面会总结一些不足之处，">
+<meta property="og:description" content="说明 - 2022-05-05 本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  蒟蒻声明 这个程序虽然可以差强人意地实现功能但是烂的一批，也不打算做出较大改动了。后面会总结一些不">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
-<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:modified_time" content="2022-06-30T10:05:58.807Z">
 <meta property="article:author" content="StarsWhisper">
 <meta property="article:tag" content="OldBlog(Before20220505)">
 <meta property="article:tag" content="爬虫">
@@ -123,32 +123,136 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="蒟蒻声明"><a href="#蒟蒻声明" class="headerlink" title="蒟蒻声明"></a>蒟蒻声明</h2><p>这个程序虽然可以差强人意地实现功能但是烂的一批，也不打算做出较大改动了。后面会总结一些不足之处，以警示以后。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>。  </p>
-<ol>
-<li>通过抓包发现云班课的视频时m3u8的，即一个m3u8的文件中记录了数个ts类型视频的链接，这些ts视频的时常一般为10秒。想爬取某个视频只需要获取视频对应的m3u8文件，依次把m3u8文件中的ts文件下载并通过os.system()调用命令行把一系列的ts文件合并为mp4  </li>
-<li>步骤1是单独下载一个视频的思路，若想下载所有视频，只需要找出所有视频的m3u8，重复步骤1。</li>
-</ol>
-<h2 id="单独下载一个m3u8"><a href="#单独下载一个m3u8" class="headerlink" title="单独下载一个m3u8"></a>单独下载一个m3u8</h2><p>笔者仅仅在要爬的课程中实验该程序可以达到目的，至于其他的m3u8就不清楚了  </p>
-<ol>
-<li>获取m3u8文件后解析其内容，做到可以提取出所有的ts文件链接  </li>
-<li>把所有的ts文件下载本地的同一个文件夹中  </li>
-<li>调用命令行，例如这样：<br>os.system(‘copy &#x2F;b ‘+os.path.abspath(tempworkpath)+’\ _.ts<br>‘+os.path.abspath(pathOUTPUT)+’\’+nameOUTPUT+’.mp4’)<br>合并所有ts文件为一个新的mp4文件  </li>
-<li>把这一次下载的ts文件删掉，以备下一次操作<br>os.system(‘del ‘+os.path.abspath(tempworkpath)+’_.ts’)import re<br>import requests<br>from bs4 import BeautifulSoup<br>import osdef DownOne(url,name):<br>toIdxStr &#x3D; lambda x : (‘000000000’+str(x))[-10:]<br><br>urlM3U8 &#x3D; url<br>nameOUTPUT &#x3D; name.replace(‘ ‘,’’)<br>pathOUTPUT &#x3D; ‘out’<br>sch &#x3D; re.search(‘(.+?&#x2F;[0-9].{3}&#x2F;[0-9].{1}&#x2F;[0-9].{1}&#x2F;)(.+?).m3u8’,urlM3U8)<br>headM3U8 &#x3D; sch.group(1)<br>nameM3U8 &#x3D;sch.group(2)<br>tempworkpath &#x3D; ‘aaabbbcccdddeeefffggghhhiii’<br><br>resM3U8 &#x3D; requests.get(urlM3U8)<br><br>lstTS &#x3D; re.findall(‘.+?ts’,resM3U8.text)<br><br>if not os.path.exists(tempworkpath):<br>    os.mkdir(tempworkpath)<br>if not os.path.exists(pathOUTPUT):<br>    os.mkdir(pathOUTPUT)<br><br>for i,each in enumerate(lstTS):<br>    print(i,’of’,len(lstTS))<br>    res &#x3D; requests.get(headM3U8+each)<br>    with open(tempworkpath+’&#x2F;‘+nameM3U8+toIdxStr(i)+’.ts’, ‘wb’) as f:<br>        f.write(res.content)<br><br>print(‘合并’)<br>print(‘copy &#x2F;b ‘+os.path.abspath(tempworkpath)+’\*.ts ‘+os.path.abspath(pathOUTPUT)+’\‘+nameOUTPUT+’.mp4’)<br>os.system(‘copy &#x2F;b ‘+os.path.abspath(tempworkpath)+’\*.ts ‘+os.path.abspath(pathOUTPUT)+’\‘+nameOUTPUT+’.mp4’)<br>os.system(‘del ‘+os.path.abspath(tempworkpath)+’\*.ts’)<br>if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘:<br>url &#x3D; input(‘m3u8 url:’)<br>name &#x3D; input(‘video name:’)<br>DownOne(url,name)</li>
-</ol>
-<h2 id="爬取全部的视频资源"><a href="#爬取全部的视频资源" class="headerlink" title="爬取全部的视频资源"></a>爬取全部的视频资源</h2><p>下方代码中的import DownloaderM3U8 as DOWN，这个库是上面爬一个m3u8的那一坨<br>下面的程序这些部分我改了，爬的话要填自己的账号密码等</p>
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="蒟蒻声明"><a class="markdownIt-Anchor" href="#蒟蒻声明"></a> 蒟蒻声明</h2>
+<p>这个程序虽然可以差强人意地实现功能但是烂的一批，也不打算做出较大改动了。后面会总结一些不足之处，以警示以后。</p>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<p>。<br>
+1.<br>
+通过抓包发现云班课的视频时m3u8的，即一个m3u8的文件中记录了数个ts类型视频的链接，这些ts视频的时常一般为10秒。想爬取某个视频只需要获取视频对应的m3u8文件，依次把m3u8文件中的ts文件下载并通过os.system()调用命令行把一系列的ts文件合并为mp4<br>
+2.<br>
+步骤1是单独下载一个视频的思路，若想下载所有视频，只需要找出所有视频的m3u8，重复步骤1。</p>
+<h2 id="单独下载一个m3u8"><a class="markdownIt-Anchor" href="#单独下载一个m3u8"></a> 单独下载一个m3u8</h2>
+<p>笔者仅仅在要爬的课程中实验该程序可以达到目的，至于其他的m3u8就不清楚了<br>
+1.<br>
+获取m3u8文件后解析其内容，做到可以提取出所有的ts文件链接<br>
+2.<br>
+把所有的ts文件下载本地的同一个文件夹中<br>
+3.<br>
+调用命令行，例如这样：<br>
+os.system(‘copy /b ‘+os.path.abspath(tempworkpath)+’\ _.ts<br>
+‘+os.path.abspath(pathOUTPUT)+’\’+nameOUTPUT+’.mp4’)<br>
+合并所有ts文件为一个新的mp4文件<br>
+4.<br>
+把这一次下载的ts文件删掉，以备下一次操作<br>
+os.system('del ‘+os.path.abspath(tempworkpath)+’_.ts’)</p>
+<pre><code>import re
+import requests
+from bs4 import BeautifulSoup
+import os
+
+
+def DownOne(url,name):
+    toIdxStr = lambda x : ('000000000'+str(x))[-10:]
+
+    urlM3U8 = url
+    nameOUTPUT = name.replace(' ','')
+    pathOUTPUT = 'out'
+    sch = re.search('(.+?/[0-9].&#123;3&#125;/[0-9].&#123;1&#125;/[0-9].&#123;1&#125;/)(.+?).m3u8',urlM3U8)
+    headM3U8 = sch.group(1)
+    nameM3U8 =sch.group(2)
+    tempworkpath = 'aaabbbcccdddeeefffggghhhiii'
+    
+    resM3U8 = requests.get(urlM3U8)
+    
+    lstTS = re.findall('.+?ts',resM3U8.text)
+    
+    if not os.path.exists(tempworkpath):
+        os.mkdir(tempworkpath)
+    if not os.path.exists(pathOUTPUT):
+        os.mkdir(pathOUTPUT)
+    
+    for i,each in enumerate(lstTS):
+        print(i,'of',len(lstTS))
+        res = requests.get(headM3U8+each)
+        with open(tempworkpath+'/'+nameM3U8+toIdxStr(i)+'.ts', 'wb') as f:
+            f.write(res.content)
+    
+    print('合并')
+    print('copy /b '+os.path.abspath(tempworkpath)+'\\*.ts '+os.path.abspath(pathOUTPUT)+'\\'+nameOUTPUT+'.mp4')
+    os.system('copy /b '+os.path.abspath(tempworkpath)+'\\*.ts '+os.path.abspath(pathOUTPUT)+'\\'+nameOUTPUT+'.mp4')
+    os.system('del '+os.path.abspath(tempworkpath)+'\\*.ts')
+
+if __name__ == '__main__':
+    url = input('m3u8 url:')
+    name = input('video name:')
+    DownOne(url,name)
+</code></pre>
+<h2 id="爬取全部的视频资源"><a class="markdownIt-Anchor" href="#爬取全部的视频资源"></a> 爬取全部的视频资源</h2>
+<p>下方代码中的import DownloaderM3U8 as DOWN，这个库是上面爬一个m3u8的那一坨<br>
+下面的程序这些部分我改了，爬的话要填自己的账号密码等</p>
 <blockquote>
-<p>logData &#x3D; { ‘account_name’ : ‘这里是我的账号’<br> ,‘user_pwd’ : ‘这里是我的密码’<br> ,‘remember_me’ : ‘N’<br> }<br> targetURL &#x3D; ‘填需要获取资源的页面（云班课进入一个课程，再点资源，然后把链接复制过来）’<br> user-agent也改了，不太清楚这个是不是必要的</p>
+<p>logData = { ‘account_name’ : ‘这里是我的账号’<br>
+,‘user_pwd’ : ‘这里是我的密码’<br>
+,‘remember_me’ : ‘N’<br>
+}<br>
+targetURL = ‘填需要获取资源的页面（云班课进入一个课程，再点资源，然后把链接复制过来）’<br>
+user-agent也改了，不太清楚这个是不是必要的</p>
 </blockquote>
-<h4 id="html解析思路"><a href="#html解析思路" class="headerlink" title="html解析思路"></a>html解析思路</h4><p>这是云班课储存资源的思路</p>
-<p>​<br>​    &lt;div1 这是包含所有视频的一块&gt;<br>​    	&lt;div2 第一单元的所有视频&gt;  所有的div2的集合对应程序里的d2<br>​    		&lt;div 视频&gt;</div>	 一个div2中所有div的集合对应程序里的d3<br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    	</div><br>​    	&lt;div2 第二单元的所有视频&gt;<br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    	</div><br>​    	&lt;div2 第三单元的所有视频&gt;<br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    		&lt;div 视频&gt;</div><br>​    	</div><br>​    </div></p>
+<h4 id="html解析思路"><a class="markdownIt-Anchor" href="#html解析思路"></a> html解析思路</h4>
+<p>这是云班课储存资源的思路</p>
+<p>​<br>
+​    &lt;div1 这是包含所有视频的一块&gt;<br>
+​    	&lt;div2 第一单元的所有视频&gt;  所有的div2的集合对应程序里的d2<br>
+​    		&lt;div 视频&gt;	 一个div2中所有div的集合对应程序里的d3<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    	<br>
+​    	&lt;div2 第二单元的所有视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    	<br>
+​    	&lt;div2 第三单元的所有视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    	<br>
+​    </p>
 <p>。</p>
-<p>值得一提的是我没有在网页的html中找到m3u8的链接，但是每个视频有一张图片，图片的链接和视频的m3u8链接有许多相同点。<br>其中图片的链接中有形如： <strong>‘年份&#x2F;月份&#x2F;字符串’ <strong>的格式，而m3u8的链接中有形如：</strong> ‘年份&#x2F;月份&#x2F;日期&#x2F;字符串’</strong><br>的格式，并且这两段格式中除了图片链接没有日期外，其他完全相同</p>
-<p>​<br>​    #云班课视频资源获取 开始于2021&#x2F;03&#x2F;12<br>​    ‘’’<br>​    目前没有任何try,纯莽<br>​<br>    part1 登录 (成功)<br>    part2 找到所有视频块div(成功)<br>    part3 获取所有视频对应的m3u8链接(遇到问题)<br>        问题：<br>            html中没有找到对应的m3u8链接,但有一张图片的链接,其中有 #年份&#x2F;月份&#x2F;字符串# 的部分与我们需要的m3u8链接十分相似<br>            需要的m3u8链接的该部分格式为 #年份&#x2F;月份&#x2F;日期&#x2F;字符串# 所以尝试枚举已知月份中所有的日期暴力破解<br>            事实证明这种方法有概率失败,因为有的m3u8链接会与图片连接中的月份有偏差,不保证能完全获取所有的m3u8链接<br>        可能的解决方案：<br>            1.尝试枚举一年中的所有日期而不是这个月的(需要时间长,但不失为一种方法,尚未尝试),<br>              但不排除m3u8链接和img链接的年份也有偏差的可能<br>            &#x2F;&#x2F;———————————————————–<br>                2021&#x2F;03&#x2F;12:<br>                    若没有找到正确的m3u8链接,则尝试读取下一个月的所有日期<br>                    这样可以正确解析出更多的链接,但是仍然不能完全解决问题<br>            &#x2F;&#x2F;———————————————————–</p>
+<p>值得一提的是我没有在网页的html中找到m3u8的链接，但是每个视频有一张图片，图片的链接和视频的m3u8链接有许多相同点。<br>
+其中图片的链接中有形如： <strong>'年份/月份/字符串’ <strong>的格式，而m3u8的链接中有形如：</strong> ‘年份/月份/日期/字符串’</strong><br>
+的格式，并且这两段格式中除了图片链接没有日期外，其他完全相同</p>
+<p>​<br>
+​    #云班课视频资源获取 开始于2021/03/12<br>
+​    ‘’’<br>
+​    目前没有任何try,纯莽<br>
+​<br>
+part1 登录 (成功)<br>
+part2 找到所有视频块div(成功)<br>
+part3 获取所有视频对应的m3u8链接(遇到问题)<br>
+问题：<br>
+html中没有找到对应的m3u8链接,但有一张图片的链接,其中有 #年份/月份/字符串# 的部分与我们需要的m3u8链接十分相似<br>
+需要的m3u8链接的该部分格式为 #年份/月份/日期/字符串# 所以尝试枚举已知月份中所有的日期暴力破解<br>
+事实证明这种方法有概率失败,因为有的m3u8链接会与图片连接中的月份有偏差,不保证能完全获取所有的m3u8链接<br>
+可能的解决方案：<br>
+1.尝试枚举一年中的所有日期而不是这个月的(需要时间长,但不失为一种方法,尚未尝试),<br>
+但不排除m3u8链接和img链接的年份也有偏差的可能<br>
+//-----------------------------------------------------------<br>
+2021/03/12:<br>
+若没有找到正确的m3u8链接,则尝试读取下一个月的所有日期<br>
+这样可以正确解析出更多的链接,但是仍然不能完全解决问题<br>
+//-----------------------------------------------------------</p>
 <pre><code>part4 针对每一个m3u8链接下载其中的所有js链接,并尝试调用命令行指令合并ts文件为mp4(尚未开始,太懒了)
     这一步脱离前三个part,独立进行
-&#39;&#39;&#39;
+'''
 
 import re
 import requests
@@ -174,53 +278,60 @@ def monthIter(year,month):
             monthMap[2] += 1
     return range(1,monthMap[month]+1)
 </code></pre>
-<p>​<br>​    def toLinkStr(ss):<br>​        ss &#x3D; str(ss)<br>​        return ‘0’+ss if len(ss) &#x3D;&#x3D; 1 else ss</p>
-<p>​<br>​    m3u8Head &#x3D; ‘<a target="_blank" rel="noopener" href="https://video-cdn-2.mosoteach.cn/mssvc/file&#39;">https://video-cdn-2.mosoteach.cn/mssvc/file&#39;</a><br>​    m3u8Tail &#x3D; ‘m3u8’<br>​<br>    logURL &#x3D; r’<a target="_blank" rel="noopener" href="https://www.mosoteach.cn/web/index.php?c=passport&amp;m=account_login&#39;">https://www.mosoteach.cn/web/index.php?c=passport&amp;m=account_login&#39;</a></p>
+<p>​<br>
+​    def toLinkStr(ss):<br>
+​        ss = str(ss)<br>
+​        return ‘0’+ss if len(ss) == 1 else ss</p>
+<p>​<br>
+​    m3u8Head = ‘<a target="_blank" rel="noopener" href="https://video-cdn-2.mosoteach.cn/mssvc/file">https://video-cdn-2.mosoteach.cn/mssvc/file</a>’<br>
+​    m3u8Tail = ‘m3u8’<br>
+​<br>
+logURL = r’<a target="_blank" rel="noopener" href="https://www.mosoteach.cn/web/index.php?c=passport&amp;m=account_login">https://www.mosoteach.cn/web/index.php?c=passport&amp;m=account_login</a>’</p>
 <pre><code>session = requests.session()
 
-logHeader = &#123; &#39;Referer&#39;      : &#39;https://www.mosoteach.cn/web/index.php?c=passport&#39;
-             ,&#39;User-Agent&#39;   : &#39;填自己的，好像不填也行，不太清楚&#39;
+logHeader = &#123; 'Referer'      : 'https://www.mosoteach.cn/web/index.php?c=passport'
+             ,'User-Agent'   : '填自己的，好像不填也行，不太清楚'
 &#125;
-logData = &#123;  &#39;account_name&#39; : &#39;这里是我的账号&#39;
-            ,&#39;user_pwd&#39;     : &#39;这里是我的密码&#39;
-            ,&#39;remember_me&#39;  : &#39;N&#39;
+logData = &#123;  'account_name' : '这里是我的账号'
+            ,'user_pwd'     : '这里是我的密码'
+            ,'remember_me'  : 'N'
 &#125; 
 
 logRES = session.post(logURL ,headers = logHeader, data = logData)
 
-targetURL = &#39;填需要获取资源的页面（云班课进入一个课程，再点资源，然后把链接复制过来）&#39;
+targetURL = '填需要获取资源的页面（云班课进入一个课程，再点资源，然后把链接复制过来）'
 
 res = session.get(targetURL)
-soup = BeautifulSoup(res.text,features=&#39;lxml&#39;)
-d1 = soup.find(&#39;div&#39;, id = &#39;res-list-box&#39;)
-d2 = d1.find_all(&#39;div&#39;,class_ = &#39;hide-div&#39;)
+soup = BeautifulSoup(res.text,features='lxml')
+d1 = soup.find('div', id = 'res-list-box')
+d2 = d1.find_all('div',class_ = 'hide-div')
 
 namelst = []
 lst = []
 cnt = 0
 jumplst = []
 for i,one in enumerate(d2):
-    #print(&#39;[第&#39;,i,&#39;块]&#39;)
-    d3 = one.find_all(&#39;div&#39;,class_ = &#39;res-row-open-enable res-row preview&#39;)
+    #print('[第',i,'块]')
+    d3 = one.find_all('div',class_ = 'res-row-open-enable res-row preview')
     for j,each in enumerate(d3):
-        #print(&#39; 第&#39;,j,&#39;个&#39;,end = &#39; &#39;)
-        ss = each.find(&#39;img&#39;, class_ = &#39;res-icon&#39;)[&#39;src&#39;]
-        linkKey = re.search(&#39;capture/([0-9].&#123;3&#125;)/([0-9].&#123;1&#125;)(.+?)jpg?&#39;,ss)
-        m3u8Middle = m3u8Head + &#39;/&#39; + linkKey.group(1) + &#39;/&#39; + linkKey.group(2) + &#39;/&#123;day&#125;&#39; + linkKey.group(3) + m3u8Tail
-        m3u8MiddlePLUS = m3u8Head + &#39;/&#39; + linkKey.group(1) + &#39;/&#39; + &#39;&#123;mth&#125;&#39; + &#39;/&#123;day&#125;&#39; + linkKey.group(3) + m3u8Tail
+        #print(' 第',j,'个',end = ' ')
+        ss = each.find('img', class_ = 'res-icon')['src']
+        linkKey = re.search('capture/([0-9].&#123;3&#125;)/([0-9].&#123;1&#125;)(.+?)jpg?',ss)
+        m3u8Middle = m3u8Head + '/' + linkKey.group(1) + '/' + linkKey.group(2) + '/&#123;day&#125;' + linkKey.group(3) + m3u8Tail
+        m3u8MiddlePLUS = m3u8Head + '/' + linkKey.group(1) + '/' + '&#123;mth&#125;' + '/&#123;day&#125;' + linkKey.group(3) + m3u8Tail
         cnt += 1 
         print(cnt)
         print(m3u8Middle)
-        #&#39;&#39;&#39;
+        #'''
         found = False
         zyear  = int(linkKey.group(1))
         zmonth = int(linkKey.group(2))
         for EE in monthIter(zyear,zmonth):
             m3u8Final = m3u8Middle.format(day = toLinkStr(EE))
             rr = requests.get(m3u8Final)
-            if re.search(&#39;Error&#39;,rr.text) == None:
+            if re.search('Error',rr.text) == None:
                 lst.append(m3u8Final)
-                namelst.append(each.find(&#39;span&#39;,class_ = &#39;res-name&#39;)[&#39;title&#39;])
+                namelst.append(each.find('span',class_ = 'res-name')['title'])
                 print(m3u8Final)
                 found = True
                 break
@@ -233,39 +344,50 @@ for i,one in enumerate(d2):
             for EE in monthIter(zyear,zmonth):
                 m3u8Final = m3u8Middle.format(day = toLinkStr(EE), mth = toLinkStr(zmonth))
                 rr = requests.get(m3u8Final)
-                if re.search(&#39;Error&#39;,rr.text) == None:
+                if re.search('Error',rr.text) == None:
                     lst.append(m3u8Final)
-                    namelst.append(each.find(&#39;span&#39;,class_ = &#39;res-name&#39;)[&#39;title&#39;])
+                    namelst.append(each.find('span',class_ = 'res-name')['title'])
                     print(m3u8Final)
                     found = True
                     break
         if found == False:
-            print(&#39;##第&#39;,i,&#39;块第&#39;,j,&#39;个已被跳过&#39;)
+            print('##第',i,'块第',j,'个已被跳过')
             jumplst.append((i,j))
-        print(&#39;---&#39;)
-       # &#39;&#39;&#39;
-            #print(each,end = &#39; &#39;)
+        print('---')
+       # '''
+            #print(each,end = ' ')
         #print(int(linkKey.group(1)),int(linkKey.group(2)))
 
-print(&#39;共跳过个数:&#39;, len(jumplst), &#39;\n分别为:&#39;)
+print('共跳过个数:', len(jumplst), '\n分别为:')
 for each in jumplst:
     print(each)
 
-print(&#39;len(lst) == len(namelst) ?&#39;,len(lst),len(namelst))
+print('len(lst) == len(namelst) ?',len(lst),len(namelst))
 
-print(&#39;开始抓取&#39;)
+print('开始抓取')
 for i in range(len(lst)):
     print(namelst[i])
     DOWN.DownOne(lst[i],namelst[i])
 </code></pre>
-<p>​<br>​    print(‘共跳过个数:’, len(jumplst), ‘\n分别为:’)<br>​    for each in jumplst:<br>​        print(each)</p>
-<h2 id="不足-与-可以预期的改进（已经不会去改了，所以是可以预期的改进）"><a href="#不足-与-可以预期的改进（已经不会去改了，所以是可以预期的改进）" class="headerlink" title="不足 与 可以预期的改进（已经不会去改了，所以是可以预期的改进）"></a>不足 与 可以预期的改进（已经不会去改了，所以是可以预期的改进）</h2><h4 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h4><p>这个程序的思路是找到整个页面中所有的m3u8存入一个列表，然后遍历列表依次下载。这样时间非常长，如果中途出错还要从头开始重新来。<br>。<br>没有try，没有写try的意识，等着以后迎接暴毙吧</p>
-<h4 id="可以预期的改进"><a href="#可以预期的改进" class="headerlink" title="可以预期的改进"></a>可以预期的改进</h4><p>1.分块获取m3u8，先获取每一个大块，再在每一个大块中获得这一大块中所有视频的m3u8<br>2.细化获取项，提供获取某一特定块中所有视频的选项<br>3.细化获取项，提供在某一特定块中获取某一特定视频的选项<br>4.做出图形界面，以一级二级标签分好大块和每个大块中的视频，可以阵对视频多选，阵对块多选，进行下载</p>
+<p>​<br>
+​    print(‘共跳过个数:’, len(jumplst), ‘\n分别为:’)<br>
+​    for each in jumplst:<br>
+​        print(each)</p>
+<h2 id="不足-与-可以预期的改进已经不会去改了所以是可以预期的改进"><a class="markdownIt-Anchor" href="#不足-与-可以预期的改进已经不会去改了所以是可以预期的改进"></a> 不足 与 可以预期的改进（已经不会去改了，所以是可以预期的改进）</h2>
+<h4 id="不足"><a class="markdownIt-Anchor" href="#不足"></a> 不足</h4>
+<p>这个程序的思路是找到整个页面中所有的m3u8存入一个列表，然后遍历列表依次下载。这样时间非常长，如果中途出错还要从头开始重新来。<br>
+。<br>
+没有try，没有写try的意识，等着以后迎接暴毙吧</p>
+<h4 id="可以预期的改进"><a class="markdownIt-Anchor" href="#可以预期的改进"></a> 可以预期的改进</h4>
+<p>1.分块获取m3u8，先获取每一个大块，再在每一个大块中获得这一大块中所有视频的m3u8<br>
+2.细化获取项，提供获取某一特定块中所有视频的选项<br>
+3.细化获取项，提供在某一特定块中获取某一特定视频的选项<br>
+4.做出图形界面，以一级二级标签分好大块和每个大块中的视频，可以阵对视频多选，阵对块多选，进行下载</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%88%AC%E8%99%AB%E3%80%91%20%E7%88%AC%E5%8F%96%E4%BA%91%E7%8F%AD%E8%AF%BE%E4%B8%8A%E8%80%81%E5%B8%88%E5%8F%91%E7%9A%84%E8%A7%86%E9%A2%91%E8%B5%84%E6%BA%90%20python/" data-id="cl50tnlrs003zycj33nah6ve1" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%88%AC%E8%99%AB%E3%80%91%20%E7%88%AC%E5%8F%96%E4%BA%91%E7%8F%AD%E8%AF%BE%E4%B8%8A%E8%80%81%E5%B8%88%E5%8F%91%E7%9A%84%E8%A7%86%E9%A2%91%E8%B5%84%E6%BA%90%20python/" data-id="cl50x8cng0042ccj3byiveox3" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li></ul>
@@ -276,19 +398,19 @@ for i in range(len(lst)):
     
 <nav id="article-nav">
   
-    <a href="/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%20dfs%20dp%E3%80%91P4408%20%5BNOI2003%5D%20%E9%80%83%E5%AD%A6%E7%9A%84%E5%B0%8F%E5%AD%A9/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%E3%80%91%E6%A0%91%E5%BD%A2DP%E6%B1%82%E8%A7%A3/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          【树的直径 dfs dp】P4408 [NOI2003] 逃学的小孩.md
+          【树的直径】树形DP求解.md
         
       </div>
     </a>
   
   
-    <a href="/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%E3%80%91%E6%A0%91%E5%BD%A2DP%E6%B1%82%E8%A7%A3/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/1111/11/11/%E3%80%90%E7%8A%B6%E5%8E%8BDP%E3%80%91%E6%96%AF%E5%9D%A6%E7%BA%B3%E6%A0%91/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">【树的直径】树形DP求解.md</div>
+      <div class="article-nav-title">【状压DP】斯坦纳树.md</div>
     </a>
   
 </nav>
