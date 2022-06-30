@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【算法】【C++】初学算法，在此记录.md | 蓝湖畔淅淅沥沥的雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  0.预留位置1.使用Manacher算法求最长回文子串给出一个字符串，要求计算出这一字符串的最长回文子">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【算法】【C++】初学算法，在此记录.md">
+<meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E3%80%90C++%E3%80%91%E5%88%9D%E5%AD%A6%E7%AE%97%E6%B3%95%EF%BC%8C%E5%9C%A8%E6%AD%A4%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
+<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。  0.预留位置1.使用Manacher算法求最长回文子串给出一个字符串，要求计算出这一字符串的最长回文子">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210416214105534.png#pic_center">
+<meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
+<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:author" content="StarsWhisper">
+<meta property="article:tag" content="OldBlog(Before20220505)">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210416214105534.png#pic_center">
+  
+    <link rel="alternate" href="/atom.xml" title="蓝湖畔淅淅沥沥的雨" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-【算法】【C++】初学算法，在此记录" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E3%80%90C++%E3%80%91%E5%88%9D%E5%AD%A6%E7%AE%97%E6%B3%95%EF%BC%8C%E5%9C%A8%E6%AD%A4%E8%AE%B0%E5%BD%95/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【算法】【C++】初学算法，在此记录.md
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<p><img src="https://img-blog.csdnimg.cn/20210416214105534.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="0-预留位置"><a href="#0-预留位置" class="headerlink" title="0.预留位置"></a>0.预留位置</h2><h2 id="1-使用Manacher算法求最长回文子串"><a href="#1-使用Manacher算法求最长回文子串" class="headerlink" title="1.使用Manacher算法求最长回文子串"></a>1.使用Manacher算法求最长回文子串</h2><p>给出一个字符串，要求计算出这一字符串的最长回文子串的长度。<br>如果遍历每一个字符，并以该字符为中心向两边查找，则其时间<br>复杂度为O(n2)。<br>Manacher算法，又被戏称为“马拉车”算法，可以在时间复杂度<br>为O(n)的情况下求解一个字符串的最长回文子串的长度。</p>
+<h6 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h6><p>回文串分为奇回文（abcba）和偶回文（baccba），为了避免区分奇偶的麻烦，把字符串变一下形式，在字符串之间加入特殊符号，并且<br><strong>首位再加不同的特殊符号以防越界</strong> ，于是字符串变成奇回文（上述偶回文得到的新字符串：@#a#b#c#c#b#a!）</p>
+<h6 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h6><p>给得到的新字符串str_new定义一个辅助数组int p[]，p[i]表示在str_new中以第i个位置为中心得到的最长回文串的 <strong>半径</strong></p>
+<h6 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h6><p>可想而知，若新字符串str_new的最大半径为p[i]，则原字符串的最长回文子串长度为p[i]-1</p>
+<h6 id="4-在这里插入图片描述-https-img-blog-csdnimg-cn-20200722184021570-PNG-x-oss"><a href="#4-在这里插入图片描述-https-img-blog-csdnimg-cn-20200722184021570-PNG-x-oss" class="headerlink" title="4.![在这里插入图片描述](https://img-blog.csdnimg.cn/20200722184021570.PNG?x-oss-"></a>4.![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200722184021570.PNG?x-oss-">https://img-blog.csdnimg.cn/20200722184021570.PNG?x-oss-</a></h6><p>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70)</p>
+<p>对于p[i]，如果i&lt;mx，设j是i关于id对称点，如图所示，则基于以下三<br>种情况，可以求出p[i]的值：<br>（1）以j为中心的回文串有一部分在以id为中心的回文串之外。因为mx<br>是以id为中心的最长回文的右边界，所以以i为中心的回文串不可能会<br>有字符在以id为中心的回文串之外；否则mx就不是以id为中心的最长回<br>文的右边界。所以，在这种情况下，p[i]&#x3D;mx–i。<br>（2）以j为中心的回文串全部在以id为中心的回文串的内部，则<br>p[i]&#x3D;p[j]，而且p[i]不可能再增加。<br>（3）以j为中心的回文串的左端正好与以id为中心的回文串的左端重合。<br>则p[i]&#x3D;p[j]或p[i]&#x3D;mx–i，并且p[i]还有可能会继续增加，即while<br>(str_new[i-p[i]]&#x3D;&#x3D;str_new[i+p[i]]) p[i]++;</p>
+<h6 id="5"><a href="#5" class="headerlink" title="5."></a>5.</h6><p>从str[1]开始遍历到末尾<br>先通过</p>
+<p>​<br>    if(i&lt;mx)    p[i]&#x3D;std::min(p[2*id-i],mx-i);<br>    else        p[i]&#x3D;1;</p>
+<p>确定好id-mx范围内的以i为中心的最长子串半径，然后再通过</p>
+<p>​<br>    while(str[i+p[i]]&#x3D;&#x3D;str[i-p[i]])     p[i]+&#x3D;1;</p>
+<p>确定最长半径</p>
+<p>若得到以i为中心的子串最右位置超过mx，则更新范围</p>
+<p>​<br>    if(p[i]+i&gt;mx)           &#x2F;&#x2F;超出最右边就更新范围<br>            {<br>                id&#x3D;i;<br>                mx&#x3D;p[i]+i;<br>                mxsub&#x3D;std::max(mxsub,p[i]);     &#x2F;&#x2F;更新最长子串长度<br>            }</p>
+<h6 id="代码：输入一个字符串，用Manacher算法求其中最长回文子串的长度"><a href="#代码：输入一个字符串，用Manacher算法求其中最长回文子串的长度" class="headerlink" title="代码：输入一个字符串，用Manacher算法求其中最长回文子串的长度"></a>代码：输入一个字符串，用Manacher算法求其中最长回文子串的长度</h6><p>​<br>    #include<iostream><br>    #include<cstring><br>    #include<cstdio><br>    #include<algorithm><br>    const int max_len &#x3D; 1e6+3;      &#x2F;&#x2F;输入字符串的最大长度<br>    const int inPos&#x3D;max_len+2;      &#x2F;&#x2F;字符串输入位置，从str数组中间输入字符串<br>    int p[max_len<em>2];               &#x2F;&#x2F;p[i]:以i为中心的回文串的最大长度<br>    int len;<br>    char str[max_len</em>2];            &#x2F;&#x2F;用于储存输入的字符串</p>
+<pre><code>//把字符串各字符之间插入字符，首位再各插入不同字符防止越界
+void change_str()
+&#123;
+    int index=0;
+    len=strlen(str);            //获得输入字符串的长度
+    str[index++]=&#39;@&#39;;
+    for(int i=inPos; i&lt;len; i++)
+    &#123;
+        str[index++]=&#39;#&#39;;
+        str[index++]=str[i];
+    &#125;
+    str[index++]=&#39;#&#39;;
+    str[index]=&#39;!&#39;;
+    len=index;                  //获得改造后字符串的长度
+&#125;
+
+int manacher()
+&#123;
+    int mx=0,id=1;              //mx表示最右端位置 id表示中心点位置
+    int mxsub=0;                //最长子串长度
+    for(int i=1; i&lt;len; i++)
+    &#123;
+        if(i&lt;mx)    p[i]=std::min(p[2*id-i],mx-i);
+        else        p[i]=1;
+        while(str[i+p[i]]==str[i-p[i]])     p[i]+=1;
+        if(p[i]+i&gt;mx)           //超出最右边就更新范围
+        &#123;
+            id=i;
+            mx=p[i]+i;
+            mxsub=std::max(mxsub,p[i]);     //更新最长子串长度
+        &#125;
+    &#125;
+    return mxsub-1;             //返回结果
+&#125;
+
+int main()
+&#123;
+    memset(str,&#39; &#39;,sizeof(str));
+    scanf(&quot;%s&quot;,str+inPos);
+    change_str();
+    std::cout &lt;&lt; manacher() &lt;&lt; std::endl;
+    return 0;
+&#125;
+</code></pre>
+<p>​    </p>
+<h2 id="2-用树结构支持并查集"><a href="#2-用树结构支持并查集" class="headerlink" title="2.用树结构支持并查集"></a>2.用树结构支持并查集</h2><h6 id="并查集："><a href="#并查集：" class="headerlink" title="并查集："></a>并查集：</h6><p>在一些应用中，需要把n个不同元素划分成不相交的若干组，每<br>一组的元素构成一个集合，由于这类问题主要涉及对集合的合<br>并和查找，因此称为并查集。<br>并查集维护一些互不相交的集合S&#x3D;{S1<br>, S2<br>, …, Sr}，每个集合Si<br>都有一个特殊元素rep[Si]，称为集合的代表元。</p>
+<h6 id="并查集的三种操作："><a href="#并查集的三种操作：" class="headerlink" title="并查集的三种操作："></a>并查集的三种操作：</h6><p>Make_Set(x)：加入一个含单元素x的集合{x}到并查集S，且rep[{x}]&#x3D;x。 x不能被包含在任何一个Si中, 因为S里任何两个集合是不相交的。<br>初始时，对每个元素x执行一次Make_Set(x)。</p>
+<p>join(x, y)：把x和y所在的两个不同集合Sx和Sy<br>合并：从S中删除Sx和Sy，<br>并加入Sx与Sy的并集。</p>
+<p>set_find(x)：返回x所在集合Sx<br>的代表元rep[Sx]。</p>
+<h6 id="树结构"><a href="#树结构" class="headerlink" title="树结构"></a>树结构</h6><p>每个集合用一棵树表示, 根为集合的代表元。每个节点p设一个指针(抄的原话，看起来不像指针)<br>set[p]，记录它所在树的根节点序号。如果set[p]&lt;0，则表明p为根节点。<br>初始时，为每一个元素建立一个集合，即 set[x]&#x3D;-1（1≤x≤n）。</p>
+<h6 id="树结构查找操作set-find-x-：边查找边“路径压缩”"><a href="#树结构查找操作set-find-x-：边查找边“路径压缩”" class="headerlink" title="树结构查找操作set_find(x) ：边查找边“路径压缩”"></a>树结构查找操作set_find(x) ：边查找边“路径压缩”</h6><p>首先，从节点x出发，沿set指针查找节点x所在树的根节点f（set[f]&lt;0）。<br>然后，进行路径压缩，将x至f的路径上经过的每个节点的set指针都指向f。<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200722203030627.PNG?x-oss-">https://img-blog.csdnimg.cn/20200722203030627.PNG?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70)</p>
+<h6 id="树结构查找操作："><a href="#树结构查找操作：" class="headerlink" title="树结构查找操作："></a>树结构查找操作：</h6><p>int set_find(int p) &#x2F;&#x2F; 查找p所在集合的代表元，用路径压缩优化<br>{<br>if (set[p]&lt;0)<br>return p;<br>return set[p]&#x3D;set_find(set[p]);<br>}</p>
+<h6 id="树结构合并操作join-x-y-：将两棵树的根节点相连"><a href="#树结构合并操作join-x-y-：将两棵树的根节点相连" class="headerlink" title="树结构合并操作join(x, y) ：将两棵树的根节点相连"></a>树结构合并操作join(x, y) ：将两棵树的根节点相连</h6><p>计算x元素所在并查集的树根fx和y元素所在并查集的树根fy。如果fx&#x3D;&#x3D;fy，则说<br>明元素x和元素y在同一并查集中；否则将x所在的集合并入y所在的集合，也就<br>是将fx的set指针设为fy。</p>
+<h6 id="题目：Find-them-Catch-them"><a href="#题目：Find-them-Catch-them" class="headerlink" title="题目：Find them, Catch them"></a>题目：Find them, Catch them</h6><blockquote>
+<p>The police office in Tadu City decides to say ends to the chaos, as<br> launch actions to root up the TWO gangs in the city, Gang Dragon and<br> Gang Snake. However, the police first needs to identify which gang a<br> criminal belongs to. The present question is, given two criminals; do<br> they belong to a same clan? You must give your judgment based on<br> incomplete information. (Since the gangsters are always acting<br> secretly.)</p>
+<p>Assume N (N &lt;&#x3D; 10^5) criminals are currently in Tadu City, numbered<br> from 1 to N. And of course, at least one of them belongs to Gang<br> Dragon, and the same for Gang Snake. You will be given M (M &lt;&#x3D; 10^5)<br> messages in sequence, which are in the following two kinds:</p>
+<p>D [a] [b] where [a] and [b] are the numbers of two criminals, and they<br> belong to different gangs.</p>
+<p>A [a] [b] where [a] and [b] are the numbers of two criminals. This<br> requires you to decide whether a and b belong to a same gang. Input<br> The first line of the input contains a single integer T (1 &lt;&#x3D; T &lt;&#x3D;<br> 20), the number of test cases. Then T cases follow. Each test case<br> begins with a line with two integers N and M, followed by M lines each<br> containing one message as described above. Output For each message “A<br> [a] [b]” in each case, your program should give the judgment based on<br> the information got before. The answers might be one of “In the same<br> gang.”, “In different gangs.” and “Not sure yet.”</p>
+<p>Sample Input<br> 1<br> 5 5<br> A 1 2<br> D 1 2<br> A 1 2<br> D 2 4<br> A 1 4<br> Sample Output Not<br> sure yet.<br> In different gangs.<br> In the same gang.</p>
+</blockquote>
+<p>翻译一下：</p>
+<blockquote>
+<p>Tadu市的警察局决定结束混乱，因此要采取行动，根除城市中的两大 帮派：龙帮和蛇帮。然而，警方首先需要确定某个罪犯是属于哪个帮派。<br> 目前的问题是，给出两个罪犯，他们是属于同一个帮派吗？您要基于不 完全的信息给出您的判断，因为歹徒总是在暗中行事。<br> 假设在Tadu市现在有N（N≤105 ）个罪犯，编号从1到N。当然，至少有 一个罪犯属于龙帮，也至少有一个罪犯属于蛇帮。给出M（M≤105<br> ）条 消息组成的序列，消息有下列两种形式：<br> D [a] [b] 其中[a]和[b]是两个犯罪分子的编号，他们属于不同的帮派；<br> A [a] [b] 其中[a]和[b]是两个犯罪分子的编号，您要确定a和b是否属于同一帮派。 输入<br>输入的第一行给出给出一个整数T（1≤T≤20），表示测试用例的个 数。后面跟着T个测试用例，每个测试用例的第一行给出两个整数<br> N和M，后面的M行每行给出一条如上面所描述的消息。 输出 对于在测试用例中的每条“A [a] [b]”消息，您的程序要基于此前<br> 给出的信息做出判断。回答是如下之一 “In the same gang.”， “In different gangs.”或“Not sure<br> yet.”。</p>
+</blockquote>
+<h6 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h6><p>1.建立一个数组int<br>set[]其大小大于等于罪犯数的两倍，把数组初始化为-1，即数组的每个元素代表一个独立的集合。把set[i+n]看作是集合set[i]的对立集合(n为罪犯数目)<br>2.遇到D[a]<br>[b]语句，说明a和b不能在同一个集合，就把a所在的集合的值set[a]赋值为b的对立集合set[b+n]对应的下标b+n，把b所在的集合的值赋值给a的对立集合的下标a+n<br>每次遇到D[a] [b]语句都进行如此操作，便可以做到集合合并（相互链接的就算一个集合了）<br>3.遇到A[a] [b]语句，查询（参照路径压缩的思路）a、b所在的集合与b所在的集合相同，输出 “In the same gang.”<br>，若a、b所在的集合不同，而且a不在b的对立集合，输出“Not sure<br>yet.”，否则输出 “In different gangs.”</p>
+<h6 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h6><p>​<br>    #include<iostream><br>    #include<cstring><br>    #include<cstdio><br>    #include<algorithm><br>    const int max_criminal &#x3D; 1e5+5;<br>    int sett[max_criminal*2];           &#x2F;&#x2F;建立多于罪犯总数两倍个集合</p>
+<pre><code>//查找元素所在的集合(顺便压缩路径)
+int set_find(int index)
+&#123;
+    if(sett[index]&lt;0)
+        return index;
+    return sett[index]=set_find(sett[index]);
+&#125;
+
+int main()
+&#123;
+    int t,n,m,a,b;
+    char ch;
+    std::cin &gt;&gt; t;
+    while(t-- &amp;&amp; std::cin &gt;&gt; n &gt;&gt; m)
+    &#123;
+        memset(sett,-1,sizeof(sett));
+        for(int i=0; i&lt;m; i++)
+        &#123;
+            std::cin &gt;&gt; ch &gt;&gt; a &gt;&gt; b;
+            if(ch==&#39;D&#39;)
+            &#123;
+                sett[set_find(a)]=set_find(b+n);
+                sett[set_find(b)]=set_find(a+n);
+            &#125;
+            else
+            &#123;
+                if(set_find(a)==set_find(b))
+                    std::cout &lt;&lt; &quot;In the same gang.&quot; &lt;&lt; std::endl;
+                else if(set_find(a)==set_find(b+n))
+                    std::cout &lt;&lt; &quot;In different gangs.&quot; &lt;&lt; std::endl;
+                else
+                    std::cout &lt;&lt; &quot;Not sure yet.&quot; &lt;&lt; std::endl;
+            &#125;
+        &#125;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<h2 id="3-应用Trie树查询字符串"><a href="#3-应用Trie树查询字符串" class="headerlink" title="3.应用Trie树查询字符串"></a>3.应用Trie树查询字符串</h2><h6 id="定义（Trie树）"><a href="#定义（Trie树）" class="headerlink" title="定义（Trie树）"></a>定义（Trie树）</h6><p>Trie树，也被称为单词查找树，前缀树，或字典树。<br>其基本性质如下：<br>• 1，根节点不包含字符，除根节点外，每个节点只包含一个字符。<br>• 2，将从根节点到某一个节点的路上经过的节点所包含的字符连<br>接起来，就是该节点对应的字符串。<br>• 3，对于每个节点，其所有子节点包含的字符是不相同的。</p>
+<p>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200723171651441.PNG?x-oss-">https://img-blog.csdnimg.cn/20200723171651441.PNG?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70)<br>Trie树的根节点root对应空字符串。一般情况下，不是所有的节点<br>都有对应的值，只有叶节点和部分内节点所对应的字符串才有相<br>关的值。所以，Trie树是一种用于快速检索的多叉树结构，每个<br>节点保存一个字符，一条路可以用于表示一个字符串、一个电话<br>号码等等信息。</p>
+<h6 id="题目：Shortest-Prefixes"><a href="#题目：Shortest-Prefixes" class="headerlink" title="题目：Shortest Prefixes"></a>题目：Shortest Prefixes</h6><p>字符串的前缀是从给出的字符串的开头开始的子字符串。<br>“carbon”的前缀是：“c”，“ca”，“car”，“carb”，“carbo”和”carbon”。<br>在本题中，空串不被视为前缀，但是每个非空字符串都被视为其<br>自身的前缀。在日常语言中，我们会用前缀来缩写单词。例如，<br>“carbohydrate” （“碳水化合物”）通常被缩写为”carb”。在本题<br>中，给出一组单词，请您为每个单词找出能唯一标识该单词的最<br>短前缀。<br>• 在给出的样例输入中，“carbohydrate”可以被缩写为”carboh”，但<br>不能被缩写为”carbo”（或者更短），因为有其他单词以”carbo”开<br>头。<br>• 完全匹配也可以作为前缀匹配。例如，给出的单词”car”，其前缀<br>“car”与”car”完全匹配。因此，”car”是”car”的缩写，而不是<br>“carriage”或列表中以”car”开头的其他任何其他词的缩写。</p>
+<p>• <strong>输入</strong><br>• 输入至少有两行，最多不超过1000行。每行给出一个由1到20<br>个小写字母组成的单词。</p>
+<p>• <strong>输出</strong><br>• 输出的行数与输入的行数相同。输出的每一行先给出输入对应行<br>中的单词，然后给出一个空格，最后给出唯一（无歧义）标识该<br>单词的最短前缀。</p>
+<h6 id="代码（可能有问题）："><a href="#代码（可能有问题）：" class="headerlink" title="代码（可能有问题）："></a>代码（可能有问题）：</h6><p>​<br>    #include <iostream><br>    #include <cstdio><br>    #include <cstring><br>    #include <algorithm><br>    int len,idx,letterIdx;             &#x2F;&#x2F;letterIdx表示英文字母按字母表的序号（0-25）<br>    const int max_node &#x3D; 1000*22;       &#x2F;&#x2F;最大节点数<br>    char save_str[1001][22];            &#x2F;&#x2F;用于保存字符串<br>    int Node[max_node][26];             &#x2F;&#x2F;提前给节点开出空间来<br>    int vis[max_node];                  &#x2F;&#x2F;节点访问次数</p>
+<pre><code>struct Trie
+&#123;
+    int tidx;                       //目前第一个尚未使用的节点序号（到目前位置一共使用了多少节点）
+    Trie()
+    &#123;
+        tidx=1;
+        memset(Node,0,sizeof(Node));
+    &#125;
+
+    //得到字母序号letterIdx
+    int getletterIdx(char ch)
+    &#123;
+        return ch-&#39;a&#39;;
+    &#125;
+
+    void insert(char * str)
+    &#123;
+        idx=0,len=strlen(str);
+        for(int i=0; i&lt;len; i++)
+        &#123;
+            letterIdx=getletterIdx(str[i]);
+            if(Node[idx][letterIdx]==0)//如果此节点应该对应的下一个解点还没有给出，则创建这个解点
+            &#123;
+                vis[tidx]=0;
+                Node[idx][letterIdx]=tidx++;
+            &#125;
+            idx=Node[idx][letterIdx];   //序号idx更新为的下一个节点的序号
+            vis[idx]++;                 //访问次数+1
+        &#125;
+    &#125;
+
+    void search(char * str)
+    &#123;
+        idx=0,len=strlen(str);
+        for(int i=0; i&lt;len; i++)
+        &#123;
+            putchar(str[i]);
+            letterIdx=getletterIdx(str[i]);
+            if(vis[Node[idx][letterIdx]]&lt;=1) //如果下一个节点访问次数仅为1，则只用之前的节点就可以确定唯一单词
+            &#123;
+                return ;
+            &#125;
+            idx=Node[idx][letterIdx];       //序号idx更新为下一个节点的序号
+
+        &#125;
+    &#125;
+&#125;;
+
+int main()
+&#123;
+    int t,strIdx=0;
+    Trie trie;
+    std::cin &gt;&gt; t;
+    for(int i=0; i&lt;t; i++)
+    &#123;
+        scanf(&quot;%s&quot;,save_str[strIdx]);
+        trie.insert(save_str[strIdx]);
+        strIdx+=1;
+    &#125;
+    for(int i=0; i&lt;t; i++)
+    &#123;
+        std::cout &lt;&lt; save_str[i] &lt;&lt; &quot; &quot;;
+        trie.search(save_str[i]);
+        std::cout &lt;&lt; std::endl;
+    &#125;
+
+    return 0;
+&#125;
+</code></pre>
+<p>这个解法必须建立在所有输入没有重复的前提上，有的话要另外加对应的处理。</p>
+<h2 id="4-使用KMP算法匹配字符串"><a href="#4-使用KMP算法匹配字符串" class="headerlink" title="4.使用KMP算法匹配字符串"></a>4.使用KMP算法匹配字符串</h2><p>Knuth-Morris-Pratt 字符串查找算法，简称为 “KMP算法”，常用于在一个文本串S内查找一个模式串P 的出现位置，这个算法由Donald<br>Knuth、Vaughan Pratt、James H. Morris三人于1977年联合发表，故取这3人的姓氏命名此算法。</p>
+<p>以下为个人理解</p>
+<h6 id="大概思路："><a href="#大概思路：" class="headerlink" title="大概思路："></a>大概思路：</h6><p>为了避免逐位查找带来的时间浪费，KMP算法使用一个数组 int<br>next[]记录一个字符串从第0位到第i位相同的前缀和后缀长度（或者此长度-1，都可以），查询时可以跨指定长度匹配，这个next数组怎么求稍后说。这样可以提高匹配速度。<br><strong>比如：</strong> 字符串 <strong>str1：abcababcabca</strong> 与字符串 <strong>str2：abcabc</strong><br>匹配，str2的next数组为{-1，-1，-1，0，1，2}。两字符串匹配到str1[4]与str2[4]完全相同，第五位不同，不完全相同。下一次匹配不需要逐位匹配（从str1[1]与str[0]开始匹配），而是尝试从str1[5]与str2[next[4]+1]匹配</p>
+<h6 id="next数组求法："><a href="#next数组求法：" class="headerlink" title="next数组求法："></a>next数组求法：</h6><p>对所查询字符串求next数组，第一位不管（一般为0或-1），从第二位开始，根据以前的信息，如果上一位前后缀匹配，则直接判断下一位是否匹配，若下一位也匹配，长度求出，若下一位不匹配，则在目前已经匹配了的若干为中，寻找最长相同前后缀</p>
+<h6 id="代码：（匹配一个字符串在另一个字符串中的出现次数）"><a href="#代码：（匹配一个字符串在另一个字符串中的出现次数）" class="headerlink" title="代码：（匹配一个字符串在另一个字符串中的出现次数）"></a>代码：（匹配一个字符串在另一个字符串中的出现次数）</h6><p>​<br>    #include <iostream><br>    #include <cstdio><br>    #include <cstring><br>    #include <algorithm><br>    char str1[100005],str2[1005];<br>    int next[1005];</p>
+<pre><code>void getNext()
+&#123;
+    next[0]=-1;
+    int len=strlen(str2),k;
+    for(int i=1; i&lt;len ;i++)
+    &#123;
+        k=next[i-1];
+        while(str2[k+1]!=str2[i] &amp;&amp; k&gt;=0) k=next[k];
+        if(str2[k+1]==str2[i]) next[i]=k+1;
+        else next[i]=-1;
+    &#125;
+&#125;
+int kmp()
+&#123;
+    int counter=0,i=0,j=0,len=strlen(str1),sublen=strlen(str2);
+    while(i&lt;len &amp;&amp; j&lt;sublen)
+    &#123;
+        if(str1[i]==str2[j])
+        &#123;
+            i+=1,j+=1;
+            if(j==sublen)
+            &#123;
+                counter+=1;
+                j=next[j-1]+1;
+            &#125;
+        &#125;
+        else
+        &#123;
+            if(j==0) i+=1;
+            else j=next[j-1]+1;
+        &#125;
+    &#125;
+    return counter;
+&#125;
+
+int main()
+&#123;
+    int t;
+    std::cin &gt;&gt; t;
+    std::cin &gt;&gt; str1;
+    while(t--)
+    &#123;
+        std::cin &gt;&gt; str2;
+        getNext();
+        std::cout &lt;&lt; kmp() &lt;&lt; std::endl;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<p>​    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E3%80%90C++%E3%80%91%E5%88%9D%E5%AD%A6%E7%AE%97%E6%B3%95%EF%BC%8C%E5%9C%A8%E6%AD%A4%E8%AE%B0%E5%BD%95/" data-id="cl50tnlrx004gycj3eyn6hvtq" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/1111/11/11/%E3%80%90%E7%BA%BF%E5%BD%A2DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1868%E9%A5%A5%E9%A5%BF%E7%9A%84%E5%A5%B6%E7%89%9B%20P1091%E5%90%88%E5%94%B1%E9%98%9F%E5%BD%A2%20P1541%E4%B9%8C%E9%BE%9F%E6%A3%8B%20P1020%E5%AF%BC%E5%BC%B9%E6%8B%A6%E6%88%AA/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          【线形DP练习】洛谷 P1868饥饿的奶牛 P1091合唱队形 P1541乌龟棋 P1020导弹拦截.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/1111/11/11/%E3%80%90%E7%BA%BF%E6%AE%B5%E6%A0%91%E3%80%91%20%20L3-017%20%E6%A3%AE%E6%A3%AE%E5%BF%AB%E9%80%92%20(30%E5%88%86)%20%2027%E5%88%86WA%E4%BB%A3%E7%A0%81/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">【线段树】  L3-017 森森快递 (30分)  27分WA代码.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">蓝湖畔淅淅沥沥的雨</h1>
+    <h2 class="blog-subtitle">All tragedy erased, I see only wonders...</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/Wldcmzy" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/wldcmzy" target="_blank" title="CSDN">
+          CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://space.bilibili.com/83743701" target="_blank" title="bilibili(无技术和学习内容)">
+          bilibili(无技术和学习内容)
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://shanamaid.github.io/" target="_blank" title="夏娜主题作者的博客">
+          夏娜主题作者的博客
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2021 - 2022 StarsWhisper<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+	  (但是魔改)
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/announcement" title="" class="menuItem">公告</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/knightabout" title="" class="menuItem">关于</a>
+          
+            <a href="/bridges" title="" class="menuItem">传送门</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

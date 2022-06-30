@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>python 简单的颜色序列生成器.md | 蓝湖畔淅淅沥沥的雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 2021&#x2F;04&#x2F;21：我火星了？？？？python Seaborn库 调色板 所以下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python 简单的颜色序列生成器.md">
+<meta property="og:url" content="http://example.com/1111/11/11/python%20%E7%AE%80%E5%8D%95%E7%9A%84%E9%A2%9C%E8%89%B2%E5%BA%8F%E5%88%97%E7%94%9F%E6%88%90%E5%99%A8/index.html">
+<meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
+<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 2021&#x2F;04&#x2F;21：我火星了？？？？python Seaborn库 调色板 所以下">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
+<meta property="article:modified_time" content="2022-06-30T09:22:00.415Z">
+<meta property="article:author" content="StarsWhisper">
+<meta property="article:tag" content="OldBlog(Before20220505)">
+<meta property="article:tag" content="画图">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="蓝湖畔淅淅沥沥的雨" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-python 简单的颜色序列生成器" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/python%20%E7%AE%80%E5%8D%95%E7%9A%84%E9%A2%9C%E8%89%B2%E5%BA%8F%E5%88%97%E7%94%9F%E6%88%90%E5%99%A8/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python 简单的颜色序列生成器.md
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/">教练我想学挂边躲牛</a>,<a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/%E6%9D%82%E4%B9%B1/">杂乱</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="2021-x2F-04-x2F-21：我火星了？？？？"><a href="#2021-x2F-04-x2F-21：我火星了？？？？" class="headerlink" title="2021&#x2F;04&#x2F;21：我火星了？？？？"></a>2021&#x2F;04&#x2F;21：我火星了？？？？</h2><p>python Seaborn库 调色板</p>
+<h2 id="所以下面的东西都别看了"><a href="#所以下面的东西都别看了" class="headerlink" title="所以下面的东西都别看了"></a>所以下面的东西都别看了</h2><h2 id=""><a href="#" class="headerlink" title="."></a>.</h2><h2 id="-1"><a href="#-1" class="headerlink" title="."></a>.</h2><h2 id="-2"><a href="#-2" class="headerlink" title="."></a>.</h2><h2 id="-3"><a href="#-3" class="headerlink" title="."></a>.</h2><h2 id="-4"><a href="#-4" class="headerlink" title="."></a>.</h2><h2 id="-5"><a href="#-5" class="headerlink" title="."></a>.</h2><h2 id="-6"><a href="#-6" class="headerlink" title="."></a>.</h2><h2 id="-7"><a href="#-7" class="headerlink" title="."></a>.</h2><h2 id="-8"><a href="#-8" class="headerlink" title="."></a>.</h2><h2 id="-9"><a href="#-9" class="headerlink" title="."></a>.</h2><h2 id="由来"><a href="#由来" class="headerlink" title="由来"></a>由来</h2><p>昨天画了这张图，自动分配的颜色比较深，而且总颜色数不多，这张图的颜色是自己一点一点写的，很麻烦，所以想制作一个简单的颜色序列生成器一劳永逸<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20210209193159338.png?x-oss-">https://img-blog.csdnimg.cn/20210209193159338.png?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70#pic_center)</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>我给这个文件取名为InterestingColorfulColor.py，把它放在python安装目录的Lib文件夹就可以随时用import语句导入，非常方便。<br>例如：</p>
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> InterestingColorfulColor <span class="keyword">as</span> ICC</span><br></pre></td></tr></table></figure>
+
+<p>目前这个文件的主要内容只有一个类：ColorOrder<br>ColorOrder类里给出了15种按照颜色深浅梯度变化的基础颜色序列，分别为：<br><strong>红，红橙，橙，橙黄，黄，黄绿，绿，绿青，青，青蓝，蓝，蓝紫，紫，紫红，和灰色</strong> （由纯黑到纯白）<br>每种序列有16种不同的颜色。<br><strong>通过这个类可以较为轻松地得到一种你想要的颜色序列</strong> ，有可能可以让你的工作提高一点点效率。不过这毕竟是个小制作，功能不复杂。<br>下图展示其中一部分颜色<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20210209193935836.png?x-oss-">https://img-blog.csdnimg.cn/20210209193935836.png?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70#pic_center)</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h4 id="约定"><a href="#约定" class="headerlink" title="约定"></a>约定</h4><p>约定上述15种颜色序列为 gray <strong>red, orange,yellow,green,cyan,blue,purple</strong><br>以及除了gray外剩下七种颜色中相邻颜色之间的两两组合 如redorange,<br>greencyan等，对两种颜色书写的先后顺序不做要求即redpurple和purplered都是正确的</p>
+<h4 id="导入模块"><a href="#导入模块" class="headerlink" title="导入模块"></a>导入模块</h4><p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> InterestingColorfulColor <span class="keyword">as</span> ICC</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="创建一个ColorOrder对象"><a href="#创建一个ColorOrder对象" class="headerlink" title="创建一个ColorOrder对象"></a>创建一个ColorOrder对象</h4><p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">co = ICC.ColorOrder([<span class="string">&#x27;red&#x27;</span>,<span class="string">&#x27;blue&#x27;</span>],mixtype = <span class="string">&#x27;cross&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>参数解析：<br>def <strong>init</strong> (self, colornames, mixtype &#x3D; ‘Connect’)<br><strong>两个参数，colornames ， mixtype</strong></p>
+<p><strong>参数colornamse给出若干个颜色序列的名称。</strong><br><strong>参数mixtype表示混合这些颜色序列的方式，目前只有两个值：connect 和 cross</strong> （不需要区分大小写）<br>connect为默认值 以连接的方式混合，即按照顺序依次把colornames中给出的颜色序列首尾相接<br>cross 以交叉的方式混合 。举个例子 如果以cross的方式混合三个颜色序列[1,2,3][a,b,c][x,y,z]<br>最后的结果序列为[1,a,x,2,b,y,3,c,z]</p>
+<h4 id="查看颜色序列，以及其他两个隐藏属性"><a href="#查看颜色序列，以及其他两个隐藏属性" class="headerlink" title="查看颜色序列，以及其他两个隐藏属性"></a>查看颜色序列，以及其他两个隐藏属性</h4><p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">co.getOrder() <span class="comment">#查看序列</span></span><br><span class="line">co.getLength() <span class="comment">#查看序列长度</span></span><br><span class="line">co.getBaseOrderNumber() <span class="comment">#查看该序列由几个基础序列混合而成</span></span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line">[<span class="string">&#x27;#2F0000&#x27;</span>, <span class="string">&#x27;#000079&#x27;</span>, <span class="string">&#x27;#4D0000&#x27;</span>, <span class="string">&#x27;#000093&#x27;</span>, <span class="string">&#x27;#600000&#x27;</span>, <span class="string">&#x27;#0000C6&#x27;</span>, <span class="string">&#x27;#750000&#x27;</span>, <span class="string">&#x27;#0000C6&#x27;</span>, <span class="string">&#x27;#930000&#x27;</span>, <span class="string">&#x27;#0000E3&#x27;</span>, <span class="string">&#x27;#AE0000&#x27;</span>, <span class="string">&#x27;#2828FF&#x27;</span>, <span class="string">&#x27;#CE0000&#x27;</span>, <span class="string">&#x27;#4A4AFF&#x27;</span>, <span class="string">&#x27;#EA0000&#x27;</span>, <span class="string">&#x27;#6A6AFF&#x27;</span>, <span class="string">&#x27;#FF0000&#x27;</span>, <span class="string">&#x27;#7D7DFF&#x27;</span>, <span class="string">&#x27;#FF2D2D&#x27;</span>, <span class="string">&#x27;#9393FF&#x27;</span>, <span class="string">&#x27;#FF5151&#x27;</span>, <span class="string">&#x27;#AAAAFF&#x27;</span>, <span class="string">&#x27;#ff7575&#x27;</span>, <span class="string">&#x27;#B9B9FF&#x27;</span>, <span class="string">&#x27;#FF9797&#x27;</span>, <span class="string">&#x27;#CECEFF&#x27;</span>, <span class="string">&#x27;#FFB5B5&#x27;</span>, <span class="string">&#x27;#DDDDFF&#x27;</span>, <span class="string">&#x27;#FFD2D2&#x27;</span>, <span class="string">&#x27;#ECECFF&#x27;</span>, <span class="string">&#x27;#FFECEC&#x27;</span>,<span class="string">&#x27;#FBFBFF&#x27;</span>]</span><br><span class="line"><span class="number">32</span></span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="切片获取序列"><a href="#切片获取序列" class="headerlink" title="切片获取序列"></a>切片获取序列</h4><p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">co.getLeft(<span class="literal">False</span>) <span class="comment">#获得序列左边的25%</span></span><br><span class="line">co.getRight(<span class="literal">True</span>) <span class="comment">#获得序列右边的25%</span></span><br><span class="line">co.getMiddle() <span class="comment">#获得序列中间的50%</span></span><br></pre></td></tr></table></figure>
+
+<p>参数分析：<br>def getLeft(self, muti_section &#x3D; False):<br>三个方法只有一个相同的参数，muti_section<br>当muti_section默认为False 直接根据需求获得序列的前25%或后25%或中间50%<br>当muti_section为True， 考虑某些时候切片以connect方式混合的序列，他会单独提取每个基础序列的左、右或中间的部分，拼接到一起作为返回结果</p>
+<h4 id="与ColorOrder对象的序列混合"><a href="#与ColorOrder对象的序列混合" class="headerlink" title="与ColorOrder对象的序列混合"></a>与ColorOrder对象的序列混合</h4><p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">co.mix(co,<span class="string">&#x27;cross&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>参数解析：<br>def mix(self, co, mixtype &#x3D; ‘Connect’)<br>co为实例对象，mixtype与__init__中的mixtype相同<br>值得一提的是这时两个序列不一定时等长的，我们再举一个cross混合的例子。假设混合[2,3,4,2,3,4,2,3,4]和[0,1,0,1,0,1]两个序列，最后的结果是[2,3,4,0,1,2,3,4,0,1,2,3,4,0<br>1]</p>
+<h2 id="应用简例"><a href="#应用简例" class="headerlink" title="应用简例"></a>应用简例</h2><p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> InterestingColorfulColor <span class="keyword">as</span> ICC</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(<span class="number">1</span>,<span class="number">2</span>,figsize = (<span class="number">16</span>,<span class="number">8</span>))</span><br><span class="line"></span><br><span class="line">co = ICC.ColorOrder([<span class="string">&#x27;blue&#x27;</span>,<span class="string">&#x27;redpurple&#x27;</span>],<span class="string">&#x27;cross&#x27;</span>)</span><br><span class="line">ax[<span class="number">0</span>].pie([<span class="number">1</span>]*<span class="built_in">len</span>(co.getOrder()),colors = co.getOrder())</span><br><span class="line"></span><br><span class="line">co.mix(ICC.ColorOrder([<span class="string">&#x27;Green&#x27;</span>]),<span class="string">&#x27;cross&#x27;</span>)</span><br><span class="line">ax[<span class="number">1</span>].pie([<span class="number">1</span>]*<span class="built_in">len</span>(co.getMiddle()),colors = co.getMiddle())</span><br></pre></td></tr></table></figure>
+
+
+<p>效果：<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20210209204037167.png?x-oss-">https://img-blog.csdnimg.cn/20210209204037167.png?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70#pic_center)</p>
+<h2 id="……-amp-￥……？？？？？！！！"><a href="#……-amp-￥……？？？？？！！！" class="headerlink" title="%……&amp;%￥……？？？？？！！！"></a>%……&amp;%￥……？？？？？！！！</h2><p>弄到颜色序列之后是可以用co.getOrder()导出来自己随便切的，并不是只能按照getMiddle,getLeft,getRight的固定方式切片</p>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ICC_UnknowColorName</span>(<span class="title class_ inherited__">Exception</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ICC_UnknowMixType</span>(<span class="title class_ inherited__">Exception</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ColorOrder</span>:</span><br><span class="line">    BaseOrderLength_Normal = <span class="number">16</span></span><br><span class="line">    <span class="comment">#BaseOrderLength_Dull   = 12</span></span><br><span class="line">    ErrorText_ICC_UnknowColorName = <span class="string">&#x27;Exist color name not in ColorOrder.ColorMap, can not identify what color the name means. Or you need to use an iteratable object to iteratable object all color names&#x27;</span></span><br><span class="line">    ErrorText_ICC_UnknowMixType = <span class="string">&#x27;Can not identify mixtype&#x27;</span></span><br><span class="line">    ColorMap = &#123; </span><br><span class="line">         <span class="string">&#x27;Gray&#x27;</span>        : <span class="string">&#x27;Gray&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Red&#x27;</span>         : <span class="string">&#x27;Red&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Redpurple&#x27;</span>   : <span class="string">&#x27;RedPurple&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Purplered&#x27;</span>   : <span class="string">&#x27;RedPurple&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Purple&#x27;</span>      : <span class="string">&#x27;Purple&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Purpleblue&#x27;</span>  : <span class="string">&#x27;PurpleBlue&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Bluepurple&#x27;</span>  : <span class="string">&#x27;PurpleBlue&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Blue&#x27;</span>        : <span class="string">&#x27;Blue&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Bluecyan&#x27;</span>    : <span class="string">&#x27;BlueCyan&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Cyanblue&#x27;</span>    : <span class="string">&#x27;BlueCyan&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Cyan&#x27;</span>        : <span class="string">&#x27;Cyan&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Cyangreen&#x27;</span>   : <span class="string">&#x27;CyanGreen&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Greencyan&#x27;</span>   : <span class="string">&#x27;CyanGreen&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Green&#x27;</span>       : <span class="string">&#x27;Green&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Greenyellow&#x27;</span> : <span class="string">&#x27;GreenYellow&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Yellowgreen&#x27;</span> : <span class="string">&#x27;GreenYellow&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Yellow&#x27;</span>      : <span class="string">&#x27;Yellow&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Yelloworange&#x27;</span>: <span class="string">&#x27;YellowOrange&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Orangeyellow&#x27;</span>: <span class="string">&#x27;YellowOrange&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Orange&#x27;</span>      : <span class="string">&#x27;Orange&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Orangered&#x27;</span>   : <span class="string">&#x27;OrangeRed&#x27;</span></span><br><span class="line">        ,<span class="string">&#x27;Redorange&#x27;</span>   : <span class="string">&#x27;OrangeRed&#x27;</span></span><br><span class="line">        <span class="comment">#,&#x27;Dullred&#x27;     : &#x27;DullRed&#x27;</span></span><br><span class="line">        <span class="comment">#,&#x27;Dullyellow&#x27;  : &#x27;DullYellow&#x27;</span></span><br><span class="line">        <span class="comment">#,&#x27;Dullcyan&#x27;    : &#x27;DullCyan&#x27;</span></span><br><span class="line">        <span class="comment">#,&#x27;Dullblue&#x27;    : &#x27;DullBlue&#x27;</span></span><br><span class="line">        <span class="comment">#,&#x27;Dullpurple&#x27;  : &#x27;DullPurple&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    BaseColorOrder = &#123; </span><br><span class="line">         <span class="string">&#x27;Gray&#x27;</span>        :   [<span class="string">&#x27;#ffffff&#x27;</span>,<span class="string">&#x27;#272727&#x27;</span>,<span class="string">&#x27;#3C3C3C&#x27;</span>,<span class="string">&#x27;#4F4F4F&#x27;</span>,<span class="string">&#x27;#5B5B5B&#x27;</span>,<span class="string">&#x27;#6C6C6C&#x27;</span>,<span class="string">&#x27;#7B7B7B&#x27;</span>,<span class="string">&#x27;#8E8E8E&#x27;</span>,<span class="string">&#x27;#9D9D9D&#x27;</span>,<span class="string">&#x27;#ADADAD&#x27;</span>,<span class="string">&#x27;#BEBEBE&#x27;</span>,<span class="string">&#x27;#d0d0d0&#x27;</span>,<span class="string">&#x27;#E0E0E0&#x27;</span>,<span class="string">&#x27;#F0F0F0&#x27;</span>,<span class="string">&#x27;#FCFCFC&#x27;</span>,<span class="string">&#x27;#FFFFFF&#x27;</span>]</span><br><span class="line">        ,<span class="string">&#x27;Red&#x27;</span>         :   [<span class="string">&#x27;#2F0000&#x27;</span>,<span class="string">&#x27;#4D0000&#x27;</span>,<span class="string">&#x27;#600000&#x27;</span>,<span class="string">&#x27;#750000&#x27;</span>,<span class="string">&#x27;#930000&#x27;</span>,<span class="string">&#x27;#AE0000&#x27;</span>,<span class="string">&#x27;#CE0000&#x27;</span>,<span class="string">&#x27;#EA0000&#x27;</span>,<span class="string">&#x27;#FF0000&#x27;</span>,<span class="string">&#x27;#FF2D2D&#x27;</span>,<span class="string">&#x27;#FF5151&#x27;</span>,<span class="string">&#x27;#ff7575&#x27;</span>,<span class="string">&#x27;#FF9797&#x27;</span>,<span class="string">&#x27;#FFB5B5&#x27;</span>,<span class="string">&#x27;#FFD2D2&#x27;</span>,<span class="string">&#x27;#FFECEC&#x27;</span>]</span><br><span class="line">        ,<span class="string">&#x27;RedPurple&#x27;</span>   :   [<span class="string">&#x27;#600030&#x27;</span>,<span class="string">&#x27;#820041&#x27;</span>,<span class="string">&#x27;#9F0050&#x27;</span>,<span class="string">&#x27;#BF0060&#x27;</span>,<span class="string">&#x27;#D9006C&#x27;</span>,<span class="string">&#x27;#F00078&#x27;</span>,<span class="string">&#x27;#FF0080&#x27;</span>,<span class="string">&#x27;#FF359A&#x27;</span>,<span class="string">&#x27;#FF60AF&#x27;</span>,<span class="string">&#x27;#FF79BC&#x27;</span>,<span class="string">&#x27;#FF95CA&#x27;</span>,<span class="string">&#x27;#ffaad5&#x27;</span>,<span class="string">&#x27;#FFC1E0&#x27;</span>,<span class="string">&#x27;#FFD9EC&#x27;</span>,<span class="string">&#x27;#FFECF5&#x27;</span>,<span class="string">&#x27;#FFF7FB&#x27;</span>]</span><br><span class="line">        ,<span class="string">&#x27;Purple&#x27;</span>      :   [<span class="string">&#x27;#460046&#x27;</span>,<span class="string">&#x27;#5E005E&#x27;</span>,<span class="string">&#x27;#750075&#x27;</span>,<span class="string">&#x27;#930093&#x27;</span>,<span class="string">&#x27;#AE00AE&#x27;</span>,<span class="string">&#x27;#D200D2&#x27;</span>,<span class="string">&#x27;#E800E8&#x27;</span>,<span class="string">&#x27;#FF00FF&#x27;</span>,<span class="string">&#x27;#FF44FF&#x27;</span>,<span class="string">&#x27;#FF77FF&#x27;</span>,<span class="string">&#x27;#FF8EFF&#x27;</span>,<span class="string">&#x27;#ffa6ff&#x27;</span>,<span class="string">&#x27;#FFBFFF&#x27;</span>,<span class="string">&#x27;#FFD0FF&#x27;</span>,<span class="string">&#x27;#FFE6FF&#x27;</span>,<span class="string">&#x27;#FFF7FF&#x27;</span>]</span><br><span class="line">        ,<span class="string">&#x27;PurpleBlue&#x27;</span>  :   [<span class="string">&#x27;#28004D&#x27;</span>,<span class="string">&#x27;#3A006F&#x27;</span>,<span class="string">&#x27;#4B0091&#x27;</span>,<span class="string">&#x27;#5B00AE&#x27;</span>,<span class="string">&#x27;#6F00D2&#x27;</span>,<span class="string">&#x27;#8600FF&#x27;</span>,<span class="string">&#x27;#921AFF&#x27;</span>,<span class="string">&#x27;#9F35FF&#x27;</span>,<span class="string">&#x27;#B15BFF&#x27;</span>,<span class="string">&#x27;#BE77FF&#x27;</span>,<span class="string">&#x27;#CA8EFF&#x27;</span>,<span class="string">&#x27;#d3a4ff&#x27;</span>,<span class="string">&#x27;#DCB5FF&#x27;</span>,<span class="string">&#x27;#E6CAFF&#x27;</span>,<span class="string">&#x27;#F1E1FF&#x27;</span>,<span class="string">&#x27;#FAF4FF&#x27;</span>]</span><br><span class="line">        ,<span class="string">&#x27;Blue&#x27;</span>        :   [<span class="string">&#x27;#000079&#x27;</span>,<span class="string">&#x27;#000093&#x27;</span>,<span class="string">&#x27;#0000C6&#x27;</span>,<span class="string">&#x27;#0000C6&#x27;</span>,<span class="string">&#x27;#0000E3&#x27;</span>,<span class="string">&#x27;#2828FF&#x27;</span>,<span class="string">&#x27;#4A4AFF&#x27;</span>,<span class="string">&#x27;#6A6AFF&#x27;</span>,<span class="string">&#x27;#7D7DFF&#x27;</span>,<span class="string">&#x27;#9393FF&#x27;</span>,<span class="string">&#x27;#AAAAFF&#x27;</span>,<span class="string">&#x27;#B9B9FF&#x27;</span>,<span class="string">&#x27;#CECEFF&#x27;</span>,<span class="string">&#x27;#DDDDFF&#x27;</span>,<span class="string">&#x27;#ECECFF&#x27;</span>,<span class="string">&#x27;#FBFBFF&#x27;</span>]</span><br><span class="line">        ,<span class="string">&#x27;BlueCyan&#x27;</span>    :   [<span class="string">&#x27;#000079&#x27;</span>,<span class="string">&#x27;#003D79&#x27;</span>,<span class="string">&#x27;#004B97&#x27;</span>,<span class="string">&#x27;#005AB5&#x27;</span>,<span class="string">&#x27;#0066CC&#x27;</span>,<span class="string">&#x27;#0072E3&#x27;</span>,<span class="string">&#x27;#0080FF&#x27;</span>,<span class="string">&#x27;#2894FF&#x27;</span>,<span class="string">&#x27;#46A3FF&#x27;</span>,<span class="string">&#x27;#66B3FF&#x27;</span>,<span class="string">&#x27;#84C1FF&#x27;</span>,<span class="string">&#x27;#97CBFF&#x27;</span>,<span class="string">&#x27;#ACD6FF&#x27;</span>,<span class="string">&#x27;#C4E1FF&#x27;</span>,<span class="string">&#x27;#D2E9FF&#x27;</span>,<span class="string">&#x27;#ECF5FF&#x27;</span>]</span><br><span class="line">        ,<span class="string">&#x27;Cyan&#x27;</span>        :   [<span class="string">&#x27;#003E3E&#x27;</span>,<span class="string">&#x27;#005757&#x27;</span>,<span class="string">&#x27;#007979&#x27;</span>,<span class="string">&#x27;#009393&#x27;</span>,<span class="string">&#x27;#00AEAE&#x27;</span>,<span class="string">&#x27;#00CACA&#x27;</span>,<span class="string">&#x27;#00E3E3&#x27;</span>,<span class="string">&#x27;#00FFFF&#x27;</span>,<span class="string">&#x27;#4DFFFF&#x27;</span>,<span class="string">&#x27;#80FFFF&#x27;</span>,<span class="string">&#x27;#A6FFFF&#x27;</span>,<span class="string">&#x27;#BBFFFF&#x27;</span>,<span class="string">&#x27;#CAFFFF&#x27;</span>,<span class="string">&#x27;#D9FFFF&#x27;</span>,<span class="string">&#x27;#ECFFFF&#x27;</span>,<span class="string">&#x27;#FDFFFF&#x27;</span>]</span><br><span class="line">        ,<span class="string">&#x27;CyanGreen&#x27;</span>   :   [<span class="string">&#x27;#006030&#x27;</span>,<span class="string">&#x27;#01814A&#x27;</span>,<span class="string">&#x27;#019858&#x27;</span>,<span class="string">&#x27;#01B468&#x27;</span>,<span class="string">&#x27;#02C874&#x27;</span>,<span class="string">&#x27;#02DF82&#x27;</span>,<span class="string">&#x27;#02F78E&#x27;</span>,<span class="string">&#x27;#1AFD9C&#x27;</span>,<span class="string">&#x27;#4EFEB3&#x27;</span>,<span class="string">&#x27;#7AFEC6&#x27;</span>,<span class="string">&#x27;#96FED1&#x27;</span>,<span class="string">&#x27;#ADFEDC&#x27;</span>,<span class="string">&#x27;#C1FFE4&#x27;</span>,<span class="string">&#x27;#D7FFEE&#x27;</span>,<span class="string">&#x27;#E8FFF5&#x27;</span>,<span class="string">&#x27;#FBFFFD&#x27;</span>]</span><br><span class="line">        ,<span class="string">&#x27;Green&#x27;</span>       :   [<span class="string">&#x27;#006000&#x27;</span>,<span class="string">&#x27;#007500&#x27;</span>,<span class="string">&#x27;#009100&#x27;</span>,<span class="string">&#x27;#00A600&#x27;</span>,<span class="string">&#x27;#00BB00&#x27;</span>,<span class="string">&#x27;#00DB00&#x27;</span>,<span class="string">&#x27;#00EC00&#x27;</span>,<span class="string">&#x27;#28FF28&#x27;</span>,<span class="string">&#x27;#53FF53&#x27;</span>,<span class="string">&#x27;#79FF79&#x27;</span>,<span class="string">&#x27;#93FF93&#x27;</span>,<span class="string">&#x27;#A6FFA6&#x27;</span>,<span class="string">&#x27;#BBFFBB&#x27;</span>,<span class="string">&#x27;#CEFFCE&#x27;</span>,<span class="string">&#x27;#DFFFDF&#x27;</span>,<span class="string">&#x27;#F0FFF0&#x27;</span>]</span><br><span class="line">        ,<span class="string">&#x27;GreenYellow&#x27;</span> :   [<span class="string">&#x27;#467500&#x27;</span>,<span class="string">&#x27;#548C00&#x27;</span>,<span class="string">&#x27;#64A600&#x27;</span>,<span class="string">&#x27;#73BF00&#x27;</span>,<span class="string">&#x27;#82D900&#x27;</span>,<span class="string">&#x27;#8CEA00&#x27;</span>,<span class="string">&#x27;#9AFF02&#x27;</span>,<span class="string">&#x27;#A8FF24&#x27;</span>,<span class="string">&#x27;#B7FF4A&#x27;</span>,<span class="string">&#x27;#C2FF68&#x27;</span>,<span class="string">&#x27;#CCFF80&#x27;</span>,<span class="string">&#x27;#D3FF93&#x27;</span>,<span class="string">&#x27;#DEFFAC&#x27;</span>,<span class="string">&#x27;#E8FFC4&#x27;</span>,<span class="string">&#x27;#EFFFD7&#x27;</span>,<span class="string">&#x27;#F5FFE8&#x27;</span>]</span><br><span class="line">        ,<span class="string">&#x27;Yellow&#x27;</span>      :   [<span class="string">&#x27;#424200&#x27;</span>,<span class="string">&#x27;#5B5B00&#x27;</span>,<span class="string">&#x27;#737300&#x27;</span>,<span class="string">&#x27;#8C8C00&#x27;</span>,<span class="string">&#x27;#A6A600&#x27;</span>,<span class="string">&#x27;#C4C400&#x27;</span>,<span class="string">&#x27;#E1E100&#x27;</span>,<span class="string">&#x27;#F9F900&#x27;</span>,<span class="string">&#x27;#FFFF37&#x27;</span>,<span class="string">&#x27;#FFFF6F&#x27;</span>,<span class="string">&#x27;#FFFF93&#x27;</span>,<span class="string">&#x27;#FFFFAA&#x27;</span>,<span class="string">&#x27;#FFFFB9&#x27;</span>,<span class="string">&#x27;#FFFFCE&#x27;</span>,<span class="string">&#x27;#FFFFDF&#x27;</span>,<span class="string">&#x27;#FFFFF4&#x27;</span>]</span><br><span class="line">        ,<span class="string">&#x27;YellowOrange&#x27;</span>:   [<span class="string">&#x27;#5B4B00&#x27;</span>,<span class="string">&#x27;#796400&#x27;</span>,<span class="string">&#x27;#977C00&#x27;</span>,<span class="string">&#x27;#AE8F00&#x27;</span>,<span class="string">&#x27;#C6A300&#x27;</span>,<span class="string">&#x27;#D9B300&#x27;</span>,<span class="string">&#x27;#EAC100&#x27;</span>,<span class="string">&#x27;#FFD306&#x27;</span>,<span class="string">&#x27;#FFDC35&#x27;</span>,<span class="string">&#x27;#FFE153&#x27;</span>,<span class="string">&#x27;#FFE66F&#x27;</span>,<span class="string">&#x27;#FFED97&#x27;</span>,<span class="string">&#x27;#FFF0AC&#x27;</span>,<span class="string">&#x27;#FFF4C1&#x27;</span>,<span class="string">&#x27;#FFF8D7&#x27;</span>,<span class="string">&#x27;#FFFCEC&#x27;</span>]</span><br><span class="line">        ,<span class="string">&#x27;Orange&#x27;</span>      :   [<span class="string">&#x27;#844200&#x27;</span>,<span class="string">&#x27;#9F5000&#x27;</span>,<span class="string">&#x27;#BB5E00&#x27;</span>,<span class="string">&#x27;#D26900&#x27;</span>,<span class="string">&#x27;#EA7500&#x27;</span>,<span class="string">&#x27;#FF8000&#x27;</span>,<span class="string">&#x27;#FF9224&#x27;</span>,<span class="string">&#x27;#FFA042&#x27;</span>,<span class="string">&#x27;#FFAF60&#x27;</span>,<span class="string">&#x27;#FFBB77&#x27;</span>,<span class="string">&#x27;#FFC78E&#x27;</span>,<span class="string">&#x27;#FFD1A4&#x27;</span>,<span class="string">&#x27;#FFDCB9&#x27;</span>,<span class="string">&#x27;#FFE4CA&#x27;</span>,<span class="string">&#x27;#FFEEDD&#x27;</span>,<span class="string">&#x27;#FFFAF4&#x27;</span>]</span><br><span class="line">        ,<span class="string">&#x27;OrangeRed&#x27;</span>   :   [<span class="string">&#x27;#642100&#x27;</span>,<span class="string">&#x27;#842B00&#x27;</span>,<span class="string">&#x27;#A23400&#x27;</span>,<span class="string">&#x27;#BB3D00&#x27;</span>,<span class="string">&#x27;#D94600&#x27;</span>,<span class="string">&#x27;#F75000&#x27;</span>,<span class="string">&#x27;#FF5809&#x27;</span>,<span class="string">&#x27;#FF8040&#x27;</span>,<span class="string">&#x27;#FF8F59&#x27;</span>,<span class="string">&#x27;#FF9D6F&#x27;</span>,<span class="string">&#x27;#FFAD86&#x27;</span>,<span class="string">&#x27;#FFBD9D&#x27;</span>,<span class="string">&#x27;#FFCBB3&#x27;</span>,<span class="string">&#x27;#FFDAC8&#x27;</span>,<span class="string">&#x27;#FFE6D9&#x27;</span>,<span class="string">&#x27;#FFF3EE&#x27;</span>]</span><br><span class="line">        <span class="comment">#,&#x27;DullRed&#x27;     :   [&#x27;#613030&#x27;,&#x27;#743A3A&#x27;,&#x27;#804040&#x27;,&#x27;#984B4B&#x27;,&#x27;#AD5A5A&#x27;,&#x27;#B87070&#x27;,&#x27;#C48888&#x27;,&#x27;#CF9E9E&#x27;,&#x27;#D9B3B3&#x27;,&#x27;#E1C4C4&#x27;,&#x27;#EBD6D6&#x27;,&#x27;#F2E6E6&#x27;]</span></span><br><span class="line">        <span class="comment">#,&#x27;DullYellow&#x27;  :   [&#x27;#616130&#x27;,&#x27;#707038&#x27;,&#x27;#808040&#x27;,&#x27;#949449&#x27;,&#x27;#A5A552&#x27;,&#x27;#AFAF61&#x27;,&#x27;#B9B973&#x27;,&#x27;#C2C287&#x27;,&#x27;#CDCD9A&#x27;,&#x27;#D6D6AD&#x27;,&#x27;#DEDEBE&#x27;,&#x27;#E8E8D0&#x27;]</span></span><br><span class="line">        <span class="comment">#,&#x27;DullCyan&#x27;    :   [&#x27;#336666&#x27;,&#x27;#3D7878&#x27;,&#x27;#408080&#x27;,&#x27;#4F9D9D&#x27;,&#x27;#5CADAD&#x27;,&#x27;#6FB7B7&#x27;,&#x27;#81C0C0&#x27;,&#x27;#95CACA&#x27;,&#x27;#A3D1D1&#x27;,&#x27;#B3D9D9&#x27;,&#x27;#C4E1E1&#x27;,&#x27;#D1E9E9&#x27;]</span></span><br><span class="line">        <span class="comment">#,&#x27;DullBlue&#x27;    :   [&#x27;#484891&#x27;,&#x27;#5151A2&#x27;,&#x27;#5A5AAD&#x27;,&#x27;#7373B9&#x27;,&#x27;#8080C0&#x27;,&#x27;#9999CC&#x27;,&#x27;#A6A6D2&#x27;,&#x27;#B8B8DC&#x27;,&#x27;#C7C7E2&#x27;,&#x27;#D8D8EB&#x27;,&#x27;#E6E6F2&#x27;,&#x27;#F3F3FA&#x27;]</span></span><br><span class="line">        <span class="comment">#,&#x27;DullPurple&#x27;  :   [&#x27;#6C3365&#x27;,&#x27;#7E3D76&#x27;,&#x27;#8F4586&#x27;,&#x27;#9F4D95&#x27;,&#x27;#AE57A4&#x27;,&#x27;#B766AD&#x27;,&#x27;#C07AB8&#x27;,&#x27;#CA8EC2&#x27;,&#x27;#D2A2CC&#x27;,&#x27;#DAB1D5&#x27;,&#x27;#E2C2DE&#x27;,&#x27;#EBD3E8&#x27;]</span></span><br><span class="line">      &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, colornames, mixtype = <span class="string">&#x27;Connect&#x27;</span></span>):</span><br><span class="line">        colornames = [i.capitalize() <span class="keyword">for</span> i <span class="keyword">in</span> colornames]</span><br><span class="line">        mixtype = mixtype.capitalize()</span><br><span class="line">        <span class="keyword">for</span> each <span class="keyword">in</span> colornames:</span><br><span class="line">            <span class="keyword">if</span> each <span class="keyword">not</span> <span class="keyword">in</span> ColorOrder.ColorMap:</span><br><span class="line">                <span class="keyword">raise</span> ICC_UnknowColorName(ColorOrder.ErrorText_ICC_UnknowColorName)</span><br><span class="line">                </span><br><span class="line">        self.__order = []</span><br><span class="line">        <span class="keyword">if</span> mixtype == <span class="string">&#x27;Connect&#x27;</span>:</span><br><span class="line">            <span class="keyword">for</span> eachname <span class="keyword">in</span> colornames:</span><br><span class="line">                self.__order.extend(ColorOrder.BaseColorOrder[ColorOrder.ColorMap[eachname]])</span><br><span class="line">        <span class="keyword">elif</span> mixtype == <span class="string">&#x27;Cross&#x27;</span>:</span><br><span class="line">            lst = []</span><br><span class="line">            <span class="keyword">for</span> eachname <span class="keyword">in</span> colornames:</span><br><span class="line">                lst.append(ColorOrder.BaseColorOrder[ColorOrder.ColorMap[eachname]])</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(ColorOrder.BaseOrderLength_Normal):</span><br><span class="line">                <span class="keyword">for</span> each <span class="keyword">in</span> lst:</span><br><span class="line">                    self.__order.append(each[i])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> ICC_UnknowMixType(ColorOrder.ErrorText_ICC_UnknowMixType)</span><br><span class="line">            </span><br><span class="line">        self.__baseOrderNumber = <span class="built_in">len</span>(colornames)</span><br><span class="line">        self.__length = self.__baseOrderNumber * ColorOrder.BaseOrderLength_Normal</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getBaseOrderNumber</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self.__baseOrderNumber</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getLength</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self.__length</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getOrder</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self.__order.copy()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getLeft</span>(<span class="params">self, muti_section = <span class="literal">False</span></span>):</span><br><span class="line">        <span class="keyword">if</span> muti_section == <span class="literal">False</span>:</span><br><span class="line">            lst = self.__order[ : <span class="number">4</span> * self.__baseOrderNumber ]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            lst = []</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(self.__baseOrderNumber):</span><br><span class="line">                pos = i * ColorOrder.BaseOrderLength_Normal</span><br><span class="line">                lst.extend(self.__order[ pos : pos + <span class="number">4</span>])</span><br><span class="line">        <span class="keyword">return</span> lst</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getRight</span>(<span class="params">self, muti_section = <span class="literal">False</span></span>):</span><br><span class="line">        <span class="keyword">if</span> muti_section == <span class="literal">False</span>:</span><br><span class="line">            lst = self.__order[ -<span class="number">4</span> * self.__baseOrderNumber : ]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            lst = []</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,self.__baseOrderNumber+<span class="number">1</span>):</span><br><span class="line">                pos = i * ColorOrder.BaseOrderLength_Normal</span><br><span class="line">                lst.extend(self.__order[ pos - <span class="number">4</span> : pos])</span><br><span class="line">        <span class="keyword">return</span> lst</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getMiddle</span>(<span class="params">self, muti_section = <span class="literal">False</span></span>):</span><br><span class="line">        <span class="keyword">if</span> muti_section == <span class="literal">False</span>:</span><br><span class="line">            lst = self.__order[ <span class="number">4</span> * self.__baseOrderNumber : <span class="number">12</span> * self.__baseOrderNumber ]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            lst = []</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(self.__baseOrderNumber):</span><br><span class="line">                pos = i * ColorOrder.BaseOrderLength_Normal</span><br><span class="line">                lst.extend(self.__order[ pos + <span class="number">4</span> : pos + <span class="number">12</span>])</span><br><span class="line">        <span class="keyword">return</span> lst</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">mix</span>(<span class="params">self, co, mixtype = <span class="string">&#x27;Connect&#x27;</span></span>):</span><br><span class="line">        mixtype = mixtype.capitalize()</span><br><span class="line">        <span class="keyword">if</span> mixtype == <span class="string">&#x27;Connect&#x27;</span>:</span><br><span class="line">            self.__order.extend(co.__order)</span><br><span class="line">        <span class="keyword">elif</span> mixtype == <span class="string">&#x27;Cross&#x27;</span>:</span><br><span class="line">            lst = []</span><br><span class="line">            idx1 = <span class="number">0</span></span><br><span class="line">            idx2 = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(ColorOrder.BaseOrderLength_Normal):</span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(self.__baseOrderNumber):</span><br><span class="line">                    lst.append(self.__order[idx1])</span><br><span class="line">                    idx1 += <span class="number">1</span></span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(co.__baseOrderNumber):</span><br><span class="line">                    lst.append(co.__order[idx2])</span><br><span class="line">                    idx2 += <span class="number">1</span></span><br><span class="line">            self.__order = lst</span><br><span class="line">        self.__length += co.__length</span><br><span class="line">        self.__baseOrderNumber += co.__baseOrderNumber</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/python%20%E7%AE%80%E5%8D%95%E7%9A%84%E9%A2%9C%E8%89%B2%E5%BA%8F%E5%88%97%E7%94%9F%E6%88%90%E5%99%A8/" data-id="cl50tnlqk000pycj36socfpxq" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%94%BB%E5%9B%BE/" rel="tag">画图</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/1111/11/11/sql%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%EF%BC%88sql%20sever%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          sql学习记录（sql sever）.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/1111/11/11/python%20graphviz%E7%9A%84%E4%BD%BF%E7%94%A8%20%20%E6%94%B9%E6%97%A5%E5%A1%AB%E5%9D%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">python graphviz的使用  改日填坑.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">蓝湖畔淅淅沥沥的雨</h1>
+    <h2 class="blog-subtitle">All tragedy erased, I see only wonders...</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/Wldcmzy" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/wldcmzy" target="_blank" title="CSDN">
+          CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://space.bilibili.com/83743701" target="_blank" title="bilibili(无技术和学习内容)">
+          bilibili(无技术和学习内容)
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://shanamaid.github.io/" target="_blank" title="夏娜主题作者的博客">
+          夏娜主题作者的博客
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2021 - 2022 StarsWhisper<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+	  (但是魔改)
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/announcement" title="" class="menuItem">公告</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/knightabout" title="" class="menuItem">关于</a>
+          
+            <a href="/bridges" title="" class="menuItem">传送门</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

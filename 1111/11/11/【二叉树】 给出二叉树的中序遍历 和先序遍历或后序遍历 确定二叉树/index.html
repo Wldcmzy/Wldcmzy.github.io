@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【二叉树】 给出二叉树的中序遍历 和先序遍历或后序遍历 确定二叉树.md | 蓝湖畔淅淅沥沥的雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 讨论的内容如题 分析拿中序遍历和后序遍历的组合举例子设数组last[]储存后续遍历 in[]中序遍历，它">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【二叉树】 给出二叉树的中序遍历 和先序遍历或后序遍历 确定二叉树.md">
+<meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%91%20%E7%BB%99%E5%87%BA%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%20%E5%92%8C%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86%E6%88%96%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%20%E7%A1%AE%E5%AE%9A%E4%BA%8C%E5%8F%89%E6%A0%91/index.html">
+<meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
+<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 讨论的内容如题 分析拿中序遍历和后序遍历的组合举例子设数组last[]储存后续遍历 in[]中序遍历，它">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
+<meta property="article:modified_time" content="2022-06-30T09:22:00.430Z">
+<meta property="article:author" content="StarsWhisper">
+<meta property="article:tag" content="OldBlog(Before20220505)">
+<meta property="article:tag" content="DFS序">
+<meta property="article:tag" content="DFS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="蓝湖畔淅淅沥沥的雨" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-【二叉树】 给出二叉树的中序遍历 和先序遍历或后序遍历 确定二叉树" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%91%20%E7%BB%99%E5%87%BA%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%20%E5%92%8C%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86%E6%88%96%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%20%E7%A1%AE%E5%AE%9A%E4%BA%8C%E5%8F%89%E6%A0%91/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【二叉树】 给出二叉树的中序遍历 和先序遍历或后序遍历 确定二叉树.md
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/">图论</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<p><strong>讨论的内容如题</strong></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>拿中序遍历和后序遍历的组合举例子<br>设数组last[]储存后续遍历 in[]中序遍历，它们的长度都是n(数组从1开始计，下标范围是1-n)</p>
+<p>树根自然为last[n]<br>，这时我们遍历in[]数组，在in[]数组中找到last[n]的值的下标idx，因为in[]储存的是中序遍历，显然我们以idx为界把in数组的序列分成两份[1,idx-1],[idx+1,n]，分别为两颗子树上的节点。</p>
+<p>之后我们便可以在分出的两个区间之中重复上述操作，分别找目前子树的根节点，再二分区间，直到获得完整的二叉树</p>
+<p>可以使用递归来完成 函数(区间左，区间右，根节点，偏移量)</p>
+<p>此时注意一个问题：当区间被二分之后，我们发现后面的区间在in[]数组和last[]数组中的下标“对不齐”了，即下标发生了偏移，如下图。所以要引入一个变量shift来记录偏移量。（偏移量最开始是0，递归时前面的区间继承原偏移量，后面的区间偏移量为原偏移量+1）<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201008231828150.png?x-oss-">https://img-blog.csdnimg.cn/20201008231828150.png?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70#pic_center)<br>（在前序遍历和中序遍历的组合中，下标发生偏移的是前面的区间）</p>
+<h2 id="例题-后序遍历和中序遍历的组合"><a href="#例题-后序遍历和中序遍历的组合" class="headerlink" title="例题 后序遍历和中序遍历的组合"></a>例题 后序遍历和中序遍历的组合</h2><p><a target="_blank" rel="noopener" href="https://vjudge.net/contest/386054#problem/E">https://vjudge.net/contest/386054#problem/E</a></p>
+<p>​<br>    #include <iostream><br>    #include <cstring><br>    #include <cstdio><br>    struct Node<br>    {<br>        int l,r;<br>    };<br>    Node treeN[10010];<br>    int inorder[10010],postorder[10010];<br>    int len,rt,least,lstPos;<br>    int input()&#x2F;&#x2F;返回数组长度<br>    {<br>        int n,idx&#x3D;1;<br>        char ch;<br>        while(scanf(“%d”,&amp;n)!&#x3D;EOF)<br>        {<br>            inorder[idx++]&#x3D;n;<br>            ch&#x3D;getchar();<br>            if(ch&#x3D;&#x3D;’\n’)<br>                break;<br>        }<br>        idx&#x3D;1;<br>        while(scanf(“%d”,&amp;n)!&#x3D;EOF)<br>        {<br>            postorder[idx++]&#x3D;n;<br>            ch&#x3D;getchar();<br>            if(ch&#x3D;&#x3D;’\n’)<br>                break;<br>        }<br>        return idx-1;<br>    }<br>    int makeTree(int l,int r,int root,int n)<br>    {<br>        if(l&gt;r)<br>            return -1;<br>        int idx&#x3D;-1;<br>        for(int i&#x3D;l; i&lt;&#x3D;r; i++)<br>        {<br>            if(inorder[i]&#x3D;&#x3D;root)<br>            {<br>                idx&#x3D;i;<br>                break;<br>            }<br>        }<br>        if(idx&gt;0)<br>        {<br>            treeN[root].l&#x3D;makeTree(l,idx-1,postorder[idx-n-1],n);<br>            treeN[root].r&#x3D;makeTree(idx+1,r,postorder[r-n-1],n+1);<br>        }<br>        return root;<br>    }<br>    void add(int root,int base)<br>    {<br>        int total&#x3D;base+root;<br>        if(treeN[root].l&#x3D;&#x3D;-1 &amp;&amp; treeN[root].r&#x3D;&#x3D;-1)<br>        {<br>            if(lstPos&#x3D;&#x3D;-1)<br>            {<br>                least&#x3D;total;<br>                lstPos&#x3D;root;<br>            }<br>            else<br>            {<br>                if(total&lt;least)<br>                {<br>                    least&#x3D;total;<br>                    lstPos&#x3D;root;<br>                }<br>            }<br>            return ;<br>        }<br>        if(treeN[root].l&gt;0)<br>        {<br>            add(treeN[root].l,total);<br>        }<br>        if(treeN[root].r&gt;0)<br>        {<br>            add(treeN[root].r,total);<br>        }<br>    }</p>
+<pre><code>int main()
+&#123;
+    while((len=input())&gt;0)
+    &#123;
+        memset(treeN,-1,sizeof(treeN));
+        lstPos=-1;
+        rt=makeTree(1,len,postorder[len],0);
+        add(rt,0);
+        std::cout &lt;&lt; lstPos &lt;&lt; std::endl;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<p>​    </p>
+<h2 id="例题-前序遍历和中序遍历的组合"><a href="#例题-前序遍历和中序遍历的组合" class="headerlink" title="例题 前序遍历和中序遍历的组合"></a>例题 前序遍历和中序遍历的组合</h2><p>&lt;<a target="_blank" rel="noopener" href="https://pintia.cn/problem-">https://pintia.cn/problem-</a><br>sets&#x2F;1303281293857476608&#x2F;problems&#x2F;1303281404742291466&gt;</p>
+<p>​<br>    #include <iostream><br>    #include <cstdio><br>    #include <cstring><br>    #include <algorithm><br>    #include <iomanip><br>    #include <queue><br>    #include <cmath><br>    #include <map></p>
+<pre><code>const int N=32;
+int n;
+struct Node
+&#123;
+    int l,r;
+&#125;treeN[N];
+int pre[N],in[N];
+
+int fff(int root,int l,int r,int shift)
+&#123;
+    if(l&gt;r) return -1;
+    int i;
+    for(i=l; i&lt;=r; i++) if(root==in[i]) break;
+    if(i&lt;=r)
+    &#123;
+        treeN[root].l=fff(pre[l+1+shift],l,i-1,shift+1);
+        treeN[root].r=fff(pre[i+1+shift],i+1,r,shift);
+    &#125;
+    return root;
+&#125;
+
+void rev(int root)
+&#123;
+    if(root==0) return ;
+    treeN[root].r=treeN[root].r^treeN[root].l;
+    treeN[root].l=treeN[root].r^treeN[root].l;
+    treeN[root].r=treeN[root].r^treeN[root].l;
+    rev(treeN[root].l);
+    rev(treeN[root].r);
+&#125;
+
+void gogogo(int root)
+&#123;
+    std::queue&lt;int &gt;q;
+    std::cout &lt;&lt; root;
+    if(treeN[root].l!=-1) q.push(treeN[root].l);
+    if(treeN[root].r!=-1) q.push(treeN[root].r);
+    while(!q.empty())
+    &#123;
+        root=q.front(); q.pop();
+        std::cout &lt;&lt; &quot; &quot; &lt;&lt; root;
+        if(treeN[root].l!=-1) q.push(treeN[root].l);
+        if(treeN[root].r!=-1) q.push(treeN[root].r);
+    &#125;
+&#125;
+
+int main()
+&#123;
+    std::cin &gt;&gt; n;
+    for(int i=0; i&lt;n; i++) std::cin &gt;&gt; in[i];
+    for(int i=0; i&lt;n; i++) std::cin &gt;&gt; pre[i];
+    int root=fff(pre[0],0,n-1,0);
+    rev(root);
+    gogogo(root);
+    return 0;
+&#125;
+</code></pre>
+<p>​    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%91%20%E7%BB%99%E5%87%BA%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%20%E5%92%8C%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86%E6%88%96%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%20%E7%A1%AE%E5%AE%9A%E4%BA%8C%E5%8F%89%E6%A0%91/" data-id="cl50tnlqx001iycj3cu7iar20" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS%E5%BA%8F/" rel="tag">DFS序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/1111/11/11/%E3%80%90tarjin%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0%20%E7%BC%A9%E7%82%B9%EF%BC%8C%E5%89%B2%E7%82%B9%EF%BC%8C%E5%89%B2%E8%BE%B9%E3%80%91%E6%B4%9B%E8%B0%B7_P3387%E7%BC%A9%E7%82%B9%E6%A8%A1%E6%9D%BFP3388%E5%89%B2%E7%82%B9%E6%A8%A1%E6%9D%BF%20HDU4738%20caocao%E2%80%98bridge/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          【tarjin算法练习 缩点，割点，割边】洛谷_P3387缩点模板P3388割点模板 HDU4738 caocao‘bridge.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91python%20matplotlib%20%E8%87%AA%E5%AD%A6%E5%85%A5%E9%97%A8%EF%BC%88%E9%9A%8F%E7%BC%98%E6%9B%B4%E6%96%B0%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">【学习记录】python matplotlib 自学入门（随缘更新）.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">蓝湖畔淅淅沥沥的雨</h1>
+    <h2 class="blog-subtitle">All tragedy erased, I see only wonders...</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/Wldcmzy" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/wldcmzy" target="_blank" title="CSDN">
+          CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://space.bilibili.com/83743701" target="_blank" title="bilibili(无技术和学习内容)">
+          bilibili(无技术和学习内容)
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://shanamaid.github.io/" target="_blank" title="夏娜主题作者的博客">
+          夏娜主题作者的博客
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2021 - 2022 StarsWhisper<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+	  (但是魔改)
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/announcement" title="" class="menuItem">公告</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/knightabout" title="" class="menuItem">关于</a>
+          
+            <a href="/bridges" title="" class="menuItem">传送门</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

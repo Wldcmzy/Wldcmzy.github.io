@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【二分图匹配 练习】洛谷P3386【模板】二分图最大匹配P2756飞行员配对方案问题P1129矩阵游戏P1559运动员最佳匹配问题P4014分配问题P1640连续攻击游戏.md | 蓝湖畔淅淅沥沥的雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 洛谷 P3386【模板】二分图最大匹配​​    #include ​    #include ​">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【二分图匹配 练习】洛谷P3386【模板】二分图最大匹配P2756飞行员配对方案问题P1129矩阵游戏P1559运动员最佳匹配问题P4014分配问题P1640连续攻击游戏.md">
+<meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D%20%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7P3386%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8DP2756%E9%A3%9E%E8%A1%8C%E5%91%98%E9%85%8D%E5%AF%B9%E6%96%B9%E6%A1%88%E9%97%AE%E9%A2%98P1129%E7%9F%A9%E9%98%B5%E6%B8%B8%E6%88%8FP1559%E8%BF%90%E5%8A%A8%E5%91%98%E6%9C%80%E4%BD%B3%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98P4014%E5%88%86%E9%85%8D%E9%97%AE%E9%A2%98P1640%E8%BF%9E%E7%BB%AD%E6%94%BB%E5%87%BB%E6%B8%B8%E6%88%8F/index.html">
+<meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
+<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 洛谷 P3386【模板】二分图最大匹配​​    #include ​    #include ​">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
+<meta property="article:modified_time" content="2022-06-30T09:22:00.430Z">
+<meta property="article:author" content="StarsWhisper">
+<meta property="article:tag" content="OldBlog(Before20220505)">
+<meta property="article:tag" content="二分图">
+<meta property="article:tag" content="KM算法">
+<meta property="article:tag" content="匈牙利算法">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="蓝湖畔淅淅沥沥的雨" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-【二分图匹配 练习】洛谷P3386【模板】二分图最大匹配P2756飞行员配对方案问题P1129矩阵游戏P1559运动员最佳匹配问题P4014分配问题P1640连续攻击游戏" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D%20%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7P3386%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8DP2756%E9%A3%9E%E8%A1%8C%E5%91%98%E9%85%8D%E5%AF%B9%E6%96%B9%E6%A1%88%E9%97%AE%E9%A2%98P1129%E7%9F%A9%E9%98%B5%E6%B8%B8%E6%88%8FP1559%E8%BF%90%E5%8A%A8%E5%91%98%E6%9C%80%E4%BD%B3%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98P4014%E5%88%86%E9%85%8D%E9%97%AE%E9%A2%98P1640%E8%BF%9E%E7%BB%AD%E6%94%BB%E5%87%BB%E6%B8%B8%E6%88%8F/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【二分图匹配 练习】洛谷P3386【模板】二分图最大匹配P2756飞行员配对方案问题P1129矩阵游戏P1559运动员最佳匹配问题P4014分配问题P1640连续攻击游戏.md
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/">图论</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="洛谷-P3386【模板】二分图最大匹配"><a href="#洛谷-P3386【模板】二分图最大匹配" class="headerlink" title="洛谷 P3386【模板】二分图最大匹配"></a>洛谷 P3386【模板】二分图最大匹配</h2><p>​<br>​    #include <iostream><br>​    #include <cstdio><br>​    #include <algorithm><br>​    #include <queue><br>​    #include <map><br>​    #include <stack><br>​    #include <string><br>​    #include <cstring><br>​    #include <vector><br>​    #include <cmath><br>​    #include <set><br>​    typedef long long int LL;<br>​    const int N &#x3D; 505;<br>​    int mp[N][N],link[N],vis[N];<br>​    int n,m,e,u,v,ans;<br>​    bool dfs(int x)<br>​    {<br>​        for(int i&#x3D;1; i&lt;&#x3D;m; i++){<br>​            if(!vis[i] &amp;&amp; mp[x][i]){<br>​                vis[i] &#x3D; 1;<br>​                if(!link[i] || dfs(link[i])){<br>​                    link[i] &#x3D; x;<br>​                    return true;<br>​                }<br>​            }<br>​        }<br>​        return false;<br>​    }<br>​    int main()<br>​    {<br>​        scanf(“%d%d%d”,&amp;n,&amp;m,&amp;e);<br>​        for(int i&#x3D;0; i&lt;e; i++){<br>​            scanf(“%d%d”,&amp;u,&amp;v);<br>​            mp[u][v] &#x3D; 1;<br>​        }<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++) {<br>​            memset(vis,0,sizeof(vis));<br>​            ans +&#x3D; dfs(i);<br>​        }<br>​        printf(“%d”,ans);<br>​        return 0;<br>​    }</p>
+<h2 id="洛谷-P2756飞行员配对方案问题"><a href="#洛谷-P2756飞行员配对方案问题" class="headerlink" title="洛谷 P2756飞行员配对方案问题"></a>洛谷 P2756飞行员配对方案问题</h2><p>​<br>​    #include <iostream><br>​    #include <cstdio><br>​    #include <algorithm><br>​    #include <queue><br>​    #include <map><br>​    #include <stack><br>​    #include <string><br>​    #include <cstring><br>​    #include <vector><br>​    #include <cmath><br>​    #include <set><br>​    typedef long long int LL;<br>​    const int N &#x3D; 105;<br>​    int mp[N][N],vis[N],link[N];<br>​    int n,m,u,v,ans;<br>​    bool dfs(int x)<br>​    {<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​            if(!vis[i] &amp;&amp; mp[x][i]){<br>​                vis[i] &#x3D; 1;<br>​                if(!link[i] || dfs(link[i])){<br>​                    link[i] &#x3D; x;<br>​                    return true;<br>​                }<br>​            }<br>​        }<br>​        return false;<br>​    }<br>​    int main()<br>​    {<br>​        scanf(“%d%d”,&amp;m,&amp;n);<br>​        n-&#x3D;m;<br>​        while(scanf(“%d%d”,&amp;u,&amp;v)){<br>​            if(u &#x3D;&#x3D; -1 &amp;&amp; v &#x3D;&#x3D; -1) break;<br>​            mp[u][v-m] &#x3D; 1;<br>​        }<br>​        for(int i&#x3D;1; i&lt;&#x3D;m; i++) {<br>​            memset(vis,0,sizeof(vis));<br>​            ans +&#x3D; dfs(i);<br>​        }<br>​        printf(“%d\n”,ans);<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​            if(link[i]) printf(“%d %d\n”,link[i],i+m);<br>​        }<br>​        return 0;<br>​    }</p>
+<h2 id="洛谷-P1129-ZJOI2007-矩阵游戏"><a href="#洛谷-P1129-ZJOI2007-矩阵游戏" class="headerlink" title="洛谷 P1129 [ZJOI2007] 矩阵游戏"></a>洛谷 P1129 [ZJOI2007] 矩阵游戏</h2><p>​<br>​    #include <iostream><br>​    #include <cstdio><br>​    #include <algorithm><br>​    #include <queue><br>​    #include <map><br>​    #include <stack><br>​    #include <string><br>​    #include <cstring><br>​    #include <vector><br>​    #include <cmath><br>​    #include <set><br>​    typedef long long int LL;<br>​    const int N &#x3D; 205;<br>​    int mp[N][N],vis[N],link[N];<br>​    int t,n,ans;<br>​    bool dfs(int x)<br>​    {<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​            if(!vis[i] &amp;&amp; mp[x][i]){<br>​                vis[i] &#x3D; 1;<br>​                if(!link[i] || dfs(link[i])){<br>​                    link[i] &#x3D; x;<br>​                    return true;<br>​                }<br>​            }<br>​        }<br>​        return false;<br>​    }<br>​    int main()<br>​    {<br>​        scanf(“%d”,&amp;t);<br>​        while(t–){<br>​            memset(link,0,sizeof(link));<br>​            ans &#x3D; 0;<br>​            scanf(“%d”,&amp;n);<br>​            for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​                for(int j&#x3D;1; j&lt;&#x3D;n; j++){<br>​                    scanf(“%d”,&amp;mp[i][j]);<br>​                }<br>​            }<br>​            for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​                memset(vis,0,sizeof(vis));<br>​                ans +&#x3D; dfs(i);<br>​            }<br>​            printf(ans &#x3D;&#x3D; n ? “Yes\n” : “No\n”);<br>​        }<br>​        return 0;<br>​    }</p>
+<h2 id="洛谷P1559-运动员最佳匹配问题"><a href="#洛谷P1559-运动员最佳匹配问题" class="headerlink" title="洛谷P1559 运动员最佳匹配问题"></a>洛谷P1559 运动员最佳匹配问题</h2><p>两种敲代码方法，一种dfs完算tmp，一种在dfs中算tmp。不确定是否一种比另一种更优，这道题后者时间占优，然而下一道题 <strong>洛谷 P4014<br>分配问题</strong> 前者时间占优。</p>
+<p>​<br>​    #include <iostream><br>​    #include <cstdio><br>​    #include <algorithm><br>​    #include <queue><br>​    #include <map><br>​    #include <stack><br>​    #include <string><br>​    #include <cstring><br>​    #include <vector><br>​    #include <cmath><br>​    #include <set><br>​    typedef long long int LL;<br>​    const int N &#x3D; 205,INF &#x3D; 0x7fffffff;<br>​    int mp[N][N],lx[N],ly[N],visx[N],visy[N],link[N];<br>​    int n,tmp,v;<br>​    bool dfs(int x)<br>​    {<br>​        visx[x] &#x3D; 1;<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​            if(!visy[i] &amp;&amp; lx[x]+ly[i]&#x3D;&#x3D;mp[x][i]){<br>​                visy[i] &#x3D; 1;<br>​                if(!link[i] || dfs(link[i])){<br>​                    link[i] &#x3D; x;<br>​                    return true;<br>​                }<br>​            }<br>​        }<br>​        return false;<br>​    }<br>​    int one()<br>​    {<br>​        int ans &#x3D; 0;<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++) for(int j&#x3D;1; j&lt;&#x3D;n; j++){<br>​            lx[i] &#x3D; std::max(lx[i],mp[i][j]);<br>​        }<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​            while(true){<br>​                memset(visx,0,sizeof(visx));<br>​                memset(visy,0,sizeof(visy));<br>​                tmp &#x3D; INF;<br>​                if(dfs(i)) break;<br>​                for(int i&#x3D;1; i&lt;&#x3D;n; i++) if(visx[i]){<br>​                    for(int j&#x3D;1; j&lt;&#x3D;n; j++) if(!visy[j]){<br>​                        tmp &#x3D; std::min(tmp,lx[i]+ly[j]-mp[i][j]);<br>​                    }<br>​                }<br>​                for(int j&#x3D;1; j&lt;&#x3D;n; j++){<br>​                    if(visx[j]) lx[j] -&#x3D; tmp;<br>​                    if(visy[j]) ly[j] +&#x3D; tmp;<br>​                }<br>​            }<br>​        }<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​            ans +&#x3D; ly[i] + lx[link[i]];<br>​            &#x2F;&#x2F;std::cout &lt;&lt; “ly[“ &lt;&lt; i &lt;&lt; “] &#x3D; “ &lt;&lt; ly[i] &lt;&lt; “ lx[“ &lt;&lt; link[i] &lt;&lt; “] &#x3D; “ &lt;&lt; lx[link[i]] &lt;&lt; “ ans &#x3D; “ &lt;&lt; ans &lt;&lt; std::endl;<br>​        }<br>​        return ans;<br>​    }<br>​    int main()<br>​    {<br>​        &#x2F;&#x2F;freopen(“D:\EdgeDownloadPlace\P4014_1.in”,”r”,stdin);<br>​        scanf(“%d”,&amp;n);<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++) for(int j&#x3D;1; j&lt;&#x3D;n; j++){<br>​            scanf(“%d”,&amp;v);<br>​            mp[i][j] &#x3D; -v;<br>​        }<br>​        for(int i&#x3D;0; i&lt;N; i++) lx[i] &#x3D; -INF;<br>​        printf(“%d\n”,-one());<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++) for(int j&#x3D;1; j&lt;&#x3D;n; j++){<br>​            mp[i][j] &#x3D; -mp[i][j];<br>​        }<br>​        memset(lx,0,sizeof(lx));<br>​        memset(ly,0,sizeof(ly));<br>​        memset(link,0,sizeof(link));<br>​        printf(“%d\n”,one());<br>​        return 0;<br>​    }</p>
+<p>​<br>​<br>​    #include <iostream><br>​    #include <cstdio><br>​    #include <algorithm><br>​    #include <queue><br>​    #include <map><br>​    #include <stack><br>​    #include <string><br>​    #include <cstring><br>​    #include <vector><br>​    #include <cmath><br>​    #include <set><br>​    typedef long long int LL;<br>​    const int N &#x3D; 23,INF &#x3D; 0x7fffffff;<br>​    int mp[N][N],vm[N],vf[N],vism[N],visf[N],link[N];<br>​    int n,v,ans,tmp;<br>​    bool dfs(int x)<br>​    {<br>​        vism[x] &#x3D; 1;<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​            if(!visf[i]){<br>​                int t &#x3D; vm[x]+vf[i]-mp[x][i];<br>​                if(t&#x3D;&#x3D;0){<br>​                    visf[i] &#x3D; 1;<br>​                    if(!link[i] || dfs(link[i])){<br>​                        link[i] &#x3D; x;<br>​                        return true;<br>​                    }<br>​<br>                }<br>                else if(t&gt;0){<br>                    tmp &#x3D; std::min(t,tmp);<br>                }<br>            }<br>        }<br>        return false;<br>    }<br>    int main()<br>    {<br>        scanf(“%d”,&amp;n);<br>        for(int i&#x3D;1; i&lt;&#x3D;n; i++) for(int j&#x3D;1; j&lt;&#x3D;n; j++) {<br>            scanf(“%d”,&amp;mp[i][j]);<br>        }<br>        for(int i&#x3D;1; i&lt;&#x3D;n; i++) for(int j&#x3D;1; j&lt;&#x3D;n; j++) {<br>            scanf(“%d”,&amp;v);<br>            mp[j][i] *&#x3D; v;<br>        }<br>        for(int i&#x3D;1; i&lt;&#x3D;n; i++) for(int j&#x3D;1; j&lt;&#x3D;n; j++) {<br>            vm[i] &#x3D; std::max(vm[i],mp[i][j]);<br>        }<br>        for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>            while(true){<br>                memset(visf,0,sizeof(visf));<br>                memset(vism,0,sizeof(vism));<br>                tmp &#x3D; INF;<br>                if(dfs(i))break;<br>                for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>                    if(visf[i]) vf[i] +&#x3D; tmp;<br>                    if(vism[i]) vm[i] -&#x3D; tmp;<br>                }<br>            }<br>        }<br>        for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>            ans +&#x3D; vf[i] + vm[link[i]];<br>        }<br>        printf(“%d”,ans);<br>        return 0;<br>    }</p>
+<h2 id="洛谷-P4014-分配问题"><a href="#洛谷-P4014-分配问题" class="headerlink" title="洛谷 P4014 分配问题"></a>洛谷 P4014 分配问题</h2><p><del>全WA，我的输出莫名其妙出现了”-“，洛谷判题机的锅？</del><br>破案了，one()里的ans没初始化，Windows自动给个0，Linux就挂了，初始化成0就好了</p>
+<p>​<br>​    #include <iostream><br>​    #include <cstdio><br>​    #include <algorithm><br>​    #include <queue><br>​    #include <map><br>​    #include <stack><br>​    #include <string><br>​    #include <cstring><br>​    #include <vector><br>​    #include <cmath><br>​    #include <set>	<br>​    typedef long long int LL;<br>​    const int N &#x3D; 105,INF &#x3D; 0x7fffffff;<br>​    int mp[N][N],lx[N],ly[N],visx[N],visy[N],link[N];<br>​    int n,tmp,v;<br>​    bool dfs(int x)<br>​    {<br>​        visx[x] &#x3D; 1;<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​            if(!visy[i] &amp;&amp; lx[x]+ly[i]&#x3D;&#x3D;mp[x][i]){<br>​                visy[i] &#x3D; 1;<br>​                if(!link[i] || dfs(link[i])){<br>​                    link[i] &#x3D; x;<br>​                    return true;<br>​                }<br>​            }<br>​        }<br>​        return false;<br>​    }<br>​    int one()<br>​    {<br>​        int ans;<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++) for(int j&#x3D;1; j&lt;&#x3D;n; j++){<br>​            lx[i] &#x3D; std::max(lx[i],mp[i][j]);<br>​        }<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​            while(true){<br>​                memset(visx,0,sizeof(visx));<br>​                memset(visy,0,sizeof(visy));<br>​                tmp &#x3D; INF;<br>​                if(dfs(i)) break;<br>​                for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​                    if(visx[i]){<br>​                        for(int j&#x3D;1; j&lt;&#x3D;n; j++){<br>​                            if(!visy[j]){<br>​                                tmp &#x3D; std::min(tmp,lx[i]+ly[j]-mp[i][j]);<br>​                            }<br>​                        }<br>​                    }<br>​                }<br>​                for(int j&#x3D;1; j&lt;&#x3D;n; j++){<br>​                    if(visx[j]) lx[j] -&#x3D; tmp;<br>​                    if(visy[j]) ly[j] +&#x3D; tmp;<br>​                }<br>​            }<br>​        }<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​            ans +&#x3D; ly[i] + lx[link[i]];<br>​        }<br>​        return ans;<br>​    }<br>​    int main()<br>​    {<br>​        &#x2F;&#x2F;freopen(“D:\EdgeDownloadPlace\P4014_1.in”,”r”,stdin);<br>​        scanf(“%d”,&amp;n);<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++) for(int j&#x3D;1; j&lt;&#x3D;n; j++){<br>​            scanf(“%d”,&amp;v);<br>​            mp[i][j] &#x3D; -v;<br>​        }<br>​        for(int i&#x3D;0; i&lt;N; i++) lx[i] &#x3D; -INF;<br>​        printf(“%d\n”,-one());<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++) for(int j&#x3D;1; j&lt;&#x3D;n; j++){<br>​            mp[i][j] &#x3D; -mp[i][j];<br>​        }<br>​        memset(lx,0,sizeof(lx));<br>​        memset(ly,0,sizeof(ly));<br>​        memset(link,0,sizeof(link));<br>​        printf(“%d\n”,one());<br>​        return 0;<br>​    }</p>
+<h2 id="洛谷-P1640连续攻击游戏"><a href="#洛谷-P1640连续攻击游戏" class="headerlink" title="洛谷 P1640连续攻击游戏"></a>洛谷 P1640连续攻击游戏</h2><p>匈牙利优化 每次memset置零vis数组太慢了，TLE，直接开一个变量timmer当作时间计数，当timmer-<br>vis[x]&gt;0就说明在这次dfs中x节点没有访问过。<br>.<br>初始timmer为1， 每次dfs后timmer自增1</p>
+<p>​<br>​    #include <iostream><br>​    #include <cstdio><br>​    #include <cstdlib><br>​    #include <cstring><br>​    #include <cmath><br>​    #include <algorithm><br>​    #include <string><br>​    #include <queue><br>​    #include <vector><br>​    #include <stack><br>​    #include <map><br>​    #include <set><br>​    typedef long long int LL;<br>​    const int INF &#x3D; 0x7fffffff, SCF &#x3D; 0x3fffffff;<br>​    const int N &#x3D; 1e6+5, M &#x3D; 220, K &#x3D; 1e6+4;<br>​    int head[N],link[N],vis[N];<br>​    int n,idx,a,b,timmer;<br>​    struct Edge<br>​    {<br>​        int to,nxt;<br>​    }edg[N&lt;&lt;1];<br>​    void addE(int fr,int to)<br>​    {<br>​        edg[idx].to &#x3D; to;<br>​        edg[idx].nxt &#x3D; head[fr];<br>​        head[fr] &#x3D; idx++;<br>​    }<br>​    bool dfs(int x)<br>​    {<br>​        for(int e&#x3D;head[x]; e; e&#x3D;edg[e].nxt){<br>​            int y &#x3D; edg[e].to;<br>​            if(timmer-vis[y]&gt;0){<br>​                vis[y] &#x3D; timmer;<br>​                if(!link[y] || dfs(link[y])){<br>​                    link[y] &#x3D; x;<br>​                    return true;<br>​                }<br>​            }<br>​        }<br>​        return false;<br>​    }<br>​    int main()<br>​    {<br>​        idx &#x3D; 2;<br>​        scanf(“%d”,&amp;n);<br>​        for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>​            scanf(“%d%d”,&amp;a,&amp;b);<br>​            addE(a,i);<br>​            addE(b,i);<br>​        }<br>​        int i;<br>​        for(i&#x3D;1; i&lt;&#x3D;n; i++){<br>​            timmer &#x3D; i;<br>​            if(!dfs(i)) break;<br>​        }<br>​        printf(“%d”,i-1);<br>​        return 0;<br>​    }</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D%20%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7P3386%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8DP2756%E9%A3%9E%E8%A1%8C%E5%91%98%E9%85%8D%E5%AF%B9%E6%96%B9%E6%A1%88%E9%97%AE%E9%A2%98P1129%E7%9F%A9%E9%98%B5%E6%B8%B8%E6%88%8FP1559%E8%BF%90%E5%8A%A8%E5%91%98%E6%9C%80%E4%BD%B3%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98P4014%E5%88%86%E9%85%8D%E9%97%AE%E9%A2%98P1640%E8%BF%9E%E7%BB%AD%E6%94%BB%E5%87%BB%E6%B8%B8%E6%88%8F/" data-id="cl50tnlqt001cycj30rs0d57v" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KM%E7%AE%97%E6%B3%95/" rel="tag">KM算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E5%9B%BE/" rel="tag">二分图</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95/" rel="tag">匈牙利算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/1111/11/11/%E3%80%90Trie%E6%A0%91&AC%E8%87%AA%E5%8A%A8%E6%9C%BA%E3%80%91P3879%5BTJOI2010%5D%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3%20P3808%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91AC%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%88%E7%AE%80%E5%8D%95%E7%89%88%EF%BC%89P3796%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91AC%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%88%E5%8A%A0%E5%BC%BA%E7%89%88%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          【Trie树&amp;AC自动机】P3879[TJOI2010]阅读理解 P3808 【模板】AC自动机（简单版）P3796 【模板】AC自动机（加强版）.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/1111/11/11/%E3%80%90tarjin%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0%20%E7%BC%A9%E7%82%B9%EF%BC%8C%E5%89%B2%E7%82%B9%EF%BC%8C%E5%89%B2%E8%BE%B9%E3%80%91%E6%B4%9B%E8%B0%B7_P3387%E7%BC%A9%E7%82%B9%E6%A8%A1%E6%9D%BFP3388%E5%89%B2%E7%82%B9%E6%A8%A1%E6%9D%BF%20HDU4738%20caocao%E2%80%98bridge/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">【tarjin算法练习 缩点，割点，割边】洛谷_P3387缩点模板P3388割点模板 HDU4738 caocao‘bridge.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">蓝湖畔淅淅沥沥的雨</h1>
+    <h2 class="blog-subtitle">All tragedy erased, I see only wonders...</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/Wldcmzy" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/wldcmzy" target="_blank" title="CSDN">
+          CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://space.bilibili.com/83743701" target="_blank" title="bilibili(无技术和学习内容)">
+          bilibili(无技术和学习内容)
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://shanamaid.github.io/" target="_blank" title="夏娜主题作者的博客">
+          夏娜主题作者的博客
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2021 - 2022 StarsWhisper<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+	  (但是魔改)
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/announcement" title="" class="menuItem">公告</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/knightabout" title="" class="menuItem">关于</a>
+          
+            <a href="/bridges" title="" class="menuItem">传送门</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

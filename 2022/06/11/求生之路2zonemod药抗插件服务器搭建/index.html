@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>求生之路2zonemod药抗插件服务器搭建 | 蓝湖畔淅淅沥沥的雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言以前曾经写过一篇关于开服的博客，但是现在尝试开服的时候发现老博客的一些内容已经不管用了，而且老博客在转移的过程中，格式出了写问题，所以写一个新的。 普通L4D2服务器的搭建主要还是搬sir大佬的文章咯 环境和必要组件12345dpkg --add-architecture i386 # enable multi-archapt-get update &amp;&amp; apt-get upg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="求生之路2zonemod药抗插件服务器搭建">
+<meta property="og:url" content="http://example.com/2022/06/11/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF2zonemod%E8%8D%AF%E6%8A%97%E6%8F%92%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
+<meta property="og:description" content="前言以前曾经写过一篇关于开服的博客，但是现在尝试开服的时候发现老博客的一些内容已经不管用了，而且老博客在转移的过程中，格式出了写问题，所以写一个新的。 普通L4D2服务器的搭建主要还是搬sir大佬的文章咯 环境和必要组件12345dpkg --add-architecture i386 # enable multi-archapt-get update &amp;&amp; apt-get upg">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-11T14:06:36.000Z">
+<meta property="article:modified_time" content="2022-06-30T09:22:00.477Z">
+<meta property="article:author" content="StarsWhisper">
+<meta property="article:tag" content="服务器">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="游戏">
+<meta property="article:tag" content="求生之路2">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="蓝湖畔淅淅沥沥的雨" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-求生之路2zonemod药抗插件服务器搭建" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/06/11/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF2zonemod%E8%8D%AF%E6%8A%97%E6%8F%92%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" class="article-date">
+  <time class="post-time" datetime="2022-06-11T14:06:36.000Z" itemprop="datePublished">
+    <span class="post-month">6月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      求生之路2zonemod药抗插件服务器搭建
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/">教练我想学挂边躲牛</a>,<a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/%E6%B8%B8%E6%88%8F/">游戏</a>,<a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/%E6%B8%B8%E6%88%8F/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF2/">求生之路2</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>以前曾经写过一篇关于开服的博客，但是现在尝试开服的时候发现老博客的一些内容已经不管用了，而且老博客在转移的过程中，格式出了写问题，所以写一个新的。</p>
+<h1 id="普通L4D2服务器的搭建"><a href="#普通L4D2服务器的搭建" class="headerlink" title="普通L4D2服务器的搭建"></a>普通L4D2服务器的搭建</h1><p>主要还是搬sir大佬的文章咯</p>
+<h2 id="环境和必要组件"><a href="#环境和必要组件" class="headerlink" title="环境和必要组件"></a>环境和必要组件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dpkg --add-architecture i386 # enable multi-arch</span><br><span class="line">apt-get update &amp;&amp; apt-get upgrade</span><br><span class="line">apt-get install libc6:i386 # install base 32bit libraries</span><br><span class="line">apt-get install lib32z1</span><br><span class="line">apt-get install screen</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建一个名为steam的账户"><a href="#创建一个名为steam的账户" class="headerlink" title="创建一个名为steam的账户"></a>创建一个名为steam的账户</h2><p>这个用户名是可以随意指定的，但sir大佬的教程里用的steam，<del>如果我们也用steam的话就不用手动改一些路径了(什么落伍的老方法，今非昔比了)</del>。</p>
+<p>如果你不适用steam作为账户名，只需要修改SRCDS_USER变量名就好了(后面会说)。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adduser steam</span><br><span class="line">adduser steam sudo</span><br><span class="line">login</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装steamcmd和求生之路2游戏"><a href="#安装steamcmd和求生之路2游戏" class="headerlink" title="安装steamcmd和求生之路2游戏"></a>安装steamcmd和求生之路2游戏</h2><p>这是sir大佬的教学文档里写的。主要做了: 安装steamcmd 匿名登录  更改安装路径 安装求生之路2。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(先进入steam账户的根目录)</span><br><span class="line">wget http://media.steampowered.com/installer/steamcmd_linux.tar.gz</span><br><span class="line">tar -xvzf steamcmd_linux.tar.gz</span><br><span class="line">./steamcmd.sh</span><br><span class="line">login anonymous</span><br><span class="line">force_install_dir ./Steam/steamapps/common/l4d2</span><br><span class="line">app_update 222860 validate</span><br><span class="line">quit</span><br></pre></td></tr></table></figure>
+
+<p><code>(2022/06/11)</code>但我用的时候会报打不开xxxsteam.so(忘记名字了)库的错误，错误原因未知，我猜测是steamcmd的版本过时了，所以找到了steamcmd的文档<a target="_blank" rel="noopener" href="https://developer.valvesoftware.com/wiki/SteamCMD#Downloading_SteamCMD">SteamCMD - Valve Developer Community (valvesoftware.com)</a>，发现可以直接apt安装(Ubuntu)， 由于运行steamcmd，会自动创建在当前目录创建<code>.steam</code>目录，而steamcmd的工作目录在<code>./.steam/steamcmd</code>，所以路径想和sir保持一致偷懒的话，路径要修改。</p>
+<p>所以流程变成了:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(先进入steam账户根目录)</span><br><span class="line">apt install steamcmd</span><br><span class="line">steamcmd</span><br><span class="line">force_install_dir ../../Steam/steamapps/common/l4d2</span><br><span class="line">login anonymous</span><br><span class="line">app_update 222860 validate</span><br><span class="line">quit</span><br></pre></td></tr></table></figure>
+
+<h2 id="开启无插件的本地服务器"><a href="#开启无插件的本地服务器" class="headerlink" title="开启无插件的本地服务器"></a>开启无插件的本地服务器</h2><p>安装完求生之路2之后，就可以开求生服务器了，但现在还是官方版本。</p>
+<p>运行<code>/home/steam/Steam/steamapps/common/l4d2</code>目录的 <code>srcds_run</code>脚本直接开服即可</p>
+<h1 id="ZoneMod药抗插件的安装"><a href="#ZoneMod药抗插件的安装" class="headerlink" title="ZoneMod药抗插件的安装"></a>ZoneMod药抗插件的安装</h1><h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>把sir大佬的项目克隆到相应位置就安装好了。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/SirPlease/L4D2-Competitive-Rework">SirPlease&#x2F;L4D2-Competitive-Rework: Just refreshing and optimizing the core files a bit, eh? (github.com)</a></p>
+<h2 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h2><h4 id="x2F-cfg-x2F-server-cfg"><a href="#x2F-cfg-x2F-server-cfg" class="headerlink" title=".&#x2F;cfg&#x2F;server.cfg"></a>.&#x2F;cfg&#x2F;server.cfg</h4><p>服务器名称，组号，设置为只有组内成员能搜索到。你可以把这个文件改名为<code>server1.cfg</code>(后面会说)。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hostname &quot;蓝湖畔淅淅沥沥的雨&quot; </span><br><span class="line">sv_steamgroup &quot;41174273&quot;</span><br><span class="line">sv_steamgroup_exclusive &quot;1&quot; </span><br></pre></td></tr></table></figure>
+
+<h4 id="x2F-Dedicated-Server-Install-Guide-x2F-srcds1"><a href="#x2F-Dedicated-Server-Install-Guide-x2F-srcds1" class="headerlink" title=".&#x2F;Dedicated Server Install Guide&#x2F;srcds1"></a>.&#x2F;Dedicated Server Install Guide&#x2F;srcds1</h4><p>修改路径，以及配置IP端口、游戏信息等内容。 </p>
+<p>这个文件需要被放在<code>/etc/init.d/</code>目录下。</p>
+<p>注意PARAMS变量中的<code>server$SVNUM.cfg&quot;</code>，这说明你的<code>./cfg/</code>路径下要有<code>server1.cfg</code>文件。当然你可以定义多种配置，写多个启动脚本。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SRCDS_USER=&quot;steam&quot;</span><br><span class="line"></span><br><span class="line">SVNUM=1</span><br><span class="line">IP=0.0.0.0</span><br><span class="line">PORT=27015</span><br><span class="line">NAME=L4D2_Server$SVNUM</span><br><span class="line">PARAMS=&quot;-game left4dead2 -ip $IP -port $PORT +sv_clockcorrection_msecs 25 -timeout 10 -tickrate 100 +map c2m1_highway -maxplayers 12 +servercfgfile server$SVNUM.cfg&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="更加方便"><a href="#更加方便" class="headerlink" title="更加方便"></a>更加方便</h2><p>编写shell脚本来调用脚本srcds<del>(什么牛马套娃)</del></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">if [ $2 = &quot;start&quot; ]</span><br><span class="line">then</span><br><span class="line">/etc/init.d/srcds$1 &quot;start&quot;</span><br><span class="line">elif [ $2 = &quot;stop&quot; ]</span><br><span class="line">then</span><br><span class="line">/etc/init.d/srcds$1 &quot;stop&quot;</span><br><span class="line">elif [ $2 = &quot;restart&quot; ]</span><br><span class="line">then</span><br><span class="line">/etc/init.d/srcds$1 &quot;restart&quot;</span><br><span class="line">else</span><br><span class="line">echo &quot;Unknow command. arg should be [start/stop/restart]&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>示例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./startgame.sh 2 restart</span><br><span class="line">相当于</span><br><span class="line">/etc/init.d/srcds2 restart</span><br></pre></td></tr></table></figure>
+
+<h1 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h1><h2 id="服务器管理员"><a href="#服务器管理员" class="headerlink" title="服务器管理员"></a>服务器管理员</h2><p>在<code>addons\sourcemod\configs\core.cfg</code>文件中修改PassInfoVar变量的值，它声明了表示密码的变量的名称， 这个值可以随意更改，也可以不改用sir写的默认值。假设我们改成”_abcd”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;PassInfoVar&quot; &quot;_abcd&quot;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>addons\sourcemod\configs\admins_simple.ini</code>文件中，拉到最下面加入以下内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;名称1&quot; &quot;99:z&quot; &quot;密码1&quot;</span><br><span class="line">&quot;名称2&quot; &quot;99:z&quot; &quot;密码2&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这时候名称1和名称2已经被设为管理员了，如果想使用这两个名称登录，就需要在你的信息中设置对应的密码。</p>
+<p>如”名称1”想进入服务器的话，需要先在控制台设置:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setinfo &quot;_abcd&quot; &quot;密码1&quot;</span><br></pre></td></tr></table></figure>
+
+<p>如”名称2”想进入服务器的话，需要先在控制台设置:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setinfo &quot;_abcd&quot; &quot;密码2&quot;</span><br></pre></td></tr></table></figure>
+
+<p>否则， 进不去，进去了再改成管理员名称也会被题出来。</p>
+<h2 id="游戏参数配置-只写改最新的zonemod插件"><a href="#游戏参数配置-只写改最新的zonemod插件" class="headerlink" title="游戏参数配置 (只写改最新的zonemod插件)"></a>游戏参数配置 (只写改最新的zonemod插件)</h2><h4 id="限制连推次数"><a href="#限制连推次数" class="headerlink" title="限制连推次数"></a>限制连推次数</h4><p>路径：<code>./cfg/cfgogl/zonemod/shared_cvars.cfg</code></p>
+<blockquote>
+<p>confogl_addcvar z_gun_swing_vs_min_penalty 10<br>confogl_addcvar z_gun_swing_vs_max_penalty 15</p>
+</blockquote>
+<h2 id="AI特感"><a href="#AI特感" class="headerlink" title="AI特感"></a>AI特感</h2><p>路径：<code>./cfg/cfgogl/zonemod/shared_cvars.cfg</code></p>
+<p>阻碍ai特感刷新</p>
+<blockquote>
+<p>confogl_addcvar confogl_blockinfectedbots “0”</p>
+</blockquote>
+<p>导演系统允许ai特感刷新</p>
+<blockquote>
+<p>confogl_addcvar director_allow_infected_bots “1”</p>
+</blockquote>
+<h2 id="安全屋外止疼药数量"><a href="#安全屋外止疼药数量" class="headerlink" title="安全屋外止疼药数量"></a>安全屋外止疼药数量</h2><p>路径：<code>./cfg/cfgogl/zonemod/confogl.cfg</code></p>
+<blockquote>
+<p>confogl_addcvar confogl_pills_limit 4</p>
+</blockquote>
+<h2 id="修改止疼药加血量"><a href="#修改止疼药加血量" class="headerlink" title="修改止疼药加血量"></a>修改止疼药加血量</h2><p>路径：<code>./cfg/server.cfg</code></p>
+<blockquote>
+<p>sm_cvar pain_pills_health_value 10 止疼药额外+10(也就是+60) 会影响战役</p>
+</blockquote>
+<h2 id="让AI生还者吃药加血"><a href="#让AI生还者吃药加血" class="headerlink" title="让AI生还者吃药加血"></a>让AI生还者吃药加血</h2><p>路径：<code>./addons/sourcemod/plugins/optional/</code></p>
+<blockquote>
+<p>删除(改名就行)插件botpopstop.smx</p>
+</blockquote>
+<h2 id="修改地图信息"><a href="#修改地图信息" class="headerlink" title="修改地图信息"></a>修改地图信息</h2><p>路径：<code>./cfg/stripper/zonemod/maps</code></p>
+<p>想用原地图把地图配置文件从目录中移除</p>
+<h1 id="一些错误的解决"><a href="#一些错误的解决" class="headerlink" title="一些错误的解决"></a>一些错误的解决</h1><h2 id="错误1"><a href="#错误1" class="headerlink" title="错误1"></a>错误1</h2><p><strong>-bash: &#x2F;etc&#x2F;init.d&#x2F;srcds1: &#x2F;bin&#x2F;sh^M: bad interpreter: No such file or directory</strong></p>
+<p>文件编码有问题。</p>
+<p>sir的说明:</p>
+<blockquote>
+<p>If you receive “-bash: &#x2F;etc&#x2F;init.d&#x2F;srcds1: &#x2F;bin&#x2F;sh^M: bad interpreter: No such file or directory” error, it means you have dos line ending file You can use dos2unix command on srcds1 file, or use any other method to have this file in unix format</p>
+</blockquote>
+<p>解决方法1:</p>
+<blockquote>
+<p>vi打开文件， 输入:set ff&#x3D;unix， 然后:wq退出</p>
+</blockquote>
+<p>解决方法2:</p>
+<blockquote>
+<p>sed -i -e ‘s&#x2F;\r$&#x2F;&#x2F;‘ 文件名</p>
+</blockquote>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="关于游戏更新"><a href="#关于游戏更新" class="headerlink" title="关于游戏更新"></a>关于游戏更新</h2><blockquote>
+<p>.&#x2F;steamcmd.sh<br>login anonymous<br>app_update 222860 validate</p>
+</blockquote>
+<p>如果开了插件服务器，则需要等作者更新发布之后，将作者的更新同步到你的服务器</p>
+<h2 id="关于screen托盘"><a href="#关于screen托盘" class="headerlink" title="关于screen托盘"></a>关于screen托盘</h2><p>查看被托盘的进程，只能看到本账户开的，不能看到其他账户开的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">screen -ls</span><br><span class="line">screen -r</span><br><span class="line">当只有一个进程时, screen -r会直接进入进程, screen -ls 不会</span><br></pre></td></tr></table></figure>
+
+<p>打开进程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">screen -r 进程名称或进程号(pid)</span><br><span class="line">当只有一个进程被托盘时, 输入screen -r直接打开该进程</span><br></pre></td></tr></table></figure>
+
+<p>退出进程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + C 直接杀掉进程</span><br><span class="line">Ctrl + A + D 退出进程页面, 进程被托盘</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/06/11/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF2zonemod%E8%8D%AF%E6%8A%97%E6%8F%92%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" data-id="cl50tnlsc005vycj31uzyfg29" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF2/" rel="tag">求生之路2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%B8%E6%88%8F/" rel="tag">游戏</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/06/11/%E5%85%B3%E4%BA%8E-socket-io%E5%AE%9E%E7%8E%B0websocket-%E9%83%A8%E5%88%86%E5%8A%9F%E8%83%BD%E7%9A%84%E4%BD%BF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">关于[socket.io实现websocket]部分功能的使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">蓝湖畔淅淅沥沥的雨</h1>
+    <h2 class="blog-subtitle">All tragedy erased, I see only wonders...</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/Wldcmzy" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/wldcmzy" target="_blank" title="CSDN">
+          CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://space.bilibili.com/83743701" target="_blank" title="bilibili(无技术和学习内容)">
+          bilibili(无技术和学习内容)
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://shanamaid.github.io/" target="_blank" title="夏娜主题作者的博客">
+          夏娜主题作者的博客
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2021 - 2022 StarsWhisper<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+	  (但是魔改)
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/announcement" title="" class="menuItem">公告</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/knightabout" title="" class="menuItem">关于</a>
+          
+            <a href="/bridges" title="" class="menuItem">传送门</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

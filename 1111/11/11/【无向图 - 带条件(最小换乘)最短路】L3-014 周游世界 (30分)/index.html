@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【无向图 - 带条件(最小换乘)最短路】L3-014 周游世界 (30分).md | 蓝湖畔淅淅沥沥的雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 &lt;https:&#x2F;&#x2F;pintia.cn&#x2F;problem-sets&#x2F;994805046380">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【无向图 - 带条件(最小换乘)最短路】L3-014 周游世界 (30分).md">
+<meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E6%97%A0%E5%90%91%E5%9B%BE%20-%20%E5%B8%A6%E6%9D%A1%E4%BB%B6(%E6%9C%80%E5%B0%8F%E6%8D%A2%E4%B9%98)%E6%9C%80%E7%9F%AD%E8%B7%AF%E3%80%91L3-014%20%E5%91%A8%E6%B8%B8%E4%B8%96%E7%95%8C%20(30%E5%88%86)/index.html">
+<meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
+<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 &lt;https:&#x2F;&#x2F;pintia.cn&#x2F;problem-sets&#x2F;994805046380">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
+<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:author" content="StarsWhisper">
+<meta property="article:tag" content="OldBlog(Before20220505)">
+<meta property="article:tag" content="BFS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="蓝湖畔淅淅沥沥的雨" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-【无向图 - 带条件(最小换乘)最短路】L3-014 周游世界 (30分)" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E6%97%A0%E5%90%91%E5%9B%BE%20-%20%E5%B8%A6%E6%9D%A1%E4%BB%B6(%E6%9C%80%E5%B0%8F%E6%8D%A2%E4%B9%98)%E6%9C%80%E7%9F%AD%E8%B7%AF%E3%80%91L3-014%20%E5%91%A8%E6%B8%B8%E4%B8%96%E7%95%8C%20(30%E5%88%86)/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【无向图 - 带条件(最小换乘)最短路】L3-014 周游世界 (30分).md
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/">图论</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<p>&lt;<a target="_blank" rel="noopener" href="https://pintia.cn/problem-">https://pintia.cn/problem-</a><br>sets&#x2F;994805046380707840&#x2F;problems&#x2F;994805048482054144&gt;</p>
+<h1 id="L3-014-周游世界-30分"><a href="#L3-014-周游世界-30分" class="headerlink" title="#L3-014 周游世界 (30分)"></a>#L3-014 周游世界 (30分)</h1><p>周游世界是件浪漫事，但规划旅行路线就不一定了……<br>全世界有成千上万条航线、铁路线、大巴线，令人眼花缭乱。所以旅行社会选择部分运输公司组成联盟，每家公司提供一条线路，然后帮助客户规划由联盟内企业支持的旅行路线。本题就要求你帮旅行社实现一个自动规划路线的程序，使得对任何给定的起点和终点，可以找出最顺畅的路线。所谓“最顺畅”，首先是指中途经停站最少；如果经停站一样多，则取需要换乘线路次数最少的路线。</p>
+<h2 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h2><p>输入在第一行给出一个正整数N（≤100），即联盟公司的数量。接下来有N行，第i行（i&#x3D;1,⋯,N）描述了第i家公司所提供的线路。格式为：</p>
+<p>M S[1] S[2] ⋯ S[M]</p>
+<p>其中M（≤100）是经停站的数量，S[i]（i&#x3D;1,⋯,M）是经停站的编号（由4位0-9的数字组成）。这里假设每条线路都是简单的一条可以双向运行的链路，并且输入保证是按照正确的经停顺序给出的<br>——<br>也就是说，任意一对相邻的S[i]和S[i+1]（i&#x3D;1,⋯,M−1）之间都不存在其他经停站点。我们称相邻站点之间的线路为一个运营区间，每个运营区间只承包给一家公司。环线是有可能存在的，但不会不经停任何中间站点就从出发地回到出发地。当然，不同公司的线路是可能在某些站点有交叉的，这些站点就是客户的换乘点，我们假设任意换乘点涉及的不同公司的线路都不超过5条。</p>
+<p>在描述了联盟线路之后，题目将给出一个正整数K（≤10），随后K行，每行给出一位客户的需求，即始发地的编号和目的地的编号，中间以一空格分隔。</p>
+<h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><p>处理每一位客户的需求。如果没有现成的线路可以使其到达目的地，就在一行中输出“Sorry, no line is<br>available.”；如果目的地可达，则首先在一行中输出最顺畅路线的经停站数量（始发地和目的地不包括在内），然后按下列格式给出旅行路线：</p>
+<p>Go by the line of company #X1 from S1 to S2.<br>Go by the line of company #X2 from S2 to S3.<br>…<br>其中Xi是线路承包公司的编号，Si是经停站的编号。但必须只输出始发地、换乘点和目的地，不能输出中间的经停站。题目保证满足要求的路线是唯一的。</p>
+<h2 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h2><p>4<br>7 1001 3212 1003 1204 1005 1306 7797<br>9 9988 2333 1204 2006 2005 2004 2003 2302 2001<br>13 3011 3812 3013 3001 1306 3003 2333 3066 3212 3008 2302 3010 3011<br>4 6666 8432 4011 1306<br>4<br>3011 3013<br>6666 2001<br>2004 3001<br>2222 6666</p>
+<h2 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h2><p>2<br>Go by the line of company #3 from 3011 to 3013.<br>10<br>Go by the line of company #4 from 6666 to 1306.<br>Go by the line of company #3 from 1306 to 2302.<br>Go by the line of company #2 from 2302 to 2001.<br>6<br>Go by the line of company #2 from 2004 to 1204.<br>Go by the line of company #1 from 1204 to 1306.<br>Go by the line of company #3 from 1306 to 3001.<br>Sorry, no line is available.</p>
+<h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>这道题要求的是 <strong>最少换乘最短路</strong> ，且题目告诉答案唯一，不同时存在多个正确答案。</p>
+<p>bfs找最短路很简单，最少换乘最短路只需要在普通的找最短路的基础上修改亿点点。<br>。<br>。<br>。</p>
+<p>在普通找最短路的基础上加入ch[10005]数组表示“到这个点所需要的最少的换乘次数”，开局全初始化为非常大；加入sta[10005][6]数组，sta[i]数组表示负责<br>“ 从出发站到站点i <strong>有最短路径</strong> 的路线的 <strong>与站点i相邻</strong> 的一段路 ” 的公司<br>（假设a，b，c路线都可以从始发站到达i，但是a，b路线上只有三个点，c路线上有4个点，则sta[i]数组中只存负责路线a的公司和负责路线b的公司）</p>
+<p>（建边时，边要记录这条边是哪一个公司负责的）<br>在bfs遍历无向图的同时，检查边的起点的sta数组是否存有这个公司，如果有，则边的终点的ch数组继承起点ch数组的值，如果没有，则ch[终点]&#x3D;ch[起点]+1<br>对于这条理论，除了始发站不满足之外，其他的站点都满足，而始发站到任何一点都会不管三七二十一直接计一次换乘，所以要设置ch[始发站]&#x3D;-1（因为sta是在bfs中构建的，当然也可以先填充始发站sta）</p>
+<p>因为题目告诉我们答案唯一，所以bfs完之后直接以终点站为起点进行反向搜索，只需要满足最短路径和最短换乘，就一定能得到答案。<br>最短路径好说，最小换乘为：若站点换乘 要求 ch[a]+1&#x3D;ch[b] 否则要求ch[a]&#x3D;ch[b]</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>​<br>    #include <iostream><br>    #include <cstdio><br>    #include <cstring><br>    #include <queue><br>    const int maxn&#x3D;10005;</p>
+<pre><code>struct Edge
+&#123;
+    int to,nxt,id;
+&#125;edge[maxn&lt;&lt;1];
+
+int n,m,vv1,vv2;
+int idx,cnt,base,nums;
+int head[maxn],tm[maxn],ch[maxn],sta[maxn][6];
+int ans[maxn][3];
+</code></pre>
+<p>​<br>    void pr(int x)<br>    {<br>        if(x&lt;10) std::cout &lt;&lt; “000” &lt;&lt; x;<br>        else if(x&lt;100) std::cout &lt;&lt; “00” &lt;&lt; x;<br>        else if(x&lt;1000) std::cout &lt;&lt; “0” &lt;&lt; x;<br>        else std::cout &lt;&lt; x;<br>    }</p>
+<pre><code>void init()
+&#123;
+    idx=-1;
+    memset(head,-1,sizeof(head));
+&#125;
+</code></pre>
+<p>​<br>    void addEdge(int fr,int to,int id)<br>    {<br>        edge[++idx].id&#x3D;id;<br>        edge[idx].to&#x3D;to;<br>        edge[idx].nxt&#x3D;head[fr];<br>        head[fr]&#x3D;idx;<br>    }</p>
+<p>​<br>​<br>    void solve(int st,int ed)<br>    {<br>        std::queue<int >q;<br>        cnt&#x3D;-1;<br>        memset(tm,1,sizeof(tm));<br>        memset(ch,1,sizeof(ch));<br>        memset(sta,0,sizeof(sta));<br>        tm[st]&#x3D;0;<br>        ch[st]&#x3D;-1;<br>        q.push(st);<br>        int cur,to;<br>        while(!q.empty())<br>        {<br>            cur&#x3D;q.front(); q.pop();<br>            for(int i&#x3D;head[cur]; i!&#x3D;-1; i&#x3D;edge[i].nxt)<br>            {<br>                to&#x3D;edge[i].to;<br>                if(tm[cur]+1 &lt;&#x3D; tm[to])<br>                {<br>                    tm[to]&#x3D;tm[cur]+1;<br>    &#x2F;&#x2F;——————————————————————–<br>                    int r;<br>                    for(r&#x3D;1; r&lt;&#x3D;sta[cur][0]; r++) if(edge[i].id&#x3D;&#x3D;sta[cur][r]) break;<br>                    if(r&gt;sta[cur][0]) ch[to]&#x3D;std::min(ch[cur]+1,ch[to]);<br>                    else ch[to]&#x3D;std::min(ch[cur],ch[to]);<br>                    for(r&#x3D;1; r&lt;&#x3D;sta[to][0]; r++) if(edge[i].id&#x3D;&#x3D;sta[to][r]) break;<br>                    if(r&gt;sta[to][0])<br>                    {<br>                        sta[to][0]+&#x3D;1;<br>                        sta[to][sta[to][0]]&#x3D;edge[i].id;<br>                    }<br>                    if(to&#x3D;&#x3D;ed) continue;<br>    &#x2F;&#x2F;——————————————————————–<br>                    q.push(to);<br>                }<br>            }<br>        }<br>        q.push(ed);<br>        base&#x3D;ed;<br>        nums&#x3D;-1;<br>        while(!q.empty())<br>        {<br>            nums+&#x3D;1;<br>            cur&#x3D;q.front(); q.pop();<br>            if(cur&#x3D;&#x3D;st)<br>            {<br>                std::cout &lt;&lt; nums &lt;&lt; std::endl;<br>    &#x2F;&#x2F;忘记了输出要逆序，螺旋暴毙<br>    &#x2F;&#x2F;站点是由四位数字组成的，如果开头是0，则需要补0，忘了这事直接永恒暴毙<br>                for(int i&#x3D;cnt; i&gt;&#x3D;0; i–)<br>                {<br>                    std::cout &lt;&lt; “Go by the line of company #” &lt;&lt; ans[i][0] &lt;&lt; “ from “;<br>                    pr(ans[i][1]);<br>                    std::cout &lt;&lt; “ to “;<br>                    pr(ans[i][2]);<br>                    std::cout &lt;&lt; “.” &lt;&lt; std::endl;<br>                }</p>
+<pre><code>            return;
+        &#125;
+//这里for循环中第三部分写成了i++，当场暴毙
+        for(int i=head[cur]; i!=-1; i=edge[i].nxt)
+        &#123;
+            to=edge[i].to;
+            if(to==st)
+            &#123;
+                ans[++cnt][0]=edge[i].id;
+                ans[cnt][1]=to;
+                ans[cnt][2]=base;
+                q.push(to);
+                break;
+            &#125;
+//这里下一行的最短路径判断忘了加了，再次暴毙
+            if(tm[to]+1==tm[cur])
+            &#123;
+                int r;
+                for(r=1; r&lt;=sta[to][0]; r++) if(sta[to][r]==edge[i].id) break;
+                if(r&gt;sta[to][0])
+                &#123;
+                    if(ch[to]+1==ch[cur])
+                    &#123;
+                        ans[++cnt][0]=edge[i].id;
+                        ans[cnt][1]=to;
+                        ans[cnt][2]=base;
+                        base=to;
+                        q.push(to);
+                        break;
+                    &#125;
+                &#125;
+                else
+                &#123;
+                    if(ch[to]==ch[cur])
+                    &#123;
+                        q.push(to);
+                        break;
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+    std::cout &lt;&lt; &quot;Sorry, no line is available.&quot; &lt;&lt; std::endl;
+&#125;
+</code></pre>
+<p>​<br>    int main()<br>    {<br>        init();<br>        std::cin &gt;&gt; n;<br>        for(int i&#x3D;1; i&lt;&#x3D;n; i++)<br>        {<br>            std::cin &gt;&gt; m &gt;&gt; vv1;<br>            for(int j&#x3D;2; j&lt;&#x3D;m; j++)<br>            {<br>                std::cin &gt;&gt; vv2;<br>                addEdge(vv1,vv2,i);<br>                addEdge(vv2,vv1,i);<br>                vv1&#x3D;vv2;<br>            }<br>        }<br>        std::cin &gt;&gt; n;<br>        while(n–)<br>        {<br>            std::cin &gt;&gt; vv1 &gt;&gt; vv2;<br>            solve(vv1,vv2);<br>        }<br>        return 0;<br>    }</p>
+<p>​    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%97%A0%E5%90%91%E5%9B%BE%20-%20%E5%B8%A6%E6%9D%A1%E4%BB%B6(%E6%9C%80%E5%B0%8F%E6%8D%A2%E4%B9%98)%E6%9C%80%E7%9F%AD%E8%B7%AF%E3%80%91L3-014%20%E5%91%A8%E6%B8%B8%E4%B8%96%E7%95%8C%20(30%E5%88%86)/" data-id="cl50tnlrj003bycj320dqb1vr" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%20%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%20%E7%BD%91%E6%A0%BC%E5%8C%96%E6%90%9C%E7%B4%A2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          【机器学习】 应用简例 随机森林 交叉验证 网格化搜索.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E4%BD%BF%E7%94%A8sklearn%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">【机器学习】应用简例 使用sklearn交叉验证随机森林.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">蓝湖畔淅淅沥沥的雨</h1>
+    <h2 class="blog-subtitle">All tragedy erased, I see only wonders...</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/Wldcmzy" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/wldcmzy" target="_blank" title="CSDN">
+          CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://space.bilibili.com/83743701" target="_blank" title="bilibili(无技术和学习内容)">
+          bilibili(无技术和学习内容)
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://shanamaid.github.io/" target="_blank" title="夏娜主题作者的博客">
+          夏娜主题作者的博客
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2021 - 2022 StarsWhisper<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+	  (但是魔改)
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/announcement" title="" class="menuItem">公告</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/knightabout" title="" class="menuItem">关于</a>
+          
+            <a href="/bridges" title="" class="menuItem">传送门</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

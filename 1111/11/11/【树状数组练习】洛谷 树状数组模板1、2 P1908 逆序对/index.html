@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【树状数组练习】洛谷 树状数组模板1、2 P1908 逆序对.md | 蓝湖畔淅淅沥沥的雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 洛谷 P3374 树状数组模板1​    #include     #include     #incl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【树状数组练习】洛谷 树状数组模板1、2 P1908 逆序对.md">
+<meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%9D%BF1%E3%80%812%20P1908%20%E9%80%86%E5%BA%8F%E5%AF%B9/index.html">
+<meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
+<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 洛谷 P3374 树状数组模板1​    #include     #include     #incl">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
+<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:author" content="StarsWhisper">
+<meta property="article:tag" content="OldBlog(Before20220505)">
+<meta property="article:tag" content="树状数组">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="蓝湖畔淅淅沥沥的雨" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-【树状数组练习】洛谷 树状数组模板1、2 P1908 逆序对" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%9D%BF1%E3%80%812%20P1908%20%E9%80%86%E5%BA%8F%E5%AF%B9/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【树状数组练习】洛谷 树状数组模板1、2 P1908 逆序对.md
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E6%80%9D%E6%83%B3or%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">思想or数据结构</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="洛谷-P3374-树状数组模板1"><a href="#洛谷-P3374-树状数组模板1" class="headerlink" title="洛谷 P3374 树状数组模板1"></a>洛谷 P3374 树状数组模板1</h2><p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <cstdlib><br>    #include <algorithm><br>    #include <vector><br>    #include <map><br>    #include <string><br>    &#x2F;&#x2F;typedef long long int LL;<br>    typedef std::pair&lt;std::string ,char&gt; PP;<br>    const int N &#x3D; 5e5+5;<br>    int tree[N];<br>    int n,m,vv,op,a,b;</p>
+<pre><code>void add(int i,int v)
+&#123;
+   while(i&lt;=n)&#123;
+      tree[i] += v;
+      i += i&amp;(-i);
+   &#125;
+&#125;
+
+int query(int i)
+&#123;
+   int re = 0;
+   while(i&gt;=1)&#123;
+      re += tree[i];
+      i -= i&amp;(-i);
+   &#125;
+   return re;
+&#125;
+
+int main()
+&#123;
+   scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+   for(int i=1; i&lt;=n; i++)&#123;
+      scanf(&quot;%d&quot;,&amp;vv);
+      add(i,vv);
+   &#125;
+   for(int i=0; i&lt;m; i++)&#123;
+      scanf(&quot;%d%d%d&quot;,&amp;op,&amp;a,&amp;b);
+      if(op == 1)&#123;
+         add(a,b);
+      &#125;
+      else&#123;
+         printf(&quot;%d\n&quot;,query(b)-query(a-1));
+      &#125;
+   &#125;
+   return 0;
+&#125;
+</code></pre>
+<p>​    </p>
+<h2 id="洛谷-P3368树状数组模板2"><a href="#洛谷-P3368树状数组模板2" class="headerlink" title="洛谷 P3368树状数组模板2"></a>洛谷 P3368树状数组模板2</h2><p>在区间中求某一单点的树状数组。初始化树状数组时，增加的值为”此点比上一个点大多少”</p>
+<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <cstdlib><br>    #include <algorithm><br>    #include <vector><br>    #include <map><br>    #include <string><br>    typedef long long int LL;<br>    &#x2F;&#x2F;typedef std::pair&lt;std::string ,char&gt; PP;<br>    const int N &#x3D; 5e5+5;<br>    LL tree[N];<br>    int n,m,op,a,b;<br>    LL c,vv,ls;</p>
+<pre><code>void add(int i,LL v)
+&#123;
+   while(i&lt;=n)&#123;
+      tree[i] += v;
+      i += i&amp;(-i);
+   &#125;
+&#125;
+
+LL query(int i)
+&#123;
+   LL re = 0;
+   while(i&gt;=1)&#123;
+      re += tree[i];
+      i -= i&amp;(-i);
+   &#125;
+   return re;
+&#125;
+
+int main()
+&#123;
+   scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+   ls = 0;
+   for(int i=1; i&lt;=n; i++)&#123;
+      scanf(&quot;%lld&quot;,&amp;vv);
+      add(i,vv-ls);
+      ls = vv;
+   &#125;
+   for(int i=0; i&lt;m; i++)&#123;
+      scanf(&quot;%d&quot;,&amp;op);
+      if(op == 1)&#123;
+         scanf(&quot;%d%d%lld&quot;,&amp;a,&amp;b,&amp;c);
+         add(a,c);
+         add(b+1,-c);
+      &#125;
+      else&#123;
+         scanf(&quot;%d&quot;,&amp;a);
+         printf(&quot;%lld\n&quot;,query(a));
+      &#125;
+
+   &#125;
+   return 0;
+&#125;
+</code></pre>
+<p>​    </p>
+<h2 id="洛谷-P1908-逆序对"><a href="#洛谷-P1908-逆序对" class="headerlink" title="洛谷 P1908 逆序对"></a>洛谷 P1908 逆序对</h2><p>数据大小的范围是1e9，但是我们只需要知道他们的大小关系，所以可以压成5e5做</p>
+<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <cstdlib><br>    #include <algorithm><br>    #include <vector><br>    #include <map><br>    #include <set><br>    typedef long long int LL;<br>    &#x2F;&#x2F;typedef std::pair&lt;int ,int&gt; PP;<br>    const int N &#x3D; 5e5+5;<br>    int tree[N],ord[N];<br>    struct AA<br>    {<br>       int val,n;<br>    }qu[N];<br>    int n,v,idx;<br>    LL ans;</p>
+<pre><code>void add(int i,int x)
+&#123;
+   while(i&lt;=n)&#123;
+      tree[i] += x;
+      i += i&amp;(-i);
+   &#125;
+&#125;
+
+LL qry(int i)
+&#123;
+   LL re = 0;
+   while(i&gt;0)&#123;
+      re += tree[i];
+      i -= i&amp;(-i);
+   &#125;
+   return re;
+&#125;
+
+bool cmp(AA x , AA y)
+&#123;
+   if(x.val == y.val) return x.n&lt;y.n;
+   return x.val &lt; y.val;
+&#125;
+
+int main()
+&#123;
+   //freopen(&quot;D:\\EdgeDownloadPlace\\P1908_11.in&quot;,&quot;r&quot;,stdin);
+   ans = 0;
+   scanf(&quot;%d&quot;,&amp;n);
+   for(int i=1; i&lt;=n; i++)&#123;
+      scanf(&quot;%d&quot;,&amp;qu[i].val);
+      qu[i].n = i;
+   &#125;
+   std::sort(qu+1,qu+n+1,cmp);
+   for(int i=1; i&lt;=n; i++)&#123;
+      ord[qu[i].n] = i;
+   &#125;
+   for(int i=1; i&lt;=n; i++)&#123;
+      add(ord[i],1);
+      ans += i-qry(ord[i]);
+   &#125;
+   printf(&quot;%lld\n&quot;,ans);
+
+   return 0;
+&#125;
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%9D%BF1%E3%80%812%20P1908%20%E9%80%86%E5%BA%8F%E5%AF%B9/" data-id="cl50tnlrr003tycj3ghpsfnt0" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag">树状数组</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/1111/11/11/%E3%80%90%E6%A0%91%E5%BD%A2dp%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P2014%E9%80%89%E8%AF%BE%20P1352%E6%B2%A1%E6%9C%89%E4%B8%8A%E5%8F%B8%E7%9A%84%E8%88%9E%E4%BC%9AP2016%E6%88%98%E7%95%A5%E6%B8%B8%E6%88%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          【树形dp练习】洛谷 P2014选课 P1352没有上司的舞会P2016战略游戏.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%20dfs%20dp%E3%80%91P4408%20%5BNOI2003%5D%20%E9%80%83%E5%AD%A6%E7%9A%84%E5%B0%8F%E5%AD%A9/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">【树的直径 dfs dp】P4408 [NOI2003] 逃学的小孩.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">蓝湖畔淅淅沥沥的雨</h1>
+    <h2 class="blog-subtitle">All tragedy erased, I see only wonders...</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/Wldcmzy" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/wldcmzy" target="_blank" title="CSDN">
+          CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://space.bilibili.com/83743701" target="_blank" title="bilibili(无技术和学习内容)">
+          bilibili(无技术和学习内容)
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://shanamaid.github.io/" target="_blank" title="夏娜主题作者的博客">
+          夏娜主题作者的博客
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2021 - 2022 StarsWhisper<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+	  (但是魔改)
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/announcement" title="" class="menuItem">公告</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/knightabout" title="" class="menuItem">关于</a>
+          
+            <a href="/bridges" title="" class="menuItem">传送门</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

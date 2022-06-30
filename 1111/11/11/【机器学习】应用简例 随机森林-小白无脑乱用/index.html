@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【机器学习】应用简例 随机森林-小白无脑乱用.md | 蓝湖畔淅淅沥沥的雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 发现随机森林的正确率在0.76-0.86左右，多次用随机森林找一个正确率大于0.84的模型输出答案 这次">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【机器学习】应用简例 随机森林-小白无脑乱用.md">
+<meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97-%E5%B0%8F%E7%99%BD%E6%97%A0%E8%84%91%E4%B9%B1%E7%94%A8/index.html">
+<meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
+<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 发现随机森林的正确率在0.76-0.86左右，多次用随机森林找一个正确率大于0.84的模型输出答案 这次">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
+<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:author" content="StarsWhisper">
+<meta property="article:tag" content="OldBlog(Before20220505)">
+<meta property="article:tag" content="随机森林">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="蓝湖畔淅淅沥沥的雨" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-【机器学习】应用简例 随机森林-小白无脑乱用" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97-%E5%B0%8F%E7%99%BD%E6%97%A0%E8%84%91%E4%B9%B1%E7%94%A8/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【机器学习】应用简例 随机森林-小白无脑乱用.md
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/">教练我想学挂边躲牛</a>,<a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/%E7%9E%8E%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">瞎学机器学习</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<p>发现随机森林的正确率在0.76-0.86左右，多次用随机森林找一个正确率大于0.84的模型输出答案</p>
+<p>这次用到的参数：<br>rfc&#x3D;RandomForestClassifier(n_estimators&#x3D;100 #决策树的数量<br>,criterion&#x3D;“entropy” #分类标准-信息熵or基尼系数<br>,max_depth&#x3D;4 #决策树最大深度<br>,min_samples_split&#x3D;10) #至少有10个数据，树才会继续分支<br>。</p>
+<p>把训练集分为新训练集和新问题集，在这上面验证准确性<br>Xtrain, Xtest, Ytrain, Ytest &#x3D;<br>train_test_split(arr_t[:,:-1],arr_t[:,-1],test_size&#x3D;0.3)<br>#（数据集，答案集，如何划分）0.3表示训练集和问题集三七分</p>
+<p>​<br>    import numpy as np<br>    import pandas as pd<br>    from sklearn.ensemble import RandomForestClassifier<br>    #随机森林分类器<br>    from sklearn.model_selection import train_test_split<br>    #功能：将数据集分为训练集测试集 Xtrain,Xtest,Ytrain,Ytest</p>
+<pre><code>df_t=pd.read_excel(r&#39;D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\train.xlsx&#39;)
+df_a=pd.read_excel(r&#39;D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\test.xlsx&#39;)
+
+def get_data_array_float64(df,test=False):
+    df = df.drop(columns=&#39;uid&#39;)
+    #去列名对应的列
+    if test == True:
+        df=df.drop(columns =&#39;target&#39;)
+        #去列名对应的列
+        
+    col_mode_lst=[]
+    for each_col in df.columns:#获得每一列的众数
+        cnts = df[each_col].value_counts()
+           #得到每一列的所有值以及它们出现的次数 ，降序排列
+        if &#39;?&#39; in cnts and cnts.index[0] == &#39;?&#39;:
+            idx=1
+        else :
+            idx=0
+        col_mode_lst.append(cnts.index[idx])
+
+    for i in range(len(df.columns)):
+        df[df.columns[i]][df[df.columns[i]] == &#39;?&#39;] = col_mode_lst[i]
+        #df[df.columns[i]]按照列名获得列
+        #按照列名获得列，找到列中值为‘？’的元素，将其改成col_mode_lst[i]
+        
+    df_array = df.values.astype(np.float64)
+    #df.values得到DataFrame对象的矩阵形式
+    #,astype()方法为矩阵转化元素类型
+    return df_array
+
+arr_t=get_data_array_float64(df_t)
+arr_a=get_data_array_float64(df_a,True)
+</code></pre>
+<p>​<br>    Xtrain, Xtest, Ytrain, Ytest &#x3D; train_test_split(arr_t[:,:-1],arr_t[:,-1],test_size&#x3D;0.3)</p>
+<pre><code>while True:
+    rfc=RandomForestClassifier(n_estimators=100
+                                ,criterion=&quot;entropy&quot;
+                               ,max_depth=4
+                               ,min_samples_split=10)
+                                   #实例化随机森林
+    rfc = rfc.fit(Xtrain,Ytrain)
+    #训练模型
+    score = rfc.score(Xtest,Ytest)
+    #得到正确率
+    if score&gt;0.84:
+        answer = rfc.predict(arr_a).astype(np.int8).tolist()
+        break
+
+answer_df=pd.DataFrame(answer)
+answer_df.to_excel(r&#39;D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\20201028ans.xlsx&#39;)
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97-%E5%B0%8F%E7%99%BD%E6%97%A0%E8%84%91%E4%B9%B1%E7%94%A8/" data-id="cl50tnlro003nycj3h80d5urb" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" rel="tag">随机森林</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BD%BF%E7%94%A8%E8%A2%8B%E5%A4%96%E6%95%B0%E6%8D%AE%EF%BC%88%E8%A2%8B%E8%A3%85%E6%B3%95%EF%BC%89%20+%20RandomForestClassifier%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          【机器学习】应用简例 随机森林 使用袋外数据（袋装法） + RandomForestClassifier的一些常用方法.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/1111/11/11/%E3%80%90%E6%A0%91%E5%BD%A2dp%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P2014%E9%80%89%E8%AF%BE%20P1352%E6%B2%A1%E6%9C%89%E4%B8%8A%E5%8F%B8%E7%9A%84%E8%88%9E%E4%BC%9AP2016%E6%88%98%E7%95%A5%E6%B8%B8%E6%88%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">【树形dp练习】洛谷 P2014选课 P1352没有上司的舞会P2016战略游戏.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">蓝湖畔淅淅沥沥的雨</h1>
+    <h2 class="blog-subtitle">All tragedy erased, I see only wonders...</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/Wldcmzy" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/wldcmzy" target="_blank" title="CSDN">
+          CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://space.bilibili.com/83743701" target="_blank" title="bilibili(无技术和学习内容)">
+          bilibili(无技术和学习内容)
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://shanamaid.github.io/" target="_blank" title="夏娜主题作者的博客">
+          夏娜主题作者的博客
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2021 - 2022 StarsWhisper<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+	  (但是魔改)
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/announcement" title="" class="menuItem">公告</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/knightabout" title="" class="menuItem">关于</a>
+          
+            <a href="/bridges" title="" class="menuItem">传送门</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

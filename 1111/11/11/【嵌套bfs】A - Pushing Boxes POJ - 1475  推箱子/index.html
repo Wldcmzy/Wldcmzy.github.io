@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【嵌套bfs】A - Pushing Boxes POJ - 1475  推箱子.md | 蓝湖畔淅淅沥沥的雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 https:&#x2F;&#x2F;vjudge.net&#x2F;contest&#x2F;387870#problem&#x2F;A 题目描述Imag">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【嵌套bfs】A - Pushing Boxes POJ - 1475  推箱子.md">
+<meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/index.html">
+<meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
+<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 https:&#x2F;&#x2F;vjudge.net&#x2F;contest&#x2F;387870#problem&#x2F;A 题目描述Imag">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
+<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:author" content="StarsWhisper">
+<meta property="article:tag" content="OldBlog(Before20220505)">
+<meta property="article:tag" content="BFS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="蓝湖畔淅淅沥沥的雨" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-【嵌套bfs】A - Pushing Boxes POJ - 1475  推箱子" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【嵌套bfs】A - Pushing Boxes POJ - 1475  推箱子.md
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2/">搜索</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<p><a target="_blank" rel="noopener" href="https://vjudge.net/contest/387870#problem/A">https://vjudge.net/contest/387870#problem/A</a></p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Imagine you are standing inside a two-dimensional maze composed of square<br>cells which may or may not be filled with rock. You can move north, south,<br>east or west one cell at a step. These moves are called walks.<br>One of the empty cells contains a box which can be moved to an adjacent free<br>cell by standing next to the box and then moving in the direction of the box.<br>Such a move is called a push. The box cannot be moved in any other way than by<br>pushing, which means that if you push it into a corner you can never get it<br>out of the corner again.</p>
+<p>One of the empty cells is marked as the target cell. Your job is to bring the<br>box to the target cell by a sequence of walks and pushes. As the box is very<br>heavy, you would like to minimize the number of pushes. Can you write a<br>program that will work out the best such sequence?<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzk2MTQ4YTA0MzgzZDlmZTI2MzBhM2FjNzcyZjEyMjYx?x-oss-">https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzk2MTQ4YTA0MzgzZDlmZTI2MzBhM2FjNzcyZjEyMjYx?x-oss-</a><br>process&#x3D;image&#x2F;format,png#pic_center)</p>
+<h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><p>The input contains the descriptions of several mazes. Each maze description<br>starts with a line containing two integers r and c (both &lt;&#x3D; 20) representing<br>the number of rows and columns of the maze.</p>
+<p>Following this are r lines each containing c characters. Each character<br>describes one cell of the maze. A cell full of rock is indicated by a <code>#&#39; and an empty cell is represented by a</code>.’. Your starting position is symbolized by<br><code>S&#39;, the starting position of the box by</code>B’ and the target cell by &#96;T’.</p>
+<p>Input is terminated by two zeroes for r and c.</p>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>For each maze in the input, first print the number of the maze, as shown in<br>the sample output. Then, if it is impossible to bring the box to the target<br>cell, print &#96;&#96;Impossible.’’.</p>
+<p>Otherwise, output a sequence that minimizes the number of pushes. If there is<br>more than one such sequence, choose the one that minimizes the number of total<br>moves (walks and pushes). If there is still more than one such sequence, any<br>one is acceptable.</p>
+<p>Print the sequence as a string of the characters N, S, E, W, n, s, e and w<br>where uppercase letters stand for pushes, lowercase letters stand for walks<br>and the different letters stand for the directions north, south, east and<br>west.</p>
+<p>Output a single blank line after each test case.</p>
+<h2 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h2><p>1 7<br>SB…T<br>1 7<br>SB…#.T<br>7 11<br>###########<br>#T##…#<br>#.#.#…####<br>#…B…#<br>#.######…#<br>#…S…#<br>###########<br>8 4<br>…<br>.##.<br>.#…<br>.#…<br>.#.B<br>.##S<br>…<br>###T<br>0 0</p>
+<h2 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h2><p>Maze #1<br>EEEEE</p>
+<p>Maze #2<br>Impossible.</p>
+<p>Maze #3<br>eennwwWWWWeeeeeesswwwwwwwnNN</p>
+<p>Maze #4<br>swwwnnnnnneeesssSSS</p>
+<h2 id="自己加一组样例输入"><a href="#自己加一组样例输入" class="headerlink" title="自己加一组样例输入"></a>自己加一组样例输入</h2><p>6 5<br>…T<br>.S…<br>#B###<br>…<br>…<br>…</p>
+<h2 id="自己加的样例的输出"><a href="#自己加的样例的输出" class="headerlink" title="自己加的样例的输出"></a>自己加的样例的输出</h2><p>Maze #1<br>SSesswNNNNwnEEE</p>
+<h2 id="瞎翻译"><a href="#瞎翻译" class="headerlink" title="瞎翻译"></a>瞎翻译</h2><p>这是一个推箱子游戏。人要把箱子推到终点，我们需要输出人走的路径（方向用nswe或NSWE表示，人不推箱子只走路时路径用小写字母nswe表示，人推箱子走路时路径用大写字母NSWE表示）</p>
+<p>先输入两个整数row和col，表示地图大小</p>
+<p>之后输入一个row行col列的char类型矩阵，其中#代表墙，.代表路，S代表人的起始位置，B代表箱子起始位置，T代表终点（箱子要被推到的位置）</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p><strong>1.</strong><br>先设想箱子会自己动，想象一下如何用简单的bfs求得“箱子自己动”情况下的答案<br><strong>2.</strong><br>在”箱子自己动“的代码基础上加入人：<br>假设箱子要往右动，那么先对人进行bfs，让人从自己的位置走到箱子的左边的位置，如果人可以走过去，则箱子可以往右移动。<br><strong>2.5</strong><br>记得人推箱子的时候人也要动，而不是仅仅箱子移动（人与箱子往相同方向移动，或者直接把人移动到箱子的上一个位置）。<br><strong>3.</strong><br>这是笔者自己犯的一个错误：<br>不能仅仅用形如visb[][]的二维数组标记箱子到过的位置，因为在某些情况下人想推箱子到终点，是需要【箱子折返】的（箱子有可能去一个地方两次或多次，可以见我自己加的输入样例）<br>所以要用三维数组：visb[][][4],第三维记录箱子来时的方向</p>
+<p><strong>4.</strong><br>在箱子移动的bfs函数中嵌套人移动的bfs函数完成求解</p>
+<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <algorithm><br>    #include <cstring><br>    #include <queue><br>    #include <string></p>
+<pre><code>int row,col,counter;
+const int maxn=25;
+char cell[maxn][maxn];
+bool visb[maxn][maxn][4],visp[maxn][maxn];  //visb记录箱子，visp记录人去过的位置
+//人的标记方式为：先在原地标记一次，之后去了哪标哪
+//箱子的标记方式为：不在原地标记，只有从一个方向（假设为2）移动到某一格（假设为i，j），则标记visb[i][j][2]为true
+
+int step[4][2]=&#123;&#123;1,0&#125;,&#123;-1,0&#125;,&#123;0,1&#125;,&#123;0,-1&#125;&#125;;
+char adir[5]=&quot;snew&quot;,Adir[5]=&quot;SNEW&quot;;         //两个dir都对应step的四个方向
+struct Pos
+&#123;
+    int x,y;            //表示位置，若是人，只会用到这两个和path
+    int mx,my;          //表示人的位置，表示箱子的变量用的，表示人的变量用不着
+    std::string path;   //记录路径
+&#125;mpre,mnxt,tar,bpre,bnxt,to;
+//mpre-man pre人的当前位置（或解释为人的上一个位置）mnxt-man next人的下一个位置
+//bpre和bnxt表示箱子的当前位置和下一个位置
+//tar表示终点位置
+//to表示箱子要移动到某个位置时，人要移动到的位置
+</code></pre>
+<p>​<br>​<br>    &#x2F;&#x2F;判断这个点是否在地图可行走范围之中<br>    bool cango(int x,int y)<br>    {<br>        if(x&gt;&#x3D;0 &amp;&amp; x&lt;row &amp;&amp; y&gt;&#x3D;0 &amp;&amp; y&lt;col &amp;&amp; cell[x][y]!&#x3D;’#’)<br>            return true;<br>        return false;<br>    }</p>
+<pre><code>//人从自己所在的位置，移动到to.x,to.y的位置，简单bfs
+bool bfsMan()
+&#123;
+    memset(visp,false,sizeof(visp));
+    std::queue&lt;Pos&gt; q;
+    mpre.path=&quot;&quot;;
+    mpre.x=bnxt.mx,mpre.y=bnxt.my;
+    q.push(mpre);
+    visp[mpre.x][mpre.y]=true;
+    while(!q.empty())
+    &#123;
+        mpre=q.front(); q.pop();
+        if(mpre.x==to.x &amp;&amp; mpre.y==to.y) return true;
+        for(int i=0; i&lt;4; i++)
+        &#123;
+            mnxt=mpre;
+            mnxt.x+=step[i][0],mnxt.y+=step[i][1];
+            if(cango(mnxt.x,mnxt.y) &amp;&amp; !visp[mnxt.x][mnxt.y] &amp;&amp; !(mnxt.x==bpre.x &amp;&amp; mnxt.y==bpre.y))
+            &#123;
+                visp[mnxt.x][mnxt.y]=true;
+                mnxt.path+=adir[i];
+                q.push(mnxt);
+            &#125;
+        &#125;
+    &#125;
+    return false;
+
+&#125;
+
+//对箱子的bfs，其中嵌套了对人的bfs
+void bfs()
+&#123;
+    std::queue&lt;Pos&gt; q;
+    bpre.path=&quot;&quot;;
+    bpre.mx=mpre.x,bpre.my=mpre.y;
+    q.push(bpre);//让最初箱子的位置入队，记得给箱子结构体赋值人的位置
+    while(!q.empty())
+    &#123;
+        bpre=q.front(); q.pop();
+        for(int i=0; i&lt;4; i++)  //开始四个方向的遍历
+        &#123;
+            bnxt=bpre;
+            bnxt.x+=step[i][0],bnxt.y+=step[i][1];
+            if(cango(bnxt.x,bnxt.y) &amp;&amp; !visb[bnxt.x][bnxt.y][i])
+            &#123;
+                to=bpre;
+                to.x-=step[i][0],to.y-=step[i][1];
+                if(cango(to.x,to.y))    //初步检查这一点是否可以达到
+                &#123;
+                    if(bfsMan())
+                    &#123;
+                        //一定要bfsMan（）返回true时才标记visb为true
+                        //因为若人不能到达特定的推箱子位置，箱子就不能访问到要去的位置
+                        visb[bnxt.x][bnxt.y][i]=true;
+                        bnxt.path+=mpre.path;               //路径末尾加入人上一次移动的路径
+                        bnxt.path+=Adir[i];                 //路径末尾加入箱子移动的路径
+                        //如果到了终点，直接输出
+                        if(bnxt.x==tar.x &amp;&amp; bnxt.y==tar.y)
+                        &#123;
+                            std::cout &lt;&lt; &quot;Maze #&quot; &lt;&lt; counter++ &lt;&lt; std::endl;
+                            std::cout &lt;&lt; bnxt.path &lt;&lt; std::endl &lt;&lt; std::endl;
+                            return ;
+                        &#125;
+                        bnxt.mx=bpre.x,bnxt.my=bpre.y;      //记得记录箱子在这个位置时对应的人的位置，然后入队
+                        q.push(bnxt);
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+    std::cout &lt;&lt; &quot;Maze #&quot; &lt;&lt; counter++ &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;Impossible.&quot; &lt;&lt; std::endl &lt;&lt; std::endl;
+&#125;
+</code></pre>
+<p>​<br>    int main()<br>    {<br>        counter&#x3D;1;<br>        while(std::cin &gt;&gt; row &gt;&gt; col &amp;&amp; !(row&#x3D;&#x3D;0 &amp;&amp; col&#x3D;&#x3D;0))<br>        {<br>            memset(visb,false,sizeof(visb));<br>            for(int i&#x3D;0; i&lt;row; i++)<br>            {<br>                std::cin &gt;&gt; cell[i];<br>                for(int j&#x3D;0; j&lt;col; j++)<br>                {<br>                    if(cell[i][j]&#x3D;&#x3D;’S’)  mpre.x&#x3D;i,mpre.y&#x3D;j;<br>                    else if(cell[i][j]&#x3D;&#x3D;’B’) bpre.x&#x3D;i,bpre.y&#x3D;j;<br>                    else if(cell[i][j]&#x3D;&#x3D;’T’) tar.x&#x3D;i,tar.y&#x3D;j;<br>                }<br>            }<br>            bfs();<br>        }</p>
+<pre><code>    return 0;
+&#125;
+</code></pre>
+<p>​    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/" data-id="cl50tnlre002mycj36nkb04kb" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/1111/11/11/%E3%80%90%E5%B1%91%E3%80%91%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95%20%E5%88%A4%E6%96%AD%E6%AD%BB%E9%94%81%20or%20%E6%B1%82%E8%A7%A3%E6%89%80%E6%9C%89%E5%8F%AF%E8%A1%8C%E5%BA%8F%E5%88%97%20%E4%BB%A3%E7%A0%81/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          【屑】银行家算法 判断死锁 or 求解所有可行序列 代码.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/1111/11/11/%E3%80%90%E5%B7%AE%E5%80%BC%E5%B9%B6%E6%9F%A5%E9%9B%86%EF%BC%88%E5%8F%A3%E8%83%A1%E7%AE%97%E6%B3%95%EF%BC%89%E3%80%91%20HDU7136%20CCPC2021%E7%BD%91%E7%BB%9C%E9%80%89%E6%8B%94%E8%B5%9B%E9%87%8D%E8%B5%9B1011%20Jumping%20Monkey/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">【差值并查集（口胡算法）】 HDU7136 CCPC2021网络选拔赛重赛1011 Jumping Monkey.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">蓝湖畔淅淅沥沥的雨</h1>
+    <h2 class="blog-subtitle">All tragedy erased, I see only wonders...</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/Wldcmzy" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/wldcmzy" target="_blank" title="CSDN">
+          CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://space.bilibili.com/83743701" target="_blank" title="bilibili(无技术和学习内容)">
+          bilibili(无技术和学习内容)
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://shanamaid.github.io/" target="_blank" title="夏娜主题作者的博客">
+          夏娜主题作者的博客
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2021 - 2022 StarsWhisper<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+	  (但是魔改)
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/announcement" title="" class="menuItem">公告</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/knightabout" title="" class="menuItem">关于</a>
+          
+            <a href="/bridges" title="" class="menuItem">传送门</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

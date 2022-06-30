@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【AC自动机 _ trie树】G - Word Puzzles   POJ - 1204.md | 蓝湖畔淅淅沥沥的雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 题目描述Word puzzles are usually simple and very enterta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【AC自动机 _ trie树】G - Word Puzzles   POJ - 1204.md">
+<meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90AC%E8%87%AA%E5%8A%A8%E6%9C%BA%20_%20trie%E6%A0%91%E3%80%91G%20-%20Word%20Puzzles%20%20%20POJ%20-%201204/index.html">
+<meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
+<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 题目描述Word puzzles are usually simple and very enterta">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
+<meta property="article:modified_time" content="2022-06-30T09:22:00.415Z">
+<meta property="article:author" content="StarsWhisper">
+<meta property="article:tag" content="OldBlog(Before20220505)">
+<meta property="article:tag" content="字符串">
+<meta property="article:tag" content="AC自动机">
+<meta property="article:tag" content="Trie树">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="蓝湖畔淅淅沥沥的雨" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-【AC自动机 _ trie树】G - Word Puzzles   POJ - 1204" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90AC%E8%87%AA%E5%8A%A8%E6%9C%BA%20_%20trie%E6%A0%91%E3%80%91G%20-%20Word%20Puzzles%20%20%20POJ%20-%201204/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【AC自动机 _ trie树】G - Word Puzzles   POJ - 1204.md
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Word puzzles are usually simple and very entertaining for all ages. They are<br>so entertaining that Pizza-Hut company started using table covers with word<br>puzzles printed on them, possibly with the intent to minimise their client’s<br>perception of any possible delay in bringing them their order.</p>
+<p>Even though word puzzles may be entertaining to solve by hand, they may become<br>boring when they get very large. Computers do not yet get bored in solving<br>tasks, therefore we thought you could devise a program to speedup (hopefully!)<br>solution finding in such puzzles.</p>
+<p>The following figure illustrates the PizzaHut puzzle. The names of the pizzas<br>to be found in the puzzle are: MARGARITA, ALEMA, BARBECUE, TROPICAL, SUPREMA,<br>LOUISIANA, CHEESEHAM, EUROPA, HAVAIANA,<br>CAMPONESA.![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuL2QwYzAxMDE5MTcwNDBkMTY2NTgzYmE5YzNhYWQ4Yzkz?x-oss-">https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuL2QwYzAxMDE5MTcwNDBkMTY2NTgzYmE5YzNhYWQ4Yzkz?x-oss-</a><br>process&#x3D;image&#x2F;format,png)<br>Your task is to produce a program that given the word puzzle and words to be<br>found in the puzzle, determines, for each word, the position of the first<br>letter and its orientation in the puzzle.</p>
+<p>You can assume that the left upper corner of the puzzle is the origin, (0,0).<br>Furthemore, the orientation of the word is marked clockwise starting with<br>letter A for north (note: there are 8 possible directions in total).</p>
+<h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><p>The first line of input consists of three positive numbers, the number of<br>lines, 0 &lt; L &lt;&#x3D; 1000, the number of columns, 0 &lt; C &lt;&#x3D; 1000, and the number of<br>words to be found, 0 &lt; W &lt;&#x3D; 1000. The following L input lines, each one of<br>size C characters, contain the word puzzle. Then at last the W words are input<br>one per line.</p>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>Your program should output, for each word (using the same order as the words<br>were input) a triplet defining the coordinates, line and column, where the<br>first letter of the word appears, followed by a letter indicating the<br>orientation of the word according to the rules define above. Each value in the<br>triplet must be separated by one space only.</p>
+<h2 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例"></a>输入样例</h2><p>20 20 10<br>QWSPILAATIRAGRAMYKEI<br>AGTRCLQAXLPOIJLFVBUQ<br>TQTKAZXVMRWALEMAPKCW<br>LIEACNKAZXKPOTPIZCEO<br>FGKLSTCBTROPICALBLBC<br>JEWHJEEWSMLPOEKORORA<br>LUPQWRNJOAAGJKMUSJAE<br>KRQEIOLOAOQPRTVILCBZ<br>QOPUCAJSPPOUTMTSLPSF<br>LPOUYTRFGMMLKIUISXSW<br>WAHCPOIYTGAKLMNAHBVA<br>EIAKHPLBGSMCLOGNGJML<br>LDTIKENVCSWQAZUAOEAL<br>HOPLPGEJKMNUTIIORMNC<br>LOIUFTGSQACAXMOPBEIO<br>QOASDHOPEPNBUYUYOBXB<br>IONIAELOJHSWASMOUTRK<br>HPOIYTJPLNAQWDRIBITG<br>LPOINUYMRTEMPTMLMNBO<br>PAFCOPLHAVAIANALBPFS<br>MARGARITA<br>ALEMA<br>BARBECUE<br>TROPICAL<br>SUPREMA<br>LOUISIANA<br>CHEESEHAM<br>EUROPA<br>HAVAIANA<br>CAMPONESA</p>
+<h2 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例"></a>输出样例</h2><p>0 15 G<br>2 11 C<br>7 18 A<br>4 8 C<br>16 13 B<br>4 15 E<br>10 3 D<br>5 1 E<br>19 7 C<br>11 11 H</p>
+<h2 id="瞎翻译"><a href="#瞎翻译" class="headerlink" title="瞎翻译"></a>瞎翻译</h2><p>给你一张字谜图，里头有一堆乱七八糟的字母，<br><strong>输入：</strong><br>先输入仨数L,C,W，前两个(L,C)是字谜图的行数和列数，第三个(W)是输入单词的数目，<br>之后输入L行C列的数填满字谜图，<br>最后W行输入W个字符串，这W个字符串肯定都可以在字谜图上找到（字母横着竖着或斜着线性连续）<br><strong>输出：</strong><br>一行输出三个元素，前两个是找到的字符串的首字母的坐标，第三个是字符串的排列方向（从首字母到尾字母的方向），方向一共有8个，按照顺时针旋转，A代表正上方，B代表右上方，一次类推</p>
+<h2 id="使用trie树暴力破解"><a href="#使用trie树暴力破解" class="headerlink" title="使用trie树暴力破解"></a>使用trie树暴力破解</h2><p><strong>思路：</strong> 用所有所查询的字符串建立一颗trie树，然后遍历地图上的每个点，在每个点分别朝8个方向对trie树搜索（三重循环无脑搜就完了）</p>
+<p>​    </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> dy[<span class="number">8</span>]=&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>&#125;;<span class="comment">//设左上角为原点，向下为x轴正方向，向右为y轴正方向</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> dx[<span class="number">8</span>]=&#123;<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>&#125;;<span class="comment">//先设置好移动方向，dx[0],dy[0]为向上方向（A方向），方向按照顺时针旋转顺序写</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn=<span class="number">1005</span>;</span><br><span class="line"><span class="type">char</span> cell[maxn][maxn],word[maxn];<span class="comment">//cell储存字谜地图，word用于接收一个要搜索的单词</span></span><br><span class="line"><span class="type">int</span> slen[maxn],tidx,r,c,w,ans[maxn][<span class="number">3</span>];<span class="comment">//slen储存每个要搜索的单词的长度，tidx为节点序号，ans储存答案（方向+横纵坐标）</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span>&#123;</span><br><span class="line">    <span class="type">int</span> id,next[<span class="number">26</span>];<span class="comment">//在trie树中每个单词的结尾给id赋值，其值为 这个单词按照输入顺序排的序号（从1开始，不是0）</span></span><br><span class="line">&#125;treeN[maxn*maxn];</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//每输入一个单词，进行一次此函数，把单词存入trie树</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">joinTree</span><span class="params">(<span class="type">int</span> id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> root=<span class="number">0</span>,len=<span class="built_in">strlen</span>(word),nxt;</span><br><span class="line">    slen[id]=len;       <span class="comment">//把此字符串的长度储存在len数组中</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;len; i++)&#123;</span><br><span class="line">        nxt=word[i]-<span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span>(treeN[root].next[nxt]&lt;=<span class="number">0</span>)</span><br><span class="line">            treeN[root].next[nxt]=++tidx;</span><br><span class="line">        root=treeN[root].next[nxt];</span><br><span class="line">    &#125;</span><br><span class="line">    treeN[root].id=id;<span class="comment">//在trie树中每个单词的结尾给id赋值，其值为 这个单词按照输入顺序排的序号（从1开始，不是0）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查找函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">sch</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">int</span> dir)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> root=<span class="number">0</span>,id;</span><br><span class="line">    <span class="keyword">while</span>(x&gt;=<span class="number">0</span> &amp;&amp; x&lt;=r &amp;&amp; y&gt;=<span class="number">0</span> &amp;&amp; y&lt;=c)&#123;    <span class="comment">//在不越界的条件下不断沿trie树搜索</span></span><br><span class="line">        root=treeN[root].next[cell[x][y]-<span class="string">&#x27;A&#x27;</span>];</span><br><span class="line">        <span class="keyword">if</span>(root&lt;=<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        id=treeN[root].id;</span><br><span class="line">        <span class="keyword">if</span>(id&gt;<span class="number">0</span>)&#123;   <span class="comment">//若id&gt;0，说明这个位置是第id个单词的结尾，略微处理得到答案，存入ans数组</span></span><br><span class="line">            ans[id][<span class="number">0</span>]=dir;</span><br><span class="line">            ans[id][<span class="number">1</span>]=x-(slen[id]<span class="number">-1</span>)*dx[dir];</span><br><span class="line">            ans[id][<span class="number">2</span>]=y-(slen[id]<span class="number">-1</span>)*dy[dir];</span><br><span class="line">        &#125;</span><br><span class="line">        x+=dx[dir];</span><br><span class="line">        y+=dy[dir];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    tidx=<span class="number">0</span>;</span><br><span class="line">    std::cin &gt;&gt; r &gt;&gt; c &gt;&gt; w;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;r; i++)</span><br><span class="line">        std::cin &gt;&gt; cell[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=w; i++)&#123;</span><br><span class="line">        std::cin &gt;&gt; word;</span><br><span class="line">        <span class="built_in">joinTree</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;r; i++)<span class="comment">// 输入所有数据并建立好tire树后暴搜得到答案</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;c; j++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>; k&lt;<span class="number">8</span>; k++)</span><br><span class="line">                <span class="built_in">sch</span>(i,j,k);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=w; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d %d %c\n&quot;</span>,ans[i][<span class="number">1</span>],ans[i][<span class="number">2</span>],ans[i][<span class="number">0</span>]+<span class="string">&#x27;A&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<h2 id="AC自动机解法"><a href="#AC自动机解法" class="headerlink" title="AC自动机解法"></a>AC自动机解法</h2><p>在trie树的基础上使用AC自动机（只需要多一步添加fail指针，然后再修改亿点点）<br>AC自动机的好处是只需要在地图最外围的一圈把8个方向都遍历一次就行了，因为它不用像单纯用trie树一样每次只能从根节点开始搜索，而是匹配不成功时通过fail指针转移到树的其他位置继续搜索</p>
+<p>​    </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="comment">//相对于暴搜，用AC自动机在地图最外围的一圈把8个方向都遍历一次</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> dy[<span class="number">8</span>]=&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>&#125;;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> dx[<span class="number">8</span>]=&#123;<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>&#125;;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn=<span class="number">1005</span>;</span><br><span class="line"><span class="type">char</span> cell[maxn][maxn],word[maxn];</span><br><span class="line"><span class="type">int</span> slen[maxn],tidx,r,c,w,ans[maxn][<span class="number">3</span>];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span>&#123;</span><br><span class="line">    <span class="type">int</span> id,next[<span class="number">26</span>],fail;</span><br><span class="line">&#125;treeN[maxn*maxn];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">joinTree</span><span class="params">(<span class="type">int</span> id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> root=<span class="number">0</span>,len=<span class="built_in">strlen</span>(word),nxt;</span><br><span class="line">    slen[id]=len;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;len; i++)&#123;</span><br><span class="line">        nxt=word[i]-<span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span>(treeN[root].next[nxt]&lt;=<span class="number">0</span>)</span><br><span class="line">            treeN[root].next[nxt]=++tidx;</span><br><span class="line">        root=treeN[root].next[nxt];</span><br><span class="line">    &#125;</span><br><span class="line">    treeN[root].id=id;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//建立好trie树后调用此函数通过bfs添加fail指针</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">getFail</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> nxt,cur,fail;</span><br><span class="line">    std::queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">26</span>; i++)&#123;</span><br><span class="line">        nxt=treeN[<span class="number">0</span>].next[i];</span><br><span class="line">        <span class="keyword">if</span>(nxt&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            treeN[nxt].fail=<span class="number">0</span>;</span><br><span class="line">            q.<span class="built_in">push</span>(nxt);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">        cur=q.<span class="built_in">front</span>(),q.<span class="built_in">pop</span>();</span><br><span class="line">        fail=treeN[cur].fail;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">26</span>; i++)&#123;</span><br><span class="line">            nxt=treeN[cur].next[i];</span><br><span class="line">            <span class="keyword">if</span>(nxt&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                treeN[nxt].fail=treeN[fail].next[i];</span><br><span class="line">                q.<span class="built_in">push</span>(nxt);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> treeN[cur].next[i]=treeN[fail].next[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ACgo</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">int</span> dir)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> root=<span class="number">0</span>,id;</span><br><span class="line">    <span class="keyword">while</span>(x&gt;=<span class="number">0</span> &amp;&amp; x&lt;=r &amp;&amp; y&gt;=<span class="number">0</span> &amp;&amp; y&lt;=c)&#123;</span><br><span class="line">        <span class="keyword">while</span>( root&gt;<span class="number">0</span> &amp;&amp; treeN[root].next[cell[x][y]-<span class="string">&#x27;A&#x27;</span>]&lt;=<span class="number">0</span>)<span class="comment">//如果不能匹配就通过fail指针回溯，在trie的其他位置继续寻找，节约了时间</span></span><br><span class="line">            root=treeN[root].fail;</span><br><span class="line">        root=treeN[root].next[cell[x][y]-<span class="string">&#x27;A&#x27;</span>];</span><br><span class="line">        id=treeN[root].id;</span><br><span class="line">        <span class="keyword">if</span>(id&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            ans[id][<span class="number">0</span>]=dir;</span><br><span class="line">            ans[id][<span class="number">1</span>]=x-(slen[id]<span class="number">-1</span>)*dx[dir];</span><br><span class="line">            ans[id][<span class="number">2</span>]=y-(slen[id]<span class="number">-1</span>)*dy[dir];</span><br><span class="line">        &#125;</span><br><span class="line">        x+=dx[dir];</span><br><span class="line">        y+=dy[dir];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    tidx=<span class="number">0</span>;</span><br><span class="line">    std::cin &gt;&gt; r &gt;&gt; c &gt;&gt; w;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;r; i++)</span><br><span class="line">        std::cin &gt;&gt; cell[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=w; i++)&#123;</span><br><span class="line">        std::cin &gt;&gt; word;</span><br><span class="line">        <span class="built_in">joinTree</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">getFail</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;r; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;<span class="number">8</span>; j++)</span><br><span class="line">            <span class="built_in">ACgo</span>(i,<span class="number">0</span>,j),<span class="built_in">ACgo</span>(i,r<span class="number">-1</span>,j);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;c; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;<span class="number">8</span>; j++)</span><br><span class="line">            <span class="built_in">ACgo</span>(<span class="number">0</span>,i,j),<span class="built_in">ACgo</span>(c<span class="number">-1</span>,i,j);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=w; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d %d %c\n&quot;</span>,ans[i][<span class="number">1</span>],ans[i][<span class="number">2</span>],ans[i][<span class="number">0</span>]+<span class="string">&#x27;A&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<h2 id="反向构建trie树，不用记录单词长度"><a href="#反向构建trie树，不用记录单词长度" class="headerlink" title="反向构建trie树，不用记录单词长度"></a>反向构建trie树，不用记录单词长度</h2><p><strong>两段代码都只改了一点，但都时间超限，目前没发现原因，慎看</strong><br><strong>两段代码都只改了一点，但都时间超限，目前没发现原因，慎看</strong><br><strong>两段代码都只改了一点，但都时间超限，目前没发现原因，慎看</strong><br><strong>两段代码都只改了一点，但都时间超限，目前没发现原因，慎看</strong><br><strong>两段代码都只改了一点，但都时间超限，目前没发现原因，慎看</strong></p>
+<p>​    </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> dy[<span class="number">8</span>]=&#123;<span class="number">0</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> dx[<span class="number">8</span>]=&#123;<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>&#125;;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn=<span class="number">1005</span>;</span><br><span class="line"><span class="type">char</span> cell[maxn][maxn],word[maxn];</span><br><span class="line"><span class="type">int</span> tidx,r,c,w,ans[maxn][<span class="number">3</span>];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span>&#123;</span><br><span class="line">    <span class="type">int</span> id,next[<span class="number">26</span>],fail;</span><br><span class="line">&#125;treeN[maxn*maxn];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">joinTree</span><span class="params">(<span class="type">int</span> id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> root=<span class="number">0</span>,len=<span class="built_in">strlen</span>(word),nxt;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=len<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--)&#123;</span><br><span class="line">        nxt=word[i]-<span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span>(treeN[root].next[nxt]&lt;=<span class="number">0</span>)</span><br><span class="line">            treeN[root].next[nxt]=++tidx;</span><br><span class="line">        root=treeN[root].next[nxt];</span><br><span class="line">    &#125;</span><br><span class="line">    treeN[root].id=id;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">getFail</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> nxt,cur,fail;</span><br><span class="line">    std::queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">26</span>; i++)&#123;</span><br><span class="line">        nxt=treeN[<span class="number">0</span>].next[i];</span><br><span class="line">        <span class="keyword">if</span>(nxt&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            treeN[nxt].fail=<span class="number">0</span>;</span><br><span class="line">            q.<span class="built_in">push</span>(nxt);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">        cur=q.<span class="built_in">front</span>(),q.<span class="built_in">pop</span>();</span><br><span class="line">        fail=treeN[cur].fail;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">26</span>; i++)&#123;</span><br><span class="line">            nxt=treeN[cur].next[i];</span><br><span class="line">            <span class="keyword">if</span>(nxt&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                treeN[nxt].fail=treeN[fail].next[i];</span><br><span class="line">                q.<span class="built_in">push</span>(nxt);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> treeN[cur].next[i]=treeN[fail].next[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ACgo</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">int</span> dir)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> root=<span class="number">0</span>,id;</span><br><span class="line">    <span class="keyword">while</span>(x&gt;=<span class="number">0</span> &amp;&amp; x&lt;=r &amp;&amp; y&gt;=<span class="number">0</span> &amp;&amp; y&lt;=c)&#123;</span><br><span class="line">        <span class="keyword">while</span>( root&gt;<span class="number">0</span> &amp;&amp; treeN[root].next[cell[x][y]-<span class="string">&#x27;A&#x27;</span>]&lt;=<span class="number">0</span>)</span><br><span class="line">            root=treeN[root].fail;</span><br><span class="line">        root=treeN[root].next[cell[x][y]-<span class="string">&#x27;A&#x27;</span>];</span><br><span class="line">        id=treeN[root].id;</span><br><span class="line">        <span class="keyword">if</span>(id&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            ans[id][<span class="number">0</span>]=dir;</span><br><span class="line">            ans[id][<span class="number">1</span>]=x;</span><br><span class="line">            ans[id][<span class="number">2</span>]=y;</span><br><span class="line">        &#125;</span><br><span class="line">        x+=dx[dir];</span><br><span class="line">        y+=dy[dir];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    tidx=<span class="number">0</span>;</span><br><span class="line">    std::cin &gt;&gt; r &gt;&gt; c &gt;&gt; w;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;r; i++)</span><br><span class="line">        std::cin &gt;&gt; cell[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=w; i++)&#123;</span><br><span class="line">        std::cin &gt;&gt; word;</span><br><span class="line">        <span class="built_in">joinTree</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">getFail</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;r; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;<span class="number">8</span>; j++)</span><br><span class="line">            <span class="built_in">ACgo</span>(i,<span class="number">0</span>,j),<span class="built_in">ACgo</span>(i,r<span class="number">-1</span>,j);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;c; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;<span class="number">8</span>; j++)</span><br><span class="line">            <span class="built_in">ACgo</span>(<span class="number">0</span>,i,j),<span class="built_in">ACgo</span>(c<span class="number">-1</span>,i,j);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=w; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d %d %c\n&quot;</span>,ans[i][<span class="number">1</span>],ans[i][<span class="number">2</span>],ans[i][<span class="number">0</span>]+<span class="string">&#x27;A&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>​<br>​<br>​<br>​    </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> dy[<span class="number">8</span>]=&#123;<span class="number">0</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;<span class="comment">//设左上角为原点，向下为x轴正方向，向右为y轴正方向</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> dx[<span class="number">8</span>]=&#123;<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>&#125;;<span class="comment">//先设置好移动方向，dx[0],dy[0]为向上方向（A方向），方向按照顺时针旋转顺序写</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn=<span class="number">1005</span>;</span><br><span class="line"><span class="type">char</span> cell[maxn][maxn],word[maxn];<span class="comment">//cell储存字谜地图，word用于接收一个要搜索的单词</span></span><br><span class="line"><span class="type">int</span> tidx,r,c,w,ans[maxn][<span class="number">3</span>];<span class="comment">//tidx为节点序号，ans储存答案（方向+横纵坐标）</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span>&#123;</span><br><span class="line">    <span class="type">int</span> id,next[<span class="number">26</span>];<span class="comment">//在trie树中每个单词的结尾给id赋值，其值为 这个单词按照输入顺序排的序号（从1开始，不是0）</span></span><br><span class="line">&#125;treeN[maxn*maxn];</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//每输入一个单词，进行一次此函数，把单词存入trie树</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">joinTree</span><span class="params">(<span class="type">int</span> id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> root=<span class="number">0</span>,len=<span class="built_in">strlen</span>(word),nxt;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=len<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--)&#123;</span><br><span class="line">        nxt=word[i]-<span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span>(treeN[root].next[nxt]&lt;=<span class="number">0</span>)</span><br><span class="line">            treeN[root].next[nxt]=++tidx;</span><br><span class="line">        root=treeN[root].next[nxt];</span><br><span class="line">    &#125;</span><br><span class="line">    treeN[root].id=id;<span class="comment">//在trie树中每个单词的结尾给id赋值，其值为 这个单词按照输入顺序排的序号（从1开始，不是0）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查找函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">sch</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">int</span> dir)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> root=<span class="number">0</span>,id;</span><br><span class="line">    <span class="keyword">while</span>(x&gt;=<span class="number">0</span> &amp;&amp; x&lt;=r &amp;&amp; y&gt;=<span class="number">0</span> &amp;&amp; y&lt;=c)&#123;    <span class="comment">//在不越界的条件下不断沿trie树搜索</span></span><br><span class="line">        root=treeN[root].next[cell[x][y]-<span class="string">&#x27;A&#x27;</span>];</span><br><span class="line">        <span class="keyword">if</span>(root&lt;=<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        id=treeN[root].id;</span><br><span class="line">        <span class="keyword">if</span>(id&gt;<span class="number">0</span>)&#123;   <span class="comment">//若id&gt;0，说明这个位置是第id个单词的结尾，略微处理得到答案，存入ans数组</span></span><br><span class="line">            ans[id][<span class="number">0</span>]=dir;</span><br><span class="line">            ans[id][<span class="number">1</span>]=x;</span><br><span class="line">            ans[id][<span class="number">2</span>]=y;</span><br><span class="line">        &#125;</span><br><span class="line">        x+=dx[dir];</span><br><span class="line">        y+=dy[dir];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    tidx=<span class="number">0</span>;</span><br><span class="line">    std::cin &gt;&gt; r &gt;&gt; c &gt;&gt; w;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;r; i++)</span><br><span class="line">        std::cin &gt;&gt; cell[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=w; i++)&#123;</span><br><span class="line">        std::cin &gt;&gt; word;</span><br><span class="line">        <span class="built_in">joinTree</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;r; i++)<span class="comment">// 输入所有数据并建立好tire树后暴搜得到答案</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;c; j++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>; k&lt;<span class="number">8</span>; k++)</span><br><span class="line">                <span class="built_in">sch</span>(i,j,k);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=w; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d %d %c\n&quot;</span>,ans[i][<span class="number">1</span>],ans[i][<span class="number">2</span>],ans[i][<span class="number">0</span>]+<span class="string">&#x27;A&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90AC%E8%87%AA%E5%8A%A8%E6%9C%BA%20_%20trie%E6%A0%91%E3%80%91G%20-%20Word%20Puzzles%20%20%20POJ%20-%201204/" data-id="cl50tnlqo0010ycj3dj7mhlg5" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AC%E8%87%AA%E5%8A%A8%E6%9C%BA/" rel="tag">AC自动机</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Trie%E6%A0%91/" rel="tag">Trie树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/1111/11/11/%E3%80%9001%E8%83%8C%E5%8C%85DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1048%E9%87%87%E8%8D%AF%20P1060%E5%BC%80%E5%BF%83%E7%9A%84%E9%87%91%E6%98%8E%20P1855%E6%A6%A8%E5%8F%96kkksc03/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          【01背包DP练习】洛谷 P1048采药 P1060开心的金明 P1855榨取kkksc03.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/1111/11/11/%E3%80%90DP%E3%80%91%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">【DP】石子合并.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">蓝湖畔淅淅沥沥的雨</h1>
+    <h2 class="blog-subtitle">All tragedy erased, I see only wonders...</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/Wldcmzy" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/wldcmzy" target="_blank" title="CSDN">
+          CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://space.bilibili.com/83743701" target="_blank" title="bilibili(无技术和学习内容)">
+          bilibili(无技术和学习内容)
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://shanamaid.github.io/" target="_blank" title="夏娜主题作者的博客">
+          夏娜主题作者的博客
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2021 - 2022 StarsWhisper<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+	  (但是魔改)
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/announcement" title="" class="menuItem">公告</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/knightabout" title="" class="menuItem">关于</a>
+          
+            <a href="/bridges" title="" class="menuItem">传送门</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>（强行算法）对2019点美赛D题极端化的算法探讨、设计与遇到的问题（未完,但可能也到此为止）.md | 蓝湖畔淅淅沥沥的雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 卢浮宫 某建筑疏散问题 时序无向图？不考虑残疾人，不考虑工作人员，不考虑一切麻烦事。只考虑一群正常人走出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（强行算法）对2019点美赛D题极端化的算法探讨、设计与遇到的问题（未完,但可能也到此为止）.md">
+<meta property="og:url" content="http://example.com/1111/11/11/%EF%BC%88%E5%BC%BA%E8%A1%8C%E7%AE%97%E6%B3%95%EF%BC%89%E5%AF%B92019%E7%82%B9%E7%BE%8E%E8%B5%9BD%E9%A2%98%E6%9E%81%E7%AB%AF%E5%8C%96%E7%9A%84%E7%AE%97%E6%B3%95%E6%8E%A2%E8%AE%A8%E3%80%81%E8%AE%BE%E8%AE%A1%E4%B8%8E%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E6%9C%AA%E5%AE%8C,%E4%BD%86%E5%8F%AF%E8%83%BD%E4%B9%9F%E5%88%B0%E6%AD%A4%E4%B8%BA%E6%AD%A2%EF%BC%89/index.html">
+<meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
+<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 卢浮宫 某建筑疏散问题 时序无向图？不考虑残疾人，不考虑工作人员，不考虑一切麻烦事。只考虑一群正常人走出">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
+<meta property="article:modified_time" content="2022-06-30T09:22:00.477Z">
+<meta property="article:author" content="StarsWhisper">
+<meta property="article:tag" content="OldBlog(Before20220505)">
+<meta property="article:tag" content="杂乱">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="蓝湖畔淅淅沥沥的雨" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-（强行算法）对2019点美赛D题极端化的算法探讨、设计与遇到的问题（未完,但可能也到此为止）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%EF%BC%88%E5%BC%BA%E8%A1%8C%E7%AE%97%E6%B3%95%EF%BC%89%E5%AF%B92019%E7%82%B9%E7%BE%8E%E8%B5%9BD%E9%A2%98%E6%9E%81%E7%AB%AF%E5%8C%96%E7%9A%84%E7%AE%97%E6%B3%95%E6%8E%A2%E8%AE%A8%E3%80%81%E8%AE%BE%E8%AE%A1%E4%B8%8E%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E6%9C%AA%E5%AE%8C,%E4%BD%86%E5%8F%AF%E8%83%BD%E4%B9%9F%E5%88%B0%E6%AD%A4%E4%B8%BA%E6%AD%A2%EF%BC%89/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      （强行算法）对2019点美赛D题极端化的算法探讨、设计与遇到的问题（未完,但可能也到此为止）.md
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h4 id="卢浮宫-某建筑疏散问题-时序无向图？"><a href="#卢浮宫-某建筑疏散问题-时序无向图？" class="headerlink" title="卢浮宫 某建筑疏散问题 时序无向图？"></a><del>卢浮宫</del> 某建筑疏散问题 <del>时序无向图？</del></h4><p>不考虑残疾人，不考虑工作人员，不考虑一切麻烦事。只考虑一群正常人走出建筑，怎样最快。<br>核心思路是随着时间的增加不断扩大每个出口的覆盖范围，让出口在覆盖范围内“找人”代表路线的规划</p>
+<h4 id="0-铺垫定义"><a href="#0-铺垫定义" class="headerlink" title="0. 铺垫定义"></a>0. 铺垫定义</h4><p>假设某建筑有好几层，层与层之间有若干通道连接，将这些通道定义为 <strong>窄道</strong> （如楼梯），出口有若干个，可以存在于任意一层，出口与外界之间也存在<br><strong>窄道</strong> （如门）（若人是源源不断的，则通过门和通过楼梯所需的平均时间近似相等）</p>
+<h4 id="1-定义-单位时间"><a href="#1-定义-单位时间" class="headerlink" title="1.定义 单位时间"></a>1.定义 单位时间</h4><p>选一个合适的时间长度当 <strong>单位时间</strong></p>
+<h4 id="2-定义-单位距离"><a href="#2-定义-单位距离" class="headerlink" title="2.定义 单位距离"></a>2.定义 单位距离</h4><p><strong>单位时间</strong> 内人按某个速度匀速行进的距离作为 <strong>单位距离</strong> （eg：走楼梯和走平地在 <strong>单位时间</strong> 内走过的距离可能不同，但他们同为<br><strong>单位距离</strong> ，即只算时间），单位时间内能通过 <strong>窄道</strong> 的最大人数称为该出口的 <strong>最大流量</strong></p>
+<h4 id="3-定义-宽道-窄道"><a href="#3-定义-宽道-窄道" class="headerlink" title="3.定义 宽道 窄道"></a>3.定义 宽道 窄道</h4><p>把建筑划分成若干个大小基本相等的多边形（或椭圆形）区域称为 <strong>节点</strong><br>（对应图数据结构中的点）。相邻的点之间存在通道（对应图数据结构中的边）（大厅或长廊中从一个点到另一个点、连接两个点的楼梯都是通道），若一个通道不是<br><strong>窄道</strong> ，则将其定义为 <strong>宽道</strong> ，所有的通道的长度都要求近似符合 <strong>单位距离</strong> 。<br>默认 <strong>窄道</strong> 人多时会发生拥挤，人流速度受限制，而 <strong>宽道</strong> 不会发生拥挤，人流速度为“无限大”（ <strong>宽道</strong> 可以拥挤，但其拥挤的原因是<br><strong>窄道</strong> 限速，所以认为 <strong>宽道</strong> 不拥挤）</p>
+<h4 id="4-算法思路-定义"><a href="#4-算法思路-定义" class="headerlink" title="4.算法思路+定义"></a>4.算法思路+定义</h4><p>找到所有的出口，刚开始它们的 <strong>时间计数</strong> 为0。<br>时间计数决定了出口的覆盖范围。（eg：当 <strong>时间计数</strong> 为0时，只有在出口区域一部分人可以逃离建筑；当 <strong>时间计数</strong> 为5时，距离任意一个出口五个<br><strong>单位距离</strong> 的人都可以理论上逃离建筑–无视碰撞体积的情况）</p>
+<h4 id="5-算法思路"><a href="#5-算法思路" class="headerlink" title="5.算法思路"></a>5.算法思路</h4><p><strong>循环：</strong><br>{<br>1.出口的人数 减少 <strong>最大流量</strong> ，但不能低于0<br>2. <strong>时间计数</strong> +1<br>3.若距离出口附近的人数&lt;出口 <strong>最大流量</strong> ：出口点可以在距离自己 <strong>时间计数</strong> 个 <strong>单位距离</strong> 的范围内找人补充人数至 <strong>最大流量</strong><br>。<br>注：*递归： * 当出口的覆盖范围中包含 <strong>窄道</strong> 时，应优先从窄道另一端的点找人， <strong>见考虑1</strong> ，进行递归。（若 <strong>窄道</strong><br>另一端覆盖的范围内存在新的窄道，则这一寻找中优先考虑新的窄道）<br>}<br><strong>终止条件:</strong> <del>所有的点全部覆盖 <strong>且</strong></del> 所有人都逃出生天</p>
+<h4 id="a-考虑1"><a href="#a-考虑1" class="headerlink" title="a.考虑1"></a>a.考虑1</h4><p><strong>为什么窄道另一端优先</strong><br>eg：2层楼疏散，只有一楼有出口，1、2层之间存在若干窄道，出口与外界之间存在若干窄道。姑且把前者称为 <strong>远级窄道</strong> ，后者称为 <strong>近级窄道</strong> 。<br>显然疏散的最快速度时取决于 <strong>近级窄道</strong> 的。若不给 <strong>远级窄道</strong> 较高的优先级，而恰好所有的 <strong>远级窄道</strong> 的最大流量和&lt;所有<br><strong>近级窄道</strong> 的最大流量和，就很可能会出现1楼的人已经疏散完，留下大量的出口，而2楼的人无法及时下来的情况。</p>
+<p>这只是一种找到每个通道需要走多少人的办法。当走一条通道的总人数固定，哪里的人先走对时间几乎没有影响。</p>
+<h4 id="A-问题1"><a href="#A-问题1" class="headerlink" title="A.问题1"></a>A.问题1</h4><p>同时涵盖到多条窄道时，如何抉择？(好像遇到坑了，怎么感觉需要花式DP啊）</p>
+<h4 id="代码（数组模拟数据结构）（未完成）"><a href="#代码（数组模拟数据结构）（未完成）" class="headerlink" title="代码（数组模拟数据结构）（未完成）"></a>代码（数组模拟数据结构）（未完成）</h4><p>​    </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="type">const</span> INF = <span class="number">1e7</span>+<span class="number">7</span>;</span><br><span class="line"><span class="type">int</span> <span class="type">const</span> maxf = <span class="number">10</span>;  <span class="comment">//最大楼层数</span></span><br><span class="line"><span class="type">int</span> <span class="type">const</span> maxn = <span class="number">20</span>;  <span class="comment">//楼层出口最大数目</span></span><br><span class="line"><span class="type">int</span> <span class="type">const</span> maxd = <span class="number">40</span>;  <span class="comment">//区域距离最远楼层出口的最大距离+1</span></span><br><span class="line"><span class="type">int</span> <span class="type">const</span> maxv = <span class="number">1000</span>;<span class="comment">//最多节点个数</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> inode,iedge,cntout;</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> num;        <span class="comment">//此节点的人数</span></span><br><span class="line">    <span class="type">int</span> dis[maxn];  <span class="comment">//此节点距离楼层中每个出口的距离</span></span><br><span class="line">    Node *nxt[maxn];<span class="comment">//指向跟这个节点与出口i距离相同的下一个节点</span></span><br><span class="line">    <span class="type">bool</span> narrow;   <span class="comment">//这个节点是否是窄道的入点、出点</span></span><br><span class="line">    Node *special;  <span class="comment">//窄道另一端的点 仅在isIN或isOUT为true时生效</span></span><br><span class="line">&#125;node[maxv];</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Edge</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> to,speed;   <span class="comment">//通道速度 单位时间内能通过通道的最大人数 宽道默认很大</span></span><br><span class="line">    <span class="type">bool</span> narrow;    <span class="comment">//是否为窄道</span></span><br><span class="line">&#125;edge[maxv&lt;&lt;<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">FLOOR</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> exitNum;        <span class="comment">//出口数目</span></span><br><span class="line">    <span class="type">int</span> nodeNum;        <span class="comment">//这层楼的节点总数</span></span><br><span class="line">    <span class="type">int</span> zero;           <span class="comment">//无人节点数</span></span><br><span class="line">    <span class="type">bool</span> isempty;       <span class="comment">//楼层是否为空</span></span><br><span class="line">    Node *Dnode[maxn][maxd] <span class="comment">//与第i个出口距离为j的节点组成的链表的头节点指针</span></span><br><span class="line">&#125;floor[maxf];</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    inode = iedge = cntout = <span class="number">-1</span>;</span><br><span class="line">    <span class="built_in">memset</span>(head,<span class="number">-1</span>,<span class="built_in">sizeof</span>(head));</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>​<br>​    </p>
+<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p><strong>2019 ICM<br>Problem D: Time to leave the Louvre</strong><br>The increasing number of terror attacks in France[1]<br>requires a review of the emergency<br>evacuation plans at many popular destinations. Your ICM team is helping to<br>design evacuation<br>plans at the Louvre in Paris, France. In general, the goal of evacuation is to<br>have all occupants<br>leave the building as quickly and safely as possible. Upon notification of a<br>required evacuation,<br>individuals egress to and through an optimal exit in order to empty the<br>building as quickly as<br>possible.<br>The Louvre is one of the world’s largest and most visited art museum,<br>receiving more than 8.1<br>million visitors in 2017[2]<br>. The number of guests in the museum varies throughout the day and<br>year, which provides challenges in planning for regular movement within the<br>museum. The<br>diversity of visitors – speaking a variety of languages, groups traveling<br>together, and disabled<br>visitors – makes evacuation in an emergency even more challenging.<br>The Louvre has five floors, two of which are underground.<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20210112235110425.png?x-oss-">https://img-blog.csdnimg.cn/20210112235110425.png?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70#pic_center)<br>The 380,000 exhibits located on these five floors cover approximately 72,735<br>square meters,<br>with building wings as long as 480 meters or 5 city blocks[3]. The pyramid<br>entrance is the main<br>and most used public entrance to the museum. However, there are also three<br>other entrances<br>usually reserved for groups and individuals with museum memberships: the<br>Passage Richelieu<br>entrance, the Carrousel du Louvre entrance, and the Portes Des Lions entrance.<br>The Louvre has<br>an online application, “Affluences” (<a target="_blank" rel="noopener" href="https://www.affluences.com/louvre.php">https://www.affluences.com/louvre.php</a>),<br>that provides realtime updates on the estimated waiting time at each of these<br>entrances to help facilitate entry to<br>the museum. Your team might consider how technology, to include apps such as<br>Affluences, or<br>others could be used to facilitate your evacuation plan.<br>Only emergency personnel and museum officials know the actual number of total<br>available exit<br>points (service doors, employee entrances, VIP entrances, emergency exits, and<br>old secret<br>entrances built by the monarchy, etc.). While public awareness of these exit<br>points could provide<br>additional strength to an evacuation plan, their use would simultaneously<br>cause security concerns<br>due to the lower or limited security postures at these exits compared with<br>level of security at the<br>four main entrances. Thus, when creating your model, your team should consider<br>carefully when<br>and how any additional exits might be utilized.<br>Your supervisor wants your ICM team to develop an emergency evacuation model<br>that allows<br>the museum leaders to explore a range of options to evacuate visitors from the<br>museum, while<br>also allowing emergency personnel to enter the building as quickly as<br>possible. It is important to<br>identify potential bottlenecks that may limit movement towards the exits. The<br>museum<br>emergency planners are especially interested in an adaptable model that can be<br>designed to<br>address a broad set of considerations and various types of potential threats.<br>Each threat has the<br>potential to alter or remove segments of possible routes to safety that may be<br>essential in a single<br>optimized route. Once developed, validate your model(s) and discuss how the<br>Louvre would<br>implement it.<br>Based on the results of your work, propose policy and procedural<br>recommendations for<br>emergency management of the Louvre. Include any applicable crowd management<br>and control<br>procedures that your team believes are necessary for the safety of the<br>visitors. Additionally,<br>discuss how you could adapt and implement your model(s) for other large,<br>crowded structures.<br>Your submission should consist of:<br> One-page Summary Sheet,<br> Your solution of no more than 20 pages, for a maximum of 21 pages with your<br>summary.<br> Judges expect a complete list of references with in-text citations, but may<br>not consider<br>appendices in the judging process.<br> Note: Reference list and any appendices do not count toward the 21-page<br>limit and<br>should appear after your completed solution.<br>References:<br>[1] Reporters, Telegraph. “Terror Attacks in France: From Toulouse to the<br>Louvre.” The<br>Telegraph, Telegraph Media Group, 24 June 2018,<br><a target="_blank" rel="noopener" href="http://www.telegraph.co.uk/news/0/terrorattacks-france-toulouse-louvre/">www.telegraph.co.uk/news/0/terrorattacks-france-toulouse-louvre/</a>. [2] “8.1<br>Million Visitors to the Louvre in 2017.” Louvre Press Release, 25 Jan. 2018,<br>presse.louvre.fr&#x2F;8-1-million-visitors-to-the-louvre-in-2017&#x2F;. [3] “Interactive<br>Floor Plans.” Louvre - Interactive Floor Plans | Louvre Museum | Paris,<br>30 June 2016, <a target="_blank" rel="noopener" href="http://www.louvre.fr/en/plan">www.louvre.fr/en/plan</a>.<br>[4] “Pyramid” Project Launch – The Musée du Louvre is improving visitor<br>reception<br>(2014-2016).” Louvre Press Kit, 18 Sept. 2014,<br><a target="_blank" rel="noopener" href="http://www.louvre.fr/sites/default/files/dp_pyramide%2028102014_en.pdf">www.louvre.fr/sites/default/files/dp_pyramide%2028102014_en.pdf</a>.<br>[5] “The ‘Pyramid’ Project - Improving Visitor Reception (2014-2016).” Louvre<br>Press<br>Release, 6 July 2016, presse.louvre.fr&#x2F;the-pyramid-project&#x2F;.<br>Glossary:<br>Bottlenecks – places where movement is dramatically slowed or even stopped.<br>Emergency personnel – people who help in an emergency, such as guards, fire<br>fighters,<br>medics, ambulance crews, doctors, and police.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%EF%BC%88%E5%BC%BA%E8%A1%8C%E7%AE%97%E6%B3%95%EF%BC%89%E5%AF%B92019%E7%82%B9%E7%BE%8E%E8%B5%9BD%E9%A2%98%E6%9E%81%E7%AB%AF%E5%8C%96%E7%9A%84%E7%AE%97%E6%B3%95%E6%8E%A2%E8%AE%A8%E3%80%81%E8%AE%BE%E8%AE%A1%E4%B8%8E%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E6%9C%AA%E5%AE%8C,%E4%BD%86%E5%8F%AF%E8%83%BD%E4%B9%9F%E5%88%B0%E6%AD%A4%E4%B8%BA%E6%AD%A2%EF%BC%89/" data-id="cl50tnltv00gfycj32otb60s1" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E4%B9%B1/" rel="tag">杂乱</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/1111/11/11/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E7%9A%84%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          随机森林的应用简例.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/1111/11/11/disabled/%E3%80%90%E5%B1%91%E3%80%91%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E8%87%AA%E5%B7%B1%E8%83%BD%E7%9C%8B%E6%98%8E%E7%99%BD%E7%9A%84%E5%85%B3%E4%BA%8E%E5%AD%A6%E4%B9%A0bs4.BeautifulSoup%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E7%9A%84%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">【屑】【学习记录】【Python】自己能看明白的关于学习bs4.BeautifulSoup基本知识的总结.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">蓝湖畔淅淅沥沥的雨</h1>
+    <h2 class="blog-subtitle">All tragedy erased, I see only wonders...</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/Wldcmzy" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/wldcmzy" target="_blank" title="CSDN">
+          CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://space.bilibili.com/83743701" target="_blank" title="bilibili(无技术和学习内容)">
+          bilibili(无技术和学习内容)
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://shanamaid.github.io/" target="_blank" title="夏娜主题作者的博客">
+          夏娜主题作者的博客
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2021 - 2022 StarsWhisper<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+	  (但是魔改)
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/announcement" title="" class="menuItem">公告</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/knightabout" title="" class="menuItem">关于</a>
+          
+            <a href="/bridges" title="" class="menuItem">传送门</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

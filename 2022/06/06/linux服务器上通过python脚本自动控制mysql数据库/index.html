@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>python语言实现服务器对mysql数据库的自动处理 | 蓝湖畔淅淅沥沥的雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="声明1.本人还是比较菜的，对服务器安全性等内容可能一窍不通，也没有使用框架，仅考虑完成目的。 2.本篇博客仅记录使用本人的总结，仅论述实现目的的基本流程， 不详细讲解知识，数据库初学者建议先学习sql基本语法(时间成本不高) 环境安装我使用的操作系统是Ubuntu20, 装好之后是自带python3, 所以我们直接无脑安装mysql 12apt updateapt install mysql-se">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python语言实现服务器对mysql数据库的自动处理">
+<meta property="og:url" content="http://example.com/2022/06/06/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%80%9A%E8%BF%87python%E8%84%9A%E6%9C%AC%E8%87%AA%E5%8A%A8%E6%8E%A7%E5%88%B6mysql%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
+<meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
+<meta property="og:description" content="声明1.本人还是比较菜的，对服务器安全性等内容可能一窍不通，也没有使用框架，仅考虑完成目的。 2.本篇博客仅记录使用本人的总结，仅论述实现目的的基本流程， 不详细讲解知识，数据库初学者建议先学习sql基本语法(时间成本不高) 环境安装我使用的操作系统是Ubuntu20, 装好之后是自带python3, 所以我们直接无脑安装mysql 12apt updateapt install mysql-se">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-06T12:55:40.000Z">
+<meta property="article:modified_time" content="2022-06-30T09:22:00.415Z">
+<meta property="article:author" content="StarsWhisper">
+<meta property="article:tag" content="服务器">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="socket">
+<meta property="article:tag" content="sql">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="后端">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="蓝湖畔淅淅沥沥的雨" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-linux服务器上通过python脚本自动控制mysql数据库" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/06/06/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%80%9A%E8%BF%87python%E8%84%9A%E6%9C%AC%E8%87%AA%E5%8A%A8%E6%8E%A7%E5%88%B6mysql%E6%95%B0%E6%8D%AE%E5%BA%93/" class="article-date">
+  <time class="post-time" datetime="2022-06-06T12:55:40.000Z" itemprop="datePublished">
+    <span class="post-month">6月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python语言实现服务器对mysql数据库的自动处理
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>,<a class="article-category-link" href="/categories/%E5%90%8E%E7%AB%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p>1.本人还是比较菜的，对服务器安全性等内容可能一窍不通，也没有使用框架，仅考虑完成目的。</p>
+<p>2.本篇博客仅记录使用本人的总结，仅论述实现目的的基本流程， 不详细讲解知识，数据库初学者建议先学习sql基本语法(时间成本不高)</p>
+<h2 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h2><p>我使用的操作系统是Ubuntu20, 装好之后是自带python3, 所以我们直接无脑安装mysql</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install mysql-server</span><br></pre></td></tr></table></figure>
+
+<p>非root账号输入, 当然要能获取root权限才行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install mysql-server</span><br></pre></td></tr></table></figure>
+
+<h2 id="新建一个账号"><a href="#新建一个账号" class="headerlink" title="新建一个账号"></a>新建一个账号</h2><p>这一步没什么用，只是我想新建一个</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adduser --home /usr/sir sir</span><br></pre></td></tr></table></figure>
+
+<h2 id="mysql登录"><a href="#mysql登录" class="headerlink" title="mysql登录"></a>mysql登录</h2><p>mysql数据库创建时会自动生成一串root用户密码,想改密码的可以去查查怎么改。使用root账号可以直接这样登录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql</span><br></pre></td></tr></table></figure>
+
+<p>非root账户用用户名密码登录, 输入下方语句后会提示你输入密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u username -p</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据库基本操作"><a href="#数据库基本操作" class="headerlink" title="数据库基本操作"></a>数据库基本操作</h2><p>建增删改查等操作示例。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select ifUsed from invitation where invitationCode = &#x27;xxx&#x27;;</span><br><span class="line">update invitation set ifUsed = &#x27;xxx&#x27; where invitationCode = &#x27;xxx&#x27;;</span><br><span class="line">delete from invitation where username = &#x27;xxx&#x27;;</span><br><span class="line">insert into userInfo values (&#x27;xxx&#x27;, &#x27;xxx&#x27;, &#x27;xxx&#x27;, 0, 0, 0);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>创建一个数据库用户, @后跟一个ip, 表示允许哪些ip,或哪些子网段的ip访问, 若写%表示所有, localhost顾名思义是本地</p>
+<p> identified by 后面写密码</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;testdbuser&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;abcd&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>给用户授权， 当然也可以新建角色给角色授权，然后再把角色权限授权给用户，</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> privileges <span class="keyword">on</span> <span class="keyword">table</span> 好几个表 <span class="keyword">to</span> testdbuser<span class="variable">@localhost</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="python自动操作数据库"><a href="#python自动操作数据库" class="headerlink" title="python自动操作数据库"></a>python自动操作数据库</h2><h4 id="安装pymysql库"><a href="#安装pymysql库" class="headerlink" title="安装pymysql库"></a>安装pymysql库</h4><p>无脑安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install mypysql</span><br></pre></td></tr></table></figure>
+
+<h4 id="pymysql基本操作"><a href="#pymysql基本操作" class="headerlink" title="pymysql基本操作"></a>pymysql基本操作</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br></pre></td></tr></table></figure>
+
+<h5 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h5><p>首先创建<strong>对象</strong>和<strong>游标</strong>， 形如下方代码 </p>
+<p>参数database表示你要操作哪个数据库 ，用户名密码要正确，且用户要有访问权限才行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">self.__connection = pymysql.connect(host = self.__host, user = self.__user, password = self.__password, database = self.__database) <span class="comment"># 实例化对象</span></span><br><span class="line">        </span><br><span class="line">self.__cursor = self.__connection.cursor(cursor=pymysql.cursors.DictCursor) <span class="comment">#游标</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h5><p>注意除了查询操作外，其他操作(也就是会改变数据库内容的操作)需要最后使用**commit()**方法,否则无法成功真正在数据库中完成操作</p>
+<p>查</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sql = <span class="string">&#x27;select count(*) cnt from User where uid = %s&#x27;</span></span><br><span class="line">self.__cursor.execute(sql, (uid)) <span class="comment"># 使用execute执行</span></span><br><span class="line">cnt = self.__cursor.fetchone()[<span class="string">&#x27;cnt&#x27;</span>] <span class="comment">#  使用fetchone() fetchmany() fetchall() 获取返回结果的一条、多条或全部</span></span><br><span class="line"><span class="keyword">if</span> cnt == <span class="number">0</span>: <span class="keyword">return</span> <span class="string">&#x27;无该用户&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>增</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sql = <span class="string">&#x27;insert into User values (%s, %s, %s, %s)&#x27;</span></span><br><span class="line">self.__cursor.execute(sql, (cnt + <span class="number">1</span>, name, password, <span class="literal">False</span>))</span><br><span class="line">self.__connection.commit() <span class="comment">#操作设计数据库修改需要执行commit方法</span></span><br></pre></td></tr></table></figure>
+
+<p>其他的都差不多 </p>
+<p>根据使用经验，若传参为字符串自带引号，当然可以提前写好之后只execute(sql)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sql = <span class="string">&#x27;insert into User values (%s, %s, %s, %s)&#x27;</span> %(乱七八糟)</span><br><span class="line">self.__cursor.execute(sql)</span><br></pre></td></tr></table></figure>
+
+<h5 id="长时间未操作连接断开"><a href="#长时间未操作连接断开" class="headerlink" title="长时间未操作连接断开"></a>长时间未操作连接断开</h5><p>Connection对象的ping 方法可以检查是否连接还在，将参数reconnect设为True表示若连接断开自动重连</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.__connection.ping(reconnect=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/06/06/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%80%9A%E8%BF%87python%E8%84%9A%E6%9C%AC%E8%87%AA%E5%8A%A8%E6%8E%A7%E5%88%B6mysql%E6%95%B0%E6%8D%AE%E5%BA%93/" data-id="cl50tnlqh000kycj35p70fwcz" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/socket/" rel="tag">socket</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/06/06/%E5%AF%B9%E5%A4%9A%E4%BA%BA%E6%89%AB%E9%9B%B7%E8%AF%BE%E8%AE%BE%E6%A0%B8%E5%BF%83%E7%AE%97%E6%B3%95%E7%9A%84%E5%88%86%E6%9E%90/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          对多人扫雷课设核心算法的分析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/06/%E7%88%AC%E5%8F%96%E8%87%AA%E5%B7%B1CSDN%E4%B8%8A%E6%89%80%E6%9C%89%E7%9A%84%E5%8D%9A%E5%AE%A2%E5%B9%B6%E8%BD%AC%E5%AD%98%E4%B8%BAmd%E6%96%87%E4%BB%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">爬取自己CSDN上所有的博客并转存为md文件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">蓝湖畔淅淅沥沥的雨</h1>
+    <h2 class="blog-subtitle">All tragedy erased, I see only wonders...</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/Wldcmzy" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/wldcmzy" target="_blank" title="CSDN">
+          CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://space.bilibili.com/83743701" target="_blank" title="bilibili(无技术和学习内容)">
+          bilibili(无技术和学习内容)
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://shanamaid.github.io/" target="_blank" title="夏娜主题作者的博客">
+          夏娜主题作者的博客
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2021 - 2022 StarsWhisper<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+	  (但是魔改)
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/announcement" title="" class="menuItem">公告</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/knightabout" title="" class="menuItem">关于</a>
+          
+            <a href="/bridges" title="" class="menuItem">传送门</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

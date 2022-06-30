@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【换根DP】Tree and Permutation.md | 蓝湖畔淅淅沥沥的雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 Tree and Permutation HUD6446题目大意给你一颗n个点的树， 有边权，求这个东西">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【换根DP】Tree and Permutation.md">
+<meta property="og:url" content="http://example.com/1111/11/11/%E3%80%90%E6%8D%A2%E6%A0%B9DP%E3%80%91Tree%20and%20Permutation/index.html">
+<meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
+<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 Tree and Permutation HUD6446题目大意给你一颗n个点的树， 有边权，求这个东西">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
+<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:author" content="StarsWhisper">
+<meta property="article:tag" content="OldBlog(Before20220505)">
+<meta property="article:tag" content="DP">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="蓝湖畔淅淅沥沥的雨" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-【换根DP】Tree and Permutation" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E6%8D%A2%E6%A0%B9DP%E3%80%91Tree%20and%20Permutation/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【换根DP】Tree and Permutation.md
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/DP/">DP</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h1 id="Tree-and-Permutation-HUD6446"><a href="#Tree-and-Permutation-HUD6446" class="headerlink" title="Tree and Permutation HUD6446"></a>Tree and Permutation HUD6446</h1><h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>给你一颗n个点的树， 有边权，求这个东西：<br>Σ i &#x3D; 1 n Σ j &#x3D; 1 n d i s [ i t o j ] ∗ ( n − 1 ) ! \Sigma_{i &#x3D; 1} ^n<br>\Sigma_{j &#x3D; 1}^n dis[i<del>to</del>j] * (n - 1) ! Σi&#x3D;1n​Σj&#x3D;1n​dis[i to j]∗(n−1)!</p>
+<h2 id="换根dp"><a href="#换根dp" class="headerlink" title="换根dp"></a>换根dp</h2><p>用换根dp算前面一坨， 然后 * (n - 1)!<br>先dfs（类似树形dp）求任意一个点a到所有点的距离part[a]。<br>然后可以由已知点x的答案part[x]做简单变换， 推导出与x相邻的未知答案的点集Y (向量)的答案part[Y] (向量)， 所以又是一次DFS<br>然后对所有part求Sigma， 再乘 (n-1)! 记得取模。 完毕。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>​<br>    #include &lt;bits&#x2F;stdc++.h&gt;<br>    const int N &#x3D; 1e5 + 4, MOD &#x3D; 1e9 + 7;<br>    int n, u, v, ipart &#x3D; 1, idx;<br>    int size[N], head[N];<br>    long long dis[N], part[N], re, w;<br>    struct Edge{ int to, nxt; long long w; }edg[N &lt;&lt; 1];<br>    inline void addE(int fr, int to, long long w){<br>        edg[++ idx] &#x3D; (Edge){to, head[fr], w}; head[fr] &#x3D; idx;<br>        edg[++ idx] &#x3D; (Edge){fr, head[to], w}; head[to] &#x3D; idx;<br>    }<br>    void dfs(int x, int fa){<br>        size[x] &#x3D; 1;<br>        for(int e&#x3D;head[x]; e; e&#x3D;edg[e].nxt){<br>            int y &#x3D; edg[e].to;<br>            if(y &#x3D;&#x3D; fa) continue;<br>            dis[y] &#x3D; dis[x] + edg[e].w;<br>            dfs(y, x);<br>            size[x] +&#x3D; size[y];<br>        }<br>        part[ipart] &#x3D; (part[ipart] + dis[x]) % MOD;<br>    }<br>    void dfsN(int x, int fa){<br>        re &#x3D; (re + part[x]) % MOD;<br>        for(int e&#x3D;head[x]; e; e&#x3D;edg[e].nxt){<br>            int y &#x3D; edg[e].to;<br>            if(y &#x3D;&#x3D; fa) continue;<br>            part[y] &#x3D; part[x] + (n - (size[y] &lt;&lt; 1)) * edg[e].w;<br>            dfsN(y, x);<br>        }<br>    }<br>    int main(){<br>        while(scanf(“%d”, &amp;n) !&#x3D; EOF){<br>            idx &#x3D; 1, re &#x3D; 0, part[ipart] &#x3D; 0;<br>            memset(head, 0, sizeof(head));<br>            memset(size, 0, sizeof(size));<br>            memset(dis, 0, sizeof(dis));<br>            for(int i&#x3D;1; i&lt;n; i++){<br>                scanf(“%d%d%d”, &amp;u, &amp;v, &amp;w);<br>                addE(u, v, w);<br>            }<br>            dfs(ipart, -1);<br>            dfsN(ipart, -1);<br>            re &#x3D; (re + MOD) % MOD;<br>            for(int i&#x3D;n-1; i&gt;&#x3D;1; i–) re &#x3D; re * i % MOD;<br>            printf(“%lld\n”, re);<br>        }<br>        return 0;<br>    }</p>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>There are N vertices connected by N−1 edges, each edge has its own length.<br>The set { 1,2,3,…,N } contains a total of N! unique permutations, let’s say<br>the i-th permutation is Pi and Pi,j is its j-th number.<br>For the i-th permutation, it can be a traverse sequence of the tree with N<br>vertices, which means we can go from the Pi,1-th vertex to the Pi,2-th vertex<br>by the shortest path, then go to the Pi,3-th vertex ( also by the shortest<br>path ) , and so on. Finally we’ll reach the Pi,N-th vertex, let’s define the<br>total distance of this route as D(Pi) , so please calculate the sum of D(Pi)<br>for all N! permutations.</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>There are 10 test cases at most.<br>The first line of each test case contains one integer N ( 1≤N≤105 ) .<br>For the next N−1 lines, each line contains three integer X, Y and L, which<br>means there is an edge between X-th vertex and Y-th of length L (<br>1≤X,Y≤N,1≤L≤109 ) .</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>For each test case, print the answer module 109+7 in one line.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%8D%A2%E6%A0%B9DP%E3%80%91Tree%20and%20Permutation/" data-id="cl50tnlri0033ycj3hoie98ug" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/1111/11/11/%E3%80%90%E6%95%B0%E4%BD%8DDP%E3%80%91%20%E6%B4%9B%E8%B0%B7%20P2602%20%5BZJOI2010%5D%E6%95%B0%E5%AD%97%E8%AE%A1%E6%95%B0%20P2657%20%5BSCOI2009%5D%20windy%20%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          【数位DP】 洛谷 P2602 [ZJOI2010]数字计数 P2657 [SCOI2009] windy 数.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%20%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%20%E7%BD%91%E6%A0%BC%E5%8C%96%E6%90%9C%E7%B4%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">【机器学习】 应用简例 随机森林 交叉验证 网格化搜索.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">蓝湖畔淅淅沥沥的雨</h1>
+    <h2 class="blog-subtitle">All tragedy erased, I see only wonders...</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/Wldcmzy" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/wldcmzy" target="_blank" title="CSDN">
+          CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://space.bilibili.com/83743701" target="_blank" title="bilibili(无技术和学习内容)">
+          bilibili(无技术和学习内容)
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://shanamaid.github.io/" target="_blank" title="夏娜主题作者的博客">
+          夏娜主题作者的博客
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2021 - 2022 StarsWhisper<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+	  (但是魔改)
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/announcement" title="" class="menuItem">公告</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/knightabout" title="" class="menuItem">关于</a>
+          
+            <a href="/bridges" title="" class="menuItem">传送门</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

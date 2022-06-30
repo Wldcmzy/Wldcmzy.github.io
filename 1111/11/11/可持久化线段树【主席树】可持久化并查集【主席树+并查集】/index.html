@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>可持久化线段树【主席树】可持久化并查集【主席树+并查集】.md | 蓝湖畔淅淅沥沥的雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 笼统的主席树原理众所周知， 主席树是可以持久化的， 换言之你能知道你所维护信息的所有历史状态。 主席树是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="可持久化线段树【主席树】可持久化并查集【主席树+并查集】.md">
+<meta property="og:url" content="http://example.com/1111/11/11/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E7%BA%BF%E6%AE%B5%E6%A0%91%E3%80%90%E4%B8%BB%E5%B8%AD%E6%A0%91%E3%80%91%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E5%B9%B6%E6%9F%A5%E9%9B%86%E3%80%90%E4%B8%BB%E5%B8%AD%E6%A0%91+%E5%B9%B6%E6%9F%A5%E9%9B%86%E3%80%91/index.html">
+<meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
+<meta property="og:description" content="说明 - 2022-05-05本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。 笼统的主席树原理众所周知， 主席树是可以持久化的， 换言之你能知道你所维护信息的所有历史状态。 主席树是">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="1111-11-11T03:06:11.000Z">
+<meta property="article:modified_time" content="2022-06-30T09:22:00.461Z">
+<meta property="article:author" content="StarsWhisper">
+<meta property="article:tag" content="OldBlog(Before20220505)">
+<meta property="article:tag" content="线段树">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="蓝湖畔淅淅沥沥的雨" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-可持久化线段树【主席树】可持久化并查集【主席树+并查集】" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E7%BA%BF%E6%AE%B5%E6%A0%91%E3%80%90%E4%B8%BB%E5%B8%AD%E6%A0%91%E3%80%91%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E5%B9%B6%E6%9F%A5%E9%9B%86%E3%80%90%E4%B8%BB%E5%B8%AD%E6%A0%91+%E5%B9%B6%E6%9F%A5%E9%9B%86%E3%80%91/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      可持久化线段树【主席树】可持久化并查集【主席树+并查集】.md
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E6%80%9D%E6%83%B3or%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">思想or数据结构</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="笼统的主席树原理"><a href="#笼统的主席树原理" class="headerlink" title="笼统的主席树原理"></a>笼统的主席树原理</h2><p>众所周知， 主席树是可以持久化的， 换言之你能知道你所维护信息的所有历史状态。 主席树是这样做的：</p>
+<h4 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h4><p>首先建一颗朴素的线段树，代表初始状态 <strong>(下图黑色)</strong> ， 也就是第0次操作后的状态。</p>
+<h4 id="tipA"><a href="#tipA" class="headerlink" title="tipA:"></a>tipA:</h4><p>你每次只对一个叶子节点的数据进行更新，所以相当于更改了树上的一条链。</p>
+<h4 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h4><p>我们不在原来的树上修改,而是创建若干个新的节点组成一条链代表树中修改后的各个节点 <strong>(下图红色)</strong> ，然后直接把这条链糊到树上，<br>并且让新链中的每个节点都连好它在树中应该连的节点 <strong>(下图蓝色)</strong> 。</p>
+<h4 id="tipB"><a href="#tipB" class="headerlink" title="tipB:"></a>tipB:</h4><p>你会发现只要交换新旧链， 就可以得到两颗完整的树</p>
+<h4 id="tipC"><a href="#tipC" class="headerlink" title="tipC:"></a>tipC:</h4><p>你还会发现：在每次更新中添加的新链，都会包含树的根节点，所以你只需要记录下第[0 - N]次操作后的树的根节点，就可以通过某一个根节点得到特定历史版本的树。<br>（0次操作后的根节点是黑色树根， 1次操作后的根节点是红色树根）</p>
+<h4 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h4><p>然 后 随 便 van van ， 主 席 树 就 学 完 了。</p>
+<h4 id="4"><a href="#4" class="headerlink" title="4."></a><del>4.</del></h4><p><del>然后我们就可以滚到别的题解上爬了</del><br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-/">https://img-</a><br>blog.csdnimg.cn&#x2F;e988fd004312427286dd76e4a36b37e5.png?x-oss-<br>process&#x3D;image&#x2F;watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAU3RhcnNXaGlzcGVy,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)</p>
+<h2 id="主席树-luogu-com-cn-的主席树板子"><a href="#主席树-luogu-com-cn-的主席树板子" class="headerlink" title="主席树 luogu.com.cn 的主席树板子"></a>主席树 luogu.com.cn 的主席树板子</h2><p>纯区间第K大<br>区间[r - (l - 1)] 相当于只插入了[l - r] 然后直接找。</p>
+<p>​    </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e5</span>+<span class="number">4</span>;</span><br><span class="line"><span class="type">int</span> lst[N]<span class="comment">/*原序列*/</span>, srt[N]<span class="comment">/*排序数组*/</span>, root[N]<span class="comment">/*记录树根*/</span>;</span><br><span class="line"><span class="type">int</span> sum[N&lt;&lt;<span class="number">5</span>], L[N&lt;&lt;<span class="number">5</span>], R[N&lt;&lt;<span class="number">5</span>];</span><br><span class="line"><span class="type">int</span> n, m, ql, qr, k, idx, sn;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">build</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> rt = ++idx, mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(l &lt; r)&#123;</span><br><span class="line">        L[rt] = <span class="built_in">build</span>(l, mid);</span><br><span class="line">        R[rt] = <span class="built_in">build</span>(mid + <span class="number">1</span>, r);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> rt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">update</span><span class="params">(<span class="type">int</span> pre, <span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> k)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> rt = ++idx, mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    L[rt] = L[pre], R[rt] = R[pre], sum[rt] = sum[pre] + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(l &lt; r)&#123;</span><br><span class="line">        <span class="keyword">if</span>(k &lt;= mid) L[rt] = <span class="built_in">update</span>(L[pre], l, mid, k);</span><br><span class="line">        <span class="keyword">else</span> R[rt] = <span class="built_in">update</span>(R[pre], mid + <span class="number">1</span>, r, k);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> rt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> ql, <span class="type">int</span> qr, <span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> k)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( l &gt;= r) <span class="keyword">return</span> l;</span><br><span class="line">    <span class="type">int</span> num = sum[L[qr]] - sum[L[ql]], mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(num &gt;= k) <span class="keyword">return</span> <span class="built_in">query</span>(L[ql], L[qr], l, mid, k);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> <span class="built_in">query</span>(R[ql], R[qr], mid + <span class="number">1</span>, r, k - num);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;lst[i]);</span><br><span class="line">        srt[i] = lst[i];</span><br><span class="line">    &#125;</span><br><span class="line">    std::<span class="built_in">sort</span>(srt + <span class="number">1</span>, srt + <span class="number">1</span> + n);</span><br><span class="line">    sn = std::<span class="built_in">unique</span>(srt + <span class="number">1</span>, srt + <span class="number">1</span> + n) - srt - <span class="number">1</span>;</span><br><span class="line">    root[<span class="number">0</span>] = <span class="built_in">build</span>(<span class="number">1</span>, sn);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">        k = std::<span class="built_in">lower_bound</span>(srt + <span class="number">1</span>, srt + <span class="number">1</span> + sn, lst[i]) - srt;</span><br><span class="line">        root[i] = <span class="built_in">update</span>(root[i - <span class="number">1</span>], <span class="number">1</span>, sn, k);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(m --)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;ql, &amp;qr, &amp;k);</span><br><span class="line">        n = <span class="built_in">query</span>(root[ql - <span class="number">1</span>], root[qr], <span class="number">1</span>, sn, k);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, srt[n]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="主席树-并查集-luogu-com-cn-的可持久化并查集板子"><a href="#主席树-并查集-luogu-com-cn-的可持久化并查集板子" class="headerlink" title="主席树+并查集 luogu.com.cn 的可持久化并查集板子"></a>主席树+并查集 luogu.com.cn 的可持久化并查集板子</h2><p>纯并查集</p>
+<p>​    </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e5</span> + <span class="number">4</span>, M = <span class="number">2e5</span> + <span class="number">4</span>;</span><br><span class="line"><span class="type">int</span> n, q, idx, x, y, op, xx, yy;</span><br><span class="line"><span class="type">int</span> D[M &lt;&lt; <span class="number">5</span>], F[M &lt;&lt; <span class="number">5</span>], L[M &lt;&lt; <span class="number">5</span>], R[M &lt;&lt; <span class="number">5</span>], E[M];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">build</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> rt = ++idx;</span><br><span class="line">    <span class="keyword">if</span>(l == r) &#123; F[rt] = l, D[rt] = <span class="number">1</span>; <span class="keyword">return</span> rt; &#125;</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    L[rt] = <span class="built_in">build</span>(l, mid);</span><br><span class="line">    R[rt] = <span class="built_in">build</span>(mid + <span class="number">1</span>, r);</span><br><span class="line">    <span class="keyword">return</span> rt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">update</span><span class="params">(<span class="type">int</span> pre, <span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> k, <span class="type">int</span> f)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> rt = ++idx;</span><br><span class="line">    <span class="keyword">if</span>(l == r)&#123;</span><br><span class="line">        D[rt] = D[pre];</span><br><span class="line">        F[rt] = f;</span><br><span class="line">        <span class="keyword">return</span> rt;</span><br><span class="line">    &#125;</span><br><span class="line">    L[rt] = L[pre], R[rt] = R[pre];</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(k &lt;= mid) L[rt] = <span class="built_in">update</span>(L[pre], l, mid, k , f);</span><br><span class="line">    <span class="keyword">else</span> R[rt] = <span class="built_in">update</span>(R[pre], mid + <span class="number">1</span>, r, k, f);</span><br><span class="line">    <span class="keyword">return</span> rt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> rt, <span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> k)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == r) <span class="keyword">return</span> rt;</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(k &lt;= mid) <span class="keyword">return</span> <span class="built_in">query</span>(L[rt], l, mid, k);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">query</span>(R[rt], mid + <span class="number">1</span>, r, k);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">cd</span><span class="params">(<span class="type">int</span> rt, <span class="type">int</span> l, <span class="type">int</span> r, <span class="type">int</span> k)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == r) &#123;D[rt] += <span class="number">1</span>; <span class="keyword">return</span> ;&#125;</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(k &lt;= mid) <span class="built_in">cd</span>(L[rt], l, mid, k);</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">cd</span>(R[rt], mid + <span class="number">1</span>, r, k);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">ffind</span><span class="params">(<span class="type">int</span> rt, <span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> t = <span class="built_in">query</span>(rt, <span class="number">1</span>, n, x);</span><br><span class="line">    <span class="keyword">if</span>(x == F[t]) <span class="keyword">return</span> t;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">ffind</span>(rt, F[t]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;q);</span><br><span class="line">    E[<span class="number">0</span>] = <span class="built_in">build</span>(<span class="number">1</span>, n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=q; i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;op);</span><br><span class="line">        <span class="keyword">if</span>(op == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;x, &amp;y);</span><br><span class="line">            E[i] = E[i - <span class="number">1</span>];</span><br><span class="line">            xx = <span class="built_in">ffind</span>(E[i], x), yy = <span class="built_in">ffind</span>(E[i], y);</span><br><span class="line">            <span class="keyword">if</span>(D[xx] &gt; D[yy]) std::<span class="built_in">swap</span>(xx, yy);</span><br><span class="line">            E[i] = <span class="built_in">update</span>(E[i - <span class="number">1</span>], <span class="number">1</span>, n, F[xx], F[yy]);</span><br><span class="line">            <span class="keyword">if</span>(D[xx] + <span class="number">1</span> &gt; D[yy]) <span class="built_in">cd</span>(E[i], <span class="number">1</span>, n, F[yy]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(op == <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">            E[i] = E[x];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(op == <span class="number">3</span>)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;x, &amp;y);</span><br><span class="line">            E[i] = E[i - <span class="number">1</span>];</span><br><span class="line">            xx = <span class="built_in">ffind</span>(E[i], x), yy = <span class="built_in">ffind</span>(E[i], y);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, F[xx] == F[yy] ? <span class="number">1</span> : <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E7%BA%BF%E6%AE%B5%E6%A0%91%E3%80%90%E4%B8%BB%E5%B8%AD%E6%A0%91%E3%80%91%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E5%B9%B6%E6%9F%A5%E9%9B%86%E3%80%90%E4%B8%BB%E5%B8%AD%E6%A0%91+%E5%B9%B6%E6%9F%A5%E9%9B%86%E3%80%91/" data-id="cl50tnls7005cycj39q4ydsth" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/1111/11/11/%E3%80%90%E8%AE%B0%E5%BD%95%E3%80%91py%E6%96%87%E4%BB%B6%E6%80%8E%E4%B9%88%E8%BD%AC%E6%88%90exe%E6%96%87%E4%BB%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          【记录】py文件怎么转成exe文件.md
+        
+      </div>
+    </a>
+  
+  
+    <a href="/1111/11/11/%E5%AD%A6%E4%B9%A0%E5%9C%A8ECS%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%9C%9F%E6%89%A7%E8%A1%8C%E5%9C%A8%E5%AD%A6%E6%A0%A1%E5%AE%98%E7%BD%91%E5%8F%91%E5%B8%96%E5%AD%90%E7%AD%BE%E5%88%B0%E7%9A%84py%E8%84%9A%E6%9C%AC/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">学习在ECS上实现定期执行在学校官网发帖子签到的py脚本.md</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">蓝湖畔淅淅沥沥的雨</h1>
+    <h2 class="blog-subtitle">All tragedy erased, I see only wonders...</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/Wldcmzy" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/wldcmzy" target="_blank" title="CSDN">
+          CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://space.bilibili.com/83743701" target="_blank" title="bilibili(无技术和学习内容)">
+          bilibili(无技术和学习内容)
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://shanamaid.github.io/" target="_blank" title="夏娜主题作者的博客">
+          夏娜主题作者的博客
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2021 - 2022 StarsWhisper<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+	  (但是魔改)
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/announcement" title="" class="menuItem">公告</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/knightabout" title="" class="menuItem">关于</a>
+          
+            <a href="/bridges" title="" class="menuItem">传送门</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

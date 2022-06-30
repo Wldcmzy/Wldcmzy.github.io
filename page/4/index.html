@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>蓝湖畔淅淅沥沥的雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="蓝湖畔淅淅沥沥的雨">
+<meta property="og:url" content="http://example.com/page/4/index.html">
+<meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="StarsWhisper">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="蓝湖畔淅淅沥沥的雨" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main">
+  
+    <article id="post-【区间DP练习】洛谷 P1880[NOI1995]石子合并 P1063能量项链P2654 原核生物培养" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E5%8C%BA%E9%97%B4DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1880%5BNOI1995%5D%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6%20P1063%E8%83%BD%E9%87%8F%E9%A1%B9%E9%93%BEP2654%20%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E5%9F%B9%E5%85%BB/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%8C%BA%E9%97%B4DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1880%5BNOI1995%5D%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6%20P1063%E8%83%BD%E9%87%8F%E9%A1%B9%E9%93%BEP2654%20%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E5%9F%B9%E5%85%BB/">【区间DP练习】洛谷 P1880[NOI1995]石子合并 P1063能量项链P2654 原核生物培养.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/DP/">DP</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="洛谷-P1880-NOI1995-石子合并"><a href="#洛谷-P1880-NOI1995-石子合并" class="headerlink" title="洛谷 P1880[NOI1995]石子合并"></a>洛谷 P1880[NOI1995]石子合并</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1880">https://www.luogu.com.cn/problem/P1880</a><br>环形的石子合并，可以把环形拆开，在末尾接一份自己的复制当线形来做<br>dp数组也需要在右端外接一份自己的复制<br>犯错：<br>因为dp公式会访问到j+1的下标，，刚开始用的if(j&gt;&#x3D;n)判断越界 ，在j&#x3D;n-1时会访问到下标为n的位置导致越界，所以一直出错<br>应该改为if(j+1&gt;&#x3D;n)</p>
+<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <algorithm><br>    #include <cmath><br>    #include <cstdlib><br>    #include <queue><br>    #include <map><br>    #include <set><br>    #include <stack><br>    #include <vector><br>    typedef long long LL;<br>    typedef std::pair&lt;int ,int&gt; PP;<br>    const int N &#x3D; 105;<br>    int n,qu[N],dx[N][N&lt;&lt;1],dn[N][N&lt;&lt;1],sum[N&lt;&lt;1];</p>
+<pre><code>int main()
+&#123;
+   memset(dn,1,sizeof(dn));
+
+   std::cin &gt;&gt;n;
+   for(int i=0; i&lt;n; i++)&#123;
+      std::cin &gt;&gt; qu[i];
+   &#125;
+
+   for(int i=1; i&lt;n; i++)&#123;
+      sum[i] = sum[i-1] + qu[i];
+   &#125;
+   for(int i=0; i&lt;n; i++)&#123;
+      sum[n+i] = sum[n+i-1] + qu[i];
+   &#125;
+   for(int i=0; i&lt;n; i++)&#123;
+      dn[i][i] = 0;
+   &#125;
+   for(int i=1; i&lt;n; i++)&#123;
+      for(int st=0; st&lt;n; st++)&#123;
+         int ed = st+i;
+         for(int j=st; j&lt;ed; j++)&#123;
+            int gain = sum[ed]-sum[st]+qu[st];
+            if(j+1&gt;=n)&#123;
+               dn[st][ed] = std::min(dn[st][ed],dn[st][j]+dn[j-n+1][ed-n]+gain);
+               dx[st][ed] = std::max(dx[st][ed],dx[st][j]+dx[j-n+1][ed-n]+gain);
+            &#125;else&#123;
+               dn[st][ed] = std::min(dn[st][ed],dn[st][j]+dn[j+1][ed]+gain);
+               dx[st][ed] = std::max(dx[st][ed],dx[st][j]+dx[j+1][ed]+gain);
+            &#125;
+         &#125;
+      &#125;
+   &#125;
+   int mx=0,mn=1e7;
+   for(int i=0; i&lt;n; i++)&#123;
+      mx = std::max(dx[i][n-1+i],mx);
+      mn = std::min(dn[i][n-1+i],mn);
+   &#125;
+   std::cout &lt;&lt; mn &lt;&lt; std::endl &lt;&lt; mx &lt;&lt;std::endl;
+   return 0;
+&#125;
+</code></pre>
+<p>​    </p>
+<h2 id="洛谷-P1063-能量项链"><a href="#洛谷-P1063-能量项链" class="headerlink" title="洛谷 P1063 能量项链"></a>洛谷 P1063 能量项链</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1063">https://www.luogu.com.cn/problem/P1063</a><br>同样时环形类石子合并dp<br>刚开始dp公式dp[st][ed] &#x3D;<br>std::max(dp[st][ed],dp[st][j]+dp[j+1-n][ed-n]+gain);中的dp[j+1-n][ed-n]写成了dp[j+1-n][ed]，当场暴毙</p>
+<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <algorithm><br>    #include <cmath><br>    #include <cstdlib><br>    #include <queue><br>    #include <map><br>    #include <set><br>    #include <stack><br>    #include <vector><br>    typedef long long LL;<br>    typedef std::pair&lt;int ,int&gt; PP;<br>    const int N &#x3D; 105;<br>    LL n,qu[N&lt;&lt;1],dp[N][N&lt;&lt;1];</p>
+<pre><code>int main()
+&#123;
+   std::cin &gt;&gt; n;
+   for(int i=1; i&lt;=n; i++)&#123;
+      std::cin &gt;&gt;qu[i];
+      qu[i+n] = qu[i];
+   &#125;
+   qu[n&lt;&lt;1|1] = qu[1];
+   for(int i=1; i&lt;n; i++)&#123;
+      for(int st=1; st&lt;=n; st++)&#123;
+         int ed = st+i;
+         for(int j=st; j&lt;ed ;j++)&#123;
+            int gain = qu[st]*qu[j+1]*qu[ed+1];
+            if(j+1&gt;n)&#123;
+               dp[st][ed] = std::max(dp[st][ed],dp[st][j]+dp[j+1-n][ed-n]+gain);
+            &#125;else&#123;
+               dp[st][ed] = std::max(dp[st][ed],dp[st][j]+dp[j+1][ed]+gain);
+            &#125;
+         &#125;
+      &#125;
+   &#125;
+   LL mx = -1;
+   for(int i=0; i&lt;n; i++)&#123;
+      mx = std::max(mx,dp[1+i][n+i]);
+   &#125;
+   std::cout &lt;&lt; mx &lt;&lt; std::endl;
+
+   return 0;
+&#125;
+</code></pre>
+<p>​    </p>
+<p>上面这个思路开了2倍的dp空间。下面改一个开4倍dp空间的（与线形区间合并更加相似）<br>只需要把st的限制条件从st&lt;&#x3D;n 改成st&lt;&#x3D;(n&lt;&lt;1)-i (-i保证下标不越界)，再把循环里面判断j+1&gt;n的分支去掉就可以了</p>
+<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <algorithm><br>    #include <cmath><br>    #include <cstdlib><br>    #include <queue><br>    #include <map><br>    #include <set><br>    #include <stack><br>    #include <vector><br>    typedef long long LL;<br>    typedef std::pair&lt;int ,int&gt; PP;<br>    const int N &#x3D; 105;<br>    LL n,qu[N&lt;&lt;1],dp[N&lt;&lt;1][N&lt;&lt;1];</p>
+<pre><code>int main()
+&#123;
+   std::cin &gt;&gt; n;
+   for(int i=1; i&lt;=n; i++)&#123;
+      std::cin &gt;&gt;qu[i];
+      qu[i+n] = qu[i];
+   &#125;
+   qu[n&lt;&lt;1|1] = qu[1];
+   for(int i=1; i&lt;n; i++)&#123;
+      for(int st=1; st&lt;=(n&lt;&lt;1)-i; st++)&#123;
+         int ed = st+i;
+         for(int j=st; j&lt;ed ;j++)&#123;
+            int gain = qu[st]*qu[j+1]*qu[ed+1];
+               dp[st][ed] = std::max(dp[st][ed],dp[st][j]+dp[j+1][ed]+gain);
+         &#125;
+      &#125;
+   &#125;
+   LL mx = -1;
+   for(int i=0; i&lt;n; i++)&#123;
+      mx = std::max(mx,dp[1+i][n+i]);
+   &#125;
+   std::cout &lt;&lt; mx &lt;&lt; std::endl;
+
+   return 0;
+&#125;
+</code></pre>
+<p>​    </p>
+<h2 id="洛谷-P2654-原核生物培养"><a href="#洛谷-P2654-原核生物培养" class="headerlink" title="洛谷 P2654 原核生物培养"></a>洛谷 P2654 原核生物培养</h2><p>很显然（真的很显然）是优先队列+区间dp，别忘了每次dp完之后还要往队列里面push一个<br>题目让求最小值，一开始一直再求max，差点WA傻了</p>
+<p>​<br>    #include <iostream><br>    #include <cstdio><br>    #include <algorithm><br>    #include <queue><br>    #include <map><br>    #include <stack><br>    #include <string><br>    #include <cstring><br>    #include <vector><br>    #include <cmath><br>    #include <set><br>    typedef long long int LL;<br>    const int N &#x3D; 1e4+5,M&#x3D;11,INF &#x3D; 0x7fffffff;<br>    int dp[M][M&lt;&lt;1],pos[M],qu[M],sum[M&lt;&lt;1];<br>    std::priority_queue&lt;int,std::vector<int>,std::greater<int> &gt; q;<br>    int n,m,k,v;<br>    LL ans;<br>    int main()<br>    {<br>        scanf(“%d%d%d”,&amp;n,&amp;m,&amp;k);<br>        for(int i&#x3D;0; i&lt;n; i++){<br>            scanf(“%d”,&amp;v);<br>            q.push(v);<br>        }<br>        while(k–){<br>            for(int i&#x3D;1; i&lt;&#x3D;m; i++) for(int j&#x3D;1; j&lt;&#x3D;(m&lt;&lt;1); j++) dp[i][j] &#x3D; INF;<br>            for(int i&#x3D;1; i&lt;&#x3D;m; i++){<br>                scanf(“%d”,&amp;pos[i]);<br>            }<br>            for(int i&#x3D;1; i&lt;&#x3D;m; i++){<br>                qu[pos[i]] &#x3D; q.top();<br>                q.pop();<br>            }<br>            for(int i&#x3D;1; i&lt;&#x3D;m; i++) sum[i] &#x3D; sum[i-1]+qu[i];<br>            for(int i&#x3D;1; i&lt;&#x3D;m; i++) sum[i+m] &#x3D; sum[i+m-1]+qu[i];<br>            for(int i&#x3D;1; i&lt;&#x3D;m; i++) dp[i][i] &#x3D; 0;<br>            for(int i&#x3D;1; i&lt;m; i++){<br>                for(int st&#x3D;1; st&lt;&#x3D;m; st++){<br>                    int ed &#x3D; st+i;<br>                    for(int j&#x3D;st; j&lt;ed; j++){<br>                        if(j+1&gt;m) dp[st][ed] &#x3D; std::min(dp[st][ed],dp[st][j]+dp[j+1-m][ed-m]+sum[ed]-sum[st-1]);<br>                        else dp[st][ed] &#x3D; std::min(dp[st][ed],dp[st][j]+dp[j+1][ed]+sum[ed]-sum[st-1]);<br>                    }<br>                }<br>            }<br>            int mx &#x3D; INF;<br>            for(int i&#x3D;1; i&lt;&#x3D;m; i++){<br>                mx &#x3D; std::min(mx,dp[i][m+i-1]);<br>            }<br>            ans +&#x3D; mx;<br>            q.push(sum[m]);<br>        }<br>        printf(“%lld”,ans);<br>        return 0;<br>    }</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%8C%BA%E9%97%B4DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1880[NOI1995]%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6%20P1063%E8%83%BD%E9%87%8F%E9%A1%B9%E9%93%BEP2654%20%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E5%9F%B9%E5%85%BB/" data-id="cl50tnlqz001pycj3hpuihau9" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【单源最短路 spfa Dijkstra】 _ 洛谷 P3371 【模板】单源最短路径（弱化版）_ ## lguou" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%20spfa%20Dijkstra%E3%80%91%20_%20%E6%B4%9B%E8%B0%B7%20P3371%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88%E5%BC%B1%E5%8C%96%E7%89%88%EF%BC%89_%20##%20lguou/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%20spfa%20Dijkstra%E3%80%91%20_%20%E6%B4%9B%E8%B0%B7%20P3371%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88%E5%BC%B1%E5%8C%96%E7%89%88%EF%BC%89_%20##%20lguou/">【单源最短路 spfa Dijkstra】 _ 洛谷 P3371 【模板】单源最短路径（弱化版）_</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/">图论</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="洛谷-P3371-【模板】单源最短路径（弱化版）"><a href="#洛谷-P3371-【模板】单源最短路径（弱化版）" class="headerlink" title="洛谷 P3371 【模板】单源最短路径（弱化版）"></a>洛谷 P3371 【模板】单源最短路径（弱化版）</h2><p>Dijkstra</p>
+<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <cstdlib><br>    #include <algorithm><br>    #include <vector><br>    #include <map><br>    #include <set><br>    #include <queue><br>    #include <stack><br>    typedef long long int LL;<br>    const int N &#x3D; 1e4+5, M &#x3D; 5e5+5,INF &#x3D; 0x7fffffff;<br>    int n,m,u,v,d,s;<br>    int idx;<br>    int head[N],dis[N];<br>    bool vis[N];<br>    struct Edge<br>    {<br>       int to,nxt,d;<br>    }edg[M];<br>    void addEdge(int fr,int to,int d)<br>    {<br>       edg[idx].to &#x3D; to;<br>       edg[idx].nxt &#x3D; head[fr];<br>       edg[idx].d &#x3D; d;<br>       head[fr] &#x3D; idx++;<br>    }<br>    struct PPP<br>    {<br>       int val,dis;<br>       bool operator &lt; (const PPP &amp;x) const{<br>          return dis &gt; x.dis;<br>       }<br>    };<br>    std::priority_queue<PPP> q;<br>    int main()<br>    {<br>       &#x2F;&#x2F;freopen(“D:\EdgeDownloadPlace\P3371_2.in”,”r”,stdin);<br>       memset(head,-1,sizeof(head));<br>       for(int i&#x3D;0;i&lt;N; i++) dis[i] &#x3D; INF;<br>       scanf(“%d%d%d”,&amp;n,&amp;m,&amp;s);<br>       for(int i&#x3D;1; i&lt;&#x3D;m; i++){<br>          scanf(“%d%d%d”,&amp;u,&amp;v,&amp;d);<br>          addEdge(u,v,d);<br>       }<br>       dis[s] &#x3D; 0;<br>       q.push((PPP){s,0});<br>       while(!q.empty()){<br>          PPP cur &#x3D; q.top(); q.pop();<br>          int x &#x3D; cur.val;<br>          if(vis[x]) continue;<br>          vis[x] &#x3D; true;<br>          for(int e&#x3D;head[x]; e!&#x3D;-1; e&#x3D;edg[e].nxt){<br>             int y &#x3D; edg[e].to;<br>             if(dis[y] &gt; dis[x]+edg[e].d){<br>                dis[y] &#x3D; dis[x]+edg[e].d;<br>                q.push((PPP){y,dis[y]});<br>             }<br>          }<br>       }<br>       for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>          printf(“%d “,dis[i]);<br>       }<br>       return 0;<br>    }</p>
+<p>spfa(个人感觉就是纯bfs)</p>
+<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <cstdlib><br>    #include <algorithm><br>    #include <vector><br>    #include <map><br>    #include <set><br>    #include <queue><br>    #include <stack><br>    typedef long long int LL;<br>    const int N &#x3D; 1e4+5, M &#x3D; 5e5+5,INF &#x3D; 0x7fffffff;<br>    int dis[N],head[N];<br>    bool vis[N];<br>    int n,m,u,v,d,s;<br>    int idx;<br>    struct Edge<br>    {<br>       int to,nxt,d;<br>    }edg[M];<br>    void addEdge(int fr,int to,int d)<br>    {<br>       edg[idx].to &#x3D; to;<br>       edg[idx].nxt &#x3D; head[fr];<br>       edg[idx].d &#x3D; d;<br>       head[fr] &#x3D; idx++;<br>    }<br>    std::queue<int> q;<br>    int main()<br>    {<br>       memset(head,-1,sizeof(head));<br>       memset(vis,0,sizeof(vis));<br>       for(int i&#x3D;0; i&lt;N; i++) dis[i] &#x3D; INF;<br>       scanf(“%d%d%d”,&amp;n,&amp;m,&amp;s);<br>       for(int i&#x3D;0; i&lt;m; i++){<br>          scanf(“%d%d%d”,&amp;u,&amp;v,&amp;d);<br>          addEdge(u,v,d);<br>       }<br>       dis[s] &#x3D; 0;<br>       q.push(s);<br>       while(!q.empty()){<br>          int x &#x3D; q.front(); q.pop(); vis[x] &#x3D; false;<br>          for(int e&#x3D;head[x]; e!&#x3D;-1; e&#x3D;edg[e].nxt){<br>             int y &#x3D; edg[e].to;<br>             if(dis[y] &gt; dis[x]+edg[e].d){<br>                dis[y] &#x3D; dis[x]+edg[e].d;<br>                if(!vis[y]){<br>                   vis[y] &#x3D; true;<br>                   q.push(y);<br>                }<br>             }<br>          }<br>       }<br>       for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>          printf(“%d “,dis[i]);<br>       }<br>       return 0;<br>    }</p>
+<h2 id="洛谷P4779-【模板】单源最短路径（标准版）"><a href="#洛谷P4779-【模板】单源最短路径（标准版）" class="headerlink" title="洛谷P4779 【模板】单源最短路径（标准版）"></a>洛谷P4779 【模板】单源最短路径（标准版）</h2><p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <cstring><br>    #include <cstdlib><br>    #include <algorithm><br>    #include <vector><br>    #include <map><br>    #include <set><br>    #include <queue><br>    #include <stack><br>    typedef long long int LL;<br>    const int N &#x3D; 1e5+5, M &#x3D; 2e5+5,INF &#x3D; 0x7fffffff;<br>    int n,m,u,v,d,s;<br>    int idx;<br>    int head[N],dis[N];<br>    bool vis[N];<br>    struct Edge<br>    {<br>       int to,nxt,d;<br>    }edg[M];<br>    void addEdge(int fr,int to,int d)<br>    {<br>       edg[idx].to &#x3D; to;<br>       edg[idx].nxt &#x3D; head[fr];<br>       edg[idx].d &#x3D; d;<br>       head[fr] &#x3D; idx++;<br>    }<br>    struct PPP<br>    {<br>       int val,dis;<br>       bool operator &lt; (const PPP &amp;x) const{<br>          return dis &gt; x.dis;<br>       }<br>    };<br>    std::priority_queue<PPP> q;<br>    int main()<br>    {<br>       &#x2F;&#x2F;freopen(“D:\EdgeDownloadPlace\P3371_2.in”,”r”,stdin);<br>       memset(head,-1,sizeof(head));<br>       for(int i&#x3D;0;i&lt;N; i++) dis[i] &#x3D; INF;<br>       scanf(“%d%d%d”,&amp;n,&amp;m,&amp;s);<br>       for(int i&#x3D;1; i&lt;&#x3D;m; i++){<br>          scanf(“%d%d%d”,&amp;u,&amp;v,&amp;d);<br>          addEdge(u,v,d);<br>       }<br>       dis[s] &#x3D; 0;<br>       q.push((PPP){s,0});<br>       while(!q.empty()){<br>          PPP cur &#x3D; q.top(); q.pop();<br>          int x &#x3D; cur.val;<br>          if(vis[x]) continue;<br>          vis[x] &#x3D; true;<br>          for(int e&#x3D;head[x]; e!&#x3D;-1; e&#x3D;edg[e].nxt){<br>             int y &#x3D; edg[e].to;<br>             if(dis[y] &gt; dis[x]+edg[e].d){<br>                dis[y] &#x3D; dis[x]+edg[e].d;<br>                q.push((PPP){y,dis[y]});<br>             }<br>          }<br>       }<br>       for(int i&#x3D;1; i&lt;&#x3D;n; i++){<br>          printf(“%d “,dis[i]);<br>       }<br>       return 0;<br>    }</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%20spfa%20Dijkstra%E3%80%91%20_%20%E6%B4%9B%E8%B0%B7%20P3371%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88%E5%BC%B1%E5%8C%96%E7%89%88%EF%BC%89_%20##%20lguou/" data-id="cl50tnlr0001tycj3h095h5y2" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【学习记录】【Python】【numpy】自学numpy库的简要记录帖（已经腰斩换新的）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6numpy%E5%BA%93%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%E5%B8%96%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6numpy%E5%BA%93%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%E5%B8%96%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/">【学习记录】【Python】【numpy】自学numpy库的简要记录帖（已经腰斩换新的）.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/">python</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/numpy/">numpy</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="1-极其基础的操作"><a href="#1-极其基础的操作" class="headerlink" title="1.极其基础的操作"></a>1.极其基础的操作</h2><p>​<br>    import numpy as np</p>
+<pre><code>#创建一个数组 数组的类型为numpy.ndarray,其中数据的类型为numpy.int32s
+array1=np.array([[[1,2,3],[4,5,6],[7,8,9]],[[10,11,12],[13,14,15],[16,17,18]]],dtype=np.int32)
+print(array1,&#39;\ntype of array1 is:&#39;,type(array1))
+
+#查看数组维数
+print(&#39;dimensions of array1:&#39;,array1.ndim)
+
+#查看数组形状
+print(&#39;shape of array1:&#39;,array1.shape)
+
+#改变数组形状
+array2=array1.reshape(6,3)
+print(array2)
+
+#提取数据(array2是二维数组)
+print(array2[1:4,0:2])          #2、3、4行前两列
+print(array2[1:4][0:2])         #两次切片  [1:4]切完后再[0:2]
+print(array2[:,2])              #第三列
+print(array2[:4])               #前四行
+print(array2[:4,:])             #前四行
+
+#数组的大小
+print(&#39;size of array1 and array2:&#39;,array1.size,array2.size)
+
+#矩阵计算
+print(array1+array2.reshape(2,3,3))     #矩阵相加
+print(array1*array2.reshape(2,3,3))     #矩阵相乘
+print(array1+2)                         #矩阵元素+2
+</code></pre>
+<h2 id="2-索引"><a href="#2-索引" class="headerlink" title="2.索引"></a>2.索引</h2><p>​<br>    import numpy as np</p>
+<pre><code>array1=np.array([[[1,2,3],[4,5,6],[7,8,9]],[[10,11,12],[13,14,15],[16,17,18]]],dtype=np.int32)
+</code></pre>
+<p>​<br>    #取元素   第一维的一、二项，第二维的第一项，第三维的一、三项<br>    array2&#x3D;array1[np.ix_([0,1],[0],[0,2])]<br>    print(array2)</p>
+<pre><code>#取 array1[0,0,0],以及 array1[1,2,1](最终取出两个数，1和17:[1,17])
+array3=array1[[0,1],[0,2],[0,1]]
+print(array3)
+
+#顺序变的
+array4=array1.reshape(6,3)[[0,5,3,1]]
+print(array4)
+
+#bool索引
+array3=np.array(range(100))     #建立一个0-99的一维数组
+print(array3)
+
+array3Bool=array3%3==0          #意会
+print(array3Bool)
+
+array3Final=array3[array3Bool]          #得到array3中是3的倍数的项
+print(array3Final)
+array3Final_another=array3[array3%3==0] #得到array3中是3的倍数的项
+print(array3Final_another)
+</code></pre>
+<p>​    </p>
+<h2 id="3-简单文件储存"><a href="#3-简单文件储存" class="headerlink" title="3.简单文件储存"></a>3.简单文件储存</h2><p>​<br>    import numpy as np</p>
+<pre><code>#txt
+x=np.genfromtxt(&#39;abc.txt&#39;,delimiter=&#39;&amp;&amp;&#39;,dtype=np.str,usecols=1)        #载入文件
+print(x)
+#delimiter 分割值
+#dtype 数据类型
+#usecols 不太清楚
+
+y=np.loadtxt(&#39;abc.txt&#39;,delimiter=&#39;&amp;&amp;&#39;,dtype=np.str,usecols=1)           #载入文件
+print(y)
+
+np.savetxt(&#39;bca.txt&#39;,y,fmt=&#39;%s&#39;)
+</code></pre>
+<p>​<br>    print(‘分割线———————–’)<br>    #二进制</p>
+<pre><code>np.save(&#39;b_bca.npyy&#39;,y)                     #使用此方法保存的后缀名文件总为npy:  b_bca.npyy.npy
+
+np.savez(&#39;b_z_bca.npz&#39;,the_x=x,the_y=y)     #此方法可以保存多个数组，后缀名为npz  the_x等形参名对应导入后的操作的键名
+
+tmp_a=np.load(&#39;b_bca.npy&#39;)
+print(tmp_a)
+
+tmp_b=np.load(&#39;b_z_bca.npz&#39;)
+print(tmp_b)
+print(tmp_b[&#39;the_x&#39;])                   #类似字典，key值为先前保存时的形参名，如the_x
+print(tmp_b[&#39;the_y&#39;])
+</code></pre>
+<h2 id="4-简单练习-amp-amp-矩阵的合并与转置"><a href="#4-简单练习-amp-amp-矩阵的合并与转置" class="headerlink" title="4.简单练习 &amp;&amp; 矩阵的合并与转置"></a>4.简单练习 &amp;&amp; 矩阵的合并与转置</h2><p>​<br>    import numpy as np</p>
+<pre><code>np.set_printoptions(precision=1,threshold=3000,suppress=True)
+#precision控制小数点位数
+#threshold控制输出值的个数，其他的以...代替(查的资料上这么说的，实际没看出效果)
+#suppress=True 取消使用科学计数法
+</code></pre>
+<p>​<br>    array1&#x3D;np.genfromtxt(r’D:\0我的下载\上证指数\上证指数副本.txt’,usecols&#x3D;(0,4,6),)<br>    print(array1)</p>
+<pre><code>daySpan=(array1[:,0]&gt;=20180901)&amp;(array1[:,0]&lt;20190101)  #筛选出其中2018年9月1日至2019年1月1日的信息
+array2=array1[daySpan]                                  #筛选出其中2018年9月1日至2019年1月1日的信息
+print(array2)
+
+#纵向合并
+#把array1第三列大于0的设为1，不大于0的设为-1，添加至数组最右边
+tmp=array1[:,2].copy()
+tmp[tmp&gt;0]=1
+tmp[tmp&lt;=0]=-1
+array_new=np.c_[array1,tmp]#等同于array_new=np.column_stack((array1,tmp))
+print(array_new)
+
+#横向合并
+arr1=np.array([[1,2,3],[4,5,6],[7,8,9]])
+arr2=np.array([[&#39;x&#39;,&#39;x&#39;,&#39;x&#39;]])
+
+arr_new=np.r_[arr1,arr2]#等同于arr_new=np.row_stack((arr1,arr2))
+print(arr_new)
+
+#一维数组默认时列向量，要转化为行向量才能横向合并
+#eg:[1,2,3]这是一个列向量 (3,)
+#eg:[[1,2,3]]这时一个行向量(1,3)
+</code></pre>
+<p>​<br>​<br>    #矩阵的转置<br>    print(arr_new.T)</p>
+<h2 id="5-矩阵的切割"><a href="#5-矩阵的切割" class="headerlink" title="5.矩阵的切割"></a>5.矩阵的切割</h2><p>​<br>    import numpy as np</p>
+<pre><code>#新建0-15的数组
+array1=np.arange(16).reshape(4,4)
+print(array1)
+</code></pre>
+<p>​<br>    #用hsplit(ary,indices_or_sections)拆分   (相当于split的axis参数&#x3D;1)<br>    #纵向拆分<br>    #第二个参数：如果时整数x，则把数组平均分成x份，不能平均分会报错<br>    #第二个参数，如果时列表，会以列表中的值为轴拆分<br>    h_arr1&#x3D;np.hsplit(array1,4)<br>    print(h_arr1)<br>    h_arr2&#x3D;np.hsplit(array1,[1,3])<br>    print(h_arr2)</p>
+<p>​<br>    #用split(ary, indices_or_sections, axis&#x3D;0)拆分<br>    #用法基本同hsplit一样，只不过hsplit只能纵向拆分，split可以定义拆分维度<br>    #axis&#x3D;0第一维，即横向拆分，axis&#x3D;1第二维，即纵向拆分<br>    arr1&#x3D;np.split(array1,4,0)<br>    print(arr1)<br>    arr2&#x3D;np.split(array1,[1,3],0)<br>    print(arr2)</p>
+<p>​    </p>
+<h2 id="6-图像通道的分离与合成"><a href="#6-图像通道的分离与合成" class="headerlink" title="6.图像通道的分离与合成"></a>6.图像通道的分离与合成</h2><p><strong>分离：</strong><br>img1B,img1G,img1R&#x3D;np.dsplit(img1,3)<br>img1B,img1G,img1R&#x3D;cv2.split(img1)都可以<br><strong>合成：</strong><br>cv2.merge([b,g,r])<br>cv2.merge([zeros, zeros, img1R])</p>
+<p><strong>注意倒数第五句的注释</strong></p>
+<p>​<br>    import cv2<br>    import numpy as np</p>
+<pre><code>def showone(img):
+    cv2.imshow(&#39;show image&#39;,img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+def showone_color(img,color):
+    zeros=np.zeros(img.shape[:2],dtype=&#39;uint8&#39;) #记得调整格式
+    if color == &#39;B&#39;:
+        cv2.imshow(&#39;blue&#39;,cv2.merge([img1B,zeros,zeros]))
+    elif color == &#39;G&#39;:
+        cv2.imshow(&#39;green&#39;, cv2.merge([zeros, img1G, zeros]))
+    elif color == &#39;R&#39;:
+        cv2.imshow(&#39;red&#39;, cv2.merge([zeros, zeros, img1R]))
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+def showone_merge(b,g,r):
+    cv2.imshow(&#39;merge&#39;,cv2.merge([b,g,r]))
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+</code></pre>
+<p>​<br>    img1&#x3D;cv2.imread(‘theimg.png’,1)</p>
+<pre><code>img1B,img1G,img1R=np.dsplit(img1,3)
+#img1B,img1G,img1R=cv2.split(img1)
+
+print(img1B.dtype)          #矩阵元素的格式为uint8
+</code></pre>
+<p>​<br>​<br>    showone(img1B)      #这里图像为灰色，原因是当调用cv2.imshow的时候G、R两个通道被默认设为了与B通道一样，三通道一样时显示灰度图</p>
+<p>​<br>    showone_color(img1B,’B’)<br>    showone_color(img1G,’G’)<br>    showone_color(img1R,’R’)</p>
+<pre><code>showone_merge(img1B,img1G,img1R)        #合成后是原图
+</code></pre>
+<p>​    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6numpy%E5%BA%93%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%E5%B8%96%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/" data-id="cl50tnlr1001vycj3hxdje6cz" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%BA%93/" rel="tag">python库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【学习记录】【Python】【numpy】自学简要记录（未完）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%EF%BC%88%E6%9C%AA%E5%AE%8C%EF%BC%89/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%EF%BC%88%E6%9C%AA%E5%AE%8C%EF%BC%89/">【学习记录】【Python】【numpy】自学简要记录（未完）.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/">python</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/numpy/">numpy</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<p>自学记录，不专业</p>
+<h2 id="1-很基础的操作"><a href="#1-很基础的操作" class="headerlink" title="1.很基础的操作"></a>1.很基础的操作</h2><h4 id="010-建立一个数组以及查看它的一些属性"><a href="#010-建立一个数组以及查看它的一些属性" class="headerlink" title="010.建立一个数组以及查看它的一些属性"></a>010.建立一个数组以及查看它的一些属性</h4><p>看就完了，奥里给</p>
+<p>​<br>    import numpy as np</p>
+<pre><code>lst=[i for i in range(6)]
+
+#---------------------------------------------------
+input(&#39;\n\n1.创建两个数组，类型为numpy.ndarray\n&#39;)
+array1=np.array(lst)
+array2=np.array([[[1,2,3],[4,5,6]],[[0,0,1],[1,1,2]]],dtype=np.int8)#dtype参数规定数组中数据的数据类型
+
+print(type(array1),type(array2))
+
+#----------------------------------------------------
+input(&#39;\n\n2.查看数组的维度和形状\n&#39;)
+print(&#39;维度：&#39;,array1.ndim,array2.ndim)
+print(&#39;形状：&#39;,array1.shape,array2.shape)
+</code></pre>
+<p>​<br>​<br>    #—————————————————–<br>    input(‘\n\n3.改变数组形状\n’)<br>    array1_re&#x3D;array1.reshape(2,3)<br>    print(‘改变后：’,array1_re)<br>    print(‘改变前：’,array1)</p>
+<p>​<br>    #—————————————————–<br>    input(‘\n\n4.查看数组数据类型\n’)<br>    print(array1.dtype,array2.dtype)</p>
+<p>​<br>    #—————————————————–<br>    input(‘\n\n5.查看数组的大小(貌似就是元素个数)\n’)<br>    print(array1.size,array2.size)</p>
+<h4 id="011-最简单的提取信息"><a href="#011-最简单的提取信息" class="headerlink" title="011.最简单的提取信息"></a>011.最简单的提取信息</h4><p>提取第几行第几列</p>
+<p>​<br>    import numpy as np</p>
+<pre><code>array=np.array([i for i in range(18)]).reshape(3,6)#reshape的作用是把np.array中创建的一维数组变形
+print(&#39;原数组array：\n&#39;,array)
+</code></pre>
+<p>​<br>    #———————————————-<br>    input(‘\n\n1.取原数组的0-1行，1-3列\n’)<br>    array1&#x3D;array[0:2,1:4]<br>    print(array1)</p>
+<pre><code>#----------------------------------------------
+input(&#39;\n\n2.取原素组1-末行的首-4列\n&#39;)
+array2=array[1:,:4]
+print(array2)
+</code></pre>
+<p>​<br>    #———————————————-<br>    input(‘\n\n3.取原数组首-末行的2-末列\n’)<br>    array3&#x3D;array[:,2:]<br>    print(array3)</p>
+<h4 id="012-最简单的矩阵运算"><a href="#012-最简单的矩阵运算" class="headerlink" title="012.最简单的矩阵运算"></a>012.最简单的矩阵运算</h4><p>加减乘 转置</p>
+<p>​<br>    import numpy as np</p>
+<pre><code>array1=np.array([i for i in range(18)]).reshape(3,6)
+array2=np.array([i*3 for i in range(18)]).reshape(3,6)
+print(&#39;原数组：\n&#39;,array1,&#39;\n\n&#39;,array2,sep=&#39;&#39;)
+</code></pre>
+<p>​<br>    #———————————————–<br>    input(‘\n\n两数组相加\n’)<br>    print(array1+array2)</p>
+<p>​<br>    #———————————————–<br>    input(‘\n\n两数组相减\n’)<br>    print(array1-array2)</p>
+<p>​<br>    #———————————————–<br>    input(‘\n\n两数组相乘，注意不是矩阵乘法，只是把对应位置的数相乘\n’)<br>    print(array1*array2)</p>
+<p>​<br>    #———————————————–<br>    input(‘\n\narray1+2\n’)<br>    print(array1+2)</p>
+<pre><code>#-----------------------------------------------
+input(&#39;\n\narray1转置\n&#39;)
+print(array1.T)
+</code></pre>
+<p>矩阵乘法<br>numpy.matmul(a,b)<br>numpy.dot(a,b)</p>
+<h4 id="01a-精度"><a href="#01a-精度" class="headerlink" title="01a.精度"></a>01a.精度</h4><p>元素为float16类型的数组和元素为float64类型的数组记录同样的值，扩大10000倍后不一样<br>通过 set_printoptions(precision&#x3D;?) 来设置精度</p>
+<p>​<br>    import numpy as np</p>
+<pre><code>array_float16=np.array([[2.2,4.4],[6.6,8.8]],dtype=np.float16)
+array_float64=np.array([[2.2,4.4],[6.6,8.8]],dtype=np.float64)
+</code></pre>
+<p>​<br>    #————————————————————————<br>    input(‘\n\n1.精度不同，值会存在误差\n’)<br>    print(‘原数组：\n’,array_float16,’\n\n’,array_float64,sep&#x3D;’’)</p>
+<pre><code>input(&#39;\n如果把里面的元素都扩大10000倍\n\n&#39;)
+print(&#39;扩大后：\n&#39;,array_float16*10000,&#39;\n\n&#39;,array_float64*10000,sep=&#39;&#39;)
+</code></pre>
+<p>​<br>    #————————————————————————<br>    input(‘\n\n2.通过 set_printoptions(precision&#x3D;?) 来设置精度\n\n’)<br>    np.set_printoptions(precision&#x3D;6)<br>    print(array_float64&#x2F;3)</p>
+<p>​    </p>
+<h4 id="01b-数组元素默认的数据类型"><a href="#01b-数组元素默认的数据类型" class="headerlink" title="01b.数组元素默认的数据类型"></a>01b.数组元素默认的数据类型</h4><p>int:默认int32<br>float：默认float64</p>
+<p>​<br>    import numpy as np</p>
+<pre><code>array1=np.array([1,2])
+array2=np.array([1.0,2.0])
+
+print(array1.dtype,array2.dtype)
+</code></pre>
+<h2 id="1-5快速创建数组1"><a href="#1-5快速创建数组1" class="headerlink" title="1.5快速创建数组1"></a>1.5快速创建数组1</h2><p>zeros 创建指定形状和类型的全 0 数组<br>zeros_like 创建另一个数组的形状和类型创建全 0 数组<br>ones 创建指定形状和类型的全 1 数组<br>ones_like 创建另一个数组的形状和类型创建全 1 数组<br>empty 创建指定形状和类型的空数组，不对数据进行初始化<br>empt_like 根据另一个数组的形状和类型创建空数组，不对数据尽兴初始化<br>full 创建指定形状和类型的数组，全部填上指定的值<br>full_like 根据另一个数组的形状和类型创建空数组，全部填上指定的值</p>
+<p>​<br>    import numpy as np</p>
+<pre><code>array=np.arange(48).reshape(4,4,3)
+spt=np.dsplit(array,3)
+
+input(&#39;\n\nnp.zeors,参数给数组形状&#39;)
+zero1=np.zeros((4,4,1),dtype=np.int8)
+print(zero1)
+
+input(&#39;\n\nnp.zeros_like参数给一个数组，创建一个相同形状的数组&#39;)
+zero2=np.zeros_like(spt[0],dtype=np.int8)
+print(zero2)
+</code></pre>
+<p>​<br>​<br>    import numpy as np</p>
+<pre><code>array=np.arange(48).reshape(4,4,3)
+spt=np.dsplit(array,3)
+
+input(&#39;\n\nnp.ones,参数给数组形状&#39;)
+one1=np.ones((4,4,1),dtype=np.int8)
+print(one1)
+
+input(&#39;\n\nnp.ones_like参数给一个数组，创建一个相同形状的数组&#39;)
+one2=np.ones_like(spt[0],dtype=np.int8)
+print(one2)
+</code></pre>
+<p>​<br>​<br>    import numpy as np</p>
+<pre><code>array=np.arange(48).reshape(4,4,3)
+spt=np.dsplit(array,3)
+
+input(&#39;这两种方法不对数据进行初始化&#39;)
+
+input(&#39;\n\nnp.empty,参数给数组形状&#39;)
+empty1=np.empty((4,4,1),dtype=np.int8)
+print(empty1)
+
+input(&#39;\n\nnp.empty_like参数给一个数组，创建一个相同形状的数组&#39;)
+empty2=np.empty_like(spt[0],dtype=np.int8)
+print(empty2)
+</code></pre>
+<p>​<br>​<br>    import numpy as np</p>
+<pre><code>array=np.arange(48).reshape(4,4,3)
+spt=np.dsplit(array,3)
+
+input(&#39;以下两种方法建立某种形状且值全为给定值的数组&#39;)
+
+input(&#39;\n\nnp.full,参数给数组形状&#39;)
+ful=np.full((4,4,1),25,dtype=np.int8)
+print(ful)
+
+input(&#39;\n\nnp.full_like参数给一个数组，创建一个相同形状的数组&#39;)
+fulll=np.full_like(spt[0],12,dtype=np.int8)
+print(fulll)
+</code></pre>
+<h2 id="1-6快速创建数组2"><a href="#1-6快速创建数组2" class="headerlink" title="1.6快速创建数组2"></a>1.6快速创建数组2</h2><h4 id="快速创建固定步长等差递变数组"><a href="#快速创建固定步长等差递变数组" class="headerlink" title="快速创建固定步长等差递变数组"></a>快速创建固定步长等差递变数组</h4><p>arange（开始，结束，步长） 创建等差递变数组</p>
+<p>​<br>    import numpy as np</p>
+<pre><code>input(&#39;numpy.arange(),下面的三个参数分别为开始，结束，步长&#39;)
+arr=np.arange(-15,23,0.25)
+print(arr)
+</code></pre>
+<h4 id="快速创建有固定元素个数的等差递变数组"><a href="#快速创建有固定元素个数的等差递变数组" class="headerlink" title="快速创建有固定元素个数的等差递变数组"></a>快速创建有固定元素个数的等差递变数组</h4><p>linspace(开始，结束，元素个数)</p>
+<p>​<br>    import numpy as np</p>
+<pre><code>print(np.linspace(-20,72,104))
+</code></pre>
+<p>​    </p>
+<h2 id="2-比较基础的东西"><a href="#2-比较基础的东西" class="headerlink" title="2.比较基础的东西"></a>2.比较基础的东西</h2><h4 id="020-基础索引-、切片"><a href="#020-基础索引-、切片" class="headerlink" title="020.基础索引 、切片"></a>020.基础索引 、切片</h4><p>​<br>    import numpy as np</p>
+<pre><code>array=np.array([i for i in range(125)]).reshape(5,5,5)
+print(&#39;原数组:\n&#39;,array,sep=&#39;&#39;)
+</code></pre>
+<p>​<br>    #—————————————————–<br>    input(‘\n\n获取第2块，第3行，第4列的元素,以下两种方法等效：\n’)<br>    print(array[2][3][4])<br>    print(array[2,3,4])</p>
+<pre><code>#-----------------------------------------------------
+input(&#39;\n\n指定步长的索引：获取第0、3块，第0、2、4行，第3列（基于python列表基础）\n&#39;)
+print(array[::3,::2,3])
+
+#-----------------------------------------------------
+input(&#39;\n\n中括号表示在该维度上取特定的元素：eg1:获取第0、3、4块,后4行,所有列\n&#39;)
+print(&#39;eg1:\n&#39;,array[[0,3,4],1:],sep=&#39;&#39;)
+input(&#39;\n\n然而当我们箱获得第0,1,2,4块，第0,2,3,4行，只得到了一块四行的数据\n&#39;)
+print(&#39;eg2:\n&#39;,array[[0,1,2,4],[0,2,3,4]],sep=&#39;&#39;)
+</code></pre>
+<h4 id="021-索引-numpy-ix"><a href="#021-索引-numpy-ix" class="headerlink" title="021.索引 numpy.ix_()"></a>021.索引 numpy.ix_()</h4><p>​<br>    import numpy as np</p>
+<pre><code>array=np.array([i for i in range(125)]).reshape(5,5,5)
+</code></pre>
+<p>​<br>    #—————————————————–<br>    input(‘\n\n解决上面(020)的问题，随心所欲取块行列\n’)<br>    #用np.ix_()包裹[0,1,2,4],[0,2,3,4]<br>    print(array[np.ix_([0,1,2,4],[0,2,3,4])])</p>
+<pre><code>#-----------------------------------------------------
+input(&#39;\n\n顺便看一下np.ix_([0,1,2,4],[0,2,3,4])是什么\n&#39;)
+print(np.ix_([0,1,2,4],[0,2,3,4]))
+
+#-----------------------------------------------------
+input(&#39;\n\n把[0,1,2,4],[0,2,3,4]中的[0,1,2,4]换成[[0,1,2,4]]再转置效果也能达到这个效果\n&#39;)
+tmp=np.array([[0,1,2,4]]).T
+print(array[tmp,[0,2,3,4]])
+</code></pre>
+<h4 id="022-组合"><a href="#022-组合" class="headerlink" title="022.组合"></a>022.组合</h4><p>​<br>    import numpy as np</p>
+<pre><code>lst1=[0,1,2,3,4]
+lst2=[4,5,6,7,8]
+lst3=[9,8,7,5,6]
+</code></pre>
+<p>​<br>    array1&#x3D;np.array([lst1,lst2,lst3])<br>    print(array1)</p>
+<pre><code>input( &#39;next &#39;)
+arr1=np.array(lst1)
+arr2=np.array(lst2)
+arr3=np.array(lst3)
+array2=np.array([arr1,arr2,arr3])
+
+print(array2)
+</code></pre>
+<h4 id="023-bool索引"><a href="#023-bool索引" class="headerlink" title="023.bool索引"></a>023.bool索引</h4><p>​<br>    import numpy as np</p>
+<pre><code>array=np.arange(100)#相当于np.array([i for i in range(100)])
+</code></pre>
+<p>​<br>    #————————————-<br>    input(‘\n\nbool索引\n’)<br>    array_bool&#x3D;array%3&#x3D;&#x3D;0<br>    print(array_bool)</p>
+<pre><code>#-------------------------------------
+input(&#39;\n\n保留3的倍数\n&#39;)
+array_mod3=array[array_bool]
+print(array_mod3)
+</code></pre>
+<h2 id="3-数组存入文件、从文件中导入数组"><a href="#3-数组存入文件、从文件中导入数组" class="headerlink" title="3.数组存入文件、从文件中导入数组"></a>3.数组存入文件、从文件中导入数组</h2><h4 id="030-导入txt文件、数组储存为txt文件"><a href="#030-导入txt文件、数组储存为txt文件" class="headerlink" title="030.导入txt文件、数组储存为txt文件"></a>030.导入txt文件、数组储存为txt文件</h4><p>​<br>    import numpy as np</p>
+<pre><code>#--------------------------------------------------
+input(&#39;\n\n读取txt文件\n&#39;)
+array1=np.genfromtxt(&#39;abc.txt&#39;,dtype=np.str)
+print(array1)
+
+#delimiter  分隔符
+array2=np.genfromtxt(&#39;abc.txt&#39;,dtype=np.int16,delimiter=&#39; &amp;QAQ&amp; &#39;)
+print(array2)
+</code></pre>
+<p>​<br>    #————————————————–<br>    input(‘\n\n读取txt文件,用numpy.loadtxt貌似和numpy.genfromtxt差不多\n’)<br>    print(‘但貌似genfromtxt功能强一些，下方改为dtype&#x3D;np.int16会报错，而genfromtxt不会’)<br>    array3&#x3D;np.loadtxt(‘abc.txt’,dtype&#x3D;np.str,delimiter&#x3D;’ &amp;QAQ&amp; ‘)<br>    print(array3)</p>
+<p>​<br>    #————————————————–<br>    input(‘\n\n保存数组为txt\n’)<br>    array1[0,0]&#x3D;0<br>    np.savetxt(‘abc_2.txt’,array1,fmt&#x3D;’%s’,delimiter&#x3D;’ &amp;QAQ&amp; ‘)<br>    #参数依次为 保存为txt文件的名字 要保存的数组的名字 元素储存格式 分隔符<br>    print(‘保存完成’)</p>
+<h4 id="031-二进制储存、导入一个数组"><a href="#031-二进制储存、导入一个数组" class="headerlink" title="031.二进制储存、导入一个数组"></a>031.二进制储存、导入一个数组</h4><p>​<br>    import numpy as np</p>
+<pre><code>array1=np.arange(48).reshape(6,8)
+array2=array1.reshape(8,6)
+
+print(&#39;二进制读写&#39;)
+
+#--------------------------------------------------
+input(&#39;\n\n储存一个数组，array1\n&#39;)
+np.save(&#39;abc-b.sadfsd&#39;,array1)
+print(&#39;储存完成&#39;)
+print(&#39;你会发现储存后文件的后缀名永远是npy(如果不是，会自动补上)&#39;)
+</code></pre>
+<p>​<br>    #————————————————–<br>    input(‘\n\n读取一个数组，格式npy\n’)<br>    array9&#x3D;np.load(‘abc-b.sadfsd.npy’)<br>    print(array9)</p>
+<p>​    </p>
+<h4 id="032-对于多个数组"><a href="#032-对于多个数组" class="headerlink" title="032.对于多个数组"></a>032.对于多个数组</h4><p>​<br>    import numpy as np</p>
+<pre><code>array1=np.arange(48).reshape(6,8)
+array2=array1.reshape(8,6)
+
+#--------------------------------------------------
+input(&#39;\n\n储存多个数组,用numpy.savez()\n&#39;)
+np.savez(&#39;abc-b.sadfsd&#39;,giao=array1,cxkjntm=array2)
+#giao 和 cxknjntm是数组的key值(类似字典)，下面会说
+print(&#39;储存完成&#39;)
+print(&#39;你会发现储存后文件的后缀名永远是npz(如果不是，会自动补上)&#39;)
+</code></pre>
+<p>​<br>    #—————————————————<br>    input(‘\n\n读取一个或多个数组（读取一个npz文件）\n’)<br>    array_home&#x3D;np.load(‘abc-b.sadfsd.npz’)<br>    print(array_home)<br>    print(‘发现这样读出了一个地址’)</p>
+<pre><code>#---------------------------------------------------
+input(&#39;\n\n分别输出之前存入的array1 array2\n&#39;)
+print(array_home[&#39;giao&#39;])
+print(array_home[&#39;cxkjntm&#39;])
+</code></pre>
+<h2 id="4-数组的合并与拆分"><a href="#4-数组的合并与拆分" class="headerlink" title="4.数组的合并与拆分"></a>4.数组的合并与拆分</h2><h4 id="040-列合并1-np-c"><a href="#040-列合并1-np-c" class="headerlink" title="040.列合并1 np.c_[]"></a>040.列合并1 np.c_[]</h4><p>​<br>    import numpy as np</p>
+<pre><code>array1=np.arange(16).reshape(4,4)
+array2=np.array([111,222,333,444])
+
+print(&#39;注意array2是个一个四行一列向量，是个列向量：array2.shape:&#39;,array2.shape)
+input()
+
+input(&#39;列合并,注意np.c_[]中的括号是方括号&#39;)
+combie1=np.c_[array1,array2]
+combie2=np.c_[array2,array1]
+
+print(combie1,&quot;\n\n&quot;,combie2)
+</code></pre>
+<h4 id="041-列合并2-np-column-stack"><a href="#041-列合并2-np-column-stack" class="headerlink" title="041.列合并2 np.column_stack()"></a>041.列合并2 np.column_stack()</h4><p>注意参数是元组形式</p>
+<p>​<br>    import numpy as np</p>
+<pre><code>arr1=np.arange(4)
+arr2=np.arange(4,8)
+arr3=np.arange(8,12)
+
+input(&#39;列叠加若干个一维列向量\n\n&#39;)
+combie1=np.column_stack((arr1,arr2,arr3))
+print(combie1)
+
+input(&#39;按列合并数组&#39;)
+mid1=np.column_stack((arr1,arr2))
+combie2=np.column_stack((mid1,arr3))
+combie3=np.column_stack((combie2,combie2))
+
+print(combie3)
+</code></pre>
+<h4 id="042-行合并1-np-r"><a href="#042-行合并1-np-r" class="headerlink" title="042.行合并1 np.r_[]"></a>042.行合并1 np.r_[]</h4><p>​<br>    import numpy as np</p>
+<pre><code>array1=np.arange(16).reshape(4,4)
+array2=np.array([111,222,333,444])
+
+print(&#39;注意array2是个一个四行一列向量，是个列向量：array2.shape:&#39;,array2.shape)
+print(&#39;如果使用行合并np.r_[]需要先把array2转化称行向量&#39;)
+input()
+
+input(&#39;行合并,注意np.r_[]中的括号是方括号&#39;)
+combie1=np.r_[array1,array2.reshape(1,4)]
+combie2=np.r_[array2.reshape(1,4),array1]
+
+print(combie1,&quot;\n\n&quot;,combie2)
+</code></pre>
+<p>​    </p>
+<h4 id="043-行合并2-np-row-stack"><a href="#043-行合并2-np-row-stack" class="headerlink" title="043.行合并2 np.row_stack()"></a>043.行合并2 np.row_stack()</h4><p>注意参数是元组形式</p>
+<p>​<br>    import numpy as np</p>
+<pre><code>arr1=np.arange(4)
+arr2=np.arange(4,8)
+arr3=np.arange(8,12)
+
+input(&#39;行叠加若干个一维列向量\n\n&#39;)
+combie1=np.row_stack((arr1,arr2,arr3))
+print(combie1)
+print(&quot;注意这里不用先把列向量转化为行向量，因为一维列向量会在函数内转化称二维行&quot;)
+
+input(&#39;按行合并数组&#39;)
+mid1=np.row_stack((arr1,arr2))
+combie2=np.row_stack((mid1,arr3))
+combie3=np.row_stack((combie2,combie2))
+
+print(combie3)
+</code></pre>
+<h4 id="044-拆分split"><a href="#044-拆分split" class="headerlink" title="044.拆分split"></a>044.拆分split</h4><p>​<br>    import numpy as np</p>
+<pre><code>#新建0-63的4x4x4三维数组
+array1=np.arange(64).reshape(4,4,4)
+print(array1)
+</code></pre>
+<p>​<br>    input(“用 split方法拆分数组，参数见注释\n”)<br>    #用split(ary, indices_or_sections, axis&#x3D;0)拆分</p>
+<pre><code>#axis表示分割轴的方向
+#（解释沿某方向：假设二维数组沿水平方向切割，可以想象有一条水平方向的轴线，沿着找条水平轴线的方向把轴线竖切称若干份，得到若干份数组）
+#关于axis： 自己实验发现axis=0表示以最高维度方向为分割方向，如三维数组沿深度方向分割，二位数组沿垂直方向分割
+#axis=1 ，沿第二高的维度方向分割 以此类推
+
+#当indices_or_sections为整数x，则把数组平分成x份，若不能平分则报错
+#当indices_or_sections为列表，则按照列表中的元素为轴拆分数组
+arr1=np.split(array1,4,2)
+print(arr1,&#39;\n\n&#39;)
+arr2=np.split(array1,[1,3],2)
+print(arr2)
+</code></pre>
+<h4 id="045-拆分hsplit-vsplit-dsplit"><a href="#045-拆分hsplit-vsplit-dsplit" class="headerlink" title="045.拆分hsplit,vsplit,dsplit"></a>045.拆分hsplit,vsplit,dsplit</h4><p>​<br>    import numpy as np</p>
+<pre><code>#新建0-63的4x4x4三维数组
+array1=np.arange(64).reshape(4,4,4)
+print(array1)
+
+print(&#39;分别使用hsplit,vsplit,dsplit分割\n(horizontally,vertically,depth)\n&#39;)
+print(&#39;注意：hsplit相当于axis=1,vsplit相当于axis=0，dsplit相当于axis=2&#39;)
+print(&#39;\n\n\n分别使用h,v,d方法拆分三维数组:&#39;)
+
+input(&#39;hsplit(ary, indices_or_sections),两参数同split一样\n&#39;)
+print(np.hsplit(array1,[1,2,3]))
+
+input(&#39;vsplit(ary, indices_or_sections),两参数同split一样\n&#39;)
+print(np.vsplit(array1,4))
+
+input(&#39;dsplit(ary, indices_or_sections),两参数同split一样\n&#39;)
+print(np.dsplit(array1,4))
+
+#貌似拆分数组维度不变
+</code></pre>
+<h4 id="046-根据拆分类比多维数组的合并"><a href="#046-根据拆分类比多维数组的合并" class="headerlink" title="046.根据拆分类比多维数组的合并"></a>046.根据拆分类比多维数组的合并</h4><p>​<br>    import numpy as np</p>
+<pre><code>类比 split      hsplit vsplit dsplit
+有 concatenate  hstack vstack dstack
+
+np.vstack((a,b))  
+效果大概同  
+np.concatenate((a,b),axis=0)#注意(a,b)是元组形式的
+
+v:axis=0
+h:axis=1
+d:axis=2
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%EF%BC%88%E6%9C%AA%E5%AE%8C%EF%BC%89/" data-id="cl50tnlr3001xycj39z4wgj8y" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%BA%93/" rel="tag">python库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【学习记录】【Python】【cv2】自学cv2 的简单记录（已经腰斩换新的）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90cv2%E3%80%91%E8%87%AA%E5%AD%A6cv2%20%E7%9A%84%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90cv2%E3%80%91%E8%87%AA%E5%AD%A6cv2%20%E7%9A%84%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/">【学习记录】【Python】【cv2】自学cv2 的简单记录（已经腰斩换新的）.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/">python</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/opencv/">opencv</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="1-图像的载入、显示、保存"><a href="#1-图像的载入、显示、保存" class="headerlink" title="1.图像的载入、显示、保存"></a>1.图像的载入、显示、保存</h2><p>​<br>​    import cv2<br>​<br>    #读入图像 cv2.imread(filepath,flags)<br>    #flags参数的取值：<br>    #cv2.IMREAD_COLOR：默认，载入一个彩色图像，忽略透明度   可用1代替<br>    #cv2.IMREAD_GRAYSCALE：载入一个灰阶图像  可用0代替<br>    #cv2.IMREAD_UNCHANGED：载入一个包含 Alpha 通道（透明度）的图像   可用-1代替<br>    img1&#x3D;cv2.imread(‘img_chess.jpg’,0)</p>
+<pre><code>#显示图像   cv2.imshow(wname,img)
+#wname  窗口的名字 window name
+#img 要显示的图像 窗口他大小为自动调整图片大小
+cv2.imshow(&#39;image_one&#39;,img1)
+key=cv2.waitKey(0)                  #等待键盘输入，单位毫秒，0为无限等待  没有这句话窗口只会闪一下就消失
+if key==27:
+    print(&#39;您按了ESC&#39;)
+#cv2.destroyAllWindows()            #销毁所有窗口
+cv2.destroyWindow(&#39;image_one&#39;)      #指定窗口名字销毁窗口
+</code></pre>
+<p>​<br>​    #保存图像 cv2.imwrite(file，img，num)<br>​    #file 文件名<br>​    #img  要保存的图像<br>​    #num 对于JPEG，其表示的是图像的质量，用0 - 100的整数表示，默认95;对于png 用0-9 ,第三个参数表示的是压缩级别。默认为3.<br>​    cv2.imwrite(‘img_chess_gray.jpg’,img1,[cv2.IMWRITE_JPEG_QUALITY,0])<br>​    cv2.imwrite(‘img_chess_gray.png’,img1,[cv2.IMWRITE_PNG_COMPRESSION,0])<br>​    # jpg属于有损压缩，是以图片的清晰度为代价的，数字越小，压缩比越高，图片质量损失越严重<br>​    # png属于无损压缩，数字0-9，数字越低，压缩比越低<br>​<br>    input(‘按回车退出程序’)</p>
+<p>那张保存为jpg格式的图片惨不忍睹</p>
+<h2 id="2-简单的图片操作-反转、复制、缩放、裁剪"><a href="#2-简单的图片操作-反转、复制、缩放、裁剪" class="headerlink" title="2.简单的图片操作 反转、复制、缩放、裁剪"></a>2.简单的图片操作 反转、复制、缩放、裁剪</h2><p>flip copy resize</p>
+<p>​<br>​    import cv2<br>​<br>    img1&#x3D;cv2.imread(‘img_chess.jpg’)</p>
+<pre><code>#图片反转 cv2.flip(img,flipcode)
+#flipcode &gt;0 沿x轴 flipcode=0 沿y轴 flipcode&lt;0 xy轴同时反转
+img1_flipx=cv2.flip(img1,1)
+img1_flipy=cv2.flip(img1,0)
+img1_flipxy=cv2.flip(img1,-1)
+
+cv2.imshow(&#39;1fx&#39;,img1_flipx)
+cv2.imshow(&#39;1fy&#39;,img1_flipy)
+cv2.imshow(&#39;1fxy&#39;,img1_flipxy)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+</code></pre>
+<p>​<br>​    #图像复制<br>​    img1_cp&#x3D;img1.copy()<br>​    cv2.imshow(‘1cp’,img1_cp)<br>​    cv2.waitKey()<br>​    cv2.destroyAllWindows()</p>
+<p>​<br>​    #图像的缩放<br>​    img_info&#x3D;img1.shape<br>​    height&#x3D;img_info[0]<br>​    width&#x3D;img_info[1]<br>​    img1_resized&#x3D;cv2.resize(img1.copy(),(int(width<em>1.2),int(height</em>0.6)))<br>​    cv2.imshow(‘1resized’,img1_resized)<br>​    cv2.waitKey(0)<br>​    cv2.destroyAllWindows()<br>​<br>    #图像的裁剪<br>    img1_cut&#x3D;img1[350:800,60:500]<br>    h,w,n&#x3D;img1.shape<br>    img1_cut2&#x3D;img1[int(h&#x2F;4):int(h<em>3&#x2F;4),int(w&#x2F;4):int(w</em>3&#x2F;4)]<br>    cv2.imshow(‘1cut’,img1_cut)<br>    cv2.imshow(‘1cut2’,img1_cut2)<br>    cv2.waitKey(0)<br>    cv2.destroyAllWindows()</p>
+<h2 id="3-图像通道的分离与合成"><a href="#3-图像通道的分离与合成" class="headerlink" title="3.图像通道的分离与合成"></a>3.图像通道的分离与合成</h2><p><strong>分离：</strong><br>img1B,img1G,img1R&#x3D;np.dsplit(img1,3)<br>img1B,img1G,img1R&#x3D;cv2.split(img1)都可以<br><strong>合成：</strong><br>cv2.merge([b,g,r])<br>cv2.merge([zeros, zeros, img1R])</p>
+<p><strong>注意倒数第五句的注释</strong></p>
+<p>​<br>​    import cv2<br>​    import numpy as np<br>​<br>    def showone(img):<br>        cv2.imshow(‘show image’,img)<br>        cv2.waitKey(0)<br>        cv2.destroyAllWindows()<br>    def showone_color(img,color):<br>        zeros&#x3D;np.zeros(img.shape[:2],dtype&#x3D;’uint8’) #记得调整格式<br>        if color &#x3D;&#x3D; ‘B’:<br>            cv2.imshow(‘blue’,cv2.merge([img1B,zeros,zeros]))<br>        elif color &#x3D;&#x3D; ‘G’:<br>            cv2.imshow(‘green’, cv2.merge([zeros, img1G, zeros]))<br>        elif color &#x3D;&#x3D; ‘R’:<br>            cv2.imshow(‘red’, cv2.merge([zeros, zeros, img1R]))<br>        cv2.waitKey(0)<br>        cv2.destroyAllWindows()<br>    def showone_merge(b,g,r):<br>        cv2.imshow(‘merge’,cv2.merge([b,g,r]))<br>        cv2.waitKey(0)<br>        cv2.destroyAllWindows()</p>
+<p>​<br>​    img1&#x3D;cv2.imread(‘theimg.png’,1)<br>​<br>    img1B,img1G,img1R&#x3D;np.dsplit(img1,3)<br>    #img1B,img1G,img1R&#x3D;cv2.split(img1)</p>
+<pre><code>print(img1B.dtype)          #矩阵元素的格式为uint8
+</code></pre>
+<p>​<br>​<br>​    showone(img1B)      #这里图像为灰色，原因是当调用cv2.imshow的时候G、R两个通道被默认设为了与B通道一样，三通道一样时显示灰度图</p>
+<p>​<br>​    showone_color(img1B,’B’)<br>​    showone_color(img1G,’G’)<br>​    showone_color(img1R,’R’)<br>​<br>    showone_merge(img1B,img1G,img1R)        #合成后是原图</p>
+<p>​    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90cv2%E3%80%91%E8%87%AA%E5%AD%A6cv2%20%E7%9A%84%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/" data-id="cl50tnlr50022ycj3e11hh7yd" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cv/" rel="tag">cv</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%BA%93/" rel="tag">python库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【学习记录】【Python】【openpyxl】简要学习openpyxl   的    记录----未完待续" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90openpyxl%E3%80%91%E7%AE%80%E8%A6%81%E5%AD%A6%E4%B9%A0openpyxl%20%20%20%E7%9A%84%20%20%20%20%E8%AE%B0%E5%BD%95----%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90openpyxl%E3%80%91%E7%AE%80%E8%A6%81%E5%AD%A6%E4%B9%A0openpyxl%20%20%20%E7%9A%84%20%20%20%20%E8%AE%B0%E5%BD%95----%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD/">【学习记录】【Python】【openpyxl】简要学习openpyxl   的    记录----未完待续.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/">python</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/openpyxl/">openpyxl</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<p>现阶段进行了简单的了解，不打算深究(后期来补: pandas挺好用的)</p>
+<h2 id="1-创建一个xls文件，随便写点东西，并保存"><a href="#1-创建一个xls文件，随便写点东西，并保存" class="headerlink" title="1.创建一个xls文件，随便写点东西，并保存"></a>1.创建一个xls文件，随便写点东西，并保存</h2><p>​<br>    import openpyxl</p>
+<pre><code>wb  = openpyxl.Workbook()   #创建一个工作表
+
+ws1 = wb.active             #获取“活跃的”表单
+ws1.title=&#39;sheeeet1&#39;         #更改表单的名字
+
+ws1[&#39;B7&#39;]=15                           #给单元格赋值
+ws1[&#39;C4&#39;]=&#39;CFour&#39;
+ws1[&#39;A2&#39;]=&#39;ttt&#39;
+ws1[&#39;A8&#39;]=&#39;AaAaAaAa&#39;
+ws1.append([1,2,&#39;sfaf&#39;,56,&#39;ABC&#39;])       #给一行中的多个单元格赋值
+ws1.append([1,1,1,11,1,1,1,1])
+
+print(ws1.max_row)                      #最大行
+print(ws1.max_column)                   #最大列
+
+print(ws1[&#39;A2&#39;].value)              
+print(ws1[&#39;B14&#39;].value)
+print(ws1[&#39;B13&#39;].value)                 #单元格无数据返回None
+</code></pre>
+<p>​<br>    ws2 &#x3D; wb.create_sheet(‘sheeeet2’)       #创建一个表单<br>    ws2[‘C3’]&#x3D;’ws2C3’</p>
+<p>​<br>    wb.save(‘xls_try1.xls’)                 #保存为xls文件</p>
+<p>​    </p>
+<p>目测openpyxl.worksheet.worksheet.Worksheet类的append方法的添加位置是：最后有内容的一行 的下一行<br>即openpyxl.worksheet.worksheet.Worksheet.max_row的下一行</p>
+<h2 id="2-打开一个xls文件，随便进行点操作"><a href="#2-打开一个xls文件，随便进行点操作" class="headerlink" title="2.打开一个xls文件，随便进行点操作"></a>2.打开一个xls文件，随便进行点操作</h2><p>​<br>    import openpyxl</p>
+<pre><code>wb = openpyxl.load_workbook(&#39;xls_try1.xlsx&#39;)
+
+ws_one = wb[&#39;sheeeet1&#39;]
+print(ws_one[&#39;A2&#39;].value)       #输出一个单元格的值
+
+for each_row in ws_one[&#39;A9&#39;:&#39;F10&#39;]:
+    for each_cell in each_row:
+        print(each_cell.value)      #输出多个单元格的值
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90openpyxl%E3%80%91%E7%AE%80%E8%A6%81%E5%AD%A6%E4%B9%A0openpyxl%20%20%20%E7%9A%84%20%20%20%20%E8%AE%B0%E5%BD%95----%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD/" data-id="cl50tnlr70025ycj3c3ycf73s" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/excle/" rel="tag">excle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%BA%93/" rel="tag">python库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【学习记录】【Python】关于super及其MRO机制的个人理解（不一定对）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E5%85%B3%E4%BA%8Esuper%E5%8F%8A%E5%85%B6MRO%E6%9C%BA%E5%88%B6%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%AF%B9%EF%BC%89/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E5%85%B3%E4%BA%8Esuper%E5%8F%8A%E5%85%B6MRO%E6%9C%BA%E5%88%B6%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%AF%B9%EF%BC%89/">【学习记录】【Python】关于super及其MRO机制的个人理解（不一定对）.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/">python</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<p>以下内容均为个人理解。<br><strong>MRO: Method Resolution Order 方法解析顺序</strong></p>
+<p>如果不用super：</p>
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;A.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        A.fun(self)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;B.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        A.fun(self)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;C.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">D</span>(B , C):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        B.fun(self)</span><br><span class="line">        C.fun(self)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;D.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line">D().fun()</span><br></pre></td></tr></table></figure>
+
+
+<p>输出结果： 发现A被实例化了两次</p>
+<blockquote>
+<p>A.fun<br> B.fun<br> A.fun<br> C.fun<br> D.fun</p>
+</blockquote>
+<p>如果用super：</p>
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;A.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(B , self).fun()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;B.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(C , self).fun()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;C.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">D</span>(B , C):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(D , self).fun()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;D.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line">D().fun()</span><br></pre></td></tr></table></figure>
+
+
+<p>输出结果： 发现A没有被重复实例化，这时由于Python继承中的MRO机制</p>
+<blockquote>
+<p>A.fun<br> C.fun<br> B.fun<br> D.fun</p>
+</blockquote>
+<p>查资料：</p>
+<blockquote>
+<p>在每个类声明之后，Python都会自动为创建一个名为“ <strong>mro</strong><br>”的内置属性，这个属性就是Python的MRO机制生成的，该属性是一个tuple，定义的是该类的方法解析顺序（继承顺序），当用super调用父类的方法时，会按照__mro__属性中的元素顺序去挨个查找方法。我们可以通过“类名.<br><strong>mro</strong> ”或“类名.mro()”来查看上面代码中D类的__mro__属性值</p>
+</blockquote>
+<p>举例：</p>
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">D</span>(A,B):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">E</span>(B, C):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">F</span>(D, E):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(F.__mro__)</span><br></pre></td></tr></table></figure>
+
+
+<p>输出结果：</p>
+<blockquote>
+<p>(&lt;class ‘ **main**.F’&gt;, &lt;class ‘ **main**.D’&gt;, &lt;class ‘ **main**.A’&gt;,&lt;class<br>‘ **main**.E’&gt;, &lt;class ‘ **main**.B’&gt;, &lt;class ‘ **main**.C’&gt;,&lt;class<br>‘object’&gt;)</p>
+</blockquote>
+<p>个人猜测MRO机制的顺序为：在深度优先的基础上，避免重复调用，且尽可能晚调用。<br>即 F-&gt;D-&gt;A-&gt;Object-&gt;B-&gt;Object-&gt;E-&gt;B-&gt;Object-&gt;C-&gt;Object<br>变为F-&gt;D-&gt;A-&gt;E-&gt;B-&gt;C-&gt;Objcet</p>
+<p><strong>super(type , obj)</strong><br>obj是type或type子类 的 一个实例，一般是self<br>super(type , obj)表示obj【按MRO 第一个排在type后面】的父类<br>如：F-&gt;D-&gt;A-&gt;E-&gt;B-&gt;C-&gt;Objcet 中 super(B , F()).function() 调用的使C类的function方法。<br><strong>super()</strong><br>相当于super( <strong>class</strong> , self)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E5%85%B3%E4%BA%8Esuper%E5%8F%8A%E5%85%B6MRO%E6%9C%BA%E5%88%B6%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%AF%B9%EF%BC%89/" data-id="cl50tnlrb002aycj3910hhd8y" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80%E6%9C%BA%E5%88%B6/" rel="tag">语言机制</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【学习记录】【python】【tkinter】自学tkinter的简要记录" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90python%E3%80%91%E3%80%90tkinter%E3%80%91%E8%87%AA%E5%AD%A6tkinter%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90python%E3%80%91%E3%80%90tkinter%E3%80%91%E8%87%AA%E5%AD%A6tkinter%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95/">【学习记录】【python】【tkinter】自学tkinter的简要记录.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/">python</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/tkinter/">tkinter</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="0-tkinter-Tk（）-零基础建议从1开始看别从0"><a href="#0-tkinter-Tk（）-零基础建议从1开始看别从0" class="headerlink" title="0. tkinter.Tk（） 零基础建议从1开始看别从0"></a>0. tkinter.Tk（） 零基础建议从1开始看别从0</h2><p>主窗口的一些方法</p>
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk</span><br><span class="line"></span><br><span class="line">root=tk.Tk()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">exit</span>():</span><br><span class="line">    root.quit()                 <span class="comment">#退出</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">update</span>():</span><br><span class="line">    root.update()               <span class="comment">#刷新界面</span></span><br><span class="line"></span><br><span class="line">root.title(<span class="string">&#x27;标题名称就叫这个&#x27;</span>)</span><br><span class="line">root.geometry(<span class="string">&#x27;250x150&#x27;</span>)        <span class="comment">#主窗体的大小</span></span><br><span class="line">root.resizable(<span class="number">20</span>,<span class="number">0</span>)             <span class="comment">#框体大小可调性，分别表示x,y方向的可变性,第一个参数为x，第二个为y</span></span><br><span class="line">                                </span><br><span class="line">bt1=tk.Button(root,text=<span class="string">&#x27;exit&#x27;</span>,command=exit)</span><br><span class="line">bt1.pack(side=tk.BOTTOM)</span><br><span class="line">bt2=tk.Button(root,text=<span class="string">&#x27;update&#x27;</span>,command=update)</span><br><span class="line">bt2.pack(side=tk.BOTTOM)</span><br><span class="line"></span><br><span class="line">tk.mainloop()</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="1-Lable-Button"><a href="#1-Lable-Button" class="headerlink" title="1. Lable Button"></a>1. Lable Button</h2><p>显示时间</p>
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tkinter <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment">#给button按钮用的函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">refresh_time</span>():</span><br><span class="line">    timestring.<span class="built_in">set</span>(<span class="string">&#x27;%s&#x27;</span>%time.ctime())</span><br><span class="line">    complexLabel.update()</span><br><span class="line"></span><br><span class="line">root=Tk()</span><br><span class="line"></span><br><span class="line">frame1=Frame(root)</span><br><span class="line">frame1.pack()</span><br><span class="line">frame2=Frame(root)</span><br><span class="line">frame2.pack()</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Label</span></span><br><span class="line">timestring=StringVar()              <span class="comment">#建立StringVar类对象</span></span><br><span class="line">timestring.<span class="built_in">set</span>(<span class="string">&#x27;%s&#x27;</span>%time.ctime())   <span class="comment">#初始化StringVar对象的值</span></span><br><span class="line">img=PhotoImage(file=<span class="string">&#x27;theimg.png&#x27;</span>)   <span class="comment">#建立PhotoImage类对象</span></span><br><span class="line">complexLabel=Label(frame1,</span><br><span class="line">                <span class="comment">#text=&#x27;天王盖地虎，\n小鸡炖蘑菇。&#x27;,  #文本</span></span><br><span class="line">                textvariable=timestring,            <span class="comment">#可变文本</span></span><br><span class="line">                image=img,                          <span class="comment">#图像</span></span><br><span class="line"></span><br><span class="line">                justify=RIGHT,      <span class="comment">#对齐方式 每行文字都会向这个方向对齐，默认CENTER居中</span></span><br><span class="line">                anchor=<span class="literal">None</span>,          <span class="comment">#文字在Label框内的方位 N,S,E,W,NE,NW,SE,SW(东南西北)</span></span><br><span class="line">                compound=CENTER,    <span class="comment">#组合方式 LEFT图左文右，RIGHT图右文左，CENTER图文重合</span></span><br><span class="line"></span><br><span class="line">                height=<span class="number">360</span>,width=<span class="number">640</span>,   <span class="comment">#Label的宽高  单位：以系统默认的中文的一个字体宽高为单位</span></span><br><span class="line">                padx=<span class="number">20</span>,pady=<span class="number">10</span>,        <span class="comment">#边距  单位是像素</span></span><br><span class="line">                fg=<span class="string">&#x27;blue&#x27;</span>,bg=<span class="literal">None</span>,      <span class="comment">#颜色  fg：字体颜色，bg：字体背景色</span></span><br><span class="line">                font=(<span class="string">&#x27;华文行楷&#x27;</span>,<span class="number">35</span>),    <span class="comment">#字体名+大小</span></span><br><span class="line"></span><br><span class="line">                relief=<span class="string">&#x27;raised&#x27;</span>,         <span class="comment">#边框样式 flat,sunken,raised,ridge</span></span><br><span class="line">                bd=<span class="number">15</span>                    <span class="comment">#边框大小</span></span><br><span class="line">                )</span><br><span class="line">complexLabel.pack()</span><br><span class="line"></span><br><span class="line"><span class="comment">#Button</span></span><br><span class="line">button=Button(frame2,</span><br><span class="line">            text=<span class="string">&#x27;刷新时间&#x27;</span>,</span><br><span class="line">            image=<span class="literal">None</span>,         <span class="comment">#Button的大小根据图片大小确定</span></span><br><span class="line"></span><br><span class="line">            justify=<span class="literal">None</span>,   </span><br><span class="line">            anchor=<span class="literal">None</span>,          </span><br><span class="line">            compound=<span class="literal">None</span>,      <span class="comment">#这些在Button里同样适用    </span></span><br><span class="line"></span><br><span class="line">            font=(<span class="string">&#x27;华文行楷&#x27;</span>,<span class="number">15</span>),   </span><br><span class="line">            fg=<span class="string">&#x27;red&#x27;</span>,bg=<span class="literal">None</span>,</span><br><span class="line">            width=<span class="number">20</span>,height=<span class="number">1</span>,</span><br><span class="line">            padx=<span class="number">10</span>,pady=<span class="number">5</span>,</span><br><span class="line"></span><br><span class="line">            bd=<span class="number">8</span>,</span><br><span class="line">            relief=<span class="string">&#x27;sunken&#x27;</span>,    <span class="comment">#flat groove ridge raised solid sunken</span></span><br><span class="line"></span><br><span class="line">            cursor=<span class="string">&#x27;hand2&#x27;</span> ,    <span class="comment">#鼠标  有pencil,circle,hand1,hand2</span></span><br><span class="line"></span><br><span class="line">            command=refresh_time  <span class="comment">#点击时触发函数 传参数用lambda:函数(参数)的形式</span></span><br><span class="line">            )</span><br><span class="line">button.pack()</span><br><span class="line"></span><br><span class="line">mainloop()</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<p>效果图<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200501165700545.PNG?x-oss-">https://img-blog.csdnimg.cn/20200501165700545.PNG?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70)</p>
+<h2 id="2-Checkbutton-Raidobutton"><a href="#2-Checkbutton-Raidobutton" class="headerlink" title="2. Checkbutton Raidobutton"></a>2. Checkbutton Raidobutton</h2><p>随便敲了个屑作</p>
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tkinter <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">root=Tk()</span><br><span class="line"></span><br><span class="line">v1=IntVar()</span><br><span class="line">v2=IntVar()</span><br><span class="line">v3=IntVar()</span><br><span class="line">var=IntVar()</span><br><span class="line"></span><br><span class="line">frame1=LabelFrame(root,bg=<span class="string">&#x27;brown&#x27;</span>,text=<span class="string">&#x27;Checkbutton部分&#x27;</span>,labelanchor=NE)</span><br><span class="line">frame1.place(relx=<span class="number">0.2</span>,rely=<span class="number">0.2</span>,relwidth=<span class="number">0.3</span>,relheight=<span class="number">0.3</span>)</span><br><span class="line">frame2=LabelFrame(root,bg=<span class="string">&#x27;green&#x27;</span>,text=<span class="string">&#x27;Raidobutton部分&#x27;</span>,labelanchor=NW)</span><br><span class="line">frame2.place(relx=<span class="number">0.5</span>,rely=<span class="number">0.5</span>,relwidth=<span class="number">0.4</span>,relheight=<span class="number">0.4</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p>​<br>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">check1=Checkbutton(frame1,text=<span class="string">&#x27;流浪汉&#x27;</span>,variable=v1,fg=<span class="string">&#x27;blue&#x27;</span>,bg=<span class="string">&#x27;green&#x27;</span>)</span><br><span class="line">check1.grid(row=<span class="number">0</span>,column=<span class="number">0</span>)</span><br><span class="line">check2=Checkbutton(frame1,text=<span class="string">&#x27;高中生&#x27;</span>,variable=v2,fg=<span class="string">&#x27;black&#x27;</span>,bg=<span class="string">&#x27;green&#x27;</span>)</span><br><span class="line">check2.grid(row=<span class="number">1</span>,column=<span class="number">0</span>)</span><br><span class="line">check3=Checkbutton(frame1,text=<span class="string">&#x27;穿越者&#x27;</span>,variable=v3,fg=<span class="string">&#x27;red&#x27;</span>,bg=<span class="string">&#x27;green&#x27;</span>)</span><br><span class="line">check3.grid(row=<span class="number">2</span>,column=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p>​<br>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">radio1=Radiobutton(frame2,text=<span class="string">&#x27;流浪汉&#x27;</span>,variable=var,value=<span class="number">1</span>)</span><br><span class="line">radio1.grid(row=<span class="number">0</span>,column=<span class="number">0</span>)</span><br><span class="line">radio2=Radiobutton(frame2,text=<span class="string">&#x27;掠夺者&#x27;</span>,variable=var,value=<span class="number">1</span>)</span><br><span class="line">radio2.grid(row=<span class="number">0</span>,column=<span class="number">1</span>)</span><br><span class="line">radio3=Radiobutton(frame2,text=<span class="string">&#x27;高中生&#x27;</span>,variable=var,value=<span class="number">2</span>)</span><br><span class="line">radio3.grid(row=<span class="number">1</span>,column=<span class="number">0</span>)</span><br><span class="line">radio4=Radiobutton(frame2,text=<span class="string">&#x27;初中生&#x27;</span>,variable=var,value=<span class="number">2</span>)</span><br><span class="line">radio4.grid(row=<span class="number">1</span>,column=<span class="number">1</span>)</span><br><span class="line">radio5=Radiobutton(frame2,text=<span class="string">&#x27;穿越者&#x27;</span>,variable=var,value=<span class="number">3</span>)</span><br><span class="line">radio5.grid(row=<span class="number">2</span>,column=<span class="number">0</span>)</span><br><span class="line">radio6=Radiobutton(frame2,text=<span class="string">&#x27;龙傲天&#x27;</span>,variable=var,value=<span class="number">3</span>)</span><br><span class="line">radio6.grid(row=<span class="number">2</span>,column=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">mainloop()</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<p>效果图<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200501165729478.PNG?x-oss-">https://img-blog.csdnimg.cn/20200501165729478.PNG?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70)</p>
+<h2 id="3-Entry-及复习前面"><a href="#3-Entry-及复习前面" class="headerlink" title="3. Entry 及复习前面"></a>3. Entry 及复习前面</h2><p>简易计算器</p>
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tkinter <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">changeop</span>(<span class="params">value</span>):</span><br><span class="line">    oplst=[<span class="string">&#x27;+&#x27;</span>,<span class="string">&#x27;-&#x27;</span>,<span class="string">&#x27;*&#x27;</span>,<span class="string">&#x27;/&#x27;</span>]</span><br><span class="line">    opstr.<span class="built_in">set</span>(oplst[value])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calcu</span>():</span><br><span class="line">    oplst=[<span class="keyword">lambda</span>:v1.get()+v2.get(),<span class="keyword">lambda</span>:v1.get()-v2.get(),<span class="keyword">lambda</span>:v1.get()*v2.get(),<span class="keyword">lambda</span>:v1.get()/v2.get()]</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        v3.<span class="built_in">set</span>(oplst[opvar.get()]())</span><br><span class="line">        errstr.<span class="built_in">set</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="keyword">except</span> ZeroDivisionError:</span><br><span class="line">        errstr.<span class="built_in">set</span>(<span class="string">&#x27;除零错误&#x27;</span>)</span><br><span class="line">    <span class="keyword">except</span> TclError:</span><br><span class="line">        errstr.<span class="built_in">set</span>(<span class="string">&#x27;输入错误&#x27;</span>)</span><br><span class="line">    <span class="keyword">except</span> IndexError:</span><br><span class="line">        errstr.<span class="built_in">set</span>(<span class="string">&#x27;无运算符&#x27;</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        errstr.<span class="built_in">set</span>(<span class="string">&#x27;未知错误&#x27;</span>)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">clear</span>():</span><br><span class="line">    v1.<span class="built_in">set</span>(<span class="number">0</span>)</span><br><span class="line">    v2.<span class="built_in">set</span>(<span class="number">0</span>)</span><br><span class="line">    v3.<span class="built_in">set</span>(<span class="number">0</span>)</span><br><span class="line">    opvar.<span class="built_in">set</span>(<span class="number">5</span>)</span><br><span class="line">    opstr.<span class="built_in">set</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    errstr.<span class="built_in">set</span>(<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">root=Tk()</span><br><span class="line"></span><br><span class="line"><span class="comment">#定义变量</span></span><br><span class="line">v1=IntVar()</span><br><span class="line">v2=IntVar()</span><br><span class="line">v3=IntVar()</span><br><span class="line">errstr=StringVar()</span><br><span class="line">opstr=StringVar()</span><br><span class="line">opvar=IntVar()</span><br><span class="line">opvar.<span class="built_in">set</span>(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">frame=LabelFrame(root,text=<span class="string">&#x27;计算器&#x27;</span>,labelanchor=NW)</span><br><span class="line">frame.pack()</span><br><span class="line"></span><br><span class="line"><span class="comment">#三个数字</span></span><br><span class="line">add1=Entry(frame,textvariable=v1,bg=<span class="string">&#x27;lightgrey&#x27;</span>,width=<span class="number">8</span>)</span><br><span class="line">add1.grid(row=<span class="number">0</span>,column=<span class="number">0</span>)</span><br><span class="line">add2=Entry(frame,textvariable=v2,bg=<span class="string">&#x27;lightgrey&#x27;</span>,width=<span class="number">8</span>)</span><br><span class="line">add2.grid(row=<span class="number">0</span>,column=<span class="number">2</span>)</span><br><span class="line">result=Label(frame,textvariable=v3,bg=<span class="string">&#x27;lightgrey&#x27;</span>,width=<span class="number">8</span>,anchor=W)</span><br><span class="line">result.grid(row=<span class="number">0</span>,column=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#运算符和等号</span></span><br><span class="line">ch1=Label(frame,textvariable=opstr)</span><br><span class="line">ch1.grid(row=<span class="number">0</span>,column=<span class="number">1</span>)</span><br><span class="line">ch2=Label(frame,text=<span class="string">&#x27;=&#x27;</span>)</span><br><span class="line">ch2.grid(row=<span class="number">0</span>,column=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#错误提示</span></span><br><span class="line">errlabel=Label(frame,textvariable=errstr,fg=<span class="string">&#x27;red&#x27;</span>)</span><br><span class="line">errlabel.grid(row=<span class="number">0</span>,column=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#运算符选项</span></span><br><span class="line">op1=Radiobutton(frame,text=<span class="string">&#x27;+&#x27;</span>,value=<span class="number">0</span>,variable=opvar,command=<span class="keyword">lambda</span>:changeop(opvar.get()))</span><br><span class="line">op1.grid(row=<span class="number">1</span>,column=<span class="number">0</span>)</span><br><span class="line">op1=Radiobutton(frame,text=<span class="string">&#x27;-&#x27;</span>,value=<span class="number">1</span>,variable=opvar,command=<span class="keyword">lambda</span>:changeop(opvar.get()))</span><br><span class="line">op1.grid(row=<span class="number">1</span>,column=<span class="number">1</span>)</span><br><span class="line">op1=Radiobutton(frame,text=<span class="string">&#x27;*&#x27;</span>,value=<span class="number">2</span>,variable=opvar,command=<span class="keyword">lambda</span>:changeop(opvar.get()))</span><br><span class="line">op1.grid(row=<span class="number">1</span>,column=<span class="number">2</span>)</span><br><span class="line">op1=Radiobutton(frame,text=<span class="string">&#x27;/&#x27;</span>,value=<span class="number">3</span>,variable=opvar,command=<span class="keyword">lambda</span>:changeop(opvar.get()))</span><br><span class="line">op1.grid(row=<span class="number">1</span>,column=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#两个按钮</span></span><br><span class="line">btcalcu=Button(frame,text=<span class="string">&#x27;计算&#x27;</span>,command=calcu,width=<span class="number">8</span>)</span><br><span class="line">btcalcu.grid(row=<span class="number">1</span>,column=<span class="number">4</span>)</span><br><span class="line">btclear=Button(frame,text=<span class="string">&#x27;清除&#x27;</span>,command=clear,width=<span class="number">8</span>)</span><br><span class="line">btclear.grid(row=<span class="number">1</span>,column=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mainloop()</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<p>效果图<br><img src="https://img-blog.csdnimg.cn/20200501165758245.PNG" alt="在这里插入图片描述"></p>
+<h2 id="4-Listbox-Scrollbar-少量Text"><a href="#4-Listbox-Scrollbar-少量Text" class="headerlink" title="4. Listbox Scrollbar 少量Text"></a>4. Listbox Scrollbar 少量Text</h2><p>Listbox Scrollbar Text 的简单应用</p>
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk</span><br><span class="line">root=tk.Tk()</span><br><span class="line"></span><br><span class="line">lst=[<span class="string">&#x27;幽灵弯刀&#x27;</span>,<span class="string">&#x27;学术剽窃&#x27;</span>,<span class="string">&#x27;苔丝格雷迈恩&#x27;</span>,<span class="string">&#x27;迈拉的不稳定元素&#x27;</span>,<span class="string">&#x27;弑君&#x27;</span>,<span class="string">&#x27;蜡烛巨龙&#x27;</span>,<span class="string">&#x27;团伙劫掠&#x27;</span>,<span class="string">&#x27;阿卡玛&#x27;</span>,<span class="string">&#x27;灵魂之境&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;炎魔之王拉格纳罗斯&#x27;</span>,<span class="string">&#x27;光耀之主拉格纳罗斯&#x27;</span>,<span class="string">&#x27;索瑞森大帝&#x27;</span>,<span class="string">&#x27;厄运信天翁&#x27;</span>,<span class="string">&#x27;露娜的口袋银河&#x27;</span>,<span class="string">&#x27;观星者露娜&#x27;</span>,<span class="string">&#x27;拉祖尔&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;火车王埃利诺&#x27;</span>,<span class="string">&#x27;卡扎库斯&#x27;</span>,<span class="string">&#x27;了不起的杰弗里斯&#x27;</span>,<span class="string">&#x27;铜须布莱恩&#x27;</span>,<span class="string">&#x27;伊利斯逐星&#x27;</span>,<span class="string">&#x27;雷诺杰克逊&#x27;</span>,<span class="string">&#x27;芬利忘了爵士&#x27;</span>]</span><br><span class="line"><span class="comment">#可以用for循环添加一些项目</span></span><br><span class="line">var=tk.StringVar()</span><br><span class="line"><span class="comment">#StringVar类变量存放Listbox中的所有项目，以空格隔开</span></span><br><span class="line">var.<span class="built_in">set</span>(<span class="string">&#x27;1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20&#x27;</span>)</span><br><span class="line"></span><br><span class="line">frame1=tk.LabelFrame(root,bg=<span class="string">&#x27;lightgrey&#x27;</span>,text=<span class="string">&#x27;Listbox&#x27;</span>,labelanchor=tk.NW)</span><br><span class="line">frame1.pack(side=tk.LEFT)</span><br><span class="line">frame2=tk.LabelFrame(root,bg=<span class="string">&#x27;lightgrey&#x27;</span>,text=<span class="string">&#x27;Text&#x27;</span>,labelanchor=tk.NW)</span><br><span class="line">frame2.pack(side=tk.RIGHT)</span><br><span class="line"></span><br><span class="line">scrbar=tk.Scrollbar(frame1,command=<span class="literal">None</span>)    <span class="comment">#仅仅这样用户拖动滚动条是不能实现Listbox的上下移动的，下文通过config方法改变了command的值</span></span><br><span class="line">scrbar.pack(side=tk.LEFT,fill=tk.Y)        </span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">lstbx=tk.Listbox(frame1,</span><br><span class="line">                height=<span class="number">8</span>,                   <span class="comment">#显示8行</span></span><br><span class="line">                fg=<span class="string">&#x27;blue&#x27;</span>,</span><br><span class="line">                yscrollcommand=scrbar.<span class="built_in">set</span>,  <span class="comment">#设置y方向滚动条</span></span><br><span class="line"></span><br><span class="line">                selectbackground=<span class="string">&#x27;green&#x27;</span>,    <span class="comment">#选中时的背景色</span></span><br><span class="line">                selectforeground=<span class="string">&#x27;red&#x27;</span>,      <span class="comment">#选中时的前景色</span></span><br><span class="line">                selectborderwidth=<span class="number">5</span>,        <span class="comment">#选中时的边框宽度 默认是由selectbackground指定的颜色填充，没有边框 如果设置了此选项，Listbox 的每一项会相应变大，被选中项为 &quot;raised&quot; 样式</span></span><br><span class="line">                </span><br><span class="line">                selectmode=tk.SINGLE,       <span class="comment">#选择模式 SINGLE 单选 BROWSE 单选，可鼠标和方向键改变选项</span></span><br><span class="line">                                            <span class="comment">#       MULTIPLE 多选 EXTENDED 多选，需要配合shift crtl 或拖动光标实现</span></span><br><span class="line">                </span><br><span class="line">                cursor=<span class="string">&#x27;hand2&#x27;</span>,             <span class="comment">#鼠标选在Listbox上的样式，pencil,circle,hand1,hand2</span></span><br><span class="line"></span><br><span class="line">                exportselection=<span class="literal">False</span>,      <span class="comment">#指定文本是否可以被复制到剪贴板</span></span><br><span class="line"></span><br><span class="line">                listvariable=var            <span class="comment">#StringVar类变量存放Listbox中的所有项目，以空格隔开</span></span><br><span class="line">                )</span><br><span class="line">lstbx.pack(side=tk.LEFT,fill=tk.BOTH)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> lst:</span><br><span class="line">    lstbx.insert(tk.END,i)</span><br><span class="line"></span><br><span class="line">scrbar.config(command=lstbx.yview)          <span class="comment">#Listbox组件的yview方法用于在垂直方向上滚动 Listbox 组件的内容</span></span><br><span class="line">                                            </span><br><span class="line"><span class="comment">#Listbox的方法以及Scrollbar的参数和方法 这里没有记录</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>():</span><br><span class="line">    text.insert(tk.END,lstbx.get(tk.ACTIVE)+<span class="string">&#x27;\n&#x27;</span>)   <span class="comment">#在Text的末尾-END位置-写入Listbox的选中项</span></span><br><span class="line"></span><br><span class="line">button1=tk.Button(frame1,text=<span class="string">&#x27;删除&#x27;</span>,command=<span class="keyword">lambda</span> x=lstbx:x.delete(tk.ACTIVE))    <span class="comment">#Listbox.delete(tk.ACTIVE)删除选中</span></span><br><span class="line">button1.pack(side=tk.BOTTOM)</span><br><span class="line">button2=tk.Button(frame1,text=<span class="string">&#x27;加入&#x27;</span>,command=add)</span><br><span class="line">button2.pack(side=tk.BOTTOM)</span><br><span class="line"></span><br><span class="line">text=tk.Text(frame2)</span><br><span class="line">text.pack()</span><br><span class="line"></span><br><span class="line">tk.mainloop()</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<p>Listbox的方法以及Scrollbar的参数和方法有很多没有记录，也暂时没有学习，学习的时候找到这位了博主发过的一些比较详细的资料<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41556318/article/list">https://blog.csdn.net/qq_41556318/article/list</a></p>
+<p>效果图<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200501165914516.PNG?x-oss-">https://img-blog.csdnimg.cn/20200501165914516.PNG?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70)</p>
+<h2 id="5-Text-之-mark与tag"><a href="#5-Text-之-mark与tag" class="headerlink" title="5. Text 之 mark与tag"></a>5. Text 之 mark与tag</h2><p>关于mark的简单知识</p>
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk</span><br><span class="line"></span><br><span class="line">root=tk.Tk()</span><br><span class="line"></span><br><span class="line">scrbar=tk.Scrollbar(root)</span><br><span class="line">scrbar.pack(side=tk.LEFT,fill=tk.Y)</span><br><span class="line"></span><br><span class="line">text1=tk.Text(root,width=<span class="number">50</span>,height=<span class="number">15</span>)</span><br><span class="line">text1.pack(side=tk.LEFT)</span><br><span class="line">text2=tk.Text(root,width=<span class="number">50</span>,height=<span class="number">15</span>)</span><br><span class="line">text2.pack(side=tk.RIGHT)</span><br><span class="line"></span><br><span class="line">text1.config(yscrollcommand=scrbar.<span class="built_in">set</span>) <span class="comment">#关联text1和滚动条</span></span><br><span class="line">scrbar.config(command=text1.yview)</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">text1.insert(tk.INSERT,<span class="string">&#x27;在Insert位置插入这段话+换行\n&#x27;</span>)     <span class="comment">#汉字只占一列的位置</span></span><br><span class="line">text2.insert(tk.INSERT,<span class="string">&#x27;在Insert位置插入这段话+换行\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">text1.mark_set(<span class="string">&#x27;thismark&#x27;</span>,<span class="string">&#x27;1.5&#x27;</span>)        <span class="comment">#创建一个新mark，若mark存在，则是移动mark到指定位置</span></span><br><span class="line">text2.mark_set(<span class="string">&#x27;thismark&#x27;</span>,<span class="string">&#x27;1.5&#x27;</span>)        </span><br><span class="line"></span><br><span class="line">text2.mark_gravity(<span class="string">&#x27;thismark&#x27;</span>,tk.LEFT)  <span class="comment">#体会gravity为LEFT和RIGHT的不同(默认是RGHIT)</span></span><br><span class="line">                                        <span class="comment">#insert操作之后mark会保持在插入内容的gravity的方向</span></span><br><span class="line"></span><br><span class="line">text1.insert(<span class="string">&#x27;thismark&#x27;</span>,<span class="string">&#x27;(第一Giao)&#x27;</span>)</span><br><span class="line">text1.insert(<span class="string">&#x27;thismark&#x27;</span>,<span class="string">&#x27;(第二Giao)&#x27;</span>)</span><br><span class="line">text2.insert(<span class="string">&#x27;thismark&#x27;</span>,<span class="string">&#x27;(第一Giao)&#x27;</span>)</span><br><span class="line">text2.insert(<span class="string">&#x27;thismark&#x27;</span>,<span class="string">&#x27;(第二Giao)&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">text1.insert(tk.END,<span class="string">&#x27;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&#x27;</span>)</span><br><span class="line">text1.insert(tk.END,text1.mark_names())                </span><br><span class="line"><span class="comment">#mark_names()方法返回Text的所有mark(返回tuple类型) 包括INSERT CURRENT 注意END不是mark是特殊索引</span></span><br><span class="line"></span><br><span class="line">text1.insert(tk.END,<span class="string">&#x27;\n&#x27;</span>+text1.mark_next(<span class="number">0.1</span>)+<span class="string">&#x27;\n&#x27;</span>)     <span class="comment">#mark_next()方法返回index位置后的第一个mark，若没有，返回None</span></span><br><span class="line">text1.insert(tk.END,<span class="built_in">type</span>(text1.mark_previous(<span class="number">0.1</span>)))     <span class="comment">#mark_previous()方法返回index位置前的第一个mark，若没有，返回None</span></span><br><span class="line"></span><br><span class="line">text1.mark_unset(<span class="string">&#x27;thismark&#x27;</span>)</span><br><span class="line">text2.mark_unset(<span class="string">&#x27;thismark&#x27;</span>)        <span class="comment">#封印mark</span></span><br><span class="line"></span><br><span class="line">tk.mainloop()</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<p>效果图<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200502141505911.PNG?x-oss-">https://img-blog.csdnimg.cn/20200502141505911.PNG?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70)<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200502141505910.PNG?x-oss-">https://img-blog.csdnimg.cn/20200502141505910.PNG?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70)</p>
+<p>关于tag的简单知识</p>
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk</span><br><span class="line"></span><br><span class="line">root=tk.Tk()</span><br><span class="line"></span><br><span class="line">text=tk.Text(root,width=<span class="number">50</span>,height=<span class="number">15</span>)</span><br><span class="line">text.pack()</span><br><span class="line"></span><br><span class="line">text.insert(tk.INSERT,<span class="string">&#x27;abdcefghijklmnopqrstuvwxyz&#x27;</span>)</span><br><span class="line"></span><br><span class="line">text.tag_config(tk.SEL,background=<span class="string">&#x27;black&#x27;</span>,foreground=<span class="string">&#x27;white&#x27;</span>)   <span class="comment">#SEL是预定义的特殊tag，表示对应的选中内容</span></span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">text.tag_add(<span class="string">&#x27;thistag&#x27;</span>,<span class="string">&#x27;1.5&#x27;</span>,<span class="string">&#x27;1.9&#x27;</span>,<span class="string">&#x27;1.14&#x27;</span>,<span class="string">&#x27;1.18&#x27;</span>,<span class="string">&#x27;1.0&#x27;</span>,<span class="string">&#x27;1.1&#x27;</span>,<span class="string">&#x27;1.20&#x27;</span>) <span class="comment">#连续的两个参数表示范围，一个表示一个位置</span></span><br><span class="line">text.tag_config(<span class="string">&#x27;thistag&#x27;</span>,background=<span class="string">&#x27;lightgrey&#x27;</span>,foreground=<span class="string">&#x27;green&#x27;</span>)</span><br><span class="line"></span><br><span class="line">text.tag_raise(tk.SEL)      </span><br><span class="line"><span class="comment">#新建tag会覆盖较为旧的tag的相同选项</span></span><br><span class="line"><span class="comment">#用tag_raise()或tag_lower()可以调整tag优先级</span></span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tk.mainloop()</span><br></pre></td></tr></table></figure>
+
+
+<p>效果图</p>
+<p>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/2020050214152292.PNG?x-oss-">https://img-blog.csdnimg.cn/2020050214152292.PNG?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70)</p>
+<h2 id="6-Canvas"><a href="#6-Canvas" class="headerlink" title="6. Canvas"></a>6. Canvas</h2><p>暂时不想学，放在这里吃灰吧</p>
+<h2 id="7-Menu-相关的一些简单知识"><a href="#7-Menu-相关的一些简单知识" class="headerlink" title="7. Menu 相关的一些简单知识"></a>7. Menu 相关的一些简单知识</h2><p>简单实现了 Menu Menubotton OptionMenu 组件</p>
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk</span><br><span class="line"></span><br><span class="line">root=tk.Tk()</span><br><span class="line"></span><br><span class="line">menu=tk.Menu(root,tearoff=<span class="literal">False</span>)        <span class="comment">#建立一个Menu menu  rearoff=true表示这个菜单可“撕下”(单独变成一个小窗口)</span></span><br><span class="line">root.config(menu=menu)</span><br><span class="line"></span><br><span class="line">filemenu=tk.Menu(menu,tearoff=<span class="literal">False</span>)    <span class="comment">#建立另一个Menu filemenu</span></span><br><span class="line">filemenu.add_command(label=<span class="string">&#x27;打开&#x27;</span>)</span><br><span class="line">filemenu.add_command(label=<span class="string">&#x27;保存&#x27;</span>)</span><br><span class="line">filemenu.add_separator()                <span class="comment">#一道线</span></span><br><span class="line">filemenu.add_command(label=<span class="string">&#x27;退出&#x27;</span>,command=root.quit)</span><br><span class="line">menu.add_cascade(label=<span class="string">&#x27;文件&#x27;</span>,menu=filemenu)    <span class="comment">#添加一个父菜单</span></span><br><span class="line"></span><br><span class="line">frame=tk.Frame(root,width=<span class="number">500</span>,height=<span class="number">200</span>)</span><br><span class="line">frame.pack()</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">popup</span>(<span class="params">event</span>):</span><br><span class="line">    filemenu.post(event.x_root,event.y_root)</span><br><span class="line"></span><br><span class="line">frame.bind(<span class="string">&#x27;&lt;Button-3&gt;&#x27;</span>,popup)              <span class="comment">#通过绑定事件（右击）使filemenu出现</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#--------------------------------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">#Menubutton</span></span><br><span class="line">menubutton=tk.Menubutton(root,text=<span class="string">&#x27;click me&#x27;</span>,relief=tk.RAISED)</span><br><span class="line">menubutton.pack()</span><br><span class="line"></span><br><span class="line">second_filemenu=tk.Menu(menubutton)</span><br><span class="line">second_filemenu.add_command(label=<span class="string">&#x27;giaogiao&#x27;</span>)</span><br><span class="line">menubutton.config(menu=second_filemenu)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#--------------------------------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">#OptionMenu（M大写）</span></span><br><span class="line">options=[<span class="string">&#x27;624&#x27;</span>,<span class="string">&#x27;625&#x27;</span>,<span class="string">&#x27;626&#x27;</span>,<span class="string">&#x27;010&#x27;</span>,<span class="string">&#x27;1437&#x27;</span>,<span class="string">&#x27;4369&#x27;</span>,<span class="string">&#x27;777&#x27;</span>]</span><br><span class="line">var=tk.StringVar()</span><br><span class="line">var.<span class="built_in">set</span>(options[<span class="number">0</span>])</span><br><span class="line">optmenu=tk.OptionMenu(root,var,*options) </span><br><span class="line">optmenu.pack()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tk.mainloop()</span><br></pre></td></tr></table></figure>
+
+
+<p>​    </p>
+<p>效果图<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200502191209144.PNG?x-oss-">https://img-blog.csdnimg.cn/20200502191209144.PNG?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70)</p>
+<h2 id="8-Message-Spinbox简单知识拓展"><a href="#8-Message-Spinbox简单知识拓展" class="headerlink" title="8. Message Spinbox简单知识拓展"></a>8. Message Spinbox简单知识拓展</h2><p>Message使Label的变体，支持多行文本消息和自动<br>Spinbox是Entry的变体， 从一些固定值中选择一个，可以通过 1.范围 2.元组 指定内容</p>
+<p>​<br>​    import tkinter as tk<br>​<br>​    root&#x3D;tk.Tk()<br>​<br>    frame1&#x3D;tk.LabelFrame(root,text&#x3D;’message’,labelanchor&#x3D;tk.NW)<br>    frame1.pack(side&#x3D;tk.LEFT)<br>    frame2&#x3D;tk.LabelFrame(root,text&#x3D;’spinbox’,labelanchor&#x3D;tk.NW)<br>    frame2.pack(side&#x3D;’right’)</p>
+<pre><code>#Message使Label的变体，支持多行文本消息和自动
+msg1=tk.Message(frame1,text=&#39;我是一个massage&#39;,width=150)
+msg1.pack()
+msg2=tk.Message(frame1,text=&#39;我是一个巨巨巨巨巨巨巨巨巨巨巨巨巨巨巨长的message&#39;,width=200)
+msg2.pack()
+
+#Spinbox是Entry的变体， 从一些固定值中选择一个，可以通过 1.范围 2.元组 指定内容
+#1.指定范围
+spb1=tk.Spinbox(frame2,from_=0,to=15)
+spb1.pack(side=tk.LEFT)
+#2.指定元组
+lst=[&#39;奥雷利亚诺布恩迪亚&#39;,&#39;何塞阿尔卡蒂奥布恩迪亚&#39;,&#39;乌尔苏拉&#39;,&#39;梅尔基亚德斯&#39;,&#39;蕾梅黛丝&#39;,&#39;赫里内勒多马尔克斯&#39;,&#39;丽贝卡&#39;,&#39;阿马兰妲&#39;,&#39;加西亚马尔克斯&#39;]
+spb2=tk.Spinbox(frame2,values=lst)
+spb2.pack()
+
+tk.mainloop()
+</code></pre>
+<p>效果图<br><img src="https://img-blog.csdnimg.cn/20200503160621198.PNG" alt="在这里插入图片描述"></p>
+<h2 id="9-Toplevel"><a href="#9-Toplevel" class="headerlink" title="9. Toplevel"></a>9. Toplevel</h2><p>实现顶级窗口</p>
+<p>​<br>​    import tkinter as tk<br>​<br>​    root&#x3D;tk.Tk()<br>​    root.title(‘root里面放按钮’)<br>​    num&#x3D;0<br>​<br>    def create():<br>        global num<br>        num+&#x3D;1</p>
+<pre><code>    top=tk.Toplevel()         #创建Top窗口
+    top.title(&#39;第&#39;+str(num)+&#39;窗&#39;)
+    top.attributes(&#39;-alpha&#39;,0.7)    #设置窗口不透明度为0.7
+    
+    msg=tk.Message(top,text=&#39;第%d个窗口成功创建!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!&#39;%num,width=300)
+    msg.pack()
+</code></pre>
+<p>​<br>​    tk.Button(root,text&#x3D;’创建一个Toplevel窗口’,width&#x3D;70,command&#x3D;create,relief&#x3D;tk.RAISED,bd&#x3D;10).pack()<br>​<br>​    tk.mainloop()</p>
+<p>效果图<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200503163759839.PNG?x-oss-">https://img-blog.csdnimg.cn/20200503163759839.PNG?x-oss-</a><br>process&#x3D;image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk&#x3D;,size_16,color_FFFFFF,t_70)<br>在学习过程中，发现这位博主有关于Toplevel 和Tk 方法，以及attributes函数 的较详细内容<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_41104353/article/details/79320155">https://blog.csdn.net/sinat_41104353/article/details/79320155</a></p>
+<h2 id="10-事件绑定-简单知识"><a href="#10-事件绑定-简单知识" class="headerlink" title="10. 事件绑定 简单知识"></a>10. 事件绑定 简单知识</h2><p>可以把事件和组件或窗口（可能表述会有问题）绑定起来以形如<br>窗口.bind(事件序列,函数)的形式，回调函数时会带着Event（事件）对象作为参数</p>
+<p>事件序列的语法描述为<modifier-type-detail>（举个栗子<Control-Shift-
+KeyPress-h>，表示同时ctrl+shift+小写h）详情见下面链接</p>
+<p>学习时发现其他博主发的资料：<br>事件序列：<a target="_blank" rel="noopener" href="https://blog.csdn.net/nkd50000/article/details/77319659">https://blog.csdn.net/nkd50000/article/details/77319659</a><br>Event对象的属性及含义：<a target="_blank" rel="noopener" href="https://blog.csdn.net/nkd50000/article/details/77319760">https://blog.csdn.net/nkd50000/article/details/77319760</a></p>
+<p>。<br>简单试水</p>
+<p>​<br>​    import tkinter as tk<br>​<br>​    lst&#x3D;[<br>​        ‘<Button-1>‘,<br>​        ‘<Control-Button-1>‘,<br>​        ‘<Control-Shift-Button-3>‘,<br>​        ‘<Control-Shift-KeyPress-Q>‘,<br>​        ‘<Alt-KeyPress-N>‘,<br>​        ‘<Alt_L>‘,<br>​        ‘<Double-Button-1>‘,<br>​        ‘<Shift_L>‘,<br>​        ‘<Double-KeyPress-A>‘,<br>​        ‘<Triple-KeyPress>‘,<br>​        ‘<Shift-KeyPress-H>‘,<br>​        #’<Any-KeyPress>‘<br>​        ]<br>​<br>    root&#x3D;tk.Tk()</p>
+<pre><code>frame=tk.Frame(root,width=250,height=50,bg=&#39;blue&#39;)
+frame.pack()
+frame.focus_set()
+
+def function(event):
+    top=tk.Toplevel()
+    tk.Message(top,text=event.type).pack()
+
+for each in lst:
+    frame.bind(each,function)
+#frame.bind(&#39;&lt;KeyPress&gt;&#39;,function)
+#frame.bind(&#39;&lt;KeyPress-Y&gt;&#39;,function)
+</code></pre>
+<p>​<br>​<br>​    tk.mainloop()</p>
+<h2 id="11-标准对话框"><a href="#11-标准对话框" class="headerlink" title="11. 标准对话框"></a>11. 标准对话框</h2><p>massage简单实现</p>
+<p>​<br>​    import tkinter.messagebox as tkmsg<br>​    import tkinter as tk</p>
+<p>​<br>​    root&#x3D;tk.Tk()<br>​<br>​    v&#x3D;tk.StringVar()<br>​    lb&#x3D;tk.Message(root,textvariable&#x3D;v)<br>​    lb.pack()<br>​<br>    #返回 字符串 yes no<br>    res&#x3D;tkmsg.askquestion(<br>                    ‘askquestion’,<br>                    ‘随便写点什么12’,<br>                    default&#x3D;tkmsg.NO,<br>                    #default定义按下回车的默认选项（默认值为一个按钮）<br>                    #CANCEL IGNORE OK NO RETRY YES<br>                    icon&#x3D;tkmsg.ERROR,<br>                    #icon 指定框内显示的图标，一般不要乱指定，用默认<br>                    #ERROR INFO QUESTION WARNNING</p>
+<pre><code>                #对话框默认显示在根窗口，通过parent参数 如parent=w  可以显示在子窗口
+                ) 
+v.set(res)
+
+#返回 bool值 True False
+res=tkmsg.askyesno(&#39;askyesno&#39;,&#39;随便写点什么3244231423&#39;)
+v.set(res)
+res=tkmsg.askretrycancel(&#39;askretrycancel&#39;,&#39;随便写点什么3454345&#39;)
+v.set(res)
+res=tkmsg.askokcancel(&#39;askokcancel&#39;,&#39;随便写点什么56765&#39;)
+v.set(res)
+
+#返回 字符串 ok
+res=tkmsg.showerror(&#39;showerror&#39;,&#39;随便写点什么rtfdx&#39;)
+v.set(res)
+res=tkmsg.showinfo(&#39;showinfo&#39;,&#39;随便写点什么3r4eds&#39;)
+v.set(res)
+res=tkmsg.showwarning(&#39;showwarning&#39;,&#39;随便写点什么d gfgdsgr&#39;)
+v.set(res)
+</code></pre>
+<p>​<br>​    tk.mainloop()</p>
+<p>filedialog模块</p>
+<blockquote>
+<p>导入模块：import tkinter.filedialog<br> 选择文件对话框的格式：<br> tkinter.filedialog.asksaveasfilename():选择以什么文件名保存，返回文件名<br> tkinter.filedialog.asksaveasfile():选择以什么文件保存，创建文件并返回文件流对象<br> tkinter.filedialog.askopenfilename():选择打开什么文件，返回文件名<br> tkinter.filedialog.askopenfile():选择打开什么文件，返回IO流对象<br> tkinter.filedialog.askdirectory():选择目录，返回目录名<br> tkinter.filedialog.askopenfilenames():选择打开多个文件，以元组形式返回多个文件名<br> tkinter.filedialog.askopenfiles():选择打开多个文件，以列表形式返回多个IO流对象</p>
+</blockquote>
+<h2 id="12-布局管理器"><a href="#12-布局管理器" class="headerlink" title="12. 布局管理器"></a>12. 布局管理器</h2><p>举个栗子</p>
+<p>​<br>​    import tkinter as tk<br>​<br>​    root&#x3D;tk.Tk()<br>​<br>    frame1&#x3D;tk.Frame(root,width&#x3D;200,height&#x3D;150,bg&#x3D;’lightgrey’)<br>    frame1.pack(side&#x3D;tk.LEFT,fill&#x3D;tk.Y)<br>    frame2&#x3D;tk.Frame(root,width&#x3D;200,height&#x3D;150,bg&#x3D;’yellow’)<br>    frame2.pack(side&#x3D;tk.LEFT)<br>    frame3&#x3D;tk.Frame(root,width&#x3D;200,height&#x3D;150,bg&#x3D;’purple’)<br>    frame3.pack(side&#x3D;tk.RIGHT,fill&#x3D;tk.BOTH)</p>
+<pre><code>lb1=tk.Label(frame1,text=&#39;123123&#39;,bg=&#39;green&#39;)
+lb1.place(relx=0.1,rely=0.1,relwidth=0.4,relheight=0.4)
+
+lb2=tk.Label(frame2,text=369396,bg=&#39;blue&#39;)
+lb2.place(relx=0.1,rely=0.1,relwidth=0.8,relheight=0.8)
+</code></pre>
+<p>​<br>​    bt1&#x3D;tk.Button(frame3,text&#x3D;’aoe’)<br>​    bt1.grid(row&#x3D;0,column&#x3D;0)<br>​    bt2&#x3D;tk.Button(frame3,text&#x3D;’iuv’)<br>​    bt2.grid(row&#x3D;1,column&#x3D;1)<br>​<br>​    tk.mainloop()</p>
+<h2 id="少量拾遗"><a href="#少量拾遗" class="headerlink" title="少量拾遗"></a>少量拾遗</h2><p>tkinter.Text.yview_moveto(1)移至最低端</p>
+<p>tkinter.Text的state参数为’disabled’时不允许修改 state的默认参数为’normal’</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90python%E3%80%91%E3%80%90tkinter%E3%80%91%E8%87%AA%E5%AD%A6tkinter%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95/" data-id="cl50tnlrc002dycj31d1bcnyu" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%BA%93/" rel="tag">python库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【屑】银行家算法 判断死锁 or 求解所有可行序列 代码" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E5%B1%91%E3%80%91%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95%20%E5%88%A4%E6%96%AD%E6%AD%BB%E9%94%81%20or%20%E6%B1%82%E8%A7%A3%E6%89%80%E6%9C%89%E5%8F%AF%E8%A1%8C%E5%BA%8F%E5%88%97%20%E4%BB%A3%E7%A0%81/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%B1%91%E3%80%91%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95%20%E5%88%A4%E6%96%AD%E6%AD%BB%E9%94%81%20or%20%E6%B1%82%E8%A7%A3%E6%89%80%E6%9C%89%E5%8F%AF%E8%A1%8C%E5%BA%8F%E5%88%97%20%E4%BB%A3%E7%A0%81/">【屑】银行家算法 判断死锁 or 求解所有可行序列 代码.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/">教练我想学挂边躲牛</a>,<a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/%E6%9D%82%E4%B9%B1/">杂乱</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<pre><code>def initial(req = False):
+    global order, vis , arr_lft, arr_need, arr_max, arr_alc, cnt
+    MAX = [
+        [0,0,4,4]
+        ,[2,7,5,0]
+        ,[3,6,10,10]
+        ,[0,9,8,4]
+        ,[0,6,6,10]
+    ]
+    ALC = [
+        [0,0,3,2]
+        ,[1,0,0,1]
+        ,[1,3,5,4]
+        ,[0,3,3,2]
+        ,[0,0,1,4]
+    ]
+    NEED = [1,6,2,2]
+    cnt = 0
+    arr_lft = np.array(NEED)
+    arr_max = np.array(MAX)
+    arr_alc = np.array(ALC)
+    arr_need = arr_max - arr_alc
+    arr_need[arr_need &lt; 0] = 0
+    vis = [False for i in range(5)]
+    order = []
+    if req == True:
+        arr_lft -= np.array([1,2,2,2])
+        arr_alc[2] += np.array([1,2,2,2])
+def dfs():
+    global order, vis , arr_lft, arr_need, arr_max, arr_alc, cnt
+    if vis.count(False) == 0:
+        print(order)
+        cnt += 1
+        return
+    for i in range(len(vis)):
+        if vis[i] == False and True not in (arr_lft - arr_need[i] &lt; 0 ):
+            vis[i] = True
+            order.append(i)
+            arr_lft += arr_alc[i]
+            dfs()
+            vis[i] = False
+            arr_lft -= arr_alc[i]
+            order.remove(i)
+def solve(req = False):
+    initial(req)
+    dfs()
+    if cnt != 0: 
+        print(&#39;共有序列&#39;,cnt,&#39;种&#39;)
+    else:
+        print(&#39;死锁&#39;)
+def main():
+    print(&#39;第一问:&#39;)
+    solve()
+    print(&#39;\n第二问&#39;)
+    solve(True)
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre>
+<p>样例为：《计算机操作系统》——翟一鸣等老师 课后题2.13</p>
+<blockquote>
+<p>第一问:<br> [0, 3, 1, 2, 4]<br> [0, 3, 1, 4, 2]<br> [0, 3, 4, 1, 2]<br> 共有序列 3 种<br> 空格<br> 第二问<br> 死锁</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%B1%91%E3%80%91%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95%20%E5%88%A4%E6%96%AD%E6%AD%BB%E9%94%81%20or%20%E6%B1%82%E8%A7%A3%E6%89%80%E6%9C%89%E5%8F%AF%E8%A1%8C%E5%BA%8F%E5%88%97%20%E4%BB%A3%E7%A0%81/" data-id="cl50tnlrd002jycj3b4txezqd" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【嵌套bfs】A - Pushing Boxes POJ - 1475  推箱子" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/">【嵌套bfs】A - Pushing Boxes POJ - 1475  推箱子.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2/">搜索</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a href="#说明-2022-05-05" class="headerlink" title="说明 - 2022-05-05"></a>说明 - 2022-05-05</h2><p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<p><a target="_blank" rel="noopener" href="https://vjudge.net/contest/387870#problem/A">https://vjudge.net/contest/387870#problem/A</a></p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Imagine you are standing inside a two-dimensional maze composed of square<br>cells which may or may not be filled with rock. You can move north, south,<br>east or west one cell at a step. These moves are called walks.<br>One of the empty cells contains a box which can be moved to an adjacent free<br>cell by standing next to the box and then moving in the direction of the box.<br>Such a move is called a push. The box cannot be moved in any other way than by<br>pushing, which means that if you push it into a corner you can never get it<br>out of the corner again.</p>
+<p>One of the empty cells is marked as the target cell. Your job is to bring the<br>box to the target cell by a sequence of walks and pushes. As the box is very<br>heavy, you would like to minimize the number of pushes. Can you write a<br>program that will work out the best such sequence?<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzk2MTQ4YTA0MzgzZDlmZTI2MzBhM2FjNzcyZjEyMjYx?x-oss-">https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzk2MTQ4YTA0MzgzZDlmZTI2MzBhM2FjNzcyZjEyMjYx?x-oss-</a><br>process&#x3D;image&#x2F;format,png#pic_center)</p>
+<h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><p>The input contains the descriptions of several mazes. Each maze description<br>starts with a line containing two integers r and c (both &lt;&#x3D; 20) representing<br>the number of rows and columns of the maze.</p>
+<p>Following this are r lines each containing c characters. Each character<br>describes one cell of the maze. A cell full of rock is indicated by a <code>#&#39; and an empty cell is represented by a</code>.’. Your starting position is symbolized by<br><code>S&#39;, the starting position of the box by</code>B’ and the target cell by &#96;T’.</p>
+<p>Input is terminated by two zeroes for r and c.</p>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>For each maze in the input, first print the number of the maze, as shown in<br>the sample output. Then, if it is impossible to bring the box to the target<br>cell, print &#96;&#96;Impossible.’’.</p>
+<p>Otherwise, output a sequence that minimizes the number of pushes. If there is<br>more than one such sequence, choose the one that minimizes the number of total<br>moves (walks and pushes). If there is still more than one such sequence, any<br>one is acceptable.</p>
+<p>Print the sequence as a string of the characters N, S, E, W, n, s, e and w<br>where uppercase letters stand for pushes, lowercase letters stand for walks<br>and the different letters stand for the directions north, south, east and<br>west.</p>
+<p>Output a single blank line after each test case.</p>
+<h2 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h2><p>1 7<br>SB…T<br>1 7<br>SB…#.T<br>7 11<br>###########<br>#T##…#<br>#.#.#…####<br>#…B…#<br>#.######…#<br>#…S…#<br>###########<br>8 4<br>…<br>.##.<br>.#…<br>.#…<br>.#.B<br>.##S<br>…<br>###T<br>0 0</p>
+<h2 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h2><p>Maze #1<br>EEEEE</p>
+<p>Maze #2<br>Impossible.</p>
+<p>Maze #3<br>eennwwWWWWeeeeeesswwwwwwwnNN</p>
+<p>Maze #4<br>swwwnnnnnneeesssSSS</p>
+<h2 id="自己加一组样例输入"><a href="#自己加一组样例输入" class="headerlink" title="自己加一组样例输入"></a>自己加一组样例输入</h2><p>6 5<br>…T<br>.S…<br>#B###<br>…<br>…<br>…</p>
+<h2 id="自己加的样例的输出"><a href="#自己加的样例的输出" class="headerlink" title="自己加的样例的输出"></a>自己加的样例的输出</h2><p>Maze #1<br>SSesswNNNNwnEEE</p>
+<h2 id="瞎翻译"><a href="#瞎翻译" class="headerlink" title="瞎翻译"></a>瞎翻译</h2><p>这是一个推箱子游戏。人要把箱子推到终点，我们需要输出人走的路径（方向用nswe或NSWE表示，人不推箱子只走路时路径用小写字母nswe表示，人推箱子走路时路径用大写字母NSWE表示）</p>
+<p>先输入两个整数row和col，表示地图大小</p>
+<p>之后输入一个row行col列的char类型矩阵，其中#代表墙，.代表路，S代表人的起始位置，B代表箱子起始位置，T代表终点（箱子要被推到的位置）</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p><strong>1.</strong><br>先设想箱子会自己动，想象一下如何用简单的bfs求得“箱子自己动”情况下的答案<br><strong>2.</strong><br>在”箱子自己动“的代码基础上加入人：<br>假设箱子要往右动，那么先对人进行bfs，让人从自己的位置走到箱子的左边的位置，如果人可以走过去，则箱子可以往右移动。<br><strong>2.5</strong><br>记得人推箱子的时候人也要动，而不是仅仅箱子移动（人与箱子往相同方向移动，或者直接把人移动到箱子的上一个位置）。<br><strong>3.</strong><br>这是笔者自己犯的一个错误：<br>不能仅仅用形如visb[][]的二维数组标记箱子到过的位置，因为在某些情况下人想推箱子到终点，是需要【箱子折返】的（箱子有可能去一个地方两次或多次，可以见我自己加的输入样例）<br>所以要用三维数组：visb[][][4],第三维记录箱子来时的方向</p>
+<p><strong>4.</strong><br>在箱子移动的bfs函数中嵌套人移动的bfs函数完成求解</p>
+<p>​<br>    #include <cstdio><br>    #include <iostream><br>    #include <algorithm><br>    #include <cstring><br>    #include <queue><br>    #include <string></p>
+<pre><code>int row,col,counter;
+const int maxn=25;
+char cell[maxn][maxn];
+bool visb[maxn][maxn][4],visp[maxn][maxn];  //visb记录箱子，visp记录人去过的位置
+//人的标记方式为：先在原地标记一次，之后去了哪标哪
+//箱子的标记方式为：不在原地标记，只有从一个方向（假设为2）移动到某一格（假设为i，j），则标记visb[i][j][2]为true
+
+int step[4][2]=&#123;&#123;1,0&#125;,&#123;-1,0&#125;,&#123;0,1&#125;,&#123;0,-1&#125;&#125;;
+char adir[5]=&quot;snew&quot;,Adir[5]=&quot;SNEW&quot;;         //两个dir都对应step的四个方向
+struct Pos
+&#123;
+    int x,y;            //表示位置，若是人，只会用到这两个和path
+    int mx,my;          //表示人的位置，表示箱子的变量用的，表示人的变量用不着
+    std::string path;   //记录路径
+&#125;mpre,mnxt,tar,bpre,bnxt,to;
+//mpre-man pre人的当前位置（或解释为人的上一个位置）mnxt-man next人的下一个位置
+//bpre和bnxt表示箱子的当前位置和下一个位置
+//tar表示终点位置
+//to表示箱子要移动到某个位置时，人要移动到的位置
+</code></pre>
+<p>​<br>​<br>    &#x2F;&#x2F;判断这个点是否在地图可行走范围之中<br>    bool cango(int x,int y)<br>    {<br>        if(x&gt;&#x3D;0 &amp;&amp; x&lt;row &amp;&amp; y&gt;&#x3D;0 &amp;&amp; y&lt;col &amp;&amp; cell[x][y]!&#x3D;’#’)<br>            return true;<br>        return false;<br>    }</p>
+<pre><code>//人从自己所在的位置，移动到to.x,to.y的位置，简单bfs
+bool bfsMan()
+&#123;
+    memset(visp,false,sizeof(visp));
+    std::queue&lt;Pos&gt; q;
+    mpre.path=&quot;&quot;;
+    mpre.x=bnxt.mx,mpre.y=bnxt.my;
+    q.push(mpre);
+    visp[mpre.x][mpre.y]=true;
+    while(!q.empty())
+    &#123;
+        mpre=q.front(); q.pop();
+        if(mpre.x==to.x &amp;&amp; mpre.y==to.y) return true;
+        for(int i=0; i&lt;4; i++)
+        &#123;
+            mnxt=mpre;
+            mnxt.x+=step[i][0],mnxt.y+=step[i][1];
+            if(cango(mnxt.x,mnxt.y) &amp;&amp; !visp[mnxt.x][mnxt.y] &amp;&amp; !(mnxt.x==bpre.x &amp;&amp; mnxt.y==bpre.y))
+            &#123;
+                visp[mnxt.x][mnxt.y]=true;
+                mnxt.path+=adir[i];
+                q.push(mnxt);
+            &#125;
+        &#125;
+    &#125;
+    return false;
+
+&#125;
+
+//对箱子的bfs，其中嵌套了对人的bfs
+void bfs()
+&#123;
+    std::queue&lt;Pos&gt; q;
+    bpre.path=&quot;&quot;;
+    bpre.mx=mpre.x,bpre.my=mpre.y;
+    q.push(bpre);//让最初箱子的位置入队，记得给箱子结构体赋值人的位置
+    while(!q.empty())
+    &#123;
+        bpre=q.front(); q.pop();
+        for(int i=0; i&lt;4; i++)  //开始四个方向的遍历
+        &#123;
+            bnxt=bpre;
+            bnxt.x+=step[i][0],bnxt.y+=step[i][1];
+            if(cango(bnxt.x,bnxt.y) &amp;&amp; !visb[bnxt.x][bnxt.y][i])
+            &#123;
+                to=bpre;
+                to.x-=step[i][0],to.y-=step[i][1];
+                if(cango(to.x,to.y))    //初步检查这一点是否可以达到
+                &#123;
+                    if(bfsMan())
+                    &#123;
+                        //一定要bfsMan（）返回true时才标记visb为true
+                        //因为若人不能到达特定的推箱子位置，箱子就不能访问到要去的位置
+                        visb[bnxt.x][bnxt.y][i]=true;
+                        bnxt.path+=mpre.path;               //路径末尾加入人上一次移动的路径
+                        bnxt.path+=Adir[i];                 //路径末尾加入箱子移动的路径
+                        //如果到了终点，直接输出
+                        if(bnxt.x==tar.x &amp;&amp; bnxt.y==tar.y)
+                        &#123;
+                            std::cout &lt;&lt; &quot;Maze #&quot; &lt;&lt; counter++ &lt;&lt; std::endl;
+                            std::cout &lt;&lt; bnxt.path &lt;&lt; std::endl &lt;&lt; std::endl;
+                            return ;
+                        &#125;
+                        bnxt.mx=bpre.x,bnxt.my=bpre.y;      //记得记录箱子在这个位置时对应的人的位置，然后入队
+                        q.push(bnxt);
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+    std::cout &lt;&lt; &quot;Maze #&quot; &lt;&lt; counter++ &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;Impossible.&quot; &lt;&lt; std::endl &lt;&lt; std::endl;
+&#125;
+</code></pre>
+<p>​<br>    int main()<br>    {<br>        counter&#x3D;1;<br>        while(std::cin &gt;&gt; row &gt;&gt; col &amp;&amp; !(row&#x3D;&#x3D;0 &amp;&amp; col&#x3D;&#x3D;0))<br>        {<br>            memset(visb,false,sizeof(visb));<br>            for(int i&#x3D;0; i&lt;row; i++)<br>            {<br>                std::cin &gt;&gt; cell[i];<br>                for(int j&#x3D;0; j&lt;col; j++)<br>                {<br>                    if(cell[i][j]&#x3D;&#x3D;’S’)  mpre.x&#x3D;i,mpre.y&#x3D;j;<br>                    else if(cell[i][j]&#x3D;&#x3D;’B’) bpre.x&#x3D;i,bpre.y&#x3D;j;<br>                    else if(cell[i][j]&#x3D;&#x3D;’T’) tar.x&#x3D;i,tar.y&#x3D;j;<br>                }<br>            }<br>            bfs();<br>        }</p>
+<pre><code>    return 0;
+&#125;
+</code></pre>
+<p>​    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/" data-id="cl50tnlre002mycj36nkb04kb" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/3/">&lt;&lt;&lt; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/">下一页 &gt;&gt;&gt;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">蓝湖畔淅淅沥沥的雨</h1>
+    <h2 class="blog-subtitle">All tragedy erased, I see only wonders...</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/Wldcmzy" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/wldcmzy" target="_blank" title="CSDN">
+          CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://space.bilibili.com/83743701" target="_blank" title="bilibili(无技术和学习内容)">
+          bilibili(无技术和学习内容)
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://shanamaid.github.io/" target="_blank" title="夏娜主题作者的博客">
+          夏娜主题作者的博客
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2021 - 2022 StarsWhisper<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+	  (但是魔改)
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/announcement" title="" class="menuItem">公告</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/knightabout" title="" class="menuItem">关于</a>
+          
+            <a href="/bridges" title="" class="menuItem">传送门</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
