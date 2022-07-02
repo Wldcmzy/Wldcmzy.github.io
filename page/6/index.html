@@ -43,9 +43,9 @@
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>76</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>32</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>60</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -82,6 +82,103 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-【机器学习】应用简例 随机森林 使用袋外数据（袋装法） + RandomForestClassifier的一些常用方法" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BD%BF%E7%94%A8%E8%A2%8B%E5%A4%96%E6%95%B0%E6%8D%AE%EF%BC%88%E8%A2%8B%E8%A3%85%E6%B3%95%EF%BC%89%20+%20RandomForestClassifier%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BD%BF%E7%94%A8%E8%A2%8B%E5%A4%96%E6%95%B0%E6%8D%AE%EF%BC%88%E8%A2%8B%E8%A3%85%E6%B3%95%EF%BC%89%20+%20RandomForestClassifier%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/">【机器学习】应用简例 随机森林 使用袋外数据（袋装法） + RandomForestClassifier的一些常用方法.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/">教练我想学挂边躲牛</a>,<a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/%E7%9E%8E%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">瞎学机器学习</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<pre><code>import numpy as np
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+
+# 从excel表导入数据
+df_t = pd.read_excel(r'D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\train.xlsx')
+
+# 删除uid列
+df_t = df_t.drop(columns='uid')
+
+# 把数据中的'?'换成每一列的众数
+for col in df_t.columns:
+    idx = df_t[col].value_counts().index
+    df_t[col][df_t[col] == '?'] = idx[0] if idx[0] != '?' else idx[1]
+
+# 把pandas.DataFrame数据转化为numpy.darray数据 元素类型为np.float32
+arr_t = df_t.values.astype(np.float32)
+</code></pre>
+<p>​<br>
+​<br>
+rfc = RandomForestClassifier(bootstrap=True #boostrap默认为True 即使用装袋法<br>
+,oob_score=True #oob_score默认为False 为True即使用袋外数据做测试集，训练模型时不需要划分训练集和测试集#<br>
+,max_depth=4<br>
+)<br>
+rfc = rfc.fit(arr_t[:,:-1],arr_t[:,-1])</p>
+<pre><code>print(rfc.oob_score_) #打印成绩
+</code></pre>
+<p>​<br>
+print(rfc.estimators_) #打印所有的树</p>
+<pre><code>print(rfc.feature_importances_) #打印特征的重要性
+
+Xtrain,Xtest,Ytrain,Ytest = train_test_split(arr_t[:,:-1],arr_t[:,-1],test_size=0.3)
+
+rfc = RandomForestClassifier(max_depth=4).fit(Xtrain,Ytrain)
+
+print(rfc.apply(Xtest)) #返回测试集中 每一个样本 在每一颗树中的叶子节点的索引
+
+print(rfc.predict(Xtest)) #返回模型预测的测试集的结果
+
+print(rfc.predict_proba(Xtest)) #返回每一个样本被分到每一个标签的概率
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BD%BF%E7%94%A8%E8%A2%8B%E5%A4%96%E6%95%B0%E6%8D%AE%EF%BC%88%E8%A2%8B%E8%A3%85%E6%B3%95%EF%BC%89%20+%20RandomForestClassifier%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" data-id="cl50x8cn9003kccj38xj0f79p" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" rel="tag">随机森林</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-【机器学习】应用简例 随机森林-小白无脑乱用" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -1919,366 +2016,6 @@ int main()
 
 
   
-    <article id="post-【线形DP练习】洛谷 P1868饥饿的奶牛 P1091合唱队形 P1541乌龟棋 P1020导弹拦截" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E3%80%90%E7%BA%BF%E5%BD%A2DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1868%E9%A5%A5%E9%A5%BF%E7%9A%84%E5%A5%B6%E7%89%9B%20P1091%E5%90%88%E5%94%B1%E9%98%9F%E5%BD%A2%20P1541%E4%B9%8C%E9%BE%9F%E6%A3%8B%20P1020%E5%AF%BC%E5%BC%B9%E6%8B%A6%E6%88%AA/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E3%80%90%E7%BA%BF%E5%BD%A2DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1868%E9%A5%A5%E9%A5%BF%E7%9A%84%E5%A5%B6%E7%89%9B%20P1091%E5%90%88%E5%94%B1%E9%98%9F%E5%BD%A2%20P1541%E4%B9%8C%E9%BE%9F%E6%A3%8B%20P1020%E5%AF%BC%E5%BC%B9%E6%8B%A6%E6%88%AA/">【线形DP练习】洛谷 P1868饥饿的奶牛 P1091合唱队形 P1541乌龟棋 P1020导弹拦截.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/DP/">DP</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="洛谷-p1868-饥饿的奶牛"><a class="markdownIt-Anchor" href="#洛谷-p1868-饥饿的奶牛"></a> 洛谷 P1868 饥饿的奶牛</h2>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1868">https://www.luogu.com.cn/problem/P1868</a><br>
-思路：<br>
-dp[N]表示 在前i块草皮中最多能吃到几块<br>
-<strong>sort</strong> 把所有区间按照右端的大小排序<br>
-<strong>for</strong> 遍历[0,区间中出现过的最大长度]<br>
-{<br>
-dp[i] = dp[i-1] (继承上一个草皮的dp)<br>
-<strong>if</strong> 存在区间[x,y] 使得y=i 则dp[y] = max ( dp[y] , dp[x-1]+len([x,y]) )<br>
-}</p>
-<p>​<br>
-#include <cstdio><br>
-#include <iostream><br>
-#include <cstring><br>
-#include <algorithm><br>
-#include <cmath><br>
-#include <cstdlib><br>
-#include <queue><br>
-#include <map><br>
-#include <set><br>
-#include <stack><br>
-#include <vector><br>
-typedef long long LL;<br>
-typedef std::pair&lt;int ,int&gt; PP;<br>
-const int N = 3e6+5;<br>
-int n,v,vv;<br>
-int dp[N];<br>
-bool cmp(PP x, PP y)<br>
-{<br>
-return x.second &lt; y.second ;<br>
-}</vector></stack></set></map></queue></cstdlib></cmath></algorithm></cstring></iostream></cstdio></p>
-<pre><code>int main()
-&#123;
-   std::vector&lt;PP&gt; vc;
-   std::cin &gt;&gt; n;
-   for(int i=0; i&lt;n; i++)&#123;
-      std::cin&gt;&gt; v  &gt;&gt; vv;
-      vc.push_back(std::make_pair(v,vv));
-   &#125;
-   std::sort(vc.begin(),vc.end(),cmp);
-   int idx=1;
-   for(std::vector&lt;PP&gt;::iterator iter = vc.begin(); iter != vc.end(); iter++)&#123;
-      //这里要加等号，否则最后两个样例会WA
-      while(idx &lt;= iter-&gt;second)&#123;
-         dp[idx] = std::max(dp[idx],dp[idx-1]);
-         idx += 1;
-      &#125;
-      dp[iter-&gt;second] = std::max(dp[iter-&gt;first-1]+iter-&gt;second-iter-&gt;first+1,dp[iter-&gt;second]);
-   &#125;
-   std::cout &lt;&lt; dp[vc[vc.size()-1].second] &lt;&lt; std::endl;
-   return 0;
-&#125;
-</code></pre>
-<p>​</p>
-<h2 id="洛谷-p1091-合唱队形"><a class="markdownIt-Anchor" href="#洛谷-p1091-合唱队形"></a> 洛谷 P1091 合唱队形</h2>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/solution/P1091">https://www.luogu.com.cn/problem/solution/P1091</a><br>
-此题要求提出最少的人，获得一个最长的先单调递增后点掉递减的队伍，对于队伍递增递减部分的长度没有要求。<br>
-思路:<br>
-up[]数组记录 在正向遍历下 第i个位置的最长升序列长度（第一个长度计0）<br>
-dn[]数组记录 在反向遍历下 第i个位置的最长升序列长度（第一个长度计0）<br>
-然后遍历一遍 [0,n-1]，找出最大的 先增后降序列长度 (up[i]+dn[i]+1)<br>
-n-最大长度 即为答案</p>
-<p>​<br>
-#include <cstdio><br>
-#include <iostream><br>
-#include <cstring><br>
-#include <algorithm><br>
-#include <cmath><br>
-#include <cstdlib><br>
-#include <queue><br>
-#include <map><br>
-#include <set><br>
-#include <stack><br>
-#include <vector><br>
-typedef long long LL;<br>
-typedef std::pair&lt;int ,int&gt; PP;<br>
-const int N = 105;<br>
-int qu[N],up[N],dn[N];<br>
-int n;</vector></stack></set></map></queue></cstdlib></cmath></algorithm></cstring></iostream></cstdio></p>
-<pre><code>int main()
-&#123;
-   scanf(&quot;%d&quot;,&amp;n);
-   for(int i=0; i&lt;n ;i++)&#123;
-      scanf(&quot;%d&quot;,&amp;qu[i]);
-   &#125;
-   for(int i=1; i&lt;n; i++)&#123;
-      for(int j=i-1; j&gt;=0; j--)&#123;
-         if(qu[i] &gt; qu[j])&#123;
-            up[i] = std::max(up[i],up[j]+1);
-         &#125;
-      &#125;
-   &#125;
-   for(int i=n-2; i&gt;=0; i--)&#123;
-      for(int j=i+1; j&lt;n; j++)&#123;
-         if(qu[i] &gt; qu[j])&#123;
-            dn[i] = std::max(dn[i],dn[j]+1);
-         &#125;
-      &#125;
-   &#125;
-   int mx = 0;
-   for(int i=0; i&lt;n; i++)&#123;
-      mx = std::max(up[i]+dn[i]+1,mx);
-   &#125;
-   std::cout &lt;&lt; n-mx;
-   return 0;
-&#125;
-</code></pre>
-<p>​</p>
-<h2 id="洛谷-p1541-乌龟棋"><a class="markdownIt-Anchor" href="#洛谷-p1541-乌龟棋"></a> 洛谷 P1541 乌龟棋</h2>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1541">https://www.luogu.com.cn/problem/P1541</a><br>
-思路:<br>
-开四重循环dp，数组dp[i][j][k][r]记录当玩家使用i张1，j张2，k张3，r张4时能得到的最高分<br>
-.<br>
-最开始空间超限一个样例，由于dp数组中存在0下标时不好计算，我把数组的规模增加了1（用dp[1][1][1][1]当成没有牌时的情况，相当于原本的dp[0][0][0][0]）<br>
-.<br>
-存在未AC样例 时间40ms 空间150M 空间超限，应该需要刚好卡完美空间，不能增加规模</p>
-<p>​<br>
-#include <cstdio><br>
-#include <iostream><br>
-#include <cstring><br>
-#include <algorithm><br>
-#include <cmath><br>
-#include <cstdlib><br>
-#include <queue><br>
-#include <map><br>
-#include <set><br>
-#include <stack><br>
-#include <vector><br>
-typedef long long LL;<br>
-typedef std::pair&lt;int ,int&gt; PP;<br>
-const int N = 355,M = 125;<br>
-int dp[M][M][M][M];<br>
-int cell[N],num[5];<br>
-int n,m,v;</vector></stack></set></map></queue></cstdlib></cmath></algorithm></cstring></iostream></cstdio></p>
-<pre><code>int main()
-&#123;
-   scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
-   for(int i=0; i&lt;n; i++)&#123;
-      scanf(&quot;%d&quot;,&amp;cell[i]);
-   &#125;
-   for(int i=0; i&lt;m; i++)&#123;
-      scanf(&quot;%d&quot;,&amp;v);
-      num[v] += 1;
-   &#125;
-   num[1] += 1;
-   num[2] += 1;
-   num[3] += 1;
-   num[4] += 1;
-   for(int i=1; i&lt;=num[1]; i++)&#123;
-      for(int j=1; j&lt;=num[2]; j++)&#123;
-         for(int k=1; k&lt;=num[3]; k++)&#123;
-            for(int r=1; r&lt;=num[4]; r++)&#123;
-               dp[i][j][k][r] = std::max(
-                  std::max(dp[i-1][j][k][r],dp[i][j-1][k][r])
-                 ,std::max(dp[i][j][k-1][r],dp[i][j][k][r-1])
-                  ) + cell[(i-1)+(j-1)*2+(k-1)*3+(r-1)*4];
-            &#125;
-         &#125;
-      &#125;
-   &#125;
-   std::cout &lt;&lt; dp[num[1]][num[2]][num[3]][num[4]];
-   return 0;
-&#125;
-</code></pre>
-<p>​</p>
-<p>所以需要优化一下空间，数组规模需要缩减多加的那一个单位的规模<br>
-.<br>
-把原来的每一轮通过三个max函数进行一次dp，变成每一轮对i/j/k/r dp四次<br>
-dp前做一次判断，只有当i/j/k/r ！= 0时，才进行dp<br>
-这样做的好处时第一轮时i/j/k/r都=0，所以dp[0][0][0][0]就可以空过，于是dp[0][0][0][0]就可以提前初始化而不用担心在循环中被更改<br>
-.<br>
-该样例AC 时间52ms 空间125M</p>
-<p>​<br>
-#include <cstdio><br>
-#include <iostream><br>
-#include <cstring><br>
-#include <algorithm><br>
-#include <cmath><br>
-#include <cstdlib><br>
-#include <queue><br>
-#include <map><br>
-#include <set><br>
-#include <stack><br>
-#include <vector><br>
-typedef long long LL;<br>
-typedef std::pair&lt;int ,int&gt; PP;<br>
-const int N = 355,M = 125;<br>
-int dp[M][M][M][M];<br>
-int cell[N],num[5];<br>
-int n,m,v;</vector></stack></set></map></queue></cstdlib></cmath></algorithm></cstring></iostream></cstdio></p>
-<pre><code>int main()
-&#123;
-   scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
-   for(int i=0; i&lt;n; i++)&#123;
-      scanf(&quot;%d&quot;,&amp;cell[i]);
-   &#125;
-   for(int i=0; i&lt;m; i++)&#123;
-      scanf(&quot;%d&quot;,&amp;v);
-      num[v] += 1;
-   &#125;
-   dp[0][0][0][0] = cell[0];
-   for(int i=0; i&lt;=num[1]; i++)&#123;
-      for(int j=0; j&lt;=num[2]; j++)&#123;
-         for(int k=0; k&lt;=num[3]; k++)&#123;
-            for(int r=0; r&lt;=num[4]; r++)&#123;
-               int idx = i+j*2+k*3+r*4;
-               if(i) dp[i][j][k][r] = std::max(dp[i][j][k][r],dp[i-1][j][k][r]+cell[idx]);
-               if(j) dp[i][j][k][r] = std::max(dp[i][j][k][r],dp[i][j-1][k][r]+cell[idx]);
-               if(k) dp[i][j][k][r] = std::max(dp[i][j][k][r],dp[i][j][k-1][r]+cell[idx]);
-               if(r) dp[i][j][k][r] = std::max(dp[i][j][k][r],dp[i][j][k][r-1]+cell[idx]);
-            &#125;
-         &#125;
-      &#125;
-   &#125;
-   std::cout &lt;&lt; dp[num[1]][num[2]][num[3]][num[4]];
-   return 0;
-&#125;
-</code></pre>
-<p>​<br>
-​</p>
-<h2 id="洛谷-p1020-导弹拦截"><a class="markdownIt-Anchor" href="#洛谷-p1020-导弹拦截"></a> 洛谷 P1020 导弹拦截</h2>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1020">https://www.luogu.com.cn/problem/P1020</a><br>
-两个输出分别为：最长不上升子序列长度，最长上升子序列长度<br>
-O(n2)思路: dp<br>
-用dp[]数组记录到第i个位置的最长不上升子序列长度。遍历所有导弹[0,n-1]，遍历到i是，检查i之前的不比i低的导弹j dp[i] =<br>
-max(dp[i] , dp[j]+1)<br>
-最长上升同理</p>
-<p>​<br>
-#include <cstdio><br>
-#include <iostream><br>
-#include <cstring><br>
-#include <algorithm><br>
-#include <cmath><br>
-#include <cstdlib><br>
-#include <queue><br>
-#include <map><br>
-#include <set><br>
-#include <stack><br>
-#include <vector><br>
-typedef long long LL;</vector></stack></set></map></queue></cstdlib></cmath></algorithm></cstring></iostream></cstdio></p>
-<pre><code>const int N = 100005;
-int hh[N],noup[N],up[N];
-</code></pre>
-<p>​<br>
-int main()<br>
-{<br>
-int idx=0,mxno,mxup;<br>
-do{<br>
-scanf(&quot;%d&quot;,&amp;hh[<ins>idx]);<br>
-}while(getchar() == ’ ');<br>
-mxno = mxup = 0;<br>
-for(int i=2; i&lt;=idx; i</ins>){<br>
-for(int j=i-1; j&gt;=1; j–){<br>
-if(hh[i]&lt;=hh[j]) noup[i] = std::max(noup[i],noup[j]+1);<br>
-else up[i] = std::max(up[i],up[j]+1);<br>
-}<br>
-mxno = std::max(noup[i],mxno);<br>
-mxup = std::max(up[i],mxup);<br>
-}<br>
-printf(&quot;%d\n%d&quot;,mxno+1,mxup+1);<br>
-return 0;<br>
-}</p>
-<p>​</p>
-<p>O(nlog2)思路：<br>
-遍历所有导弹[0,n-1]<br>
-若第i个导弹对于前面的导弹满足“不上升”则存入数组arr[]的尾部，若打破了不上升原则，则再arr[]中二分查找height[i]（i导弹的高度）,使得最后可以用height[i]代替最左边的可以使height[i]代替此位置后满足“不上升”原则的位置<br>
-最后arr数组的长度就是所求答案<br>
-最长上升同理</p>
-<p>注意：若序列12 13 15，插入13 若求不下降 则 变成 12 13 13， 若求上升 则变成 12 13 15</p>
-<p>​<br>
-#include <cstdio><br>
-#include <iostream><br>
-#include <cstring><br>
-#include <algorithm><br>
-#include <cmath><br>
-#include <cstdlib><br>
-#include <queue><br>
-#include <map><br>
-#include <set><br>
-#include <stack><br>
-#include <vector><br>
-typedef long long LL;<br>
-typedef std::pair&lt;int ,int&gt; PP;<br>
-const int N = 100005,M = 125;<br>
-int qu[N],up[N],noup[N];<br>
-int idx,lno,lup;<br>
-int main()<br>
-{<br>
-do{<br>
-scanf(&quot;%d&quot;,&amp;qu[idx++]);<br>
-}while(getchar() == ’ ');</vector></stack></set></map></queue></cstdlib></cmath></algorithm></cstring></iostream></cstdio></p>
-<pre><code>   noup[0] = up[0] = qu[0];
-   for(int i=1; i&lt;idx; i++)&#123;
-      if(qu[i] &lt;= noup[lno]) noup[++lno] = qu[i];
-      else *std::upper_bound(noup,noup+lno+1,qu[i],std::greater&lt;int&gt;()) = qu[i];
-
-      if(qu[i] &gt; up[lup]) up[++lup] = qu[i];
-      else *std::lower_bound(up,up+lup+1,qu[i]) = qu[i];
-   &#125;
-   std::cout &lt;&lt; lno+1 &lt;&lt; std::endl &lt;&lt; lup+1;
-   return 0;
-&#125;
-</code></pre>
-<p>​</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%BA%BF%E5%BD%A2DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1868%E9%A5%A5%E9%A5%BF%E7%9A%84%E5%A5%B6%E7%89%9B%20P1091%E5%90%88%E5%94%B1%E9%98%9F%E5%BD%A2%20P1541%E4%B9%8C%E9%BE%9F%E6%A3%8B%20P1020%E5%AF%BC%E5%BC%B9%E6%8B%A6%E6%88%AA/" data-id="cl50x8cnk004hccj3gkodhrzg" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -2335,9 +2072,9 @@ scanf(&quot;%d&quot;,&amp;qu[idx++]);<br>
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>76</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>32</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>60</strong><br>标签</div></a>
     </div>
 
 

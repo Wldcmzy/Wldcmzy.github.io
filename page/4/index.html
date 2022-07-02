@@ -43,9 +43,9 @@
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>76</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>32</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>60</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -82,6 +82,284 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-【区间DP练习】洛谷 P1880[NOI1995]石子合并 P1063能量项链P2654 原核生物培养" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E5%8C%BA%E9%97%B4DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1880%5BNOI1995%5D%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6%20P1063%E8%83%BD%E9%87%8F%E9%A1%B9%E9%93%BEP2654%20%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E5%9F%B9%E5%85%BB/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%8C%BA%E9%97%B4DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1880%5BNOI1995%5D%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6%20P1063%E8%83%BD%E9%87%8F%E9%A1%B9%E9%93%BEP2654%20%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E5%9F%B9%E5%85%BB/">【区间DP练习】洛谷 P1880[NOI1995]石子合并 P1063能量项链P2654 原核生物培养.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/DP/">DP</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="洛谷-p1880noi1995石子合并"><a class="markdownIt-Anchor" href="#洛谷-p1880noi1995石子合并"></a> 洛谷 P1880[NOI1995]石子合并</h2>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1880">https://www.luogu.com.cn/problem/P1880</a><br>
+环形的石子合并，可以把环形拆开，在末尾接一份自己的复制当线形来做<br>
+dp数组也需要在右端外接一份自己的复制<br>
+犯错：<br>
+因为dp公式会访问到j+1的下标，，刚开始用的if(j&gt;=n)判断越界 ，在j=n-1时会访问到下标为n的位置导致越界，所以一直出错<br>
+应该改为if(j+1&gt;=n)</p>
+<p>​<br>
+#include <cstdio><br>
+#include <iostream><br>
+#include <cstring><br>
+#include <algorithm><br>
+#include <cmath><br>
+#include <cstdlib><br>
+#include <queue><br>
+#include <map><br>
+#include <set><br>
+#include <stack><br>
+#include <vector><br>
+typedef long long LL;<br>
+typedef std::pair&lt;int ,int&gt; PP;<br>
+const int N = 105;<br>
+int n,qu[N],dx[N][N&lt;&lt;1],dn[N][N&lt;&lt;1],sum[N&lt;&lt;1];</vector></stack></set></map></queue></cstdlib></cmath></algorithm></cstring></iostream></cstdio></p>
+<pre><code>int main()
+&#123;
+   memset(dn,1,sizeof(dn));
+
+   std::cin &gt;&gt;n;
+   for(int i=0; i&lt;n; i++)&#123;
+      std::cin &gt;&gt; qu[i];
+   &#125;
+
+   for(int i=1; i&lt;n; i++)&#123;
+      sum[i] = sum[i-1] + qu[i];
+   &#125;
+   for(int i=0; i&lt;n; i++)&#123;
+      sum[n+i] = sum[n+i-1] + qu[i];
+   &#125;
+   for(int i=0; i&lt;n; i++)&#123;
+      dn[i][i] = 0;
+   &#125;
+   for(int i=1; i&lt;n; i++)&#123;
+      for(int st=0; st&lt;n; st++)&#123;
+         int ed = st+i;
+         for(int j=st; j&lt;ed; j++)&#123;
+            int gain = sum[ed]-sum[st]+qu[st];
+            if(j+1&gt;=n)&#123;
+               dn[st][ed] = std::min(dn[st][ed],dn[st][j]+dn[j-n+1][ed-n]+gain);
+               dx[st][ed] = std::max(dx[st][ed],dx[st][j]+dx[j-n+1][ed-n]+gain);
+            &#125;else&#123;
+               dn[st][ed] = std::min(dn[st][ed],dn[st][j]+dn[j+1][ed]+gain);
+               dx[st][ed] = std::max(dx[st][ed],dx[st][j]+dx[j+1][ed]+gain);
+            &#125;
+         &#125;
+      &#125;
+   &#125;
+   int mx=0,mn=1e7;
+   for(int i=0; i&lt;n; i++)&#123;
+      mx = std::max(dx[i][n-1+i],mx);
+      mn = std::min(dn[i][n-1+i],mn);
+   &#125;
+   std::cout &lt;&lt; mn &lt;&lt; std::endl &lt;&lt; mx &lt;&lt;std::endl;
+   return 0;
+&#125;
+</code></pre>
+<p>​</p>
+<h2 id="洛谷-p1063-能量项链"><a class="markdownIt-Anchor" href="#洛谷-p1063-能量项链"></a> 洛谷 P1063 能量项链</h2>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1063">https://www.luogu.com.cn/problem/P1063</a><br>
+同样时环形类石子合并dp<br>
+刚开始dp公式dp[st][ed] =<br>
+std::max(dp[st][ed],dp[st][j]+dp[j+1-n][ed-n]+gain);中的dp[j+1-n][ed-n]写成了dp[j+1-n][ed]，当场暴毙</p>
+<p>​<br>
+#include <cstdio><br>
+#include <iostream><br>
+#include <cstring><br>
+#include <algorithm><br>
+#include <cmath><br>
+#include <cstdlib><br>
+#include <queue><br>
+#include <map><br>
+#include <set><br>
+#include <stack><br>
+#include <vector><br>
+typedef long long LL;<br>
+typedef std::pair&lt;int ,int&gt; PP;<br>
+const int N = 105;<br>
+LL n,qu[N&lt;&lt;1],dp[N][N&lt;&lt;1];</vector></stack></set></map></queue></cstdlib></cmath></algorithm></cstring></iostream></cstdio></p>
+<pre><code>int main()
+&#123;
+   std::cin &gt;&gt; n;
+   for(int i=1; i&lt;=n; i++)&#123;
+      std::cin &gt;&gt;qu[i];
+      qu[i+n] = qu[i];
+   &#125;
+   qu[n&lt;&lt;1|1] = qu[1];
+   for(int i=1; i&lt;n; i++)&#123;
+      for(int st=1; st&lt;=n; st++)&#123;
+         int ed = st+i;
+         for(int j=st; j&lt;ed ;j++)&#123;
+            int gain = qu[st]*qu[j+1]*qu[ed+1];
+            if(j+1&gt;n)&#123;
+               dp[st][ed] = std::max(dp[st][ed],dp[st][j]+dp[j+1-n][ed-n]+gain);
+            &#125;else&#123;
+               dp[st][ed] = std::max(dp[st][ed],dp[st][j]+dp[j+1][ed]+gain);
+            &#125;
+         &#125;
+      &#125;
+   &#125;
+   LL mx = -1;
+   for(int i=0; i&lt;n; i++)&#123;
+      mx = std::max(mx,dp[1+i][n+i]);
+   &#125;
+   std::cout &lt;&lt; mx &lt;&lt; std::endl;
+
+   return 0;
+&#125;
+</code></pre>
+<p>​</p>
+<p>上面这个思路开了2倍的dp空间。下面改一个开4倍dp空间的（与线形区间合并更加相似）<br>
+只需要把st的限制条件从st&lt;=n 改成st&lt;=(n&lt;&lt;1)-i (-i保证下标不越界)，再把循环里面判断j+1&gt;n的分支去掉就可以了</p>
+<p>​<br>
+#include <cstdio><br>
+#include <iostream><br>
+#include <cstring><br>
+#include <algorithm><br>
+#include <cmath><br>
+#include <cstdlib><br>
+#include <queue><br>
+#include <map><br>
+#include <set><br>
+#include <stack><br>
+#include <vector><br>
+typedef long long LL;<br>
+typedef std::pair&lt;int ,int&gt; PP;<br>
+const int N = 105;<br>
+LL n,qu[N&lt;&lt;1],dp[N&lt;&lt;1][N&lt;&lt;1];</vector></stack></set></map></queue></cstdlib></cmath></algorithm></cstring></iostream></cstdio></p>
+<pre><code>int main()
+&#123;
+   std::cin &gt;&gt; n;
+   for(int i=1; i&lt;=n; i++)&#123;
+      std::cin &gt;&gt;qu[i];
+      qu[i+n] = qu[i];
+   &#125;
+   qu[n&lt;&lt;1|1] = qu[1];
+   for(int i=1; i&lt;n; i++)&#123;
+      for(int st=1; st&lt;=(n&lt;&lt;1)-i; st++)&#123;
+         int ed = st+i;
+         for(int j=st; j&lt;ed ;j++)&#123;
+            int gain = qu[st]*qu[j+1]*qu[ed+1];
+               dp[st][ed] = std::max(dp[st][ed],dp[st][j]+dp[j+1][ed]+gain);
+         &#125;
+      &#125;
+   &#125;
+   LL mx = -1;
+   for(int i=0; i&lt;n; i++)&#123;
+      mx = std::max(mx,dp[1+i][n+i]);
+   &#125;
+   std::cout &lt;&lt; mx &lt;&lt; std::endl;
+
+   return 0;
+&#125;
+</code></pre>
+<p>​</p>
+<h2 id="洛谷-p2654-原核生物培养"><a class="markdownIt-Anchor" href="#洛谷-p2654-原核生物培养"></a> 洛谷 P2654 原核生物培养</h2>
+<p>很显然（真的很显然）是优先队列+区间dp，别忘了每次dp完之后还要往队列里面push一个<br>
+题目让求最小值，一开始一直再求max，差点WA傻了</p>
+<p>​<br>
+#include <iostream><br>
+#include <cstdio><br>
+#include <algorithm><br>
+#include <queue><br>
+#include <map><br>
+#include <stack><br>
+#include <string><br>
+#include <cstring><br>
+#include <vector><br>
+#include <cmath><br>
+#include <set><br>
+typedef long long int LL;<br>
+const int N = 1e4+5,M=11,INF = 0x7fffffff;<br>
+int dp[M][M&lt;&lt;1],pos[M],qu[M],sum[M&lt;&lt;1];<br>
+std::priority_queue&lt;int,std::vector<int>,std::greater<int> &gt; q;<br>
+int n,m,k,v;<br>
+LL ans;<br>
+int main()<br>
+{<br>
+scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;k);<br>
+for(int i=0; i&lt;n; i++){<br>
+scanf(&quot;%d&quot;,&amp;v);<br>
+q.push(v);<br>
+}<br>
+while(k–){<br>
+for(int i=1; i&lt;=m; i++) for(int j=1; j&lt;=(m&lt;&lt;1); j++) dp[i][j] = INF;<br>
+for(int i=1; i&lt;=m; i++){<br>
+scanf(&quot;%d&quot;,&amp;pos[i]);<br>
+}<br>
+for(int i=1; i&lt;=m; i++){<br>
+qu[pos[i]] = q.top();<br>
+q.pop();<br>
+}<br>
+for(int i=1; i&lt;=m; i++) sum[i] = sum[i-1]+qu[i];<br>
+for(int i=1; i&lt;=m; i++) sum[i+m] = sum[i+m-1]+qu[i];<br>
+for(int i=1; i&lt;=m; i++) dp[i][i] = 0;<br>
+for(int i=1; i&lt;m; i++){<br>
+for(int st=1; st&lt;=m; st++){<br>
+int ed = st+i;<br>
+for(int j=st; j&lt;ed; j++){<br>
+if(j+1&gt;m) dp[st][ed] = std::min(dp[st][ed],dp[st][j]+dp[j+1-m][ed-m]+sum[ed]-sum[st-1]);<br>
+else dp[st][ed] = std::min(dp[st][ed],dp[st][j]+dp[j+1][ed]+sum[ed]-sum[st-1]);<br>
+}<br>
+}<br>
+}<br>
+int mx = INF;<br>
+for(int i=1; i&lt;=m; i++){<br>
+mx = std::min(mx,dp[i][m+i-1]);<br>
+}<br>
+ans += mx;<br>
+q.push(sum[m]);<br>
+}<br>
+printf(&quot;%lld&quot;,ans);<br>
+return 0;<br>
+}</int></int></set></cmath></vector></cstring></string></stack></map></queue></algorithm></cstdio></iostream></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%8C%BA%E9%97%B4DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1880[NOI1995]%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6%20P1063%E8%83%BD%E9%87%8F%E9%A1%B9%E9%93%BEP2654%20%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E5%9F%B9%E5%85%BB/" data-id="cl50x8cms001occj35fjkbcds" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-【单源最短路 spfa Dijkstra】 _ 洛谷 P3371 【模板】单源最短路径（弱化版）_ ## lguou" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -2126,293 +2404,6 @@ if __name__ == '__main__':
 
 
   
-    <article id="post-【嵌套bfs】A - Pushing Boxes POJ - 1475  推箱子" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/">【嵌套bfs】A - Pushing Boxes POJ - 1475  推箱子.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2/">搜索</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<p><a target="_blank" rel="noopener" href="https://vjudge.net/contest/387870#problem/A">https://vjudge.net/contest/387870#problem/A</a></p>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Imagine you are standing inside a two-dimensional maze composed of square<br>
-cells which may or may not be filled with rock. You can move north, south,<br>
-east or west one cell at a step. These moves are called walks.<br>
-One of the empty cells contains a box which can be moved to an adjacent free<br>
-cell by standing next to the box and then moving in the direction of the box.<br>
-Such a move is called a push. The box cannot be moved in any other way than by<br>
-pushing, which means that if you push it into a corner you can never get it<br>
-out of the corner again.</p>
-<p>One of the empty cells is marked as the target cell. Your job is to bring the<br>
-box to the target cell by a sequence of walks and pushes. As the box is very<br>
-heavy, you would like to minimize the number of pushes. Can you write a<br>
-program that will work out the best such sequence?<br>
-![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzk2MTQ4YTA0MzgzZDlmZTI2MzBhM2FjNzcyZjEyMjYx?x-oss-">https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzk2MTQ4YTA0MzgzZDlmZTI2MzBhM2FjNzcyZjEyMjYx?x-oss-</a><br>
-process=image/format,png#pic_center)</p>
-<h2 id="输入"><a class="markdownIt-Anchor" href="#输入"></a> 输入</h2>
-<p>The input contains the descriptions of several mazes. Each maze description<br>
-starts with a line containing two integers r and c (both &lt;= 20) representing<br>
-the number of rows and columns of the maze.</p>
-<p>Following this are r lines each containing c characters. Each character<br>
-describes one cell of the maze. A cell full of rock is indicated by a <code>#' and an empty cell is represented by a</code>.’. Your starting position is symbolized by<br>
-<code>S', the starting position of the box by</code>B’ and the target cell by `T’.</p>
-<p>Input is terminated by two zeroes for r and c.</p>
-<h2 id="输出"><a class="markdownIt-Anchor" href="#输出"></a> 输出</h2>
-<p>For each maze in the input, first print the number of the maze, as shown in<br>
-the sample output. Then, if it is impossible to bring the box to the target<br>
-cell, print ``Impossible.’’.</p>
-<p>Otherwise, output a sequence that minimizes the number of pushes. If there is<br>
-more than one such sequence, choose the one that minimizes the number of total<br>
-moves (walks and pushes). If there is still more than one such sequence, any<br>
-one is acceptable.</p>
-<p>Print the sequence as a string of the characters N, S, E, W, n, s, e and w<br>
-where uppercase letters stand for pushes, lowercase letters stand for walks<br>
-and the different letters stand for the directions north, south, east and<br>
-west.</p>
-<p>Output a single blank line after each test case.</p>
-<h2 id="样例输入"><a class="markdownIt-Anchor" href="#样例输入"></a> 样例输入</h2>
-<p>1 7<br>
-SB…T<br>
-1 7<br>
-SB…#.T<br>
-7 11<br>
-###########<br>
-#T##…#<br>
-#.#.#…####<br>
-#…B…#<br>
-#.######…#<br>
-#…S…#<br>
-###########<br>
-8 4<br>
-…<br>
-.##.<br>
-.#…<br>
-.#…<br>
-.#.B<br>
-.##S<br>
-…<br>
-###T<br>
-0 0</p>
-<h2 id="样例输出"><a class="markdownIt-Anchor" href="#样例输出"></a> 样例输出</h2>
-<p>Maze #1<br>
-EEEEE</p>
-<p>Maze #2<br>
-Impossible.</p>
-<p>Maze #3<br>
-eennwwWWWWeeeeeesswwwwwwwnNN</p>
-<p>Maze #4<br>
-swwwnnnnnneeesssSSS</p>
-<h2 id="自己加一组样例输入"><a class="markdownIt-Anchor" href="#自己加一组样例输入"></a> 自己加一组样例输入</h2>
-<p>6 5<br>
-…T<br>
-.S…<br>
-#B###<br>
-…<br>
-…<br>
-…</p>
-<h2 id="自己加的样例的输出"><a class="markdownIt-Anchor" href="#自己加的样例的输出"></a> 自己加的样例的输出</h2>
-<p>Maze #1<br>
-SSesswNNNNwnEEE</p>
-<h2 id="瞎翻译"><a class="markdownIt-Anchor" href="#瞎翻译"></a> 瞎翻译</h2>
-<p>这是一个推箱子游戏。人要把箱子推到终点，我们需要输出人走的路径（方向用nswe或NSWE表示，人不推箱子只走路时路径用小写字母nswe表示，人推箱子走路时路径用大写字母NSWE表示）</p>
-<p>先输入两个整数row和col，表示地图大小</p>
-<p>之后输入一个row行col列的char类型矩阵，其中#代表墙，.代表路，S代表人的起始位置，B代表箱子起始位置，T代表终点（箱子要被推到的位置）</p>
-<h2 id="题解"><a class="markdownIt-Anchor" href="#题解"></a> 题解</h2>
-<p><strong>1.</strong><br>
-先设想箱子会自己动，想象一下如何用简单的bfs求得“箱子自己动”情况下的答案<br>
-<strong>2.</strong><br>
-在”箱子自己动“的代码基础上加入人：<br>
-假设箱子要往右动，那么先对人进行bfs，让人从自己的位置走到箱子的左边的位置，如果人可以走过去，则箱子可以往右移动。<br>
-<strong>2.5</strong><br>
-记得人推箱子的时候人也要动，而不是仅仅箱子移动（人与箱子往相同方向移动，或者直接把人移动到箱子的上一个位置）。<br>
-<strong>3.</strong><br>
-这是笔者自己犯的一个错误：<br>
-不能仅仅用形如visb[][]的二维数组标记箱子到过的位置，因为在某些情况下人想推箱子到终点，是需要【箱子折返】的（箱子有可能去一个地方两次或多次，可以见我自己加的输入样例）<br>
-所以要用三维数组：visb[][][4],第三维记录箱子来时的方向</p>
-<p><strong>4.</strong><br>
-在箱子移动的bfs函数中嵌套人移动的bfs函数完成求解</p>
-<p>​<br>
-#include <cstdio><br>
-#include <iostream><br>
-#include <algorithm><br>
-#include <cstring><br>
-#include <queue><br>
-#include <string></string></queue></cstring></algorithm></iostream></cstdio></p>
-<pre><code>int row,col,counter;
-const int maxn=25;
-char cell[maxn][maxn];
-bool visb[maxn][maxn][4],visp[maxn][maxn];  //visb记录箱子，visp记录人去过的位置
-//人的标记方式为：先在原地标记一次，之后去了哪标哪
-//箱子的标记方式为：不在原地标记，只有从一个方向（假设为2）移动到某一格（假设为i，j），则标记visb[i][j][2]为true
-
-int step[4][2]=&#123;&#123;1,0&#125;,&#123;-1,0&#125;,&#123;0,1&#125;,&#123;0,-1&#125;&#125;;
-char adir[5]=&quot;snew&quot;,Adir[5]=&quot;SNEW&quot;;         //两个dir都对应step的四个方向
-struct Pos
-&#123;
-    int x,y;            //表示位置，若是人，只会用到这两个和path
-    int mx,my;          //表示人的位置，表示箱子的变量用的，表示人的变量用不着
-    std::string path;   //记录路径
-&#125;mpre,mnxt,tar,bpre,bnxt,to;
-//mpre-man pre人的当前位置（或解释为人的上一个位置）mnxt-man next人的下一个位置
-//bpre和bnxt表示箱子的当前位置和下一个位置
-//tar表示终点位置
-//to表示箱子要移动到某个位置时，人要移动到的位置
-</code></pre>
-<p>​<br>
-​<br>
-//判断这个点是否在地图可行走范围之中<br>
-bool cango(int x,int y)<br>
-{<br>
-if(x&gt;=0 &amp;&amp; x&lt;row &amp;&amp; y&gt;=0 &amp;&amp; y&lt;col &amp;&amp; cell[x][y]!=’#’)<br>
-return true;<br>
-return false;<br>
-}</p>
-<pre><code>//人从自己所在的位置，移动到to.x,to.y的位置，简单bfs
-bool bfsMan()
-&#123;
-    memset(visp,false,sizeof(visp));
-    std::queue&lt;Pos&gt; q;
-    mpre.path=&quot;&quot;;
-    mpre.x=bnxt.mx,mpre.y=bnxt.my;
-    q.push(mpre);
-    visp[mpre.x][mpre.y]=true;
-    while(!q.empty())
-    &#123;
-        mpre=q.front(); q.pop();
-        if(mpre.x==to.x &amp;&amp; mpre.y==to.y) return true;
-        for(int i=0; i&lt;4; i++)
-        &#123;
-            mnxt=mpre;
-            mnxt.x+=step[i][0],mnxt.y+=step[i][1];
-            if(cango(mnxt.x,mnxt.y) &amp;&amp; !visp[mnxt.x][mnxt.y] &amp;&amp; !(mnxt.x==bpre.x &amp;&amp; mnxt.y==bpre.y))
-            &#123;
-                visp[mnxt.x][mnxt.y]=true;
-                mnxt.path+=adir[i];
-                q.push(mnxt);
-            &#125;
-        &#125;
-    &#125;
-    return false;
-
-&#125;
-
-//对箱子的bfs，其中嵌套了对人的bfs
-void bfs()
-&#123;
-    std::queue&lt;Pos&gt; q;
-    bpre.path=&quot;&quot;;
-    bpre.mx=mpre.x,bpre.my=mpre.y;
-    q.push(bpre);//让最初箱子的位置入队，记得给箱子结构体赋值人的位置
-    while(!q.empty())
-    &#123;
-        bpre=q.front(); q.pop();
-        for(int i=0; i&lt;4; i++)  //开始四个方向的遍历
-        &#123;
-            bnxt=bpre;
-            bnxt.x+=step[i][0],bnxt.y+=step[i][1];
-            if(cango(bnxt.x,bnxt.y) &amp;&amp; !visb[bnxt.x][bnxt.y][i])
-            &#123;
-                to=bpre;
-                to.x-=step[i][0],to.y-=step[i][1];
-                if(cango(to.x,to.y))    //初步检查这一点是否可以达到
-                &#123;
-                    if(bfsMan())
-                    &#123;
-                        //一定要bfsMan（）返回true时才标记visb为true
-                        //因为若人不能到达特定的推箱子位置，箱子就不能访问到要去的位置
-                        visb[bnxt.x][bnxt.y][i]=true;
-                        bnxt.path+=mpre.path;               //路径末尾加入人上一次移动的路径
-                        bnxt.path+=Adir[i];                 //路径末尾加入箱子移动的路径
-                        //如果到了终点，直接输出
-                        if(bnxt.x==tar.x &amp;&amp; bnxt.y==tar.y)
-                        &#123;
-                            std::cout &lt;&lt; &quot;Maze #&quot; &lt;&lt; counter++ &lt;&lt; std::endl;
-                            std::cout &lt;&lt; bnxt.path &lt;&lt; std::endl &lt;&lt; std::endl;
-                            return ;
-                        &#125;
-                        bnxt.mx=bpre.x,bnxt.my=bpre.y;      //记得记录箱子在这个位置时对应的人的位置，然后入队
-                        q.push(bnxt);
-                    &#125;
-                &#125;
-            &#125;
-        &#125;
-    &#125;
-    std::cout &lt;&lt; &quot;Maze #&quot; &lt;&lt; counter++ &lt;&lt; std::endl;
-    std::cout &lt;&lt; &quot;Impossible.&quot; &lt;&lt; std::endl &lt;&lt; std::endl;
-&#125;
-</code></pre>
-<p>​<br>
-int main()<br>
-{<br>
-counter=1;<br>
-while(std::cin &gt;&gt; row &gt;&gt; col &amp;&amp; !(row<mark>0 &amp;&amp; col</mark>0))<br>
-{<br>
-memset(visb,false,sizeof(visb));<br>
-for(int i=0; i&lt;row; i++)<br>
-{<br>
-std::cin &gt;&gt; cell[i];<br>
-for(int j=0; j&lt;col; j++)<br>
-{<br>
-if(cell[i][j]<mark>‘S’)  mpre.x=i,mpre.y=j;<br>
-else if(cell[i][j]</mark>‘B’) bpre.x=i,bpre.y=j;<br>
-else if(cell[i][j]==‘T’) tar.x=i,tar.y=j;<br>
-}<br>
-}<br>
-bfs();<br>
-}</p>
-<pre><code>    return 0;
-&#125;
-</code></pre>
-<p>​</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/" data-id="cl50x8cn1002mccj3htcybpw5" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -2469,9 +2460,9 @@ bfs();<br>
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>75</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>76</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>32</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>60</strong><br>标签</div></a>
     </div>
 
 
