@@ -194,18 +194,6 @@ setinfo "_abcd" "密码2"
 
 > confogl_addcvar director_allow_infected_bots "1"
 
-## 安全屋外止疼药数量
-
-路径：`./cfg/cfgogl/zonemod/confogl.cfg`
-
->confogl_addcvar confogl_pills_limit 4
-
-## 修改止疼药加血量
-
-路径：`./cfg/server.cfg`
-
->sm_cvar pain_pills_health_value 10 止疼药额外+10(也就是+60) 会影响战役
-
 ## 让AI生还者吃药加血
 
 路径：`./addons/sourcemod/plugins/optional/`

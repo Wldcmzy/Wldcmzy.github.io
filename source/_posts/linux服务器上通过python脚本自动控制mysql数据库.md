@@ -2,14 +2,14 @@
 title: python语言实现服务器对mysql数据库的自动处理
 date: 2022-06-06 20:55:40
 categories:
-  - [后端, 数据库]
+  - [基础知识, python, pymysql]
 tags:
   - linux
-  - socket
   - sql
   - 数据库
   -	服务器
   - 后端
+  - pymysql
 ---
 
 ## 声明
