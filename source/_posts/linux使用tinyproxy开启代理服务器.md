@@ -31,3 +31,5 @@ apt-get install tinyproxy
 sudo service tinyproxy restart
 ```
 
+## 莫得加密
+
