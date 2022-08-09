@@ -43,7 +43,7 @@
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>77</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>78</strong><br>文章</div></a>
       <a href="/categories"><div><strong>32</strong><br>分类</div></a>
       <a href="/tags"><div><strong>63</strong><br>标签</div></a>
     </div>
@@ -82,6 +82,123 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-hexo框架下博客应用夏娜主题并略微魔改" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/06/hexo%E6%A1%86%E6%9E%B6%E4%B8%8B%E5%8D%9A%E5%AE%A2%E5%BA%94%E7%94%A8%E5%A4%8F%E5%A8%9C%E4%B8%BB%E9%A2%98%E5%B9%B6%E7%95%A5%E5%BE%AE%E9%AD%94%E6%94%B9/" class="article-date">
+  <time class="post-time" datetime="2022-05-06T03:29:57.000Z" itemprop="datePublished">
+    <span class="post-month">5月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/06/hexo%E6%A1%86%E6%9E%B6%E4%B8%8B%E5%8D%9A%E5%AE%A2%E5%BA%94%E7%94%A8%E5%A4%8F%E5%A8%9C%E4%B8%BB%E9%A2%98%E5%B9%B6%E7%95%A5%E5%BE%AE%E9%AD%94%E6%94%B9/">hexo框架下博客应用夏娜主题并略微魔改</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/">教练我想学挂边躲牛</a>,<a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="应用夏娜主题"><a class="markdownIt-Anchor" href="#应用夏娜主题"></a> 应用夏娜主题</h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">夏娜主题github连接</a></p>
+<p><s>我直接进行一个主题README.md文件的搬</s></p>
+<h3 id="安装"><a class="markdownIt-Anchor" href="#安装"></a> 安装</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ShanaMaid/hexo-theme-shana themes/shana</span><br></pre></td></tr></table></figure>
+<h3 id="配置"><a class="markdownIt-Anchor" href="#配置"></a> 配置</h3>
+<p>修改hexo根目录下的 <code>_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span></span><br><span class="line"></span><br><span class="line"><span class="attr">theme:</span> <span class="string">shana</span></span><br></pre></td></tr></table></figure>
+<p>同时将<code>themes/shana/_source/</code>的<code>tags</code>和<code>categories</code>文件夹拷贝到hexo根目录下的<code>source</code>文件夹下</p>
+<h3 id="更新"><a class="markdownIt-Anchor" href="#更新"></a> 更新</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd themes/shana</span><br><span class="line"></span><br><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
+<h2 id="瞎搞和魔改过程"><a class="markdownIt-Anchor" href="#瞎搞和魔改过程"></a> 瞎搞和魔改过程</h2>
+<p><strong><s>由于我不是很懂前端，所以不能随意更改博客，只能走一步看一步</s></strong></p>
+<h4 id="更改网站的favicon"><a class="markdownIt-Anchor" href="#更改网站的favicon"></a> 更改网站的favicon</h4>
+<p>把你想改的图片放到hexo根目录下的source目录中，然后修改shana主图根目录下_config.yml配置文件favicon属性的值为图片名即可，如:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">favicon:</span> <span class="string">/favicon.png</span></span><br></pre></td></tr></table></figure>
+<h4 id="修改博客标题-副标题-描述-作者等内容"><a class="markdownIt-Anchor" href="#修改博客标题-副标题-描述-作者等内容"></a> 修改博客标题、副标题、描述、作者等内容</h4>
+<p>在hexo根目录修改配置文件_config.yml对应内容即可。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">蓝湖畔的雨</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;All tragedy erased, I see only wonders...&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">keywords:</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">StarsWhisper</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+<h4 id="增加菜单"><a class="markdownIt-Anchor" href="#增加菜单"></a> 增加菜单</h4>
+<p>一开始应该只有主页、归档、分类、标签四个菜单，可以通过修改shana主题根目录中的_config.yml配置文件来实现添加菜单</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">Home:</span> <span class="string">/</span></span><br><span class="line">  <span class="attr">Archives:</span> <span class="string">/archives</span></span><br><span class="line">  <span class="attr">Categories:</span> <span class="string">/categories</span></span><br><span class="line">  <span class="attr">Tags:</span> <span class="string">/tags</span></span><br><span class="line">  <span class="attr">About:</span> <span class="string">/about</span></span><br><span class="line"><span class="attr">rss:</span> <span class="string">/atom.xml</span></span><br></pre></td></tr></table></figure>
+<p>仿照 <strong>themes/shana/_source/</strong> 中的文件夹，建立about文件夹以及里面的内容，并把它扔到hexo根目录下的<code>source</code>文件夹下即可</p>
+<p>若不在翻译文件中加入自定义的名称，自定义菜单选项会显示英文，所以我们在 <strong>\themes\shana\languages</strong> 目录下修改zh-CN.yml 添加如下内容</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#你的自定义名称: 中文翻译</span></span><br><span class="line"><span class="attr">About:</span> <span class="string">关于啊啊啊</span></span><br></pre></td></tr></table></figure>
+<p>增加点击菜单后显示的内容，只需要在对应的index.md文件中增加内容即可</p>
+<h4 id="增加或修改右键菜单内容"><a class="markdownIt-Anchor" href="#增加或修改右键菜单内容"></a> 增加或修改右键菜单内容</h4>
+<p>在shana主题配置文件中找到gaymenu_item:，比如我的已经改成了</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">gaymenu_item:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">公告</span></span><br><span class="line">  <span class="attr">url :</span> <span class="string">/announcement</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">标签</span></span><br><span class="line">  <span class="attr">url :</span> <span class="string">/tags</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">分类</span></span><br><span class="line">  <span class="attr">url :</span> <span class="string">/categories</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">归档</span></span><br><span class="line">  <span class="attr">url :</span> <span class="string">/archives</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">关于</span></span><br><span class="line">  <span class="attr">url :</span> <span class="string">/knightabout</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">传送门</span></span><br><span class="line">  <span class="attr">url :</span> <span class="string">/bridges</span></span><br></pre></td></tr></table></figure>
+<p>仿照修改就可以</p>
+<h4 id="修改右键菜单图标"><a class="markdownIt-Anchor" href="#修改右键菜单图标"></a> 修改右键菜单图标</h4>
+<p>在 <strong>\themes\shana\source\plugin\galmenu</strong> 目录下修改img.png文件，自己P一下就行。</p>
+<p>原图：</p>
+<p><img src="/2022/05/06/hexo%E6%A1%86%E6%9E%B6%E4%B8%8B%E5%8D%9A%E5%AE%A2%E5%BA%94%E7%94%A8%E5%A4%8F%E5%A8%9C%E4%B8%BB%E9%A2%98%E5%B9%B6%E7%95%A5%E5%BE%AE%E9%AD%94%E6%94%B9/img1.png" alt="img1"></p>
+<p>修改后：</p>
+<p><img src="/2022/05/06/hexo%E6%A1%86%E6%9E%B6%E4%B8%8B%E5%8D%9A%E5%AE%A2%E5%BA%94%E7%94%A8%E5%A4%8F%E5%A8%9C%E4%B8%BB%E9%A2%98%E5%B9%B6%E7%95%A5%E5%BE%AE%E9%AD%94%E6%94%B9/img.png" alt="img"></p>
+<h4 id="社交连接和友情连接"><a class="markdownIt-Anchor" href="#社交连接和友情连接"></a> 社交连接和友情连接</h4>
+<p>修改shana配置文件， 比如:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 社交链接</span></span><br><span class="line"><span class="attr">social:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">url:</span> <span class="string">https://github.com/Wldcmzy</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">Github</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">url:</span> <span class="string">https://blog.csdn.net/wldcmzy</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">CSDN</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">url:</span> <span class="string">https://space.bilibili.com/83743701</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">bilibili(无技术和学习内容)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 友情链接</span></span><br><span class="line"><span class="comment"># name : url</span></span><br><span class="line"><span class="attr">link_title:</span> <span class="string">友情链接</span></span><br><span class="line"><span class="attr">links:</span></span><br><span class="line">  <span class="string">夏娜主题作者的博客:</span> <span class="string">https://shanamaid.github.io/</span></span><br></pre></td></tr></table></figure>
+<h4 id="修改头像"><a class="markdownIt-Anchor" href="#修改头像"></a> 修改头像</h4>
+<p>在shana配置文件中更改avatar属性的值为头像图片的url即可。</p>
+<p>若想使用本地图片，则在 <strong>shana/source/</strong> 目录下创建images文件夹，并把头像图片扔到里面，avatar的值这样写:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">avatar:</span> <span class="string">/images/avatar.png(这个是你的头像图片名)</span></span><br></pre></td></tr></table></figure>
+<h4 id="修改背景图"><a class="markdownIt-Anchor" href="#修改背景图"></a> 修改背景图</h4>
+<p>在 <strong>\shana\source\plugin\bganimation</strong> 目录下，直接把你想用的背景图片放进去。</p>
+<p>然后修改文件bg.css</p>
+<p>下方代码中对应的图片名部分改为自己的背景图片名，也可以使用图片对应的url</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.cb-slideshow</span> <span class="selector-tag">li</span><span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>) <span class="selector-tag">span</span> &#123; <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&#x27;qianbei.jpg&#x27;</span>);&#125;</span><br><span class="line"><span class="selector-class">.cb-slideshow</span> <span class="selector-tag">li</span><span class="selector-pseudo">:nth-child</span>(<span class="number">2</span>) <span class="selector-tag">span</span> &#123; <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&#x27;sister.jpg&#x27;</span>);&#125;</span><br><span class="line"><span class="selector-class">.cb-slideshow</span> <span class="selector-tag">li</span><span class="selector-pseudo">:nth-child</span>(<span class="number">3</span>) <span class="selector-tag">span</span> &#123; <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&#x27;brother.jpg&#x27;</span>);&#125;</span><br><span class="line"><span class="selector-class">.cb-slideshow</span> <span class="selector-tag">li</span><span class="selector-pseudo">:nth-child</span>(<span class="number">4</span>) <span class="selector-tag">span</span> &#123; <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&#x27;shadow.jpg&#x27;</span>);&#125;</span><br><span class="line"><span class="selector-class">.cb-slideshow</span> <span class="selector-tag">li</span><span class="selector-pseudo">:nth-child</span>(<span class="number">5</span>) <span class="selector-tag">span</span> &#123; <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&#x27;knight.jpg&#x27;</span>);&#125;</span><br><span class="line"><span class="selector-class">.cb-slideshow</span> <span class="selector-tag">li</span><span class="selector-pseudo">:nth-child</span>(<span class="number">6</span>) <span class="selector-tag">span</span> &#123; <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&#x27;kuiruo.jpg&#x27;</span>);&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="修改鼠标指针"><a class="markdownIt-Anchor" href="#修改鼠标指针"></a> 修改鼠标指针</h4>
+<p>在 <strong>\shana\source\css\images/</strong> 目录下修改icon.png文件，可以自己找图或者p一个或者画一个。喜欢小骑士的可以用我这个:</p>
+<p><img src="/2022/05/06/hexo%E6%A1%86%E6%9E%B6%E4%B8%8B%E5%8D%9A%E5%AE%A2%E5%BA%94%E7%94%A8%E5%A4%8F%E5%A8%9C%E4%B8%BB%E9%A2%98%E5%B9%B6%E7%95%A5%E5%BE%AE%E9%AD%94%E6%94%B9/icon.png" alt="icon"></p>
+<h4 id="修改代码高亮-代码背景等"><a class="markdownIt-Anchor" href="#修改代码高亮-代码背景等"></a> 修改代码高亮、代码背景等</h4>
+<p>对应文件 <strong>\shana\source\css\ _partial\highlight.styl</strong></p>
+<p>修改代码背景: 修改下方代码中 <strong>background</strong> 的值</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$code</span>-block</span><br><span class="line">  <span class="attribute">border-left</span>: <span class="number">5px</span> solid <span class="number">#0000FF</span></span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#2244AA</span></span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> article-padding * -<span class="number">1</span></span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">15px</span> article-padding</span><br><span class="line">  <span class="attribute">overflow</span>: auto</span><br><span class="line">  <span class="attribute">color</span>: highlight-foreground</span><br><span class="line">  <span class="attribute">line-height</span>: font-size * line-height</span><br></pre></td></tr></table></figure>
+<h4 id="修改文章版透明度"><a class="markdownIt-Anchor" href="#修改文章版透明度"></a> 修改文章版透明度</h4>
+<p>修改文件 **\themes\shana\source\css\ _variables.styl ** 中color-background-rgba属性的第四个值</p>
+<h4 id="更换换页按钮的文本"><a class="markdownIt-Anchor" href="#更换换页按钮的文本"></a> 更换换页按钮的文本</h4>
+<p>修改文件 <strong>themes\shana\layout_partial\archive.ejs</strong> 中最下方对应内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;% if (page.total &gt; 1)&#123; %&gt;</span><br><span class="line">  &lt;nav id=&quot;page-nav&quot;&gt;</span><br><span class="line">    &lt;%- paginator(&#123;</span><br><span class="line">      prev_text: &quot;&lt;&lt;&lt; 上一页&quot;,</span><br><span class="line">      next_text: &quot;下一页 &gt;&gt;&gt;&quot;</span><br><span class="line">    &#125;) %&gt;</span><br><span class="line">  &lt;/nav&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="调宽博文显示栏"><a class="markdownIt-Anchor" href="#调宽博文显示栏"></a> 调宽博文显示栏</h4>
+<p>打开文件 <strong>\themes\shana\source\css_partial\article.styl</strong> 在.artical下增加宽度内容</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.article</span></span><br><span class="line">  <span class="attribute">margin</span>: block-margin <span class="number">0</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">115%</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/05/06/hexo%E6%A1%86%E6%9E%B6%E4%B8%8B%E5%8D%9A%E5%AE%A2%E5%BA%94%E7%94%A8%E5%A4%8F%E5%A8%9C%E4%B8%BB%E9%A2%98%E5%B9%B6%E7%95%A5%E5%BE%AE%E9%AD%94%E6%94%B9/" data-id="cl50x8cmb000iccj3519y8psf" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag">博客搭建</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-使用hexo框架发布博客" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -1300,65 +1417,6 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
 
 
   
-    <article id="post-python graphviz的使用  改日填坑" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/python%20graphviz%E7%9A%84%E4%BD%BF%E7%94%A8%20%20%E6%94%B9%E6%97%A5%E5%A1%AB%E5%9D%91/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/python%20graphviz%E7%9A%84%E4%BD%BF%E7%94%A8%20%20%E6%94%B9%E6%97%A5%E5%A1%AB%E5%9D%91/">python graphviz的使用  改日填坑.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/">python</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/graphviz/">graphviz</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<p>抄了半个大致模板 自己研究了研究了研究，现在先会画流程图 改日详细填坑</p>
-<p>​</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> graphviz <span class="keyword">import</span> Digraph</span><br><span class="line"><span class="keyword">from</span> graphviz <span class="keyword">import</span> Source</span><br><span class="line">dot = Digraph(</span><br><span class="line">    name=<span class="string">&#x27;try1&#x27;</span>,</span><br><span class="line">    comment=<span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    filename=<span class="literal">None</span>,</span><br><span class="line">    directory=<span class="literal">None</span>,</span><br><span class="line">    <span class="built_in">format</span>=<span class="string">&quot;png&quot;</span>,</span><br><span class="line">    engine=<span class="literal">None</span>,</span><br><span class="line">    encoding=<span class="string">&#x27;utf8&#x27;</span>,</span><br><span class="line">    graph_attr=&#123;<span class="string">&#x27;rankdir&#x27;</span>:<span class="string">&#x27;TB&#x27;</span>&#125;,</span><br><span class="line">    node_attr=&#123;<span class="string">&#x27;color&#x27;</span>:<span class="string">&#x27;black&#x27;</span>,<span class="string">&#x27;fontcolor&#x27;</span>:<span class="string">&#x27;black&#x27;</span>,<span class="string">&#x27;fontname&#x27;</span>:<span class="string">&#x27;FangSong&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>:<span class="string">&#x27;12&#x27;</span>,<span class="string">&#x27;style&#x27;</span>:<span class="string">&#x27;rounded&#x27;</span>,<span class="string">&#x27;shape&#x27;</span>:<span class="string">&#x27;box&#x27;</span>&#125;,</span><br><span class="line">    edge_attr=&#123;<span class="string">&#x27;color&#x27;</span>:<span class="string">&#x27;red&#x27;</span>,<span class="string">&#x27;fontcolor&#x27;</span>:<span class="string">&#x27;#888888&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>:<span class="string">&#x27;10&#x27;</span>,<span class="string">&#x27;fontname&#x27;</span>:<span class="string">&#x27;FangSong&#x27;</span>&#125;,</span><br><span class="line">    body=<span class="literal">None</span>,</span><br><span class="line">    strict=<span class="literal">False</span></span><br><span class="line">)</span><br><span class="line">dot.node(<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;A-----&#x27;</span>,shape = <span class="string">&#x27;rectangle&#x27;</span>)</span><br><span class="line">dot.node(<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;B=====&#x27;</span>,shape = <span class="string">&#x27;circle&#x27;</span>)</span><br><span class="line">dot.node(<span class="string">&#x27;C&#x27;</span>, <span class="string">&#x27;C-----&#x27;</span>,shape = <span class="string">&#x27;triangle&#x27;</span>, color = <span class="string">&#x27;blue&#x27;</span>, fontcolor = <span class="string">&#x27;green&#x27;</span>)</span><br><span class="line">dot.node(<span class="string">&#x27;D&#x27;</span>,<span class="string">&#x27;D=====&#x27;</span>,shape = <span class="string">&#x27;circle&#x27;</span>)</span><br><span class="line">dot.view()</span><br><span class="line"><span class="string">&#x27;try1.gv.png&#x27;</span></span><br><span class="line">dot.edge(<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;E GAY WOLY GIAO&#x27;</span>)</span><br><span class="line">dot.edge(<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;D&#x27;</span>,<span class="string">&#x27;ss&#x27;</span>)</span><br><span class="line">dot.edge(<span class="string">&#x27;D&#x27;</span>,<span class="string">&#x27;C&#x27;</span>)</span><br><span class="line">dot.edge(<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;A&#x27;</span>)</span><br><span class="line">dot.edge(<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;D&#x27;</span>)</span><br><span class="line">dot.view()</span><br><span class="line"><span class="string">&#x27;try1.gv.png&#x27;</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/python%20graphviz%E7%9A%84%E4%BD%BF%E7%94%A8%20%20%E6%94%B9%E6%97%A5%E5%A1%AB%E5%9D%91/" data-id="cl50x8cme000nccj36zktenjp" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%94%BB%E5%9B%BE/" rel="tag">画图</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1415,7 +1473,7 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>77</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>78</strong><br>文章</div></a>
       <a href="/categories"><div><strong>32</strong><br>分类</div></a>
       <a href="/tags"><div><strong>63</strong><br>标签</div></a>
     </div>
