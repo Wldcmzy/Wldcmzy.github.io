@@ -11,7 +11,7 @@ tags:
 
 ## 安装tinyproxy
 
-Ubuntu系统
+Ubuntu系统。
 
 ```
 apt-get install tinyproxy
