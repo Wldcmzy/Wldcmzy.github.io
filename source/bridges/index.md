@@ -40,6 +40,7 @@ Github: [Wldcmzy/UpperCaveMan_Ellis (github.com)](https://github.com/Wldcmzy/Upp
 1. 这是一门不上课只有课程设计的课程
 2. 在此之前，完全没碰过web，也完全没碰过后端服务器，拿到这个固定题目的时候还是棘手的，不过好在最基本的web知识不难，而且可以马上进行应用，服务器学一点简单的也就基本能用了。整体来说这个课设在学习上对我的帮助是很大的，但它确实很烂。（尤其是js代码雀氏太烂了，刚开始写只考虑能用，好多基本机制都不清楚，其实有好多地方可以优化，大优化）
 3. 再次声明：很烂，不过对我个人来说有一定的意义。
+4. 工作量倒是不小。
 
 Github: [Wldcmzy/Automatic-fire-control-system(github.com)](https://github.com/Wldcmzy/Automatic-fire-control-system)
 
@@ -60,5 +61,6 @@ Github: [Wldcmzy/PVZ-Funcode(github.com)](https://github.com/Wldcmzy/PVZ-Funcode
 说明：
 
 1. 有一湖水的课设，主要是什么功能也不想加乐，摆烂人。
+2. 主要内容为备忘录本地增删改+自定义ip端口的云端储存+python flask后端。
 
 Github:[Wldcmzy/MEMO(github.com)](https://github.com/Wldcmzy/MEMO)
