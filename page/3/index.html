@@ -43,7 +43,7 @@
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>78</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>79</strong><br>文章</div></a>
       <a href="/categories"><div><strong>32</strong><br>分类</div></a>
       <a href="/tags"><div><strong>63</strong><br>标签</div></a>
     </div>
@@ -82,6 +82,108 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-YTU 3413_ 小姬小姬小姬" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/YTU%203413_%20%E5%B0%8F%E5%A7%AC%E5%B0%8F%E5%A7%AC%E5%B0%8F%E5%A7%AC/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/YTU%203413_%20%E5%B0%8F%E5%A7%AC%E5%B0%8F%E5%A7%AC%E5%B0%8F%E5%A7%AC/">YTU 3413_ 小姬小姬小姬.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E7%9E%8E%E6%90%9E/">瞎搞</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>小姬最近开始研究起了曼哈顿距离，因为他厌倦了欧氏距离的学习。</p>
+<p>我们知道，平面内 (x1,y1) 与 (x2,y2) 的曼哈顿距离被定义为这两点在标准坐标系上的绝对轴距之和，即 |x1−x2|+|y1−y2|。</p>
+<p>对于小姬来讲，他可以很容易的算出给定平面内任意多个点之间的曼哈顿距离，但是千千给小姬出了一个问题：假如我有 n(n−1)2 个数，它们分别代表平面中 n<br>
+个点之间的曼哈顿距离，你能告诉我这 n 个点的位置么？</p>
+<p>随后的几天，小姬开始困惑了，因为他想来想去也只会算当 n=2 的情形，于是便去找千千诉苦，看到这样的情形，千千只好答应降低难度，只要你算出 n=3<br>
+的情形便可以啦。</p>
+<p>你能帮小姬解决这个问题么？</p>
+<h2 id="输入"><a class="markdownIt-Anchor" href="#输入"></a> 输入</h2>
+<p>输入只有一行，包含三个正整数 a,b,c (1≤a,b,c≤100)，分别代表平面中 3 个点两两之间的曼哈顿距离。（保证输入数据有解）</p>
+<h2 id="输出"><a class="markdownIt-Anchor" href="#输出"></a> 输出</h2>
+<p>输出满足题意的三个点的坐标（要求<br>
+0≤|x|,|y|≤105），每个点的坐标占一行，可以以任意的顺序输出，若存在多解的情况，输出任意一组即可。（如果你的答案计算出的结果与真实值相差 10−6<br>
+以内则被认为是正确的）</p>
+<h2 id="样例输入"><a class="markdownIt-Anchor" href="#样例输入"></a> 样例输入</h2>
+<p>1 1 2</p>
+<h2 id="样例输出"><a class="markdownIt-Anchor" href="#样例输出"></a> 样例输出</h2>
+<p>0.000000 0.000000<br>
+1.000000 0.000000<br>
+0.000000 1.000000</p>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<p>在这三个曼哈顿距离中任取一个d，它一定表示两点之间的曼哈顿距离<br>
+设其中一个点为原点，则另一个点一定在以原点为中心距离远点曼哈顿距离为d的菱形（正方形）上。<br>
+其他两个输入值，其中有一个值是于原点相关的曼哈顿距离，而这个值对应的点也应该是围绕原点的一个菱形（正方形）<br>
+。<br>
+不妨先假设其中一个值是与原点相关的曼哈顿距离，只要第三个值（原点除外的其他两点的曼哈顿距离）在区间【两菱形之间点的最短距离，两菱形点的最长距离】范围之内，则必定可以求解，如果不满足，则最后剩下的值才是与原点关联的值<br>
+。<br>
+这样我们就可以先直接定死两个点，求第三个点。<br>
+先说两个菱形大小不一样的情况：<br>
+如下图，（这个图我只看了右边）<br>
+1.我定的点是（0，0）和小菱形最上端的点（0，x）<br>
+图中上方表示红线（0，x）和求解点有最短距离时求解点存在的范围，在这一线段上（0，x）和求解点的曼哈顿距离相等，这个最短距离为abs（与原点相关的连个曼哈顿距离只差），若不关联原点的曼哈顿距离就是最短距离，则随便取红线上的一点就是答案<br>
+2.同理，下方红线表示（0，x）和所求点曼哈顿距离最长的范围，若不关联原点的曼哈顿距离等于最长距离，则随便在下方红线上取一点就是答案<br>
+3.在蓝线上（0，x）到求解点的曼哈顿距离递增<br>
+我们可以先把求解点定在上方红线的最下边，这时求解点与（0，x）的曼哈顿距离为最短距离，然后再将求解点向下偏移，令两点之间的曼哈顿距离增长（不关联原点的曼哈顿距离-<br>
+最短距离），得到的点就是答案（斜率都是1或-1呀）<br>
+![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201028223150512.png?x-oss-">https://img-blog.csdnimg.cn/20201028223150512.png?x-oss-</a><br>
+process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)<br>
+如果两个菱形大小一样，最上方的红线就会变成一个点，其余思路不变，所以这种情况不用另外考虑 <s>战吼：放一个P</s></p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<p>一遍过的，里面有些冗余的东西写出来了根本没用上，比如那个结构体的点</p>
+<p>​</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Edge</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">float</span> x,y;</span><br><span class="line">&#125;p1,p2,p3;</span><br><span class="line"><span class="type">int</span> a,b,c;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(<span class="type">float</span> p,<span class="type">float</span> q,<span class="type">float</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> x,y,px,py,left;</span><br><span class="line">    <span class="keyword">if</span>(p&lt;q) x=p,y=q;</span><br><span class="line">    <span class="keyword">else</span> x=q,y=p;</span><br><span class="line">    <span class="keyword">if</span> (w == std::<span class="built_in">abs</span>(p-q))</span><br><span class="line">    &#123;</span><br><span class="line">        px=<span class="number">0</span>;</span><br><span class="line">        py=y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(w == p+q)</span><br><span class="line">    &#123;</span><br><span class="line">        px=<span class="number">0</span>;</span><br><span class="line">        py=-y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">float</span> tmp=std::<span class="built_in">abs</span>(p-q);</span><br><span class="line">        px=tmp,py=x;</span><br><span class="line">        left=w-tmp;</span><br><span class="line">        left/=<span class="number">2</span>;</span><br><span class="line">        px+=left;</span><br><span class="line">        py-=left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.6f %.6f\n&quot;</span>,<span class="number">0.0</span>,<span class="number">0.0</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.6f %.6f\n&quot;</span>,<span class="number">0.0</span>,x);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.6f %.6f\n&quot;</span>,px,py);</span><br></pre></td></tr></table></figure>
+<p>​</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">    p1.x=p1.y=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(c&gt;= std::<span class="built_in">abs</span>(a-b) &amp;&amp; c&lt;= a+b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fun</span>(a,b,c);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fun</span>(a,c,b);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/YTU%203413_%20%E5%B0%8F%E5%A7%AC%E5%B0%8F%E5%A7%AC%E5%B0%8F%E5%A7%AC/" data-id="cl50x8cma000fccj3gz9q6pyc" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-python graphviz的使用  改日填坑" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -1916,420 +2018,6 @@ return 0;<br>
 
 
   
-    <article id="post-【tarjin算法练习 缩点，割点，割边】洛谷_P3387缩点模板P3388割点模板 HDU4738 caocao‘bridge" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E3%80%90tarjin%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0%20%E7%BC%A9%E7%82%B9%EF%BC%8C%E5%89%B2%E7%82%B9%EF%BC%8C%E5%89%B2%E8%BE%B9%E3%80%91%E6%B4%9B%E8%B0%B7_P3387%E7%BC%A9%E7%82%B9%E6%A8%A1%E6%9D%BFP3388%E5%89%B2%E7%82%B9%E6%A8%A1%E6%9D%BF%20HDU4738%20caocao%E2%80%98bridge/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E3%80%90tarjin%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0%20%E7%BC%A9%E7%82%B9%EF%BC%8C%E5%89%B2%E7%82%B9%EF%BC%8C%E5%89%B2%E8%BE%B9%E3%80%91%E6%B4%9B%E8%B0%B7_P3387%E7%BC%A9%E7%82%B9%E6%A8%A1%E6%9D%BFP3388%E5%89%B2%E7%82%B9%E6%A8%A1%E6%9D%BF%20HDU4738%20caocao%E2%80%98bridge/">【tarjin算法练习 缩点，割点，割边】洛谷_P3387缩点模板P3388割点模板 HDU4738 caocao‘bridge.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/">图论</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="洛谷-p3387缩点模板"><a class="markdownIt-Anchor" href="#洛谷-p3387缩点模板"></a> 洛谷 P3387缩点模板</h2>
-<p>vis数组是必要的，如果遇到vis[i]=false的点，说明此点对应的强连通已经被缩点过了,而访问的i的起点并不属于这一强连通分量。若这时执行low[x]<br>
-= std::min(low[x],dfn[y]);可能会导致一些点在栈内无法弹出。</p>
-<p>​<br>
-​    #include <cstdio><br>
-​    #include <iostream><br>
-​    #include <cstring><br>
-​    #include <cstdlib><br>
-​    #include <algorithm><br>
-​    #include <vector><br>
-​    #include <map><br>
-​    #include <set><br>
-​    #include <queue><br>
-​    #include <stack><br>
-​    typedef long long int LL;<br>
-​    //typedef std::pair&lt;int ,int&gt; PP;<br>
-​    const int N = 1e4+5, M = 1e5+5;<br>
-​    int vis[N],low[N],dfn[N],val[N],head[N],stk[N],suo[N],weight[N],hh[N],in[N],dp[N];<br>
-​    struct Edge<br>
-​    {<br>
-​       int to,nxt;<br>
-​    }edg[M&lt;&lt;1];<br>
-​    int n,m,u,v;<br>
-​    int idx,timer,top,id,tt;<br>
-​    void addEdge(int fr,int to)<br>
-​    {<br>
-​       edg[idx].to  = to;<br>
-​       edg[idx].nxt = head[fr];<br>
-​       head[fr] = idx++;<br>
-​    }<br>
-​    void tarjin(int x)<br>
-​    {<br>
-​       low[x] = dfn[x] = <ins>timer;<br>
-​       stk[<ins>top] = x,vis[x] = 1;<br>
-​       for(int e=head[x]; e!=-1; e=edg[e].nxt){<br>
-​          int y = edg[e].to;<br>
-​          if(!dfn[y]){<br>
-​             tarjin(y);<br>
-​             low[x] = std::min(low[x],low[y]);<br>
-​          }<br>
-​          else if(vis[y]){<br>
-​             low[x] = std::min(low[x],dfn[y]);<br>
-​          }<br>
-​       }<br>
-​       if(low[x] == dfn[x]){<br>
-​          id += 1;<br>
-​          while(true){<br>
-​             vis[stk[top]] = 0;<br>
-​             suo[stk[top]] = id;<br>
-​             weight[id] += val[stk[top]];<br>
-​             if(x == stk[top–]) break;<br>
-​          }<br>
-​       }<br>
-​    }<br>
-​    void rebuild()<br>
-​    {<br>
-​       for(int i=1; i&lt;=n; i</ins>){<br>
-​          for(int e=head[i]; e!=-1; e=edg[e].nxt){<br>
-​             int y  = edg[e].to;<br>
-​             int ii = suo[i],yy = suo[y];<br>
-​             if(ii != yy){<br>
-​                in[yy] += 1;<br>
-​                edg[idx].to = yy;<br>
-​                edg[idx].nxt = hh[ii];<br>
-​                hh[ii] = idx</ins>;<br>
-​             }<br>
-​          }<br>
-​       }<br>
-​    }<br>
-​    int tpsort()<br>
-​    {<br>
-​       std::queue<int> q;<br>
-​       for(int i=1; i&lt;=id; i++){<br>
-​          if(!in[i]){<br>
-​             q.push(i);<br>
-​             dp[i] = weight[i];<br>
-​          }<br>
-​       }<br>
-​       while(!q.empty()){<br>
-​          int cur = q.front(); q.pop();<br>
-​          for(int e=hh[cur]; e!=-1; e=edg[e].nxt){<br>
-​             int  to = edg[e].to;<br>
-​             dp[to] = std::max(dp[to],dp[cur]+weight[to]);<br>
-​             in[to] -= 1;<br>
-​             if(!in[to]) q.push(to);<br>
-​          }<br>
-​       }<br>
-​       int ans = 0;<br>
-​       for(int i=1; i&lt;=id; i++){<br>
-​          ans = std::max(ans,dp[i]);<br>
-​       }<br>
-​       return ans;<br>
-​    }<br>
-​    int main()<br>
-​    {<br>
-​       memset(head,-1,sizeof(head));<br>
-​       memset(hh,-1,sizeof(hh));<br>
-​       scanf(&quot;%d%d&quot;,&amp;n,&amp;m);<br>
-​       for(int i=1; i&lt;=n; i++){<br>
-​          scanf(&quot;%d&quot;,&amp;val[i]);<br>
-​       }<br>
-​       for(int i=0; i&lt;m; i++){<br>
-​          scanf(&quot;%d%d&quot;,&amp;u,&amp;v);<br>
-​          addEdge(u,v);<br>
-​       }<br>
-​       for(int i=1; i&lt;=n; i++){<br>
-​          if(!dfn[i]) tarjin(i);<br>
-​       }<br>
-​       rebuild();<br>
-​       printf(&quot;%d&quot;,tpsort());<br>
-​<br>
-return 0;<br>
-}</int></stack></queue></set></map></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
-<h2 id="洛谷p3388割点模板"><a class="markdownIt-Anchor" href="#洛谷p3388割点模板"></a> 洛谷P3388割点模板</h2>
-<p>trajin中的形参意义为（此点，上一个点），最好改为（此点，过来的边），在做caocao‘s bridge的时候暴露了一些问题</p>
-<p>​<br>
-​    #include <cstdio><br>
-​    #include <iostream><br>
-​    #include <cstring><br>
-​    #include <cstdlib><br>
-​    #include <algorithm><br>
-​    #include <vector><br>
-​    #include <map><br>
-​    #include <set><br>
-​    #include <queue><br>
-​    #include <stack><br>
-​    typedef long long int LL;<br>
-​    const int N = 2e4+5, M = 2e5+5;<br>
-​    int n,m,u,v;<br>
-​    int ans;<br>
-​    int idx,timer;<br>
-​    int head[N];<br>
-​    int low[N],dfn[N],flag[N];<br>
-​    struct Edge<br>
-​    {<br>
-​       int to,nxt;<br>
-​    }edg[M];<br>
-​    void addEdge(int fr,int to)<br>
-​    {<br>
-​       edg[idx].to = to;<br>
-​       edg[idx].nxt = head[fr];<br>
-​       head[fr] = idx++;<br>
-​    }<br>
-​    void tarjin(int x,int fa)<br>
-​    {<br>
-​       low[x] = dfn[x] = <ins>timer;<br>
-​       int son = 0;<br>
-​       for(int e=head[x]; e!=-1; e=edg[e].nxt){<br>
-​          int to = edg[e].to;<br>
-​          if(!dfn[to]){<br>
-​             son += 1;<br>
-​             tarjin(to,x);<br>
-​             low[x] = std::min(low[x],low[to]);<br>
-​             if(fa &amp;&amp; dfn[x] &lt;= low[to] &amp;&amp; !flag[x]){<br>
-​                flag[x] = 1;<br>
-​                ans += 1;<br>
-​             }<br>
-​          }<br>
-​          else if(to != fa)low[x] = std::min(low[x],dfn[to]);<br>
-​       }<br>
-​       if(!fa &amp;&amp; son&gt;=2 &amp;&amp; !flag[x]){<br>
-​          flag[x] = 1;<br>
-​          ans += 1;<br>
-​       }<br>
-​    }<br>
-​    int main()<br>
-​    {<br>
-​       //freopen(“D:\EdgeDownloadPlace\P3388_4.in”,“r”,stdin);<br>
-​       memset(head,-1,sizeof(head));<br>
-​       scanf(&quot;%d%d&quot;,&amp;n,&amp;m);<br>
-​       for(int i=0; i&lt;m; i</ins>){<br>
-​          scanf(&quot;%d%d&quot;,&amp;u,&amp;v);<br>
-​          addEdge(u,v); addEdge(v,u);<br>
-​       }<br>
-​       for(int i=1; i&lt;=n; i++){<br>
-​         tarjin(i,0);<br>
-​       }<br>
-​       printf(&quot;%d\n&quot;,ans);<br>
-​       for(int i=1; i&lt;=n; i++){<code>在这里插入代码片</code><br>
-​          if(flag[i]) printf(&quot;%d &quot;,i);<br>
-​       }<br>
-​       return 0;<br>
-​    }</stack></queue></set></map></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
-<h2 id="hdu4738-caocaobridge"><a class="markdownIt-Anchor" href="#hdu4738-caocaobridge"></a> HDU4738 caocao’bridge</h2>
-<p>坑点：</p>
-<ol>
-<li>你需要判断图是否是全部联通的，若不是输出0</li>
-<li>若需要派出0个人，则要输出1，至少需要1人才能炸桥</li>
-</ol>
-<p>——————<br>
-最开始在tarjin记录（此点，上一个点），一直wa，猜测可能是有重边，改为记录（此点，过来的边）ac。懒得动脑以后再想。</p>
-<p>​<br>
-​    #include <cstdio><br>
-​    #include <iostream><br>
-​    #include <cstring><br>
-​    #include <cstdlib><br>
-​    #include <algorithm><br>
-​    #include <vector><br>
-​    #include <map><br>
-​    #include <set><br>
-​    #include <queue><br>
-​    #include <stack><br>
-​    typedef long long int LL;<br>
-​    const int N = 1005, M = 1000005,INF = 1e6;<br>
-​    int n,m,u,v,p;<br>
-​    int ans;<br>
-​    int head[N],low[N],dfn[N],pp[M];<br>
-​    int idx,timer;<br>
-​    struct Edge<br>
-​    {<br>
-​       int to,nxt,p;<br>
-​    }edg[M];<br>
-​    void addEdge(int u,int v,int p)<br>
-​    {<br>
-​       edg[idx].to = v;<br>
-​       edg[idx].nxt = head[u];<br>
-​       edg[idx].p = p;<br>
-​       head[u] = idx++;<br>
-​    }<br>
-​    void initial()<br>
-​    {<br>
-​       idx = timer = 0;<br>
-​       ans = INF;<br>
-​       memset(head,-1,sizeof(head));<br>
-​       memset(low,0,sizeof(low));<br>
-​       memset(dfn,0,sizeof(dfn));<br>
-​       memset(pp,0,sizeof(pp));<br>
-​    }<br>
-​    void tarjin(int x,int bri)<br>
-​    {<br>
-​       low[x] = dfn[x] = <ins>timer;<br>
-​       for(int e=head[x]; e!=-1; e=edg[e].nxt){<br>
-​          if((e^1) == bri) continue;<br>
-​          int y = edg[e].to;<br>
-​          if(!dfn[y]){<br>
-​             tarjin(y,e);<br>
-​             low[x] = std::min(low[x],low[y]);<br>
-​             if(dfn[x] &lt; low[y]) pp[e] = pp[e^1] = 1;<br>
-​          }<br>
-​          else low[x] = std::min(low[x],dfn[y]);<br>
-​       }<br>
-​    }<br>
-​    int main()<br>
-​    {<br>
-​       while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m)){<br>
-​          if(n == 0 &amp;&amp; m == 0) break;<br>
-​          initial();<br>
-​          for(int i=0; i&lt;m; i</ins>){<br>
-​             scanf(&quot;%d%d%d&quot;,&amp;u,&amp;v,&amp;p);<br>
-​             addEdge(u,v,p); addEdge(v,u,p);<br>
-​          }<br>
-​          tarjin(1,-1);<br>
-​          bool judge = false;<br>
-​          for(int i=1; i&lt;=n; i++){<br>
-​             if(!dfn[i]){<br>
-​                judge = true;<br>
-​                break;<br>
-​             }<br>
-​          }<br>
-​          if(judge) printf(“0\n”);<br>
-​          else{<br>
-​             for(int e=0; e&lt;idx; e++){<br>
-​                if(pp[e] == 1) ans = std::min(ans,edg[e].p);<br>
-​             }<br>
-​             if(!ans) ans += 1;<br>
-​             else if(ans == INF) ans = -1;<br>
-​             printf(&quot;%d\n&quot;,ans);<br>
-​          }<br>
-​       }<br>
-​       return 0;<br>
-​    }</stack></queue></set></map></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
-<p>​</p>
-<h2 id="洛谷p2341-usaco03fallhaoi2006受欢迎的牛-g"><a class="markdownIt-Anchor" href="#洛谷p2341-usaco03fallhaoi2006受欢迎的牛-g"></a> 洛谷P2341 [USACO03FALL][HAOI2006]受欢迎的牛 G</h2>
-<p>​<br>
-​    #include <iostream><br>
-​    #include <cstdio><br>
-​    #include <cstring><br>
-​    #include <string><br>
-​    #include <cstdlib><br>
-​    #include <cmath><br>
-​    #include <algorithm><br>
-​    #include <queue><br>
-​    #include <stack><br>
-​    #include <vector><br>
-​    #include <set><br>
-​    #include <map><br>
-​    typedef long long int LL;<br>
-​    typedef std::pair&lt;int ,int&gt; PP;<br>
-​    const int N = 1e4, M = 5e4+5, INF = 0x7fffffff;<br>
-​    int n,m,u,v,su,sv,cnt;<br>
-​    int idx,timer,counter;<br>
-​    int head[N],low[N],dfn[N],vis[N],suo[N],num[N],out[N];<br>
-​    PP qry[M];<br>
-​    std::stack<int> stk;<br>
-​    struct Edge<br>
-​    {<br>
-​        int to,nxt;<br>
-​    }edg[M];<br>
-​    void initial()<br>
-​    {<br>
-​        idx = 2;<br>
-​    }<br>
-​    void addEdge(int fr,int to)<br>
-​    {<br>
-​        edg[idx].to =to;<br>
-​        edg[idx].nxt = head[fr];<br>
-​        head[fr] = idx++;<br>
-​    }<br>
-​    void tarjin(int x)<br>
-​    {<br>
-​        dfn[x] = low[x] = <ins>timer;<br>
-​        vis[x] = true;<br>
-​        stk.push(x);<br>
-​        for(int e=head[x]; e; e=edg[e].nxt){<br>
-​            int y = edg[e].to;<br>
-​            if(!dfn[y]){<br>
-​                tarjin(y);<br>
-​                low[x] = std::min(low[x],low[y]);<br>
-​            }<br>
-​            else if(vis[y]) low[x] = std::min(low[x],dfn[y]);<br>
-​        }<br>
-​        if(low[x] == dfn[x]){<br>
-​            counter += 1;<br>
-​            while(true){<br>
-​                int t = stk.top(); stk.pop();<br>
-​                suo[t] = counter;<br>
-​                num[counter] += 1;<br>
-​                vis[t] = false;<br>
-​                if(t == x) break;<br>
-​            }<br>
-​        }<br>
-​    }<br>
-​    int main()<br>
-​    {<br>
-​        initial();<br>
-​        scanf(&quot;%d%d&quot;,&amp;n,&amp;m);<br>
-​        for(int i=0; i&lt;m; i</ins>){<br>
-​            scanf(&quot;%d%d&quot;,&amp;qry[i].first,&amp;qry[i].second);<br>
-​            addEdge(qry[i].first,qry[i].second);<br>
-​        }<br>
-​        for(int i=1; i&lt;=n; i++) if(!dfn[i]) tarjin(i);<br>
-​        for(int i=0; i&lt;m; i++){<br>
-​            u = qry[i].first , v = qry[i].second;<br>
-​            su = suo[u] , sv = suo[v];<br>
-​            if(su == sv) continue;<br>
-​            out[su] += 1;<br>
-​        }<br>
-​        for(int i=1; i&lt;=counter; i++){<br>
-​            if(!out[i]){<br>
-​                cnt += 1;<br>
-​                u = i;<br>
-​                if(cnt &gt; 1) break;<br>
-​            }<br>
-​        }<br>
-​        if(cnt == 1) printf(&quot;%d&quot;,num[u]);<br>
-​        else printf(“0”);<br>
-​        return 0;<br>
-​    }</int></map></set></vector></stack></queue></algorithm></cmath></cstdlib></string></cstring></cstdio></iostream></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90tarjin%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0%20%E7%BC%A9%E7%82%B9%EF%BC%8C%E5%89%B2%E7%82%B9%EF%BC%8C%E5%89%B2%E8%BE%B9%E3%80%91%E6%B4%9B%E8%B0%B7_P3387%E7%BC%A9%E7%82%B9%E6%A8%A1%E6%9D%BFP3388%E5%89%B2%E7%82%B9%E6%A8%A1%E6%9D%BF%20HDU4738%20caocao%E2%80%98bridge/" data-id="cl50x8cmo001cccj316bnae9r" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tarjin/" rel="tag">tarjin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%B2%E7%82%B9/" rel="tag">割点</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%B2%E8%BE%B9/" rel="tag">割边</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%A9%E7%82%B9/" rel="tag">缩点</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -2386,7 +2074,7 @@ return 0;<br>
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>78</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>79</strong><br>文章</div></a>
       <a href="/categories"><div><strong>32</strong><br>分类</div></a>
       <a href="/tags"><div><strong>63</strong><br>标签</div></a>
     </div>

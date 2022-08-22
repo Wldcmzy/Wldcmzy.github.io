@@ -43,7 +43,7 @@
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>78</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>79</strong><br>文章</div></a>
       <a href="/categories"><div><strong>32</strong><br>分类</div></a>
       <a href="/tags"><div><strong>63</strong><br>标签</div></a>
     </div>
@@ -82,6 +82,86 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-【状压DP】斯坦纳树" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E7%8A%B6%E5%8E%8BDP%E3%80%91%E6%96%AF%E5%9D%A6%E7%BA%B3%E6%A0%91/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E7%8A%B6%E5%8E%8BDP%E3%80%91%E6%96%AF%E5%9D%A6%E7%BA%B3%E6%A0%91/">【状压DP】斯坦纳树.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/DP/">DP</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>斯坦纳树常用于解决类似这样的最小代价联通问题：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4294">https://www.luogu.com.cn/problem/P4294</a></p>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<p><strong>tip1:</strong><br>
+对于一个结点, 通过状态压缩的思想，用一个整数sta表示这个结点与所有目标节点的联通状态，<br>
+在sta的二进制位中，若第x位为1，表示该结点与第x个目标结点联通，反之则为不连通<br>
+用dp[i][sta]表示结点i联通sta状态的最小代价</p>
+<p><strong>状态转移part1</strong><br>
+若结点i与状态sta1和sta2都联通，且sta1与sta2无重合结点(即sta1, sta2<br>
+是对sta1+sta2的一个划分)。令P表示把点i联通所需的代价， 显然有:<br>
+dp[i][sta1 + sta2] = MIN(dp[i][sta1 + sta2], dp[i][sta1] + dp[i][sta2] - P[i])<br>
+由于dp[i][sta1] 和dp[i][sta2]都包含了联通点i的代价P[i]，所以要减去一个P[i]。<br>
+dp[i][sta1]中的[i]只是一种结点的表示方法.<br>
+<strong>状态转移part2</strong><br>
+按照边进行松弛<br>
+对于一个结点i， dp[i][sta] = MIN(dp[i][sta], dp[i周围一步可达的结点][sta] + P[i])<br>
+像极了最短路， 直接spfa</p>
+<h2 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h2>
+<h4 id="p4294-wc2008游览计划"><a class="markdownIt-Anchor" href="#p4294-wc2008游览计划"></a> P4294 [WC2008]游览计划</h4>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4294">https://www.luogu.com.cn/problem/P4294</a></p>
+<p>由于你还需要输出所有位置的摆放 所以加入了pre数组记录某状态的前置状态。得出最小答案后通过dfs找出斯坦纳树的所有结点。<br>
+(对于状态转移part1, 只需要记录一个前置状态，另一个前置状态通过减法求出)</p>
+<p>​</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">13</span>, LIM = <span class="number">1028</span>, INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="type">int</span> dx[] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>&#125;;</span><br><span class="line"><span class="type">int</span> dy[] = &#123;<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line"><span class="type">int</span> board[N][N], dp[N][N][LIM];</span><br><span class="line"><span class="type">int</span> n, m, idx, mSta, rex, rey;</span><br><span class="line"><span class="type">bool</span> vis[N][N], judge;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">PRE</span>&#123;</span><br><span class="line">    <span class="type">int</span> x, y, s;</span><br><span class="line">&#125;pre[N][N][LIM];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> st)</span></span>&#123;</span><br><span class="line">    vis[x][y] = <span class="literal">true</span>;</span><br><span class="line">    PRE tmp = pre[x][y][st];</span><br><span class="line">    <span class="keyword">if</span>(!tmp.x &amp;&amp; !tmp.y) <span class="keyword">return</span> ;</span><br><span class="line">    <span class="built_in">dfs</span>(tmp.x, tmp.y, tmp.s);</span><br><span class="line">    <span class="keyword">if</span>(tmp.x == x &amp;&amp; tmp.y == y) <span class="built_in">dfs</span>(x, y, st - tmp.s);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">cango</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;<span class="keyword">return</span> x&lt;=n &amp;&amp; y&lt;=m &amp;&amp; x&gt;=<span class="number">1</span> &amp;&amp; y&gt;=<span class="number">1</span>; &#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(dp, <span class="number">63</span>, <span class="built_in">sizeof</span>(dp));</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>; j&lt;=m; j++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;board[i][j]);</span><br><span class="line">        <span class="keyword">if</span>(!board[i][j]) dp[i][j][<span class="number">1</span> &lt;&lt; idx ++] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    mSta = <span class="number">1</span> &lt;&lt; idx;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> sta=<span class="number">1</span>; sta&lt;mSta; sta++)&#123;</span><br><span class="line">        std::queue&lt;std::pair&lt;<span class="type">int</span> ,<span class="type">int</span>&gt; &gt; q;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>; j&lt;=m; j++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> sub=sta; sub; sub=(sub<span class="number">-1</span>)&amp;sta)&#123;</span><br><span class="line">                <span class="keyword">if</span>(dp[i][j][sub] + dp[i][j][sta - sub] - board[i][j] &lt; dp[i][j][sta])&#123;</span><br><span class="line">                    dp[i][j][sta] = dp[i][j][sub] + dp[i][j][sta - sub] - board[i][j];</span><br><span class="line">                    pre[i][j][sta] = (PRE)&#123;i, j, sub&#125;;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(dp[i][j][sta] &lt; INF) q.<span class="built_in">push</span>(std::<span class="built_in">make_pair</span>(i, j)), vis[i][j] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            std::pair&lt;<span class="type">int</span> , <span class="type">int</span>&gt; x = q.<span class="built_in">front</span>(); q.<span class="built_in">pop</span>(); vis[x.first][x.second] = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">4</span>; i++)&#123;</span><br><span class="line">                <span class="type">int</span> xx = x.first + dx[i], yy = x.second + dy[i];</span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">cango</span>(xx, yy)) <span class="keyword">if</span>(dp[x.first][x.second][sta] + board[xx][yy] &lt; dp[xx][yy][sta])&#123;</span><br><span class="line">                    dp[xx][yy][sta] = dp[x.first][x.second][sta] + board[xx][yy];</span><br><span class="line">                    pre[xx][yy][sta] = (PRE)&#123;x.first, x.second, sta&#125;;</span><br><span class="line">                    <span class="keyword">if</span>(!vis[xx][yy]) vis[xx][yy] = <span class="literal">true</span>, q.<span class="built_in">push</span>(std::<span class="built_in">make_pair</span>(xx, yy));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n &amp;&amp; !judge; i++) <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>; j&lt;=m &amp;&amp; !judge; j++) <span class="keyword">if</span>(!board[i][j]) rex = i, rey = j, judge = <span class="literal">true</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, dp[rex][rey][mSta - <span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">dfs</span>(rex, rey, mSta - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>; j&lt;=m; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(board[i][j] == <span class="number">0</span>) <span class="built_in">putchar</span>(<span class="string">&#x27;x&#x27;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(vis[i][j] == <span class="number">1</span>) <span class="built_in">putchar</span>(<span class="string">&#x27;o&#x27;</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">putchar</span>(<span class="string">&#x27;_&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%8A%B6%E5%8E%8BDP%E3%80%91%E6%96%AF%E5%9D%A6%E7%BA%B3%E6%A0%91/" data-id="cl50x8cnh0045ccj33j2ldmhp" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/" rel="tag">状态压缩</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-【状压dp练习】洛谷P1896 [SCOI2005]互不侵犯 P2704 [NOI2001]炮兵阵地" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -2099,93 +2179,6 @@ process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAU3Rh
 
 
   
-    <article id="post-数据预处理  sklearn 或者别的库" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%20%20sklearn%20%E6%88%96%E8%80%85%E5%88%AB%E7%9A%84%E5%BA%93/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%20%20sklearn%20%E6%88%96%E8%80%85%E5%88%AB%E7%9A%84%E5%BA%93/">数据预处理  sklearn 或者别的库.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/">教练我想学挂边躲牛</a>,<a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/%E7%9E%8E%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">瞎学机器学习</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="无量纲化"><a class="markdownIt-Anchor" href="#无量纲化"></a> 无量纲化</h2>
-<p>sklearn.preprocessing.MinMaxScaler<br>
-数据归一化<br>
-（数据-最小值）/极差 把数据限制在0-1之间 范围可以改 feature_range</p>
-<p>​</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"></span><br><span class="line">data = [[-<span class="number">10</span>,<span class="number">16</span>],[-<span class="number">5</span>,<span class="number">32</span>],[<span class="number">0</span>,<span class="number">48</span>],[<span class="number">5</span>,<span class="number">64</span>]]</span><br><span class="line"></span><br><span class="line">scaler = MinMaxScaler(feature_range = [<span class="number">0</span>,<span class="number">2</span>])</span><br><span class="line">scaler = scaler.fit(data)</span><br><span class="line"><span class="comment">#scaler = scaler.partial_fit(data)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#进行数据归一化</span></span><br><span class="line">result = scaler.transform(data)</span><br><span class="line"></span><br><span class="line"><span class="comment">#利用归一化结果还原原数据</span></span><br><span class="line">origin = scaler.inverse_transform(result)</span><br><span class="line"></span><br><span class="line"><span class="comment">#一步</span></span><br><span class="line">result2 = scaler.fit_transform(data)</span><br></pre></td></tr></table></figure>
-<p>​</p>
-<p>sklearn.preprocessing.StandardScaler<br>
-数据标准化<br>
-中心化后 x-均值（均值为零）/标准差<br>
-之后满足均值0方差1 的正态分布</p>
-<p>​</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"></span><br><span class="line">data = [[-<span class="number">10</span>,<span class="number">16</span>],[-<span class="number">5</span>,<span class="number">32</span>],[<span class="number">0</span>,<span class="number">48</span>],[<span class="number">5</span>,<span class="number">64</span>]]</span><br><span class="line"></span><br><span class="line">scaler = StandardScaler()</span><br><span class="line">scaler.fit(data)</span><br><span class="line"></span><br><span class="line"><span class="comment">#mean_均值, var_方差</span></span><br><span class="line"><span class="built_in">print</span>(scaler.mean_, scaler.var_)</span><br><span class="line"></span><br><span class="line">result = scaler.transform(data)</span><br><span class="line"><span class="built_in">print</span>(result.mean(), result.std())</span><br><span class="line"><span class="comment">#转化后服从均值为0方差为1的正态分布</span></span><br><span class="line"></span><br><span class="line">origin =  scaler.inverse_transform(result)</span><br><span class="line"></span><br><span class="line"><span class="comment">#一步</span></span><br><span class="line">result2 = scaler.fit_transform(data)</span><br></pre></td></tr></table></figure>
-<p>sklearn.preprocessing.MaxAbsScaler<br>
-所有数据/abs（绝对值最大的值）</p>
-<p>​</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MaxAbsScaler</span><br><span class="line"></span><br><span class="line">data = [[-<span class="number">10</span>,<span class="number">8</span>],[-<span class="number">5</span>,<span class="number">16</span>],[<span class="number">0</span>,<span class="number">24</span>],[<span class="number">5</span>,<span class="number">32</span>]]</span><br><span class="line"></span><br><span class="line">scaler = MaxAbsScaler()</span><br><span class="line">scaler = scaler.fit(data)</span><br><span class="line">result = scaler.transform(data)</span><br><span class="line"></span><br><span class="line">origin = scaler.inverse_transform(result)</span><br><span class="line"></span><br><span class="line"><span class="comment">#一步</span></span><br><span class="line">result2 = scaler.fit_transform(data)</span><br></pre></td></tr></table></figure>
-<h2 id="缺失值"><a class="markdownIt-Anchor" href="#缺失值"></a> 缺失值</h2>
-<p>​</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从excel表导入数据</span></span><br><span class="line">df_t = pd.read_excel(<span class="string">r&#x27;D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\train.xlsx&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(df_t.info())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取列 所有</span></span><br><span class="line"><span class="built_in">print</span>(df_t.loc[:,<span class="string">&#x27;uid&#x27;</span>])</span><br><span class="line"></span><br><span class="line">arr_t_uid = df_t.loc[:,<span class="string">&#x27;uid&#x27;</span>].values</span><br><span class="line"></span><br><span class="line"><span class="comment">#转换成二维</span></span><br><span class="line">arr_t_uid = arr_t_uid.reshape(-<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#找到ca列中为？的行</span></span><br><span class="line">ca_wenhao =df_t[df_t.loc[:,<span class="string">&#x27;ca&#x27;</span>]==<span class="string">&#x27;?&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#替换ca列的？为x</span></span><br><span class="line">df_t[<span class="string">&#x27;ca&#x27;</span>][df_t[<span class="string">&#x27;ca&#x27;</span>]==<span class="string">&#x27;?&#x27;</span>] = <span class="string">&#x27;x&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;中位数&#x27;</span>,df_t.loc[:,<span class="string">&#x27;age&#x27;</span>].median())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;平均数&#x27;</span>,df_t.loc[:,<span class="string">&#x27;age&#x27;</span>].mean())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;众数&#x27;</span>,df_t.loc[:,<span class="string">&#x27;age&#x27;</span>].mode())</span><br><span class="line">cnt =df_t.loc[:,<span class="string">&#x27;age&#x27;</span>].value_counts() <span class="comment">#把所有的值计数 降序排序</span></span><br><span class="line">idx = cnt.index <span class="comment">#结果降序排序</span></span><br></pre></td></tr></table></figure>
-<p>​</p>
-<p>此数据缺失值用？代表 ，直接把？换了。<br>
-如果缺失值为nan 可以直接用pd.drowna() 或pd.fillna()</p>
-<h2 id="编码-哑变量-处理分类数据用"><a class="markdownIt-Anchor" href="#编码-哑变量-处理分类数据用"></a> 编码 哑变量 ---- 处理分类数据用</h2>
-<p>​</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> OrdinalEncoder</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> OneHotEncoder</span><br><span class="line"></span><br><span class="line">df_t = pd.read_excel(<span class="string">r&#x27;D:\EdgeDownloadPlace\大数据比赛测试示例\训练集.xlsx&#x27;</span>)</span><br><span class="line"><span class="comment">#删掉 ‘Embarked’列有缺失值的行</span></span><br><span class="line">df_t.dropna(axis = <span class="number">0</span> , subset = [<span class="string">&#x27;Embarked&#x27;</span>], inplace = <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#一维</span></span><br><span class="line">LE = LabelEncoder()</span><br><span class="line">LElabel = LE.fit_transform(df_t[<span class="string">&#x27;Embarked&#x27;</span>].astype(np.<span class="built_in">str</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#多维</span></span><br><span class="line">OE= OrdinalEncoder()</span><br><span class="line">OElabel = OE.fit_transform(df_t.loc[:,[<span class="string">&#x27;Sex&#x27;</span>,<span class="string">&#x27;Embarked&#x27;</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment">#独热编码</span></span><br><span class="line">OHE = OneHotEncoder(categories = <span class="string">&#x27;auto&#x27;</span>)</span><br><span class="line">OHElabel = OHE.fit_transform(df_t.loc[:,[<span class="string">&#x27;Sex&#x27;</span>,<span class="string">&#x27;Embarked&#x27;</span>]])</span><br><span class="line">df_ttt = pd.concat([df_t,pd.DataFrame(OHElabel.toarray())],axis = <span class="number">1</span>)</span><br><span class="line">df_ttt.columns = df_t.columns.tolist()+OHE.get_feature_names().tolist()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(LE.classes_,OE.categories_,OHE.categories_,sep=<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">rLE = LE.inverse_transform(LElabel)</span><br><span class="line">rOE = OE.inverse_transform(OElabel)</span><br><span class="line">rOHE = OHE.inverse_transform(OHElabel)</span><br></pre></td></tr></table></figure>
-<h2 id="二值化-分箱-连续数据"><a class="markdownIt-Anchor" href="#二值化-分箱-连续数据"></a> 二值化 分箱 ----连续数据</h2>
-<p>​</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> Binarizer</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> KBinsDiscretizer</span><br><span class="line"></span><br><span class="line">df_t = pd.read_excel(<span class="string">r&#x27;D:\EdgeDownloadPlace\大数据比赛测试示例\训练集.xlsx&#x27;</span>)</span><br><span class="line"></span><br><span class="line">df_t.fillna(df_t.loc[:,<span class="string">&#x27;Age&#x27;</span>].value_counts().index[<span class="number">0</span>],axis = <span class="number">1</span>,inplace = <span class="literal">True</span>)</span><br><span class="line">age_t = df_t[<span class="string">&#x27;Age&#x27;</span>].values.reshape(-<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">B = Binarizer(threshold= <span class="number">24</span>)</span><br><span class="line">result = B.fit_transform(age_t)</span><br></pre></td></tr></table></figure>
-<p>​</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#参数 encode：ordinal onehot 参考分类</span></span><br><span class="line"><span class="comment">#参数 strategy： uniform 等宽分箱(平分特征)  quantile等位分箱(分箱后每箱数量一致)  kmeans按聚类分箱</span></span><br><span class="line">KBD_ordinal = KBinsDiscretizer(n_bins = <span class="number">5</span>, encode = <span class="string">&#x27;ordinal&#x27;</span>, strategy= <span class="string">&#x27;uniform&#x27;</span>)</span><br><span class="line">KBDresult_ordinal = KBD_ordinal.fit_transform(age_t)</span><br><span class="line"><span class="built_in">print</span>(KBDresult_ordinal.ravel())<span class="comment">#ravel()的作用是降维</span></span><br><span class="line"></span><br><span class="line">KBD_onehot = KBinsDiscretizer(n_bins = <span class="number">5</span>, encode = <span class="string">&#x27;onehot&#x27;</span>, strategy= <span class="string">&#x27;uniform&#x27;</span>)</span><br><span class="line">KBDresult_onehot = KBD_onehot.fit_transform(age_t)</span><br><span class="line"><span class="built_in">print</span>(KBDresult_onehot.toarray())</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%20%20sklearn%20%E6%88%96%E8%80%85%E5%88%AB%E7%9A%84%E5%BA%93/" data-id="cl50x8cnx005occj3ejudagku" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -2242,7 +2235,7 @@ process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAU3Rh
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>78</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>79</strong><br>文章</div></a>
       <a href="/categories"><div><strong>32</strong><br>分类</div></a>
       <a href="/tags"><div><strong>63</strong><br>标签</div></a>
     </div>

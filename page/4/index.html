@@ -43,7 +43,7 @@
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>78</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>79</strong><br>文章</div></a>
       <a href="/categories"><div><strong>32</strong><br>分类</div></a>
       <a href="/tags"><div><strong>63</strong><br>标签</div></a>
     </div>
@@ -82,6 +82,420 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-【tarjin算法练习 缩点，割点，割边】洛谷_P3387缩点模板P3388割点模板 HDU4738 caocao‘bridge" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90tarjin%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0%20%E7%BC%A9%E7%82%B9%EF%BC%8C%E5%89%B2%E7%82%B9%EF%BC%8C%E5%89%B2%E8%BE%B9%E3%80%91%E6%B4%9B%E8%B0%B7_P3387%E7%BC%A9%E7%82%B9%E6%A8%A1%E6%9D%BFP3388%E5%89%B2%E7%82%B9%E6%A8%A1%E6%9D%BF%20HDU4738%20caocao%E2%80%98bridge/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90tarjin%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0%20%E7%BC%A9%E7%82%B9%EF%BC%8C%E5%89%B2%E7%82%B9%EF%BC%8C%E5%89%B2%E8%BE%B9%E3%80%91%E6%B4%9B%E8%B0%B7_P3387%E7%BC%A9%E7%82%B9%E6%A8%A1%E6%9D%BFP3388%E5%89%B2%E7%82%B9%E6%A8%A1%E6%9D%BF%20HDU4738%20caocao%E2%80%98bridge/">【tarjin算法练习 缩点，割点，割边】洛谷_P3387缩点模板P3388割点模板 HDU4738 caocao‘bridge.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/">图论</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="洛谷-p3387缩点模板"><a class="markdownIt-Anchor" href="#洛谷-p3387缩点模板"></a> 洛谷 P3387缩点模板</h2>
+<p>vis数组是必要的，如果遇到vis[i]=false的点，说明此点对应的强连通已经被缩点过了,而访问的i的起点并不属于这一强连通分量。若这时执行low[x]<br>
+= std::min(low[x],dfn[y]);可能会导致一些点在栈内无法弹出。</p>
+<p>​<br>
+​    #include <cstdio><br>
+​    #include <iostream><br>
+​    #include <cstring><br>
+​    #include <cstdlib><br>
+​    #include <algorithm><br>
+​    #include <vector><br>
+​    #include <map><br>
+​    #include <set><br>
+​    #include <queue><br>
+​    #include <stack><br>
+​    typedef long long int LL;<br>
+​    //typedef std::pair&lt;int ,int&gt; PP;<br>
+​    const int N = 1e4+5, M = 1e5+5;<br>
+​    int vis[N],low[N],dfn[N],val[N],head[N],stk[N],suo[N],weight[N],hh[N],in[N],dp[N];<br>
+​    struct Edge<br>
+​    {<br>
+​       int to,nxt;<br>
+​    }edg[M&lt;&lt;1];<br>
+​    int n,m,u,v;<br>
+​    int idx,timer,top,id,tt;<br>
+​    void addEdge(int fr,int to)<br>
+​    {<br>
+​       edg[idx].to  = to;<br>
+​       edg[idx].nxt = head[fr];<br>
+​       head[fr] = idx++;<br>
+​    }<br>
+​    void tarjin(int x)<br>
+​    {<br>
+​       low[x] = dfn[x] = <ins>timer;<br>
+​       stk[<ins>top] = x,vis[x] = 1;<br>
+​       for(int e=head[x]; e!=-1; e=edg[e].nxt){<br>
+​          int y = edg[e].to;<br>
+​          if(!dfn[y]){<br>
+​             tarjin(y);<br>
+​             low[x] = std::min(low[x],low[y]);<br>
+​          }<br>
+​          else if(vis[y]){<br>
+​             low[x] = std::min(low[x],dfn[y]);<br>
+​          }<br>
+​       }<br>
+​       if(low[x] == dfn[x]){<br>
+​          id += 1;<br>
+​          while(true){<br>
+​             vis[stk[top]] = 0;<br>
+​             suo[stk[top]] = id;<br>
+​             weight[id] += val[stk[top]];<br>
+​             if(x == stk[top–]) break;<br>
+​          }<br>
+​       }<br>
+​    }<br>
+​    void rebuild()<br>
+​    {<br>
+​       for(int i=1; i&lt;=n; i</ins>){<br>
+​          for(int e=head[i]; e!=-1; e=edg[e].nxt){<br>
+​             int y  = edg[e].to;<br>
+​             int ii = suo[i],yy = suo[y];<br>
+​             if(ii != yy){<br>
+​                in[yy] += 1;<br>
+​                edg[idx].to = yy;<br>
+​                edg[idx].nxt = hh[ii];<br>
+​                hh[ii] = idx</ins>;<br>
+​             }<br>
+​          }<br>
+​       }<br>
+​    }<br>
+​    int tpsort()<br>
+​    {<br>
+​       std::queue<int> q;<br>
+​       for(int i=1; i&lt;=id; i++){<br>
+​          if(!in[i]){<br>
+​             q.push(i);<br>
+​             dp[i] = weight[i];<br>
+​          }<br>
+​       }<br>
+​       while(!q.empty()){<br>
+​          int cur = q.front(); q.pop();<br>
+​          for(int e=hh[cur]; e!=-1; e=edg[e].nxt){<br>
+​             int  to = edg[e].to;<br>
+​             dp[to] = std::max(dp[to],dp[cur]+weight[to]);<br>
+​             in[to] -= 1;<br>
+​             if(!in[to]) q.push(to);<br>
+​          }<br>
+​       }<br>
+​       int ans = 0;<br>
+​       for(int i=1; i&lt;=id; i++){<br>
+​          ans = std::max(ans,dp[i]);<br>
+​       }<br>
+​       return ans;<br>
+​    }<br>
+​    int main()<br>
+​    {<br>
+​       memset(head,-1,sizeof(head));<br>
+​       memset(hh,-1,sizeof(hh));<br>
+​       scanf(&quot;%d%d&quot;,&amp;n,&amp;m);<br>
+​       for(int i=1; i&lt;=n; i++){<br>
+​          scanf(&quot;%d&quot;,&amp;val[i]);<br>
+​       }<br>
+​       for(int i=0; i&lt;m; i++){<br>
+​          scanf(&quot;%d%d&quot;,&amp;u,&amp;v);<br>
+​          addEdge(u,v);<br>
+​       }<br>
+​       for(int i=1; i&lt;=n; i++){<br>
+​          if(!dfn[i]) tarjin(i);<br>
+​       }<br>
+​       rebuild();<br>
+​       printf(&quot;%d&quot;,tpsort());<br>
+​<br>
+return 0;<br>
+}</int></stack></queue></set></map></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
+<h2 id="洛谷p3388割点模板"><a class="markdownIt-Anchor" href="#洛谷p3388割点模板"></a> 洛谷P3388割点模板</h2>
+<p>trajin中的形参意义为（此点，上一个点），最好改为（此点，过来的边），在做caocao‘s bridge的时候暴露了一些问题</p>
+<p>​<br>
+​    #include <cstdio><br>
+​    #include <iostream><br>
+​    #include <cstring><br>
+​    #include <cstdlib><br>
+​    #include <algorithm><br>
+​    #include <vector><br>
+​    #include <map><br>
+​    #include <set><br>
+​    #include <queue><br>
+​    #include <stack><br>
+​    typedef long long int LL;<br>
+​    const int N = 2e4+5, M = 2e5+5;<br>
+​    int n,m,u,v;<br>
+​    int ans;<br>
+​    int idx,timer;<br>
+​    int head[N];<br>
+​    int low[N],dfn[N],flag[N];<br>
+​    struct Edge<br>
+​    {<br>
+​       int to,nxt;<br>
+​    }edg[M];<br>
+​    void addEdge(int fr,int to)<br>
+​    {<br>
+​       edg[idx].to = to;<br>
+​       edg[idx].nxt = head[fr];<br>
+​       head[fr] = idx++;<br>
+​    }<br>
+​    void tarjin(int x,int fa)<br>
+​    {<br>
+​       low[x] = dfn[x] = <ins>timer;<br>
+​       int son = 0;<br>
+​       for(int e=head[x]; e!=-1; e=edg[e].nxt){<br>
+​          int to = edg[e].to;<br>
+​          if(!dfn[to]){<br>
+​             son += 1;<br>
+​             tarjin(to,x);<br>
+​             low[x] = std::min(low[x],low[to]);<br>
+​             if(fa &amp;&amp; dfn[x] &lt;= low[to] &amp;&amp; !flag[x]){<br>
+​                flag[x] = 1;<br>
+​                ans += 1;<br>
+​             }<br>
+​          }<br>
+​          else if(to != fa)low[x] = std::min(low[x],dfn[to]);<br>
+​       }<br>
+​       if(!fa &amp;&amp; son&gt;=2 &amp;&amp; !flag[x]){<br>
+​          flag[x] = 1;<br>
+​          ans += 1;<br>
+​       }<br>
+​    }<br>
+​    int main()<br>
+​    {<br>
+​       //freopen(“D:\EdgeDownloadPlace\P3388_4.in”,“r”,stdin);<br>
+​       memset(head,-1,sizeof(head));<br>
+​       scanf(&quot;%d%d&quot;,&amp;n,&amp;m);<br>
+​       for(int i=0; i&lt;m; i</ins>){<br>
+​          scanf(&quot;%d%d&quot;,&amp;u,&amp;v);<br>
+​          addEdge(u,v); addEdge(v,u);<br>
+​       }<br>
+​       for(int i=1; i&lt;=n; i++){<br>
+​         tarjin(i,0);<br>
+​       }<br>
+​       printf(&quot;%d\n&quot;,ans);<br>
+​       for(int i=1; i&lt;=n; i++){<code>在这里插入代码片</code><br>
+​          if(flag[i]) printf(&quot;%d &quot;,i);<br>
+​       }<br>
+​       return 0;<br>
+​    }</stack></queue></set></map></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
+<h2 id="hdu4738-caocaobridge"><a class="markdownIt-Anchor" href="#hdu4738-caocaobridge"></a> HDU4738 caocao’bridge</h2>
+<p>坑点：</p>
+<ol>
+<li>你需要判断图是否是全部联通的，若不是输出0</li>
+<li>若需要派出0个人，则要输出1，至少需要1人才能炸桥</li>
+</ol>
+<p>——————<br>
+最开始在tarjin记录（此点，上一个点），一直wa，猜测可能是有重边，改为记录（此点，过来的边）ac。懒得动脑以后再想。</p>
+<p>​<br>
+​    #include <cstdio><br>
+​    #include <iostream><br>
+​    #include <cstring><br>
+​    #include <cstdlib><br>
+​    #include <algorithm><br>
+​    #include <vector><br>
+​    #include <map><br>
+​    #include <set><br>
+​    #include <queue><br>
+​    #include <stack><br>
+​    typedef long long int LL;<br>
+​    const int N = 1005, M = 1000005,INF = 1e6;<br>
+​    int n,m,u,v,p;<br>
+​    int ans;<br>
+​    int head[N],low[N],dfn[N],pp[M];<br>
+​    int idx,timer;<br>
+​    struct Edge<br>
+​    {<br>
+​       int to,nxt,p;<br>
+​    }edg[M];<br>
+​    void addEdge(int u,int v,int p)<br>
+​    {<br>
+​       edg[idx].to = v;<br>
+​       edg[idx].nxt = head[u];<br>
+​       edg[idx].p = p;<br>
+​       head[u] = idx++;<br>
+​    }<br>
+​    void initial()<br>
+​    {<br>
+​       idx = timer = 0;<br>
+​       ans = INF;<br>
+​       memset(head,-1,sizeof(head));<br>
+​       memset(low,0,sizeof(low));<br>
+​       memset(dfn,0,sizeof(dfn));<br>
+​       memset(pp,0,sizeof(pp));<br>
+​    }<br>
+​    void tarjin(int x,int bri)<br>
+​    {<br>
+​       low[x] = dfn[x] = <ins>timer;<br>
+​       for(int e=head[x]; e!=-1; e=edg[e].nxt){<br>
+​          if((e^1) == bri) continue;<br>
+​          int y = edg[e].to;<br>
+​          if(!dfn[y]){<br>
+​             tarjin(y,e);<br>
+​             low[x] = std::min(low[x],low[y]);<br>
+​             if(dfn[x] &lt; low[y]) pp[e] = pp[e^1] = 1;<br>
+​          }<br>
+​          else low[x] = std::min(low[x],dfn[y]);<br>
+​       }<br>
+​    }<br>
+​    int main()<br>
+​    {<br>
+​       while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m)){<br>
+​          if(n == 0 &amp;&amp; m == 0) break;<br>
+​          initial();<br>
+​          for(int i=0; i&lt;m; i</ins>){<br>
+​             scanf(&quot;%d%d%d&quot;,&amp;u,&amp;v,&amp;p);<br>
+​             addEdge(u,v,p); addEdge(v,u,p);<br>
+​          }<br>
+​          tarjin(1,-1);<br>
+​          bool judge = false;<br>
+​          for(int i=1; i&lt;=n; i++){<br>
+​             if(!dfn[i]){<br>
+​                judge = true;<br>
+​                break;<br>
+​             }<br>
+​          }<br>
+​          if(judge) printf(“0\n”);<br>
+​          else{<br>
+​             for(int e=0; e&lt;idx; e++){<br>
+​                if(pp[e] == 1) ans = std::min(ans,edg[e].p);<br>
+​             }<br>
+​             if(!ans) ans += 1;<br>
+​             else if(ans == INF) ans = -1;<br>
+​             printf(&quot;%d\n&quot;,ans);<br>
+​          }<br>
+​       }<br>
+​       return 0;<br>
+​    }</stack></queue></set></map></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
+<p>​</p>
+<h2 id="洛谷p2341-usaco03fallhaoi2006受欢迎的牛-g"><a class="markdownIt-Anchor" href="#洛谷p2341-usaco03fallhaoi2006受欢迎的牛-g"></a> 洛谷P2341 [USACO03FALL][HAOI2006]受欢迎的牛 G</h2>
+<p>​<br>
+​    #include <iostream><br>
+​    #include <cstdio><br>
+​    #include <cstring><br>
+​    #include <string><br>
+​    #include <cstdlib><br>
+​    #include <cmath><br>
+​    #include <algorithm><br>
+​    #include <queue><br>
+​    #include <stack><br>
+​    #include <vector><br>
+​    #include <set><br>
+​    #include <map><br>
+​    typedef long long int LL;<br>
+​    typedef std::pair&lt;int ,int&gt; PP;<br>
+​    const int N = 1e4, M = 5e4+5, INF = 0x7fffffff;<br>
+​    int n,m,u,v,su,sv,cnt;<br>
+​    int idx,timer,counter;<br>
+​    int head[N],low[N],dfn[N],vis[N],suo[N],num[N],out[N];<br>
+​    PP qry[M];<br>
+​    std::stack<int> stk;<br>
+​    struct Edge<br>
+​    {<br>
+​        int to,nxt;<br>
+​    }edg[M];<br>
+​    void initial()<br>
+​    {<br>
+​        idx = 2;<br>
+​    }<br>
+​    void addEdge(int fr,int to)<br>
+​    {<br>
+​        edg[idx].to =to;<br>
+​        edg[idx].nxt = head[fr];<br>
+​        head[fr] = idx++;<br>
+​    }<br>
+​    void tarjin(int x)<br>
+​    {<br>
+​        dfn[x] = low[x] = <ins>timer;<br>
+​        vis[x] = true;<br>
+​        stk.push(x);<br>
+​        for(int e=head[x]; e; e=edg[e].nxt){<br>
+​            int y = edg[e].to;<br>
+​            if(!dfn[y]){<br>
+​                tarjin(y);<br>
+​                low[x] = std::min(low[x],low[y]);<br>
+​            }<br>
+​            else if(vis[y]) low[x] = std::min(low[x],dfn[y]);<br>
+​        }<br>
+​        if(low[x] == dfn[x]){<br>
+​            counter += 1;<br>
+​            while(true){<br>
+​                int t = stk.top(); stk.pop();<br>
+​                suo[t] = counter;<br>
+​                num[counter] += 1;<br>
+​                vis[t] = false;<br>
+​                if(t == x) break;<br>
+​            }<br>
+​        }<br>
+​    }<br>
+​    int main()<br>
+​    {<br>
+​        initial();<br>
+​        scanf(&quot;%d%d&quot;,&amp;n,&amp;m);<br>
+​        for(int i=0; i&lt;m; i</ins>){<br>
+​            scanf(&quot;%d%d&quot;,&amp;qry[i].first,&amp;qry[i].second);<br>
+​            addEdge(qry[i].first,qry[i].second);<br>
+​        }<br>
+​        for(int i=1; i&lt;=n; i++) if(!dfn[i]) tarjin(i);<br>
+​        for(int i=0; i&lt;m; i++){<br>
+​            u = qry[i].first , v = qry[i].second;<br>
+​            su = suo[u] , sv = suo[v];<br>
+​            if(su == sv) continue;<br>
+​            out[su] += 1;<br>
+​        }<br>
+​        for(int i=1; i&lt;=counter; i++){<br>
+​            if(!out[i]){<br>
+​                cnt += 1;<br>
+​                u = i;<br>
+​                if(cnt &gt; 1) break;<br>
+​            }<br>
+​        }<br>
+​        if(cnt == 1) printf(&quot;%d&quot;,num[u]);<br>
+​        else printf(“0”);<br>
+​        return 0;<br>
+​    }</int></map></set></vector></stack></queue></algorithm></cmath></cstdlib></string></cstring></cstdio></iostream></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90tarjin%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0%20%E7%BC%A9%E7%82%B9%EF%BC%8C%E5%89%B2%E7%82%B9%EF%BC%8C%E5%89%B2%E8%BE%B9%E3%80%91%E6%B4%9B%E8%B0%B7_P3387%E7%BC%A9%E7%82%B9%E6%A8%A1%E6%9D%BFP3388%E5%89%B2%E7%82%B9%E6%A8%A1%E6%9D%BF%20HDU4738%20caocao%E2%80%98bridge/" data-id="cl50x8cmo001cccj316bnae9r" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tarjin/" rel="tag">tarjin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%B2%E7%82%B9/" rel="tag">割点</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%B2%E8%BE%B9/" rel="tag">割边</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%A9%E7%82%B9/" rel="tag">缩点</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-【二分图匹配 练习】洛谷P3386【模板】二分图最大匹配P2756飞行员配对方案问题P1129矩阵游戏P1559运动员最佳匹配问题P4014分配问题P1640连续攻击游戏" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -2575,109 +2989,6 @@ for each_row in ws_one['A9':'F10']:
 
 
   
-    <article id="post-【学习记录】【Python】关于super及其MRO机制的个人理解（不一定对）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E5%85%B3%E4%BA%8Esuper%E5%8F%8A%E5%85%B6MRO%E6%9C%BA%E5%88%B6%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%AF%B9%EF%BC%89/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E5%85%B3%E4%BA%8Esuper%E5%8F%8A%E5%85%B6MRO%E6%9C%BA%E5%88%B6%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%AF%B9%EF%BC%89/">【学习记录】【Python】关于super及其MRO机制的个人理解（不一定对）.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/">python</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<p>以下内容均为个人理解。<br>
-<strong>MRO: Method Resolution Order 方法解析顺序</strong></p>
-<p>如果不用super：</p>
-<p>​</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;A.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        A.fun(self)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;B.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        A.fun(self)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;C.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">D</span>(B , C):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        B.fun(self)</span><br><span class="line">        C.fun(self)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;D.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line">D().fun()</span><br></pre></td></tr></table></figure>
-<p>输出结果： 发现A被实例化了两次</p>
-<blockquote>
-<p>A.fun<br>
-B.fun<br>
-A.fun<br>
-C.fun<br>
-D.fun</p>
-</blockquote>
-<p>如果用super：</p>
-<p>​</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;A.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(B , self).fun()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;B.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(C , self).fun()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;C.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">D</span>(B , C):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(D , self).fun()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;D.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line">D().fun()</span><br></pre></td></tr></table></figure>
-<p>输出结果： 发现A没有被重复实例化，这时由于Python继承中的MRO机制</p>
-<blockquote>
-<p>A.fun<br>
-C.fun<br>
-B.fun<br>
-D.fun</p>
-</blockquote>
-<p>查资料：</p>
-<blockquote>
-<p>在每个类声明之后，Python都会自动为创建一个名为“ <strong>mro</strong><br>
-”的内置属性，这个属性就是Python的MRO机制生成的，该属性是一个tuple，定义的是该类的方法解析顺序（继承顺序），当用super调用父类的方法时，会按照__mro__属性中的元素顺序去挨个查找方法。我们可以通过“类名.<br>
-<strong>mro</strong> ”或“类名.mro()”来查看上面代码中D类的__mro__属性值</p>
-</blockquote>
-<p>举例：</p>
-<p>​</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">D</span>(A,B):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">E</span>(B, C):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">F</span>(D, E):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(F.__mro__)</span><br></pre></td></tr></table></figure>
-<p>输出结果：</p>
-<blockquote>
-<p>(&lt;class ‘ <strong>main</strong>.F’&gt;, &lt;class ‘ <strong>main</strong>.D’&gt;, &lt;class ‘ <strong>main</strong>.A’&gt;,&lt;class<br>
-‘ <strong>main</strong>.E’&gt;, &lt;class ‘ <strong>main</strong>.B’&gt;, &lt;class ‘ <strong>main</strong>.C’&gt;,&lt;class<br>
-‘object’&gt;)</p>
-</blockquote>
-<p>个人猜测MRO机制的顺序为：在深度优先的基础上，避免重复调用，且尽可能晚调用。<br>
-即 F-&gt;D-&gt;A-&gt;Object-&gt;B-&gt;Object-&gt;E-&gt;B-&gt;Object-&gt;C-&gt;Object<br>
-变为F-&gt;D-&gt;A-&gt;E-&gt;B-&gt;C-&gt;Objcet</p>
-<p><strong>super(type , obj)</strong><br>
-obj是type或type子类 的 一个实例，一般是self<br>
-super(type , obj)表示obj【按MRO 第一个排在type后面】的父类<br>
-如：F-&gt;D-&gt;A-&gt;E-&gt;B-&gt;C-&gt;Objcet 中 super(B , F()).function() 调用的使C类的function方法。<br>
-<strong>super()</strong><br>
-相当于super( <strong>class</strong> , self)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E5%85%B3%E4%BA%8Esuper%E5%8F%8A%E5%85%B6MRO%E6%9C%BA%E5%88%B6%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%AF%B9%EF%BC%89/" data-id="cl50x8cmy002accj3687e0pq8" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80%E6%9C%BA%E5%88%B6/" rel="tag">语言机制</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -2734,7 +3045,7 @@ super(type , obj)表示obj【按MRO 第一个排在type后面】的父类<br>
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>78</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>79</strong><br>文章</div></a>
       <a href="/categories"><div><strong>32</strong><br>分类</div></a>
       <a href="/tags"><div><strong>63</strong><br>标签</div></a>
     </div>
