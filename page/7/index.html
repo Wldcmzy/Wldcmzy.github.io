@@ -43,9 +43,9 @@
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>79</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>80</strong><br>文章</div></a>
       <a href="/categories"><div><strong>32</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>63</strong><br>标签</div></a>
+      <a href="/tags"><div><strong>65</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -82,6 +82,320 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-【爬虫】 爬取云班课上老师发的视频资源 python" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E7%88%AC%E8%99%AB%E3%80%91%20%E7%88%AC%E5%8F%96%E4%BA%91%E7%8F%AD%E8%AF%BE%E4%B8%8A%E8%80%81%E5%B8%88%E5%8F%91%E7%9A%84%E8%A7%86%E9%A2%91%E8%B5%84%E6%BA%90%20python/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E7%88%AC%E8%99%AB%E3%80%91%20%E7%88%AC%E5%8F%96%E4%BA%91%E7%8F%AD%E8%AF%BE%E4%B8%8A%E8%80%81%E5%B8%88%E5%8F%91%E7%9A%84%E8%A7%86%E9%A2%91%E8%B5%84%E6%BA%90%20python/">【爬虫】 爬取云班课上老师发的视频资源 python.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/">教练我想学挂边躲牛</a>,<a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/%E7%88%AC%E8%99%AB/">爬虫</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="蒟蒻声明"><a class="markdownIt-Anchor" href="#蒟蒻声明"></a> 蒟蒻声明</h2>
+<p>这个程序虽然可以差强人意地实现功能但是烂的一批，也不打算做出较大改动了。后面会总结一些不足之处，以警示以后。</p>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<p>。<br>
+1.<br>
+通过抓包发现云班课的视频时m3u8的，即一个m3u8的文件中记录了数个ts类型视频的链接，这些ts视频的时常一般为10秒。想爬取某个视频只需要获取视频对应的m3u8文件，依次把m3u8文件中的ts文件下载并通过os.system()调用命令行把一系列的ts文件合并为mp4<br>
+2.<br>
+步骤1是单独下载一个视频的思路，若想下载所有视频，只需要找出所有视频的m3u8，重复步骤1。</p>
+<h2 id="单独下载一个m3u8"><a class="markdownIt-Anchor" href="#单独下载一个m3u8"></a> 单独下载一个m3u8</h2>
+<p>笔者仅仅在要爬的课程中实验该程序可以达到目的，至于其他的m3u8就不清楚了<br>
+1.<br>
+获取m3u8文件后解析其内容，做到可以提取出所有的ts文件链接<br>
+2.<br>
+把所有的ts文件下载本地的同一个文件夹中<br>
+3.<br>
+调用命令行，例如这样：<br>
+os.system(‘copy /b ‘+os.path.abspath(tempworkpath)+’\ _.ts<br>
+‘+os.path.abspath(pathOUTPUT)+’\’+nameOUTPUT+’.mp4’)<br>
+合并所有ts文件为一个新的mp4文件<br>
+4.<br>
+把这一次下载的ts文件删掉，以备下一次操作<br>
+os.system('del ‘+os.path.abspath(tempworkpath)+’_.ts’)</p>
+<pre><code>import re
+import requests
+from bs4 import BeautifulSoup
+import os
+
+
+def DownOne(url,name):
+    toIdxStr = lambda x : ('000000000'+str(x))[-10:]
+
+    urlM3U8 = url
+    nameOUTPUT = name.replace(' ','')
+    pathOUTPUT = 'out'
+    sch = re.search('(.+?/[0-9].&#123;3&#125;/[0-9].&#123;1&#125;/[0-9].&#123;1&#125;/)(.+?).m3u8',urlM3U8)
+    headM3U8 = sch.group(1)
+    nameM3U8 =sch.group(2)
+    tempworkpath = 'aaabbbcccdddeeefffggghhhiii'
+    
+    resM3U8 = requests.get(urlM3U8)
+    
+    lstTS = re.findall('.+?ts',resM3U8.text)
+    
+    if not os.path.exists(tempworkpath):
+        os.mkdir(tempworkpath)
+    if not os.path.exists(pathOUTPUT):
+        os.mkdir(pathOUTPUT)
+    
+    for i,each in enumerate(lstTS):
+        print(i,'of',len(lstTS))
+        res = requests.get(headM3U8+each)
+        with open(tempworkpath+'/'+nameM3U8+toIdxStr(i)+'.ts', 'wb') as f:
+            f.write(res.content)
+    
+    print('合并')
+    print('copy /b '+os.path.abspath(tempworkpath)+'\\*.ts '+os.path.abspath(pathOUTPUT)+'\\'+nameOUTPUT+'.mp4')
+    os.system('copy /b '+os.path.abspath(tempworkpath)+'\\*.ts '+os.path.abspath(pathOUTPUT)+'\\'+nameOUTPUT+'.mp4')
+    os.system('del '+os.path.abspath(tempworkpath)+'\\*.ts')
+
+if __name__ == '__main__':
+    url = input('m3u8 url:')
+    name = input('video name:')
+    DownOne(url,name)
+</code></pre>
+<h2 id="爬取全部的视频资源"><a class="markdownIt-Anchor" href="#爬取全部的视频资源"></a> 爬取全部的视频资源</h2>
+<p>下方代码中的import DownloaderM3U8 as DOWN，这个库是上面爬一个m3u8的那一坨<br>
+下面的程序这些部分我改了，爬的话要填自己的账号密码等</p>
+<blockquote>
+<p>logData = { ‘account_name’ : ‘这里是我的账号’<br>
+,‘user_pwd’ : ‘这里是我的密码’<br>
+,‘remember_me’ : ‘N’<br>
+}<br>
+targetURL = ‘填需要获取资源的页面（云班课进入一个课程，再点资源，然后把链接复制过来）’<br>
+user-agent也改了，不太清楚这个是不是必要的</p>
+</blockquote>
+<h4 id="html解析思路"><a class="markdownIt-Anchor" href="#html解析思路"></a> html解析思路</h4>
+<p>这是云班课储存资源的思路</p>
+<p>​<br>
+​    &lt;div1 这是包含所有视频的一块&gt;<br>
+​    	&lt;div2 第一单元的所有视频&gt;  所有的div2的集合对应程序里的d2<br>
+​    		&lt;div 视频&gt;	 一个div2中所有div的集合对应程序里的d3<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    	<br>
+​    	&lt;div2 第二单元的所有视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    	<br>
+​    	&lt;div2 第三单元的所有视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    		&lt;div 视频&gt;<br>
+​    	<br>
+​    </p>
+<p>。</p>
+<p>值得一提的是我没有在网页的html中找到m3u8的链接，但是每个视频有一张图片，图片的链接和视频的m3u8链接有许多相同点。<br>
+其中图片的链接中有形如： <strong>'年份/月份/字符串’ <strong>的格式，而m3u8的链接中有形如：</strong> ‘年份/月份/日期/字符串’</strong><br>
+的格式，并且这两段格式中除了图片链接没有日期外，其他完全相同</p>
+<p>​<br>
+​    #云班课视频资源获取 开始于2021/03/12<br>
+​    ‘’’<br>
+​    目前没有任何try,纯莽<br>
+​<br>
+part1 登录 (成功)<br>
+part2 找到所有视频块div(成功)<br>
+part3 获取所有视频对应的m3u8链接(遇到问题)<br>
+问题：<br>
+html中没有找到对应的m3u8链接,但有一张图片的链接,其中有 #年份/月份/字符串# 的部分与我们需要的m3u8链接十分相似<br>
+需要的m3u8链接的该部分格式为 #年份/月份/日期/字符串# 所以尝试枚举已知月份中所有的日期暴力破解<br>
+事实证明这种方法有概率失败,因为有的m3u8链接会与图片连接中的月份有偏差,不保证能完全获取所有的m3u8链接<br>
+可能的解决方案：<br>
+1.尝试枚举一年中的所有日期而不是这个月的(需要时间长,但不失为一种方法,尚未尝试),<br>
+但不排除m3u8链接和img链接的年份也有偏差的可能<br>
+//-----------------------------------------------------------<br>
+2021/03/12:<br>
+若没有找到正确的m3u8链接,则尝试读取下一个月的所有日期<br>
+这样可以正确解析出更多的链接,但是仍然不能完全解决问题<br>
+//-----------------------------------------------------------</p>
+<pre><code>part4 针对每一个m3u8链接下载其中的所有js链接,并尝试调用命令行指令合并ts文件为mp4(尚未开始,太懒了)
+    这一步脱离前三个part,独立进行
+'''
+
+import re
+import requests
+from bs4 import BeautifulSoup
+import DownloaderM3U8 as DOWN
+
+def monthIter(year,month):
+    monthMap = &#123; 1:  31 
+                ,2:  28
+                ,3:  31 
+                ,4:  30
+                ,5:  31
+                ,6:  30
+                ,7:  31
+                ,8:  31
+                ,9:  30
+                ,10: 31
+                ,11: 30
+                ,12: 31
+    &#125;
+    if month == 2:
+        if year%400 == 0 or (year%4 == 0 and year%100 != 0):
+            monthMap[2] += 1
+    return range(1,monthMap[month]+1)
+</code></pre>
+<p>​<br>
+​    def toLinkStr(ss):<br>
+​        ss = str(ss)<br>
+​        return ‘0’+ss if len(ss) == 1 else ss</p>
+<p>​<br>
+​    m3u8Head = ‘<a target="_blank" rel="noopener" href="https://video-cdn-2.mosoteach.cn/mssvc/file">https://video-cdn-2.mosoteach.cn/mssvc/file</a>’<br>
+​    m3u8Tail = ‘m3u8’<br>
+​<br>
+logURL = r’<a target="_blank" rel="noopener" href="https://www.mosoteach.cn/web/index.php?c=passport&amp;m=account_login">https://www.mosoteach.cn/web/index.php?c=passport&amp;m=account_login</a>’</p>
+<pre><code>session = requests.session()
+
+logHeader = &#123; 'Referer'      : 'https://www.mosoteach.cn/web/index.php?c=passport'
+             ,'User-Agent'   : '填自己的，好像不填也行，不太清楚'
+&#125;
+logData = &#123;  'account_name' : '这里是我的账号'
+            ,'user_pwd'     : '这里是我的密码'
+            ,'remember_me'  : 'N'
+&#125; 
+
+logRES = session.post(logURL ,headers = logHeader, data = logData)
+
+targetURL = '填需要获取资源的页面（云班课进入一个课程，再点资源，然后把链接复制过来）'
+
+res = session.get(targetURL)
+soup = BeautifulSoup(res.text,features='lxml')
+d1 = soup.find('div', id = 'res-list-box')
+d2 = d1.find_all('div',class_ = 'hide-div')
+
+namelst = []
+lst = []
+cnt = 0
+jumplst = []
+for i,one in enumerate(d2):
+    #print('[第',i,'块]')
+    d3 = one.find_all('div',class_ = 'res-row-open-enable res-row preview')
+    for j,each in enumerate(d3):
+        #print(' 第',j,'个',end = ' ')
+        ss = each.find('img', class_ = 'res-icon')['src']
+        linkKey = re.search('capture/([0-9].&#123;3&#125;)/([0-9].&#123;1&#125;)(.+?)jpg?',ss)
+        m3u8Middle = m3u8Head + '/' + linkKey.group(1) + '/' + linkKey.group(2) + '/&#123;day&#125;' + linkKey.group(3) + m3u8Tail
+        m3u8MiddlePLUS = m3u8Head + '/' + linkKey.group(1) + '/' + '&#123;mth&#125;' + '/&#123;day&#125;' + linkKey.group(3) + m3u8Tail
+        cnt += 1 
+        print(cnt)
+        print(m3u8Middle)
+        #'''
+        found = False
+        zyear  = int(linkKey.group(1))
+        zmonth = int(linkKey.group(2))
+        for EE in monthIter(zyear,zmonth):
+            m3u8Final = m3u8Middle.format(day = toLinkStr(EE))
+            rr = requests.get(m3u8Final)
+            if re.search('Error',rr.text) == None:
+                lst.append(m3u8Final)
+                namelst.append(each.find('span',class_ = 'res-name')['title'])
+                print(m3u8Final)
+                found = True
+                break
+        if found == False:
+            zmonth += 1
+            if zmonth &gt; 12:
+                zmonth = 1
+                zyear += 1
+                m3u8Middle = m3u8MiddlePLUS
+            for EE in monthIter(zyear,zmonth):
+                m3u8Final = m3u8Middle.format(day = toLinkStr(EE), mth = toLinkStr(zmonth))
+                rr = requests.get(m3u8Final)
+                if re.search('Error',rr.text) == None:
+                    lst.append(m3u8Final)
+                    namelst.append(each.find('span',class_ = 'res-name')['title'])
+                    print(m3u8Final)
+                    found = True
+                    break
+        if found == False:
+            print('##第',i,'块第',j,'个已被跳过')
+            jumplst.append((i,j))
+        print('---')
+       # '''
+            #print(each,end = ' ')
+        #print(int(linkKey.group(1)),int(linkKey.group(2)))
+
+print('共跳过个数:', len(jumplst), '\n分别为:')
+for each in jumplst:
+    print(each)
+
+print('len(lst) == len(namelst) ?',len(lst),len(namelst))
+
+print('开始抓取')
+for i in range(len(lst)):
+    print(namelst[i])
+    DOWN.DownOne(lst[i],namelst[i])
+</code></pre>
+<p>​<br>
+​    print(‘共跳过个数:’, len(jumplst), ‘\n分别为:’)<br>
+​    for each in jumplst:<br>
+​        print(each)</p>
+<h2 id="不足-与-可以预期的改进已经不会去改了所以是可以预期的改进"><a class="markdownIt-Anchor" href="#不足-与-可以预期的改进已经不会去改了所以是可以预期的改进"></a> 不足 与 可以预期的改进（已经不会去改了，所以是可以预期的改进）</h2>
+<h4 id="不足"><a class="markdownIt-Anchor" href="#不足"></a> 不足</h4>
+<p>这个程序的思路是找到整个页面中所有的m3u8存入一个列表，然后遍历列表依次下载。这样时间非常长，如果中途出错还要从头开始重新来。<br>
+。<br>
+没有try，没有写try的意识，等着以后迎接暴毙吧</p>
+<h4 id="可以预期的改进"><a class="markdownIt-Anchor" href="#可以预期的改进"></a> 可以预期的改进</h4>
+<p>1.分块获取m3u8，先获取每一个大块，再在每一个大块中获得这一大块中所有视频的m3u8<br>
+2.细化获取项，提供获取某一特定块中所有视频的选项<br>
+3.细化获取项，提供在某一特定块中获取某一特定视频的选项<br>
+4.做出图形界面，以一级二级标签分好大块和每个大块中的视频，可以阵对视频多选，阵对块多选，进行下载</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E7%88%AC%E8%99%AB%E3%80%91%20%E7%88%AC%E5%8F%96%E4%BA%91%E7%8F%AD%E8%AF%BE%E4%B8%8A%E8%80%81%E5%B8%88%E5%8F%91%E7%9A%84%E8%A7%86%E9%A2%91%E8%B5%84%E6%BA%90%20python/" data-id="cl50x8cng0042ccj3byiveox3" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-【状压DP】斯坦纳树" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -2088,97 +2402,6 @@ process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAU3Rh
 
 
   
-    <article id="post-学习在ECS上实现定期执行在学校官网发帖子签到的py脚本" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E5%AD%A6%E4%B9%A0%E5%9C%A8ECS%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%9C%9F%E6%89%A7%E8%A1%8C%E5%9C%A8%E5%AD%A6%E6%A0%A1%E5%AE%98%E7%BD%91%E5%8F%91%E5%B8%96%E5%AD%90%E7%AD%BE%E5%88%B0%E7%9A%84py%E8%84%9A%E6%9C%AC/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E5%AD%A6%E4%B9%A0%E5%9C%A8ECS%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%9C%9F%E6%89%A7%E8%A1%8C%E5%9C%A8%E5%AD%A6%E6%A0%A1%E5%AE%98%E7%BD%91%E5%8F%91%E5%B8%96%E5%AD%90%E7%AD%BE%E5%88%B0%E7%9A%84py%E8%84%9A%E6%9C%AC/">学习在ECS上实现定期执行在学校官网发帖子签到的py脚本.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/">教练我想学挂边躲牛</a>,<a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/%E7%88%AC%E8%99%AB/">爬虫</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<p><strong>本文不作为较专业的资料，仅为萌新不专业的试水和踩坑</strong></p>
-<h2 id="1编写签到脚本"><a class="markdownIt-Anchor" href="#1编写签到脚本"></a> 1.编写签到脚本</h2>
-<p>从这个环节开始我就遇到了许多问题，比如可以复制cookie实现签到，但不会获取cooike<br>
-实际上直到现在写博客，我始终没有做到完整地吧所需要的cookie提取出来，对于爬虫也是一知半解</p>
-<p>直接上误打误撞写出来的拉跨代码（部分内容隐蔽或更改）：</p>
-<p>​</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">url=<span class="string">&#x27;在学校官网登录请求的url&#x27;</span></span><br><span class="line">header=&#123;</span><br><span class="line">        <span class="string">&#x27;Referer&#x27;</span>: <span class="string">&#x27;secret&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;mystery&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">data=&#123;</span><br><span class="line">        <span class="string">&#x27;IPT_LOGINUSERNAME&#x27;</span>: <span class="string">&#x27;what?&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;IPT_LOGINPASSWORD&#x27;</span>: <span class="string">&#x27;you don\&#x27;t know&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">session=requests.session()</span><br><span class="line">res=session.post(url,headers=header,data=data)</span><br><span class="line"></span><br><span class="line">posturl=<span class="string">&#x27;发帖子请求的url&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>​</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">headersx=&#123;</span><br><span class="line">        <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;Referer&#x27;</span>: <span class="string">&#x27;mytsery&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;jsadsadfsadfasd&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">datax=&#123;</span><br><span class="line">        <span class="string">&#x27;opt&#x27;</span>: <span class="string">&#x27;toreply&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;frompage&#x27;</span>: <span class="string">&#x27;common&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;forumid&#x27;</span>:<span class="string">&#x27;3743&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;threadid&#x27;</span>:<span class="string">&#x27;114775&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;parentid&#x27;</span>:<span class="string">&#x27;239973&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;0&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;subject&#x27;</span>:<span class="string">&#x27;帖子标题的一些内容&#x27;</span>.encode(<span class="string">&quot;gbk&quot;</span>),</span><br><span class="line">        <span class="string">&#x27;body&#x27;</span>: <span class="string">&#x27;&lt;p&gt;学号 某某签到&lt;/p&gt;&#x27;</span>.encode(<span class="string">&quot;gbk&quot;</span>)<span class="comment">#编码格式一定要换，否则发出乱码</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">resx=session.post(posturl,headers=headersx,data=datax)</span><br><span class="line"></span><br><span class="line"><span class="comment">#相当于一个日志</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;journal.txt&#x27;</span>,<span class="string">&#x27;a&#x27;</span>) <span class="keyword">as</span> f:<span class="comment">#这是在本地写的，放在服务器上要使用绝对路径，否则会在根目录创建文件</span></span><br><span class="line">    string=<span class="string">&#x27;&#x27;</span></span><br><span class="line">    tm=time.localtime()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">6</span>):</span><br><span class="line">        string+=<span class="built_in">str</span>(tm[i])+<span class="string">&#x27; &#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        string+=<span class="string">&#x27;OVER \n&#x27;</span></span><br><span class="line">    f.write(string)</span><br></pre></td></tr></table></figure>
-<p>​</p>
-<h2 id="2在ecs上令其定时执行"><a class="markdownIt-Anchor" href="#2在ecs上令其定时执行"></a> 2.在ECS上令其定时执行</h2>
-<p>我的云服务器装的乌班图系统</p>
-<p>先通过以下操作测试了一下py文件是否能在云服务器上运行，且运行成功</p>
-<blockquote>
-<p>python3 签到文件</p>
-</blockquote>
-<p>然后通过第一行的操作打开控制定时执行的文件，添加内容，最后两行是我新添加的内容(排版不是很好，服务器上看是很清晰的)。<br>
-关于怎样设置执行时间见传送门：<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-crontab.html">https://www.runoob.com/linux/linux-comm-crontab.html</a></p>
-<blockquote>
-<p>vi /etc/corntab</p>
-</blockquote>
-<blockquote>
-<h1 id="m-h-dom-mon-dow-user-command"><a class="markdownIt-Anchor" href="#m-h-dom-mon-dow-user-command"></a> m h dom mon dow user command</h1>
-<p>17 * * * * root cd / &amp;&amp; run-parts --report /etc/cron.hourly<br>
-25 6 * * * root test -x /usr/sbin/anacron || ( cd / &amp;&amp; run-parts --report<br>
-/etc/cron.daily )<br>
-47 6 * * 7 root test -x /usr/sbin/anacron || ( cd / &amp;&amp; run-parts --report<br>
-/etc/cron.weekly )<br>
-52 6 1 * * root test -x /usr/sbin/anacron || ( cd / &amp;&amp; run-parts --report<br>
-/etc/cron.monthly )<br>
-0 14 * * 3 root /usr/bin/python3.6 /home/signIn195C/login195C.py<br>
-0 10 * * 5 root /usr/bin/python3.6 /home/signIn195C/login195C.py</p>
-</blockquote>
-<h2 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意</h2>
-<p>python脚本若要建立（或写入）文件一定要使用绝对路径。笔者手动执行程序时会在脚本所在的目录建立（或写入）文件，但自动执行时文件会在根目录建立（或写入）</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E5%AD%A6%E4%B9%A0%E5%9C%A8ECS%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%9C%9F%E6%89%A7%E8%A1%8C%E5%9C%A8%E5%AD%A6%E6%A0%A1%E5%AE%98%E7%BD%91%E5%8F%91%E5%B8%96%E5%AD%90%E7%AD%BE%E5%88%B0%E7%9A%84py%E8%84%9A%E6%9C%AC/" data-id="cl50x8cnv005gccj34a40dx0q" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -2235,9 +2458,9 @@ process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAU3Rh
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>79</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>80</strong><br>文章</div></a>
       <a href="/categories"><div><strong>32</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>63</strong><br>标签</div></a>
+      <a href="/tags"><div><strong>65</strong><br>标签</div></a>
     </div>
 
 
