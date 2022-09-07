@@ -1,6 +1,6 @@
 ---
 title: 【学习记录】python matplotlib 自学入门（随缘更新）.md
-date: 1111-11-11 11:11:11
+date: 1444-11-11 11:11:11
 categories:
   - [基础知识, python, matplotlib]
 tags:
@@ -9,8 +9,17 @@ tags:
   - 画图
 ---
 
-## 说明 - 2022-05-05
-本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。
+## 说明 - 2022 - 09 - 07
+
+已经完成人工重置，发布时间设定在1444年11月11日，表示这篇博文写于博客建立之前，并于为重置的远古文章区分。
+
+## ~~说明 - 2022-05-05~~ 
+
+~~本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。~~
+
+## 建议
+
+画图建议去matplotlib官网搬砖
 
 ## 貌似基础
 
@@ -25,8 +34,7 @@ ax1 = fig.add_subplot(2,2,1)
 ax2 = fig.add_subplot(2,2,2)
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210110161619319.png?x-oss-
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)
+![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110161619319.png)
 
 
 ​    
@@ -44,7 +52,7 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
 画一条线
 
 
-​    
+
 ```python
 fig,ax = plt.subplots()
 x = np.linspace(0,np.pi)
@@ -53,8 +61,7 @@ ax.plot(x,y_cosx,linewidth = 1, markersize = 6,color = 'red',linestyle='-.')
 #图上的和这个不一样的写法，一个效果
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210110163055151.png?x-oss-
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)  
+![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110163055151.png)  
 加点盐
 
 
@@ -68,8 +75,7 @@ ax.set(title = 'ABC',xlabel = 'X QwQ',ylabel = '-Y---',xlim = [0,5],ylim = [-1.2
 ```
 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2021011016424414.png?x-oss-
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)
+![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/2021011016424414.png)
 
 #### 填充两线之间的空间
 
@@ -88,8 +94,7 @@ ax.set(title = 'ABC',xlabel = 'X QwQ',ylabel = '-Y---',xlim = [0,5],ylim = [-1.2
 ax.fill_between(x,y_cosx,y_sinx,color = 'yellow')
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210110164613966.png?x-oss-
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)
+![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110164613966.png)
 
 #### 加入网格线
 
@@ -111,8 +116,7 @@ ax.fill_between('x','cos','tan',color = 'yellow',data = data)
 ax.grid()
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210110185516287.png?x-oss-
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)
+![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110185516287.png)
 
 ## 散点图
 
@@ -126,8 +130,7 @@ y = x*3%8
 plt.scatter(x,y,marker = '3',color = ['blue','green','blue','green','blue','green',], s = 600)
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210110170857320.png?x-oss-
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)
+![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110170857320.png)
 
 
 ​    
@@ -137,8 +140,7 @@ y = x*3%13
 plt.scatter(x,y,marker = '*',c = np.random.rand(10),s = (np.random.rand(10)*30)**2)
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2021011017090355.png?x-oss-
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)
+![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/2021011017090355.png)
 
 ## 条形图
 
@@ -158,8 +160,7 @@ axes[1].barh(x,y,color = 'lightgreen')
 axes[1].set(ylim = [-3,15])
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210110173351106.png?x-oss-
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)
+![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110173351106.png)
 
 #### 画直线
 
@@ -179,11 +180,9 @@ axes[0].axhline(0,color = 'blue',linewidth = 6)
 axes[1].axvline(2,color = 'lightgrey',linewidth = 3)
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210110173710153.png?x-oss-
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)  
+![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110173710153.png)  
 有负数的情况  
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210110173936447.png?x-oss-
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)
+![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110173936447.png)
 
 ## 饼图
 
@@ -196,8 +195,7 @@ plt.pie(weights,labels = names)
 pass
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210110174927927.png?x-oss-
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)
+![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110174927927.png)
 
 
 ​    
@@ -223,8 +221,7 @@ plt.legend(loc = 'lower left')      #显示图例
 pass
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210110181032977.png?x-oss-
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)  
+![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110181032977.png)  
 所有图例位置名称
 
 > :18: MatplotlibDeprecationWarning: Unrecognized location ‘lower dleft’.
@@ -274,22 +271,13 @@ ax0.pie(weights,
 ax0.axis('equal') #显示为正圆
 ax0.legend(names,loc = 'upper left')      #显示图例
 ax0.set(title = 'Big')
-```
 
-
-​    
-​    
-```python
 #画柱
 rates = [0.33,0.56,0.07,0.04]
 posX = 0
 floor = 0
 width = 0.2
-```
 
-
-​    
-```python
 for i in range(len(rates)):
     height = rates[i]
     ax1.bar(posX,height,width,bottom = floor)
@@ -376,11 +364,7 @@ ax1.pie(small,
         wedgeprops = dict(width = 0.22,edgecolor = 'white')
        )
 ax1.axis('equal') #显示为正圆
-```
 
-
-​    
-```python
 #画柱
 lll = [1.333,3.111,2.667,2.222,3.556,3.111,2.043,2.043,2.809,1.787,1.021,1.021,1.277]
 colorssss = ['#ffbd9d','#ff8f59','#ff5809','#ff5151','#ea0000','#ff5809','#d7ffee'
@@ -406,11 +390,7 @@ rates = (np.array(lll)/sum(lll)).tolist()
 posX = -0.1
 floor = 0
 width = 0.2
-```
 
-
-​    
-```python
 for i in range(len(rates)):
     height = rates[i]
     ax2.bar(posX,height,width,bottom = floor,color = colorssss[i])
@@ -447,11 +427,7 @@ rates = (np.array(lll)/sum(lll)).tolist()
 posX =  1.7
 floor = 0
 width = 0.2
-```
 
-
-​    
-```python
 for i in range(len(rates)):
     height = rates[i]
     ax0.bar(posX,height,width,bottom = floor,color = colorssss[i])
@@ -467,6 +443,142 @@ ax1.set_title('Weight of Every Factor',fontsize = 30)
 plt.savefig('Weight of Every Factor.png')
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2021020913414042.png?x-oss-
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)
+![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/2021020913414042.png)
+
+## 搬砖案例
+
+爬一点空洞骑士1.4.3.2+版本Any完成度速通世界纪录榜，并简单画点图
+
+```python
+# %matplotlib inline
+import matplotlib.pyplot as plt
+plt.rcParams['font.family']=['SimHei']
+plt.rcParams.update({"font.size":25})
+import numpy as np
+import pandas as pd
+import requests
+from bs4 import BeautifulSoup
+import os
+
+'''
+数据爬取
+'''
+
+HK_Any_1432More_SpeedRun_WR_url = 'https://www.speedrun.com/ajax_leaderboard.php?vary=1662443390&timeunits=0&topn=1000&variable9968=144449&variable9966=33306&variable16235=53846&variable45548=156253&variable45549=156255&variable14661=48684&variable25811=86076&variable25810=86073&variable55472=193197&variable45538=156209&variable35461=119744&variable15554=51769&variable9838=32795&variable45550=156257&variable67895=238958&game=hollowknight&layout=new&verified=1&category=44046&platform=&variable11324=&loadtimes=0&video=&obsolete=&date='
+headers = None
+proxy = None
+if not os.path.exists('out'): os.mkdir('out')
+
+res = requests.get(HK_Any_1432More_SpeedRun_WR_url)
+soup = BeautifulSoup(res.text, 'lxml')
+df = pd.DataFrame(
+    columns = ['Name', 'TimeWithLoads', 'TimeWithoutLoads', 'date', 'Version', 'Nationality']
+)
+
+for i, each in enumerate(soup.find('tbody').findAll('tr')):
+    cap = each.findAll('td', class_ = 'nobr center hidden-xs')
+    nationality = each.find('img', class_ = 'flagicon')
+    lst = [
+        each.find('span', class_ = 'username').span.string,
+        cap[0].text,
+        cap[1].text,
+        cap[2].text,
+        each.find('td', class_ = 'nobr center hidden-xs hidden-lg-down').string,
+        'unknow' if nationality == None else nationality['src'].split('/')[-1][ : -4],
+    ]
+    df.loc[i] = lst
+
+
+df = pd.read_csv('HK_Any_1432More_SpeedRun_WR.csv')
+df = df[df['Nationality'] != 'unknow']
+
+'''
+国籍分布图 pie + bar
+'''
+
+nc = df['Nationality'].value_counts()
+new_nc = nc[nc >= 9]
+new_nc['others'] = len(nc[nc < 9])
+idx, val = new_nc.index, new_nc.values
+
+
+fig, ax = plt.subplots(figsize=(10, 10))
+size = 0.3
+
+vals = val
+label = idx
+
+cmap = plt.colormaps["tab20c"]
+outer_colors = cmap(np.arange(5)*4)
+# inner_colors = cmap([1, 2, 5, 6, 9, 10])
+
+ax.pie(vals, radius=1, colors=outer_colors, labels= label,
+       wedgeprops=dict(width=size, edgecolor='w'))
+
+# ax.pie(vals.flatten(), radius=1-size, colors=inner_colors,
+#        wedgeprops=dict(width=size, edgecolor='w'))
+
+ax.set(aspect="equal", title='空洞骑士速通排行榜国籍分布')
+fig.savefig('out/HKWR榜国籍分布pie.jpg')
+plt.clf()
+new_nc.plot(kind = 'bar', figsize=(10, 10), title = '空洞骑士速通排行榜国籍分布').figure.savefig('out/HKWR榜国籍分布bar.jpg')
+plt.clf()
+
+'''
+版本分布图 bar
+'''
+
+df['Version'].value_counts().plot(kind = 'bar', figsize=(12, 14), title = '空洞骑士速通排行榜版本分布').figure.savefig('out/HKWR榜版本分布bar.jpg')
+plt.clf()
+
+'''
+通关时间分布图 bar
+'''
+
+class TM:
+    def __init__(self, data: str):
+        if 'h' not in data: data = '0h ' + data
+        self.H, self.M, self.S = data.split()     
+        self.H, self.M, self.S = int(self.H[ : -1]), int(self.M[ : -1]), int(self.S[ : -1])
+    
+    def __ge__(self, other):
+        if self.H == other.H:
+            if self.M == other.M: 
+                return self.S >= other.S
+            return self.M > other.M
+        return self.H > other.H
+    
+    def tostr(self) -> str:
+        return f'{self.H}h{self.M}m{self.S}s'
+
+def add10M(x: TM):
+    x.M += 10
+    if x.M >= 60:
+        x.M -= 60
+        x.H += 1
+    return x
+
+def per10M(x):
+    I, X = TM('0h 0m 0s'), TM(x)
+    while True:
+        I = add10M(I)
+        if I >= X:
+            return I.tostr()
+
+df['TimeWithLoads'].map(per10M).value_counts(sort = False).plot(kind = 'bar', figsize=(25, 15), title = '空洞骑士速通排行榜通关时间分布').figure.savefig('out/HKWR榜通关时间分布bar.jpg')
+plt.clf()
+
+'''
+计算与不计算加载时间的对比
+'''
+
+fig,ax = plt.subplots(figsize = (100, 300))
+
+x = range(len(df['TimeWithLoads']))
+ax.set_title('空洞骑士速通排行榜计算与不计算加载时间的对比')
+ax.plot(x, df['TimeWithLoads'].values)
+ax.plot(x, df['TimeWithoutLoads'].values, color = 'red')
+plt.savefig('out/HKWR榜计算与不计算加载时间的差距对比bar.jpg')
+
+```
 
