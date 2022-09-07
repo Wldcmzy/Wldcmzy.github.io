@@ -43,9 +43,9 @@
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>80</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>32</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>65</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>85</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>37</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>72</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -82,6 +82,1236 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-【差值并查集（口胡算法）】 HDU7136 CCPC2021网络选拔赛重赛1011 Jumping Monkey" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E5%B7%AE%E5%80%BC%E5%B9%B6%E6%9F%A5%E9%9B%86%EF%BC%88%E5%8F%A3%E8%83%A1%E7%AE%97%E6%B3%95%EF%BC%89%E3%80%91%20HDU7136%20CCPC2021%E7%BD%91%E7%BB%9C%E9%80%89%E6%8B%94%E8%B5%9B%E9%87%8D%E8%B5%9B1011%20Jumping%20Monkey/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%B7%AE%E5%80%BC%E5%B9%B6%E6%9F%A5%E9%9B%86%EF%BC%88%E5%8F%A3%E8%83%A1%E7%AE%97%E6%B3%95%EF%BC%89%E3%80%91%20HDU7136%20CCPC2021%E7%BD%91%E7%BB%9C%E9%80%89%E6%8B%94%E8%B5%9B%E9%87%8D%E8%B5%9B1011%20Jumping%20Monkey/">【差值并查集（口胡算法）】 HDU7136 CCPC2021网络选拔赛重赛1011 Jumping Monkey.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/">图论</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="题面"><a class="markdownIt-Anchor" href="#题面"></a> 题面</h2>
+<p>HDU7136 不放了</p>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<p>把所有的点按照权值从小到大排序， 依次用并查集维护<br>
+每次更新一个点， 把此点与其相邻的枚举过的点并为一个集合， 这样每次更新可以使这个集合的点的遍历数量都+1<br>
+用num[]记录一个点可以合法遍历的点的数量， 且num[]仅对代表元生效<br>
+用gap[]记录一个点于其代表元的差值, 非代表元的答案为 num[] - gap[] (因为代表元的gap[] = 0)<br>
+记得路径压缩， 不路径压缩——反正我没试过， 会T吧</p>
+<h2 id="变量数组-解释"><a class="markdownIt-Anchor" href="#变量数组-解释"></a> 变量&amp;数组 解释</h2>
+<h6 id="建图存图用的"><a class="markdownIt-Anchor" href="#建图存图用的"></a> 建图存图用的 ：</h6>
+<p>head[], idx, u, v, edg[]</p>
+<h6 id="输入数据相关"><a class="markdownIt-Anchor" href="#输入数据相关"></a> 输入数据相关</h6>
+<p>input[] 输入数据<br>
+node[] 输入数据 结构体 {输入数值 + 编号} 后按照输入数值排序</p>
+<h6 id="并查集相关"><a class="markdownIt-Anchor" href="#并查集相关"></a> 并查集相关</h6>
+<p>sset[] 并查集<br>
+gap[]每个元素与其代表元素的差值<br>
+num[]从该元素开始可以合法遍历的点的数量<br>
+<em><strong>num[]只对代表元生效， 所有节点可合法遍历的点的数量 都可以由 num[] - gap[]计算</strong></em></p>
+<h6 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h6>
+<p>boss 在每加入一个点时， 作为这一轮的唯一代表元</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<p>时间826MS 空间5688K</p>
+<p>​<br>
+#include &lt;bits/stdc++.h&gt;<br>
+const int N = 1e5 + 5;<br>
+int t, n, u, v, idx, boss;<br>
+int head[N], sset[N], gap[N], num[N], inpt[N];<br>
+struct AAAA{<br>
+int id, w;<br>
+bool operator &lt; (const AAAA &amp;a) const{<br>
+return w &lt; a.w;<br>
+}<br>
+} node[N];<br>
+struct Edge{ int to, nxt; }edg[N &lt;&lt; 1];<br>
+inline void addE(int fr, int to){<br>
+edg[++ idx] = (Edge) {to, head[fr]};<br>
+head[fr] = idx;<br>
+}<br>
+int ffind(int x){<br>
+if(sset[x] == x) return x;<br>
+int fa = sset[x];<br>
+int xx = ffind(fa);<br>
+gap[x] += gap[fa];<br>
+sset[x] = xx;<br>
+return xx;<br>
+}<br>
+inline void mmerge(int fa, int x){<br>
+int ff = ffind(fa), xx = ffind(x);<br>
+sset[xx] = ff;<br>
+gap[xx] = num[ff] - num[xx];<br>
+}<br>
+int main(){<br>
+scanf(&quot;%d&quot;, &amp;t);<br>
+while(t --){<br>
+idx = 1;<br>
+scanf(&quot;%d&quot;, &amp;n);<br>
+for(int i=0; i&lt;=n; i++) sset[i] = i;<br>
+for(int i=1; i&lt;n; i++){<br>
+scanf(&quot;%d%d&quot;, &amp;u, &amp;v);<br>
+addE(u, v), addE(v, u);<br>
+}<br>
+for(int i=1; i&lt;=n; i++){<br>
+scanf(&quot;%d&quot;, &amp;inpt[i]);<br>
+node[i].w = inpt[i];<br>
+node[i].id = i;<br>
+}<br>
+std::sort(node + 1, node + 1 + n);<br>
+for(int i=1, x, y; i&lt;=n; i++){<br>
+boss = x = node[i].id;<br>
+for(int e=head[x]; e; e=edg[e].nxt){<br>
+y = edg[e].to;<br>
+if(inpt[y] &lt; inpt[x]){<br>
+if(boss == x){<br>
+boss = y;<br>
+mmerge(boss, x);<br>
+}<br>
+else{<br>
+mmerge(boss, y);<br>
+}<br>
+}<br>
+}<br>
+num[ffind(boss)] += 1;<br>
+}<br>
+for(int x=1, xx; x&lt;=n; x++){<br>
+xx = ffind(x);<br>
+printf(&quot;%d\n&quot;, num[xx] - gap[x]);<br>
+}<br>
+memset(num, 0, sizeof(int) * (n + 1));<br>
+memset(gap, 0, sizeof(int) * (n + 1));<br>
+memset(head, 0, sizeof(int) * (n + 1));<br>
+}<br>
+return 0;<br>
+}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%B7%AE%E5%80%BC%E5%B9%B6%E6%9F%A5%E9%9B%86%EF%BC%88%E5%8F%A3%E8%83%A1%E7%AE%97%E6%B3%95%EF%BC%89%E3%80%91%20HDU7136%20CCPC2021%E7%BD%91%E7%BB%9C%E9%80%89%E6%8B%94%E8%B5%9B%E9%87%8D%E8%B5%9B1011%20Jumping%20Monkey/" data-id="cl50x8cn2002pccj3elxp2cpw" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【成长记录】【C语言】尝试用C语言实现简易贪吃蛇" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90C%E8%AF%AD%E8%A8%80%E3%80%91%E5%B0%9D%E8%AF%95%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AA%E5%90%83%E8%9B%87/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90C%E8%AF%AD%E8%A8%80%E3%80%91%E5%B0%9D%E8%AF%95%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AA%E5%90%83%E8%9B%87/">【成长记录】【C语言】尝试用C语言实现简易贪吃蛇.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/">教练我想学挂边躲牛</a>,<a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/%E6%9D%82%E4%B9%B1/">杂乱</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<p>刚开始查阅资料看别人的贪吃蛇代码，看得一头雾水，比如：<br>
+SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);<br>
+这是个什么玩意儿？<br>
+于是只能先去查阅一些资料。</p>
+<h1 id="1技术支持"><a class="markdownIt-Anchor" href="#1技术支持"></a> 1.技术支持</h1>
+<p>在稍微了解了控制台API函数后，发现这一堆巨长的字母也就是这么回事，虽然没背过，但拿过来用还是可以的。</p>
+<p><strong>移动光标的函数</strong><br>
+个人感觉这个算比较重要的</p>
+<p>​<br>
+void Gotoxy(int x, int y)<br>
+{<br>
+COORD position = { y, x };<br>
+SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);<br>
+}</p>
+<p><strong>更改字体颜色的函数</strong><br>
+这个可以不要，纯粹是为了好看</p>
+<p>​<br>
+int color(int c)<br>
+{<br>
+//SetConsoleTextAttribute是API设置控制台窗口字体颜色和背景色的函数<br>
+SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);<br>
+return 0;<br>
+}</p>
+<p><strong>隐藏光标的函数</strong><br>
+在制作的过程中发现光标一闪一闪的很碍眼，最初的操作是在不需要在地图上打印东西时把光标移动到（0，0），但发现有时候光标还是会在地图内闪烁，于是加入了这个函数（这里对我来说有一个问题，会在“遗留问题部分说明”）</p>
+<p>​<br>
+void cursor_visible(int size,int visible)<br>
+{<br>
+CONSOLE_CURSOR_INFO cursor_info;<br>
+cursor_info.bVisible=visible;<br>
+cursor_info.dwSize=size;<br>
+SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &amp;cursor_info);<br>
+}</p>
+<p><strong>其他</strong><br>
+笔者自己的理解：<br>
+fflush(stdin);清空缓冲区<br>
+system(“cls”);刷屏<br>
+_kbhit() 相应键盘输入<br>
+getch() 接收字符</p>
+<h1 id="2前期设定"><a class="markdownIt-Anchor" href="#2前期设定"></a> 2.前期设定</h1>
+<p>设置一些基本的要素，如一些宏定义，全局变量，蛇与食物的结构体，函数声明，下面的代码中有一些时一开始就写上的，有一些是边写边加的（做完之后发现相较于最初的设想，改了好多东西）。<br>
+<strong>我把它们写在了自己的头文件head.h里：</strong></p>
+<p>​<br>
+#ifndef HEAD_H_INCLUDED<br>
+#define HEAD_H_INCLUDED<br>
+#define TALL 30//地图高度<br>
+#define DBW 68//地图宽度<br>
+#define SNAKE_MAXLEN 500//蛇的极限长度（用于定义数组）<br>
+#define SNAKE_INI_LEN 4<br>
+#define SNAKE_INI_DELAY 200<br>
+void cursor_visible(int,int);<br>
+int color(int);<br>
+void Gotoxy(int,int);<br>
+void welcome(void);<br>
+void printboard(void);<br>
+void printnotes(void);<br>
+void printsnake(void);<br>
+void printfood(void);<br>
+void snakemove(void);<br>
+int jgameover(void);<br>
+void gameover(int);<br>
+int jeat(void);<br>
+void repr_info(void);<br>
+int score;<br>
+struct<br>
+{<br>
+int x[SNAKE_MAXLEN];<br>
+int y[SNAKE_MAXLEN];<br>
+int delay;<br>
+int len;//目前蛇的长度<br>
+int dire;//direction蛇的移动方向<br>
+}snake;<br>
+struct<br>
+{<br>
+int x;<br>
+int y;<br>
+}food;<br>
+#endif // HEAD_H_INCLUDED</p>
+<p>看别人写的贪吃蛇都没有用数组来记录蛇的位置，（猜）可能是因为数组会占用连续的空间，这样不太好。<br>
+（2020.04.15更新：他们都用的链表，当时我都没听过这东西）</p>
+<h1 id="3着手实现"><a class="markdownIt-Anchor" href="#3着手实现"></a> 3.着手实现</h1>
+<p><strong>显示最初界面的函数</strong></p>
+<p>​<br>
+void welcome(void)<br>
+{<br>
+color(6);<br>
+Gotoxy(3,10);<br>
+printf(“欢迎来到真·终极蛇皮上帝视角之皮死人不偿命之来回咕畜之贪吃蛇！”);<br>
+Gotoxy(6,10);<br>
+printf(“不温馨的提示：请先把游戏窗口调整至&quot;足够大”，否则后果自负&quot;);<br>
+Gotoxy(9,10);<br>
+printf(“按E可赛艇…  我是指按任意键开始游戏。”);<br>
+Gotoxy(12,10);<br>
+color(7);<br>
+system(“pause”);<br>
+}</p>
+<p>效果图<br>
+![效果图](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/2020020420582644.png?x-oss-">https://img-blog.csdnimg.cn/2020020420582644.png?x-oss-</a><br>
+process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70)<br>
+<strong>画地图</strong><br>
+发现代码写得好粗啊，浪费资源</p>
+<p>​<br>
+void printboard(void)<br>
+{<br>
+int i,j;<br>
+system(“cls”);<br>
+color(9);<br>
+for(i=0;i&lt;=TALL;i++)<br>
+for(j=0;j&lt;=DBW;j+=2)<br>
+if(i<mark>0||i</mark>TALL||j<mark>0||j</mark>DBW)<br>
+{<br>
+Gotoxy(i,j);<br>
+printf(“■”);<br>
+}<br>
+color(7);<br>
+}</p>
+<p><strong>显示地图之外的一些信息</strong></p>
+<p>​<br>
+void printnotes(void)<br>
+{<br>
+color(2);<br>
+Gotoxy(3,74);<br>
+printf(“当前得分：%d”,score);<br>
+Gotoxy(4,74);<br>
+printf(“当前蛇长：%d节”,SNAKE_INI_LEN);<br>
+Gotoxy(8,74);<br>
+printf(“当前难度：较为平和”);<br>
+Gotoxy(9,74);<br>
+printf(“等待延迟：%d    ms（最小为20ms）”,SNAKE_INI_DELAY);<br>
+//Gotoxy(12,74);<br>
+//printf(“历史最高分为：”);<br>
+color(7);<br>
+}</p>
+<p><strong>画静态蛇</strong></p>
+<p>​<br>
+void printsnake(void)<br>
+{<br>
+snake.x[0]=TALL/2;<br>
+snake.y[0]=DBW/2;<br>
+snake.delay=SNAKE_INI_DELAY;<br>
+snake.len=SNAKE_INI_LEN;<br>
+snake.dire=‘w’;<br>
+Gotoxy(snake.x[0],snake.y[0]);<br>
+printf(“⊙”);<br>
+for(int i=1;i&lt;4;i++)<br>
+{<br>
+snake.x[i]=snake.x[i-1];<br>
+snake.y[i]=snake.y[i-1]+2;<br>
+Gotoxy(snake.x[i],snake.y[i]);<br>
+printf(“■”);<br>
+}</p>
+<p><strong>随机生成食物</strong><br>
+要通过一些措施保证食物在地图之内，而且还不能出现在蛇的身上。（这里也存在一个问题，会在之后的“遗留问题”部分说明。）<br>
+需要注意一个细节，‘■’会横向占用两个字节，所以要让它们统一在偶数坐标生成</p>
+<p>​<br>
+void printfood(void)<br>
+{<br>
+food.x=rand()%(TALL-2)+1;<br>
+food.y=rand()%(DBW-4)+2;<br>
+if(food.y%2)<br>
+food.y++;<br>
+int notput=1;<br>
+while(notput)<br>
+{<br>
+for(int i=0;i&lt;snake.len;i++)<br>
+{<br>
+if(!(food.x<mark>snake.x[i]&amp;&amp;food.y</mark>snake.y[i]))<br>
+{<br>
+Gotoxy(food.x,food.y);<br>
+printf(“奥”);<br>
+notput=0;<br>
+break;<br>
+}<br>
+}<br>
+}<br>
+}</p>
+<p><strong>蛇的移动</strong><br>
+思路是先记录蛇最后一节的位置，用“<br>
+”（两个空格）覆盖蛇尾，在蛇的移动方向的下一个位置画蛇头，如果蛇吃到了食物，则在擦去的地方给蛇补充一节，一些相应的信息也要作改变<br>
+查阅资料得到了_kbhit()和getch()的用法，_kbhit()可以响应键盘输入（大概），getch()可以接收字符，由于作者的了解也不深入，所以不多说。<br>
+PS:隐藏光标的操作是后来加上的，导致某些移动光标的操作纯属多余</p>
+<p>​<br>
+void snakemove(void)<br>
+{<br>
+int lastx=snake.x[snake.len-1],lasty=snake.y[snake.len-1];<br>
+if(_kbhit())<br>
+{<br>
+fflush(stdin);<br>
+snake.dire=getch();<br>
+}<br>
+for(int i=snake.len-1;i&gt;0;i–)<br>
+{<br>
+snake.x[i]=snake.x[i-1];<br>
+snake.y[i]=snake.y[i-1];<br>
+}<br>
+switch(snake.dire)<br>
+{<br>
+case ‘w’:<br>
+case ‘W’:<br>
+snake.x[0]-=1;<br>
+break;<br>
+case ‘S’:<br>
+case ‘s’:<br>
+snake.x[0]+=1;<br>
+break;<br>
+case ‘A’:<br>
+case ‘a’:<br>
+snake.y[0]-=2;<br>
+break;<br>
+case ‘D’:<br>
+case ‘d’:<br>
+snake.y[0]+=2;<br>
+break;<br>
+}<br>
+Gotoxy(snake.x[1],snake.y[1]);<br>
+printf(“■”);<br>
+Gotoxy(snake.x[0],snake.y[0]);<br>
+printf(“⊙”);<br>
+if(jeat())<br>
+{<br>
+score++;<br>
+if(snake.len&lt;SNAKE_MAXLEN)<br>
+snake.len++;<br>
+if(snake.delay&gt;=22)<br>
+snake.delay-=2;<br>
+snake.x[snake.len-1]=lastx;<br>
+snake.y[snake.len-1]=lasty;<br>
+printfood();<br>
+repr_info();<br>
+}<br>
+else<br>
+{<br>
+Gotoxy(lastx,lasty);<br>
+printf(&quot;  &quot;);<br>
+}<br>
+Gotoxy(0,0);<br>
+}</p>
+<p><strong>在蛇吃到食物后，改变一些显示信息</strong><br>
+reprint information</p>
+<p>​<br>
+void repr_info(void)<br>
+{<br>
+Gotoxy(3,84);<br>
+color(2);<br>
+printf(&quot;%d&quot;,score);<br>
+Gotoxy(4,84);<br>
+printf(&quot;%d&quot;,snake.len);<br>
+Gotoxy(8,84);<br>
+if(snake.delay&gt;=170)<br>
+printf(“较为平和”);<br>
+else if(snake.delay&gt;=120)<br>
+printf(“略高一筹”);<br>
+else if(snake.delay&gt;=90)<br>
+printf(“考验手速”);<br>
+else if(snake.delay&gt;=50)<br>
+printf(“高能预警”);<br>
+else if(snake.delay&gt;=22)<br>
+printf(“终极蛇皮”);<br>
+else<br>
+printf(&quot;MAX     “);<br>
+Gotoxy(9,84);<br>
+printf(”%d  &quot;,snake.delay);<br>
+color(7);<br>
+}</p>
+<p><strong>检验是否吃到食物</strong><br>
+judge eat</p>
+<p>​<br>
+int jeat(void)<br>
+{<br>
+if(food.x<mark>snake.x[0]&amp;&amp;food.y</mark>snake.y[0])<br>
+return 1;<br>
+return 0;<br>
+}</p>
+<p><strong>检验蛇是否死亡</strong></p>
+<p>​<br>
+int jgameover(void)<br>
+{<br>
+if(snake.x[0]==TALL||snake.x[0]==0||snake.y[0]==0||snake.y[0]==DBW)<br>
+return 1;<br>
+for(int i=1;i&lt;snake.len;i++)<br>
+{<br>
+if(snake.x[0]==snake.x[i]&amp;&amp;snake.y[0]==snake.y[i])<br>
+return 2;<br>
+}<br>
+return 0;<br>
+}</p>
+<p><strong>打印死亡后显示的一些东西</strong></p>
+<p>​<br>
+void gameover(int j)<br>
+{<br>
+Gotoxy(20,75);<br>
+printf(“Game over\n”);<br>
+Gotoxy(21,73);<br>
+if(j<mark>1)<br>
+printf(“死因：铁齿铜牙与头铁”);<br>
+else if(j</mark>2)<br>
+printf(“死因：我吃我自己”);<br>
+}</p>
+<h1 id="以下是所有代码"><a class="markdownIt-Anchor" href="#以下是所有代码"></a> 以下是所有代码</h1>
+<h2 id="头文件"><a class="markdownIt-Anchor" href="#头文件"></a> 头文件</h2>
+<p>​<br>
+#ifndef HEAD_H_INCLUDED<br>
+#define HEAD_H_INCLUDED<br>
+#define TALL 30//地图高度<br>
+#define DBW 68//地图宽度<br>
+#define SNAKE_MAXLEN 500//蛇的极限长度（用于定义数组）<br>
+#define SNAKE_INI_LEN 4<br>
+#define SNAKE_INI_DELAY 200<br>
+void cursor_visible(int,int);<br>
+int color(int);<br>
+void Gotoxy(int,int);<br>
+void welcome(void);<br>
+void printboard(void);<br>
+void printnotes(void);<br>
+void printsnake(void);<br>
+void printfood(void);<br>
+void snakemove(void);<br>
+int jgameover(void);<br>
+void gameover(int);<br>
+int jeat(void);<br>
+void repr_info(void);<br>
+int score;<br>
+struct<br>
+{<br>
+int x[SNAKE_MAXLEN];<br>
+int y[SNAKE_MAXLEN];<br>
+int delay;<br>
+int len;//目前蛇的长度<br>
+int dire;//direction蛇的移动方向<br>
+}snake;<br>
+struct<br>
+{<br>
+int x;<br>
+int y;<br>
+}food;</p>
+<p>​<br>
+#endif // HEAD_H_INCLUDED</p>
+<p>​<br>
+​</p>
+<h2 id="源文件"><a class="markdownIt-Anchor" href="#源文件"></a> 源文件</h2>
+<p>主函数单独写了</p>
+<p>​<br>
+#include &lt;stdio.h&gt;<br>
+#include &lt;stdlib.h&gt;<br>
+#include &lt;windows.h&gt;<br>
+#include &lt;unistd.h&gt;<br>
+#include &lt;time.h&gt;<br>
+#include &lt;string.h&gt;<br>
+#include “head.h”<br>
+void cursor_visible(int size,int visible)<br>
+{<br>
+CONSOLE_CURSOR_INFO cursor_info;<br>
+cursor_info.bVisible=visible;<br>
+cursor_info.dwSize=size;<br>
+SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &amp;cursor_info);<br>
+}<br>
+int color(int c)<br>
+{<br>
+//SetConsoleTextAttribute是API设置控制台窗口字体颜色和背景色的函数<br>
+SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);<br>
+return 0;<br>
+}<br>
+void Gotoxy(int x, int y)<br>
+{<br>
+COORD position = { y, x };<br>
+SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);<br>
+}<br>
+void welcome(void)<br>
+{<br>
+color(6);<br>
+Gotoxy(3,10);<br>
+printf(“欢迎来到真·终极蛇皮上帝视角之皮死人不偿命之来回咕畜之贪吃蛇！”);<br>
+Gotoxy(6,10);<br>
+printf(“不温馨的提示：请先把游戏窗口调整至&quot;足够大”，否则后果自负&quot;);<br>
+Gotoxy(9,10);<br>
+printf(“按E可赛艇…  我是指按任意键开始游戏。”);<br>
+Gotoxy(12,10);<br>
+color(7);<br>
+system(“pause”);<br>
+}<br>
+void printboard(void)<br>
+{<br>
+int i,j;<br>
+system(“cls”);<br>
+color(9);<br>
+for(i=0;i&lt;=TALL;i++)<br>
+for(j=0;j&lt;=DBW;j+=2)<br>
+if(i<mark>0||i</mark>TALL||j<mark>0||j</mark>DBW)<br>
+{<br>
+Gotoxy(i,j);<br>
+printf(“■”);<br>
+}<br>
+color(7);<br>
+}<br>
+void printnotes(void)<br>
+{<br>
+color(2);<br>
+Gotoxy(3,74);<br>
+printf(“当前得分：%d”,score);<br>
+Gotoxy(4,74);<br>
+printf(“当前蛇长：%d节”,SNAKE_INI_LEN);<br>
+Gotoxy(8,74);<br>
+printf(“当前难度：较为平和”);<br>
+Gotoxy(9,74);<br>
+printf(“等待延迟：%d    ms（最小为20ms）”,SNAKE_INI_DELAY);<br>
+//Gotoxy(12,74);<br>
+//printf(“历史最高分为：”);<br>
+color(7);<br>
+}<br>
+void printsnake(void)<br>
+{<br>
+snake.x[0]=TALL/2;<br>
+snake.y[0]=DBW/2;<br>
+snake.delay=SNAKE_INI_DELAY;<br>
+snake.len=SNAKE_INI_LEN;<br>
+snake.dire=‘w’;<br>
+Gotoxy(snake.x[0],snake.y[0]);<br>
+printf(“⊙”);<br>
+for(int i=1;i&lt;4;i++)<br>
+{<br>
+snake.x[i]=snake.x[i-1];<br>
+snake.y[i]=snake.y[i-1]+2;<br>
+Gotoxy(snake.x[i],snake.y[i]);<br>
+printf(“■”);<br>
+}</p>
+<pre><code>&#125;
+void printfood(void)
+&#123;
+    food.x=rand()%(TALL-2)+1;
+    food.y=rand()%(DBW-4)+2;
+    if(food.y%2)
+        food.y++;
+    int notput=1;
+    while(notput)
+    &#123;
+        for(int i=0;i&lt;snake.len;i++)
+        &#123;
+            if(!(food.x==snake.x[i]&amp;&amp;food.y==snake.y[i]))
+            &#123;
+                Gotoxy(food.x,food.y);
+                printf(&quot;奥&quot;);
+                notput=0;
+                break;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+void snakemove(void)
+&#123;
+    int lastx=snake.x[snake.len-1],lasty=snake.y[snake.len-1];
+    if(_kbhit())
+    &#123;
+        fflush(stdin);
+        snake.dire=getch();
+    &#125;
+    for(int i=snake.len-1;i&gt;0;i--)
+    &#123;
+        snake.x[i]=snake.x[i-1];
+        snake.y[i]=snake.y[i-1];
+    &#125;
+    switch(snake.dire)
+    &#123;
+    case 'w':
+    case 'W':
+        snake.x[0]-=1;
+        break;
+    case 'S':
+    case 's':
+        snake.x[0]+=1;
+        break;
+    case 'A':
+    case 'a':
+        snake.y[0]-=2;
+        break;
+    case 'D':
+    case 'd':
+        snake.y[0]+=2;
+        break;
+    &#125;
+    Gotoxy(snake.x[1],snake.y[1]);
+    printf(&quot;■&quot;);
+    Gotoxy(snake.x[0],snake.y[0]);
+    printf(&quot;⊙&quot;);
+    if(jeat())
+    &#123;
+        score++;
+        if(snake.len&lt;SNAKE_MAXLEN)
+            snake.len++;
+        if(snake.delay&gt;=22)
+            snake.delay-=2;
+        snake.x[snake.len-1]=lastx;
+        snake.y[snake.len-1]=lasty;
+        printfood();
+        repr_info();
+    &#125;
+    else
+    &#123;
+        Gotoxy(lastx,lasty);
+        printf(&quot;  &quot;);
+    &#125;
+    Gotoxy(0,0);
+&#125;
+int jgameover(void)
+&#123;
+    if(snake.x[0]==TALL||snake.x[0]==0||snake.y[0]==0||snake.y[0]==DBW)
+        return 1;
+    for(int i=1;i&lt;snake.len;i++)
+    &#123;
+        if(snake.x[0]==snake.x[i]&amp;&amp;snake.y[0]==snake.y[i])
+            return 2;
+    &#125;
+    return 0;
+&#125;
+void gameover(int j)
+&#123;
+    Gotoxy(20,75);
+    printf(&quot;Game over\n&quot;);
+    Gotoxy(21,73);
+    if(j==1)
+        printf(&quot;死因：铁齿铜牙与头铁&quot;);
+    else if(j==2)
+        printf(&quot;死因：我吃我自己&quot;);
+&#125;
+int jeat(void)
+&#123;
+    if(food.x==snake.x[0]&amp;&amp;food.y==snake.y[0])
+        return 1;
+    return 0;
+&#125;
+void repr_info(void)
+&#123;
+    Gotoxy(3,84);
+    color(2);
+    printf(&quot;%d&quot;,score);
+    Gotoxy(4,84);
+    printf(&quot;%d&quot;,snake.len);
+    Gotoxy(8,84);
+    if(snake.delay&gt;=170)
+        printf(&quot;较为平和&quot;);
+    else if(snake.delay&gt;=120)
+        printf(&quot;略高一筹&quot;);
+    else if(snake.delay&gt;=90)
+        printf(&quot;考验手速&quot;);
+    else if(snake.delay&gt;=50)
+        printf(&quot;高能预警&quot;);
+    else if(snake.delay&gt;=22)
+        printf(&quot;终极蛇皮&quot;);
+    else
+        printf(&quot;MAX     &quot;);
+    Gotoxy(9,84);
+    printf(&quot;%d  &quot;,snake.delay);
+    color(7);
+&#125;
+</code></pre>
+<p>​</p>
+<h2 id="主函数"><a class="markdownIt-Anchor" href="#主函数"></a> 主函数</h2>
+<p>​<br>
+int main()<br>
+{<br>
+cursor_visible(25,0);<br>
+score=0;<br>
+srand(time(NULL));<br>
+welcome();<br>
+printboard();<br>
+printnotes();<br>
+printsnake();<br>
+printfood();<br>
+while(1)<br>
+{<br>
+int j;<br>
+snakemove();<br>
+if(j=jgameover())<br>
+{<br>
+gameover(j);<br>
+break;<br>
+}<br>
+Sleep(snake.delay);<br>
+}<br>
+Gotoxy(TALL+1,0);<br>
+cursor_visible(25,1);<br>
+system(“pause”);<br>
+return 0;<br>
+}</p>
+<p>​</p>
+<p>游戏效果图<br>
+![游戏效果图](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20200204215133333.png?x-oss-">https://img-blog.csdnimg.cn/20200204215133333.png?x-oss-</a><br>
+process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70)</p>
+<h1 id="遗留问题"><a class="markdownIt-Anchor" href="#遗留问题"></a> 遗留问题</h1>
+<p><strong>1.关于随机生成食物（程序问题）</strong><br>
+笔者认为已经对食物的出现未知作出了判断，但在实际操作过程中还是会出现食物生成在蛇身上的状况</p>
+<p><strong>2.关于光标隐藏（知识盲点）</strong><br>
+笔者最早的光标移动函数是这么写的</p>
+<p>​<br>
+void cursor_visible(int visible)<br>
+{<br>
+CONSOLE_CURSOR_INFO cursor_info;<br>
+cursor_info.bVisible=visible;<br>
+SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &amp;cursor_info);<br>
+}</p>
+<p>但发现通过cursor_visible(0);这个操作并不能隐藏光标。<br>
+本着一本正经乱改的心态改成了这样</p>
+<p>​<br>
+void cursor_visible(int size,int visible)<br>
+{<br>
+CONSOLE_CURSOR_INFO cursor_info;<br>
+cursor_info.bVisible=visible;<br>
+cursor_info.dwSize=size;<br>
+SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &amp;cursor_info);<br>
+}</p>
+<p>笔者认为调节光标尺寸应该与是否隐藏光标没什么关系，然而事实却是即使使用光标的默认尺寸25（即不对光标尺寸做更改），通过cursor_visible(25，0);也可以隐藏光标。</p>
+<p><strong>3.当快速连续有效输入（程序问题）</strong><br>
+当快速连续按下方向键，比如“sdsdsdsdsdsdsdsdsdsdsd”，（猜）可能有大量的字符留在缓冲区，使蛇“延迟”，不听操作，但笔者暂时不会修正这个bug。</p>
+<p><strong>4.蛇可以直接反向撞自己导致死亡</strong><br>
+可能需要加入一些限制，比如snake.dire=‘w’时不能直接反向改变其值为’s’</p>
+<p><strong>5.可能还存在众多未发现的问题</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90C%E8%AF%AD%E8%A8%80%E3%80%91%E5%B0%9D%E8%AF%95%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AA%E5%90%83%E8%9B%87/" data-id="cl50x8cn3002tccj3a3ki0u5m" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【折半搜索】 洛谷  P4799 [CEOI2015 Day2]世界冰球锦标赛" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E6%8A%98%E5%8D%8A%E6%90%9C%E7%B4%A2%E3%80%91%20%E6%B4%9B%E8%B0%B7%20%20P4799%20%5BCEOI2015%20Day2%5D%E4%B8%96%E7%95%8C%E5%86%B0%E7%90%83%E9%94%A6%E6%A0%87%E8%B5%9B/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E6%8A%98%E5%8D%8A%E6%90%9C%E7%B4%A2%E3%80%91%20%E6%B4%9B%E8%B0%B7%20%20P4799%20%5BCEOI2015%20Day2%5D%E4%B8%96%E7%95%8C%E5%86%B0%E7%90%83%E9%94%A6%E6%A0%87%E8%B5%9B/">【折半搜索】 洛谷  P4799 [CEOI2015 Day2]世界冰球锦标赛.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2/">搜索</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<p><s>我只会看题解和抄题解</s></p>
+<h3 id="普通搜索在这道题中存在的问题"><a class="markdownIt-Anchor" href="#普通搜索在这道题中存在的问题"></a> 普通搜索在这道题中存在的问题</h3>
+<p>一共最多有40场比赛，每一场比赛有看和不看2种选择，如果求看40场比赛一共有多少选择，最多有2^40种可能性，时间复杂度太高。</p>
+<h3 id="折半搜索思路"><a class="markdownIt-Anchor" href="#折半搜索思路"></a> 折半搜索思路</h3>
+<p>1.把这40场比赛拆开，看成2个20场的比赛分别进行常规搜索。但是这两次常规搜索得到的所有的可能性所花费的金钱都要用数组记录下来。（<br>
+<s>数组中记录的是所有的可能性所花费的金钱，若金钱有相同的，也会重复记录下来，因为我们不是要找到所有的花费数目，而是找到所有的看比赛的可能性花费的金钱）</s><br>
+2.把其中一个用于记录的数组排序。<br>
+3.遍历另一个没排序的数组,假设其为s[]。s[i]表示在s[]数组涵盖的一半的场次中的第i个可能性所花费的金钱，m-s[i]表示当第i个的可能性发生时可以花费在另外一半的场次中的金钱。于是可以对排过序的数组折半查找m-s[i]这个数。找到的位置前面有多少个元素，一半场次的第i个可能性便在所有的场次中拥有几种可能性。</p>
+<p>​</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> <span class="type">int</span> LL;</span><br><span class="line">LL s1[<span class="number">2000000</span>],s2[<span class="number">2000000</span>];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line">LL m;</span><br><span class="line">LL qu[<span class="number">45</span>];</span><br><span class="line"><span class="type">int</span> cnt1,cnt2;</span><br><span class="line">LL ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> &amp;cnt,LL total,LL s[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(m &lt; total) <span class="keyword">return</span>;</span><br><span class="line">   <span class="keyword">if</span>(l&gt;r)&#123;</span><br><span class="line">      s[++cnt] = total;</span><br><span class="line">      <span class="comment">//std::cout &lt;&lt; &quot;cnt=&quot; &lt;&lt; cnt &lt;&lt; &quot; s[&quot; &lt;&lt; cnt &lt;&lt; &quot;]=&quot; &lt;&lt; s[cnt] &lt;&lt; std::endl;</span></span><br><span class="line">      <span class="keyword">return</span> ;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">dfs</span>(l+<span class="number">1</span>,r,cnt,total,s);</span><br><span class="line">   <span class="built_in">dfs</span>(l+<span class="number">1</span>,r,cnt,total+qu[l],s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="built_in">scanf</span>(<span class="string">&quot;%d%lld&quot;</span>,&amp;n,&amp;m);</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>,&amp;qu[i]);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="type">int</span> mid = (<span class="number">1</span>+n) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">   cnt1 = cnt2 = ans = <span class="number">0</span>;</span><br><span class="line">   <span class="built_in">dfs</span>(<span class="number">1</span>,mid,cnt1,<span class="number">0</span>,s1);</span><br><span class="line">   <span class="built_in">dfs</span>(mid+<span class="number">1</span>,n,cnt2,<span class="number">0</span>,s2);</span><br><span class="line">   std::<span class="built_in">sort</span>(s1+<span class="number">1</span>,s1+cnt1+<span class="number">1</span>);</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=cnt2; i++)&#123;</span><br><span class="line">      LL left = m-s2[i];</span><br><span class="line">      <span class="keyword">if</span>(left &gt;= <span class="number">0</span> )&#123;</span><br><span class="line">      <span class="comment">//最开始忘了加等号，导致当s2[i]=m(金钱上限)时，不会统计在s2看m块钱，不在s1看的情况</span></span><br><span class="line">      <span class="comment">//其实这个if不用要，刚开始啥也不会，就瞎写的。</span></span><br><span class="line">         <span class="type">int</span> ii = std::<span class="built_in">upper_bound</span>(s1+<span class="number">1</span>,s1+<span class="number">1</span>+cnt1,left)-(s1+<span class="number">1</span>);</span><br><span class="line">         <span class="comment">//std::cout &lt;&lt; &quot;s2[&quot; &lt;&lt; i &lt;&lt; &quot;]有&quot; &lt;&lt; ii &lt;&lt; &quot;种情况&quot; &lt;&lt; std::endl;</span></span><br><span class="line">         ans += ii;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>,ans);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%8A%98%E5%8D%8A%E6%90%9C%E7%B4%A2%E3%80%91%20%E6%B4%9B%E8%B0%B7%20%20P4799%20[CEOI2015%20Day2]%E4%B8%96%E7%95%8C%E5%86%B0%E7%90%83%E9%94%A6%E6%A0%87%E8%B5%9B/" data-id="cl50x8cn4002vccj37fg1bcn8" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【换根DP】Tree and Permutation" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E6%8D%A2%E6%A0%B9DP%E3%80%91Tree%20and%20Permutation/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E6%8D%A2%E6%A0%B9DP%E3%80%91Tree%20and%20Permutation/">【换根DP】Tree and Permutation.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/DP/">DP</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h1 id="tree-and-permutation-hud6446"><a class="markdownIt-Anchor" href="#tree-and-permutation-hud6446"></a> Tree and Permutation HUD6446</h1>
+<h2 id="题目大意"><a class="markdownIt-Anchor" href="#题目大意"></a> 题目大意</h2>
+<p>给你一颗n个点的树， 有边权，求这个东西：<br>
+Σ i = 1 n Σ j = 1 n d i s [ i t o j ] ∗ ( n − 1 ) ! \Sigma_{i = 1} ^n<br>
+\Sigma_{j = 1}^n dis[i<sub>to</sub>j] * (n - 1) ! Σi=1n​Σj=1n​dis[i to j]∗(n−1)!</p>
+<h2 id="换根dp"><a class="markdownIt-Anchor" href="#换根dp"></a> 换根dp</h2>
+<p>用换根dp算前面一坨， 然后 * (n - 1)!<br>
+先dfs（类似树形dp）求任意一个点a到所有点的距离part[a]。<br>
+然后可以由已知点x的答案part[x]做简单变换， 推导出与x相邻的未知答案的点集Y (向量)的答案part[Y] (向量)， 所以又是一次DFS<br>
+然后对所有part求Sigma， 再乘 (n-1)! 记得取模。 完毕。</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<p>​<br>
+#include &lt;bits/stdc++.h&gt;<br>
+const int N = 1e5 + 4, MOD = 1e9 + 7;<br>
+int n, u, v, ipart = 1, idx;<br>
+int size[N], head[N];<br>
+long long dis[N], part[N], re, w;<br>
+struct Edge{ int to, nxt; long long w; }edg[N &lt;&lt; 1];<br>
+inline void addE(int fr, int to, long long w){<br>
+edg[++ idx] = (Edge){to, head[fr], w}; head[fr] = idx;<br>
+edg[++ idx] = (Edge){fr, head[to], w}; head[to] = idx;<br>
+}<br>
+void dfs(int x, int fa){<br>
+size[x] = 1;<br>
+for(int e=head[x]; e; e=edg[e].nxt){<br>
+int y = edg[e].to;<br>
+if(y == fa) continue;<br>
+dis[y] = dis[x] + edg[e].w;<br>
+dfs(y, x);<br>
+size[x] += size[y];<br>
+}<br>
+part[ipart] = (part[ipart] + dis[x]) % MOD;<br>
+}<br>
+void dfsN(int x, int fa){<br>
+re = (re + part[x]) % MOD;<br>
+for(int e=head[x]; e; e=edg[e].nxt){<br>
+int y = edg[e].to;<br>
+if(y == fa) continue;<br>
+part[y] = part[x] + (n - (size[y] &lt;&lt; 1)) * edg[e].w;<br>
+dfsN(y, x);<br>
+}<br>
+}<br>
+int main(){<br>
+while(scanf(&quot;%d&quot;, &amp;n) != EOF){<br>
+idx = 1, re = 0, part[ipart] = 0;<br>
+memset(head, 0, sizeof(head));<br>
+memset(size, 0, sizeof(size));<br>
+memset(dis, 0, sizeof(dis));<br>
+for(int i=1; i&lt;n; i++){<br>
+scanf(&quot;%d%d%d&quot;, &amp;u, &amp;v, &amp;w);<br>
+addE(u, v, w);<br>
+}<br>
+dfs(ipart, -1);<br>
+dfsN(ipart, -1);<br>
+re = (re + MOD) % MOD;<br>
+for(int i=n-1; i&gt;=1; i–) re = re * i % MOD;<br>
+printf(&quot;%lld\n&quot;, re);<br>
+}<br>
+return 0;<br>
+}</p>
+<h2 id="描述"><a class="markdownIt-Anchor" href="#描述"></a> 描述</h2>
+<p>There are N vertices connected by N−1 edges, each edge has its own length.<br>
+The set { 1,2,3,…,N } contains a total of N! unique permutations, let’s say<br>
+the i-th permutation is Pi and Pi,j is its j-th number.<br>
+For the i-th permutation, it can be a traverse sequence of the tree with N<br>
+vertices, which means we can go from the Pi,1-th vertex to the Pi,2-th vertex<br>
+by the shortest path, then go to the Pi,3-th vertex ( also by the shortest<br>
+path ) , and so on. Finally we’ll reach the Pi,N-th vertex, let’s define the<br>
+total distance of this route as D(Pi) , so please calculate the sum of D(Pi)<br>
+for all N! permutations.</p>
+<h2 id="input"><a class="markdownIt-Anchor" href="#input"></a> Input</h2>
+<p>There are 10 test cases at most.<br>
+The first line of each test case contains one integer N ( 1≤N≤105 ) .<br>
+For the next N−1 lines, each line contains three integer X, Y and L, which<br>
+means there is an edge between X-th vertex and Y-th of length L (<br>
+1≤X,Y≤N,1≤L≤109 ) .</p>
+<h2 id="output"><a class="markdownIt-Anchor" href="#output"></a> Output</h2>
+<p>For each test case, print the answer module 109+7 in one line.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%8D%A2%E6%A0%B9DP%E3%80%91Tree%20and%20Permutation/" data-id="cl50x8cn50030ccj3378217ys" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【数位DP】 洛谷 P2602 [ZJOI2010]数字计数 P2657 [SCOI2009] windy 数" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E6%95%B0%E4%BD%8DDP%E3%80%91%20%E6%B4%9B%E8%B0%B7%20P2602%20%5BZJOI2010%5D%E6%95%B0%E5%AD%97%E8%AE%A1%E6%95%B0%20P2657%20%5BSCOI2009%5D%20windy%20%E6%95%B0/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E6%95%B0%E4%BD%8DDP%E3%80%91%20%E6%B4%9B%E8%B0%B7%20P2602%20%5BZJOI2010%5D%E6%95%B0%E5%AD%97%E8%AE%A1%E6%95%B0%20P2657%20%5BSCOI2009%5D%20windy%20%E6%95%B0/">【数位DP】 洛谷 P2602 [ZJOI2010]数字计数 P2657 [SCOI2009] windy 数.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/DP/">DP</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="洛谷-p2602-zjoi2010数字计数"><a class="markdownIt-Anchor" href="#洛谷-p2602-zjoi2010数字计数"></a> 洛谷 P2602 [ZJOI2010]数字计数</h2>
+<p>​<br>
+#include <iostream><br>
+#include <cstdio><br>
+#include <cstdlib><br>
+#include <cstring><br>
+#include <cmath><br>
+#include <algorithm><br>
+#include <string><br>
+#include <queue><br>
+#include <vector><br>
+#include <stack><br>
+#include <map><br>
+#include <set><br>
+typedef long long int LL;<br>
+const int INF = 0x7fffffff, SCF = 0x3fffffff;<br>
+const int N = 14, M = 1e4+5, K = 1e6+4, T = 10;<br>
+LL dp[N][T][T];<br>
+int dig[N];<br>
+LL a,b;<br>
+LL Qmul(int p)<br>
+{<br>
+LL base = 10, re = 1;<br>
+while§{<br>
+if(p&amp;1) re *= base;<br>
+base *= base;<br>
+p &gt;&gt;= 1;<br>
+}<br>
+return re;<br>
+}<br>
+LL fun(LL x,int num)<br>
+{<br>
+LL ans = 0;<br>
+int len = 0;<br>
+while(x){<br>
+dig[<ins>len] = x%10;<br>
+x /= 10;<br>
+}<br>
+for(int i=1; i&lt;len; i</ins>){<br>
+for(int j=1; j&lt;T; j++){<br>
+ans += dp[i][j][num];<br>
+}<br>
+}<br>
+for(int i=1; i&lt;dig[len]; i++){<br>
+ans += dp[len][i][num];<br>
+}<br>
+for(int i=1; i&lt;len; i++){<br>
+for(int j=0; j&lt;dig[i]; j++){<br>
+ans += dp[i][j][num];<br>
+}<br>
+for(int j=i+1; j&lt;=len; j++){<br>
+if(dig[j] == num) ans += dig[i]*Qmul(i-1);<br>
+//要算上前面的数<br>
+}<br>
+}<br>
+return ans;<br>
+}<br>
+int main()<br>
+{<br>
+scanf(&quot;%lld%lld&quot;,&amp;a,&amp;b);<br>
+for(int i=0; i&lt;T; i++) dp[1][i][i] = 1;<br>
+for(int i=2; i&lt;=13; i++){<br>
+for(int j=0; j&lt;T; j++){<br>
+for(int k=0; k&lt;T; k++){<br>
+for(int r=0; r&lt;T; r++){<br>
+dp[i][j][r] += dp[i-1][k][r];<br>
+}<br>
+}<br>
+dp[i][j][j] += Qmul(i-1);<br>
+}<br>
+}<br>
+for(int i=0; i&lt;T; i++) printf(&quot;%lld &quot;,fun(b+1,i)-fun(a,i));<br>
+return 0;<br>
+}</set></map></stack></vector></queue></string></algorithm></cmath></cstring></cstdlib></cstdio></iostream></p>
+<h2 id="洛谷-p2657-scoi2009-windy-数"><a class="markdownIt-Anchor" href="#洛谷-p2657-scoi2009-windy-数"></a> 洛谷 P2657 [SCOI2009] windy 数</h2>
+<p>抄完数字计数之后照葫芦画瓢做的这道题，遂去看了题解。<br>
+离AC只差一句题解上抄来的 if(std::abs(dig[i+1]-dig[i]) &lt;= 1)<br>
+break;，因为函数的参数可能就是一个非windy数，你需要找出这个比这个非windy数小的所有的的windy数，当if(std::abs(dig[i+1]-dig[i])<br>
+&lt;= 1) break;这个条件满足时，之后找到的就必然时非windy数了，自然不需要继续找。<br>
+<s>之前我自己的类似的判断思路错了，写题解的人yyds</s></p>
+<p>​<br>
+#include <iostream><br>
+#include <cstdio><br>
+#include <cstdlib><br>
+#include <cstring><br>
+#include <cmath><br>
+#include <algorithm><br>
+#include <string><br>
+#include <queue><br>
+#include <vector><br>
+#include <stack><br>
+#include <map><br>
+#include <set><br>
+typedef long long int LL;<br>
+const int INF = 0x7fffffff, SCF = 0x3fffffff;<br>
+const int N = 12, M = 1e4+5, T = 10;<br>
+LL dp[N][N];<br>
+int dig[N];<br>
+int a,b;<br>
+void build()<br>
+{<br>
+for(int i=0; i&lt;T; i++) dp[1][i] = 1;<br>
+for(int i=2; i&lt;=T; i++) {<br>
+for(int j=0; j&lt;T; j++){<br>
+for(int k=0; k&lt;T; k++){<br>
+if(std::abs(j-k) &lt;= 1) continue;<br>
+dp[i][j] += dp[i-1][k];<br>
+}<br>
+}<br>
+}<br>
+}<br>
+LL fun(int x)<br>
+{<br>
+LL ans = 0;<br>
+int len = 0;<br>
+while(x){<br>
+dig[<ins>len] = x%10;<br>
+x /= 10;<br>
+}<br>
+for(int i=1; i&lt;len; i</ins>){<br>
+for(int j=1; j&lt;T; j++){<br>
+ans += dp[i][j];<br>
+}<br>
+}<br>
+//std::cout &lt;&lt; &quot; pre: &quot; &lt;&lt; ans;<br>
+for(int j=1; j&lt;dig[len]; j++){<br>
+ans += dp[len][j];<br>
+}<br>
+//std::cout &lt;&lt; &quot; now:&quot; &lt;&lt; ans;<br>
+//if(len &gt;=2 &amp;&amp; std::abs(dig[len]-dig[len-1]) &lt;= 1) return ans;<br>
+for(int i=len-1; i&gt;=1; i–){<br>
+for(int j=0; j&lt;dig[i]; j++){<br>
+if(std::abs(j-dig[i+1]) &lt;= 1) continue;<br>
+ans += dp[i][j];<br>
+}<br>
+if(std::abs(dig[i+1]-dig[i]) &lt;= 1) break;<br>
+}<br>
+//std::cout &lt;&lt; &quot; post:&quot; &lt;&lt; ans &lt;&lt; &quot; “;<br>
+return ans;<br>
+}<br>
+int main()<br>
+{<br>
+scanf(”%d%d&quot;,&amp;a,&amp;b);<br>
+build();<br>
+/*<br>
+for(int i=1; i&lt;141; i++){<br>
+std::cout &lt;&lt; “fun(” &lt;&lt; i &lt;&lt; “): &quot; &lt;&lt; fun(i+1) &lt;&lt; std::endl;<br>
+}<br>
+*/<br>
+printf(”%lld&quot;,fun(b+1)-fun(a));<br>
+return 0;<br>
+}</set></map></stack></vector></queue></string></algorithm></cmath></cstring></cstdlib></cstdio></iostream></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%95%B0%E4%BD%8DDP%E3%80%91%20%E6%B4%9B%E8%B0%B7%20P2602%20[ZJOI2010]%E6%95%B0%E5%AD%97%E8%AE%A1%E6%95%B0%20P2657%20[SCOI2009]%20windy%20%E6%95%B0/" data-id="cl50x8cn50033ccj31fnufgxa" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-【无向图 - 带条件(最小换乘)最短路】L3-014 周游世界 (30分)" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -840,869 +2070,10 @@ print(rfc.predict_proba(Xtest)) #返回每一个样本被分到每一个标签�
 
 
   
-    <article id="post-【机器学习】应用简例 随机森林-小白无脑乱用" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97-%E5%B0%8F%E7%99%BD%E6%97%A0%E8%84%91%E4%B9%B1%E7%94%A8/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97-%E5%B0%8F%E7%99%BD%E6%97%A0%E8%84%91%E4%B9%B1%E7%94%A8/">【机器学习】应用简例 随机森林-小白无脑乱用.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/">教练我想学挂边躲牛</a>,<a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/%E7%9E%8E%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">瞎学机器学习</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<p>发现随机森林的正确率在0.76-0.86左右，多次用随机森林找一个正确率大于0.84的模型输出答案</p>
-<p>这次用到的参数：<br>
-rfc=RandomForestClassifier(n_estimators=100 #决策树的数量<br>
-,criterion=“entropy” #分类标准-信息熵or基尼系数<br>
-,max_depth=4 #决策树最大深度<br>
-,min_samples_split=10) #至少有10个数据，树才会继续分支<br>
-。</p>
-<p>把训练集分为新训练集和新问题集，在这上面验证准确性<br>
-Xtrain, Xtest, Ytrain, Ytest =<br>
-train_test_split(arr_t[:,:-1],arr_t[:,-1],test_size=0.3)<br>
-#（数据集，答案集，如何划分）0.3表示训练集和问题集三七分</p>
-<p>​<br>
-import numpy as np<br>
-import pandas as pd<br>
-from sklearn.ensemble import RandomForestClassifier<br>
-#随机森林分类器<br>
-from sklearn.model_selection import train_test_split<br>
-#功能：将数据集分为训练集测试集 Xtrain,Xtest,Ytrain,Ytest</p>
-<pre><code>df_t=pd.read_excel(r'D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\train.xlsx')
-df_a=pd.read_excel(r'D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\test.xlsx')
-
-def get_data_array_float64(df,test=False):
-    df = df.drop(columns='uid')
-    #去列名对应的列
-    if test == True:
-        df=df.drop(columns ='target')
-        #去列名对应的列
-        
-    col_mode_lst=[]
-    for each_col in df.columns:#获得每一列的众数
-        cnts = df[each_col].value_counts()
-   		#得到每一列的所有值以及它们出现的次数 ，降序排列
-        if '?' in cnts and cnts.index[0] == '?':
-            idx=1
-        else :
-            idx=0
-        col_mode_lst.append(cnts.index[idx])
-
-    for i in range(len(df.columns)):
-        df[df.columns[i]][df[df.columns[i]] == '?'] = col_mode_lst[i]
-        #df[df.columns[i]]按照列名获得列
-		#按照列名获得列，找到列中值为‘？’的元素，将其改成col_mode_lst[i]
-		
-    df_array = df.values.astype(np.float64)
-    #df.values得到DataFrame对象的矩阵形式
-    #,astype()方法为矩阵转化元素类型
-    return df_array
-
-arr_t=get_data_array_float64(df_t)
-arr_a=get_data_array_float64(df_a,True)
-</code></pre>
-<p>​<br>
-Xtrain, Xtest, Ytrain, Ytest = train_test_split(arr_t[:,:-1],arr_t[:,-1],test_size=0.3)</p>
-<pre><code>while True:
-    rfc=RandomForestClassifier(n_estimators=100
-                                ,criterion=&quot;entropy&quot;
-                               ,max_depth=4
-                               ,min_samples_split=10)
-                           		#实例化随机森林
-    rfc = rfc.fit(Xtrain,Ytrain)
-    #训练模型
-    score = rfc.score(Xtest,Ytest)
-    #得到正确率
-    if score&gt;0.84:
-        answer = rfc.predict(arr_a).astype(np.int8).tolist()
-        break
-
-answer_df=pd.DataFrame(answer)
-answer_df.to_excel(r'D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\20201028ans.xlsx')
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97-%E5%B0%8F%E7%99%BD%E6%97%A0%E8%84%91%E4%B9%B1%E7%94%A8/" data-id="cl50x8cna003occj3ed4o6p7n" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" rel="tag">随机森林</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-【树形dp练习】洛谷 P2014选课 P1352没有上司的舞会P2016战略游戏" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E3%80%90%E6%A0%91%E5%BD%A2dp%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P2014%E9%80%89%E8%AF%BE%20P1352%E6%B2%A1%E6%9C%89%E4%B8%8A%E5%8F%B8%E7%9A%84%E8%88%9E%E4%BC%9AP2016%E6%88%98%E7%95%A5%E6%B8%B8%E6%88%8F/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E3%80%90%E6%A0%91%E5%BD%A2dp%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P2014%E9%80%89%E8%AF%BE%20P1352%E6%B2%A1%E6%9C%89%E4%B8%8A%E5%8F%B8%E7%9A%84%E8%88%9E%E4%BC%9AP2016%E6%88%98%E7%95%A5%E6%B8%B8%E6%88%8F/">【树形dp练习】洛谷 P2014选课 P1352没有上司的舞会P2016战略游戏.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/DP/">DP</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="洛谷-p2014选课"><a class="markdownIt-Anchor" href="#洛谷-p2014选课"></a> 洛谷 P2014选课</h2>
-<p>​<br>
-#include <iostream><br>
-#include <cstdio><br>
-#include <algorithm><br>
-#include <cstdlib><br>
-#include <cstring><br>
-#include <cmath><br>
-#include <queue><br>
-#include <vector><br>
-#include <stack><br>
-#include <map><br>
-typedef long long LL;<br>
-const int N = 305;<br>
-int dp[N][N],score[N];<br>
-std::vector<int>son[N];<br>
-int n,m,f,g;</int></map></stack></vector></queue></cmath></cstring></cstdlib></algorithm></cstdio></iostream></p>
-<pre><code>void dfs(int rt)
-&#123;
-   dp[rt][1] = score[rt];
-   dp[rt][0] = 1;
-   for(int i=0; i&lt;son[rt].size(); i++)&#123;
-      int lt = son[rt][i];
-      dfs(lt);
-      dp[rt][0] += dp[lt][0];
-   &#125;
-   int lim = std::min(dp[rt][0],m+1);
-   for(int i=0; i&lt;son[rt].size(); i++)&#123;
-      int lt = son[rt][i];
-      int limk = std::min(dp[lt][0],m+1);
-      for(int j=lim; j&gt;=2; j--)&#123;
-         for(int k=1; k&lt;=limk; k++)&#123;
-            if(j-k &lt;1) break;
-            dp[rt][j] = std::max(dp[rt][j],dp[rt][j-k]+dp[lt][k]);
-         &#125;
-      &#125;
-   &#125;
-&#125;
-</code></pre>
-<p>​<br>
-int main()<br>
-{<br>
-memset(dp,0,sizeof(dp));<br>
-scanf(&quot;%d%d&quot;,&amp;n,&amp;m);<br>
-for(int i=1; i&lt;=n; i++){<br>
-scanf(&quot;%d%d&quot;,&amp;f,&amp;g);<br>
-son[f].push_back(i);<br>
-score[i] = g;<br>
-}<br>
-score[0] = 0;<br>
-dfs(0);<br>
-std::cout &lt;&lt; dp[0][m+1] &lt;&lt; std::endl;<br>
-return 0;<br>
-}</p>
-<p>​<br>
-​</p>
-<p>二刷改良</p>
-<p>​<br>
-#include <iostream><br>
-#include <cstdio><br>
-#include <cstring><br>
-#include <cstdlib><br>
-#include <algorithm><br>
-#include <cmath><br>
-#include <queue><br>
-#include <map><br>
-#include <stack><br>
-#include <set><br>
-#include <vector><br>
-const int N = 305;</vector></set></stack></map></queue></cmath></algorithm></cstdlib></cstring></cstdio></iostream></p>
-<p>​<br>
-std::vector<int> son[N];</int></p>
-<pre><code>int dp[N][N];
-int val[N];
-int n,m,f,v;
-
-void dfs(int x)
-&#123;
-   dp[x][0] = 1;
-   dp[x][1] = val[x];
-   for(int i=0; i&lt;son[x].size(); i++)&#123;
-      int y = son[x][i];
-      dfs(y);
-      dp[x][0] += dp[y][0];
-      for(int j=m+1; j&gt;=2; j--)&#123;
-         int lim = std::min(dp[y][0],j);
-         for(int k=1; k&lt;j; k++)&#123;
-            dp[x][j] = std::max(dp[x][j],dp[x][j-k]+dp[y][k]);
-         &#125;
-      &#125;
-   &#125;
-&#125;
-
-int main()
-&#123;
-   scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
-   val[0] = 0;
-   for(int i=1; i&lt;=n; i++)&#123;
-      scanf(&quot;%d%d&quot;,&amp;f,&amp;v);
-      val[i] = v;
-      son[f].push_back(i);
-   &#125;
-   dfs(0);
-   printf(&quot;%d&quot;,dp[0][m+1]);
-   return 0;
-&#125;
-</code></pre>
-<p>​</p>
-<h2 id="洛谷-p1352-没有上司的舞会"><a class="markdownIt-Anchor" href="#洛谷-p1352-没有上司的舞会"></a> 洛谷 P1352 没有上司的舞会</h2>
-<p>​<br>
-#include &lt;bits/stdc++.h&gt;<br>
-typedef long long LL;</p>
-<pre><code>const int N = 6e3+5;
-std::vector&lt;int&gt; son[N];
-int qu[N],has[N],dp[N][2];
-int n,a,b,rt;
-
-void dfs(int rt)
-&#123;
-   dp[rt][0] = 0;
-   dp[rt][1] = qu[rt];
-   for(int i=0; i&lt;son[rt].size(); i++)&#123;
-      int lt = son[rt][i];
-      dfs(lt);
-      dp[rt][0] += std::max(dp[lt][0],dp[lt][1]);
-      dp[rt][1] += dp[lt][0];
-   &#125;
-&#125;
-</code></pre>
-<p>​<br>
-int main(){<br>
-scanf(&quot;%d&quot;,&amp;n);<br>
-for(int i=1; i&lt;=n; i++){<br>
-scanf(&quot;%d&quot;,&amp;qu[i]);<br>
-}<br>
-for(int i=1; i&lt;n; i++){<br>
-scanf(&quot;%d%d&quot;,&amp;a,&amp;b);<br>
-has[a] = 1;<br>
-son[b].push_back(a);<br>
-}<br>
-for(int i=1; i&lt;=n; i++){<br>
-if(!has[i]){<br>
-rt = i;<br>
-break;<br>
-}<br>
-}<br>
-dfs(rt);<br>
-printf(&quot;%d&quot;,std::max(dp[rt][0],dp[rt][1]));<br>
-return 0;<br>
-}</p>
-<p>​<br>
-​</p>
-<h2 id="洛谷-p2016-战略游戏"><a class="markdownIt-Anchor" href="#洛谷-p2016-战略游戏"></a> 洛谷 P2016 战略游戏</h2>
-<p>​<br>
-#include <cstdio><br>
-#include <iostream><br>
-#include <cstring><br>
-#include <cstdlib><br>
-#include <algorithm><br>
-#include <vector><br>
-typedef std::pair&lt;int ,int&gt; PP;<br>
-const int N = 1502;<br>
-std::vector<int> son[N];<br>
-int n,k,u,v;<br>
-int dp[N][2];<br>
-void dfs(int x)<br>
-{<br>
-dp[x][0] = 0;<br>
-dp[x][1] = 1;<br>
-for(int i=0; i&lt;son[x].size(); i++){<br>
-int y = son[x][i];<br>
-dfs(y);<br>
-dp[x][0] += dp[y][1];<br>
-dp[x][1] += std::min(dp[y][1],dp[y][0]);<br>
-}<br>
-}</int></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
-<pre><code>int main()
-&#123;
-
-   scanf(&quot;%d&quot;,&amp;n);
-   for(int i=0; i&lt;n; i++)&#123;
-      scanf(&quot;%d%d&quot;,&amp;u,&amp;k);
-      for(int j=0; j&lt;k; j++)&#123;
-         scanf(&quot;%d&quot;,&amp;v);
-         son[u].push_back(v);
-      &#125;
-   &#125;
-   dfs(0);
-   printf(&quot;%d&quot;,std::min(dp[0][0],dp[0][1]));
-
-   return 0;
-&#125;
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E5%BD%A2dp%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P2014%E9%80%89%E8%AF%BE%20P1352%E6%B2%A1%E6%9C%89%E4%B8%8A%E5%8F%B8%E7%9A%84%E8%88%9E%E4%BC%9AP2016%E6%88%98%E7%95%A5%E6%B8%B8%E6%88%8F/" data-id="cl50x8cnb003qccj3gx83caeq" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-【树状数组练习】洛谷 树状数组模板1、2 P1908 逆序对" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E3%80%90%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%9D%BF1%E3%80%812%20P1908%20%E9%80%86%E5%BA%8F%E5%AF%B9/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E3%80%90%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%9D%BF1%E3%80%812%20P1908%20%E9%80%86%E5%BA%8F%E5%AF%B9/">【树状数组练习】洛谷 树状数组模板1、2 P1908 逆序对.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E6%80%9D%E6%83%B3or%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">思想or数据结构</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="洛谷-p3374-树状数组模板1"><a class="markdownIt-Anchor" href="#洛谷-p3374-树状数组模板1"></a> 洛谷 P3374 树状数组模板1</h2>
-<p>​<br>
-#include <cstdio><br>
-#include <iostream><br>
-#include <cstring><br>
-#include <cstdlib><br>
-#include <algorithm><br>
-#include <vector><br>
-#include <map><br>
-#include <string><br>
-//typedef long long int LL;<br>
-typedef std::pair&lt;std::string ,char&gt; PP;<br>
-const int N = 5e5+5;<br>
-int tree[N];<br>
-int n,m,vv,op,a,b;</string></map></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
-<pre><code>void add(int i,int v)
-&#123;
-   while(i&lt;=n)&#123;
-      tree[i] += v;
-      i += i&amp;(-i);
-   &#125;
-&#125;
-
-int query(int i)
-&#123;
-   int re = 0;
-   while(i&gt;=1)&#123;
-      re += tree[i];
-      i -= i&amp;(-i);
-   &#125;
-   return re;
-&#125;
-
-int main()
-&#123;
-   scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
-   for(int i=1; i&lt;=n; i++)&#123;
-      scanf(&quot;%d&quot;,&amp;vv);
-      add(i,vv);
-   &#125;
-   for(int i=0; i&lt;m; i++)&#123;
-      scanf(&quot;%d%d%d&quot;,&amp;op,&amp;a,&amp;b);
-      if(op == 1)&#123;
-         add(a,b);
-      &#125;
-      else&#123;
-         printf(&quot;%d\n&quot;,query(b)-query(a-1));
-      &#125;
-   &#125;
-   return 0;
-&#125;
-</code></pre>
-<p>​</p>
-<h2 id="洛谷-p3368树状数组模板2"><a class="markdownIt-Anchor" href="#洛谷-p3368树状数组模板2"></a> 洛谷 P3368树状数组模板2</h2>
-<p>在区间中求某一单点的树状数组。初始化树状数组时，增加的值为&quot;此点比上一个点大多少&quot;</p>
-<p>​<br>
-#include <cstdio><br>
-#include <iostream><br>
-#include <cstring><br>
-#include <cstdlib><br>
-#include <algorithm><br>
-#include <vector><br>
-#include <map><br>
-#include <string><br>
-typedef long long int LL;<br>
-//typedef std::pair&lt;std::string ,char&gt; PP;<br>
-const int N = 5e5+5;<br>
-LL tree[N];<br>
-int n,m,op,a,b;<br>
-LL c,vv,ls;</string></map></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
-<pre><code>void add(int i,LL v)
-&#123;
-   while(i&lt;=n)&#123;
-      tree[i] += v;
-      i += i&amp;(-i);
-   &#125;
-&#125;
-
-LL query(int i)
-&#123;
-   LL re = 0;
-   while(i&gt;=1)&#123;
-      re += tree[i];
-      i -= i&amp;(-i);
-   &#125;
-   return re;
-&#125;
-
-int main()
-&#123;
-   scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
-   ls = 0;
-   for(int i=1; i&lt;=n; i++)&#123;
-      scanf(&quot;%lld&quot;,&amp;vv);
-      add(i,vv-ls);
-      ls = vv;
-   &#125;
-   for(int i=0; i&lt;m; i++)&#123;
-      scanf(&quot;%d&quot;,&amp;op);
-      if(op == 1)&#123;
-         scanf(&quot;%d%d%lld&quot;,&amp;a,&amp;b,&amp;c);
-         add(a,c);
-         add(b+1,-c);
-      &#125;
-      else&#123;
-         scanf(&quot;%d&quot;,&amp;a);
-         printf(&quot;%lld\n&quot;,query(a));
-      &#125;
-
-   &#125;
-   return 0;
-&#125;
-</code></pre>
-<p>​</p>
-<h2 id="洛谷-p1908-逆序对"><a class="markdownIt-Anchor" href="#洛谷-p1908-逆序对"></a> 洛谷 P1908 逆序对</h2>
-<p>数据大小的范围是1e9，但是我们只需要知道他们的大小关系，所以可以压成5e5做</p>
-<p>​<br>
-#include <cstdio><br>
-#include <iostream><br>
-#include <cstring><br>
-#include <cstdlib><br>
-#include <algorithm><br>
-#include <vector><br>
-#include <map><br>
-#include <set><br>
-typedef long long int LL;<br>
-//typedef std::pair&lt;int ,int&gt; PP;<br>
-const int N = 5e5+5;<br>
-int tree[N],ord[N];<br>
-struct AA<br>
-{<br>
-int val,n;<br>
-}qu[N];<br>
-int n,v,idx;<br>
-LL ans;</set></map></vector></algorithm></cstdlib></cstring></iostream></cstdio></p>
-<pre><code>void add(int i,int x)
-&#123;
-   while(i&lt;=n)&#123;
-      tree[i] += x;
-      i += i&amp;(-i);
-   &#125;
-&#125;
-
-LL qry(int i)
-&#123;
-   LL re = 0;
-   while(i&gt;0)&#123;
-      re += tree[i];
-      i -= i&amp;(-i);
-   &#125;
-   return re;
-&#125;
-
-bool cmp(AA x , AA y)
-&#123;
-   if(x.val == y.val) return x.n&lt;y.n;
-   return x.val &lt; y.val;
-&#125;
-
-int main()
-&#123;
-   //freopen(&quot;D:\\EdgeDownloadPlace\\P1908_11.in&quot;,&quot;r&quot;,stdin);
-   ans = 0;
-   scanf(&quot;%d&quot;,&amp;n);
-   for(int i=1; i&lt;=n; i++)&#123;
-      scanf(&quot;%d&quot;,&amp;qu[i].val);
-      qu[i].n = i;
-   &#125;
-   std::sort(qu+1,qu+n+1,cmp);
-   for(int i=1; i&lt;=n; i++)&#123;
-      ord[qu[i].n] = i;
-   &#125;
-   for(int i=1; i&lt;=n; i++)&#123;
-      add(ord[i],1);
-      ans += i-qry(ord[i]);
-   &#125;
-   printf(&quot;%lld\n&quot;,ans);
-
-   return 0;
-&#125;
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E6%A8%A1%E6%9D%BF1%E3%80%812%20P1908%20%E9%80%86%E5%BA%8F%E5%AF%B9/" data-id="cl50x8cnd003uccj33n756cra" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag">树状数组</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-【树的直径 dfs dp】P4408 [NOI2003] 逃学的小孩" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%20dfs%20dp%E3%80%91P4408%20%5BNOI2003%5D%20%E9%80%83%E5%AD%A6%E7%9A%84%E5%B0%8F%E5%AD%A9/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%20dfs%20dp%E3%80%91P4408%20%5BNOI2003%5D%20%E9%80%83%E5%AD%A6%E7%9A%84%E5%B0%8F%E5%AD%A9/">【树的直径 dfs dp】P4408 [NOI2003] 逃学的小孩.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/">图论</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="p4408-noi2003-逃学的小孩"><a class="markdownIt-Anchor" href="#p4408-noi2003-逃学的小孩"></a> P4408 [NOI2003] 逃学的小孩</h2>
-<p>​<br>
-#include <iostream><br>
-#include <cstdio><br>
-#include <cstdlib><br>
-#include <cstring><br>
-#include <cmath><br>
-#include <algorithm><br>
-#include <string><br>
-#include <queue><br>
-#include <vector><br>
-#include <stack><br>
-#include <map><br>
-#include <set><br>
-typedef long long int LL;<br>
-const int N = 2e5+5, M = -1, INF = 0x7fffffff;<br>
-int n,m,u,v,pid,tid;<br>
-LL w,plong,tlong;<br>
-int idx;<br>
-int head[N];<br>
-LL disa[N],disb[N];<br>
-struct Edge<br>
-{<br>
-int to,nxt;<br>
-LL w;<br>
-}edg[N&lt;&lt;1];<br>
-void addEdge(int fr,int to,LL w)<br>
-{<br>
-edg[idx].to = to;<br>
-edg[idx].nxt = head[fr];<br>
-edg[idx].w = w;<br>
-head[fr] = idx++;<br>
-}<br>
-void initial()<br>
-{<br>
-idx = 2;<br>
-}<br>
-void dfs(LL leng,int id,int efrom)<br>
-{<br>
-if(leng &gt; plong){<br>
-plong = leng;<br>
-pid = id;<br>
-}<br>
-for(int e=head[id]; e; e=edg[e].nxt){<br>
-if((e^1) == efrom) continue;<br>
-dfs(leng+edg[e].w,edg[e].to,e);<br>
-}<br>
-}<br>
-void DFS(LL dis[],int x,int efrom,LL leng)<br>
-{<br>
-dis[x] = leng;<br>
-for(int e=head[x]; e; e=edg[e].nxt){<br>
-if((e^1) == efrom) continue;<br>
-int y = edg[e].to;<br>
-DFS(dis,y,e,leng+edg[e].w);<br>
-}<br>
-}<br>
-int main()<br>
-{<br>
-initial();<br>
-scanf(&quot;%d%d&quot;,&amp;n,&amp;m);<br>
-for(int i=0; i&lt;m; i++) {<br>
-scanf(&quot;%d%d%lld&quot;,&amp;u,&amp;v,&amp;w);<br>
-addEdge(u,v,w);<br>
-addEdge(v,u,w);<br>
-}<br>
-pid = 1, plong = 0;<br>
-dfs(0,pid,0);<br>
-tid = pid;<br>
-pid = tid, plong = 0;<br>
-dfs(0,pid,0);<br>
-DFS(disa,tid,0,0);<br>
-DFS(disb,pid,0,0);<br>
-tlong = 0;<br>
-for(int i=1; i&lt;=n; i++){<br>
-tlong = std::max(tlong,std::min(disa[i],disb[i]));<br>
-}<br>
-printf(&quot;%lld&quot;,tlong+plong);<br>
-return 0;<br>
-}</set></map></stack></vector></queue></string></algorithm></cmath></cstring></cstdlib></cstdio></iostream></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%20dfs%20dp%E3%80%91P4408%20[NOI2003]%20%E9%80%83%E5%AD%A6%E7%9A%84%E5%B0%8F%E5%AD%A9/" data-id="cl50x8cne003wccj31p7r9qi3" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-【树的直径】树形DP求解" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%E3%80%91%E6%A0%91%E5%BD%A2DP%E6%B1%82%E8%A7%A3/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%E3%80%91%E6%A0%91%E5%BD%A2DP%E6%B1%82%E8%A7%A3/">【树的直径】树形DP求解.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/">图论</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<p>每次记录每个子树从根到叶的最长的链， 然后把最长前2长的拼起来<br>
-先更新D再更新dp， 否则会求出一条最长链*2</p>
-<p>​<br>
-void dfs(int x, int efr){<br>
-for(int e = head[x]; e; e = edg[e].nxt){<br>
-if((e ^ 1) == efr) continue;<br>
-int y = edg[e].to;<br>
-dfs(y, e);<br>
-D = std::max(D, dp[x] + dp[y] + 1);<br>
-dp[x] = std::max(dp[x], dp[y] + 1);<br>
-}<br>
-}</p>
-<h2 id="hdu-6201-transaction-transaction-transaction非模题"><a class="markdownIt-Anchor" href="#hdu-6201-transaction-transaction-transaction非模题"></a> HDU 6201 transaction transaction transaction（非模题）</h2>
-<p>​<br>
-#include &lt;bits/stdc++.h&gt;<br>
-const int N = 1e5 + 4;<br>
-int val[N], dp[N][2], head[N];<br>
-struct Edge{<br>
-int to, nxt, va;<br>
-}edg[N &lt;&lt; 1];<br>
-int idx, n, t, u, v, w, ans;<br>
-void addE(int fr, int to , int w){<br>
-edg[idx].to = to;<br>
-edg[idx].nxt = head[fr];<br>
-edg[idx].va = w;<br>
-head[fr] = idx <ins>;<br>
-}<br>
-void dfs(int x, int efr){<br>
-dp[x][0] = val[x], dp[x][1] = -val[x];<br>
-for(int e=head[x]; e; e=edg[e].nxt){<br>
-if((e ^ 1) == efr) continue;<br>
-int y = edg[e].to;<br>
-dfs(y, e);<br>
-dp[x][0] = std::min(dp[x][0], dp[y][0] + edg[e].va);<br>
-dp[x][1] = std::min(dp[x][1], dp[y][1] + edg[e].va);<br>
-}<br>
-ans = std::min(ans, dp[x][0] + dp[x][1]);<br>
-}<br>
-int main(){<br>
-scanf(&quot;%d&quot;, &amp;t);<br>
-while(t --){<br>
-scanf(&quot;%d&quot;, &amp;n);<br>
-idx = 2, ans = 0;<br>
-for(int i=0; i&lt;=n; i</ins>) head[i] = 0;<br>
-for(int i=1; i&lt;=n; i++) scanf(&quot;%d&quot;, &amp;val[i]);<br>
-for(int i=1; i&lt;n; i++){<br>
-scanf(&quot;%d%d%d&quot;, &amp;u, &amp;v, &amp;w);<br>
-addE(u, v, w), addE(v, u, w);<br>
-}<br>
-dfs(1, -1);<br>
-printf(&quot;%d\n&quot;, -ans);<br>
-}<br>
-return 0;<br>
-}</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%E3%80%91%E6%A0%91%E5%BD%A2DP%E6%B1%82%E8%A7%A3/" data-id="cl50x8cnf0040ccj3cvdd3u66" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/5/">&lt;&lt;&lt; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">下一页 &gt;&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/5/">&lt;&lt;&lt; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/">下一页 &gt;&gt;&gt;</a>
   </nav>
 </section>
         
@@ -1755,9 +2126,9 @@ return 0;<br>
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>80</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>32</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>65</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>85</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>37</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>72</strong><br>标签</div></a>
     </div>
 
 

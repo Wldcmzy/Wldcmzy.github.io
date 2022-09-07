@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>python logging库 简易自学记录 | 蓝湖畔淅淅沥沥的雨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="设置日志等级并在控制台打印日志 12345678910111213import randomimport logginglst &#x3D; [logging.DEBUG, logging.INFO, logging.WARNING, logging.ERROR, logging.CRITICAL]# 设置日志输出等级logging.basicConfig(level&#x3D;random.choice(lst)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python logging库 简易自学记录">
+<meta property="og:url" content="http://example.com/2022/08/26/python-logging%E5%BA%93-%E7%AE%80%E6%98%93%E8%87%AA%E5%AD%A6%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="蓝湖畔淅淅沥沥的雨">
+<meta property="og:description" content="设置日志等级并在控制台打印日志 12345678910111213import randomimport logginglst &#x3D; [logging.DEBUG, logging.INFO, logging.WARNING, logging.ERROR, logging.CRITICAL]# 设置日志输出等级logging.basicConfig(level&#x3D;random.choice(lst)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-26T04:26:59.000Z">
+<meta property="article:modified_time" content="2022-08-26T04:44:07.143Z">
+<meta property="article:author" content="StarsWhisper">
+<meta property="article:tag" content="日志">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="蓝湖畔淅淅沥沥的雨" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>85</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>37</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>72</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-python-logging库-简易自学记录" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/08/26/python-logging%E5%BA%93-%E7%AE%80%E6%98%93%E8%87%AA%E5%AD%A6%E8%AE%B0%E5%BD%95/" class="article-date">
+  <time class="post-time" datetime="2022-08-26T04:26:59.000Z" itemprop="datePublished">
+    <span class="post-month">8月</span><br/>
+    <span class="post-day">26</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python logging库 简易自学记录
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/">python</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/logging/">logging</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="设置日志等级并在控制台打印日志"><a class="markdownIt-Anchor" href="#设置日志等级并在控制台打印日志"></a> 设置日志等级并在控制台打印日志</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">lst = [logging.DEBUG, logging.INFO, logging.WARNING, logging.ERROR, logging.CRITICAL]</span><br><span class="line"><span class="comment"># 设置日志输出等级</span></span><br><span class="line">logging.basicConfig(level=random.choice(lst))</span><br><span class="line"></span><br><span class="line">logging.debug(<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">logging.info(<span class="string">&#x27;info&#x27;</span>)</span><br><span class="line">logging.warning(<span class="string">&#x27;waring&#x27;</span>)</span><br><span class="line">logging.error(<span class="string">&#x27;error&#x27;</span>)</span><br><span class="line">logging.critical(<span class="string">&#x27;critical&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="设置日志参数"><a class="markdownIt-Anchor" href="#设置日志参数"></a> 设置日志参数</h2>
+<p>在文件打印日志，带固定格式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(</span><br><span class="line">    filename= <span class="string">&#x27;mylog.log&#x27;</span>,</span><br><span class="line">    level= logging.DEBUG,</span><br><span class="line">    <span class="built_in">format</span> = <span class="string">&#x27;%(asctime)s &lt;%(name)s&gt; %(levelname)s: %(message)s&#x27;</span>,</span><br><span class="line">    filemode= <span class="string">&#x27;a&#x27;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">logging.debug(<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">logging.info(<span class="string">&#x27;info&#x27;</span>)</span><br><span class="line">logging.warning(<span class="string">&#x27;waring&#x27;</span>)</span><br><span class="line">logging.error(<span class="string">&#x27;error&#x27;</span>)</span><br><span class="line">logging.critical(<span class="string">&#x27;critical&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>参数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Do basic configuration for the logging system.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    This function does nothing if the root logger already has handlers</span></span><br><span class="line"><span class="string">    configured, unless the keyword argument *force* is set to ``True``.</span></span><br><span class="line"><span class="string">    It is a convenience method intended for use by simple scripts</span></span><br><span class="line"><span class="string">    to do one-shot configuration of the logging package.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    The default behaviour is to create a StreamHandler which writes to</span></span><br><span class="line"><span class="string">    sys.stderr, set a formatter using the BASIC_FORMAT format string, and</span></span><br><span class="line"><span class="string">    add the handler to the root logger.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    A number of optional keyword arguments may be specified, which can alter</span></span><br><span class="line"><span class="string">    the default behaviour.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    filename  Specifies that a FileHandler be created, using the specified</span></span><br><span class="line"><span class="string">              filename, rather than a StreamHandler.</span></span><br><span class="line"><span class="string">    filemode  Specifies the mode to open the file, if filename is specified</span></span><br><span class="line"><span class="string">              (if filemode is unspecified, it defaults to &#x27;a&#x27;).</span></span><br><span class="line"><span class="string">    format    Use the specified format string for the handler.</span></span><br><span class="line"><span class="string">    datefmt   Use the specified date/time format.</span></span><br><span class="line"><span class="string">    style     If a format string is specified, use this to specify the</span></span><br><span class="line"><span class="string">              type of format string (possible values &#x27;%&#x27;, &#x27;&#123;&#x27;, &#x27;$&#x27;, for</span></span><br><span class="line"><span class="string">              %-formatting, :meth:`str.format` and :class:`string.Template`</span></span><br><span class="line"><span class="string">              - defaults to &#x27;%&#x27;).</span></span><br><span class="line"><span class="string">    level     Set the root logger level to the specified level.</span></span><br><span class="line"><span class="string">    stream    Use the specified stream to initialize the StreamHandler. Note</span></span><br><span class="line"><span class="string">              that this argument is incompatible with &#x27;filename&#x27; - if both</span></span><br><span class="line"><span class="string">              are present, &#x27;stream&#x27; is ignored.</span></span><br><span class="line"><span class="string">    handlers  If specified, this should be an iterable of already created</span></span><br><span class="line"><span class="string">              handlers, which will be added to the root handler. Any handler</span></span><br><span class="line"><span class="string">              in the list which does not have a formatter assigned will be</span></span><br><span class="line"><span class="string">              assigned the formatter created in this function.</span></span><br><span class="line"><span class="string">    force     If this keyword  is specified as true, any existing handlers</span></span><br><span class="line"><span class="string">              attached to the root logger are removed and closed, before</span></span><br><span class="line"><span class="string">              carrying out the configuration as specified by the other</span></span><br><span class="line"><span class="string">              arguments.</span></span><br><span class="line"><span class="string">    encoding  If specified together with a filename, this encoding is passed to</span></span><br><span class="line"><span class="string">              the created FileHandler, causing it to be used when the file is</span></span><br><span class="line"><span class="string">              opened.</span></span><br><span class="line"><span class="string">    errors    If specified together with a filename, this value is passed to the</span></span><br><span class="line"><span class="string">              created FileHandler, causing it to be used when the file is</span></span><br><span class="line"><span class="string">              opened in text mode. If not specified, the default value is</span></span><br><span class="line"><span class="string">              `backslashreplace`.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Note that you could specify a stream created using open(filename, mode)</span></span><br><span class="line"><span class="string">    rather than passing the filename and mode in. However, it should be</span></span><br><span class="line"><span class="string">    remembered that StreamHandler does not close its stream (since it may be</span></span><br><span class="line"><span class="string">    using sys.stdout or sys.stderr), whereas FileHandler closes its stream</span></span><br><span class="line"><span class="string">    when the handler is closed.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    .. versionchanged:: 3.2</span></span><br><span class="line"><span class="string">       Added the ``style`` parameter.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    .. versionchanged:: 3.3</span></span><br><span class="line"><span class="string">       Added the ``handlers`` parameter. A ``ValueError`` is now thrown for</span></span><br><span class="line"><span class="string">       incompatible arguments (e.g. ``handlers`` specified together with</span></span><br><span class="line"><span class="string">       ``filename``/``filemode``, or ``filename``/``filemode`` specified</span></span><br><span class="line"><span class="string">       together with ``stream``, or ``handlers`` specified together with</span></span><br><span class="line"><span class="string">       ``stream``.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    .. versionchanged:: 3.8</span></span><br><span class="line"><span class="string">       Added the ``force`` parameter.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    .. versionchanged:: 3.9</span></span><br><span class="line"><span class="string">       Added the ``encoding`` and ``errors`` parameters.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="一些组件的使用"><a class="markdownIt-Anchor" href="#一些组件的使用"></a> 一些组件的使用</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">handlerF = logging.FileHandler(<span class="string">&#x27;mylog2.log&#x27;</span>) <span class="comment"># 打印到文件的Handler</span></span><br><span class="line">handlerC = logging.StreamHandler()    <span class="comment"># 打印到控制台的Handler</span></span><br><span class="line">handlerF.setLevel(logging.ERROR) <span class="comment"># 设置Handler的日志等级</span></span><br><span class="line">handlerC.setLevel(logging.DEBUG)</span><br><span class="line"></span><br><span class="line">formatter = logging.Formatter(<span class="string">&#x27;%(asctime)s &lt;%(name)s&gt; %(levelname)s: %(message)s&#x27;</span>)</span><br><span class="line">handlerF.setFormatter(formatter) <span class="comment"># 设置输出格式</span></span><br><span class="line">handlerC.setFormatter(formatter)</span><br><span class="line"></span><br><span class="line">logger = logging.getLogger(<span class="string">&#x27;MyLoggerName&#x27;</span>)</span><br><span class="line">logger.setLevel(logging.WARNING)  <span class="comment"># 设置logger的日志等级</span></span><br><span class="line"><span class="comment"># 即使handlerC日志等级为DEBUG, 但logger最多输出WARNING等级日志</span></span><br><span class="line"></span><br><span class="line">logger.addHandler(handlerF)     <span class="comment"># 装载Handler</span></span><br><span class="line">logger.addHandler(handlerC)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">logger.debug(<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">logger.info(<span class="string">&#x27;info&#x27;</span>)</span><br><span class="line">logger.warning(<span class="string">&#x27;waring&#x27;</span>)</span><br><span class="line">logger.error(<span class="string">&#x27;error&#x27;</span>)</span><br><span class="line">logger.critical(<span class="string">&#x27;critical&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="使用配置文件"><a class="markdownIt-Anchor" href="#使用配置文件"></a> 使用配置文件</h2>
+<p>不想学了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/08/26/python-logging%E5%BA%93-%E7%AE%80%E6%98%93%E8%87%AA%E5%AD%A6%E8%AE%B0%E5%BD%95/" data-id="cl7qxr4qc0001msj38z9058ns" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/09/07/selenium%E7%88%AC%E8%99%AB%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          selenium爬虫的简单使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/08/25/%E8%AF%8D%E4%BA%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">词云</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">蓝湖畔淅淅沥沥的雨</h1>
+    <h2 class="blog-subtitle">All tragedy erased, I see only wonders...</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/bridges" title="Bridges">
+            <li>传送门</li>
+          </a>
+        
+          <a href="/knightabout" title="About">
+            <li>关于</li>
+          </a>
+        
+          <a href="/announcement" title="Announcement">
+            <li>公告</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/images/avatar.png">
+    <h2 class="author">StarsWhisper</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>85</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>37</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>72</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/Wldcmzy" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/wldcmzy" target="_blank" title="CSDN">
+          CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://space.bilibili.com/83743701" target="_blank" title="bilibili(无技术和学习内容)">
+          bilibili(无技术和学习内容)
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://shanamaid.github.io/" target="_blank" title="夏娜主题作者的博客">
+          夏娜主题作者的博客
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2021 - 2022 StarsWhisper<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+	  (但是魔改)
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/announcement" title="" class="menuItem">公告</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/knightabout" title="" class="menuItem">关于</a>
+          
+            <a href="/bridges" title="" class="menuItem">传送门</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
