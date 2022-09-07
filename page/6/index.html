@@ -43,7 +43,7 @@
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>86</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>85</strong><br>文章</div></a>
       <a href="/categories"><div><strong>37</strong><br>分类</div></a>
       <a href="/tags"><div><strong>72</strong><br>标签</div></a>
     </div>
@@ -82,293 +82,6 @@
 </div>
 
         <section id="main">
-  
-    <article id="post-【嵌套bfs】A - Pushing Boxes POJ - 1475  推箱子" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/">【嵌套bfs】A - Pushing Boxes POJ - 1475  推箱子.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2/">搜索</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<p><a target="_blank" rel="noopener" href="https://vjudge.net/contest/387870#problem/A">https://vjudge.net/contest/387870#problem/A</a></p>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Imagine you are standing inside a two-dimensional maze composed of square<br>
-cells which may or may not be filled with rock. You can move north, south,<br>
-east or west one cell at a step. These moves are called walks.<br>
-One of the empty cells contains a box which can be moved to an adjacent free<br>
-cell by standing next to the box and then moving in the direction of the box.<br>
-Such a move is called a push. The box cannot be moved in any other way than by<br>
-pushing, which means that if you push it into a corner you can never get it<br>
-out of the corner again.</p>
-<p>One of the empty cells is marked as the target cell. Your job is to bring the<br>
-box to the target cell by a sequence of walks and pushes. As the box is very<br>
-heavy, you would like to minimize the number of pushes. Can you write a<br>
-program that will work out the best such sequence?<br>
-![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzk2MTQ4YTA0MzgzZDlmZTI2MzBhM2FjNzcyZjEyMjYx?x-oss-">https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzk2MTQ4YTA0MzgzZDlmZTI2MzBhM2FjNzcyZjEyMjYx?x-oss-</a><br>
-process=image/format,png#pic_center)</p>
-<h2 id="输入"><a class="markdownIt-Anchor" href="#输入"></a> 输入</h2>
-<p>The input contains the descriptions of several mazes. Each maze description<br>
-starts with a line containing two integers r and c (both &lt;= 20) representing<br>
-the number of rows and columns of the maze.</p>
-<p>Following this are r lines each containing c characters. Each character<br>
-describes one cell of the maze. A cell full of rock is indicated by a <code>#' and an empty cell is represented by a</code>.’. Your starting position is symbolized by<br>
-<code>S', the starting position of the box by</code>B’ and the target cell by `T’.</p>
-<p>Input is terminated by two zeroes for r and c.</p>
-<h2 id="输出"><a class="markdownIt-Anchor" href="#输出"></a> 输出</h2>
-<p>For each maze in the input, first print the number of the maze, as shown in<br>
-the sample output. Then, if it is impossible to bring the box to the target<br>
-cell, print ``Impossible.’’.</p>
-<p>Otherwise, output a sequence that minimizes the number of pushes. If there is<br>
-more than one such sequence, choose the one that minimizes the number of total<br>
-moves (walks and pushes). If there is still more than one such sequence, any<br>
-one is acceptable.</p>
-<p>Print the sequence as a string of the characters N, S, E, W, n, s, e and w<br>
-where uppercase letters stand for pushes, lowercase letters stand for walks<br>
-and the different letters stand for the directions north, south, east and<br>
-west.</p>
-<p>Output a single blank line after each test case.</p>
-<h2 id="样例输入"><a class="markdownIt-Anchor" href="#样例输入"></a> 样例输入</h2>
-<p>1 7<br>
-SB…T<br>
-1 7<br>
-SB…#.T<br>
-7 11<br>
-###########<br>
-#T##…#<br>
-#.#.#…####<br>
-#…B…#<br>
-#.######…#<br>
-#…S…#<br>
-###########<br>
-8 4<br>
-…<br>
-.##.<br>
-.#…<br>
-.#…<br>
-.#.B<br>
-.##S<br>
-…<br>
-###T<br>
-0 0</p>
-<h2 id="样例输出"><a class="markdownIt-Anchor" href="#样例输出"></a> 样例输出</h2>
-<p>Maze #1<br>
-EEEEE</p>
-<p>Maze #2<br>
-Impossible.</p>
-<p>Maze #3<br>
-eennwwWWWWeeeeeesswwwwwwwnNN</p>
-<p>Maze #4<br>
-swwwnnnnnneeesssSSS</p>
-<h2 id="自己加一组样例输入"><a class="markdownIt-Anchor" href="#自己加一组样例输入"></a> 自己加一组样例输入</h2>
-<p>6 5<br>
-…T<br>
-.S…<br>
-#B###<br>
-…<br>
-…<br>
-…</p>
-<h2 id="自己加的样例的输出"><a class="markdownIt-Anchor" href="#自己加的样例的输出"></a> 自己加的样例的输出</h2>
-<p>Maze #1<br>
-SSesswNNNNwnEEE</p>
-<h2 id="瞎翻译"><a class="markdownIt-Anchor" href="#瞎翻译"></a> 瞎翻译</h2>
-<p>这是一个推箱子游戏。人要把箱子推到终点，我们需要输出人走的路径（方向用nswe或NSWE表示，人不推箱子只走路时路径用小写字母nswe表示，人推箱子走路时路径用大写字母NSWE表示）</p>
-<p>先输入两个整数row和col，表示地图大小</p>
-<p>之后输入一个row行col列的char类型矩阵，其中#代表墙，.代表路，S代表人的起始位置，B代表箱子起始位置，T代表终点（箱子要被推到的位置）</p>
-<h2 id="题解"><a class="markdownIt-Anchor" href="#题解"></a> 题解</h2>
-<p><strong>1.</strong><br>
-先设想箱子会自己动，想象一下如何用简单的bfs求得“箱子自己动”情况下的答案<br>
-<strong>2.</strong><br>
-在”箱子自己动“的代码基础上加入人：<br>
-假设箱子要往右动，那么先对人进行bfs，让人从自己的位置走到箱子的左边的位置，如果人可以走过去，则箱子可以往右移动。<br>
-<strong>2.5</strong><br>
-记得人推箱子的时候人也要动，而不是仅仅箱子移动（人与箱子往相同方向移动，或者直接把人移动到箱子的上一个位置）。<br>
-<strong>3.</strong><br>
-这是笔者自己犯的一个错误：<br>
-不能仅仅用形如visb[][]的二维数组标记箱子到过的位置，因为在某些情况下人想推箱子到终点，是需要【箱子折返】的（箱子有可能去一个地方两次或多次，可以见我自己加的输入样例）<br>
-所以要用三维数组：visb[][][4],第三维记录箱子来时的方向</p>
-<p><strong>4.</strong><br>
-在箱子移动的bfs函数中嵌套人移动的bfs函数完成求解</p>
-<p>​<br>
-#include <cstdio><br>
-#include <iostream><br>
-#include <algorithm><br>
-#include <cstring><br>
-#include <queue><br>
-#include <string></string></queue></cstring></algorithm></iostream></cstdio></p>
-<pre><code>int row,col,counter;
-const int maxn=25;
-char cell[maxn][maxn];
-bool visb[maxn][maxn][4],visp[maxn][maxn];  //visb记录箱子，visp记录人去过的位置
-//人的标记方式为：先在原地标记一次，之后去了哪标哪
-//箱子的标记方式为：不在原地标记，只有从一个方向（假设为2）移动到某一格（假设为i，j），则标记visb[i][j][2]为true
-
-int step[4][2]=&#123;&#123;1,0&#125;,&#123;-1,0&#125;,&#123;0,1&#125;,&#123;0,-1&#125;&#125;;
-char adir[5]=&quot;snew&quot;,Adir[5]=&quot;SNEW&quot;;         //两个dir都对应step的四个方向
-struct Pos
-&#123;
-    int x,y;            //表示位置，若是人，只会用到这两个和path
-    int mx,my;          //表示人的位置，表示箱子的变量用的，表示人的变量用不着
-    std::string path;   //记录路径
-&#125;mpre,mnxt,tar,bpre,bnxt,to;
-//mpre-man pre人的当前位置（或解释为人的上一个位置）mnxt-man next人的下一个位置
-//bpre和bnxt表示箱子的当前位置和下一个位置
-//tar表示终点位置
-//to表示箱子要移动到某个位置时，人要移动到的位置
-</code></pre>
-<p>​<br>
-​<br>
-//判断这个点是否在地图可行走范围之中<br>
-bool cango(int x,int y)<br>
-{<br>
-if(x&gt;=0 &amp;&amp; x&lt;row &amp;&amp; y&gt;=0 &amp;&amp; y&lt;col &amp;&amp; cell[x][y]!=’#’)<br>
-return true;<br>
-return false;<br>
-}</p>
-<pre><code>//人从自己所在的位置，移动到to.x,to.y的位置，简单bfs
-bool bfsMan()
-&#123;
-    memset(visp,false,sizeof(visp));
-    std::queue&lt;Pos&gt; q;
-    mpre.path=&quot;&quot;;
-    mpre.x=bnxt.mx,mpre.y=bnxt.my;
-    q.push(mpre);
-    visp[mpre.x][mpre.y]=true;
-    while(!q.empty())
-    &#123;
-        mpre=q.front(); q.pop();
-        if(mpre.x==to.x &amp;&amp; mpre.y==to.y) return true;
-        for(int i=0; i&lt;4; i++)
-        &#123;
-            mnxt=mpre;
-            mnxt.x+=step[i][0],mnxt.y+=step[i][1];
-            if(cango(mnxt.x,mnxt.y) &amp;&amp; !visp[mnxt.x][mnxt.y] &amp;&amp; !(mnxt.x==bpre.x &amp;&amp; mnxt.y==bpre.y))
-            &#123;
-                visp[mnxt.x][mnxt.y]=true;
-                mnxt.path+=adir[i];
-                q.push(mnxt);
-            &#125;
-        &#125;
-    &#125;
-    return false;
-
-&#125;
-
-//对箱子的bfs，其中嵌套了对人的bfs
-void bfs()
-&#123;
-    std::queue&lt;Pos&gt; q;
-    bpre.path=&quot;&quot;;
-    bpre.mx=mpre.x,bpre.my=mpre.y;
-    q.push(bpre);//让最初箱子的位置入队，记得给箱子结构体赋值人的位置
-    while(!q.empty())
-    &#123;
-        bpre=q.front(); q.pop();
-        for(int i=0; i&lt;4; i++)  //开始四个方向的遍历
-        &#123;
-            bnxt=bpre;
-            bnxt.x+=step[i][0],bnxt.y+=step[i][1];
-            if(cango(bnxt.x,bnxt.y) &amp;&amp; !visb[bnxt.x][bnxt.y][i])
-            &#123;
-                to=bpre;
-                to.x-=step[i][0],to.y-=step[i][1];
-                if(cango(to.x,to.y))    //初步检查这一点是否可以达到
-                &#123;
-                    if(bfsMan())
-                    &#123;
-                        //一定要bfsMan（）返回true时才标记visb为true
-                        //因为若人不能到达特定的推箱子位置，箱子就不能访问到要去的位置
-                        visb[bnxt.x][bnxt.y][i]=true;
-                        bnxt.path+=mpre.path;               //路径末尾加入人上一次移动的路径
-                        bnxt.path+=Adir[i];                 //路径末尾加入箱子移动的路径
-                        //如果到了终点，直接输出
-                        if(bnxt.x==tar.x &amp;&amp; bnxt.y==tar.y)
-                        &#123;
-                            std::cout &lt;&lt; &quot;Maze #&quot; &lt;&lt; counter++ &lt;&lt; std::endl;
-                            std::cout &lt;&lt; bnxt.path &lt;&lt; std::endl &lt;&lt; std::endl;
-                            return ;
-                        &#125;
-                        bnxt.mx=bpre.x,bnxt.my=bpre.y;      //记得记录箱子在这个位置时对应的人的位置，然后入队
-                        q.push(bnxt);
-                    &#125;
-                &#125;
-            &#125;
-        &#125;
-    &#125;
-    std::cout &lt;&lt; &quot;Maze #&quot; &lt;&lt; counter++ &lt;&lt; std::endl;
-    std::cout &lt;&lt; &quot;Impossible.&quot; &lt;&lt; std::endl &lt;&lt; std::endl;
-&#125;
-</code></pre>
-<p>​<br>
-int main()<br>
-{<br>
-counter=1;<br>
-while(std::cin &gt;&gt; row &gt;&gt; col &amp;&amp; !(row<mark>0 &amp;&amp; col</mark>0))<br>
-{<br>
-memset(visb,false,sizeof(visb));<br>
-for(int i=0; i&lt;row; i++)<br>
-{<br>
-std::cin &gt;&gt; cell[i];<br>
-for(int j=0; j&lt;col; j++)<br>
-{<br>
-if(cell[i][j]<mark>‘S’)  mpre.x=i,mpre.y=j;<br>
-else if(cell[i][j]</mark>‘B’) bpre.x=i,bpre.y=j;<br>
-else if(cell[i][j]==‘T’) tar.x=i,tar.y=j;<br>
-}<br>
-}<br>
-bfs();<br>
-}</p>
-<pre><code>    return 0;
-&#125;
-</code></pre>
-<p>​</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/" data-id="cl50x8cn1002mccj3htcybpw5" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
   
     <article id="post-【差值并查集（口胡算法）】 HDU7136 CCPC2021网络选拔赛重赛1011 Jumping Monkey" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -506,7 +219,7 @@ return 0;<br>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%B7%AE%E5%80%BC%E5%B9%B6%E6%9F%A5%E9%9B%86%EF%BC%88%E5%8F%A3%E8%83%A1%E7%AE%97%E6%B3%95%EF%BC%89%E3%80%91%20HDU7136%20CCPC2021%E7%BD%91%E7%BB%9C%E9%80%89%E6%8B%94%E8%B5%9B%E9%87%8D%E8%B5%9B1011%20Jumping%20Monkey/" data-id="cl50x8cn2002pccj3elxp2cpw" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%B7%AE%E5%80%BC%E5%B9%B6%E6%9F%A5%E9%9B%86%EF%BC%88%E5%8F%A3%E8%83%A1%E7%AE%97%E6%B3%95%EF%BC%89%E3%80%91%20HDU7136%20CCPC2021%E7%BD%91%E7%BB%9C%E9%80%89%E6%8B%94%E8%B5%9B%E9%87%8D%E8%B5%9B1011%20Jumping%20Monkey/" data-id="cl7qycavu003ggkj38e694lqv" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a></li></ul>
@@ -1177,7 +890,7 @@ SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &amp;cursor_info);<br>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90C%E8%AF%AD%E8%A8%80%E3%80%91%E5%B0%9D%E8%AF%95%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AA%E5%90%83%E8%9B%87/" data-id="cl50x8cn3002tccj3a3ki0u5m" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90C%E8%AF%AD%E8%A8%80%E3%80%91%E5%B0%9D%E8%AF%95%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AA%E5%90%83%E8%9B%87/" data-id="cl7qycavv003hgkj3h26bfvih" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
@@ -1244,7 +957,7 @@ SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &amp;cursor_info);<br>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%8A%98%E5%8D%8A%E6%90%9C%E7%B4%A2%E3%80%91%20%E6%B4%9B%E8%B0%B7%20%20P4799%20[CEOI2015%20Day2]%E4%B8%96%E7%95%8C%E5%86%B0%E7%90%83%E9%94%A6%E6%A0%87%E8%B5%9B/" data-id="cl50x8cn4002vccj37fg1bcn8" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%8A%98%E5%8D%8A%E6%90%9C%E7%B4%A2%E3%80%91%20%E6%B4%9B%E8%B0%B7%20%20P4799%20[CEOI2015%20Day2]%E4%B8%96%E7%95%8C%E5%86%B0%E7%90%83%E9%94%A6%E6%A0%87%E8%B5%9B/" data-id="cl7qycavw003kgkj34gx2ayhx" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
@@ -1378,7 +1091,7 @@ means there is an edge between X-th vertex and Y-th of length L (<br>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%8D%A2%E6%A0%B9DP%E3%80%91Tree%20and%20Permutation/" data-id="cl50x8cn50030ccj3378217ys" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%8D%A2%E6%A0%B9DP%E3%80%91Tree%20and%20Permutation/" data-id="cl7qycavx003ngkj3e9e0dice" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
@@ -1586,7 +1299,7 @@ return 0;<br>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%95%B0%E4%BD%8DDP%E3%80%91%20%E6%B4%9B%E8%B0%B7%20P2602%20[ZJOI2010]%E6%95%B0%E5%AD%97%E8%AE%A1%E6%95%B0%20P2657%20[SCOI2009]%20windy%20%E6%95%B0/" data-id="cl50x8cn50033ccj31fnufgxa" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%95%B0%E4%BD%8DDP%E3%80%91%20%E6%B4%9B%E8%B0%B7%20P2602%20[ZJOI2010]%E6%95%B0%E5%AD%97%E8%AE%A1%E6%95%B0%20P2657%20[SCOI2009]%20windy%20%E6%95%B0/" data-id="cl7qycavz003sgkj3cbnzduf8" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
@@ -1866,7 +1579,7 @@ return 0;<br>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%97%A0%E5%90%91%E5%9B%BE%20-%20%E5%B8%A6%E6%9D%A1%E4%BB%B6(%E6%9C%80%E5%B0%8F%E6%8D%A2%E4%B9%98)%E6%9C%80%E7%9F%AD%E8%B7%AF%E3%80%91L3-014%20%E5%91%A8%E6%B8%B8%E4%B8%96%E7%95%8C%20(30%E5%88%86)/" data-id="cl50x8cn60037ccj34pic33p3" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%97%A0%E5%90%91%E5%9B%BE%20-%20%E5%B8%A6%E6%9D%A1%E4%BB%B6(%E6%9C%80%E5%B0%8F%E6%8D%A2%E4%B9%98)%E6%9C%80%E7%9F%AD%E8%B7%AF%E3%80%91L3-014%20%E5%91%A8%E6%B8%B8%E4%B8%96%E7%95%8C%20(30%E5%88%86)/" data-id="cl7qycaw0003vgkj3f048fxrb" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
@@ -2046,7 +1759,7 @@ GS.fit(arr_t[:,:-1],arr_t[:,-1])
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%20%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%20%E7%BD%91%E6%A0%BC%E5%8C%96%E6%90%9C%E7%B4%A2/" data-id="cl50x8cn7003bccj36moa52yq" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%20%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%20%E7%BD%91%E6%A0%BC%E5%8C%96%E6%90%9C%E7%B4%A2/" data-id="cl7qycaw10040gkj3cesn8ezv" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" rel="tag">随机森林</a></li></ul>
@@ -2134,7 +1847,7 @@ plt.show()
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E4%BD%BF%E7%94%A8sklearn%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" data-id="cl50x8cn8003eccj3giknhyli" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E4%BD%BF%E7%94%A8sklearn%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" data-id="cl7qycaw20042gkj39hon41n8" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" rel="tag">随机森林</a></li></ul>
@@ -2246,10 +1959,107 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E5%86%B3%E7%AD%96%E6%A0%91%20%E5%B9%B6%E7%94%A8graphviz%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A0%91/" data-id="cl50x8cn9003iccj30syu65mk" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E5%86%B3%E7%AD%96%E6%A0%91%20%E5%B9%B6%E7%94%A8graphviz%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A0%91/" data-id="cl7qycaw30046gkj3csd2h69a" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【机器学习】应用简例 随机森林 使用袋外数据（袋装法） + RandomForestClassifier的一些常用方法" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BD%BF%E7%94%A8%E8%A2%8B%E5%A4%96%E6%95%B0%E6%8D%AE%EF%BC%88%E8%A2%8B%E8%A3%85%E6%B3%95%EF%BC%89%20+%20RandomForestClassifier%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BD%BF%E7%94%A8%E8%A2%8B%E5%A4%96%E6%95%B0%E6%8D%AE%EF%BC%88%E8%A2%8B%E8%A3%85%E6%B3%95%EF%BC%89%20+%20RandomForestClassifier%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/">【机器学习】应用简例 随机森林 使用袋外数据（袋装法） + RandomForestClassifier的一些常用方法.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/">教练我想学挂边躲牛</a>,<a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/%E7%9E%8E%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">瞎学机器学习</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<pre><code>import numpy as np
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+
+# 从excel表导入数据
+df_t = pd.read_excel(r'D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\train.xlsx')
+
+# 删除uid列
+df_t = df_t.drop(columns='uid')
+
+# 把数据中的'?'换成每一列的众数
+for col in df_t.columns:
+    idx = df_t[col].value_counts().index
+    df_t[col][df_t[col] == '?'] = idx[0] if idx[0] != '?' else idx[1]
+
+# 把pandas.DataFrame数据转化为numpy.darray数据 元素类型为np.float32
+arr_t = df_t.values.astype(np.float32)
+</code></pre>
+<p>​<br>
+​<br>
+rfc = RandomForestClassifier(bootstrap=True #boostrap默认为True 即使用装袋法<br>
+,oob_score=True #oob_score默认为False 为True即使用袋外数据做测试集，训练模型时不需要划分训练集和测试集#<br>
+,max_depth=4<br>
+)<br>
+rfc = rfc.fit(arr_t[:,:-1],arr_t[:,-1])</p>
+<pre><code>print(rfc.oob_score_) #打印成绩
+</code></pre>
+<p>​<br>
+print(rfc.estimators_) #打印所有的树</p>
+<pre><code>print(rfc.feature_importances_) #打印特征的重要性
+
+Xtrain,Xtest,Ytrain,Ytest = train_test_split(arr_t[:,:-1],arr_t[:,-1],test_size=0.3)
+
+rfc = RandomForestClassifier(max_depth=4).fit(Xtrain,Ytrain)
+
+print(rfc.apply(Xtest)) #返回测试集中 每一个样本 在每一颗树中的叶子节点的索引
+
+print(rfc.predict(Xtest)) #返回模型预测的测试集的结果
+
+print(rfc.predict_proba(Xtest)) #返回每一个样本被分到每一个标签的概率
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BD%BF%E7%94%A8%E8%A2%8B%E5%A4%96%E6%95%B0%E6%8D%AE%EF%BC%88%E8%A2%8B%E8%A3%85%E6%B3%95%EF%BC%89%20+%20RandomForestClassifier%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" data-id="cl7qycaw30048gkj33enc4o8e" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" rel="tag">随机森林</a></li></ul>
 
     </footer>
   </div>
@@ -2316,7 +2126,7 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>86</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>85</strong><br>文章</div></a>
       <a href="/categories"><div><strong>37</strong><br>分类</div></a>
       <a href="/tags"><div><strong>72</strong><br>标签</div></a>
     </div>

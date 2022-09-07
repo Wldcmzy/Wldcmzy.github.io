@@ -43,7 +43,7 @@
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>86</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>85</strong><br>文章</div></a>
       <a href="/categories"><div><strong>37</strong><br>分类</div></a>
       <a href="/tags"><div><strong>72</strong><br>标签</div></a>
     </div>
@@ -82,241 +82,6 @@
 </div>
 
         <section id="main">
-  
-    <article id="post-【二叉树】 给出二叉树的中序遍历 和先序遍历或后序遍历 确定二叉树" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E3%80%90%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%91%20%E7%BB%99%E5%87%BA%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%20%E5%92%8C%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86%E6%88%96%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%20%E7%A1%AE%E5%AE%9A%E4%BA%8C%E5%8F%89%E6%A0%91/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E3%80%90%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%91%20%E7%BB%99%E5%87%BA%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%20%E5%92%8C%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86%E6%88%96%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%20%E7%A1%AE%E5%AE%9A%E4%BA%8C%E5%8F%89%E6%A0%91/">【二叉树】 给出二叉树的中序遍历 和先序遍历或后序遍历 确定二叉树.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/">图论</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<p><strong>讨论的内容如题</strong></p>
-<h2 id="分析"><a class="markdownIt-Anchor" href="#分析"></a> 分析</h2>
-<p>拿中序遍历和后序遍历的组合举例子<br>
-设数组last[]储存后续遍历 in[]中序遍历，它们的长度都是n(数组从1开始计，下标范围是1-n)</p>
-<p>树根自然为last[n]<br>
-，这时我们遍历in[]数组，在in[]数组中找到last[n]的值的下标idx，因为in[]储存的是中序遍历，显然我们以idx为界把in数组的序列分成两份[1,idx-1],[idx+1,n]，分别为两颗子树上的节点。</p>
-<p>之后我们便可以在分出的两个区间之中重复上述操作，分别找目前子树的根节点，再二分区间，直到获得完整的二叉树</p>
-<p>可以使用递归来完成 函数(区间左，区间右，根节点，偏移量)</p>
-<p>此时注意一个问题：当区间被二分之后，我们发现后面的区间在in[]数组和last[]数组中的下标“对不齐”了，即下标发生了偏移，如下图。所以要引入一个变量shift来记录偏移量。（偏移量最开始是0，递归时前面的区间继承原偏移量，后面的区间偏移量为原偏移量+1）<br>
-![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201008231828150.png?x-oss-">https://img-blog.csdnimg.cn/20201008231828150.png?x-oss-</a><br>
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)<br>
-（在前序遍历和中序遍历的组合中，下标发生偏移的是前面的区间）</p>
-<h2 id="例题-后序遍历和中序遍历的组合"><a class="markdownIt-Anchor" href="#例题-后序遍历和中序遍历的组合"></a> 例题 后序遍历和中序遍历的组合</h2>
-<p><a target="_blank" rel="noopener" href="https://vjudge.net/contest/386054#problem/E">https://vjudge.net/contest/386054#problem/E</a></p>
-<p>​<br>
-#include <iostream><br>
-#include <cstring><br>
-#include <cstdio><br>
-struct Node<br>
-{<br>
-int l,r;<br>
-};<br>
-Node treeN[10010];<br>
-int inorder[10010],postorder[10010];<br>
-int len,rt,least,lstPos;<br>
-int input()//返回数组长度<br>
-{<br>
-int n,idx=1;<br>
-char ch;<br>
-while(scanf(&quot;%d&quot;,&amp;n)!=EOF)<br>
-{<br>
-inorder[idx++]=n;<br>
-ch=getchar();<br>
-if(ch==’\n’)<br>
-break;<br>
-}<br>
-idx=1;<br>
-while(scanf(&quot;%d&quot;,&amp;n)!=EOF)<br>
-{<br>
-postorder[idx++]=n;<br>
-ch=getchar();<br>
-if(ch==’\n’)<br>
-break;<br>
-}<br>
-return idx-1;<br>
-}<br>
-int makeTree(int l,int r,int root,int n)<br>
-{<br>
-if(l&gt;r)<br>
-return -1;<br>
-int idx=-1;<br>
-for(int i=l; i&lt;=r; i++)<br>
-{<br>
-if(inorder[i]<mark>root)<br>
-{<br>
-idx=i;<br>
-break;<br>
-}<br>
-}<br>
-if(idx&gt;0)<br>
-{<br>
-treeN[root].l=makeTree(l,idx-1,postorder[idx-n-1],n);<br>
-treeN[root].r=makeTree(idx+1,r,postorder[r-n-1],n+1);<br>
-}<br>
-return root;<br>
-}<br>
-void add(int root,int base)<br>
-{<br>
-int total=base+root;<br>
-if(treeN[root].l</mark>-1 &amp;&amp; treeN[root].r==-1)<br>
-{<br>
-if(lstPos==-1)<br>
-{<br>
-least=total;<br>
-lstPos=root;<br>
-}<br>
-else<br>
-{<br>
-if(total&lt;least)<br>
-{<br>
-least=total;<br>
-lstPos=root;<br>
-}<br>
-}<br>
-return ;<br>
-}<br>
-if(treeN[root].l&gt;0)<br>
-{<br>
-add(treeN[root].l,total);<br>
-}<br>
-if(treeN[root].r&gt;0)<br>
-{<br>
-add(treeN[root].r,total);<br>
-}<br>
-}</cstdio></cstring></iostream></p>
-<pre><code>int main()
-&#123;
-    while((len=input())&gt;0)
-    &#123;
-        memset(treeN,-1,sizeof(treeN));
-        lstPos=-1;
-        rt=makeTree(1,len,postorder[len],0);
-        add(rt,0);
-        std::cout &lt;&lt; lstPos &lt;&lt; std::endl;
-    &#125;
-    return 0;
-&#125;
-</code></pre>
-<p>​</p>
-<h2 id="例题-前序遍历和中序遍历的组合"><a class="markdownIt-Anchor" href="#例题-前序遍历和中序遍历的组合"></a> 例题 前序遍历和中序遍历的组合</h2>
-<p>&lt;<a target="_blank" rel="noopener" href="https://pintia.cn/problem-">https://pintia.cn/problem-</a><br>
-sets/1303281293857476608/problems/1303281404742291466&gt;</p>
-<p>​<br>
-#include <iostream><br>
-#include <cstdio><br>
-#include <cstring><br>
-#include <algorithm><br>
-#include <iomanip><br>
-#include <queue><br>
-#include <cmath><br>
-#include <map></map></cmath></queue></iomanip></algorithm></cstring></cstdio></iostream></p>
-<pre><code>const int N=32;
-int n;
-struct Node
-&#123;
-    int l,r;
-&#125;treeN[N];
-int pre[N],in[N];
-
-int fff(int root,int l,int r,int shift)
-&#123;
-    if(l&gt;r) return -1;
-    int i;
-    for(i=l; i&lt;=r; i++) if(root==in[i]) break;
-    if(i&lt;=r)
-    &#123;
-        treeN[root].l=fff(pre[l+1+shift],l,i-1,shift+1);
-        treeN[root].r=fff(pre[i+1+shift],i+1,r,shift);
-    &#125;
-    return root;
-&#125;
-
-void rev(int root)
-&#123;
-    if(root==0) return ;
-    treeN[root].r=treeN[root].r^treeN[root].l;
-    treeN[root].l=treeN[root].r^treeN[root].l;
-    treeN[root].r=treeN[root].r^treeN[root].l;
-    rev(treeN[root].l);
-    rev(treeN[root].r);
-&#125;
-
-void gogogo(int root)
-&#123;
-    std::queue&lt;int &gt;q;
-    std::cout &lt;&lt; root;
-    if(treeN[root].l!=-1) q.push(treeN[root].l);
-    if(treeN[root].r!=-1) q.push(treeN[root].r);
-    while(!q.empty())
-    &#123;
-        root=q.front(); q.pop();
-        std::cout &lt;&lt; &quot; &quot; &lt;&lt; root;
-        if(treeN[root].l!=-1) q.push(treeN[root].l);
-        if(treeN[root].r!=-1) q.push(treeN[root].r);
-    &#125;
-&#125;
-
-int main()
-&#123;
-    std::cin &gt;&gt; n;
-    for(int i=0; i&lt;n; i++) std::cin &gt;&gt; in[i];
-    for(int i=0; i&lt;n; i++) std::cin &gt;&gt; pre[i];
-    int root=fff(pre[0],0,n-1,0);
-    rev(root);
-    gogogo(root);
-    return 0;
-&#125;
-</code></pre>
-<p>​</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%91%20%E7%BB%99%E5%87%BA%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%20%E5%92%8C%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86%E6%88%96%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%20%E7%A1%AE%E5%AE%9A%E4%BA%8C%E5%8F%89%E6%A0%91/" data-id="cl50x8cmr001jccj3bt4s9y88" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS%E5%BA%8F/" rel="tag">DFS序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
   
     <article id="post-【区间DP练习】洛谷 P1880[NOI1995]石子合并 P1063能量项链P2654 原核生物培养" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -582,7 +347,7 @@ return 0;<br>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%8C%BA%E9%97%B4DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1880[NOI1995]%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6%20P1063%E8%83%BD%E9%87%8F%E9%A1%B9%E9%93%BEP2654%20%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E5%9F%B9%E5%85%BB/" data-id="cl50x8cms001occj35fjkbcds" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%8C%BA%E9%97%B4DP%E7%BB%83%E4%B9%A0%E3%80%91%E6%B4%9B%E8%B0%B7%20P1880[NOI1995]%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6%20P1063%E8%83%BD%E9%87%8F%E9%A1%B9%E9%93%BEP2654%20%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E5%9F%B9%E5%85%BB/" data-id="cl7qycave0029gkj3csmb22op" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li></ul>
@@ -833,7 +598,7 @@ return 0;<br>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%20spfa%20Dijkstra%E3%80%91%20_%20%E6%B4%9B%E8%B0%B7%20P3371%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88%E5%BC%B1%E5%8C%96%E7%89%88%EF%BC%89_%20##%20lguou/" data-id="cl50x8cmt001rccj37w1pe5pm" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%20spfa%20Dijkstra%E3%80%91%20_%20%E6%B4%9B%E8%B0%B7%20P3371%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%EF%BC%88%E5%BC%B1%E5%8C%96%E7%89%88%EF%BC%89_%20##%20lguou/" data-id="cl7qycavf002cgkj336dg3bue" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li></ul>
@@ -1010,268 +775,10 @@ showone_merge(img1B,img1G,img1R)        #合成后是原图</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90cv2%E3%80%91%E8%87%AA%E5%AD%A6cv2%20%E7%9A%84%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/" data-id="cl50x8cmu001wccj3awxy59fa" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90cv2%E3%80%91%E8%87%AA%E5%AD%A6cv2%20%E7%9A%84%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/" data-id="cl7qycavl002kgkj39z59hkeb" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cv/" rel="tag">cv</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%BA%93/" rel="tag">python库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-【学习记录】【Python】【numpy】自学numpy库的简要记录帖（已经腰斩换新的）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6numpy%E5%BA%93%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%E5%B8%96%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6numpy%E5%BA%93%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%E5%B8%96%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/">【学习记录】【Python】【numpy】自学numpy库的简要记录帖（已经腰斩换新的）.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/">python</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/numpy/">numpy</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="1极其基础的操作"><a class="markdownIt-Anchor" href="#1极其基础的操作"></a> 1.极其基础的操作</h2>
-<p>​<br>
-import numpy as np</p>
-<pre><code>#创建一个数组 数组的类型为numpy.ndarray,其中数据的类型为numpy.int32s
-array1=np.array([[[1,2,3],[4,5,6],[7,8,9]],[[10,11,12],[13,14,15],[16,17,18]]],dtype=np.int32)
-print(array1,'\ntype of array1 is:',type(array1))
-
-#查看数组维数
-print('dimensions of array1:',array1.ndim)
-
-#查看数组形状
-print('shape of array1:',array1.shape)
-
-#改变数组形状
-array2=array1.reshape(6,3)
-print(array2)
-
-#提取数据(array2是二维数组)
-print(array2[1:4,0:2])          #2、3、4行前两列
-print(array2[1:4][0:2])         #两次切片  [1:4]切完后再[0:2]
-print(array2[:,2])              #第三列
-print(array2[:4])               #前四行
-print(array2[:4,:])             #前四行
-
-#数组的大小
-print('size of array1 and array2:',array1.size,array2.size)
-
-#矩阵计算
-print(array1+array2.reshape(2,3,3))     #矩阵相加
-print(array1*array2.reshape(2,3,3))     #矩阵相乘
-print(array1+2)                         #矩阵元素+2
-</code></pre>
-<h2 id="2索引"><a class="markdownIt-Anchor" href="#2索引"></a> 2.索引</h2>
-<p>​<br>
-import numpy as np</p>
-<pre><code>array1=np.array([[[1,2,3],[4,5,6],[7,8,9]],[[10,11,12],[13,14,15],[16,17,18]]],dtype=np.int32)
-</code></pre>
-<p>​<br>
-#取元素   第一维的一、二项，第二维的第一项，第三维的一、三项<br>
-array2=array1[np.ix_([0,1],[0],[0,2])]<br>
-print(array2)</p>
-<pre><code>#取 array1[0,0,0],以及 array1[1,2,1](最终取出两个数，1和17:[1,17])
-array3=array1[[0,1],[0,2],[0,1]]
-print(array3)
-
-#顺序变的
-array4=array1.reshape(6,3)[[0,5,3,1]]
-print(array4)
-
-#bool索引
-array3=np.array(range(100))     #建立一个0-99的一维数组
-print(array3)
-
-array3Bool=array3%3==0          #意会
-print(array3Bool)
-
-array3Final=array3[array3Bool]          #得到array3中是3的倍数的项
-print(array3Final)
-array3Final_another=array3[array3%3==0] #得到array3中是3的倍数的项
-print(array3Final_another)
-</code></pre>
-<p>​</p>
-<h2 id="3简单文件储存"><a class="markdownIt-Anchor" href="#3简单文件储存"></a> 3.简单文件储存</h2>
-<p>​<br>
-import numpy as np</p>
-<pre><code>#txt
-x=np.genfromtxt('abc.txt',delimiter='&amp;&amp;',dtype=np.str,usecols=1)        #载入文件
-print(x)
-#delimiter 分割值
-#dtype 数据类型
-#usecols 不太清楚
-
-y=np.loadtxt('abc.txt',delimiter='&amp;&amp;',dtype=np.str,usecols=1)           #载入文件
-print(y)
-
-np.savetxt('bca.txt',y,fmt='%s')
-</code></pre>
-<p>​<br>
-print(‘分割线-----------------------’)<br>
-#二进制</p>
-<pre><code>np.save('b_bca.npyy',y)                     #使用此方法保存的后缀名文件总为npy:  b_bca.npyy.npy
-
-np.savez('b_z_bca.npz',the_x=x,the_y=y)     #此方法可以保存多个数组，后缀名为npz  the_x等形参名对应导入后的操作的键名
-
-tmp_a=np.load('b_bca.npy')
-print(tmp_a)
-
-tmp_b=np.load('b_z_bca.npz')
-print(tmp_b)
-print(tmp_b['the_x'])                   #类似字典，key值为先前保存时的形参名，如the_x
-print(tmp_b['the_y'])
-</code></pre>
-<h2 id="4简单练习-矩阵的合并与转置"><a class="markdownIt-Anchor" href="#4简单练习-矩阵的合并与转置"></a> 4.简单练习 &amp;&amp; 矩阵的合并与转置</h2>
-<p>​<br>
-import numpy as np</p>
-<pre><code>np.set_printoptions(precision=1,threshold=3000,suppress=True)
-#precision控制小数点位数
-#threshold控制输出值的个数，其他的以...代替(查的资料上这么说的，实际没看出效果)
-#suppress=True 取消使用科学计数法
-</code></pre>
-<p>​<br>
-array1=np.genfromtxt(r’D:\0我的下载\上证指数\上证指数副本.txt’,usecols=(0,4,6),)<br>
-print(array1)</p>
-<pre><code>daySpan=(array1[:,0]&gt;=20180901)&amp;(array1[:,0]&lt;20190101)  #筛选出其中2018年9月1日至2019年1月1日的信息
-array2=array1[daySpan]                                  #筛选出其中2018年9月1日至2019年1月1日的信息
-print(array2)
-
-#纵向合并
-#把array1第三列大于0的设为1，不大于0的设为-1，添加至数组最右边
-tmp=array1[:,2].copy()
-tmp[tmp&gt;0]=1
-tmp[tmp&lt;=0]=-1
-array_new=np.c_[array1,tmp]#等同于array_new=np.column_stack((array1,tmp))
-print(array_new)
-
-#横向合并
-arr1=np.array([[1,2,3],[4,5,6],[7,8,9]])
-arr2=np.array([['x','x','x']])
-
-arr_new=np.r_[arr1,arr2]#等同于arr_new=np.row_stack((arr1,arr2))
-print(arr_new)
-
-#一维数组默认时列向量，要转化为行向量才能横向合并
-#eg:[1,2,3]这是一个列向量 (3,)
-#eg:[[1,2,3]]这时一个行向量(1,3)
-</code></pre>
-<p>​<br>
-​<br>
-#矩阵的转置<br>
-print(arr_new.T)</p>
-<h2 id="5矩阵的切割"><a class="markdownIt-Anchor" href="#5矩阵的切割"></a> 5.矩阵的切割</h2>
-<p>​<br>
-import numpy as np</p>
-<pre><code>#新建0-15的数组
-array1=np.arange(16).reshape(4,4)
-print(array1)
-</code></pre>
-<p>​<br>
-#用hsplit(ary,indices_or_sections)拆分   (相当于split的axis参数=1)<br>
-#纵向拆分<br>
-#第二个参数：如果时整数x，则把数组平均分成x份，不能平均分会报错<br>
-#第二个参数，如果时列表，会以列表中的值为轴拆分<br>
-h_arr1=np.hsplit(array1,4)<br>
-print(h_arr1)<br>
-h_arr2=np.hsplit(array1,[1,3])<br>
-print(h_arr2)</p>
-<p>​<br>
-#用split(ary, indices_or_sections, axis=0)拆分<br>
-#用法基本同hsplit一样，只不过hsplit只能纵向拆分，split可以定义拆分维度<br>
-#axis=0第一维，即横向拆分，axis=1第二维，即纵向拆分<br>
-arr1=np.split(array1,4,0)<br>
-print(arr1)<br>
-arr2=np.split(array1,[1,3],0)<br>
-print(arr2)</p>
-<p>​</p>
-<h2 id="6图像通道的分离与合成"><a class="markdownIt-Anchor" href="#6图像通道的分离与合成"></a> 6.图像通道的分离与合成</h2>
-<p><strong>分离：</strong><br>
-img1B,img1G,img1R=np.dsplit(img1,3)<br>
-img1B,img1G,img1R=cv2.split(img1)都可以<br>
-<strong>合成：</strong><br>
-cv2.merge([b,g,r])<br>
-cv2.merge([zeros, zeros, img1R])</p>
-<p><strong>注意倒数第五句的注释</strong></p>
-<p>​<br>
-import cv2<br>
-import numpy as np</p>
-<pre><code>def showone(img):
-    cv2.imshow('show image',img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-def showone_color(img,color):
-    zeros=np.zeros(img.shape[:2],dtype='uint8') #记得调整格式
-    if color == 'B':
-        cv2.imshow('blue',cv2.merge([img1B,zeros,zeros]))
-    elif color == 'G':
-        cv2.imshow('green', cv2.merge([zeros, img1G, zeros]))
-    elif color == 'R':
-        cv2.imshow('red', cv2.merge([zeros, zeros, img1R]))
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-def showone_merge(b,g,r):
-    cv2.imshow('merge',cv2.merge([b,g,r]))
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-</code></pre>
-<p>​<br>
-img1=cv2.imread(‘theimg.png’,1)</p>
-<pre><code>img1B,img1G,img1R=np.dsplit(img1,3)
-#img1B,img1G,img1R=cv2.split(img1)
-
-print(img1B.dtype)          #矩阵元素的格式为uint8
-</code></pre>
-<p>​<br>
-​<br>
-showone(img1B)      #这里图像为灰色，原因是当调用cv2.imshow的时候G、R两个通道被默认设为了与B通道一样，三通道一样时显示灰度图</p>
-<p>​<br>
-showone_color(img1B,‘B’)<br>
-showone_color(img1G,‘G’)<br>
-showone_color(img1R,‘R’)</p>
-<pre><code>showone_merge(img1B,img1G,img1R)        #合成后是原图
-</code></pre>
-<p>​</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6numpy%E5%BA%93%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%E5%B8%96%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/" data-id="cl50x8cmv001xccj32mx45ict" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%BA%93/" rel="tag">python库</a></li></ul>
 
     </footer>
   </div>
@@ -1801,7 +1308,265 @@ d:axis=2
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%EF%BC%88%E6%9C%AA%E5%AE%8C%EF%BC%89/" data-id="cl50x8cmw0022ccj3cr9d29m8" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%EF%BC%88%E6%9C%AA%E5%AE%8C%EF%BC%89/" data-id="cl7qycavn002ogkj3fc12gl2z" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%BA%93/" rel="tag">python库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【学习记录】【Python】【numpy】自学numpy库的简要记录帖（已经腰斩换新的）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6numpy%E5%BA%93%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%E5%B8%96%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6numpy%E5%BA%93%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%E5%B8%96%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/">【学习记录】【Python】【numpy】自学numpy库的简要记录帖（已经腰斩换新的）.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/">python</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/numpy/">numpy</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="1极其基础的操作"><a class="markdownIt-Anchor" href="#1极其基础的操作"></a> 1.极其基础的操作</h2>
+<p>​<br>
+import numpy as np</p>
+<pre><code>#创建一个数组 数组的类型为numpy.ndarray,其中数据的类型为numpy.int32s
+array1=np.array([[[1,2,3],[4,5,6],[7,8,9]],[[10,11,12],[13,14,15],[16,17,18]]],dtype=np.int32)
+print(array1,'\ntype of array1 is:',type(array1))
+
+#查看数组维数
+print('dimensions of array1:',array1.ndim)
+
+#查看数组形状
+print('shape of array1:',array1.shape)
+
+#改变数组形状
+array2=array1.reshape(6,3)
+print(array2)
+
+#提取数据(array2是二维数组)
+print(array2[1:4,0:2])          #2、3、4行前两列
+print(array2[1:4][0:2])         #两次切片  [1:4]切完后再[0:2]
+print(array2[:,2])              #第三列
+print(array2[:4])               #前四行
+print(array2[:4,:])             #前四行
+
+#数组的大小
+print('size of array1 and array2:',array1.size,array2.size)
+
+#矩阵计算
+print(array1+array2.reshape(2,3,3))     #矩阵相加
+print(array1*array2.reshape(2,3,3))     #矩阵相乘
+print(array1+2)                         #矩阵元素+2
+</code></pre>
+<h2 id="2索引"><a class="markdownIt-Anchor" href="#2索引"></a> 2.索引</h2>
+<p>​<br>
+import numpy as np</p>
+<pre><code>array1=np.array([[[1,2,3],[4,5,6],[7,8,9]],[[10,11,12],[13,14,15],[16,17,18]]],dtype=np.int32)
+</code></pre>
+<p>​<br>
+#取元素   第一维的一、二项，第二维的第一项，第三维的一、三项<br>
+array2=array1[np.ix_([0,1],[0],[0,2])]<br>
+print(array2)</p>
+<pre><code>#取 array1[0,0,0],以及 array1[1,2,1](最终取出两个数，1和17:[1,17])
+array3=array1[[0,1],[0,2],[0,1]]
+print(array3)
+
+#顺序变的
+array4=array1.reshape(6,3)[[0,5,3,1]]
+print(array4)
+
+#bool索引
+array3=np.array(range(100))     #建立一个0-99的一维数组
+print(array3)
+
+array3Bool=array3%3==0          #意会
+print(array3Bool)
+
+array3Final=array3[array3Bool]          #得到array3中是3的倍数的项
+print(array3Final)
+array3Final_another=array3[array3%3==0] #得到array3中是3的倍数的项
+print(array3Final_another)
+</code></pre>
+<p>​</p>
+<h2 id="3简单文件储存"><a class="markdownIt-Anchor" href="#3简单文件储存"></a> 3.简单文件储存</h2>
+<p>​<br>
+import numpy as np</p>
+<pre><code>#txt
+x=np.genfromtxt('abc.txt',delimiter='&amp;&amp;',dtype=np.str,usecols=1)        #载入文件
+print(x)
+#delimiter 分割值
+#dtype 数据类型
+#usecols 不太清楚
+
+y=np.loadtxt('abc.txt',delimiter='&amp;&amp;',dtype=np.str,usecols=1)           #载入文件
+print(y)
+
+np.savetxt('bca.txt',y,fmt='%s')
+</code></pre>
+<p>​<br>
+print(‘分割线-----------------------’)<br>
+#二进制</p>
+<pre><code>np.save('b_bca.npyy',y)                     #使用此方法保存的后缀名文件总为npy:  b_bca.npyy.npy
+
+np.savez('b_z_bca.npz',the_x=x,the_y=y)     #此方法可以保存多个数组，后缀名为npz  the_x等形参名对应导入后的操作的键名
+
+tmp_a=np.load('b_bca.npy')
+print(tmp_a)
+
+tmp_b=np.load('b_z_bca.npz')
+print(tmp_b)
+print(tmp_b['the_x'])                   #类似字典，key值为先前保存时的形参名，如the_x
+print(tmp_b['the_y'])
+</code></pre>
+<h2 id="4简单练习-矩阵的合并与转置"><a class="markdownIt-Anchor" href="#4简单练习-矩阵的合并与转置"></a> 4.简单练习 &amp;&amp; 矩阵的合并与转置</h2>
+<p>​<br>
+import numpy as np</p>
+<pre><code>np.set_printoptions(precision=1,threshold=3000,suppress=True)
+#precision控制小数点位数
+#threshold控制输出值的个数，其他的以...代替(查的资料上这么说的，实际没看出效果)
+#suppress=True 取消使用科学计数法
+</code></pre>
+<p>​<br>
+array1=np.genfromtxt(r’D:\0我的下载\上证指数\上证指数副本.txt’,usecols=(0,4,6),)<br>
+print(array1)</p>
+<pre><code>daySpan=(array1[:,0]&gt;=20180901)&amp;(array1[:,0]&lt;20190101)  #筛选出其中2018年9月1日至2019年1月1日的信息
+array2=array1[daySpan]                                  #筛选出其中2018年9月1日至2019年1月1日的信息
+print(array2)
+
+#纵向合并
+#把array1第三列大于0的设为1，不大于0的设为-1，添加至数组最右边
+tmp=array1[:,2].copy()
+tmp[tmp&gt;0]=1
+tmp[tmp&lt;=0]=-1
+array_new=np.c_[array1,tmp]#等同于array_new=np.column_stack((array1,tmp))
+print(array_new)
+
+#横向合并
+arr1=np.array([[1,2,3],[4,5,6],[7,8,9]])
+arr2=np.array([['x','x','x']])
+
+arr_new=np.r_[arr1,arr2]#等同于arr_new=np.row_stack((arr1,arr2))
+print(arr_new)
+
+#一维数组默认时列向量，要转化为行向量才能横向合并
+#eg:[1,2,3]这是一个列向量 (3,)
+#eg:[[1,2,3]]这时一个行向量(1,3)
+</code></pre>
+<p>​<br>
+​<br>
+#矩阵的转置<br>
+print(arr_new.T)</p>
+<h2 id="5矩阵的切割"><a class="markdownIt-Anchor" href="#5矩阵的切割"></a> 5.矩阵的切割</h2>
+<p>​<br>
+import numpy as np</p>
+<pre><code>#新建0-15的数组
+array1=np.arange(16).reshape(4,4)
+print(array1)
+</code></pre>
+<p>​<br>
+#用hsplit(ary,indices_or_sections)拆分   (相当于split的axis参数=1)<br>
+#纵向拆分<br>
+#第二个参数：如果时整数x，则把数组平均分成x份，不能平均分会报错<br>
+#第二个参数，如果时列表，会以列表中的值为轴拆分<br>
+h_arr1=np.hsplit(array1,4)<br>
+print(h_arr1)<br>
+h_arr2=np.hsplit(array1,[1,3])<br>
+print(h_arr2)</p>
+<p>​<br>
+#用split(ary, indices_or_sections, axis=0)拆分<br>
+#用法基本同hsplit一样，只不过hsplit只能纵向拆分，split可以定义拆分维度<br>
+#axis=0第一维，即横向拆分，axis=1第二维，即纵向拆分<br>
+arr1=np.split(array1,4,0)<br>
+print(arr1)<br>
+arr2=np.split(array1,[1,3],0)<br>
+print(arr2)</p>
+<p>​</p>
+<h2 id="6图像通道的分离与合成"><a class="markdownIt-Anchor" href="#6图像通道的分离与合成"></a> 6.图像通道的分离与合成</h2>
+<p><strong>分离：</strong><br>
+img1B,img1G,img1R=np.dsplit(img1,3)<br>
+img1B,img1G,img1R=cv2.split(img1)都可以<br>
+<strong>合成：</strong><br>
+cv2.merge([b,g,r])<br>
+cv2.merge([zeros, zeros, img1R])</p>
+<p><strong>注意倒数第五句的注释</strong></p>
+<p>​<br>
+import cv2<br>
+import numpy as np</p>
+<pre><code>def showone(img):
+    cv2.imshow('show image',img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+def showone_color(img,color):
+    zeros=np.zeros(img.shape[:2],dtype='uint8') #记得调整格式
+    if color == 'B':
+        cv2.imshow('blue',cv2.merge([img1B,zeros,zeros]))
+    elif color == 'G':
+        cv2.imshow('green', cv2.merge([zeros, img1G, zeros]))
+    elif color == 'R':
+        cv2.imshow('red', cv2.merge([zeros, zeros, img1R]))
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+def showone_merge(b,g,r):
+    cv2.imshow('merge',cv2.merge([b,g,r]))
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+</code></pre>
+<p>​<br>
+img1=cv2.imread(‘theimg.png’,1)</p>
+<pre><code>img1B,img1G,img1R=np.dsplit(img1,3)
+#img1B,img1G,img1R=cv2.split(img1)
+
+print(img1B.dtype)          #矩阵元素的格式为uint8
+</code></pre>
+<p>​<br>
+​<br>
+showone(img1B)      #这里图像为灰色，原因是当调用cv2.imshow的时候G、R两个通道被默认设为了与B通道一样，三通道一样时显示灰度图</p>
+<p>​<br>
+showone_color(img1B,‘B’)<br>
+showone_color(img1G,‘G’)<br>
+showone_color(img1R,‘R’)</p>
+<pre><code>showone_merge(img1B,img1G,img1R)        #合成后是原图
+</code></pre>
+<p>​</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90numpy%E3%80%91%E8%87%AA%E5%AD%A6numpy%E5%BA%93%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95%E5%B8%96%EF%BC%88%E5%B7%B2%E7%BB%8F%E8%85%B0%E6%96%A9%E6%8D%A2%E6%96%B0%E7%9A%84%EF%BC%89/" data-id="cl7qycavn002pgkj3e5iy56m9" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%BA%93/" rel="tag">python库</a></li></ul>
@@ -1900,7 +1665,7 @@ for each_row in ws_one['A9':'F10']:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90openpyxl%E3%80%91%E7%AE%80%E8%A6%81%E5%AD%A6%E4%B9%A0openpyxl%20%20%20%E7%9A%84%20%20%20%20%E8%AE%B0%E5%BD%95----%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD/" data-id="cl50x8cmx0025ccj3ep6vgd49" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E3%80%90openpyxl%E3%80%91%E7%AE%80%E8%A6%81%E5%AD%A6%E4%B9%A0openpyxl%20%20%20%E7%9A%84%20%20%20%20%E8%AE%B0%E5%BD%95----%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD/" data-id="cl7qycavo002rgkj3eifm8pzv" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/excle/" rel="tag">excle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%BA%93/" rel="tag">python库</a></li></ul>
@@ -2003,7 +1768,7 @@ super(type , obj)表示obj【按MRO 第一个排在type后面】的父类<br>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E5%85%B3%E4%BA%8Esuper%E5%8F%8A%E5%85%B6MRO%E6%9C%BA%E5%88%B6%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%AF%B9%EF%BC%89/" data-id="cl50x8cmy002accj3687e0pq8" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E5%85%B3%E4%BA%8Esuper%E5%8F%8A%E5%85%B6MRO%E6%9C%BA%E5%88%B6%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%AF%B9%EF%BC%89/" data-id="cl7qycavp002ugkj306gw9j1q" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80%E6%9C%BA%E5%88%B6/" rel="tag">语言机制</a></li></ul>
@@ -2335,7 +2100,7 @@ lb2.place(relx=0.1,rely=0.1,relwidth=0.8,relheight=0.8)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90python%E3%80%91%E3%80%90tkinter%E3%80%91%E8%87%AA%E5%AD%A6tkinter%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95/" data-id="cl50x8cmz002hccj359oy7gph" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90python%E3%80%91%E3%80%90tkinter%E3%80%91%E8%87%AA%E5%AD%A6tkinter%E7%9A%84%E7%AE%80%E8%A6%81%E8%AE%B0%E5%BD%95/" data-id="cl7qycavr0031gkj39o3dh5rm" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GUI/" rel="tag">GUI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%BA%93/" rel="tag">python库</a></li></ul>
@@ -2460,10 +2225,297 @@ if __name__ == '__main__':
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%B1%91%E3%80%91%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95%20%E5%88%A4%E6%96%AD%E6%AD%BB%E9%94%81%20or%20%E6%B1%82%E8%A7%A3%E6%89%80%E6%9C%89%E5%8F%AF%E8%A1%8C%E5%BA%8F%E5%88%97%20%E4%BB%A3%E7%A0%81/" data-id="cl50x8cn0002jccj37n4z9sfo" class="article-share-link">分享</a>
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%B1%91%E3%80%91%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95%20%E5%88%A4%E6%96%AD%E6%AD%BB%E9%94%81%20or%20%E6%B1%82%E8%A7%A3%E6%89%80%E6%9C%89%E5%8F%AF%E8%A1%8C%E5%BA%8F%E5%88%97%20%E4%BB%A3%E7%A0%81/" data-id="cl7qycavs0038gkj3czbx2zid" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-【嵌套bfs】A - Pushing Boxes POJ - 1475  推箱子" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/">【嵌套bfs】A - Pushing Boxes POJ - 1475  推箱子.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2/">搜索</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<p><a target="_blank" rel="noopener" href="https://vjudge.net/contest/387870#problem/A">https://vjudge.net/contest/387870#problem/A</a></p>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Imagine you are standing inside a two-dimensional maze composed of square<br>
+cells which may or may not be filled with rock. You can move north, south,<br>
+east or west one cell at a step. These moves are called walks.<br>
+One of the empty cells contains a box which can be moved to an adjacent free<br>
+cell by standing next to the box and then moving in the direction of the box.<br>
+Such a move is called a push. The box cannot be moved in any other way than by<br>
+pushing, which means that if you push it into a corner you can never get it<br>
+out of the corner again.</p>
+<p>One of the empty cells is marked as the target cell. Your job is to bring the<br>
+box to the target cell by a sequence of walks and pushes. As the box is very<br>
+heavy, you would like to minimize the number of pushes. Can you write a<br>
+program that will work out the best such sequence?<br>
+![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzk2MTQ4YTA0MzgzZDlmZTI2MzBhM2FjNzcyZjEyMjYx?x-oss-">https://imgconvert.csdnimg.cn/aHR0cHM6Ly92ai56MTgwLmNuLzk2MTQ4YTA0MzgzZDlmZTI2MzBhM2FjNzcyZjEyMjYx?x-oss-</a><br>
+process=image/format,png#pic_center)</p>
+<h2 id="输入"><a class="markdownIt-Anchor" href="#输入"></a> 输入</h2>
+<p>The input contains the descriptions of several mazes. Each maze description<br>
+starts with a line containing two integers r and c (both &lt;= 20) representing<br>
+the number of rows and columns of the maze.</p>
+<p>Following this are r lines each containing c characters. Each character<br>
+describes one cell of the maze. A cell full of rock is indicated by a <code>#' and an empty cell is represented by a</code>.’. Your starting position is symbolized by<br>
+<code>S', the starting position of the box by</code>B’ and the target cell by `T’.</p>
+<p>Input is terminated by two zeroes for r and c.</p>
+<h2 id="输出"><a class="markdownIt-Anchor" href="#输出"></a> 输出</h2>
+<p>For each maze in the input, first print the number of the maze, as shown in<br>
+the sample output. Then, if it is impossible to bring the box to the target<br>
+cell, print ``Impossible.’’.</p>
+<p>Otherwise, output a sequence that minimizes the number of pushes. If there is<br>
+more than one such sequence, choose the one that minimizes the number of total<br>
+moves (walks and pushes). If there is still more than one such sequence, any<br>
+one is acceptable.</p>
+<p>Print the sequence as a string of the characters N, S, E, W, n, s, e and w<br>
+where uppercase letters stand for pushes, lowercase letters stand for walks<br>
+and the different letters stand for the directions north, south, east and<br>
+west.</p>
+<p>Output a single blank line after each test case.</p>
+<h2 id="样例输入"><a class="markdownIt-Anchor" href="#样例输入"></a> 样例输入</h2>
+<p>1 7<br>
+SB…T<br>
+1 7<br>
+SB…#.T<br>
+7 11<br>
+###########<br>
+#T##…#<br>
+#.#.#…####<br>
+#…B…#<br>
+#.######…#<br>
+#…S…#<br>
+###########<br>
+8 4<br>
+…<br>
+.##.<br>
+.#…<br>
+.#…<br>
+.#.B<br>
+.##S<br>
+…<br>
+###T<br>
+0 0</p>
+<h2 id="样例输出"><a class="markdownIt-Anchor" href="#样例输出"></a> 样例输出</h2>
+<p>Maze #1<br>
+EEEEE</p>
+<p>Maze #2<br>
+Impossible.</p>
+<p>Maze #3<br>
+eennwwWWWWeeeeeesswwwwwwwnNN</p>
+<p>Maze #4<br>
+swwwnnnnnneeesssSSS</p>
+<h2 id="自己加一组样例输入"><a class="markdownIt-Anchor" href="#自己加一组样例输入"></a> 自己加一组样例输入</h2>
+<p>6 5<br>
+…T<br>
+.S…<br>
+#B###<br>
+…<br>
+…<br>
+…</p>
+<h2 id="自己加的样例的输出"><a class="markdownIt-Anchor" href="#自己加的样例的输出"></a> 自己加的样例的输出</h2>
+<p>Maze #1<br>
+SSesswNNNNwnEEE</p>
+<h2 id="瞎翻译"><a class="markdownIt-Anchor" href="#瞎翻译"></a> 瞎翻译</h2>
+<p>这是一个推箱子游戏。人要把箱子推到终点，我们需要输出人走的路径（方向用nswe或NSWE表示，人不推箱子只走路时路径用小写字母nswe表示，人推箱子走路时路径用大写字母NSWE表示）</p>
+<p>先输入两个整数row和col，表示地图大小</p>
+<p>之后输入一个row行col列的char类型矩阵，其中#代表墙，.代表路，S代表人的起始位置，B代表箱子起始位置，T代表终点（箱子要被推到的位置）</p>
+<h2 id="题解"><a class="markdownIt-Anchor" href="#题解"></a> 题解</h2>
+<p><strong>1.</strong><br>
+先设想箱子会自己动，想象一下如何用简单的bfs求得“箱子自己动”情况下的答案<br>
+<strong>2.</strong><br>
+在”箱子自己动“的代码基础上加入人：<br>
+假设箱子要往右动，那么先对人进行bfs，让人从自己的位置走到箱子的左边的位置，如果人可以走过去，则箱子可以往右移动。<br>
+<strong>2.5</strong><br>
+记得人推箱子的时候人也要动，而不是仅仅箱子移动（人与箱子往相同方向移动，或者直接把人移动到箱子的上一个位置）。<br>
+<strong>3.</strong><br>
+这是笔者自己犯的一个错误：<br>
+不能仅仅用形如visb[][]的二维数组标记箱子到过的位置，因为在某些情况下人想推箱子到终点，是需要【箱子折返】的（箱子有可能去一个地方两次或多次，可以见我自己加的输入样例）<br>
+所以要用三维数组：visb[][][4],第三维记录箱子来时的方向</p>
+<p><strong>4.</strong><br>
+在箱子移动的bfs函数中嵌套人移动的bfs函数完成求解</p>
+<p>​<br>
+#include <cstdio><br>
+#include <iostream><br>
+#include <algorithm><br>
+#include <cstring><br>
+#include <queue><br>
+#include <string></string></queue></cstring></algorithm></iostream></cstdio></p>
+<pre><code>int row,col,counter;
+const int maxn=25;
+char cell[maxn][maxn];
+bool visb[maxn][maxn][4],visp[maxn][maxn];  //visb记录箱子，visp记录人去过的位置
+//人的标记方式为：先在原地标记一次，之后去了哪标哪
+//箱子的标记方式为：不在原地标记，只有从一个方向（假设为2）移动到某一格（假设为i，j），则标记visb[i][j][2]为true
+
+int step[4][2]=&#123;&#123;1,0&#125;,&#123;-1,0&#125;,&#123;0,1&#125;,&#123;0,-1&#125;&#125;;
+char adir[5]=&quot;snew&quot;,Adir[5]=&quot;SNEW&quot;;         //两个dir都对应step的四个方向
+struct Pos
+&#123;
+    int x,y;            //表示位置，若是人，只会用到这两个和path
+    int mx,my;          //表示人的位置，表示箱子的变量用的，表示人的变量用不着
+    std::string path;   //记录路径
+&#125;mpre,mnxt,tar,bpre,bnxt,to;
+//mpre-man pre人的当前位置（或解释为人的上一个位置）mnxt-man next人的下一个位置
+//bpre和bnxt表示箱子的当前位置和下一个位置
+//tar表示终点位置
+//to表示箱子要移动到某个位置时，人要移动到的位置
+</code></pre>
+<p>​<br>
+​<br>
+//判断这个点是否在地图可行走范围之中<br>
+bool cango(int x,int y)<br>
+{<br>
+if(x&gt;=0 &amp;&amp; x&lt;row &amp;&amp; y&gt;=0 &amp;&amp; y&lt;col &amp;&amp; cell[x][y]!=’#’)<br>
+return true;<br>
+return false;<br>
+}</p>
+<pre><code>//人从自己所在的位置，移动到to.x,to.y的位置，简单bfs
+bool bfsMan()
+&#123;
+    memset(visp,false,sizeof(visp));
+    std::queue&lt;Pos&gt; q;
+    mpre.path=&quot;&quot;;
+    mpre.x=bnxt.mx,mpre.y=bnxt.my;
+    q.push(mpre);
+    visp[mpre.x][mpre.y]=true;
+    while(!q.empty())
+    &#123;
+        mpre=q.front(); q.pop();
+        if(mpre.x==to.x &amp;&amp; mpre.y==to.y) return true;
+        for(int i=0; i&lt;4; i++)
+        &#123;
+            mnxt=mpre;
+            mnxt.x+=step[i][0],mnxt.y+=step[i][1];
+            if(cango(mnxt.x,mnxt.y) &amp;&amp; !visp[mnxt.x][mnxt.y] &amp;&amp; !(mnxt.x==bpre.x &amp;&amp; mnxt.y==bpre.y))
+            &#123;
+                visp[mnxt.x][mnxt.y]=true;
+                mnxt.path+=adir[i];
+                q.push(mnxt);
+            &#125;
+        &#125;
+    &#125;
+    return false;
+
+&#125;
+
+//对箱子的bfs，其中嵌套了对人的bfs
+void bfs()
+&#123;
+    std::queue&lt;Pos&gt; q;
+    bpre.path=&quot;&quot;;
+    bpre.mx=mpre.x,bpre.my=mpre.y;
+    q.push(bpre);//让最初箱子的位置入队，记得给箱子结构体赋值人的位置
+    while(!q.empty())
+    &#123;
+        bpre=q.front(); q.pop();
+        for(int i=0; i&lt;4; i++)  //开始四个方向的遍历
+        &#123;
+            bnxt=bpre;
+            bnxt.x+=step[i][0],bnxt.y+=step[i][1];
+            if(cango(bnxt.x,bnxt.y) &amp;&amp; !visb[bnxt.x][bnxt.y][i])
+            &#123;
+                to=bpre;
+                to.x-=step[i][0],to.y-=step[i][1];
+                if(cango(to.x,to.y))    //初步检查这一点是否可以达到
+                &#123;
+                    if(bfsMan())
+                    &#123;
+                        //一定要bfsMan（）返回true时才标记visb为true
+                        //因为若人不能到达特定的推箱子位置，箱子就不能访问到要去的位置
+                        visb[bnxt.x][bnxt.y][i]=true;
+                        bnxt.path+=mpre.path;               //路径末尾加入人上一次移动的路径
+                        bnxt.path+=Adir[i];                 //路径末尾加入箱子移动的路径
+                        //如果到了终点，直接输出
+                        if(bnxt.x==tar.x &amp;&amp; bnxt.y==tar.y)
+                        &#123;
+                            std::cout &lt;&lt; &quot;Maze #&quot; &lt;&lt; counter++ &lt;&lt; std::endl;
+                            std::cout &lt;&lt; bnxt.path &lt;&lt; std::endl &lt;&lt; std::endl;
+                            return ;
+                        &#125;
+                        bnxt.mx=bpre.x,bnxt.my=bpre.y;      //记得记录箱子在这个位置时对应的人的位置，然后入队
+                        q.push(bnxt);
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+    std::cout &lt;&lt; &quot;Maze #&quot; &lt;&lt; counter++ &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;Impossible.&quot; &lt;&lt; std::endl &lt;&lt; std::endl;
+&#125;
+</code></pre>
+<p>​<br>
+int main()<br>
+{<br>
+counter=1;<br>
+while(std::cin &gt;&gt; row &gt;&gt; col &amp;&amp; !(row<mark>0 &amp;&amp; col</mark>0))<br>
+{<br>
+memset(visb,false,sizeof(visb));<br>
+for(int i=0; i&lt;row; i++)<br>
+{<br>
+std::cin &gt;&gt; cell[i];<br>
+for(int j=0; j&lt;col; j++)<br>
+{<br>
+if(cell[i][j]<mark>‘S’)  mpre.x=i,mpre.y=j;<br>
+else if(cell[i][j]</mark>‘B’) bpre.x=i,bpre.y=j;<br>
+else if(cell[i][j]==‘T’) tar.x=i,tar.y=j;<br>
+}<br>
+}<br>
+bfs();<br>
+}</p>
+<pre><code>    return 0;
+&#125;
+</code></pre>
+<p>​</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%B5%8C%E5%A5%97bfs%E3%80%91A%20-%20Pushing%20Boxes%20POJ%20-%201475%20%20%E6%8E%A8%E7%AE%B1%E5%AD%90/" data-id="cl7qycavt003bgkj3d375f0oi" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
 
     </footer>
   </div>
@@ -2530,7 +2582,7 @@ if __name__ == '__main__':
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>86</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>85</strong><br>文章</div></a>
       <a href="/categories"><div><strong>37</strong><br>分类</div></a>
       <a href="/tags"><div><strong>72</strong><br>标签</div></a>
     </div>
