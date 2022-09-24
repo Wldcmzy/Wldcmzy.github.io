@@ -1,5 +1,5 @@
 ---
-title: 【学习记录】python matplotlib 自学入门（随缘更新）.md
+title: 【已重置】【学习记录】python matplotlib 自学入门（随缘更新）.md
 date: 1444-11-11 11:11:11
 categories:
   - [基础知识, python, matplotlib]
@@ -34,7 +34,9 @@ ax1 = fig.add_subplot(2,2,1)
 ax2 = fig.add_subplot(2,2,2)
 ```
 
-![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110161619319.png)
+![在这里插入图片描述](【学习记录】pythonmatplotlib自学入门（随缘更新）/20210110161619319.png)
+
+
 
 
 ​    
@@ -44,8 +46,7 @@ axes[1,1].set(title = 'middle')
 axes[0,2].set(title = 'NE')
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210110161720574.png?x-oss-
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)
+![在这里插入图片描述](【学习记录】pythonmatplotlib自学入门（随缘更新）/20210110161720574.png)
 
 ## 线+貌似基础
 
@@ -61,7 +62,11 @@ ax.plot(x,y_cosx,linewidth = 1, markersize = 6,color = 'red',linestyle='-.')
 #图上的和这个不一样的写法，一个效果
 ```
 
-![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110163055151.png)  
+![在这里插入图片描述](【学习记录】pythonmatplotlib自学入门（随缘更新）/20210110163055151.png)
+
+
+
+
 加点盐
 
 
@@ -75,7 +80,7 @@ ax.set(title = 'ABC',xlabel = 'X QwQ',ylabel = '-Y---',xlim = [0,5],ylim = [-1.2
 ```
 
 
-![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/2021011016424414.png)
+![在这里插入图片描述](【学习记录】pythonmatplotlib自学入门（随缘更新）/2021011016424414.png)
 
 #### 填充两线之间的空间
 
@@ -94,7 +99,7 @@ ax.set(title = 'ABC',xlabel = 'X QwQ',ylabel = '-Y---',xlim = [0,5],ylim = [-1.2
 ax.fill_between(x,y_cosx,y_sinx,color = 'yellow')
 ```
 
-![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110164613966.png)
+![在这里插入图片描述](【学习记录】pythonmatplotlib自学入门（随缘更新）/20210110164613966.png)
 
 #### 加入网格线
 
@@ -116,7 +121,7 @@ ax.fill_between('x','cos','tan',color = 'yellow',data = data)
 ax.grid()
 ```
 
-![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110185516287.png)
+![在这里插入图片描述](【学习记录】pythonmatplotlib自学入门（随缘更新）/20210110185516287.png)
 
 ## 散点图
 
@@ -130,7 +135,7 @@ y = x*3%8
 plt.scatter(x,y,marker = '3',color = ['blue','green','blue','green','blue','green',], s = 600)
 ```
 
-![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110170857320.png)
+![在这里插入图片描述](【学习记录】pythonmatplotlib自学入门（随缘更新）/20210110170857320.png)
 
 
 ​    
@@ -140,7 +145,7 @@ y = x*3%13
 plt.scatter(x,y,marker = '*',c = np.random.rand(10),s = (np.random.rand(10)*30)**2)
 ```
 
-![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/2021011017090355.png)
+![在这里插入图片描述](【学习记录】pythonmatplotlib自学入门（随缘更新）/2021011017090355.png)
 
 ## 条形图
 
@@ -160,7 +165,7 @@ axes[1].barh(x,y,color = 'lightgreen')
 axes[1].set(ylim = [-3,15])
 ```
 
-![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110173351106.png)
+![在这里插入图片描述](【学习记录】pythonmatplotlib自学入门（随缘更新）/20210110173351106.png)
 
 #### 画直线
 
@@ -180,9 +185,9 @@ axes[0].axhline(0,color = 'blue',linewidth = 6)
 axes[1].axvline(2,color = 'lightgrey',linewidth = 3)
 ```
 
-![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110173710153.png)  
+![在这里插入图片描述](【学习记录】pythonmatplotlib自学入门（随缘更新）/20210110173710153.png)  
 有负数的情况  
-![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110173936447.png)
+![在这里插入图片描述](【学习记录】pythonmatplotlib自学入门（随缘更新）/20210110173936447.png)
 
 ## 饼图
 
@@ -195,7 +200,7 @@ plt.pie(weights,labels = names)
 pass
 ```
 
-![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110174927927.png)
+![在这里插入图片描述](【学习记录】pythonmatplotlib自学入门（随缘更新）/20210110174927927.png)
 
 
 ​    
@@ -221,7 +226,7 @@ plt.legend(loc = 'lower left')      #显示图例
 pass
 ```
 
-![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/20210110181032977.png)  
+![在这里插入图片描述](【学习记录】pythonmatplotlib自学入门（随缘更新）/20210110181032977.png)  
 所有图例位置名称
 
 > :18: MatplotlibDeprecationWarning: Unrecognized location ‘lower dleft’.
@@ -308,8 +313,7 @@ con.set_linewidth(5)
 pass
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/202101102053298.png?x-oss-
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)
+![在这里插入图片描述](【学习记录】pythonmatplotlib自学入门（随缘更新）/202101102053298.png)
 
 ## 嵌套环形图+条形图组合 实例
 
@@ -443,7 +447,7 @@ ax1.set_title('Weight of Every Factor',fontsize = 30)
 plt.savefig('Weight of Every Factor.png')
 ```
 
-![在这里插入图片描述](【学习记录】python matplotlib 自学入门（随缘更新）/2021020913414042.png)
+![在这里插入图片描述](【学习记录】pythonmatplotlib自学入门（随缘更新）/2021020913414042.png)
 
 ## 搬砖案例
 
