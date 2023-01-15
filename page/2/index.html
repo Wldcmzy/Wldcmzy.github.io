@@ -367,6 +367,11 @@
 <p>示例</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./startgame.sh 2 restart</span><br><span class="line">相当于</span><br><span class="line">/etc/init.d/srcds2 restart</span><br></pre></td></tr></table></figure>
 <h1 id="服务器配置"><a class="markdownIt-Anchor" href="#服务器配置"></a> 服务器配置</h1>
+<h2 id="导航页"><a class="markdownIt-Anchor" href="#导航页"></a> 导航页</h2>
+<p>sir佬项目的根目录有这样四个txt文件: motd.txt, host.txt, myhost.txt, mymotd.txt</p>
+<p>这些文件里可以写字，也可以放一个链接（图片，网页），可以自定义网页然后把链接放上。</p>
+<p>其中motd.txt, host.txt是默认服的导航页</p>
+<p>myhost.txt, mymotd.txt是加载插件后的导航页</p>
 <h2 id="服务器管理员"><a class="markdownIt-Anchor" href="#服务器管理员"></a> 服务器管理员</h2>
 <p>在<code>addons\sourcemod\configs\core.cfg</code>文件中修改PassInfoVar变量的值，它声明了表示密码的变量的名称， 这个值可以随意更改，也可以不改用sir写的默认值。假设我们改成&quot;_abcd&quot;</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;PassInfoVar&quot; &quot;_abcd&quot;</span><br></pre></td></tr></table></figure>
@@ -378,7 +383,7 @@
 <p>如&quot;名称2&quot;想进入服务器的话，需要先在控制台设置:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setinfo &quot;_abcd&quot; &quot;密码2&quot;</span><br></pre></td></tr></table></figure>
 <p>否则， 进不去，进去了再改成管理员名称也会被题出来。</p>
-<h2 id="游戏参数配置-只写改最新的zonemod插件"><a class="markdownIt-Anchor" href="#游戏参数配置-只写改最新的zonemod插件"></a> 游戏参数配置 (只写改最新的zonemod插件)</h2>
+<h2 id="游戏参数配置-改zonemod插件"><a class="markdownIt-Anchor" href="#游戏参数配置-改zonemod插件"></a> 游戏参数配置 (改zonemod插件)</h2>
 <h4 id="限制连推次数"><a class="markdownIt-Anchor" href="#限制连推次数"></a> 限制连推次数</h4>
 <p>路径：<code>./cfg/cfgogl/zonemod/shared_cvars.cfg</code></p>
 <blockquote>
@@ -396,13 +401,33 @@ confogl_addcvar z_gun_swing_vs_max_penalty 15</p>
 <p>confogl_addcvar director_allow_infected_bots “1”</p>
 </blockquote>
 <h2 id="让ai生还者吃药加血"><a class="markdownIt-Anchor" href="#让ai生还者吃药加血"></a> 让AI生还者吃药加血</h2>
+<p><strong>方法1</strong></p>
 <p>路径：<code>./addons/sourcemod/plugins/optional/</code></p>
 <blockquote>
 <p>删除(改名就行)插件botpopstop.smx</p>
 </blockquote>
-<h2 id="修改地图信息"><a class="markdownIt-Anchor" href="#修改地图信息"></a> 修改地图信息</h2>
+<p><strong>方法2</strong></p>
+<p>在<code>./cfg/cfgogl/zonemod/shared_cvars.cfg</code></p>
+<p>将这一句注释</p>
+<blockquote>
+<p>sm plugins load optional/botpopstop.smx</p>
+</blockquote>
+<h2 id="修改地图"><a class="markdownIt-Anchor" href="#修改地图"></a> 修改地图</h2>
 <p>路径：<code>./cfg/stripper/zonemod/maps</code></p>
 <p>想用原地图把地图配置文件从目录中移除</p>
+<h2 id="插件安装-2"><a class="markdownIt-Anchor" href="#插件安装-2"></a> 插件安装</h2>
+<h4 id="插件下载"><a class="markdownIt-Anchor" href="#插件下载"></a> 插件下载</h4>
+<p><a target="_blank" rel="noopener" href="https://forums.alliedmods.net/index.php">AlliedModders (alliedmods.net)</a></p>
+<h4 id="插件安装-3"><a class="markdownIt-Anchor" href="#插件安装-3"></a> 插件安装</h4>
+<p>以这个开局在安全屋生成近战的插件举例</p>
+<p>[<a target="_blank" rel="noopener" href="https://forums.alliedmods.net/showthread.php?p=1160193">L4D2] Melee In The Safe Room (with unlock all melee weapons on every campaign) - AlliedModders (alliedmods.net)</a></p>
+<h6 id="在默认服安装"><a class="markdownIt-Anchor" href="#在默认服安装"></a> 在默认服安装</h6>
+<p>插件网页中说：<code>copy the [L4D2] MeleeInTheSafeRoom.smx to your servers sourcemod/plugins folder.</code> 也就是把smx文文件拷贝到<code>addons/sourcemod/plugins</code>目录下。 这样就可以在默认服使用该插件。</p>
+<p>这个插件还有一些自定义选项，这里不做介绍，可以在网页看教程。</p>
+<h6 id="在zonemod服务器安装"><a class="markdownIt-Anchor" href="#在zonemod服务器安装"></a> 在zonemod服务器安装</h6>
+<p>在<code>cfg\cfgogl\zonemod</code>路径下的<code>shared_plugins.cfg</code> 和 <code>confogl_plugins.cfg</code>文件中都有加载特定插件的语句，可以直接仿照。</p>
+<p>先把smx文件拷贝到<code>addons/sourcemod/plugins/optional</code>目录，然后在<code>confogl_plugins.cfg</code>写入<code>sm plugins load optional/[L4D2]MeleeInTheSafeRoom.smx</code></p>
+<p>**注意：**经测试若插件名带空格会加载不上，可以给插件改一个名字</p>
 <h1 id="一些错误的解决"><a class="markdownIt-Anchor" href="#一些错误的解决"></a> 一些错误的解决</h1>
 <h2 id="错误1"><a class="markdownIt-Anchor" href="#错误1"></a> 错误1</h2>
 <p><strong>-bash: /etc/init.d/srcds1: /bin/sh^M: bad interpreter: No such file or directory</strong></p>
@@ -1038,7 +1063,7 @@ app_update 222860 validate</p>
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy;2021 - 2022 StarsWhisper<br>
+      &copy;2022 - 2023 StarsWhisper<br>
       由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
       主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
 	  (但是魔改)
