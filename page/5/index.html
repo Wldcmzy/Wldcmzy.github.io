@@ -43,9 +43,9 @@
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
       <a href="/categories"><div><strong>37</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>75</strong><br>标签</div></a>
+      <a href="/tags"><div><strong>77</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -82,6 +82,229 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-【Trie树&amp;AC自动机】P3879[TJOI2010]阅读理解 P3808 【模板】AC自动机（简单版）P3796 【模板】AC自动机（加强版）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90Trie%E6%A0%91&AC%E8%87%AA%E5%8A%A8%E6%9C%BA%E3%80%91P3879%5BTJOI2010%5D%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3%20P3808%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91AC%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%88%E7%AE%80%E5%8D%95%E7%89%88%EF%BC%89P3796%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91AC%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%88%E5%8A%A0%E5%BC%BA%E7%89%88%EF%BC%89/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90Trie%E6%A0%91&AC%E8%87%AA%E5%8A%A8%E6%9C%BA%E3%80%91P3879%5BTJOI2010%5D%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3%20P3808%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91AC%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%88%E7%AE%80%E5%8D%95%E7%89%88%EF%BC%89P3796%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91AC%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%88%E5%8A%A0%E5%BC%BA%E7%89%88%EF%BC%89/">【Trie树&amp;AC自动机】P3879[TJOI2010]阅读理解 P3808 【模板】AC自动机（简单版）P3796 【模板】AC自动机（加强版）.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<h2 id="洛谷-p3879tjoi2010阅读理解"><a class="markdownIt-Anchor" href="#洛谷-p3879tjoi2010阅读理解"></a> 洛谷 P3879[TJOI2010]阅读理解</h2>
+<p>​<br>
+​    #include <iostream><br>
+​    #include <cstdio><br>
+​    #include <cstdlib><br>
+​    #include <cstring><br>
+​    #include <cmath><br>
+​    #include <algorithm><br>
+​    #include <string><br>
+​    #include <queue><br>
+​    #include <vector><br>
+​    #include <stack><br>
+​    #include <map><br>
+​    #include <set><br>
+​    typedef long long int LL;<br>
+​    const int INF = 0x7fffffff, SCF = 0x3fffffff;<br>
+​    const int N = 5e6+4, M = 1e3+4;<br>
+​    int n,m,k;<br>
+​    int idx,len,ans;<br>
+​    int has[M];<br>
+​    char ss[22];<br>
+​    struct TT<br>
+​    {<br>
+​        int nxt[26],id;<br>
+​    }tree[N];<br>
+​    void jointree(int rt)<br>
+​    {<br>
+​        len = strlen(ss);<br>
+​        for(int i=0; i&lt;len; i++){<br>
+​            int pp = ss[i]-‘a’;<br>
+​            if(!tree[rt].nxt[pp]){<br>
+​                tree[rt].nxt[pp] = idx++;<br>
+​            }<br>
+​            rt = tree[rt].nxt[pp];<br>
+​        }<br>
+​        tree[rt].id = 1;<br>
+​    }<br>
+​    void qry(int rt)<br>
+​    {<br>
+​        int root = rt;<br>
+​        for(int i=0; i&lt;len; i++){<br>
+​            int pp = ss[i]-‘a’;<br>
+​            if(!tree[rt].nxt[pp]) return ;<br>
+​            rt = tree[rt].nxt[pp];<br>
+​        }<br>
+​        has[root] = tree[rt].id;<br>
+​    }<br>
+​    void solve()<br>
+​    {<br>
+​        memset(has,0,sizeof(has));<br>
+​        len = strlen(ss);<br>
+​        for(int i=1; i&lt;=n; i++){<br>
+​            qry(i);<br>
+​        }<br>
+​        for(int i=1; i&lt;=n; i++){<br>
+​            if(has[i]) printf(&quot;%d “,i);<br>
+​        }<br>
+​        printf(”\n&quot;);<br>
+​    }<br>
+​    int main()<br>
+​    {<br>
+​        scanf(&quot;%d&quot;,&amp;n);<br>
+​        idx = n+1;<br>
+​        for(int i=1; i&lt;=n; i++){<br>
+​            scanf(&quot;%d&quot;,&amp;k);<br>
+​            for(int j=1; j&lt;=k; j++){<br>
+​                scanf(&quot;%s&quot;,ss);<br>
+​                jointree(i);<br>
+​            }<br>
+​        }<br>
+​        scanf(&quot;%d&quot;,&amp;m);<br>
+​        for(int i=0; i&lt;m; i++){<br>
+​            scanf(&quot;%s&quot;,ss);<br>
+​            solve();<br>
+​        }<br>
+​        return 0;<br>
+​    }</set></map></stack></vector></queue></string></algorithm></cmath></cstring></cstdlib></cstdio></iostream></p>
+<p>​</p>
+<h2 id="洛谷-p3808-模板ac自动机简单版"><a class="markdownIt-Anchor" href="#洛谷-p3808-模板ac自动机简单版"></a> 洛谷 P3808 【模板】AC自动机（简单版）</h2>
+<p>​<br>
+​    #include <iostream><br>
+​    #include <cstdio><br>
+​    #include <cstdlib><br>
+​    #include <cstring><br>
+​    #include <cmath><br>
+​    #include <algorithm><br>
+​    #include <string><br>
+​    #include <queue><br>
+​    #include <vector><br>
+​    #include <stack><br>
+​    #include <map><br>
+​    #include <set><br>
+​    typedef long long int LL;<br>
+​    const int INF = 0x7fffffff, SCF = 0x3fffffff;<br>
+​    const int N = 1e7+4, M = 1e3+4;<br>
+​    int n,idx;<br>
+​    char ss[N];<br>
+​    struct TT<br>
+​    {<br>
+​        int fail,id,nxt[26];<br>
+​    }tree[N];<br>
+​    void joinTree()<br>
+​    {<br>
+​        int len = strlen(ss), rt = 0;<br>
+​        for(int i=0; i&lt;len; i++){<br>
+​            int pp = ss[i]-‘a’;<br>
+​            if(!tree[rt].nxt[pp]){<br>
+​                tree[rt].nxt[pp] = idx++;<br>
+​            }<br>
+​            rt = tree[rt].nxt[pp];<br>
+​        }<br>
+​        tree[rt].id += 1;<br>
+​    }<br>
+​    void getFail()<br>
+​    {<br>
+​        std::queue<int> q;<br>
+​        int x,y,fail;<br>
+​        for(int i=0; i&lt;26; i++){<br>
+​            y = tree[0].nxt[i];<br>
+​            if(y&gt;0){<br>
+​                tree[y].fail = 0;<br>
+​                q.push(y);<br>
+​            }<br>
+​        }<br>
+​        while(!q.empty()){<br>
+​            x = q.front(); q.pop();<br>
+​            fail = tree[x].fail;<br>
+​            for(int i=0; i&lt;26; i++){<br>
+​                y = tree[x].nxt[i];<br>
+​                if(y&gt;0){<br>
+​                    tree[y].fail = tree[fail].nxt[i];<br>
+​                    q.push(y);<br>
+​                }<br>
+​                else tree[x].nxt[i] = tree[fail].nxt[i];<br>
+​            }<br>
+​        }<br>
+​    }<br>
+​    int ACgo()<br>
+​    {<br>
+​        int rt = 0,len = strlen(ss),ans = 0;<br>
+​        for(int i=0; i&lt;len; i++){<br>
+​            rt = tree[rt].nxt[ss[i]-‘a’];<br>
+​            for(int j=rt; j &amp;&amp; tree[j].id != -1; j=tree[j].fail){<br>
+​                ans += tree[j].id;<br>
+​                tree[j].id = -1;<br>
+​            }<br>
+​        }<br>
+​        return ans;<br>
+​    }<br>
+​    int main()<br>
+​    {<br>
+​        //freopen(“D:\EdgeDownloadPlace\P3808_2.in”,“r”,stdin);<br>
+​        idx = 1;<br>
+​        scanf(&quot;%d&quot;,&amp;n);<br>
+​        while(n–){<br>
+​            scanf(&quot;%s&quot;,ss);<br>
+​            joinTree();<br>
+​        }<br>
+​        getFail();<br>
+​        scanf(&quot;%s&quot;,ss);<br>
+​        printf(&quot;%d&quot;,ACgo());<br>
+​        return 0;<br>
+​    }</int></set></map></stack></vector></queue></string></algorithm></cmath></cstring></cstdlib></cstdio></iostream></p>
+<h2 id="洛谷-p3796-模板ac自动机加强版"><a class="markdownIt-Anchor" href="#洛谷-p3796-模板ac自动机加强版"></a> 洛谷 P3796 【模板】AC自动机（加强版）</h2>
+<p>​</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> <span class="type">int</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x7fffffff</span>, SCF = <span class="number">0x3fffffff</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e6</span>+<span class="number">4</span>, M = <span class="number">10550</span>;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> idx;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">TT</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> fail,id,nxt[<span class="number">26</span>];</span><br><span class="line">&#125;node[M];</span><br><span class="line"><span class="type">char</span> ss[N];</span><br><span class="line"><span class="type">char</span> sub[<span class="number">155</span>][<span class="number">75</span>];</span><br><span class="line"><span class="type">int</span> save[<span class="number">155</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">initial</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;=idx; i++)&#123;</span><br><span class="line">        <span class="built_in">memset</span>(node[i].nxt,<span class="number">0</span>,<span class="built_in">sizeof</span>(node[i].nxt));</span><br><span class="line">        node[i].fail = <span class="number">0</span>;</span><br><span class="line">        node[i].id = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    idx = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(save,<span class="number">0</span>,<span class="built_in">sizeof</span>(save));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">joinTree</span><span class="params">(<span class="type">int</span> id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> len = <span class="built_in">strlen</span>(sub[id]) ,rt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;len; i++)&#123;</span><br><span class="line">        <span class="type">int</span> ch = sub[id][i]-<span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span>(!node[rt].nxt[ch]) node[rt].nxt[ch] = ++idx;</span><br><span class="line">        rt = node[rt].nxt[ch];</span><br><span class="line">    &#125;</span><br><span class="line">    node[rt].id = id;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">buildFail</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::queue&lt;<span class="type">int</span> &gt;q;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">26</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(node[<span class="number">0</span>].nxt[i]&gt;<span class="number">0</span>) &#123;</span><br><span class="line">            node[node[<span class="number">0</span>].nxt[i]].fail = <span class="number">0</span>;</span><br><span class="line">            q.<span class="built_in">push</span>(node[<span class="number">0</span>].nxt[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">        <span class="type">int</span> cur = q.<span class="built_in">front</span>(); q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="type">int</span> fail = node[cur].fail;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">26</span>; i++)&#123;</span><br><span class="line">            <span class="type">int</span> next = node[cur].nxt[i];</span><br><span class="line">            <span class="keyword">if</span>(next&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                node[next].fail = node[fail].nxt[i];</span><br><span class="line">                q.<span class="built_in">push</span>(next);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> node[cur].nxt[i] = node[fail].nxt[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ACgo</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> len = <span class="built_in">strlen</span>(ss),rt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;len; i++)&#123;</span><br><span class="line">        rt = node[rt].nxt[ss[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=rt; j; j=node[j].fail)</span><br><span class="line">            save[node[j].id] += <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//freopen(&quot;D:\\EdgeDownloadPlace\\P3796_1.in&quot;,&quot;r&quot;,stdin);</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n))&#123;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        <span class="built_in">initial</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,sub[i]);</span><br><span class="line">            <span class="built_in">joinTree</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">buildFail</span>();</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,ss);</span><br><span class="line">        <span class="built_in">ACgo</span>();</span><br><span class="line">        <span class="type">int</span> mx = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">            mx = std::<span class="built_in">max</span>(save[i],mx);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,mx);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(save[i] == mx)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>,sub[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90Trie%E6%A0%91&AC%E8%87%AA%E5%8A%A8%E6%9C%BA%E3%80%91P3879[TJOI2010]%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3%20P3808%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91AC%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%88%E7%AE%80%E5%8D%95%E7%89%88%EF%BC%89P3796%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91AC%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%88%E5%8A%A0%E5%BC%BA%E7%89%88%EF%BC%89/" data-id="cl7qycava001wgkj312aed6n7" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AC%E8%87%AA%E5%8A%A8%E6%9C%BA/" rel="tag">AC自动机</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Trie%E6%A0%91/" rel="tag">Trie树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-【tarjin算法练习 缩点，割点，割边】洛谷_P3387缩点模板P3388割点模板 HDU4738 caocao‘bridge" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -2824,109 +3047,6 @@ for each_row in ws_one['A9':'F10']:
 
 
   
-    <article id="post-【学习记录】【Python】关于super及其MRO机制的个人理解（不一定对）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E5%85%B3%E4%BA%8Esuper%E5%8F%8A%E5%85%B6MRO%E6%9C%BA%E5%88%B6%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%AF%B9%EF%BC%89/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E5%85%B3%E4%BA%8Esuper%E5%8F%8A%E5%85%B6MRO%E6%9C%BA%E5%88%B6%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%AF%B9%EF%BC%89/">【学习记录】【Python】关于super及其MRO机制的个人理解（不一定对）.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/">python</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<p>以下内容均为个人理解。<br>
-<strong>MRO: Method Resolution Order 方法解析顺序</strong></p>
-<p>如果不用super：</p>
-<p>​</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;A.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        A.fun(self)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;B.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        A.fun(self)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;C.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">D</span>(B , C):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        B.fun(self)</span><br><span class="line">        C.fun(self)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;D.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line">D().fun()</span><br></pre></td></tr></table></figure>
-<p>输出结果： 发现A被实例化了两次</p>
-<blockquote>
-<p>A.fun<br>
-B.fun<br>
-A.fun<br>
-C.fun<br>
-D.fun</p>
-</blockquote>
-<p>如果用super：</p>
-<p>​</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;A.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(B , self).fun()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;B.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(C , self).fun()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;C.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">D</span>(B , C):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(D , self).fun()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;D.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line">D().fun()</span><br></pre></td></tr></table></figure>
-<p>输出结果： 发现A没有被重复实例化，这时由于Python继承中的MRO机制</p>
-<blockquote>
-<p>A.fun<br>
-C.fun<br>
-B.fun<br>
-D.fun</p>
-</blockquote>
-<p>查资料：</p>
-<blockquote>
-<p>在每个类声明之后，Python都会自动为创建一个名为“ <strong>mro</strong><br>
-”的内置属性，这个属性就是Python的MRO机制生成的，该属性是一个tuple，定义的是该类的方法解析顺序（继承顺序），当用super调用父类的方法时，会按照__mro__属性中的元素顺序去挨个查找方法。我们可以通过“类名.<br>
-<strong>mro</strong> ”或“类名.mro()”来查看上面代码中D类的__mro__属性值</p>
-</blockquote>
-<p>举例：</p>
-<p>​</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">D</span>(A,B):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">E</span>(B, C):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">F</span>(D, E):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(F.__mro__)</span><br></pre></td></tr></table></figure>
-<p>输出结果：</p>
-<blockquote>
-<p>(&lt;class ‘ <strong>main</strong>.F’&gt;, &lt;class ‘ <strong>main</strong>.D’&gt;, &lt;class ‘ <strong>main</strong>.A’&gt;,&lt;class<br>
-‘ <strong>main</strong>.E’&gt;, &lt;class ‘ <strong>main</strong>.B’&gt;, &lt;class ‘ <strong>main</strong>.C’&gt;,&lt;class<br>
-‘object’&gt;)</p>
-</blockquote>
-<p>个人猜测MRO机制的顺序为：在深度优先的基础上，避免重复调用，且尽可能晚调用。<br>
-即 F-&gt;D-&gt;A-&gt;Object-&gt;B-&gt;Object-&gt;E-&gt;B-&gt;Object-&gt;C-&gt;Object<br>
-变为F-&gt;D-&gt;A-&gt;E-&gt;B-&gt;C-&gt;Objcet</p>
-<p><strong>super(type , obj)</strong><br>
-obj是type或type子类 的 一个实例，一般是self<br>
-super(type , obj)表示obj【按MRO 第一个排在type后面】的父类<br>
-如：F-&gt;D-&gt;A-&gt;E-&gt;B-&gt;C-&gt;Objcet 中 super(B , F()).function() 调用的使C类的function方法。<br>
-<strong>super()</strong><br>
-相当于super( <strong>class</strong> , self)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E5%85%B3%E4%BA%8Esuper%E5%8F%8A%E5%85%B6MRO%E6%9C%BA%E5%88%B6%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%AF%B9%EF%BC%89/" data-id="cl7qycavp002ugkj306gw9j1q" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80%E6%9C%BA%E5%88%B6/" rel="tag">语言机制</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -2983,9 +3103,9 @@ super(type , obj)表示obj【按MRO 第一个排在type后面】的父类<br>
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
       <a href="/categories"><div><strong>37</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>75</strong><br>标签</div></a>
+      <a href="/tags"><div><strong>77</strong><br>标签</div></a>
     </div>
 
 

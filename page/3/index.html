@@ -43,9 +43,9 @@
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
       <a href="/categories"><div><strong>37</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>75</strong><br>标签</div></a>
+      <a href="/tags"><div><strong>77</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -82,6 +82,73 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-爬取自己CSDN上所有的博客并转存为md文件" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/05/06/%E7%88%AC%E5%8F%96%E8%87%AA%E5%B7%B1CSDN%E4%B8%8A%E6%89%80%E6%9C%89%E7%9A%84%E5%8D%9A%E5%AE%A2%E5%B9%B6%E8%BD%AC%E5%AD%98%E4%B8%BAmd%E6%96%87%E4%BB%B6/" class="article-date">
+  <time class="post-time" datetime="2022-05-06T09:59:32.000Z" itemprop="datePublished">
+    <span class="post-month">5月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/06/%E7%88%AC%E5%8F%96%E8%87%AA%E5%B7%B1CSDN%E4%B8%8A%E6%89%80%E6%9C%89%E7%9A%84%E5%8D%9A%E5%AE%A2%E5%B9%B6%E8%BD%AC%E5%AD%98%E4%B8%BAmd%E6%96%87%E4%BB%B6/">爬取自己CSDN上所有的博客并转存为md文件</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/">教练我想学挂边躲牛</a>,<a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/%E7%88%AC%E8%99%AB/">爬虫</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1先考虑怎么获得自己所有博客的地址"><a class="markdownIt-Anchor" href="#1先考虑怎么获得自己所有博客的地址"></a> 1.先考虑怎么获得自己所有博客的地址</h2>
+<p>a.打开自己的个人博客，尝试从HTML里提取有用信息，没能成功。</p>
+<p>b.发现下滑后动态加载自己的博客，于是抓包，找到连接</p>
+<p><img src="/2022/05/06/%E7%88%AC%E5%8F%96%E8%87%AA%E5%B7%B1CSDN%E4%B8%8A%E6%89%80%E6%9C%89%E7%9A%84%E5%8D%9A%E5%AE%A2%E5%B9%B6%E8%BD%AC%E5%AD%98%E4%B8%BAmd%E6%96%87%E4%BB%B6/zhuabaolianjie.png" alt="zhuabaolianjie"></p>
+<p>c.发现连接中除了page=%d这一部分外，其余都相同，所以考虑使用for循环请求多个连接，并在返回数据中提取网址</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">N = <span class="number">6</span></span><br><span class="line">idname = <span class="string">&#x27;wldcmzy&#x27;</span></span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36 Edg/101.0.1210.32&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">url_base = <span class="string">&#x27;https://blog.csdn.net/community/home-api/v1/get-business-list?page=&#123;page&#125;&amp;size=20&amp;businessType=lately&amp;noMore=false&amp;username=&#123;name&#125;&#x27;</span>.<span class="built_in">format</span>(page = <span class="string">&#x27;&#123;page&#125;&#x27;</span>, name = idname)</span><br><span class="line"></span><br><span class="line">lst = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, N):</span><br><span class="line">    res = requests.get(url_base.<span class="built_in">format</span>(page = i), headers = headers)</span><br><span class="line">    lst.extend(re.findall(<span class="string">&quot;https://blog.csdn.net/%s/article/details/[0-9]+&quot;</span> % idname, res.text))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="2写抓取博文的代码"><a class="markdownIt-Anchor" href="#2写抓取博文的代码"></a> 2.写抓取博文的代码</h2>
+<p>由于本人太菜了，没有成功吧博文提取出来，所以去网上搜索到了<a target="_blank" rel="noopener" href="https://blog.csdn.net/haojie_duan/article/details/122864466">一篇大佬的文章</a>，这篇文章是爬取CSDN热门文章的，可以复制源码略加改动，打到爬自己博文的目的</p>
+<p>中间还是遇到了一些错误的，毕竟自己的需求和原文有所不同，比如大佬的代码里没有处理特殊字符\t，以及使用BeautifSoup检索标签时需要在class_参数中加上&quot;markdown_views prism-atom-one-dark&quot;。这些问题可以很快被发现并且修正。</p>
+<p>附上改后的代码:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">@Author:survive</span></span><br><span class="line"><span class="string">@Blog(个人博客地址): https://blog.csdn.net/haojie_duan</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string">@File:csdn.py.py</span></span><br><span class="line"><span class="string">@Time:2022/2/10 8:49</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string">@Motto:我不知道将去何方，但我已在路上。——宫崎骏《千与千寻》</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">代码思路：</span></span><br><span class="line"><span class="string">1.确定目标需求:将csdn文章内容保存成 html、PDF、md格式</span></span><br><span class="line"><span class="string">    - 1.1首先保存为html格式：获取列表页中所有的文章ur1地址，请求文章ur1地址获取我们需要的文章内容</span></span><br><span class="line"><span class="string">    - 1.2 通过 wkhtmitopdf.exe把html文件转换成PDF文件</span></span><br><span class="line"><span class="string">    - 1.3 通过 wkhtmitopdf.exe把html文件转换成md文件</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">2.请求ur1获取网页源代码</span></span><br><span class="line"><span class="string">3.解析数据，提取自己想要内容</span></span><br><span class="line"><span class="string">4.保存数据</span></span><br><span class="line"><span class="string">5.转换数据类型把HTML转换成PDF、md文伴</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">html_str = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="string">&lt;html lang=&quot;en&quot;&gt;</span></span><br><span class="line"><span class="string">&lt;head&gt;</span></span><br><span class="line"><span class="string">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span></span><br><span class="line"><span class="string">    &lt;title&gt;Document&lt;/title&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">&#123;article&#125;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> parsel</span><br><span class="line"><span class="comment">#import pdfkit   #用来将html转为pdf</span></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> html2text    <span class="comment">#用来将html转换为md</span></span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="comment"># user_agent库：每次执行一次访问随机选取一个 user_agent，防止过于频繁访问被禁止</span></span><br><span class="line">USER_AGENT_LIST = [</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1092.0 Safari/536.6&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1090.0 Safari/536.6&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; 360SE)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.0 Safari/536.3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24&quot;</span></span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36&quot;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CSDNSpider</span>():</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, lst</span>):</span><br><span class="line">        self.url = <span class="string">&#x27;https://blog.csdn.net/csdndevelopers/category_10594816.html&#x27;</span></span><br><span class="line">        self.headers = &#123;</span><br><span class="line">            <span class="string">&#x27;user-agent&#x27;</span>:random.choice(USER_AGENT_LIST)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        self.lst = lst</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_request</span>(<span class="params">self, url</span>):</span><br><span class="line">        response = requests.get(url=url, headers=self.headers)</span><br><span class="line">        response.encoding = <span class="string">&quot;utf-8&quot;</span></span><br><span class="line">        <span class="keyword">if</span> response.status_code == <span class="number">200</span>:</span><br><span class="line">            <span class="keyword">return</span> response</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">parse_content</span>(<span class="params">self, reponse</span>):</span><br><span class="line">        html = reponse.text</span><br><span class="line">        selector = parsel.Selector(html)</span><br><span class="line">        href = selector.css(<span class="string">&#x27;.column_article_list a::attr(href)&#x27;</span>).getall()</span><br><span class="line">        name = <span class="number">00</span></span><br><span class="line">        <span class="keyword">for</span> link <span class="keyword">in</span> href:</span><br><span class="line">            <span class="built_in">print</span>(link)</span><br><span class="line">            name = name + <span class="number">1</span></span><br><span class="line">            <span class="comment"># 对文章的url地址发送请求</span></span><br><span class="line">            response = self.send_request(link)</span><br><span class="line">            <span class="keyword">if</span> response:</span><br><span class="line">                self.parse_detail(response, name)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">parse_detail</span>(<span class="params">self, response, name</span>):</span><br><span class="line">        html = response.text</span><br><span class="line">        <span class="comment"># print(html)</span></span><br><span class="line">        selector = parsel.Selector(html)</span><br><span class="line">        title = selector.css(<span class="string">&#x27;#articleContentId::text&#x27;</span>).get()</span><br><span class="line">        <span class="comment"># content = selector.css(&#x27;#content_views&#x27;).get()</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 由于这里使用parsel拿到的网页文件，打开会自动跳转到csdn首页，并且不能转为pdf，就想在这里用soup</span></span><br><span class="line">        soup = BeautifulSoup(html, <span class="string">&#x27;lxml&#x27;</span>)</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;debugdir/&#x27;</span> + <span class="built_in">str</span>(name) + <span class="string">&#x27;.css&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(<span class="built_in">str</span>(soup))</span><br><span class="line">        <span class="comment">#print(soup)</span></span><br><span class="line">        content = soup.find(<span class="string">&#x27;div&#x27;</span>,<span class="built_in">id</span>=<span class="string">&quot;content_views&quot;</span>,class_=[<span class="string">&quot;markdown_views prism-atom-one-dark&quot;</span>, <span class="string">&quot;markdown_views prism-atom-one-light&quot;</span> , <span class="string">&quot;htmledit_views&quot;</span>]) <span class="comment">#class_=&quot;htmledit_views&quot;</span></span><br><span class="line">        <span class="built_in">print</span>(content)</span><br><span class="line">        <span class="comment"># print(content)</span></span><br><span class="line">        <span class="comment"># print(title, content)</span></span><br><span class="line">        html = html_str.<span class="built_in">format</span>(article=content)</span><br><span class="line">        self.write_content(html, title)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">write_content</span>(<span class="params">self, content, name</span>):</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(name)</span><br><span class="line"></span><br><span class="line">        html_path = <span class="string">&quot;HTML/&quot;</span> + <span class="built_in">str</span>(self.change_title(name)) + <span class="string">&quot;.html&quot;</span></span><br><span class="line">        pdf_path =<span class="string">&quot;PDF/&quot;</span> + <span class="built_in">str</span>(self.change_title(name))+ <span class="string">&quot;.pdf&quot;</span></span><br><span class="line">        md_path = <span class="string">&quot;MD/&quot;</span> + <span class="built_in">str</span>(self.change_title(name)) + <span class="string">&quot;.md&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将内容保存为html文件</span></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(html_path, <span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(content)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;正在保存&quot;</span>, name, <span class="string">&quot;.html&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将html文件转换成PDF文件</span></span><br><span class="line">        <span class="comment">#config = pdfkit.configuration(wkhtmltopdf=r&#x27;G:\Dev\wkhtmltopdf\bin\wkhtmltopdf.exe&#x27;)</span></span><br><span class="line">        <span class="comment">#pdfkit.from_file(html_path, pdf_path, configuration=config)</span></span><br><span class="line">        <span class="comment">#print(&quot;正在保存&quot;, name, &quot;.pdf&quot;)</span></span><br><span class="line">        <span class="comment"># os.remove(html_path)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将html文件转换成md格式</span></span><br><span class="line">        html_text = <span class="built_in">open</span>(html_path, <span class="string">&#x27;r&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>).read()</span><br><span class="line">        markdown = html2text.html2text(html_text)</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(md_path, <span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">            file.write(markdown)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;正在保存&quot;</span>, name, <span class="string">&quot;.md&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">change_title</span>(<span class="params">self, title</span>):</span><br><span class="line">        mode = re.<span class="built_in">compile</span>(<span class="string">r&#x27;[\\\/\:\?\*\&quot;\&lt;\&gt;\|\!\t]&#x27;</span>)</span><br><span class="line">        new_title = re.sub(mode,<span class="string">&#x27;_&#x27;</span>, title)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> new_title</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">start</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment">#response = self.send_request(self.url)</span></span><br><span class="line">        <span class="comment">#if response:</span></span><br><span class="line">        <span class="comment">#    self.parse_content(response)</span></span><br><span class="line">        <span class="keyword">for</span> i, link <span class="keyword">in</span> <span class="built_in">enumerate</span>(self.lst):</span><br><span class="line">            <span class="built_in">print</span>(i + <span class="number">1</span>, link)</span><br><span class="line">            response = self.send_request(link)</span><br><span class="line">            <span class="keyword">if</span> response:</span><br><span class="line">                 self.parse_detail(response, i)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    csdn = CSDNSpider(lst)</span><br><span class="line">    csdn.start()</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="3效果"><a class="markdownIt-Anchor" href="#3效果"></a> 3.效果</h2>
+<p>虽然得到了所有博客的md文件，整体效果稍微差一点，比如代码框没有代码类型，代码框中回车较多会被截成好几份等，但是也可以接受</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/05/06/%E7%88%AC%E5%8F%96%E8%87%AA%E5%B7%B1CSDN%E4%B8%8A%E6%89%80%E6%9C%89%E7%9A%84%E5%8D%9A%E5%AE%A2%E5%B9%B6%E8%BD%AC%E5%AD%98%E4%B8%BAmd%E6%96%87%E4%BB%B6/" data-id="cl7qycawq006pgkj385661jgg" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-hexo框架下博客应用夏娜主题并略微魔改" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -1359,108 +1426,6 @@ director_allow_infected_bots “0”</p>
 
 
   
-    <article id="post-YTU 3413_ 小姬小姬小姬" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/YTU%203413_%20%E5%B0%8F%E5%A7%AC%E5%B0%8F%E5%A7%AC%E5%B0%8F%E5%A7%AC/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/YTU%203413_%20%E5%B0%8F%E5%A7%AC%E5%B0%8F%E5%A7%AC%E5%B0%8F%E5%A7%AC/">YTU 3413_ 小姬小姬小姬.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>,<a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/%E7%9E%8E%E6%90%9E/">瞎搞</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>小姬最近开始研究起了曼哈顿距离，因为他厌倦了欧氏距离的学习。</p>
-<p>我们知道，平面内 (x1,y1) 与 (x2,y2) 的曼哈顿距离被定义为这两点在标准坐标系上的绝对轴距之和，即 |x1−x2|+|y1−y2|。</p>
-<p>对于小姬来讲，他可以很容易的算出给定平面内任意多个点之间的曼哈顿距离，但是千千给小姬出了一个问题：假如我有 n(n−1)2 个数，它们分别代表平面中 n<br>
-个点之间的曼哈顿距离，你能告诉我这 n 个点的位置么？</p>
-<p>随后的几天，小姬开始困惑了，因为他想来想去也只会算当 n=2 的情形，于是便去找千千诉苦，看到这样的情形，千千只好答应降低难度，只要你算出 n=3<br>
-的情形便可以啦。</p>
-<p>你能帮小姬解决这个问题么？</p>
-<h2 id="输入"><a class="markdownIt-Anchor" href="#输入"></a> 输入</h2>
-<p>输入只有一行，包含三个正整数 a,b,c (1≤a,b,c≤100)，分别代表平面中 3 个点两两之间的曼哈顿距离。（保证输入数据有解）</p>
-<h2 id="输出"><a class="markdownIt-Anchor" href="#输出"></a> 输出</h2>
-<p>输出满足题意的三个点的坐标（要求<br>
-0≤|x|,|y|≤105），每个点的坐标占一行，可以以任意的顺序输出，若存在多解的情况，输出任意一组即可。（如果你的答案计算出的结果与真实值相差 10−6<br>
-以内则被认为是正确的）</p>
-<h2 id="样例输入"><a class="markdownIt-Anchor" href="#样例输入"></a> 样例输入</h2>
-<p>1 1 2</p>
-<h2 id="样例输出"><a class="markdownIt-Anchor" href="#样例输出"></a> 样例输出</h2>
-<p>0.000000 0.000000<br>
-1.000000 0.000000<br>
-0.000000 1.000000</p>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<p>在这三个曼哈顿距离中任取一个d，它一定表示两点之间的曼哈顿距离<br>
-设其中一个点为原点，则另一个点一定在以原点为中心距离远点曼哈顿距离为d的菱形（正方形）上。<br>
-其他两个输入值，其中有一个值是于原点相关的曼哈顿距离，而这个值对应的点也应该是围绕原点的一个菱形（正方形）<br>
-。<br>
-不妨先假设其中一个值是与原点相关的曼哈顿距离，只要第三个值（原点除外的其他两点的曼哈顿距离）在区间【两菱形之间点的最短距离，两菱形点的最长距离】范围之内，则必定可以求解，如果不满足，则最后剩下的值才是与原点关联的值<br>
-。<br>
-这样我们就可以先直接定死两个点，求第三个点。<br>
-先说两个菱形大小不一样的情况：<br>
-如下图，（这个图我只看了右边）<br>
-1.我定的点是（0，0）和小菱形最上端的点（0，x）<br>
-图中上方表示红线（0，x）和求解点有最短距离时求解点存在的范围，在这一线段上（0，x）和求解点的曼哈顿距离相等，这个最短距离为abs（与原点相关的连个曼哈顿距离只差），若不关联原点的曼哈顿距离就是最短距离，则随便取红线上的一点就是答案<br>
-2.同理，下方红线表示（0，x）和所求点曼哈顿距离最长的范围，若不关联原点的曼哈顿距离等于最长距离，则随便在下方红线上取一点就是答案<br>
-3.在蓝线上（0，x）到求解点的曼哈顿距离递增<br>
-我们可以先把求解点定在上方红线的最下边，这时求解点与（0，x）的曼哈顿距离为最短距离，然后再将求解点向下偏移，令两点之间的曼哈顿距离增长（不关联原点的曼哈顿距离-<br>
-最短距离），得到的点就是答案（斜率都是1或-1呀）<br>
-![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201028223150512.png?x-oss-">https://img-blog.csdnimg.cn/20201028223150512.png?x-oss-</a><br>
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)<br>
-如果两个菱形大小一样，最上方的红线就会变成一个点，其余思路不变，所以这种情况不用另外考虑 <s>战吼：放一个P</s></p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<p>一遍过的，里面有些冗余的东西写出来了根本没用上，比如那个结构体的点</p>
-<p>​</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Edge</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">float</span> x,y;</span><br><span class="line">&#125;p1,p2,p3;</span><br><span class="line"><span class="type">int</span> a,b,c;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(<span class="type">float</span> p,<span class="type">float</span> q,<span class="type">float</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> x,y,px,py,left;</span><br><span class="line">    <span class="keyword">if</span>(p&lt;q) x=p,y=q;</span><br><span class="line">    <span class="keyword">else</span> x=q,y=p;</span><br><span class="line">    <span class="keyword">if</span> (w == std::<span class="built_in">abs</span>(p-q))</span><br><span class="line">    &#123;</span><br><span class="line">        px=<span class="number">0</span>;</span><br><span class="line">        py=y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(w == p+q)</span><br><span class="line">    &#123;</span><br><span class="line">        px=<span class="number">0</span>;</span><br><span class="line">        py=-y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">float</span> tmp=std::<span class="built_in">abs</span>(p-q);</span><br><span class="line">        px=tmp,py=x;</span><br><span class="line">        left=w-tmp;</span><br><span class="line">        left/=<span class="number">2</span>;</span><br><span class="line">        px+=left;</span><br><span class="line">        py-=left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.6f %.6f\n&quot;</span>,<span class="number">0.0</span>,<span class="number">0.0</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.6f %.6f\n&quot;</span>,<span class="number">0.0</span>,x);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.6f %.6f\n&quot;</span>,px,py);</span><br></pre></td></tr></table></figure>
-<p>​</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">    p1.x=p1.y=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(c&gt;= std::<span class="built_in">abs</span>(a-b) &amp;&amp; c&lt;= a+b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fun</span>(a,b,c);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fun</span>(a,c,b);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>​</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/YTU%203413_%20%E5%B0%8F%E5%A7%AC%E5%B0%8F%E5%A7%AC%E5%B0%8F%E5%A7%AC/" data-id="cl7qycauo000egkj317lpd4mq" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1517,9 +1482,9 @@ process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9n
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
       <a href="/categories"><div><strong>37</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>75</strong><br>标签</div></a>
+      <a href="/tags"><div><strong>77</strong><br>标签</div></a>
     </div>
 
 

@@ -43,9 +43,9 @@
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
       <a href="/categories"><div><strong>37</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>75</strong><br>标签</div></a>
+      <a href="/tags"><div><strong>77</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -82,6 +82,109 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-【学习记录】【Python】关于super及其MRO机制的个人理解（不一定对）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E5%85%B3%E4%BA%8Esuper%E5%8F%8A%E5%85%B6MRO%E6%9C%BA%E5%88%B6%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%AF%B9%EF%BC%89/" class="article-date">
+  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E5%85%B3%E4%BA%8Esuper%E5%8F%8A%E5%85%B6MRO%E6%9C%BA%E5%88%B6%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%AF%B9%EF%BC%89/">【学习记录】【Python】关于super及其MRO机制的个人理解（不一定对）.md</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>,<a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/python/">python</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
+<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
+<p>以下内容均为个人理解。<br>
+<strong>MRO: Method Resolution Order 方法解析顺序</strong></p>
+<p>如果不用super：</p>
+<p>​</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;A.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        A.fun(self)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;B.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        A.fun(self)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;C.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">D</span>(B , C):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        B.fun(self)</span><br><span class="line">        C.fun(self)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;D.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line">D().fun()</span><br></pre></td></tr></table></figure>
+<p>输出结果： 发现A被实例化了两次</p>
+<blockquote>
+<p>A.fun<br>
+B.fun<br>
+A.fun<br>
+C.fun<br>
+D.fun</p>
+</blockquote>
+<p>如果用super：</p>
+<p>​</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;A.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(B , self).fun()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;B.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(C , self).fun()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;C.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">D</span>(B , C):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(D , self).fun()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;D.fun&#x27;</span>)</span><br><span class="line"></span><br><span class="line">D().fun()</span><br></pre></td></tr></table></figure>
+<p>输出结果： 发现A没有被重复实例化，这时由于Python继承中的MRO机制</p>
+<blockquote>
+<p>A.fun<br>
+C.fun<br>
+B.fun<br>
+D.fun</p>
+</blockquote>
+<p>查资料：</p>
+<blockquote>
+<p>在每个类声明之后，Python都会自动为创建一个名为“ <strong>mro</strong><br>
+”的内置属性，这个属性就是Python的MRO机制生成的，该属性是一个tuple，定义的是该类的方法解析顺序（继承顺序），当用super调用父类的方法时，会按照__mro__属性中的元素顺序去挨个查找方法。我们可以通过“类名.<br>
+<strong>mro</strong> ”或“类名.mro()”来查看上面代码中D类的__mro__属性值</p>
+</blockquote>
+<p>举例：</p>
+<p>​</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">D</span>(A,B):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">E</span>(B, C):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">F</span>(D, E):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(F.__mro__)</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<blockquote>
+<p>(&lt;class ‘ <strong>main</strong>.F’&gt;, &lt;class ‘ <strong>main</strong>.D’&gt;, &lt;class ‘ <strong>main</strong>.A’&gt;,&lt;class<br>
+‘ <strong>main</strong>.E’&gt;, &lt;class ‘ <strong>main</strong>.B’&gt;, &lt;class ‘ <strong>main</strong>.C’&gt;,&lt;class<br>
+‘object’&gt;)</p>
+</blockquote>
+<p>个人猜测MRO机制的顺序为：在深度优先的基础上，避免重复调用，且尽可能晚调用。<br>
+即 F-&gt;D-&gt;A-&gt;Object-&gt;B-&gt;Object-&gt;E-&gt;B-&gt;Object-&gt;C-&gt;Object<br>
+变为F-&gt;D-&gt;A-&gt;E-&gt;B-&gt;C-&gt;Objcet</p>
+<p><strong>super(type , obj)</strong><br>
+obj是type或type子类 的 一个实例，一般是self<br>
+super(type , obj)表示obj【按MRO 第一个排在type后面】的父类<br>
+如：F-&gt;D-&gt;A-&gt;E-&gt;B-&gt;C-&gt;Objcet 中 super(B , F()).function() 调用的使C类的function方法。<br>
+<strong>super()</strong><br>
+相当于super( <strong>class</strong> , self)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/1111/11/11/%E3%80%90%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E3%80%91%E3%80%90Python%E3%80%91%E5%85%B3%E4%BA%8Esuper%E5%8F%8A%E5%85%B6MRO%E6%9C%BA%E5%88%B6%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3%EF%BC%88%E4%B8%8D%E4%B8%80%E5%AE%9A%E5%AF%B9%EF%BC%89/" data-id="cl7qycavp002ugkj306gw9j1q" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80%E6%9C%BA%E5%88%B6/" rel="tag">语言机制</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-【学习记录】【python】【tkinter】自学tkinter的简要记录" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -2337,186 +2440,6 @@ return 0;<br>
 
 
   
-    <article id="post-【机器学习】 应用简例 随机森林 交叉验证 网格化搜索" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%20%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%20%E7%BD%91%E6%A0%BC%E5%8C%96%E6%90%9C%E7%B4%A2/" class="article-date">
-  <time class="post-time" datetime="1111-11-11T03:06:11.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%20%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%20%E7%BD%91%E6%A0%BC%E5%8C%96%E6%90%9C%E7%B4%A2/">【机器学习】 应用简例 随机森林 交叉验证 网格化搜索.md</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/">教练我想学挂边躲牛</a>,<a class="article-category-link" href="/categories/%E6%95%99%E7%BB%83%E6%88%91%E6%83%B3%E5%AD%A6%E6%8C%82%E8%BE%B9%E8%BA%B2%E7%89%9B/%E7%9E%8E%E5%AD%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">瞎学机器学习</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="说明-2022-05-05"><a class="markdownIt-Anchor" href="#说明-2022-05-05"></a> 说明 - 2022-05-05</h2>
-<p>本篇博客为本人原创, 原发布于CSDN, 在搭建个人博客后使用爬虫批量爬取并挂到个人博客, 出于一些技术原因博客未能完全还原到初始版本(而且我懒得修改), 在观看体验上会有一些瑕疵 ,若有需求会发布重制版总结性新博客。发布时间统一定为1111年11月11日。钦此。</p>
-<pre><code>%matplotlib inline
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import GridSearchCV
-from sklearn.model_selection import cross_val_score
-from sklearn.model_selection import GridSearchCV
-</code></pre>
-<p>导入数据</p>
-<p>​<br>
-# 从excel表导入数据<br>
-df_t = pd.read_excel(r’D:\EdgeDownloadPlace\3dd40612152202ee8440f82a3d277008\train.xlsx’)</p>
-<pre><code># 删除uid列
-df_t = df_t.drop(columns='uid')
-
-# 把数据中的'?'换成每一列的众数
-for col in df_t.columns:
-    idx = df_t[col].value_counts().index
-    df_t[col][df_t[col] == '?'] = idx[0] if idx[0] != '?' else idx[1]
-
-# 把pandas.DataFrame数据转化为numpy.darray数据 元素类型为np.float32
-arr_t = df_t.values.astype(np.float32)
-</code></pre>
-<p>交叉验证找分数最高的n_estimators</p>
-<p>​<br>
-score_tt = []<br>
-for i in range(0,300,15):<br>
-rfc = RandomForestClassifier(n_estimators = i+1<br>
-,n_jobs = -1<br>
-,random_state = 156535<br>
-)<br>
-score = cross_val_score(rfc, arr_t[:,:-1],arr_t[:,-1],cv=10).mean()<br>
-score_tt.append(score)<br>
-peak = [max(score_tt), score_tt.index(max(score_tt))*15+1]<br>
-plt.figure(figsize = [20,5])<br>
-plt.plot(range(1,301,15),score_tt)<br>
-plt.show()<br>
-peak</p>
-<p>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201031121122721.PNG?x-oss-">https://img-blog.csdnimg.cn/20201031121122721.PNG?x-oss-</a><br>
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)</p>
-<p>​<br>
-score_tt = []<br>
-for i in range(peak[1]-15,peak[1]+15):<br>
-rfc = RandomForestClassifier(n_estimators = i+1<br>
-,n_jobs = -1<br>
-,random_state = 156535)<br>
-score = cross_val_score(rfc, arr_t[:,:-1],arr_t[:,-1],cv=10).mean()<br>
-score_tt.append(score)<br>
-peak = [max(score_tt), ([*range(peak[1]-15,peak[1]+15)][score_tt.index(max(score_tt))])]<br>
-plt.figure(figsize = [20,5])<br>
-plt.plot(range(peak[1]-15,peak[1]+15),score_tt)<br>
-plt.show()<br>
-peak</p>
-<p>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/20201031121129915.PNG?x-oss-">https://img-blog.csdnimg.cn/20201031121129915.PNG?x-oss-</a><br>
-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dsZGNtenk=,size_16,color_FFFFFF,t_70#pic_center)</p>
-<p>​<br>
-n_peak = peak[1]</p>
-<p>网格化搜索找最大深度</p>
-<p>​<br>
-param_grid = {‘max_depth’ : np.arange(1,14)}</p>
-<pre><code>rfc =  rfc = RandomForestClassifier(n_estimators = n_peak
-                                ,random_state = 156535
-                                   ) 
-GS = GridSearchCV(rfc,param_grid,cv=10)
-GS.fit(arr_t[:,:-1],arr_t[:,-1])
-
-#GS.best_params_ #返回最佳参数
-
-#GS.best_score_ #返回最佳参数对应的准确率
-
-[GS.best_score_, GS.best_params_]
-</code></pre>
-<p>​<br>
-​<br>
-depth_peak=GS.best_params_[‘max_depth’]</p>
-<p>同理min_samples_split</p>
-<p>​<br>
-param_grid = {‘min_samples_split’ : np.arange(2,30)}</p>
-<pre><code>rfc =  rfc = RandomForestClassifier(n_estimators = n_peak
-                                ,random_state = 156535
-                                ,max_depth = depth_peak
-                                   )
-GS = GridSearchCV(rfc,param_grid,cv=10)
-GS.fit(arr_t[:,:-1],arr_t[:,-1])
-
-#GS.best_params_ #返回最佳参数
-
-#GS.best_score_ #返回最佳参数对应的准确率
-
-[GS.best_score_, GS.best_params_]
-</code></pre>
-<p>同理 criterion</p>
-<p>​<br>
-param_grid = {‘criterion’ : [‘gini’,‘entropy’]}</p>
-<pre><code>rfc =  rfc = RandomForestClassifier(n_estimators = n_peak
-                                ,random_state = 156535
-                                ,max_depth = depth_peak
-                                   )
-GS = GridSearchCV(rfc,param_grid,cv=10)
-GS.fit(arr_t[:,:-1],arr_t[:,-1])
-
-#GS.best_params_ #返回最佳参数
-
-#GS.best_score_ #返回最佳参数对应的准确率
-
-[GS.best_score_, GS.best_params_]
-</code></pre>
-<p>网格化搜索n_estimators</p>
-<p>​<br>
-param_grid = {‘n_estimators’ : np.arange(1,300,15)}</p>
-<pre><code>rfc = RandomForestClassifier( random_state = 156535
-                               
-                                   )
-GS = GridSearchCV(rfc,param_grid,cv=10)
-GS.fit(arr_t[:,:-1],arr_t[:,-1])
-
-#GS.best_params_ #返回最佳参数
-
-#GS.best_score_ #返回最佳参数对应的准确率
-
-[GS.best_score_, GS.best_params_]
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/1111/11/11/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91%20%E5%BA%94%E7%94%A8%E7%AE%80%E4%BE%8B%20%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%20%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%20%E7%BD%91%E6%A0%BC%E5%8C%96%E6%90%9C%E7%B4%A2/" data-id="cl7qycaw10040gkj3cesn8ezv" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OldBlog-Before20220505/" rel="tag">OldBlog(Before20220505)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" rel="tag">随机森林</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -2573,9 +2496,9 @@ GS.fit(arr_t[:,:-1],arr_t[:,-1])
     <h2 class="author">StarsWhisper</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>88</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>89</strong><br>文章</div></a>
       <a href="/categories"><div><strong>37</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>75</strong><br>标签</div></a>
+      <a href="/tags"><div><strong>77</strong><br>标签</div></a>
     </div>
 
 
